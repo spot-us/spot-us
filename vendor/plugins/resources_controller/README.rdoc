@@ -1,0 +1,24 @@
+= resources_controller
+
+plugin to facilitate inheritance and DRYness in your resources controllers.
+See the docs at http://plugins.ardes.com/doc/resources_controller for details
+
+See the CHANGLELOG for recent changes and contributors
+
+== works with rails 2.0-stable and edge
+
+resources_controller works with rails 2 and edge.
+
+== Specs and Coverage
+
+* The SPECDOC lists the specifications
+* Coverage is 100% (C0), and the spec suite is quite comprehensive
+
+RSpec is used for testing, so the tests are in <tt>spec/</tt> rather than
+<tt>test/</tt> Do rake --tasks for more details.
+
+== Continuous Integration
+
+garlic (at http://github.com/ianwhite/garlic) is used for CI.  To run the CI suite have a look at
+garlic_example.rb
+
