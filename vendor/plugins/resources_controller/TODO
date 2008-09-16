@@ -1,0 +1,5 @@
+* allow option to override namespace name_prefix, or add arbitrary name_prefix
+  and path_prefix
+* enclosing_resource_service for easier creating of custom enclosing resources
+* end-to-end tests
+* stories
