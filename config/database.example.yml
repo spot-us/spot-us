@@ -1,0 +1,12 @@
+development:
+  adapter: mysql
+  database: spotus_development
+  username: root
+  password:
+
+test:
+  adapter: mysql
+  database: spotus_test
+  username: root
+  password:
+
