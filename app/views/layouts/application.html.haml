@@ -1,0 +1,19 @@
+!!!
+%html
+  = render :partial => 'layouts/head'
+  - # TODO remove quotes on body_class
+  %body{ :class => "body_class" }
+    #user-header
+      = render :partial => 'layouts/user_header'
+    .body-content
+      .container
+        = render :partial => 'layouts/header'
+        - if flash.any?
+          .flash
+            - flash.each do |key, value|
+              %div{ :id => "flash_#{key}", :class => key }
+                %span.dismiss= link_to "Close #{key.to_s}", '' # empty string means self
+                = value
+        = yield
+    #footer
+      = render :partial => 'layouts/footer'

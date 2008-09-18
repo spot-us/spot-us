@@ -1,0 +1,53 @@
+.block-spacer
+%h3 My Tip
+#content_tabbed_2
+  %ul.ui-tabs-nav
+    %li
+      = link_to "Activity", "#fragment-1"
+    %li 
+      = link_to "Dashboard", "#fragment-2"
+    %li
+      = link_to "Profile (edit)", "#fragment-3"
+    %li
+      = link_to "Settings", "#fragment-4"
+  #equalize
+    .span-715.box_white
+      #fragment-1.ui-tabs-panel{:style=>"display:block;"}
+        %p First tab is active by default
+      #fragment-2.ui-tabs-panel.ui-tabs-hide
+        %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      #fragment-3.ui-tabs-panel.ui-tabs-hide
+        %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      #fragment-4.ui-tabs-panel.ui-tabs-hide
+        %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    .span-160.box_white
+      %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+      %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+  .clear
+.block-spacer
+
+:plain
+  <div id="content_tabbed">
+    <ul class="ui-tabs-nav">
+    
+        <li class="ui-tabs-selected"><a href="#fragment-1"><span>One</span></a></li>
+        <li class=""><a href="#fragment-2"><span>Two</span></a></li>
+        <li class=""><a href="#fragment-3"><span>Three</span></a></li>
+    </ul>
+    <div style="display: block;" class="ui-tabs-panel" id="fragment-1">
+        <p>First tab is active by default:</p>
+        <pre><code>$('#example &gt; ul').tabs();</code></pre>
+    </div>
+    <div class="ui-tabs-panel ui-tabs-hide" id="fragment-2">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+    <div class="ui-tabs-panel ui-tabs-hide" id="fragment-3">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+    </div>
+  </div>
+
