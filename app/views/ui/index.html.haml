@@ -23,20 +23,13 @@
 .span-7.colborder
   %h2 Layouts Files
   %ul
-    %li
-      = link_to "application.html.haml", "#{@layouts_url}/application.html.haml"
-    %li
-      = link_to "_head.html.haml", "#{@layouts_url}/_head.html.haml"
-    %li
-      = link_to "_user_header.html.haml", "#{@layouts_url}/_user_header.html.haml"
-    %li
-      = link_to "_header.html.haml", "#{@layouts_url}/_header.html.haml"
-    %li
-      = link_to "_footer.html.haml", "#{@layouts_url}/_footer.html.haml"
-    %li
-      = link_to "_footer_notes.html.haml", "#{@layouts_url}/_footer_notes.html.haml"
-    %li
-      = link_to "_footer_copyright.html.haml", "#{@layouts_url}/_footer_copyright.html.haml"
+    %li= link_to "application.html.haml", "#{@layouts_url}/application.html.haml"
+    %li= link_to "_head.html.haml", "#{@layouts_url}/_head.html.haml"
+    %li= link_to "_user_header.html.haml", "#{@layouts_url}/_user_header.html.haml"
+    %li= link_to "_header.html.haml", "#{@layouts_url}/_header.html.haml"
+    %li= link_to "_footer.html.haml", "#{@layouts_url}/_footer.html.haml"
+    %li= link_to "_footer_notes.html.haml", "#{@layouts_url}/_footer_notes.html.haml"
+    %li= link_to "_footer_copyright.html.haml", "#{@layouts_url}/_footer_copyright.html.haml"
   
   %hr/
   
@@ -45,8 +38,7 @@
     %li{:style=>"list-style:square"}
       Custom CSS
       %ul
-        %li
-          = link_to "screen_spotus.css", "#{@public_url}/stylesheets/screen_spotus.css"
+        %li= link_to "screen_spotus.css", "#{@public_url}/stylesheets/screen_spotus.css"
     %li{:style=>"list-style:square"} 
       Blue Print CSS
       %ul
@@ -113,7 +105,7 @@
       &nbsp;
     .span-4
       Styled Screen
-    .span-4
+    .span-6
       Mark-up Files
     .clear
   %br/
@@ -155,8 +147,9 @@
       %br Progress Bar
   %h2 Known IE issues
   %ul
-    %li home page boxing (ie6 & ie7) - fixed via - # spotus_ie_pixel.gif image
-    %li png issue (ie6) - fixed via - jquery.pngFix.js
+    %li home page boxing (ie6 & ie7) - status: fixed - via spotus_ie_pixel.gif image
+    %li png issue (ie6) - status: fixed - via  jquery.pngFix.js
+    %li create a tip iconized section (ie6) - status: unresolved
        
 
 %hr/
