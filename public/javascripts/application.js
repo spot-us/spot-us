@@ -8,6 +8,16 @@ $('.flash .dismiss a').livequery('click', function(event) {
 });
 
 // IE PNG fix
+//$(document).ready(function(){ 
+//  $(document).pngFix(); 
+//});
+
+$(function(){ 
+  $('#equalize').equalHeights();
+});
 $(document).ready(function(){ 
   $(document).pngFix(); 
+});
+$(document).ready(function(){
+  $("#content_tabbed > ul").tabs();
 });
