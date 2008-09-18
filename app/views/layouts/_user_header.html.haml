@@ -1,0 +1,18 @@
+%ul.user-header-nav
+  %li.no-pipe
+    Hello,
+    == #{link_to "Chris Amico", "#"}.
+  %li.no-pipe
+    You need
+    = link_to number_to_currency("50"), "#"
+    in credit to fund your donations.
+  %li
+    = link_to "Purchase &raquo;", "#"
+  %li
+    = link_to "My Spot", "#"
+  %li.no-pipe
+    = link_to "Logout", "#"
+.slogan
+  %span.pink Community 
+  %span.moss-green Funded Reporting
+.clear
