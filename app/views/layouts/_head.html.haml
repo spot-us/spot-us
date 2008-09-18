@@ -1,0 +1,38 @@
+%head
+  %meta{ :name => "keywords",    :content => "Keywords" }/
+  %meta{ :name => "description", :content => "Description" }/
+
+  %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }/
+
+  %title
+    = @title || "Spot.us"
+  
+  /[if IE 6]
+    = stylesheet_link_tag 'ie.css'
+    = stylesheet_link_tag 'ie_spotus.css'
+  = stylesheet_link_tag 'screen', :media => "screen"
+  = stylesheet_link_tag 'screen_spotus', :media => "screen"
+  = stylesheet_link_tag 'print', :media => "print"
+  
+  = javascript_include_tag 'jquery.js'
+  = javascript_include_tag 'jquery-ui.js'
+  = javascript_include_tag 'jquery.pngFix.js'
+  = javascript_include_tag 'jquery.equalHeights.js'
+  = javascript_include_tag 'jquery.tabs.js'
+  = javascript_include_tag 'jrails.js'
+  =# javascript_include_tag 'prototype'
+  =# javascript_include_tag 'scriptaculous'
+  =# javascript_include_tag 'effects'
+  = javascript_include_tag 'application'
+  :plain
+    <script type="text/javascript">
+      $(function(){ 
+        $('#equalize').equalHeights();
+      });
+      $(document).ready(function(){ 
+        $(document).pngFix(); 
+      });
+      $(document).ready(function(){
+        $("#content_tabbed > ul").tabs();
+      });
+    </script>

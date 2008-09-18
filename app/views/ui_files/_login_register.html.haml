@@ -1,0 +1,16 @@
+/ Login & register
+.span-4
+  LOGIN / REGISTER
+.span-4
+  = link_to "Login / Register", "../ui/login"
+  %br/
+  = link_to "Error", "../ui/login_error"
+  %br/
+  = link_to "Sucess", "../ui/login_success"
+.span-6
+  = link_to "ui/login.html.haml", "#{@ui_url}/login.html.haml"
+  %br/
+  = link_to "ui/login_error.html.haml", "#{@ui_url}/login_error.html.haml"
+  %br/
+  = link_to "ui/login_success.html.haml", "#{@ui_url}/login_success.html.haml"
+.clear{:style=>"margin-bottom:15px;"}

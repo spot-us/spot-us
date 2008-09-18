@@ -1,0 +1,12 @@
+/ Activity
+.span-4
+  ACTIVITY
+.span-4
+  = link_to "Populated", "../ui/activity_populated"
+  %br/
+  = link_to "New User w/ Alert Message", "../ui/activity_new_user"
+.span-6
+  = link_to "ui/activity_populated.html.haml", "#{@ui_url}/activity_populated.html.haml"
+  %br/
+  = link_to "ui/activity_new_user.html.haml", "#{@ui_url}/activity_new_user.html.haml"
+.clear{:style=>"margin-bottom:15px;"}

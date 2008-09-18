@@ -1,0 +1,61 @@
+- @title = "Spot.us - Login Success"
+
+#flash.success
+  %h2 Success
+  %p Check your e-mail for your password, then login to change it.
+
+.block-spacer
+
+.login-boxer
+
+  - # Register box 
+  .span-6.register
+    %h3 Register
+    .double_content_border
+    .row
+      %label Your Name
+      %input{:class=>"text"}
+    .block-spacer
+    .row
+      %label Your E-mail Address
+      %input{:class=>"text"}
+    .block-spacer
+    %span I am a:
+    .row
+      .float_left= radio_button_tag("", "", "")
+      %label.float_left Community Member
+    .row
+      .float_left= radio_button_tag("", "", "")
+      %label.float_left Professional Journalist
+    .row
+      .float_left= radio_button_tag("", "", "")
+      %label.float_left News Organization
+    .block-spacer.clear 
+    %p We'll email you a password which you can login and change.
+    .double_content_border
+    .float_right
+      %input{:type => "button", :class=>"gray_button", :value => "Register &raquo;"}
+    
+  - # Login box 
+  .span-6.or_login
+    %h3 Or Login
+    .double_content_border
+    .row
+      %label Your E-mail Address
+      %input{:class=>"text"}
+    .block-spacer
+    .row
+      %label Your Password
+      %input{:class=>"text"}
+    .float-right
+      %p
+        = link_to "Forgot Password?", "#", :class => "forgot_password"
+    .clear
+    .double_content_border
+    .float_right
+      %input{:type => "button", :class=>"gray_button", :value => "Login &raquo;"}
+    
+    
+  .clear
+%img{:src=>"../images/spotus_ie_pixel.gif"}
+.block-spacer
