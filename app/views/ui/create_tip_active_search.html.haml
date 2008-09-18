@@ -1,0 +1,142 @@
+- @title = "Spot.us - Create a Tip"
+.block-spacer
+%h3 Create a Tip
+
+#equalize
+
+  - # first column content 
+  .span-715.box_white
+  
+    .create_a_tip
+      %ol.create_a_tip_iconized
+        %li.tipster
+        %li.pledgester
+        %li.pitcher
+      %ol.create_a_tip_steps
+        %li.tipster Create a Tip
+        %li.pledgester Get Your Community to Pledge
+        %li.pitcher A journalist Will Build a Pitch Around Your Tip
+    .take_action
+      %p.no_margin
+        %strong Take Action!
+      %ul
+        %li 
+          Creating a community news tip is a way to let journalist and news organizations know what is important to you. At this stage the pledge is uncommitted. we don't even ask for credit card information.
+          = link_to "Learn more about tips", "#"
+        %li= link_to "What kind of tips should I create?", "#"
+        %li Watch the search results on the right to see if other tips or pitches are tackling the same issue.
+        %li
+          After you create a tip, find others who will join. Soon a journalist may create a pitch based on your story tip. 
+        = link_to "Learn more about what happens after you create a tip.", "#"
+    .clear
+    
+    .block-spacer-negative
+    
+    .span-455.box_yellow.create_a_tip_form
+      .row
+        %label{:for => ""} Your Tip's Headline
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Short Description
+        = text_area_tag "", nil, :rows => 11
+        .form_hint.small
+          500 Characters Remain
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Pick Topics
+        .form_hint
+          %span.ss_sprite.ss_add 
+          %span.add_edit Add or Edit Topics
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Location
+        = select_tag "", "<option>Chicago</option>"
+        %span.ss_sprite.ss_delete
+        .form_hint
+          %span.ss_sprite.ss_add 
+          %span.add_edit Add a Country
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          Keyword
+          %br/
+          %span.small.quieter
+            Keywords, or tags, should be separate by commas, for example: “car, automobile, SUVs.”
+        = text_area_tag "", nil, :rows => 3
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          I pledge...
+        = text_field_tag "", nil, :maxlength => 15, :size => 15
+        %span.ss_sprite.ss_information
+        %span.small.add_edit= link_to "Why pledge", "#"
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          Add Media
+          %span.quieter (Optional)
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Upload A Featured Image
+          %br
+          %span.quieter JPEG, PNG and GIF's less than 5 MB.
+        = file_field_tag ""
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Add a Featured Image Caption
+          %br
+          %span.quieter 200 Characters Remain
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Embed a Video
+          %br
+          %span.quieter Paste your third-party embeded cide here.
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative
+      .free
+        .float_left= radio_button_tag '', ''
+        %label{:for => ""}
+          I agree with the
+          = link_to "Terms and Conditions.", "#", :class => "quieter"
+        .clear
+      
+    .double_content_border
+    
+    .float-right
+      = link_to image_tag('../images/preview_tip.png'), "#"
+      
+  - # second column content   
+  .span-160.box_white
+    %h3 What is Spot.us?
+    .double_content_border
+    %ul
+      %li 
+        If you're a professional journalist,
+        = link_to "create a pitch instead of a tip", "#"
+      %li
+        Or
+        = link_to "browse the community", "#"
+        to get inspiration for a new pitch or ping tips for an existing pitch.
+    .double_content_border
+    .centered
+      = link_to image_tag('../images/create_a_pitch.png'), "#"
+    .create_tip_spacer
+    .block-spacer-negative
+    %h3 Common Questions
+    .double_content_border
+    %h4.title What's a Tip?
+    %p.alt-spotus Anyone can create a news "tip" about an important topic you think should be reported on? This is often related to the question "what are you passionate about?" You can pledge to this tip, but no money is taken - it's just a way to show how much interest you have in this possibly becoming a pitch (link to pitch Faq). Creating a tip could be the spark that starts an investigation.
+
+    %h4.title What do you mean "Pledge?"
+    %br/ 
+    %p.alt-spotus Pledges do not represent an actual money transaction. But, they do show the general monetary value that a story might command. When you "pledge" a tip, it's similar to joining a group. If a journalist references this tip in their pitch, you'll be notified and asked to DONATE real money at that point.
+
+    %h4.title What happens next?
+    %p.alt-spotus Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Morbi est nisl, blandit sit amet, ultrices ut, consequat at, ante. Sed nisi sapien, pellentesque vel, vehicula quis, semper quis, orci.
+.clear
+.block-spacer
