@@ -1,0 +1,168 @@
+- @title ="Hashrocket UI Comps System for 3-2-1"
+- @layouts_url = "txmt://open/?url=file://#{RAILS_ROOT}/app/views/layouts"
+- @ui_url = "txmt://open/?url=file://#{RAILS_ROOT}/app/views/ui"
+- @public_url = "txmt://open/?url=file://#{RAILS_ROOT}/public"
+
+.container
+%p{:style=>"float:right;"}
+  Client: 
+  %strong
+    SPOT.US
+%h1{:style=>"margin-bottom:0px;"} 
+  %img{:src=>"../images/hashrocket_logo.png",:height =>"26px"}
+  Hashrocket UI Comps System for 3-2-1
+%p.small{:style=>"margin-left:38px;"}  { haml-ized and styled mark-up }
+
+.box 
+  %h2{:style=>"margin-bottom:0px;"} Developer notes:
+  %p 
+    Mark-up files are inside app/views/ui directory. The main layout files are inside app/views/layouts. Most pages are broken down into partials as seen fit. Images are inside public/images. Spot.us is using 
+    %a{:href=>"http://www.blueprintcss.org/"} Blueprint 
+    as its CSS Framework and it is the base for the custom css files.
+
+.span-7.colborder
+  %h2 Layouts Files
+  %ul
+    %li
+      = link_to "application.html.haml", "#{@layouts_url}/application.html.haml"
+    %li
+      = link_to "_head.html.haml", "#{@layouts_url}/_head.html.haml"
+    %li
+      = link_to "_user_header.html.haml", "#{@layouts_url}/_user_header.html.haml"
+    %li
+      = link_to "_header.html.haml", "#{@layouts_url}/_header.html.haml"
+    %li
+      = link_to "_footer.html.haml", "#{@layouts_url}/_footer.html.haml"
+    %li
+      = link_to "_footer_notes.html.haml", "#{@layouts_url}/_footer_notes.html.haml"
+    %li
+      = link_to "_footer_copyright.html.haml", "#{@layouts_url}/_footer_copyright.html.haml"
+  
+  %hr/
+  
+  %h2 CSS Files
+  %ul
+    %li{:style=>"list-style:square"}
+      Custom CSS
+      %ul
+        %li
+          = link_to "screen_spotus.css", "#{@public_url}/stylesheets/screen_spotus.css"
+    %li{:style=>"list-style:square"} 
+      Blue Print CSS
+      %ul
+        %li= link_to "screen.css", "#{@public_url}/stylesheets/screen.css"
+        %li= link_to "print.css", "#{@public_url}/stylesheets/print.css"
+        %li= link_to "ie.css", "#{@public_url}/stylesheets/ie.css"
+        %li= link_to "sprite.css", "#{@public_url}/stylesheets/sprite.css"
+  %p 
+    To easily update/upgrade the Blue Print CSS files, all custom css and over rides should be on
+    %strong
+      screen_spotus.css
+    for the screen media.
+
+  %hr/
+  
+  %h2 Color Schemes
+  %div{:style =>"color:#fff;padding:8px;background-color:#212C30;"}
+    :plain 
+      #212C30
+  %div{:style =>"color:#fff;padding:8px;background-color:#3C5359;"}
+    :plain
+      #3C5359
+  %div{:style =>"color:#333;padding:8px;background-color:#909a9d;"}
+    :plain
+      #909a9d
+  %div{:style =>"color:#333;padding:8px;background-color:#E9EB98;"}
+    :plain
+      #E9EB98
+  %div{:style =>"color:#333;padding:8px;background-color:#F1F1F1;"}
+    :plain
+      #F1F1F1
+  %div{:style =>"color:#333;padding:8px;background-color:#FF005D;"}
+    :plain
+      #FF005D
+  %div{:style =>"color:#333;padding:8px;background-color:#CE859D;"}
+    :plain
+      #CE859D
+  %div{:style =>"color:#333;padding:8px;background-color:#379F00;"}
+    :plain
+      #379F00
+  %div{:style =>"color:#333;padding:8px;background-color:#CCE7BA;"}
+    :plain
+      #CCE7BA
+  %div{:style =>"color:#fff;padding:8px;background-color:#940000;"}
+    :plain
+      #940000
+  %p &nbsp;
+  %hr/
+  
+  %h2 Silk Icons
+  %p
+    Silk icons are readily available for use via the sprites plugin for BluePrint.
+    %br/
+    To see sample use, visit: 
+    = link_to "Sprites", "http://www.ajaxbestiary.com/Labs/SilkSprite/"
+  
+    
+.span-15{:style=>"float:right"}
+  %h2 Screens haml-ized and styled.
+  %div{:style=>"padding:10px 0 10px 0;background:#E5ECF9"}
+  
+    / header
+    .span-4
+      &nbsp;
+    .span-4
+      Styled Screen
+    .span-4
+      Mark-up Files
+    .clear
+  %br/
+  
+  = render :partial => 'ui_files/activity'
+    
+  %hr
+  
+  = render :partial => 'ui_files/home'
+  
+  %hr
+  
+  = render :partial => 'ui_files/login_register'
+  
+  %hr
+  
+  = render :partial => 'ui_files/create_tip'
+  
+  %p.clear &nbsp;
+  %hr/
+  %h2 jQuery Elements
+  %ul
+    %li
+      = link_to "jquery.equalHeights.js", "#{@public_url}/javascripts/jquery.equalHeights.js"
+      %br Equal heights for columns instead of using CSS faux columns for lesser overhead.
+    %li
+      = link_to "jquery.pngFix.js", "#{@public_url}/javascripts/jquery.pngFix.js"
+      %br jQuery png fix for ie6
+    %li
+      = link_to "jquery-ui.js", "#{@public_url}/javascripts/jquery-ui.js"
+      %br Tabs using jQuery UI
+    %li
+      = link_to "application.js", "#{@public_url}/javascripts/application.js"
+      %br Close flash messages with jQueryfied close button.
+  %h2 Prototype Elements
+  %ul
+    %li
+      = link_to "jsProgressBarHandler.js", "#{@public_url}/javascripts/jsProgressBarHandler.js" 
+      %br Progress Bar
+  %h2 Known IE issues
+  %ul
+    %li home page boxing (ie6 & ie7) - fixed via - # spotus_ie_pixel.gif image
+    %li png issue (ie6) - fixed via - jquery.pngFix.js
+       
+
+%hr/
+%p{:style=>"float:left;"}
+  == Copyright &copy; #{Time.now.year} Hashrocket.
+%p{:style=>"float:right;margin-top:0px;"}
+  If you have any questions about the mark-up files and styling, please email:
+  %a{:href=>"mailto: carmelyne@hashrocket.com", :style=>"margin-top:-1.5em;"} carmelyne@hashrocket.com
+  
