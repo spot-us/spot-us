@@ -1,0 +1,487 @@
+/* -----------------------------------------------------------------------
+ Spot.us Overrides and Custom CSS over Blueprint CSS Framework 0.7.1
+ Provider: Hashrocket, Inc. http://www.hashrocket.com
+----------------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------------
+ Spot.us overrides for Blueprint 
+----------------------------------------------------------------------- */
+
+#user-header {width:960px;margin:0 auto;display:inline-block;display:block;}
+table.top td.top {vertical-align:top;}
+
+/* layout dimension */
+.container {
+  width: 930px;
+  padding: 0 15px;
+  }
+#footer {
+  padding: 0 5px;
+  }
+#user-header {
+  width:960px;
+  }
+#header {
+  background: #fff;
+  margin: 0 -15px 0 -15px;
+  padding: 10px 15px;
+  }
+#footer, .body-content {
+  width:960px;
+  margin:0 auto;
+  display:inline-block;
+  display:block;
+  padding: 0 10px;
+  }
+
+/* styling */
+.container a {
+  color: #999999;
+  text-decoration: none;  
+  }
+.alt-spotus {
+  font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
+  font-weight:normal;
+  }
+h4.title { 
+  margin: 0px;
+  font-weight: bold;
+  }
+.float_left {
+  float: left;
+  }
+.float_right {
+  float: right;
+  }
+.box_white {
+  background: #fff;
+  padding: 10px;
+  }
+.container h3, .container h2 {
+  margin: 0 0 10px 0;
+  padding: 0;
+  }
+.home-floater {
+  padding:15px;
+  margin: 0px;
+  }
+.home-boxer {
+  background: url(../images/spotus_home_boxer.jpg) repeat-y top left;
+  }
+.login-boxer {
+  background: url(../images/spotus_login_boxer.gif) repeat-y top left;
+  }
+.login-boxer .span-6 {
+  padding: 15px;
+  margin-right: 15px;
+  width: 200px;
+  }
+.float-left {
+  float: left;
+  }
+.float-right {
+  float: right;
+  }
+.row {
+  clear: both;
+  margin: 0 0 10px 0;
+  }
+.no_margin {
+  margin: 0;
+  }
+.add_edit {
+  margin: 0 0 0 10px; 
+  }
+.quieter {
+  color:#999999;
+  font-weight: normal;
+  }
+/* Adjust showgrid to use 960px instead of 950px */
+.showgrid {background:url(src/grid.png) 15px -3px;}
+
+/* verride p + p fancy type to not indent the footer-notes paragraph section */
+#footer-notes .span-6 p + p, #footer-notes .span-4 p + p {
+  text-indent: 0;
+  margin-top:-1.5em;
+  }
+
+
+/* -----------------------------------------------------------------------
+ Spot.us CUSTOM CSS 
+----------------------------------------------------------------------- */
+body {
+  background: #E3EEEF url(../images/spotus_bg.jpg) repeat-x;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  }
+.centered {
+  text-align: center;
+  color: #fff;
+  }
+.text-justify {
+  text-align: justify;
+  }
+
+/* Header & Main Nav Styles */
+#header .logo {
+  background: url(../images/spotus_header_logo.jpg) no-repeat;
+  width: 222px;
+  height: 31px;
+  overflow: hidden;
+  float: left;
+  }
+#header .logo-link {  
+  width: 222px;
+  height: 31px;
+  display: block;
+  }
+#header .nav-container {
+  float: right;
+  background: url(../images/spotus_nav_bg.gif) no-repeat 0 bottom;
+  padding: 6px 0 0 0;
+  height: 26px;
+  width: 506px;
+  }
+#header .nav-container ul {
+  margin: 0;
+  padding: 0;
+  }
+.nav-container #main-nav li {
+  float: left;
+  list-style: none;
+  }
+.nav-container #main-nav li a { 
+  text-decoration: none;
+  display: block;
+  text-size: 18px;
+  color: #ef4179;
+  font-weight: bold;
+  }
+#main-nav li.start_story, #main-nav li.fund_story, #main-nav li.read_story, #main-nav li.about_spotus  {
+  text-align: center;
+  }
+#main-nav li.start_story {
+  width: 118px;
+  }
+#main-nav li.fund_story {
+  width: 153px;
+  }
+#main-nav li.read_story {  
+  width: 150px
+  }
+#main-nav li.about_spotus {
+  margin: 0 0 0 18px;
+  width: 67px
+  }
+
+/* Content Styles */
+.double_footer_border {
+  background: url(../images/spotus_footer_title_border.gif) repeat-x 0 bottom;
+  }
+.double_content_border {
+  background: url(../images/spotus_content_title_border.gif) repeat-x 0 bottom;
+  }
+.double_footer_border, .double_content_border {  
+  height: 3px;
+  margin: 0 0 10px 0;
+  }
+.register input.text, .or_login input.text {
+  width: 190px!important;
+  }
+.gray_button {
+  background: url(../images/spotus_button_plain_gray.gif) no-repeat 1px 3px;
+  width: 111px;
+  height: 35px;
+  display: block;
+  color: #ff0062;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+  border: 0;
+  }
+.forgot_password {
+  text-transform: uppercase;
+  color: #8B9C9F;
+  font-size: 9px;
+  text-decoration: none;
+  margin-right: 3px;
+  }
+  
+/* User Header & Footer Styles */
+.pink { color: #ce859d;}
+.moss-green { color: #909a9d;}
+#user-header .slogan {
+  padding: 5px 0 3px 0;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  float: right;
+  }
+#user-header ul.user-header-nav {
+  padding: 5px 0 3px 0;
+  margin: 0;
+  color: #ccc;
+  float: left;
+  }
+#footer, .body-content {
+  background: url(../images/spotus_shadow_bg.jpg) repeat-y;
+  }
+#footer div#footer-copyright, #footer div#footer-notes {
+  background: #52656B;
+  margin: 0 auto;
+  padding: 15px;
+  color: #ccc;
+  width: 930px;
+  }
+#footer ul.footer-nav, #user-header ul.user-header-nav {
+  margin: 0px;
+  }
+#footer #footer-copyright .footer-nav li, #user-header .user-header-nav li {
+  list-style: none;
+  display: inline;
+  margin: 0 8px 0 0;
+  padding: 0 8px 0 0;
+  background: url(../images/spotus_pipe.gif) no-repeat top right;
+  }
+#footer #footer-copyright .footer-nav li.no-pipe, #user-header .user-header-nav li.no-pipe {
+  border-right: 0px;
+  margin-right: 0;
+  padding-right: 0;
+  background: url(../images/spotus_no_pipe.gif) no-repeat top right;
+  }
+#footer a, #user-header a {
+  color: #E9EB98;
+  text-decoration: none;
+  }
+#footer .logo-footer {
+  background: url(../images/spotus_footer_logo.gif) repeat-y;
+  width: 331px;
+  height: 100px;
+  float: right;
+  margin: -18px 105px 0 0;
+  }
+#footer .logo-footer-link {  
+  width: 331px;
+  height: 100px;
+  display: block;
+  }
+#footer-notes h3 {
+  color: #7d8c90;
+  margin: 0 0 10px 0;
+  padding: 0;
+  }
+#footer-notes .span-6 {
+  width: 225px;
+  margin-right: 30px;
+  }
+#footer-notes .span-4 {
+  width: 165px;
+  float: right;
+  margin-right: 0;
+  }
+#footer-notes .span-6 .pledge_another_amount {
+  text-transform: uppercase;
+  color: #8B9C9F;
+  font-size: 9px;
+  }
+#footer-notes .span-6  a.i_pledge, .create_a_tip_sidebar a.create_pitch {
+  background: url(../images/spotus_button_pink.png) no-repeat;
+  width: 170px;
+  height: 31px;
+  padding: 2px 0 0 0;
+  display: block;
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+  margin: 0 auto;
+  }
+#footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
+
+/* Flash Error Styling */
+.error, .success {
+  border-color:#FFD324;
+  margin-top:15px;
+  padding: 10px 15px 15px 65px;
+  margin-bottom:1em;
+  border-right: 2px #c9c9c9 solid;
+  border-bottom: 2px #c9c9c9 solid;
+  border-top: 1px #ccc solid;
+  border-left: 1px #ccc solid;
+  }
+  
+.success {
+  background: #fff url(../images/flash_success_bg.jpg) no-repeat;
+  color:#514721;
+  }
+.success h2 {
+  color: #3a9300;
+  }
+  
+.error {
+  background: #fff url(../images/flash_error_bg.jpg) no-repeat;
+  color: #a70000;
+  }
+.error h2 {
+  color: #a70000;
+  }
+.error h2, .error p, .error li, .success h2, .success p, .success li {
+  margin: 0;
+  padding: 0;
+  }
+.error li, .success li {
+  list-style: square;
+  }
+.error a, .success a {
+  text-decoration: none;
+  color: #999999;
+  }
+  
+.fieldWithErrors input {
+  border: 1px #a70000 solid;
+  }
+.fieldWithErrors input, .fieldWithErrors label {
+  color: #a70000;
+  font-weight: bold;
+  }
+.dismiss {
+  float: right;
+  }
+.dismiss a {
+  text-decoration: none;
+  padding: 0 0 3px 25px;
+  background: url(../images/close.png) no-repeat 3px 0;
+  }
+  
+/* Create A Tip */  
+.create_a_tip {
+  float: left;
+  width: 225px;
+  background: #ffffe1 url(../images/yellow_bg.jpg) repeat-x left top;
+  padding: 10px 0 10px 10px;
+  }
+  
+ol.create_a_tip_iconized {
+  float: left;
+  margin: 0 20px 0 5px;
+  padding: 0;
+  width: 50px;
+  }
+ol.create_a_tip_iconized li {
+  margin: 0;
+  list-style:none;
+  }
+ol.create_a_tip_iconized li.tipster {
+  background: url(../images/tipster.png) no-repeat left top;
+  color: #666666;
+  padding: 0;
+  margin: 0 ;
+  height: 31px;
+  }
+ol.create_a_tip_iconized li.pledgester {
+  background: url(../images/pledgester.png) no-repeat left top;
+  padding: 0;
+  margin: 30px 0 0 0;
+  height: 33px;
+  }
+ol.create_a_tip_iconized li.pitcher {
+  background: url(../images/pitcher.png) no-repeat left top;
+  height: 33px;
+  padding: 0;
+  margin: 30px 0 0 0;
+  }
+ol.create_a_tip_steps  li.tipster {
+  color: #666666;
+  margin: 15px 0 0 0;
+  }
+ol.create_a_tip_steps li.pledgester {
+  color: #999999;
+  margin: 30px 0 0 0;
+  }
+ol.create_a_tip_steps li.pitcher {
+  color: #999999;
+  margin: 30px 0 0 0;
+  }
+.take_action {
+  float: right;
+  width: 445px;
+  padding: 10px 10px 10px 10px;
+  margin: 0 0 0 10px;
+  font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
+  line-height: 17px;
+  }
+.take_action ul {
+  margin: 0 0 0 10px;
+  padding: 0;
+  }
+.take_action li {
+  list-style: square;
+  }
+.create_a_tip_form textarea {
+  width: 240px!important;
+  }
+.create_a_tip_form label {
+  float: left;
+  width: 200px!important;
+  margin: 0 10px 0 0;
+  }
+.create_a_tip_form textarea {
+  float: left;
+  margin: 0 0 10px 0;
+  padding: 0;
+  }
+.create_a_tip_form .form_hint {
+  margin: 0 0 0 210px;
+  color: #999999;
+  }
+/* -----------------------------------------------------------------------------
+ General Column specs part 1 - this the white background color plus the padding
+--------------------------------------------------------------------------------  */
+.box_white {
+  padding: 10px;
+  background: #fff;
+  }
+.box_yellow {
+  padding: 10px;
+  background: #FEFFD9;
+  margin: 0 0 10px 0;
+  }
+/* ---------------------------------------------------------------------------------
+ General Column specs part 2 - this achieves the float left and size for the columns
+------------------------------------------------------------------------------------ */
+.span-205, .span-220, .span-235, .span-340, .span-460, .span-605, .span-715 {float:left;}
+.span-205 {width: 205px;}
+.span-220 {width: 220px;}
+.span-235 {width: 235px;}
+.span-340 {width: 340px;}
+.span-455 {width: 455px;}
+.span-460 {width: 460px;}
+.span-605 {width: 605px;}
+.span-715 {width: 715px;}
+/* ---------------------------------------------------------------------------------
+ General Column specs part 3 - this achieves the float right and size for the columns
+------------------------------------------------------------------------------------ */
+.span-145, .span-160, .span-270, .span-530 {float: right;}
+.span-145 {width:145px;}
+.span-160 {width:160px;}
+.span-270 {width:270px;}
+.span-530 {width:530px;}
+/* ---------------------------------------------------------------------------------
+ General Column specs part 4 - this achieves the gray areas for the columns 
+ - needed because of support for ie6 and 7 with the spotus_ie_pixel.gif
+------------------------------------------------------------------------------------ */
+.block-spacer {
+  height: 15px;
+  background: #f5f5f5;
+  }
+.block-spacer-negative {
+  height: 15px;
+  background: #f5f5f5;
+  margin: 10px -10px;
+  }
+.yellow-spacer-negative {
+  height: 2px;
+  background: url(../images/spotus_content_title_border.gif) repeat-x left top;
+  clear: both;
+  margin: 0px -10px 10px -10px;
+  } 
