@@ -1,6 +1,6 @@
 - @title = "Spot.us - Login"
 
-.block-spacer
+.block-padding
 
 .login-boxer
 
@@ -10,12 +10,12 @@
     .double_content_border
     .row
       %label Your Name
-      %input{:class=>"text"}
-    .block-spacer
+      = text_field_tag "", :class=>"text"
+    .block-padding
     .row
       %label Your E-mail Address
-      %input{:class=>"text"}
-    .block-spacer
+      = text_field_tag "", :class=>"text"
+    .block-padding
     %span I am a:
     .row
       .float_left= radio_button_tag("", "", "")
@@ -26,7 +26,7 @@
     .row
       .float_left= radio_button_tag("", "", "")
       %label.float_left News Organization
-    .block-spacer.clear 
+    .block-padding.clear 
     %p We'll email you a password which you can login and change.
     .double_content_border
     .float_right
@@ -38,11 +38,11 @@
     .double_content_border
     .row
       %label Your E-mail Address
-      %input{:class=>"text"}
-    .block-spacer
+      = text_field_tag "", :class=>"text"
+    .block-padding
     .row
       %label Your Password
-      %input{:class=>"text"}
+      = text_field_tag "", :class=>"text"
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
@@ -54,4 +54,4 @@
     
   .clear
 %img{:src=>"../images/spotus_ie_pixel.gif"}
-.block-spacer
+.block-padding

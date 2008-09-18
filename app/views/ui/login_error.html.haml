@@ -20,11 +20,11 @@
     .double_content_border
     .row
       %label Your Name
-      %input{:class=>"text"}
+      = text_field_tag "", :class=>"text"
     .block-spacer
     .row
       %label Your E-mail Address
-      %input{:class=>"text"}
+      = text_field_tag "", :class=>"text"
     .block-spacer
     %span I am a:
     .row
@@ -50,13 +50,13 @@
       .fieldWithErrors
         %label Your E-mail Address
       .fieldWithErrors
-        %input{:class=>"text"}
+        = text_field_tag "", :class=>"text"
     .block-spacer
     .row
       .fieldWithErrors
         %label Your Password
       .fieldWithErrors
-        %input{:class=>"text"}
+        = text_field_tag "", :class=>"text"
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
