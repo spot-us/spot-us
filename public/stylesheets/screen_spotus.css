@@ -416,15 +416,18 @@ ol.create_a_tip_steps li.pitcher {
 .take_action li {
   list-style: square;
   }
-.create_a_tip_form textarea {
+.create_a_tip_form .row  textarea {
   width: 240px!important;
+  }
+.create_a_tip_form .free  textarea {
+  width: 450px!important;
   }
 .create_a_tip_form .row label {
   float: left;
   width: 200px!important;
   margin: 0 10px 0 0;
   }
-.create_a_tip_form textarea {
+.create_a_tip_form .row textarea {
   float: left;
   margin: 0 0 10px 0;
   padding: 0;
@@ -457,6 +460,9 @@ ol.create_a_tip_steps li.pitcher {
   border-bottom: 1px solid #c0c0c0;
   margin: 0 0 10px 0;
   background: url(../images/blue_info.png) no-repeat 10px 5px;
+  }
+.existing_tips_picthes {
+  border-bottom: 1px solid #c0c0c0;
   }
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns

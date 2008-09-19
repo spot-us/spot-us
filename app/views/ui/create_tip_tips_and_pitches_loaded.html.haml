@@ -8,6 +8,7 @@
   .span-715.box_white
   
     .create_a_tip
+      - #TODO for Carm, just move the icons as embeded images rather than css background since ie6 is being picky about it.
       %ol.create_a_tip_iconized
         %li.tipster
         %li.pledgester
@@ -31,7 +32,7 @@
     .clear
     
     .block-spacer-negative
-    - # First Inner column in the yellow box
+    - # First Inner column - the yellow box
     .span-455.box_yellow.create_a_tip_form.float_left
       .row
         %label{:for => ""} Your Tip's Headline
@@ -98,6 +99,13 @@
         = text_area_tag '', nil, :rows => 2
       .yellow-spacer-negative
       .free
+        %label{:for => ""} 
+          .float_left Extended Description
+          .float_right.small.quieter 3,000 Characters Remain 
+        = text_area_tag "", nil, :rows => 3, :columns => 60
+        = fckeditor_textarea("object", "field", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+      .yellow-spacer-negative
+      .free
         .float_left= radio_button_tag '', ''
         %label{:for => ""}
           I agree with the
@@ -141,7 +149,9 @@
         %p.small.quiet Posted Monday, June 20, 2008 by Stan Smith and has 1 donation(s).
         %p David Neumann isn't the most excitable guy. He's a physicist, after all, who worked at Air Force Space Command and did research at the Air Force Academy....
         %p= link_to "Learn More »", "#"
-      
+      .float_left 
+        %p Previous
+      .float_left
       
       
     .clear 
