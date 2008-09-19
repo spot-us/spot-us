@@ -31,7 +31,7 @@
     .clear
     
     .block-spacer-negative
-    
+    - # First Inner column in the yellow box
     .span-455.box_yellow.create_a_tip_form.float_left
       .row
         %label{:for => ""} Your Tip's Headline
@@ -103,9 +103,47 @@
           I agree with the
           = link_to "Terms and Conditions.", "#", :class => "quieter"
         .clear
+        
+    - # Second Inner column next to the yellow box
     .span-225
       %h3 Existing Tips & Pitches
       .double_content_border
+      
+      .box_blue_info
+        %p.small Please review these Pitches and make sure another Journalist hasn’t already proposed your Pitch.
+      
+      .existing_tips_picthes
+        %h4 
+          PITCH: 
+          %strong A Concrete Cure for Global Warming?
+        %p.small.quiet Posted Monday, July 8, 2008 by Karen Smith and has 8 donation(s).
+        %p To halt climate change, we need to start capturing the millions of tons of CO2 pouring out of the world’s electricity plants. So far, most of the focus has been on pumping the CO2 back underground, to bind with rocks. But why not just stash it in the cement used to make sidewalks...
+        %p= link_to "Learn More »", "#"
+        %h4 
+          PITCH: 
+          %strong Can Carbon Dioxide Be Turned to Concrete?
+        %p.small.quiet Posted Monday, July 8, 2008 by Kevin Nones and has 3 donation(s).
+        %p Engineers are constantly coming up with new ways to dispose of greenhouse gases. The latest idea is to hide carbon dioxide exhaust in cement. The method could revolutionize one of the most carbon-intensive industries in the world.
+        %p= link_to "Learn More »", "#"
+        %h4 
+          TIP: 
+          %strong The greening of Greg Nickels
+        %p.small.quiet Posted Monday, June 20, 2008 by Henry Ford and has 1 pledge(s).
+        %p The Kyoto-clean status currently hinges on one fickle factor: cement plants. Cement manufacturing uses heat like a steel blast furnace, 3,000 degrees Fahrenheit, and most plants stoke the fire by burning coal. That heat decarbonates limestone, which results in the release of CO2....
+        %p
+          = link_to "Learn More »", "#"
+          = "|"
+          = link_to "Ping This Tip"#"
+        %h4 
+          PITCH: 
+          %strong 
+            = truncate("Emissions-purifying system working well so far in Colorado Springs", 45)
+        %p.small.quiet Posted Monday, June 20, 2008 by Stan Smith and has 1 donation(s).
+        %p David Neumann isn't the most excitable guy. He's a physicist, after all, who worked at Air Force Space Command and did research at the Air Force Academy....
+        %p= link_to "Learn More »", "#"
+      
+      
+      
     .clear 
     .double_content_border
     
