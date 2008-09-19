@@ -101,9 +101,9 @@
   %div{:style=>"padding:10px 0 10px 0;background:#E5ECF9"}
   
     / header
-    .span-4
+    .span-3
       &nbsp;
-    .span-4
+    .span-5
       Styled Screen
     .span-6
       Mark-up Files
@@ -125,41 +125,50 @@
   = render :partial => 'ui_files/create_tip'
   
   %p.clear &nbsp;
+  
   %hr/
   %h2 jQuery Elements
-  %ul
-    %li
-      = link_to "jquery.equalHeights.js", "#{@public_url}/javascripts/jquery.equalHeights.js"
-      %br Equal heights for columns instead of using CSS faux columns for lesser overhead.
-    %li
-      = link_to "jquery.pngFix.js", "#{@public_url}/javascripts/jquery.pngFix.js"
-      %br jQuery png fix for ie6
-    %li
-      = link_to "jquery-ui.js", "#{@public_url}/javascripts/jquery-ui.js"
-      %br Tabs using jQuery UI
-    %li
-      = link_to "application.js", "#{@public_url}/javascripts/application.js"
-      %br Close flash messages with jQueryfied close button.
+  .clear
+    = link_to "jquery.equalHeights.js", "#{@public_url}/javascripts/jquery.equalHeights.js"
+    %br - Equal heights for columns instead of using CSS faux columns for lesser overhead.
+  .clear
+    = link_to "jquery.pngFix.js", "#{@public_url}/javascripts/jquery.pngFix.js"
+    %br - Png fix for ie6
+  
+  %p.clear &nbsp;
+  
+  %hr/  
   %h2 Prototype Elements
-  %ul
-    %li
-      = link_to "jsProgressBarHandler.js", "#{@public_url}/javascripts/jsProgressBarHandler.js" 
-      %br Progress Bar
+  %span.clear
+    = link_to "jsProgressBarHandler.js", "#{@public_url}/javascripts/jsProgressBarHandler.js" 
+    %br Progress Bar
+  
+  %p.clear &nbsp;
+  
+  %hr/
+  %h2 Image Assets
+  %h3 Layout images
+  %div background image: 
+  %div background shadow image:
+  
+  %p.clear &nbsp;
+  
+  %h3 Button images
+  %div &nbsp;
+  
+  %hr/   
   %h2 Known IE & Other issues
   %ul
-    %li home page boxing (ie6 & ie7) - status: fixed - via spotus_ie_pixel.gif image
-    %li png issue (ie6) - status: fixed - via  jquery.pngFix.js
-    %li create a tip iconized section (ie6) - status: unresolved
-    %li Header tags like h1, h2, h3, h4, h5 over lapping with p tags if the length is more than the definded width its on over 2 rows.
-  %h2 Image Assets
-  %ul
-    %li
-      Layout images
-      %ul
-        %li background image: 
-        %li background shadow image:
-        
-       
+    %li Status: Fixed / home page boxing (ie6 & ie7)  - via spotus_ie_pixel.gif image
+    %li Status: Fixed / png issue (ie6)  - via  jquery.pngFix.js
+    %li 
+      Status: Unresolved / create a tip iconized section (ie6)
+      %br/ 
+      TODO: embed the icon instead of using it as a background in the li block
+    %li 
+      Status: Unresolved / header tags like h1, h2, h3, h4, h5 over lapping with p tags if the length covers more than 2 rows.
+      %br/ 
+      TODO: truncate words to limit it within two rows. 
 
 %hr/
 %p{:style=>"float:left;"}
