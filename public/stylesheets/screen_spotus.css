@@ -100,12 +100,12 @@ h4.title {
 .showgrid {background:url(src/grid.png) 15px -3px;}
 
 /* verride p + p fancy type to not indent the footer-notes paragraph section */
-#footer-notes .span-6 p + p, #footer-notes .span-4 p + p {
+#footer-notes .span-6 p + p, #footer-notes .span-4 p + p, .existing_tips_picthes p + p {
   text-indent: 0;
   margin-top:-1.5em;
   }
 
-
+.existing_tips_picthes
 /* -----------------------------------------------------------------------
  Spot.us CUSTOM CSS 
 ----------------------------------------------------------------------- */
@@ -452,6 +452,12 @@ ol.create_a_tip_steps li.pitcher {
   padding: 10px;
   background: #FEFFD9;
   margin: 0 0 10px 0;
+  }
+.box_blue_info {
+  padding: 5px 0 0 50px;
+  border-bottom: 1px solid #c0c0c0;
+  margin: 0 0 10px 0;
+  background: url(../images/blue_info.png) no-repeat 10px 5px;
   }
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
