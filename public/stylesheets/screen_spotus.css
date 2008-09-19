@@ -10,6 +10,7 @@
 #user-header {width:960px;margin:0 auto;display:inline-block;display:block;}
 table.top td.top {vertical-align:top;}
 .debug { background:#ccc; }
+
 /* layout dimension */
 .container {
   width: 930px;
@@ -104,8 +105,6 @@ h4.title {
   text-indent: 0;
   margin-top:-1.5em;
   }
-
-.existing_tips_picthes
 /* -----------------------------------------------------------------------
  Spot.us CUSTOM CSS 
 ----------------------------------------------------------------------- */
