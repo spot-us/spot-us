@@ -436,8 +436,9 @@ ol.create_a_tip_steps li.pitcher {
   margin: 0 0 0 210px;
   color: #999999;
   }
-.media label {
+.media label{
   margin: 0 0 0 10px;
+  width: 190px!important;
   }
 .create_a_tip_form .free label {
  float: left;
@@ -512,3 +513,4 @@ ol.create_a_tip_steps li.pitcher {
   clear: both;
   margin: 0px -10px 10px -10px;
   }
+.ui-tabs-hide { display: none; }

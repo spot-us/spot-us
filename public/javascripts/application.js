@@ -3,7 +3,7 @@
 $(document).ready(function(){ 
 	$('#equalize').equalHeights();
 	$(document).pngFix();
-	$("#content_tabbed > ul").tabs();
+	$('#example > ul').tabs();
 });
 // Flash dismiss - CARM TALK TO DESI WE ARE MISSING jslivequery.js for this
 /*$('.flash .dismiss a').livequery('click', function(event) {
