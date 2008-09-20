@@ -10,6 +10,7 @@
       = @title || "Spot.us"
     
     = stylesheet_link_tag 'screen', :media => "screen"
+    = stylesheet_link_tag 'hashrocket', :media => "screen"
     = stylesheet_link_tag 'print', :media => "print"
     /[if IE 6]
       = stylesheet_link_tag 'ie'
@@ -17,9 +18,10 @@
     = javascript_include_tag 'jquery.js'
     = javascript_include_tag 'jquery-ui.js'
     = javascript_include_tag 'jrails.js'
-    = javascript_include_tag 'prototype'
-    = javascript_include_tag 'scriptaculous'
-    = javascript_include_tag 'effects'
+    = javascript_include_tag 'jquery.scrollTo-1.3.3.js'
+    = javascript_include_tag 'jquery.localscroll-1.2.5.js'
+    = javascript_include_tag 'jquery.serialScroll-1.2.1.js'
+    = javascript_include_tag 'coda-slider.js'
     = javascript_include_tag 'application'
   %body
     .body-content
@@ -31,4 +33,3 @@
                 = value
         = yield
     #footer
-      
