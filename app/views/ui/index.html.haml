@@ -22,158 +22,51 @@
 
 .span-7.colborder
   %h2 Layouts Files
-  %ul
-    %li= link_to "application.html.haml", "#{@layouts_url}/application.html.haml"
-    %li= link_to "_head.html.haml", "#{@layouts_url}/_head.html.haml"
-    %li= link_to "_user_header.html.haml", "#{@layouts_url}/_user_header.html.haml"
-    %li= link_to "_header.html.haml", "#{@layouts_url}/_header.html.haml"
-    %li= link_to "_footer.html.haml", "#{@layouts_url}/_footer.html.haml"
-    %li= link_to "_footer_notes.html.haml", "#{@layouts_url}/_footer_notes.html.haml"
-    %li= link_to "_footer_copyright.html.haml", "#{@layouts_url}/_footer_copyright.html.haml"
+  = render :partial => 'ui_files/sidebar_layout_files'
   
   %hr/
   
   %h2 CSS Files
-  %ul
-    %li{:style=>"list-style:square"}
-      Custom CSS
-      %ul
-        %li= link_to "screen_spotus.css", "#{@public_url}/stylesheets/screen_spotus.css"
-    %li{:style=>"list-style:square"} 
-      Blue Print CSS
-      %ul
-        %li= link_to "screen.css", "#{@public_url}/stylesheets/screen.css"
-        %li= link_to "print.css", "#{@public_url}/stylesheets/print.css"
-        %li= link_to "ie.css", "#{@public_url}/stylesheets/ie.css"
-        %li= link_to "sprite.css", "#{@public_url}/stylesheets/sprite.css"
-  %p 
-    To easily update/upgrade the Blue Print CSS files, all custom css and over rides should be on
-    %strong
-      screen_spotus.css
-    for the screen media.
+  = render :partial => 'ui_files/sidebar_css'
 
   %hr/
   
   %h2 Color Schemes
-  %div{:style =>"color:#fff;padding:8px;background-color:#212C30;"}
-    :plain 
-      #212C30
-  %div{:style =>"color:#fff;padding:8px;background-color:#3C5359;"}
-    :plain
-      #3C5359
-  %div{:style =>"color:#333;padding:8px;background-color:#909a9d;"}
-    :plain
-      #909a9d
-  %div{:style =>"color:#333;padding:8px;background-color:#E9EB98;"}
-    :plain
-      #E9EB98
-  %div{:style =>"color:#333;padding:8px;background-color:#F1F1F1;"}
-    :plain
-      #F1F1F1
-  %div{:style =>"color:#333;padding:8px;background-color:#FF005D;"}
-    :plain
-      #FF005D
-  %div{:style =>"color:#333;padding:8px;background-color:#CE859D;"}
-    :plain
-      #CE859D
-  %div{:style =>"color:#333;padding:8px;background-color:#379F00;"}
-    :plain
-      #379F00
-  %div{:style =>"color:#333;padding:8px;background-color:#CCE7BA;"}
-    :plain
-      #CCE7BA
-  %div{:style =>"color:#fff;padding:8px;background-color:#940000;"}
-    :plain
-      #940000
+  = render :partial => 'ui_files/sidebar_color_schemes'
   %p &nbsp;
   %hr/
   
   %h2 Silk Icons
-  %p
-    Silk icons are readily available for use via the sprites plugin for BluePrint.
-    %br/
-    To see sample use, visit: 
-    = link_to "Sprites", "http://www.ajaxbestiary.com/Labs/SilkSprite/"
-  
+  = render :partial => 'ui_files/sidebar_silk_icons'
     
-.span-15{:style=>"float:right"}
-  %h2 Screens haml-ized and styled.
-  %div{:style=>"padding:10px 0 10px 0;background:#E5ECF9"}
-  
-    / header
-    .span-3
-      &nbsp;
-    .span-5
-      Styled Screen
-    .span-6
-      Mark-up Files
-    .clear
-  %br/
-  
-  = render :partial => 'ui_files/activity'
-    
-  %hr
-  
-  = render :partial => 'ui_files/home'
-  
-  %hr
-  
-  = render :partial => 'ui_files/login_register'
-  
-  %hr
-  
-  = render :partial => 'ui_files/create_tip'
-  
-  %p.clear &nbsp;
-  
-  %hr/
-  %h2 jQuery Elements
-  .clear
-    = link_to "jquery.equalHeights.js", "#{@public_url}/javascripts/jquery.equalHeights.js"
-    %br - Equal heights for columns instead of using CSS faux columns for lesser overhead.
-  .clear
-    = link_to "jquery.pngFix.js", "#{@public_url}/javascripts/jquery.pngFix.js"
-    %br - Png fix for ie6
-  
-  %p.clear &nbsp;
-  
-  %hr/  
-  %h2 Prototype Elements
-  %span.clear
-    = link_to "jsProgressBarHandler.js", "#{@public_url}/javascripts/jsProgressBarHandler.js" 
-    %br Progress Bar
-  
-  %p.clear &nbsp;
-  
-  %hr/
-  %h2 Image Assets
-  %h3 Layout images
-  %div background image: 
-  %div background shadow image:
-  
-  %p.clear &nbsp;
-  
-  %h3 Button images
-  %div &nbsp;
-  
-  %hr/   
-  %h2 Known IE & Other issues
-  %ul
-    %li Status: Fixed / home page boxing (ie6 & ie7)  - via spotus_ie_pixel.gif image
-    %li Status: Fixed / png issue (ie6)  - via  jquery.pngFix.js
-    %li 
-      Status: Unresolved / create a tip iconized section (ie6)
-      %br/ 
-      TODO: embed the icon instead of using it as a background in the li block
-    %li 
-      Status: Unresolved / header tags like h1, h2, h3, h4, h5 over lapping with p tags if the length covers more than 2 rows.
-      %br/ 
-      TODO: truncate words to limit it within two rows. 
 
-%hr/
-%p{:style=>"float:left;"}
-  == Copyright &copy; #{Time.now.year} Hashrocket.
-%p{:style=>"float:right;margin-top:0px;"}
-  If you have any questions about the mark-up files and styling, please email:
-  %a{:href=>"mailto: carmelyne@hashrocket.com", :style=>"margin-top:-1.5em;"} carmelyne@hashrocket.com
+- # Content Section
+
+#slider{:style=>"float:right"}
+  %ul.navigation
+    %li
+      %a{ :href => "#screens" } Screens
+    %li
+      %a{ :href => "#javascripts" } UI Widgets
+    %li
+      %a{ :href => "#image_assets" } Image Assets
+    %li
+      %a{ :href => "#issues" } Known IE & Other issues
+  .scroll{ :style => "overflow: hidden;" }
+    .scrollContainer{ :style => "width: 4340px;" }
+      #screens.panel{ :style => "float: left; position: relative;" }
+        %h2 Screens haml-ized and styled
+        = render :partial => 'ui_files/panel_screens'
+      #javascripts.panel{ :style => "float: left; position: relative;" }
+        %h2 UI Widgets
+        = render :partial => 'ui_files/panel_javascripts'
+      #image_assets.panel{ :style => "float: left; position: relative;" }
+        %h2 Image Assets
+        = render :partial => 'ui_files/panel_image_assets'
+      #issues.panel{ :style => "float: left; position: relative;" }
+        %h2 Known IE & Other issues
+        = render :partial => 'ui_files/panel_issues'
   
+- # Footer Section  
+%hr/
+= render :partial => 'ui_files/footer'

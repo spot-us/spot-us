@@ -1,0 +1,17 @@
+%ul
+  %li{:style=>"list-style:square"}
+    Custom CSS
+    %ul
+      %li= link_to "screen_spotus.css", "#{@public_url}/stylesheets/screen_spotus.css"
+  %li{:style=>"list-style:square"} 
+    Blue Print CSS
+    %ul
+      %li= link_to "screen.css", "#{@public_url}/stylesheets/screen.css"
+      %li= link_to "print.css", "#{@public_url}/stylesheets/print.css"
+      %li= link_to "ie.css", "#{@public_url}/stylesheets/ie.css"
+      %li= link_to "sprite.css", "#{@public_url}/stylesheets/sprite.css"
+%p 
+  To easily update/upgrade the Blue Print CSS files, all custom css and over rides should be on
+  %strong
+    screen_spotus.css
+  for the screen media.
