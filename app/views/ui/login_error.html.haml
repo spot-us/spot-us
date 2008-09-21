@@ -10,7 +10,7 @@
     If you're experiencing a persistent problem,
     = link_to "let us know", "#"
 
-.block-spacer
+.block-padding
 
 .login-boxer
 
@@ -20,12 +20,12 @@
     .double_content_border
     .row
       %label Your Name
-      = text_field_tag "", :class=>"text"
-    .block-spacer
+      = text_field_tag "", nil, :class=>"text"
+    .block-padding
     .row
       %label Your E-mail Address
-      = text_field_tag "", :class=>"text"
-    .block-spacer
+      = text_field_tag "", nil, :class=>"text"
+    .block-padding
     %span I am a:
     .row
       .float_left= radio_button_tag("", "", "")
@@ -36,11 +36,11 @@
     .row
       .float_left= radio_button_tag("", "", "")
       %label.float_left News Organization
-    .block-spacer.clear 
+    .block-padding.clear 
     %p We'll email you a password which you can login and change.
     .double_content_border
     .float_right
-      %input{:type => "button", :class=>"gray_button", :value => "Register &raquo;"}
+      %input{:type => "image", :src=>"../images/register.png"}
     
   - # Login box 
   .span-6.or_login
@@ -50,13 +50,13 @@
       .fieldWithErrors
         %label Your E-mail Address
       .fieldWithErrors
-        = text_field_tag "", :class=>"text"
-    .block-spacer
+        = text_field_tag "", nil, :class=>"text"
+    .block-padding
     .row
       .fieldWithErrors
         %label Your Password
       .fieldWithErrors
-        = text_field_tag "", :class=>"text"
+        = text_field_tag "", nil, :class=>"text"
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
@@ -68,4 +68,4 @@
     
   .clear
 %img{:src=>"../images/spotus_ie_pixel.gif"}
-.block-spacer
+.block-padding
