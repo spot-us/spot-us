@@ -29,5 +29,5 @@ FCKConfig.RemoveFormatTags = 'b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,
 
 // toolbar specific to spot.us
 FCKConfig.ToolbarSets["Spotus"] = [
-	['Bold','Italic','OrderedList','UnorderedList','-','Outdent','Indent','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','Link','Rule','Source'],
+	['Bold','Italic','StrikeThrough','OrderedList','UnorderedList','-','Outdent','Indent','JustifyLeft','JustifyCenter','JustifyRight','JustifyFull','-','Link','Rule','Source'],
 ] ;

@@ -70,6 +70,11 @@ ul.navigation a:focus {
 .hide {
   display: none;
   }
+  
 .image_items img {
   margin: 5px;
   }
+
+.image_items {
+  margin: 0 0 25px 0;
+}
