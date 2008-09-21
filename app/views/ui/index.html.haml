@@ -20,54 +20,54 @@
     Mark-up files are inside app/views/ui directory. The main layout files are inside app/views/layouts. Most pages are broken down into partials as seen fit. Images are inside public/images. Spot.us is using 
     %a{:href=>"http://www.blueprintcss.org/"} Blueprint 
     as its CSS Framework and it is the base for the custom css files.
-
-.span-7.colborder
-  %h2 Layouts Files
-  = render :partial => 'ui_files/sidebar_layout_files'
-  
-  %hr/
-  
-  %h2 CSS Files
-  = render :partial => 'ui_files/sidebar_css'
-
-  %hr/
-  
-  %h2 Color Schemes
-  = render :partial => 'ui_files/sidebar_color_schemes'
-  %p &nbsp;
-  %hr/
-  
-  %h2 Silk Icons
-  = render :partial => 'ui_files/sidebar_silk_icons'
+#equalize
+  .span-7.colborder
+    %h2 Layouts Files
+    = render :partial => 'ui_files/sidebar_layout_files'
     
-
-- # Content Section
-
-#slider{:style=>"float:right"}
-  %ul.navigation
-    %li
-      %a{ :href => "#screens" } Screens
-    %li
-      %a{ :href => "#javascripts" } UI Widgets
-    %li
-      %a{ :href => "#image_assets" } Image Assets
-    %li
-      %a{ :href => "#issues" } Known IE & Other issues
-  .scroll{ :style => "overflow: hidden;" }
-    .scrollContainer{ :style => "width: 4340px;" }
-      #screens.panel{ :style => "float: left; position: relative;" }
-        %h2 Screens haml-ized and styled
-        = render :partial => 'ui_files/panel_screens'
-      #javascripts.panel{ :style => "float: left; position: relative;" }
-        %h2 UI Widgets
-        = render :partial => 'ui_files/panel_javascripts'
-      #image_assets.panel{ :style => "float: left; position: relative;" }
-        %h2 Image Assets
-        = render :partial => 'ui_files/panel_image_assets'
-      #issues.panel{ :style => "float: left; position: relative;" }
-        %h2 Known IE & Other issues
-        = render :partial => 'ui_files/panel_issues'
+    %hr/
+    
+    %h2 CSS Files
+    = render :partial => 'ui_files/sidebar_css'
   
+    %hr/
+    
+    %h2 Color Schemes
+    = render :partial => 'ui_files/sidebar_color_schemes'
+    %p &nbsp;
+    %hr/
+    
+    %h2 Silk Icons
+    = render :partial => 'ui_files/sidebar_silk_icons'
+      
+  
+  - # Content Section
+  
+  #slider{:style=>"float:right"}
+    %ul.navigation
+      %li
+        %a{ :href => "#screens" } Screens
+      %li
+        %a{ :href => "#javascripts" } UI Widgets
+      %li
+        %a{ :href => "#image_assets" } Image Assets
+      %li
+        %a{ :href => "#issues" } Known IE & Other issues
+    .scroll{ :style => "overflow: hidden;" }
+      .scrollContainer{ :style => "width: 4340px;" }
+        #screens.panel{ :style => "float: left; position: relative;" }
+          %h2 Screens haml-ized and styled
+          = render :partial => 'ui_files/panel_screens'
+        #javascripts.panel{ :style => "float: left; position: relative;" }
+          %h2 UI Widgets
+          = render :partial => 'ui_files/panel_javascripts'
+        #image_assets.panel{ :style => "float: left; position: relative;" }
+          %h2 Image Assets
+          = render :partial => 'ui_files/panel_image_assets'
+        #issues.panel{ :style => "float: left; position: relative;" }
+          %h2 Known IE & Other issues
+          = render :partial => 'ui_files/panel_issues'
+    
 - # Footer Section  
 %hr/
 = render :partial => 'ui_files/footer'
