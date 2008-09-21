@@ -10,11 +10,11 @@
     .double_content_border
     .row
       %label Your Name
-      = text_field_tag "", :class=>"text"
+      = text_field_tag "", nil, :class=>"text"
     .block-padding
     .row
       %label Your E-mail Address
-      = text_field_tag "", :class=>"text"
+      = text_field_tag "", nil, :class=>"text"
     .block-padding
     %span I am a:
     .row
@@ -30,7 +30,7 @@
     %p We'll email you a password which you can login and change.
     .double_content_border
     .float_right
-      %input{:type => "button", :class=>"gray_button", :value => "Register &raquo;"}
+      %input{:type => "image", :src=>"../images/register.png"}
     
   - # Login box 
   .span-6.or_login
@@ -38,18 +38,18 @@
     .double_content_border
     .row
       %label Your E-mail Address
-      = text_field_tag "", :class=>"text"
+      = text_field_tag "", nil, :class=>"text"
     .block-padding
     .row
       %label Your Password
-      = text_field_tag "", :class=>"text"
+      = text_field_tag "", nil, :class=>"text"
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
     .clear
     .double_content_border
     .float_right
-      %input{:type => "button", :class=>"gray_button", :value => "Login &raquo;"}
+      %input{:type => "image", :src=>"../images/login.png"}
     
     
   .clear
