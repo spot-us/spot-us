@@ -117,6 +117,10 @@ body {
   text-align: center;
   color: #fff;
   }
+.centered_text {
+  margin: 0 0 0 35px;
+  float: left;
+  }
 .text-justify {
   text-align: justify;
   }
