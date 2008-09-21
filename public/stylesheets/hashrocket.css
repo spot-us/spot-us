@@ -1,8 +1,8 @@
 #slider {
-    width: 600px;
-    margin: 20px auto 0 auto;
-    position: relative;
-}
+  width: 600px;
+  margin: 20px auto 0 auto;
+  position: relative;
+  }
 
 .scroll {
     width: 600px;
@@ -10,63 +10,66 @@
     overflow-x: hidden;
     position: relative;
     clear: left;
-}
+  }
 
 .scrollContainer div.panel {
-    padding: 20px 10px 0 5px;
-    height: 1000px;
-    width: 590px;
-    border-top: 1px solid #d5d5d5;
-    margin: 0;
-}
+  padding: 20px 10px 0 5px;
+  height: 1000px;
+  width: 590px;
+  border-top: 1px solid #d5d5d5;
+  margin: 0;
+  }
 
 ul.navigation {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    padding-bottom: 9px;
-}
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 9px;
+  }
 
 ul.navigation li {
-    display: inline;
-    margin-right: 10px;
-}
+  display: inline;
+  margin-right: 10px;
+  }
 
 ul.navigation a {
-    padding: 10px;
-    color: #000;
-    text-decoration: none;
-    border-top: 1px solid #d5d5d5;
-    border-right: 1px solid #d5d5d5;
-    border-left: 1px solid #d5d5d5;
-}
+  padding: 10px;
+  color: #000;
+  text-decoration: none;
+  border-top: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
+  border-left: 1px solid #d5d5d5;
+  }
 
 ul.navigation a:hover {
-    background-color: #f6f6f6;
-}
+  background-color: #f6f6f6;
+  }
 
-/* ul.navigation a.selected {
-    background-color: #ccc;
-}*/
+ul.navigation a.selected {
+  background-color: #FFFEEF;
+  }
 
 ul.navigation a:focus {
-    outline: none;
-}
+  outline: none;
+  }
 
 .scrollButtons {
-    position: absolute;
-    top: 0px;
-    cursor: pointer;
-}
+  position: absolute;
+  top: 0px;
+  cursor: pointer;
+  }
 
 .scrollButtons.left {
-    left: -25px;
-}
+  left: -25px;
+  }
 
 .scrollButtons.right {
-    right: 0px;
-}
+  right: 0px;
+  }
 
 .hide {
-    display: none;
-}
+  display: none;
+  }
+.image_items img {
+  margin: 5px;
+  }

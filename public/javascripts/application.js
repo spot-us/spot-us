@@ -11,3 +11,14 @@ $(document).ready(function(){
   return false;
 });*/
 
+
+$("a").click(function(){
+  $(".navigation a.selected").removeClass("selected");  
+  // remove previous class if there is any
+  $(this).addClass("selected");                                      
+  // add class to the clicked link
+  return false;                                                           
+  // this prevents browser from following clicked link
+});
+
+
