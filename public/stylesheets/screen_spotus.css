@@ -352,8 +352,10 @@ body {
   }
 .dismiss a {
   text-decoration: none;
-  padding: 0 0 3px 25px;
-  background: url(../images/close.png) no-repeat 3px 0;
+  height: 22px;
+  width: 22px;
+  background: url(../images/close_square.png) no-repeat;
+  display: block;
   }
   
 /* Create A Tip */  
