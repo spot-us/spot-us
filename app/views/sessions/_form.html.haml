@@ -9,6 +9,9 @@
     .row
       %label Your Password
       = password_field_tag "password", nil, :class=>"text"
+    .row
+      = check_box_tag 'remember_me', '1'
+      %label{:for => 'remember_me'} Remember Me
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
