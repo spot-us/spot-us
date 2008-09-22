@@ -558,7 +558,7 @@ ul.navigation li {
   }
 
 ul.navigation a {
-  padding: 5px 20px;
+  padding: 6px 25px;
   color: #3C5359;
   text-decoration: none;
   border-top: 1px solid #d5d5d5;
@@ -574,7 +574,7 @@ ul.navigation a:hover {
   }
 
 ul.navigation a.selected {
-  padding: 8px 15px 5px 15px;
+  padding: 9px 15px 5px 15px;
   background-color: #fff;
   background: #fff url(../images/white.png) repeat-x left bottom;
   border-bottom: 1px solid #fff;
