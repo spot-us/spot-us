@@ -1,0 +1,5 @@
+# copy me into public/system/config.yml
+production:
+  google_analytics:
+    api_key: CHANGEME
+
