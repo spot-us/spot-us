@@ -1,4 +1,6 @@
+= render :partial => 'ibox_create_tip'
 - @title = "Spot.us - Create a Tip"
+
 .block-spacer
 %h3 Create a Tip
 
@@ -158,20 +160,6 @@
         %p 4 of 1078 Total
       .float_right
         %p= link_to "Next", "#", :class => "quiet"
-        
-      - # IBOX Content Start      
-      #inner_content{:style=>"display:none;"}
-        .clear
-        .double_content_border
-        .box_white
-          %p If you were to view source, you would find a div called 'inner_content'. This is that div. We have used CSS to set its display property to none, but using <a href="/blog/p_ibox.html">iBox</a>, you can clearly see it as an overlay. Hurrah!
-        %div{:style=>"background:#999999;color:#ffffff;border:1px dashed #FFFFFF;padding:10px;margin:10px;"} 
-          %h3 It is a hidden div!
-          %p If you were to view source, you would find a div called 'inner_content'. This is that div. We have used CSS to set its display property to none, but using <a href="/blog/p_ibox.html">iBox</a>, you can clearly see it as an overlay. Hurrah!
-          .clear
-      - # IBOX Content End
-      
-      
     .clear 
     .double_content_border
     
