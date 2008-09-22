@@ -538,3 +538,49 @@ div.progressBar div.background {
 div.progressBar img {
   margin: 5px;
   }
+
+/* Tab Styling */
+#tab_container {
+  border-bottom: 1px solid #d5d5d5;
+  width: 625px;
+  margin: 20px 0 0 0;
+  }  
+ul.navigation {
+  list-style: none;
+  margin: 0 0 0 1px;
+  padding: 0;
+  padding-bottom: 4px;
+  }
+
+ul.navigation li {
+  display: inline;
+  margin-right: 5px;
+  }
+
+ul.navigation a {
+  padding: 5px 20px;
+  color: #3C5359;
+  text-decoration: none;
+  border-top: 1px solid #d5d5d5;
+  border-right: 1px solid #d5d5d5;
+  border-left: 1px solid #d5d5d5;
+  background: url(../images/tab_bg.png) repeat-x left bottom;
+  font-weight: bold;
+  margin: 0 0 -1px 0;
+  }
+
+ul.navigation a:hover {
+  background: #fff url(../images/white.png) repeat-x left bottom;
+  }
+
+ul.navigation a.selected {
+  padding: 8px 15px 5px 15px;
+  background-color: #fff;
+  background: #fff url(../images/white.png) repeat-x left bottom;
+  border-bottom: 1px solid #fff;
+  color: #000;
+  }
+
+ul.navigation a:focus {
+  outline: none;
+  }
