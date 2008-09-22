@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 # Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead
 # Then, you can remove it from this and the units test.
 include AuthenticatedTestHelper
+include ActionController::UrlWriter
 
 describe UsersController do
   fixtures :users
@@ -14,9 +15,13 @@ describe UsersController do
     end.should change(User, :count).by(1)
   end
 
-  
+  it "routes /user to the 'show' action" do
+    user_path.should == "/user"
+  end
 
-  
+  it "routes /user to the 'show' action" do
+    route_for(:controller => "users", :action => "show").should == "/user"
+  end
 
   it 'requires login on signup' do
     lambda do
