@@ -16,7 +16,6 @@ describe SessionsController do
   it 'fails login and does not redirect' do
     post :create, :email => 'quentin@example.com', :password => 'bad password'
     session[:user_id].should be_nil
-    flash[:error].should_not be_blank
     response.should be_success
   end
 
