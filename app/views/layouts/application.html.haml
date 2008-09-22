@@ -8,6 +8,10 @@
     .body-content
       .container
         = render :partial => 'layouts/header'
+        - if yield(:error)
+          .flash.error
+            %span.dismiss= link_to "Close Error", '' # empty string means self
+            = yield(:error)
         - if flash.any?
           .flash
             - flash.each do |key, value|
