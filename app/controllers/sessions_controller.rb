@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
     else
-      flash[:error] = 'Invalid E-mail Address or Password'
+      flash[:error] = render_to_string(:partial => 'sessions/error')
       render :action => 'new'
     end
   end
