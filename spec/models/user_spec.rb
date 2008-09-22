@@ -26,7 +26,8 @@ describe User do
     violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
     user.password.should_not be_nil
     user.password.size.should == 6
-    User.authenticate(user.email, user.password).should == user
+    User.authenticate(user.email, user.password).should == 
+      User.find(user.to_param)
   end
 
   it 'requires password confirmation on update' do
@@ -43,6 +44,31 @@ describe User do
     end.should_not change(User, :count)
   end
 
+  %w(Citizen Reporter Organization).each do |user_type|
+    it "should allow a type of #{user_type}" do
+      user = create_user
+      user.type = user_type
+      user.save
+      violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
+    end
+  end
+
+  it "should not allow a type of BusDriver" do
+    user = create_user
+    user.type = 'BusDriver'
+    user.valid?
+    user.should_not be_valid
+    user.should have(1).error_on(:type)
+  end
+
+  it "should require a type" do
+    user = create_user
+    user.type = nil
+    user.valid?
+    user.should_not be_valid
+    user.should have(1).error_on(:type)
+  end
+
   it 'resets password' do
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
     User.authenticate('quentin@example.com', 'new password').should == users(:quentin)
@@ -51,6 +77,18 @@ describe User do
   it 'does not rehash password' do
     users(:quentin).update_attributes(:email => 'quentin2@example.com')
     User.authenticate('quentin2@example.com', 'test').should == users(:quentin)
+  end
+
+  it "requires first name" do
+    user = create_user(:first_name => nil)
+    user.should_not be_valid
+    user.should have(1).error_on(:first_name)
+  end
+
+  it "requires last name" do
+    user = create_user(:last_name => nil)
+    user.should_not be_valid
+    user.should have(1).error_on(:last_name)
   end
 
   it 'authenticates user' do
@@ -98,7 +136,10 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({ :email => 'quire@example.com' }.merge(options))
+    record = User.new({ :email      => 'quire@example.com',
+                        :first_name => 'Quire',
+                        :last_name  => 'User' }.merge(options))
+    record.type = 'Citizen'
     record.save
     record
   end

@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
   include AuthenticatedSystem
 
+  def new
+    @user = User.new
+  end
+
   def create
     self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
