@@ -1,3 +1,13 @@
+- content_for :error do
+  - unless session_field_class_name.blank?
+    %h2 Oops
+    %p Please correct these items:
+    %ul
+      %li Invalid E-mail Address or Password
+    %p 
+      If you're experiencing a persistent problem,
+      = link_to "let us know", "#"
+
 - form_tag session_url do
   .span-6.or_login
     %h3 Or Login
