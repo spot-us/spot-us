@@ -1,5 +1,5 @@
 - content_for :error do
-  - unless session_field_class_name.blank?
+  - unless login_failed?
     %h2 Oops
     %p Please correct these items:
     %ul
