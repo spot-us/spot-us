@@ -23,19 +23,11 @@ describe UsersController do
     route_for(:controller => "users", :action => "show").should == "/user"
   end
 
-  it 'requires login on signup' do
-    lambda do
-      create_user(:login => nil)
-      assigns[:user].errors.on(:login).should_not be_nil
-      response.should be_success
-    end.should_not change(User, :count)
-  end
-  
   it 'generates password on signup' do
     create_user
     assigns[:user].password.should_not be_blank
     assigns[:user].password.size.should == 6
-    User.authenticate(assigns[:user].login, assigns[:user].password).should == 
+    User.authenticate(assigns[:user].email, assigns[:user].password).should == 
       assigns[:user]
     response.should be_redirect
   end
@@ -51,6 +43,6 @@ describe UsersController do
   
   
   def create_user(options = {})
-    post :create, :user => { :login => 'quire', :email => 'quire@example.com' }.merge(options)
+    post :create, :user => { :email => 'quire@example.com' }.merge(options)
   end
 end

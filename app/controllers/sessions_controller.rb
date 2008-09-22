@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   include AuthenticatedSystem
 
   def create
-    self.current_user = User.authenticate(params[:login], params[:password])
+    self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
     else
+      flash[:error] = 'Invalid E-mail Address or Password'
       render :action => 'new'
     end
   end
