@@ -26,35 +26,29 @@
 	top: 0px;
 	left: 0px;
 	z-index:1000;
-	padding:10px;
-	border:20px solid #eee;
-	width:300px;
+	padding: 0px;
+	border:10px solid #DFEFED;
+	background: #DFEFED url(../../images/ibox_bg.jpg) repeat-x;
+	width:520px;
 /*	height:300px;*/
-	background-color:#eee;
-	padding-bottom:30px;
+	padding-bottom:50px;
 	margin:0;
 }
 
 #ibox_content {
-	background-color:#eee;
+  position:relative;
 	width:100%;
 	height:100%;
-	margin-bottom:5px;
-	position:relative;
-	top:0px;
-	left:0px;
-	padding:0;
+	padding: 50px 0 0 0;
 }
 
 #ibox_footer_wrapper {
-	border-top:1px solid #ccc;
-	padding: 5px;
-	position:relative;
-	padding-top:5px;
-	margin:0 -10px;
+	padding: 0px;
+	position:absolute;
+	margin:0;
 	top:0px;
 	left:0px;
-	vertical-align: top;
+	width: 100%;
 }
 
 #ibox_footer{
@@ -74,13 +68,12 @@
 
 #ibox_close a{
 	font-size: 18px;
-	padding: 0 5px;
+	padding: 0;
 	text-decoration: none;
-	background-color:#eee;
+	background-color:#DFEFED;
 	color: #000;
 }
 
 #ibox_close a:hover{
-	background-color: #000;
 	color:#fff;
 }
