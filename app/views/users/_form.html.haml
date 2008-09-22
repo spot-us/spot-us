@@ -1,0 +1,26 @@
+.span-6.register
+  %h3 Register
+  .double_content_border
+  .row
+    %label Your Name
+    = text_field_tag "", nil, :class=>"text"
+  .block-padding
+  .row
+    %label Your E-mail Address
+    = text_field_tag "", nil, :class=>"text"
+  .block-padding
+  %span I am a:
+  .row
+    .float_left= radio_button_tag("", "", "")
+    %label.float_left Community Member
+  .row
+    .float_left= radio_button_tag("", "", "")
+    %label.float_left Professional Journalist
+  .row
+    .float_left= radio_button_tag("", "", "")
+    %label.float_left News Organization
+  .block-padding.clear 
+  %p We'll email you a password which you can login and change.
+  .double_content_border
+  .float_right
+    %input{:type => "image", :src=>"../images/register.png"}
