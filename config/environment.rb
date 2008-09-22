@@ -9,6 +9,9 @@ APP_CONFIG = YAML.load_file(File.join(RAILS_ROOT, *%w(public system config.yml))
 
 Rails::Initializer.run do |config|
   config.gem "haml"#, :version => 2.0.3
+  config.gem 'thoughtbot-factory_girl',
+             :lib => 'factory_girl',
+             :source => 'http://gems.github.com'
   
   config.time_zone = 'UTC'
   
