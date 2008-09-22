@@ -23,5 +23,5 @@ class UiController < ApplicationController
       render :nothing => true, :status => 404 and return false
     end
   end
-
 end
+
