@@ -1,0 +1,2 @@
+class Reporter < User
+end
