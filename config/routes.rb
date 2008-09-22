@@ -1,7 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  # TODO: remove when done
   map.resources :ui
   
-  map.resources :users
+  map.resource :user
   map.signup  '/signup', :controller => 'users',    :action => 'new'
 
   map.resource :session
@@ -12,3 +13,4 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
+
