@@ -1,23 +1,210 @@
-:plain
-      <div id="example" class="flora">
-              <ul>
+- @title = "Spot.us - Create a Tip"
+.block-spacer
+%h3 Create a Tip
 
-                  <li><a href="#fragment-1"><span>One</span></a></li>
-                  <li><a href="#fragment-2"><span>Two</span></a></li>
-                  <li><a href="#fragment-3"><span>Three</span></a></li>
-              </ul>
-              <div id="fragment-1" class="ui-tabs-panel" style="display: block;">
-                  <p>First tab is active by default:</p>
-                  <pre><code>$('#example > ul').tabs();</code></pre>
-              </div>
-              <div id="fragment-2" class="ui-tabs-panel ui-tabs-hide">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </div>
-              <div id="fragment-3" class="ui-tabs-panel ui-tabs-hide">
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-              </div>
-      </div>
+#equalize
+
+  - # first column content 
+  .span-715.box_white
   
+    .create_a_tip
+      - #TODO for Carm, just move the icons as embeded images rather than css background since ie6 is being picky about it.
+      %ol.create_a_tip_iconized
+        %li.tipster
+        %li.pledgester
+        %li.pitcher
+      %ol.create_a_tip_steps
+        %li.tipster Create a Tip
+        %li.pledgester Get Your Community to Pledge
+        %li.pitcher A journalist Will Build a Pitch Around Your Tip
+    .take_action
+      %p.no_margin
+        %strong Take Action!
+      %ul
+        %li 
+          Creating a community news tip is a way to let journalist and news organizations know what is important to you. At this stage the pledge is uncommitted. we don't even ask for credit card information.
+          = link_to "Learn more about tips", "#"
+        %li= link_to "What kind of tips should I create?", "#"
+        %li Watch the search results on the right to see if other tips or pitches are tackling the same issue.
+        %li
+          After you create a tip, find others who will join. Soon a journalist may create a pitch based on your story tip. 
+        = link_to "Learn more about what happens after you create a tip.", "#"
+    .clear
+    
+    .block-spacer-negative
+    - # First Inner column - the yellow box
+    .span-455.box_yellow.create_a_tip_form.float_left
+      .row
+        %label{:for => ""} Your Tip's Headline
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Short Description
+        = text_area_tag "", nil, :rows => 11
+        .form_hint.small
+          500 Characters Remain
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Pick Topics
+        .form_hint
+          %span.ss_sprite.ss_add 
+          %span.add_edit Add or Edit Topics
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} Location
+        = select_tag "", "<option>Jax</option>"
+        .form_hint
+          %span.ss_sprite.ss_add 
+          %span.add_edit Add a Country
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          Keyword
+          %br/
+          %span.small.quieter
+            Keywords, or tags, should be separate by commas, for example: “car, automobile, SUVs.”
+        = text_area_tag "", nil, :rows => 3
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          I pledge...
+        = text_field_tag "", nil, :maxlength => 15, :size => 15
+        %span.ss_sprite.ss_information
+        %span.small.add_edit= link_to "Why pledge", "#"
+      .yellow-spacer-negative
+      .row
+        %label{:for => ""} 
+          Add Media
+          %span.quieter (Optional)
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Upload A Featured Image
+          %br
+          %span.quieter JPEG, PNG and GIF's less than 5 MB.
+        = file_field_tag ""
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Add a Featured Image Caption
+          %br
+          %span.quieter 200 Characters Remain
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative-blank
+      .row.media
+        %label.small{:for => ""}
+          Embed a Video
+          %br
+          %span.quieter Paste your third-party embeded cide here.
+        = text_area_tag '', nil, :rows => 2
+      .yellow-spacer-negative
+      .free
+        %label{:for => ""} 
+          .float_left Extended Description
+          .float_right.small.quieter 3,000 Characters Remain 
+        = fckeditor_textarea("object", "field", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+      .yellow-spacer-negative
+      .free
+        .float_left= radio_button_tag '', ''
+        %label{:for => ""}
+          I agree with the
+          = link_to "Terms and Conditions.", "#", :class => "quieter"
+        .clear
+        
+    - # Second Inner column next to the yellow box
+    .span-225
+      %h3 Existing Tips & Pitches
+      .double_content_border
+      
+      .box_blue_info
+        %p.small Please review these Pitches and make sure another Journalist hasn’t already proposed your Pitch.
+      
+      .existing_tips_picthes
+        %h4 
+          PITCH: 
+          %strong A Concrete Cure for Global Warming?
+        %p.small.quiet Posted Monday, July 8, 2008 by Karen Smith and has 8 donation(s).
+        %p To halt climate change, we need to start capturing the millions of tons of CO2 pouring out of the world’s electricity plants. So far, most of the focus has been on pumping the CO2 back underground, to bind with rocks. But why not just stash it in the cement used to make sidewalks...
+        - # IBOX LINK
+        %p= link_to "Learn More &raquo;", "#", :title=>"<img src='../images/preview_icon.png' class='float_left ibox_image'/>Loading Internal HTML Content", :rel => "ibox", :href=>"#inner_content"
+        %h4 
+          PITCH: 
+          %strong Can Carbon Dioxide Be Turned to Concrete?
+        %p.small.quiet Posted Monday, July 8, 2008 by Kevin Nones and has 3 donation(s).
+        %p Engineers are constantly coming up with new ways to dispose of greenhouse gases. The latest idea is to hide carbon dioxide exhaust in cement. The method could revolutionize one of the most carbon-intensive industries in the world.
+        - # IBOX LINK
+        %p= link_to "Learn More &raquo;", "#", :title=>"<img src='../images/preview_icon.png' class='float_left ibox_image'/>Loading Internal HTML Content", :rel => "ibox", :href=>"#inner_content"
+        %h4 
+          TIP: 
+          %strong The greening of Greg Nickels
+        %p.small.quiet Posted Monday, June 20, 2008 by Henry Ford and has 1 pledge(s).
+        %p The Kyoto-clean status currently hinges on one fickle factor: cement plants. Cement manufacturing uses heat like a steel blast furnace, 3,000 degrees Fahrenheit, and most plants stoke the fire by burning coal. That heat decarbonates limestone, which results in the release of CO2....
+        - # IBOX LINK
+        %p
+          = link_to "Learn More &raquo;", "#", :title=>"<img src='../images/preview_icon.png' class='float_left ibox_image'/>Loading Internal HTML Content", :rel => "ibox", :href=>"#inner_content"
+          = "|"
+          = link_to "Ping This Tip"#"
+        %h4 
+          PITCH: 
+          %strong 
+            = truncate("Emissions-purifying system working well so far in Colorado Springs", 45)
+        %p.small.quiet Posted Monday, June 20, 2008 by Stan Smith and has 1 donation(s).
+        %p David Neumann isn't the most excitable guy. He's a physicist, after all, who worked at Air Force Space Command and did research at the Air Force Academy....
+        - # IBOX LINK
+        %p= link_to "Learn More &raquo;", "#", :title=>"<img src='../images/preview_icon.png' class='float_left ibox_image'/>Loading Internal HTML Content", :rel => "ibox", :href=>"#inner_content"
+      .float_left 
+        %p= link_to "Previous", "#", :class => "quiet"
+      .centered_text
+        %p 4 of 1078 Total
+      .float_right
+        %p= link_to "Next", "#", :class => "quiet"
+        
+      - # IBOX Content Start      
+      #inner_content{:style=>"display:none;"}
+        .clear
+        .double_content_border
+        .box_white
+          %p If you were to view source, you would find a div called 'inner_content'. This is that div. We have used CSS to set its display property to none, but using <a href="/blog/p_ibox.html">iBox</a>, you can clearly see it as an overlay. Hurrah!
+        %div{:style=>"background:#999999;color:#ffffff;border:1px dashed #FFFFFF;padding:10px;margin:10px;"} 
+          %h3 It is a hidden div!
+          %p If you were to view source, you would find a div called 'inner_content'. This is that div. We have used CSS to set its display property to none, but using <a href="/blog/p_ibox.html">iBox</a>, you can clearly see it as an overlay. Hurrah!
+          .clear
+      - # IBOX Content End
+      
+      
+    .clear 
+    .double_content_border
+    
+    .float-right
+      = link_to image_tag('../images/preview_tip.png'), "#"
+      
+  - # second column content   
+  .span-160.box_white
+    %h3 What is Spot.us?
+    .double_content_border
+    %ul
+      %li 
+        If you're a professional journalist,
+        = link_to "create a pitch instead of a tip", "#"
+      %li
+        Or
+        = link_to "browse the community", "#"
+        to get inspiration for a new pitch or ping tips for an existing pitch.
+    .double_content_border
+    .centered
+      = link_to image_tag('../images/create_a_pitch.png'), "#"
+    .create_tip_spacer
+    .block-spacer-negative
+    %h3 Common Questions
+    .double_content_border
+    %h4.title What's a Tip?
+    %p.alt-spotus Anyone can create a news "tip" about an important topic you think should be reported on? This is often related to the question "what are you passionate about?" You can pledge to this tip, but no money is taken - it's just a way to show how much interest you have in this possibly becoming a pitch (link to pitch Faq). Creating a tip could be the spark that starts an investigation.
+
+    %h4.title What do you mean "Pledge?"
+    %br/ 
+    %p.alt-spotus Pledges do not represent an actual money transaction. But, they do show the general monetary value that a story might command. When you "pledge" a tip, it's similar to joining a group. If a journalist references this tip in their pitch, you'll be notified and asked to DONATE real money at that point.
+
+    %h4.title What happens next?
+    %p.alt-spotus Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Morbi est nisl, blandit sit amet, ultrices ut, consequat at, ante. Sed nisi sapien, pellentesque vel, vehicula quis, semper quis, orci.
+.clear
+.block-spacer
