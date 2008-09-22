@@ -520,3 +520,21 @@ ol.create_a_tip_steps li.pitcher {
   margin: 0px -10px 10px -10px;
   }
 .ui-tabs-hide { display: none; }
+
+/* Progress Bar Styling */  
+div.progressBar {
+  margin: 5px;
+  }
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid gray;
+  width: 100%;
+  }
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
+  }
+div.progressBar img {
+  margin: 5px;
+  }
