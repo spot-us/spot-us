@@ -26,22 +26,15 @@ describe UsersController do
     end.should_not change(User, :count)
   end
   
-  it 'requires password on signup' do
-    lambda do
-      create_user(:password => nil)
-      assigns[:user].errors.on(:password).should_not be_nil
-      response.should be_success
-    end.should_not change(User, :count)
+  it 'generates password on signup' do
+    create_user
+    assigns[:user].password.should_not be_blank
+    assigns[:user].password.size.should == 6
+    User.authenticate(assigns[:user].login, assigns[:user].password).should == 
+      assigns[:user]
+    response.should be_redirect
   end
   
-  it 'requires password confirmation on signup' do
-    lambda do
-      create_user(:password_confirmation => nil)
-      assigns[:user].errors.on(:password_confirmation).should_not be_nil
-      response.should be_success
-    end.should_not change(User, :count)
-  end
-
   it 'requires email on signup' do
     lambda do
       create_user(:email => nil)
@@ -53,7 +46,6 @@ describe UsersController do
   
   
   def create_user(options = {})
-    post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-      :password => 'quire', :password_confirmation => 'quire' }.merge(options)
+    post :create, :user => { :login => 'quire', :email => 'quire@example.com' }.merge(options)
   end
 end

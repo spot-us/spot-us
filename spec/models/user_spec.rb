@@ -28,18 +28,19 @@ describe User do
     end.should_not change(User, :count)
   end
 
-  it 'requires password' do
-    lambda do
-      u = create_user(:password => nil)
-      u.errors.on(:password).should_not be_nil
-    end.should_not change(User, :count)
+  it 'generates password on create' do
+    user = create_user(:password => nil)
+    violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
+    user.password.should_not be_nil
+    user.password.size.should == 6
+    User.authenticate(user.login, user.password).should == user
   end
 
-  it 'requires password confirmation' do
-    lambda do
-      u = create_user(:password_confirmation => nil)
-      u.errors.on(:password_confirmation).should_not be_nil
-    end.should_not change(User, :count)
+  it 'requires password confirmation on update' do
+    user = create_user
+    user.update_attributes(:password => 'new password', :password_confirmation => nil)
+    user.should_not be_valid
+    user.errors.on(:password_confirmation).should_not be_nil
   end
 
   it 'requires email' do
@@ -104,7 +105,7 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
+    record = User.new({ :login => 'quire', :email => 'quire@example.com' }.merge(options))
     record.save
     record
   end
