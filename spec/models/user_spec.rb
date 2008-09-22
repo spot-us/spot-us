@@ -7,6 +7,21 @@ include AuthenticatedTestHelper
 describe User do
   fixtures :users
 
+  describe "signup notification emails" do
+    it "sends on create" do
+      user = Factory.build(:user)
+      Mailer.should_receive(:deliver_signup_notification).with(user)
+      user.save!
+    end
+
+    it "doesn't send on save" do
+      user = Factory(:user)
+      user.email = Factory.next :email
+      Mailer.should_not_receive(:deliver_signup_notification).with(user)
+      user.save
+    end
+  end
+
   describe 'being created' do
     before do
       @user = nil
@@ -35,6 +50,12 @@ describe User do
     user.update_attributes(:password => 'new password', :password_confirmation => nil)
     user.should_not be_valid
     user.errors.on(:password_confirmation).should_not be_nil
+  end
+
+  it "doesn't require password_confirmation on save" do
+    user = Factory :user
+    user.email = Factory.next :email
+    user.save.should be_true
   end
 
   it 'requires email' do
@@ -134,7 +155,8 @@ describe User do
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
 
-protected
+  protected
+
   def create_user(options = {})
     record = User.new({ :email      => 'quire@example.com',
                         :first_name => 'Quire',
