@@ -4,11 +4,16 @@
     .double_content_border
     .row
       %label Your E-mail Address
-      = text_field_tag "email", nil, :class=>"text"
+      %div{:class => session_field_class_name }
+        = text_field_tag "email", nil, :class=>"text"
     .block-padding
     .row
       %label Your Password
-      = password_field_tag "password", nil, :class=>"text"
+      %div{:class => session_field_class_name }
+        = password_field_tag "password", nil, :class=>"text"
+    .row
+      = check_box_tag 'remember_me', '1'
+      %label{:for => 'remember_me'} Remember Me
     .float-right
       %p
         = link_to "Forgot Password?", "#", :class => "forgot_password"
