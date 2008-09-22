@@ -1,0 +1,18 @@
+- form_tag session_url do
+  .span-6.or_login
+    %h3 Or Login
+    .double_content_border
+    .row
+      %label Your E-mail Address
+      = text_field_tag "email", nil, :class=>"text"
+    .block-padding
+    .row
+      %label Your Password
+      = password_field_tag "password", nil, :class=>"text"
+    .float-right
+      %p
+        = link_to "Forgot Password?", "#", :class => "forgot_password"
+    .clear
+    .double_content_border
+    .float_right
+      %input{:type => "image", :src=>"../images/login.png"}

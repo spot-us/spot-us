@@ -21,19 +21,12 @@ describe User do
     end
   end
 
-  it 'requires login' do
-    lambda do
-      u = create_user(:login => nil)
-      u.errors.on(:login).should_not be_nil
-    end.should_not change(User, :count)
-  end
-
   it 'generates password on create' do
     user = create_user(:password => nil)
     violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
     user.password.should_not be_nil
     user.password.size.should == 6
-    User.authenticate(user.login, user.password).should == user
+    User.authenticate(user.email, user.password).should == user
   end
 
   it 'requires password confirmation on update' do
@@ -52,16 +45,16 @@ describe User do
 
   it 'resets password' do
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    User.authenticate('quentin', 'new password').should == users(:quentin)
+    User.authenticate('quentin@example.com', 'new password').should == users(:quentin)
   end
 
   it 'does not rehash password' do
-    users(:quentin).update_attributes(:login => 'quentin2')
-    User.authenticate('quentin2', 'test').should == users(:quentin)
+    users(:quentin).update_attributes(:email => 'quentin2@example.com')
+    User.authenticate('quentin2@example.com', 'test').should == users(:quentin)
   end
 
   it 'authenticates user' do
-    User.authenticate('quentin', 'test').should == users(:quentin)
+    User.authenticate('quentin@example.com', 'test').should == users(:quentin)
   end
 
   it 'sets remember token' do
@@ -105,7 +98,7 @@ describe User do
 
 protected
   def create_user(options = {})
-    record = User.new({ :login => 'quire', :email => 'quire@example.com' }.merge(options))
+    record = User.new({ :email => 'quire@example.com' }.merge(options))
     record.save
     record
   end
