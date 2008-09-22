@@ -3,7 +3,10 @@ class UiController < ApplicationController
   layout :home_layout
 
   def index
-
+    @layouts_url = "txmt://open/?url=file://#{RAILS_ROOT}/app/views/layouts"
+    @ui_url = "txmt://open/?url=file://#{RAILS_ROOT}/app/views/ui"
+    @public_url = "txmt://open/?url=file://#{RAILS_ROOT}/public"
+    @plugin_url = "txmt://open/?url=file://#{RAILS_ROOT}/vendor/plugins"
   end
 
   def show
