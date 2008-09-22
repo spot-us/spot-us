@@ -4,7 +4,7 @@ require 'rbconfig'
 class ViewSpecifyGenerator < Rails::Generator::Base
   def manifest
     record do |m|
-      files = FileList["app/views/**/*.html.erb"]
+      files = FileList["app/views/**/*.html.haml"]
       
       files.each do |view_template_path|
         next if view_template_path =~ /\/_/  # ignore partials
@@ -14,9 +14,9 @@ class ViewSpecifyGenerator < Rails::Generator::Base
         root_depth.times do
           root_directory += '/..'
         end
-        view_template_path =~ /app\/views\/(.*?)\.html\.erb/
+        view_template_path =~ /app\/views\/(.*?)\.html\.haml/
         view_template_path_stem = $1  # grab the 'controller/action' part of the path
-        view_spec_path = "spec/views/#{view_template_path_stem}.html.erb_spec.rb"
+        view_spec_path = "spec/views/#{view_template_path_stem}.html.haml_spec.rb"
         
         @mocks, @template_stubs = [], []
         File.open(view_template_path) do |f|
