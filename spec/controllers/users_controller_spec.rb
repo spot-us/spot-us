@@ -11,7 +11,9 @@ describe UsersController do
   it 'allows signup' do
     lambda do
       create_user
-      response.should be_redirect
+      response.should be_success
+      response.should render_template('create')
+      flash[:success].should_not be_blank
     end.should change(User, :count).by(1)
   end
 
@@ -25,11 +27,11 @@ describe UsersController do
 
   it 'generates password on signup' do
     create_user
-    assigns[:user].password.should_not be_blank
-    assigns[:user].password.size.should == 6
-    User.authenticate(assigns[:user].email, assigns[:user].password).should == 
-      assigns[:user]
-    response.should be_redirect
+    assigns[:user].crypted_password.should_not be_blank
+    User.find_by_email(assigns[:user].email).should == assigns[:user]
+    response.should be_success
+    response.should render_template('create')
+    flash[:success].should_not be_blank
   end
   
   it 'requires email on signup' do
@@ -40,9 +42,28 @@ describe UsersController do
     end.should_not change(User, :count)
   end
   
-  
+  describe "on POST to create with bad params" do
+    before do
+      post :create, :user => {}
+    end
+
+    it "should be successful" do
+      response.should be_success
+    end
+
+    it "should have errors on the user" do
+      assigns[:user].should_not be_nil
+    end
+
+    it "should render the new session view" do
+      response.should render_template('sessions/new')
+    end
+  end
   
   def create_user(options = {})
-    post :create, :user => { :email => 'quire@example.com' }.merge(options)
+    post :create, :user => { :email      => 'quire@example.com',
+                             :first_name => 'Quire',
+                             :last_name  => 'User',
+                             :type       => 'Citizen' }.merge(options)
   end
 end

@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + "/../../spec_helper"
 
-describe 'users/new' do
+describe 'layouts/application' do
   it 'should render' do
-    template.stub!(:user_path).and_return('')
+    
         
-    render 'users/new'
+    render 'layouts/application'
   end
 end

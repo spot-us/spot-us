@@ -1,0 +1,2 @@
+class Citizen < User
+end
