@@ -7,6 +7,12 @@ include AuthenticatedTestHelper
 describe SessionsController do
   fixtures :users
 
+  it 'assigns a user for the new user form' do
+    get :new
+    response.should be_success
+    assigns[:user].should_not be_nil
+  end
+
   it 'logins and redirects' do
     post :create, :email => 'quentin@example.com', :password => 'test'
     session[:user_id].should_not be_nil
