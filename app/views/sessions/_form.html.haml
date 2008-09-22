@@ -1,5 +1,5 @@
-- content_for :error do
-  - unless login_failed?
+- if login_failed?
+  - content_for :error do
     %h2 Oops
     %p Please correct these items:
     %ul
