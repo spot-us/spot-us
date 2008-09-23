@@ -155,6 +155,12 @@ describe User do
     end
   end
 
+  it "should require acceptance of terms of service" do
+    user = Factory.build(:user, :terms_of_service => '0')
+    user.should_not be_valid
+    user.should have(1).error_on(:terms_of_service)
+  end
+
   it "requires first name" do
     user = Factory.build(:user, :first_name => nil)
     user.should_not be_valid
