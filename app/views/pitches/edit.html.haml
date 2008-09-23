@@ -1,0 +1,10 @@
+%h1 Editing pitch
+
+- form_for(@pitch) do |f|
+  = f.error_messages
+  %p
+    = f.submit "Update"
+
+= link_to 'Show', @pitch
+|
+= link_to 'Back', pitches_path
