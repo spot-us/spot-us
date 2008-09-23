@@ -1,0 +1,49 @@
+- @title = "Spot.us - Member Profile"
+.block-spacer
+%h3 My Spot
+- # nav
+#tab_container
+  %ul.navigation
+    %li
+      %a{ :href => "#screens" } Activity
+    %li
+      %a{ :href => "#javascripts" } Dashboard
+    %li
+      %a{ :href => "#image_assets", :class => "selected" } Profile (edit)
+    %li
+      %a{ :href => "#issues" } Settings
+.clear
+
+- unless @profile.errors.empty?
+  - content_for :error do
+    = error_messages_for_resource
+
+#equalize
+
+  - # first column content 
+  - form_for :profile, :url => myspot_profile_path, :html => { :method => :put } do |f|
+    .span-605.box_white
+      %h3 Edit Your Profile
+      .double_content_border
+      .span-595.box_yellow.create_a_tip_form
+        .row
+          = f.label :first_name
+          = f.text_field :first_name
+        .yellow-spacer-negative
+        .row
+          = f.label :last_name
+          = f.text_field :last_name
+        .clear
+  
+      .double_content_border
+
+      .float-right
+        %input{:type => "image", :src=>"/images/save.png"}
+      
+  
+  - # second column content   
+  .span-270.box_white
+
+.clear
+.block-spacer
+
