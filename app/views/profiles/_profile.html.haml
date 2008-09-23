@@ -1,0 +1,18 @@
+%p= image_tag @profile.photo.url(:thumb)
+%h4.reg-line-height= h @profile.full_name
+%p.reg-line-height= h @profile.location
+.date.quiet.reg-line-height
+  member since
+  = @profile.created_at.to_s(:date)
+- unless @profile.website.blank?
+  %p 
+    = link_to(h(@profile.website), @profile.website)
+%hr
+
+%h3
+  About
+  = @profile.first_name
+
+= sanitize @profile.about_you
+
+.double_content_border
