@@ -60,12 +60,12 @@ module AuthenticatedSystem
     # behavior in case the user is not authorized
     # to access the requested action.  For example, a popup window might
     # simply close itself.
-    def access_denied
+    def access_denied(opts = {})
       respond_to do |format|
         format.html do
-          flash[:error] = 'You must be logged in to access this page.'
+          flash[:error] = opts[:flash] || 'You must be logged in to access this page.'
           store_location
-          redirect_to new_session_path
+          redirect_to opts[:redirect] || new_session_path
         end
         format.any do
           request_http_basic_authentication 'Web Password'
