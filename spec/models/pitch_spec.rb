@@ -17,6 +17,8 @@ describe Pitch do
   requires_presence_of Pitch, :short_description
   requires_presence_of Pitch, :extended_description
   requires_presence_of Pitch, :delivery_description
+  requires_presence_of Pitch, :skills
+  requires_presence_of Pitch, :keywords
 
   it "requires contract_agreement to be true" do
     Factory.build(:pitch, :contract_agreement => false).should_not be_valid
