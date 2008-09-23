@@ -36,17 +36,18 @@ class User < ActiveRecord::Base
   after_create :deliver_signup_notification
 
   has_attached_file :photo, 
-                    :styles => { :thumb => '50x50#' }, 
-                    :path   => ":rails_root/public/system/profiles/" << 
-                               ":attachment/:id_partition/" <<
-                               ":basename_:style.:extension",
-                    :url    => "/system/profiles/:attachment/:id_partition/" <<
-                               ":basename_:style.:extension"
+                    :styles      => { :thumb => '50x50#' }, 
+                    :path        => ":rails_root/public/system/profiles/" << 
+                                    ":attachment/:id_partition/" <<
+                                    ":basename_:style.:extension",
+                    :url         => "/system/profiles/:attachment/:id_partition/" <<
+                                    ":basename_:style.:extension",
+                    :default_url => "/images/default_avatar.png"
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo, :location
+                  :last_name, :terms_of_service, :photo, :location, :about_you
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -103,6 +104,10 @@ class User < ActiveRecord::Base
   # Returns true if the user has just been activated.
   def recently_activated?
     @activated
+  end
+
+  def full_name
+    [first_name, last_name].join(' ')
   end
 
   protected

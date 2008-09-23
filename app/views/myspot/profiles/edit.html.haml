@@ -1,18 +1,8 @@
 - @title = "Spot.us - Member Profile"
 .block-spacer
 %h3 My Spot
-- # nav
-#tab_container
-  %ul.navigation
-    %li
-      %a{ :href => "#screens" } Activity
-    %li
-      %a{ :href => "#javascripts" } Dashboard
-    %li
-      = link_to 'Profile', myspot_profile_path, :id => 'profile_tab'
-    %li
-      %a{ :href => "#issues" } Settings
-.clear
+
+= render :partial => 'nav'
 
 - unless @profile.errors.empty?
   - content_for :error do

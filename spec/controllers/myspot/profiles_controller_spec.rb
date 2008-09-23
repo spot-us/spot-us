@@ -13,22 +13,19 @@ describe Myspot::ProfilesController do
       login_as Factory(:user)
     end
 
-    describe "on GET to edit" do
-      before do
-        get :edit
-      end
+    it "should successfully GET edit" do
+      get :edit
+      response.should be_success
+    end
 
-      it "should be successful" do
-        response.should be_success
-      end
+    it "should successfully PUT update" do
+      put :update
+      response.should be_redirect
+    end
 
-      it "should render the edit profile form" do
-        response.should render_template('edit')
-      end
-
-      it "should assign the profile for the form" do
-        assigns[:profile].should_not be_nil
-      end
+    it "should successfully GET show" do
+      get :show
+      response.should be_success
     end
   end
 

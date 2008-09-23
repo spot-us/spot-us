@@ -34,8 +34,10 @@ table.top td.top {vertical-align:top;}
   display:block;
   padding: 0 10px;
   }
-
 /* styling */
+.reg-line-height {
+  margin: 0;	
+  }
 .container a {
   color: #999999;
   text-decoration: none;  
