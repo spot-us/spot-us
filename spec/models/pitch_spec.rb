@@ -13,6 +13,20 @@ describe Pitch do
   table_has_columns(Pitch, :boolean,  "contract_agreement")
   table_has_columns(Pitch, :datetime, "expiration_date")
 
+  requires_presence_of Pitch, :requested_amount
+  requires_presence_of Pitch, :short_description
+  requires_presence_of Pitch, :extended_description
+  requires_presence_of Pitch, :delivery_description
+
+  it "requires contract_agreement to be true" do
+    Factory.build(:pitch, :contract_agreement => false).should_not be_valid
+  end
+
+  it "requires location to be a valid LOCATION" do
+    Factory.build(:pitch, :location => LOCATIONS.first).should be_valid
+    Factory.build(:pitch, :location => "invalid").should_not be_valid
+  end
+
   describe "to support STI" do
     it "descends from NewItem" do
       Pitch.ancestors.include?(NewsItem)

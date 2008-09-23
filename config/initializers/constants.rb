@@ -3,3 +3,4 @@ LOCATIONS = [
   'Region 2',
   'Jupiter'
 ].freeze
+

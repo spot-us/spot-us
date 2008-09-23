@@ -11,6 +11,9 @@ describe NewsItem do
   table_has_columns(NewsItem, :string,   "featured_image_caption")
   table_has_columns(NewsItem, :string,   "video_embed")
 
+  requires_presence_of NewsItem, :headline
+  requires_presence_of NewsItem, :location
+
   describe "to support paperclip" do
     it "has a paperclip attachment for featured_image" do
       Factory(:news_item).featured_image.should be_instance_of(Paperclip::Attachment)
