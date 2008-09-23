@@ -35,4 +35,10 @@ class Pitch < NewsItem
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
   validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
   validates_inclusion_of :location, :in => LOCATIONS
+
+  has_many :donations
+
+  def donated_to?
+    donations.any?
+  end
 end
