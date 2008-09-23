@@ -45,7 +45,8 @@
         .yellow-spacer-negative
         .row
           = f.label :about_you
-          = f.text_area :about_you, :rows => 6
+          = fckeditor_textarea("profile", "about_you", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+
         .clear
   
       .double_content_border
