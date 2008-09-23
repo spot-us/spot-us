@@ -1,0 +1,58 @@
+8
+
+dir
+2424
+https://ri20.svn.beanstalkapp.com/expertnetwork/trunk/vendor/plugins/annotate_models
+https://ri20.svn.beanstalkapp.com/expertnetwork
+
+
+
+2008-02-19T16:29:40.235941Z
+28
+l4rk
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+57192c5d-cb23-4ee7-8578-f99c25107cb5
+
+tasks
+dir
+
+lib
+dir
+
+ChangeLog
+file
+
+
+
+
+2008-05-20T13:54:18.000000Z
+d6d7c4ec7466a950da7647f0fba5240c
+2008-02-19T16:24:53.183181Z
+27
+l4rk
+
+README
+file
+
+
+
+
+2008-05-20T13:54:18.000000Z
+1584d33a28eca3bccb7ae644600aaef0
+2008-02-19T16:24:53.183181Z
+27
+l4rk
+

@@ -1,0 +1,17 @@
+K 21
+piston:local-revision
+V 2
+26
+K 22
+piston:remote-revision
+V 2
+23
+K 11
+piston:root
+V 59
+http://repo.pragprog.com/svn/Public/plugins/annotate_models
+K 11
+piston:uuid
+V 36
+fc0f91e5-bf0d-0410-947d-bdda1c4c8ae8
+END
