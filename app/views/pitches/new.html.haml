@@ -1,0 +1,7 @@
+%h1
+  New pitch
+- form_for(@pitch) do |f|
+  = f.error_messages
+  %p
+    = f.submit "Create"
+= link_to 'Back', pitches_path
