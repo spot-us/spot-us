@@ -1,5 +1,6 @@
-- content_for :error do
-  = error_messages_for :user
+- unless @user.errors.blank?
+  - content_for :error do
+    = error_messages_for :user
 
 - form_for(@user, :url => user_path) do |f|
   .span-6.register
