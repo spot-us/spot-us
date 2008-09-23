@@ -1,0 +1,12 @@
+<h1>Editing pitch</h1>
+
+<% form_for(@pitch) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @pitch %> |
+<%= link_to 'Back', pitches_path %>
