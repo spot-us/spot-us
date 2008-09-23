@@ -52,3 +52,11 @@ def requires_login_for(method, action)
     flash[:error].should match(/must be logged in/)
   end
 end
+
+def requires_presence_of(clazz, field)
+  it "requires #{field}" do
+    record = Factory.build(clazz.to_s.underscore.to_sym, field.to_sym => nil)
+    record.should_not be_valid
+    record.errors.on(field.to_sym).should_not be_nil
+  end
+end
