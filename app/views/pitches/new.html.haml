@@ -30,7 +30,7 @@
     
     .block-spacer-negative
     
-    - form_for(@pitch) do |f|
+    - form_for(@pitch, :html => { :multipart => true }) do |f|
       .span-455.box_yellow.create_a_pitch_form
         .row
           = f.label     :headline, "Your Pitch's Headline"
@@ -100,21 +100,19 @@
             Upload A Featured Image
             %br
             %span.quieter JPEG, PNG and GIF's less than 5 MB.
-          = file_field_tag ""
+          = f.file_field :featured_image
         .yellow-spacer-negative-blank
         .row.media
-          %label.small{:for => ""}
-            Add a Featured Image Caption
-            %br
-            %span.quieter 200 Characters Remain
-          = text_area_tag '', nil, :rows => 2
+          = f.label :featured_image_caption, "Add a Featured Image Caption", :class => "small"
+          %br
+          %span.quieter 200 Characters Max
+          = f.text_area :featured_image_caption, :rows => 2
         .yellow-spacer-negative-blank
         .row.media
-          %label.small{:for => ""}
-            Embed a Video
-            %br
-            %span.quieter Paste your third-party embeded cide here.
-          = text_area_tag '', nil, :rows => 2
+          = f.label :video_embed, "Embed a Video", :class => "small"
+          %br
+          %span.quieter Paste your third-party embeded cide here.
+          = f.text_area :video_embed, :rows => 2
         .yellow-spacer-negative
         .row
           = f.label :expiration_date

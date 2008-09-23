@@ -12,7 +12,7 @@ describe "/pitches/new.html.haml" do
   it "should render new form" do
     render "/pitches/new.html.haml"
     
-    response.should have_tag("form[action=?][method=post]", pitches_path) do
+    response.should have_tag("form[action=?][method=post][enctype='multipart/form-data']", pitches_path) do
       with_tag "input[type=submit]"
     end
   end
@@ -35,7 +35,9 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  %w(headline short_description delivery_description extended_description skills keywords).each do |field|
+  %w(featured_image_caption video_embed headline 
+     short_description delivery_description 
+     extended_description skills keywords).each do |field|
     it "renders #{field} as textarea" do
       render "/pitches/new.html.haml"
       response.should have_tag("form") do
