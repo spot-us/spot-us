@@ -22,6 +22,7 @@ Spec::Runner.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+  config.include AuthenticatedTestHelper
 end
 
 def table_has_columns(clazz, type, *column_names)
@@ -44,3 +45,10 @@ def route_matches(path, method, params)
   end
 end
 
+def requires_login_for(method, action)
+  it "should require a login for #{method.to_s.upcase} #{action}" do
+    send(method, action)
+    response.should redirect_to(new_session_path)
+    flash[:error].should match(/must be logged in/)
+  end
+end
