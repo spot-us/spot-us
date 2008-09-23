@@ -6,11 +6,9 @@ include AuthenticatedTestHelper
 include ActionController::UrlWriter
 
 describe UsersController do
-  fixtures :users
-
   it 'allows signup' do
     lambda do
-      create_user
+      do_create
       response.should be_success
       response.should render_template('create')
       flash[:success].should_not be_blank
@@ -26,7 +24,7 @@ describe UsersController do
   end
 
   it 'generates password on signup' do
-    create_user
+    do_create
     assigns[:user].crypted_password.should_not be_blank
     User.find_by_email(assigns[:user].email).should == assigns[:user]
     response.should be_success
@@ -36,7 +34,7 @@ describe UsersController do
   
   it 'requires email on signup' do
     lambda do
-      create_user(:email => nil)
+      do_create(:email => nil)
       assigns[:user].errors.on(:email).should_not be_nil
       response.should be_success
     end.should_not change(User, :count)
@@ -60,7 +58,7 @@ describe UsersController do
     end
   end
   
-  def create_user(options = {})
+  def do_create(options = {})
     post :create, :user => { :email      => 'quire@example.com',
                              :first_name => 'Quire',
                              :last_name  => 'User',

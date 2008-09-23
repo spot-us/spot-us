@@ -14,8 +14,6 @@ Spec::Runner.configure do |config|
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
-  config.global_fixtures = :all
-
   # == Mock Framework
   #
   # RSpec uses it's own mocking framework by default. If you prefer to
