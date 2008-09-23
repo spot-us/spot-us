@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.root :controller => 'homes', :action => 'show'
+
   map.resources :pitches
 
   # TODO: remove when done
