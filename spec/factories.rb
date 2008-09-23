@@ -7,3 +7,6 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
 end
 
+Factory.define :pitch do |pitch|
+end
+
