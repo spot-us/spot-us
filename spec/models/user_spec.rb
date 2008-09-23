@@ -89,7 +89,7 @@ describe User do
       @user = User.find(@user.to_param) # clear instance vars and get correct type
     end
 
-    it 'resets password' do
+    it 'changes password' do
       @user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
       User.authenticate('user@example.com', 'new password').should == @user
     end
@@ -140,6 +140,18 @@ describe User do
       @user.remember_token.should_not be_nil
       @user.remember_token_expires_at.should_not be_nil
       @user.remember_token_expires_at.between?(before, after).should be_true
+    end
+
+    it "resets the password" do
+      @old_crypted_password = @user.crypted_password
+      @user.reset_password!
+      @user.reload
+      @user.crypted_password.should_not == @old_crypted_password
+    end
+
+    it "sends a password reset email" do
+      Mailer.should_receive(:deliver_password_reset_notification).with(@user).once
+      @user.reset_password!
     end
   end
 
