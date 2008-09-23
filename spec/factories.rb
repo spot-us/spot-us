@@ -28,6 +28,11 @@ Factory.define :pitch do |pitch|
   pitch.featured_image         { upload_fixture_file }
 end
 
+Factory.define :donation do |donation|
+  donation.association(:user)
+  donation.association(:pitch)
+end
+
 def upload_fixture_file
   ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, *%w(spec fixtures upload_file.jpg)), "image/jpg", true)
 end
