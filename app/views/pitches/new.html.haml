@@ -132,10 +132,10 @@
           = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", "#", :class => "quieter"})
           .clear
 
-      .double_content_border
+        .double_content_border
 
-      .float-right
-        = f.submit "TODO: post button"
+        .float-right
+          = f.submit "TODO: post button", :confirm => "Are you sure you want to post this pitch?"
       
   -# second column content   
   .span-160.box_white
