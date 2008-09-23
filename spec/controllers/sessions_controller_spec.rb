@@ -7,6 +7,20 @@ include AuthenticatedTestHelper
 describe SessionsController do
   fixtures :users
 
+  describe "on POST to create with a bad login" do
+    before do
+      post :create, :email => 'dontexist@example.com'
+    end
+
+    it "should assign a new user for the view" do
+      assigns[:user].should_not be_nil
+    end
+
+    it "should be successful" do
+      response.should be_success
+    end
+  end
+
   it 'assigns a user for the new user form' do
     get :new
     response.should be_success

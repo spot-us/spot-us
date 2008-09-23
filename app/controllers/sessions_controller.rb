@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       end
       redirect_back_or_default('/')
     else
+      @user = User.new
       render :action => 'new'
     end
   end
