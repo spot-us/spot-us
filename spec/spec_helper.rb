@@ -26,7 +26,7 @@ end
 
 def table_has_columns(clazz, type, *column_names)
   column_names.each do |column_name|
-    column = clazz.columns.select {|c| c.name == column_name}.first
+    column = clazz.columns.select {|c| c.name == column_name.to_s}.first
     it "has a string named #{column_name}" do
       column.should_not be_nil
       column.type.should == type.to_sym
