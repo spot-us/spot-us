@@ -14,6 +14,8 @@
     .date.quiet.reg-line-height
       member since
       = @profile.created_at.to_s(:date)
+    %p 
+      = link_to(h(@profile.website), @profile.website)
     %hr
 
     %h3
@@ -23,6 +25,8 @@
     = sanitize @profile.about_you
   
     .double_content_border
+
+    = link_to 'Edit your profile', edit_myspot_profile_path
 
   - # second column content   
   .span-270.box_white

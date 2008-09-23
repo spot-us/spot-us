@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization)
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
+  validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
   before_save :encrypt_password
   before_validation_on_create :generate_password, :set_default_location
 
@@ -47,7 +48,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo, :location, :about_you
+                  :last_name, :terms_of_service, :photo, :location, :about_you, :website
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)

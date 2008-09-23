@@ -25,6 +25,11 @@ describe 'profiles/show' do
     do_render
     response.should have_tag('img[src = ?]', image_path('default_avatar.png'))
   end
+
+  it "should have a link to edit the profile" do
+    do_render
+    response.should have_tag('a[href = ?]', edit_myspot_profile_path)
+  end
   
   def do_render
     render 'myspot/profiles/show'
