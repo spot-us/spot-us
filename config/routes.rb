@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :pitches
+
   # TODO: remove when done
   map.resources :ui
   
