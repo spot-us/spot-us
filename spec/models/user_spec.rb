@@ -200,4 +200,9 @@ describe User do
     user.should have(1).error_on(:location)
   end
 
+  it "should combine the first and last name for full name" do
+    user = Factory(:user, :first_name => 'First', :last_name => 'Second')
+    user.full_name.should == 'First Second'
+  end
+
 end
