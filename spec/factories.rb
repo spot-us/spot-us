@@ -10,3 +10,5 @@ end
 Factory.define :pitch do |pitch|
 end
 
+Factory.define :news_item do |news_item|
+end
