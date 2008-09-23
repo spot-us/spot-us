@@ -29,8 +29,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :case_sensitive => false
   validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization)
   validates_acceptance_of   :terms_of_service
+  validates_inclusion_of    :location, :in => LOCATIONS
   before_save :encrypt_password
-  before_validation_on_create :generate_password
+  before_validation_on_create :generate_password, :set_default_location
 
   after_create :deliver_signup_notification
 
@@ -45,7 +46,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo
+                  :last_name, :terms_of_service, :photo, :location
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -124,6 +125,10 @@ class User < ActiveRecord::Base
   
   def deliver_signup_notification
     Mailer.deliver_signup_notification(self)
+  end
+
+  def set_default_location
+    self.location ||= LOCATIONS.first
   end
 end
 
