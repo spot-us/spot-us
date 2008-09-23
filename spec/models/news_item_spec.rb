@@ -7,7 +7,9 @@ describe NewsItem do
 
   table_has_columns(NewsItem, :string,   "headline")
   table_has_columns(NewsItem, :string,   "location")
-  table_has_columns(NewsItem, :text,     "keywords")
+  table_has_columns(NewsItem, :string,   "keywords")
+  table_has_columns(NewsItem, :string,   "featured_image_caption")
+  table_has_columns(NewsItem, :string,   "video_embed")
 
   describe "to support paperclip" do
     it "has a paperclip attachment for featured_image" do
