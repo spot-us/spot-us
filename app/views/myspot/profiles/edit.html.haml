@@ -38,6 +38,14 @@
         .row
           = f.label :last_name
           = f.text_field :last_name
+        .yellow-spacer-negative
+        .row
+          = f.label :location
+          = f.select :location, LOCATIONS
+        .yellow-spacer-negative
+        .row
+          = f.label :about_you
+          = f.text_area :about_you, :rows => 6
         .clear
   
       .double_content_border
