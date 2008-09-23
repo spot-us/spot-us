@@ -19,7 +19,9 @@
         %strong Take Action!
       %ul
         %li 
-          Creating a community news tip is a way to let journalist and news organizations know what is important to you. At this stage the pledge is uncommitted. we don't even ask for credit card information.
+          Creating a community news tip is a way to let journalist and news
+          organizations know what is important to you. At this stage the pledge
+          is uncommitted. we don't even ask for credit card information.
           = link_to "Learn more about tips", "#"
         %li= link_to "What kind of tips should I create?", "#"
         %li Watch the search results on the right to see if other tips or pitches are tackling the same issue.
@@ -89,6 +91,7 @@
         .row
           = f.label :extended_description
           = f.text_area :extended_description
+          = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
         .yellow-spacer-negative
         .row
           %label{:for => ""} 
