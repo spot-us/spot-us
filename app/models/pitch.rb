@@ -23,4 +23,12 @@
 #
 
 class Pitch < NewsItem
+  validates_presence_of :requested_amount
+  validates_presence_of :short_description
+  validates_presence_of :extended_description
+  validates_presence_of :delivery_description
+  # Next :accept required because of rails bug: 
+  # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
+  validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
+  validates_inclusion_of :location, :in => LOCATIONS
 end
