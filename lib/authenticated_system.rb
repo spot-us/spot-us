@@ -63,6 +63,7 @@ module AuthenticatedSystem
     def access_denied
       respond_to do |format|
         format.html do
+          flash[:error] = 'You must be logged in to access this page.'
           store_location
           redirect_to new_session_path
         end

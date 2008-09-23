@@ -13,6 +13,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :password_reset
 
+  map.namespace :myspot do |myspot|
+    myspot.resource :profile
+  end
+
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
