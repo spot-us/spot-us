@@ -21,11 +21,16 @@
 #equalize
 
   - # first column content 
-  - form_for :profile, :url => myspot_profile_path, :html => { :method => :put } do |f|
+  - form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true } do |f|
     .span-605.box_white
       %h3 Edit Your Profile
       .double_content_border
       .span-595.box_yellow.create_a_tip_form
+        .row
+          = f.label :photo
+          = image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
+          = f.file_field :photo
+        .yellow-spacer-negative
         .row
           = f.label :first_name
           = f.text_field :first_name

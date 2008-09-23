@@ -172,5 +172,9 @@ describe User do
     user.should_not be_valid
     user.should have(1).error_on(:last_name)
   end
+  
+  it "should have a photo attachment" do
+    Factory(:user).photo.should be_instance_of(Paperclip::Attachment)
+  end
 
 end
