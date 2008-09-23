@@ -30,6 +30,20 @@ describe 'profiles/edit' do
     response.should have_tag('input[type = "file"][name = ?]', 'profile[photo]')
   end
 
+  it "should have a field to edit 'about you'" do
+    do_render
+    response.should have_tag('textarea[name = ?]', 'profile[about_you]')
+  end
+
+  it "should have a dropdown to edit the location" do
+    do_render
+    response.should have_tag('select[name = ?]', 'profile[location]') do
+      LOCATIONS.each do |location|
+        with_tag('option[value=?]', location)
+      end
+    end
+  end
+
   it "should have a multipart form" do
     do_render
     response.should have_tag('form[enctype = ?]', 'multipart/form-data')
