@@ -1,0 +1,18 @@
+* response_for only kicks in once ActionController has got to the stage of
+  performing an action.
+  
+    before_filter :bail_out
+  
+    def bail_out
+      respond_to do |format|
+        format.html { redirect_to :bail_out_place }
+      end
+    end
+  
+  The above code snippet bails out whatever the response_for, which I think is
+  the least surprising behaviour.
+  
+  (This means that you can ignore the last changelog message for response_for,
+  which has been deleted to avoid confusion)
+  
+* initial release of response_for
