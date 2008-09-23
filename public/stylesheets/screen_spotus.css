@@ -474,7 +474,7 @@ ol.create_a_tip_steps li.pitcher {
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
 ------------------------------------------------------------------------------------ */
-.span-205, .span-220, .span-235, .span-340, .span-460, .span-605, .span-715 {float:left;}
+.span-205, .span-220, .span-235, .span-340, .span-455, .span-460, .span-605, .span-715 {float:left;}
 .span-205 {width: 205px;}
 .span-220 {width: 220px;}
 .span-235 {width: 235px;}
@@ -498,6 +498,9 @@ ol.create_a_tip_steps li.pitcher {
 ------------------------------------------------------------------------------------ */
 .block-padding {
   height: 15px;
+  }
+.column_v {
+  margin: 0 15px;
   }
 .block-spacer {
   height: 15px;
