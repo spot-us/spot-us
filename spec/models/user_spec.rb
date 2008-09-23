@@ -153,6 +153,10 @@ describe User do
       Mailer.should_receive(:deliver_password_reset_notification).with(@user).once
       @user.reset_password!
     end
+
+    it "should set the default location to the first location" do
+      @user.location.should == LOCATIONS.first
+    end
   end
 
   it "should require acceptance of terms of service" do
@@ -175,6 +179,25 @@ describe User do
   
   it "should have a photo attachment" do
     Factory(:user).photo.should be_instance_of(Paperclip::Attachment)
+  end
+
+  it "should allow a valid region for location" do
+    user = Factory(:user)
+    LOCATIONS.each do |location|
+      user.location = location
+      user.should be_valid
+    end
+  end
+
+  it "should allow a blank location" do
+    user = Factory.build(:user, :location => nil)
+    user.should be_valid
+  end
+
+  it "should not allow invalid regions for location" do
+    user = Factory.build(:user, :location => 'Mars')
+    user.should_not be_valid
+    user.should have(1).error_on(:location)
   end
 
 end
