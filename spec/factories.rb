@@ -10,15 +10,24 @@ end
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
   news_item.location { LOCATIONS.first }
+  news_item.featured_image_caption "lorem ipsum"
+  news_item.featured_image  { upload_fixture_file }
 end
 
 Factory.define :pitch do |pitch|
-  pitch.headline              "Headline"
-  pitch.location              { LOCATIONS.first }
-  pitch.requested_amount      100
-  pitch.short_description     "lorem ipsum"
-  pitch.extended_description  "lorem ipsum"
-  pitch.delivery_description  "lorem ipsum"
-  pitch.contract_agreement    "1"
+  pitch.headline               "Headline"
+  pitch.location               { LOCATIONS.first }
+  pitch.requested_amount       100
+  pitch.short_description      "lorem ipsum"
+  pitch.extended_description   "lorem ipsum"
+  pitch.delivery_description   "lorem ipsum"
+  pitch.featured_image_caption "lorem ipsum"
+  pitch.skills                 "lorem ipsum"
+  pitch.keywords               "lorem ipsum"
+  pitch.contract_agreement     "1"
+  pitch.featured_image         { upload_fixture_file }
 end
 
+def upload_fixture_file
+  ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, *%w(spec fixtures upload_file.jpg)), "image/jpg", true)
+end
