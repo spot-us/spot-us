@@ -55,6 +55,27 @@ describe "/pitches/new.html.haml" do
     end
   end
 
+  describe "without errors" do
+    before do
+      assigns[:pitch].stub!(:valid).and_return(true)
+    end
+
+    it "should not display an error message" do
+      template.should_receive(:content_for).with(:errors).never
+      render "/pitches/new.html.haml"
+    end
+  end
+
+  describe "with errors" do
+    before do
+      assigns[:pitch].stub!(:errors).and_return([:one])
+    end
+
+    it "should display an error message" do
+      template.should_receive(:content_for).once.with(:error)
+      render "/pitches/new.html.haml"
+    end
+  end
 end
 
 
