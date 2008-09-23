@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
   validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization)
+  validates_acceptance_of   :terms_of_service
   before_save :encrypt_password
   before_validation_on_create :generate_password
 
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name
+                  :last_name, :terms_of_service
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
