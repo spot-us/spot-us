@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
   map.resources :pitches
+  map.resources :profiles
 
   # TODO: remove when done
   map.resources :ui
@@ -19,9 +20,5 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :myspot do |myspot|
     myspot.resource :profile
   end
-
-  # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end
 

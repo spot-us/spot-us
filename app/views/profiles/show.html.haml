@@ -2,14 +2,11 @@
 .block-spacer
 %h3 My Spot
 
-= render :partial => 'nav'
-
 #equalize
 
   - # first column content 
   .span-605.box_white
     = render :partial => 'profiles/profile'
-    = link_to 'Edit your profile', edit_myspot_profile_path
 
   - # second column content   
   .span-270.box_white
