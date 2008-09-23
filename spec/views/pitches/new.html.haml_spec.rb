@@ -13,6 +13,7 @@ describe "/pitches/new.html.erb" do
     render "/pitches/new.html.erb"
     
     response.should have_tag("form[action=?][method=post]", pitches_path) do
+
     end
   end
 end
