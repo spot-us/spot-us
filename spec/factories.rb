@@ -7,8 +7,18 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
 end
 
-Factory.define :pitch do |pitch|
+Factory.define :news_item do |news_item|
+  news_item.headline "Headline"
+  news_item.location { LOCATIONS.first }
 end
 
-Factory.define :news_item do |news_item|
+Factory.define :pitch do |pitch|
+  pitch.headline              "Headline"
+  pitch.location              { LOCATIONS.first }
+  pitch.requested_amount      100
+  pitch.short_description     "lorem ipsum"
+  pitch.extended_description  "lorem ipsum"
+  pitch.delivery_description  "lorem ipsum"
+  pitch.contract_agreement    "1"
 end
+
