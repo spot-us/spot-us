@@ -37,6 +37,13 @@ class User < ActiveRecord::Base
     self.class.encrypt(password, salt)
   end
 
+  def reset_password!
+    self.password = nil
+    generate_password
+    save!
+    Mailer.deliver_password_reset_notification(self)
+  end
+
   def authenticated?(password)
     crypted_password == encrypt(password)
   end
