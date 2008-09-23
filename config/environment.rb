@@ -4,8 +4,13 @@ require File.join(File.dirname(__FILE__), 'boot')
 require 'yaml'
 
 config_file_path = File.join(RAILS_ROOT, *%w(public system config.yml))
-raise RuntimeError, "Please add a configuration file #{config_file_path} locally." unless File.exist?(config_file_path)
-APP_CONFIG = YAML.load_file(File.join(RAILS_ROOT, *%w(public system config.yml)))[RAILS_ENV] || {}
+if File.exist?(config_file_path)
+  config = YAML.load_file(config_file_path)
+  APP_CONFIG = config.has_key?(RAILS_ENV) ? config[RAILS_ENV] : {}
+else
+  puts "WARNING: configuration file #{config_file_path} not found." 
+  APP_CONFIG = {}
+end
 
 Rails::Initializer.run do |config|
   config.gem "haml"#, :version => 2.0.3
