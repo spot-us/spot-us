@@ -116,10 +116,15 @@
             %span.quieter Paste your third-party embeded cide here.
           = text_area_tag '', nil, :rows => 2
         .yellow-spacer-negative
+        .row
+          = f.label :expiration_date
+          %br
+          = f.date_select :expiration_date
+        .yellow-spacer-negative
         .free
-          .float_left= radio_button_tag '', ''
-          = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", "#", :class => "quieter"})
+          .float_left
           = f.check_box :contract_agreement
+          = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", "#", :class => "quieter"})
           .clear
 
       .double_content_border
