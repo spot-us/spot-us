@@ -20,6 +20,8 @@ describe Pitch do
   requires_presence_of Pitch, :skills
   requires_presence_of Pitch, :keywords
 
+  it { Factory(:pitch).should have_many(:donations) }
+
   it "requires contract_agreement to be true" do
     Factory.build(:pitch, :contract_agreement => false).should_not be_valid
   end
@@ -32,6 +34,18 @@ describe Pitch do
   describe "to support STI" do
     it "descends from NewItem" do
       Pitch.ancestors.include?(NewsItem)
+    end
+  end
+
+  describe "a pitch with donations" do
+    before(:each) do
+      @pitch = Factory(:pitch)
+      @donation = Factory(:donation, :pitch => @pitch)
+      @pitch.reload
+    end
+
+    it "has donations" do
+      @pitch.should be_donated_to
     end
   end
 end
