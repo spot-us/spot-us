@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe "/pitches/new.html.erb" do
+describe "/pitches/new.html.haml" do
   include PitchesHelper
   
   before(:each) do
@@ -10,7 +10,7 @@ describe "/pitches/new.html.erb" do
   end
 
   it "should render new form" do
-    render "/pitches/new.html.erb"
+    render "/pitches/new.html.haml"
     
     response.should have_tag("form[action=?][method=post]", pitches_path) do
 
