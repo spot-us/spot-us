@@ -33,11 +33,19 @@ class User < ActiveRecord::Base
   before_validation_on_create :generate_password
 
   after_create :deliver_signup_notification
+
+  has_attached_file :photo, 
+                    :styles => { :thumb => '50x50#' }, 
+                    :path   => ":rails_root/public/system/profiles/" << 
+                               ":attachment/:id_partition/" <<
+                               ":basename_:style.:extension",
+                    :url    => "/system/profiles/:attachment/:id_partition/" <<
+                               ":basename_:style.:extension"
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service
+                  :last_name, :terms_of_service, :photo
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
