@@ -24,6 +24,24 @@ describe 'profiles/edit' do
     do_render
     response.should have_tag('input[name = ?]', 'profile[last_name]')
   end
+  
+  it "should have a field to edit the user photo" do
+    do_render
+    response.should have_tag('input[type = "file"][name = ?]', 'profile[photo]')
+  end
+
+  it "should have a multipart form" do
+    do_render
+    response.should have_tag('form[enctype = ?]', 'multipart/form-data')
+  end
+
+  it "should display a thumbnail when available" do
+    url = '/url/to/file.jpg'
+    attachment = mock('attachment', :url => url)
+    assigns[:profile].stub!(:photo).and_return(attachment)
+    do_render
+    response.should have_tag('img[src = ?]', url)
+  end
 
   it "should display error messages when there are validation errors" do
     template.should_receive(:content_for).with(:error).once
