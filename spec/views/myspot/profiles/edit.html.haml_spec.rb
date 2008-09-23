@@ -35,6 +35,11 @@ describe 'profiles/edit' do
     response.should have_tag('textarea[name = ?]', 'profile[about_you]')
   end
 
+  it "should have a field to edit website" do
+    do_render
+    response.should have_tag('input[name = ?]', 'profile[website]')
+  end
+
   it "should have a dropdown to edit the location" do
     do_render
     response.should have_tag('select[name = ?]', 'profile[location]') do
@@ -44,6 +49,10 @@ describe 'profiles/edit' do
     end
   end
 
+  it "should have a link to view the profile" do
+    do_render
+    response.should have_tag('a[href = ?]', myspot_profile_path)
+  end
   it "should have a multipart form" do
     do_render
     response.should have_tag('form[enctype = ?]', 'multipart/form-data')

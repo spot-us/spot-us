@@ -34,6 +34,10 @@
           = f.select :location, LOCATIONS
         .yellow-spacer-negative
         .row
+          = f.label :website
+          = f.text_field :website
+        .yellow-spacer-negative
+        .row
           = f.label :about_you
           = fckeditor_textarea("profile", "about_you", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
 
@@ -42,6 +46,7 @@
       .double_content_border
 
       .float-right
+        = link_to image_tag('cancel.png', :alt => 'Cancel'), myspot_profile_path
         %input{:type => "image", :src=>"/images/save.png"}
       
   

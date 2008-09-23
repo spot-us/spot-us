@@ -204,5 +204,21 @@ describe User do
     user = Factory(:user, :first_name => 'First', :last_name => 'Second')
     user.full_name.should == 'First Second'
   end
+  
+  it "should allow a url starting with http" do
+    user = Factory.build(:user, :website => "http://something")
+    user.should be_valid
+  end
+  
+  it "should not allow a url that does not start with http" do
+    user = Factory.build(:user, :website => "bob")
+    user.should_not be_valid
+    user.should have(1).error_on(:website)
+  end
+  
+  it "should allow for the website to be blank" do
+    user = Factory.build(:user, :website => nil)
+    user.should be_valid
+  end
 
 end
