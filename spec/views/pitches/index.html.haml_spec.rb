@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe "/pitches/index.html.erb" do
+describe "/pitches/index.html.haml" do
   include PitchesHelper
   
   before(:each) do
@@ -8,7 +8,7 @@ describe "/pitches/index.html.erb" do
   end
 
   it "should render list of pitches" do
-    render "/pitches/index.html.erb"
+    render "/pitches/index.html.haml"
   end
 end
 
