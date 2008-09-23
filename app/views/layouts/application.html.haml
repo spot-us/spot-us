@@ -1,8 +1,7 @@
 !!!
 %html
   = render :partial => 'layouts/head'
-  - # TODO remove quotes on body_class
-  %body{ :class => "body_class" }
+  %body{ :class => body_class }
     #user-header
       = render :partial => 'layouts/user_header'
     .body-content

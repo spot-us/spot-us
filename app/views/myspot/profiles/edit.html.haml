@@ -9,7 +9,7 @@
     %li
       %a{ :href => "#javascripts" } Dashboard
     %li
-      %a{ :href => "#image_assets", :class => "selected" } Profile (edit)
+      = link_to 'Profile', myspot_profile_path, :id => 'profile_tab'
     %li
       %a{ :href => "#issues" } Settings
 .clear
