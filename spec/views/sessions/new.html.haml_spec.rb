@@ -12,6 +12,11 @@ describe 'sessions/new' do
     template.should have_tag('a[href=?]', new_password_reset_path)
   end
 
+  it "should have a checkbox for accepting the terms of service" do
+    do_render
+    template.should have_tag('input[type="checkbox"][name=?]', "user[terms_of_service]")
+  end
+
   describe "without errors" do
     before do
       assigns[:user].should be_valid

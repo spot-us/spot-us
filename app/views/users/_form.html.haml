@@ -17,7 +17,6 @@
     .row
       %label Your E-mail Address
       = f.text_field :email, :class=>"text"
-    .block-padding
     %span I am a:
     .row
       .float_left= f.radio_button :type, 'Citizen'
@@ -30,6 +29,13 @@
       %label.float_left{:for => 'user_type_organization'} News Organization
     .block-padding.clear 
     %p We'll email you a password which you can login and change.
+    .row
+      .float_left= f.check_box :terms_of_service, {}, '1', '0'
+      %label.float_left{:for => 'user_terms_of_service'}
+        I accept the 
+        = link_to 'terms of service', '#'
+    .block-padding.clear 
+
     .double_content_border
     .float_right
       %input{:type => "image", :src=>"../images/register.png"}
