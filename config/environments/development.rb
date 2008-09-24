@@ -20,7 +20,7 @@ config.action_mailer.raise_delivery_errors = false
 use_gateway = true
 
 config.to_prepare do
-  if use_gateway
+  if use_gateway && APP_CONFIG['gateway'].is_a?(Hash)
     Purchase.gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new({
       :login    => APP_CONFIG['gateway']['login'],
       :password => APP_CONFIG['gateway']['password'],
