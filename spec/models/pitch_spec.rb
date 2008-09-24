@@ -19,6 +19,13 @@ describe Pitch do
   requires_presence_of Pitch, :delivery_description
   requires_presence_of Pitch, :skills
   requires_presence_of Pitch, :keywords
+  requires_presence_of Pitch, :featured_image_caption
+
+  it "requires a featured image to be set" do
+    pitch = Factory.build(:pitch, :featured_image => nil)
+    pitch.should_not be_valid
+    pitch.should have(1).error_on(:featured_image_file_name)
+  end
 
   it { Factory(:pitch).should have_many(:donations) }
 
