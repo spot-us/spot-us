@@ -342,6 +342,9 @@ body {
   color: #999999;
   }
   
+.fieldWithErrors {
+  display: inline;
+  }
 .fieldWithErrors input {
   border: 1px #a70000 solid;
   }
