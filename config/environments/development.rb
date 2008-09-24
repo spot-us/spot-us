@@ -15,3 +15,20 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# use_gateway = false
+use_gateway = true
+
+config.to_prepare do
+  if use_gateway
+    Purchase.gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new({
+      :login    => APP_CONFIG['gateway']['login'],
+      :password => APP_CONFIG['gateway']['password'],
+      :test => true
+    })
+  else
+    ActiveMerchant::Billing::Base.mode = :test
+    Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
+  end
+end
+

@@ -6,8 +6,7 @@ class Purchase < ActiveRecord::Base
     :set_credit_card_number_ending
 
   validates_presence_of :first_name, :last_name, :credit_card_number_ending,
-    :address1, :address2, :city, :state, :zip, :phone, :user_id,
-    :total_amount_in_cents
+    :address1, :city, :state, :zip, :user_id, :total_amount_in_cents
   validates_presence_of :credit_card_number, :credit_card_year,
     :credit_card_type, :credit_card_month, :verification_value, :on => :create
   validate :validate_credit_card, :on => :create
@@ -26,6 +25,7 @@ class Purchase < ActiveRecord::Base
 
   def donations=(donations)
     @new_donations = donations
+    set_total
   end
 
   protected
@@ -87,17 +87,17 @@ class Purchase < ActiveRecord::Base
   end
 
   def billing_hash
-    { :name     => full_name,
-      :address1 => address1,
-      :address2 => address2,
-      :city     => city,
-      :state    => state,
-      :zip      => zip,
-      :country  => 'US',
-      :phone    => phone }
+    { :billing_address => { :address1 => address1,
+                            :address2 => address2,
+                            :city     => city,
+                            :state    => state,
+                            :zip      => zip,
+                            :country  => 'US',
+                            :email    => email } }
   end
 
-  def full_name
-    [first_name, last_name].join(' ')
+  def email
+    user.nil? ? nil : user.email
   end
+
 end

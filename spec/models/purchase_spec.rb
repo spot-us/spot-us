@@ -9,17 +9,14 @@ describe Purchase do
   table_has_columns(Purchase, :string, "city")
   table_has_columns(Purchase, :string, "state")
   table_has_columns(Purchase, :string, "zip")
-  table_has_columns(Purchase, :string, "phone")
   table_has_columns(Purchase, :integer, "user_id")
 
   requires_presence_of(Purchase, :first_name)
   requires_presence_of(Purchase, :last_name)
   requires_presence_of(Purchase, :address1)
-  requires_presence_of(Purchase, :address2)
   requires_presence_of(Purchase, :city)
   requires_presence_of(Purchase, :state)
   requires_presence_of(Purchase, :zip)
-  requires_presence_of(Purchase, :phone)
   requires_presence_of(Purchase, :user_id)
   requires_presence_of(Purchase, :credit_card_number)
   requires_presence_of(Purchase, :credit_card_month)
@@ -79,11 +76,10 @@ describe Purchase do
     before do
       @credit_card = Factory.build(:credit_card)
       ActiveMerchant::Billing::CreditCard.stub!(:new).and_return(@credit_card)
-      @purchase = Factory.build(:purchase, :user => Factory(:user))
-      
+      @user = Factory(:user)
       @total = 100
-      @donation = Factory(:donation, :amount_in_cents => @total)
-      @purchase.donations = [@donation]
+      @donation = Factory(:donation, :amount_in_cents => @total, :user => @user)
+      @purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
     end
 
     it "should build a new credit card" do
@@ -108,14 +104,15 @@ describe Purchase do
 
     it "should bill the credit card" do
       full_name = [@purchase.first_name, @purchase.last_name].join(' ')
-      hash = { :name     => full_name,
-               :address1 => @purchase.address1,
-               :address2 => @purchase.address2,
-               :city     => @purchase.city,
-               :state    => @purchase.state,
-               :country  => 'US',
-               :zip      => @purchase.zip,
-               :phone    => @purchase.phone }
+      hash = { :billing_address => {
+        :address1 => @purchase.address1,
+        :address2 => @purchase.address2,
+        :city     => @purchase.city,
+        :state    => @purchase.state,
+        :country  => 'US',
+        :zip      => @purchase.zip,
+        :email    => @purchase.user.email
+      } }
       Purchase.gateway.should_receive(:purchase).
         with(@total, @credit_card, hash).
         and_return(mock('response', :success? => true))
@@ -144,6 +141,14 @@ describe Purchase do
     @purchase.save
 
     @purchase.credit_card_number_ending.should == '5678'
+  end
+
+  it "should calculate the total when donations are set" do
+      @purchase = Factory.build(:purchase)
+      @donations = [Factory(:donation, :amount_in_cents => 5), 
+                    Factory(:donation, :amount_in_cents => 10)]
+      @purchase.donations = @donations
+      @purchase.total_amount_in_cents.should == 15
   end
 
   describe "after being saved with donations" do
