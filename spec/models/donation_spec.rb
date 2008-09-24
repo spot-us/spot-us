@@ -16,6 +16,8 @@ describe Donation do
 
   describe "Donation.unpaid" do
     before(:each) do
+      Donation.destroy_all
+
       Factory(:donation, :paid => true)
       Factory(:donation, :paid => false)
       @donations = Donation.unpaid
