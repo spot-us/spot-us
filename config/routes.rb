@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tips
   map.resources :pitches
   map.resources :profiles
+  map.resource :purchase
 
   # TODO: remove when done
   map.resources :ui
