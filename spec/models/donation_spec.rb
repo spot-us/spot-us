@@ -10,8 +10,9 @@ describe Donation do
   requires_presence_of Donation, :pitch_id
   requires_presence_of Donation, :amount_in_cents
 
-  it { Factory(:donation).should belong_to(:user) }
-  it { Factory(:donation).should belong_to(:pitch) }
+  it { Donation.should belong_to(:user) }
+  it { Donation.should belong_to(:pitch) }
+  it { Donation.should belong_to(:purchase) }
 
   describe "Donation.unpaid" do
     before(:each) do
