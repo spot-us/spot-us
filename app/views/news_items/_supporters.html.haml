@@ -1,0 +1,10 @@
+%h2.supporters
+  = @tip.total_amount_pledged
+  pledged by
+  = pluralize(@tip.supporters.count, "person")
+
+%ul.supporters
+  %li.supporter
+    - @tip.supporters.each do |supporter|
+      = render :partial => 'news_items/supporter', :locals => {:news_item => @tip, :supporter => supporter}
+

@@ -9,6 +9,24 @@ describe User do
   it { Factory(:user).should have_many(:tips) }
   it { Factory(:user).should have_many(:pitches) }
 
+  it "returns the amount pledged on amount_pledged_to(tip)" do
+    user = Factory(:user)
+    pledge1 = Factory(:pledge, :user => user, :amount => 1)
+    pledge2 = Factory(:pledge, :user => user, :amount => 3)
+    user.reload
+    user.amount_pledged_to(pledge1.tip).should == pledge1.amount
+    user.amount_pledged_to(pledge2.tip).should == pledge2.amount
+  end
+
+  it "returns the amount donated on amount_donated_to(pitch)" do
+    user = Factory(:user)
+    donation1 = Factory(:donation, :user => user, :amount => 1)
+    donation2 = Factory(:donation, :user => user, :amount => 3)
+    user.reload
+    user.amount_donated_to(donation1.pitch).should == donation1.amount
+    user.amount_donated_to(donation2.pitch).should == donation2.amount
+  end
+
   describe "signup notification emails" do
     it "sends on create" do
       user = Factory.build(:user)

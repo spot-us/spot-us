@@ -16,4 +16,12 @@ class NewsItem < ActiveRecord::Base
   def editable_by?(user)
     self.user == user
   end
+
+  def tip?
+    is_a?(Tip)
+  end
+
+  def pitch?
+    is_a?(Pitch)
+  end
 end

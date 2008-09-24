@@ -8,11 +8,13 @@ describe Donation do
 
   requires_presence_of Donation, :user_id
   requires_presence_of Donation, :pitch_id
-  requires_presence_of Donation, :amount_in_cents
+  requires_presence_of Donation, :amount
 
   it { Donation.should belong_to(:user) }
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
+
+  has_dollar_field(Donation, :amount)
 
   describe "Donation.unpaid" do
     before(:each) do
