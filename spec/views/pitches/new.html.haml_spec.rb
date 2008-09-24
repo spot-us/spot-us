@@ -26,11 +26,13 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  %w(location).each do |field|
-    it "renders #{field} as select" do
-      render "/pitches/new.html.haml"
-      response.should have_tag("form") do
-        with_tag "select[name=?]", "pitch[#{field}]"
+  it "renders location as select" do
+    render "/pitches/new.html.haml"
+    response.should have_tag("form") do
+      with_tag "select[name=?]", "pitch[location]" do
+        LOCATIONS.each do |location|
+          with_tag('option[value=?]', location)
+        end
       end
     end
   end
