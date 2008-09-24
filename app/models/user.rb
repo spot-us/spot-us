@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
 
+  def amount_pledged_to(tip)
+    tip.pledges.find_by_user_id(id).amount
+  end
+
+  def amount_donated_to(pitch)
+    pitch.donations.find_by_user_id(id).amount
+  end
+
   # Encrypts the password with the user salt
   def encrypt(password)
     self.class.encrypt(password, salt)
