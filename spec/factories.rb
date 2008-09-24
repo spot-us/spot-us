@@ -33,7 +33,7 @@ end
 Factory.define :donation do |donation|
   donation.association(:user)
   donation.association(:pitch)
-  donation.amount_in_cents 4200
+  donation.amount 42
 end
 
 Factory.define :tip do |tip|
@@ -41,13 +41,14 @@ Factory.define :tip do |tip|
   tip.location               { LOCATIONS.first }
   tip.short_description      "lorem ipsum"
   tip.keywords               "lorem ipsum"
+  tip.pledge_amount          100
   tip.association(:user)
 end
 
 Factory.define :pledge do |pledge|
   pledge.association(:user)
   pledge.association(:tip)
-  pledge.amount_in_cents 4200
+  pledge.amount 42
 end
 
 Factory.define :purchase do |purchase|

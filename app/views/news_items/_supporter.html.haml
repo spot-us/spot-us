@@ -1,0 +1,17 @@
+%p= image_tag supporter.photo.url(:thumb)
+%p.reg-line-height
+  = link_to supporter.full_name, profile_path(supporter)
+  - if news_item.user == supporter
+    Created this
+    = news_item.class
+    on
+    = @profile.created_at.to_s(:date)
+  - else
+    - if news_item.tip?
+      Pledged
+      = number_to_currency(supporter.amount_pledged_to(news_item))
+    - else
+      Donated
+      = number_to_currency(supporter.amount_donated_to(news_item))
+
+.clear

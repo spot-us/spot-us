@@ -6,7 +6,7 @@
     %h2.headline
       TIP:
       = @tip.headline
-    = render :partial => 'user', :object => @tip.user
+    = render :partial => 'user', :locals => { :news_item => @tip }
     %p 
       - if @tip.featured_image?
         %span.featured_image
@@ -23,7 +23,7 @@
     %h3 Keywords
     %p= @tip.keywords
   .span-160.box_white
-    = render :partial => "supporters"
+    = render :partial => "news_items/supporters"
 .clear
 .block-spacer
 
