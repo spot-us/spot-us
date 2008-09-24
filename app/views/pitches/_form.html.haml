@@ -1,5 +1,5 @@
 - form_for(@pitch, :html => { :multipart => true }) do |f|
-  .span-455.box_yellow.create_a_pitch_form
+  .span-595.box_yellow.create_a_pitch_form
     .row
       = f.label     :headline, "Your Pitch's Headline"
       = f.text_area :headline, :rows => 2
@@ -56,7 +56,6 @@
     .yellow-spacer-negative-blank
     .row
       = f.label :extended_description
-      = f.text_area :extended_description
       = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
     .yellow-spacer-negative
     .row
@@ -94,10 +93,10 @@
       = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", "#", :class => "quieter"})
       .clear
 
-    .double_content_border
+  .double_content_border
 
-    .float-right
-      - if @pitch.new_record?
-        = f.submit "TODO: create button", :confirm => "Are you sure you want to post this pitch?"
-      - else
-        = f.submit "TODO: edit button"
+  .float-right
+    - if @pitch.new_record?
+      = image_submit_tag image_path('create_a_pitch.png')
+    - else
+      = image_submit_tag image_path('save.png')

@@ -13,7 +13,7 @@ describe "/pitches/new.html.haml" do
     render "/pitches/new.html.haml"
     
     response.should have_tag("form[action=?][method=post][enctype='multipart/form-data']", pitches_path) do
-      with_tag "input[type=submit]"
+      with_tag "input[type=image]"
     end
   end
 
