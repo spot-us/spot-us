@@ -12,6 +12,7 @@ Factory.define :news_item do |news_item|
   news_item.location { LOCATIONS.first }
   news_item.featured_image_caption "lorem ipsum"
   news_item.featured_image  { upload_fixture_file }
+  news_item.association(:user)
 end
 
 Factory.define :pitch do |pitch|
@@ -26,6 +27,7 @@ Factory.define :pitch do |pitch|
   pitch.keywords               "lorem ipsum"
   pitch.contract_agreement     "1"
   pitch.featured_image         { upload_fixture_file }
+  pitch.association(:user)
 end
 
 Factory.define :donation do |donation|
