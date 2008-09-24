@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :tips
   has_many :pitches
+  has_many :pledges
+  has_many :pledged_tips, :through => :pledges, :source => :pledge
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password

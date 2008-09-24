@@ -16,12 +16,14 @@
   
   = javascript_include_tag 'fckeditor/fckeditor.js'
   = javascript_include_tag 'jquery.js'
+  %script
+    jQuery.noConflict();
   = javascript_include_tag 'jquery-ui.js'
   = javascript_include_tag 'jrails.js'
   = javascript_include_tag 'jquery.pngFix.js'
   = javascript_include_tag 'jquery.equalHeights.js'
   = javascript_include_tag 'prototype'
-  = javascript_include_tag 'scriptaculous'
+  / = javascript_include_tag 'scriptaculous'
   = javascript_include_tag 'effects'
   = javascript_include_tag 'jsProgressBarHandler.js'
   = javascript_include_tag 'jquery.livequery.js'

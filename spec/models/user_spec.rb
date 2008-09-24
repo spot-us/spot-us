@@ -8,6 +8,8 @@ describe User do
   it { Factory(:user).should have_many(:donations) }
   it { Factory(:user).should have_many(:tips) }
   it { Factory(:user).should have_many(:pitches) }
+  it { Factory(:user).should have_many(:pledges) }
+  it { Factory(:user).should have_many(:pledges) }
 
   it "returns the amount pledged on amount_pledged_to(tip)" do
     user = Factory(:user)
