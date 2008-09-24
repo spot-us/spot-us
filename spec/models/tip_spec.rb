@@ -18,7 +18,6 @@ describe Tip do
     Factory.build(:tip).should respond_to(:pledge_amount_in_cents=)
   end
 
-  it { Factory(:tip).should belong_to(:user) }
   it { Factory(:tip).should have_many(:pledges) }
 
   describe "a new tip with a pledge amount" do

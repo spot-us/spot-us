@@ -1,3 +1,32 @@
-= link_to 'Edit', edit_tip_path(@tip)
-|
-= link_to 'Back', tips_path
+- @title = "Spot.us - TIP: #{@tip.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      TIP:
+      = @tip.headline
+    = render :partial => 'user', :object => @tip.user
+    %p 
+      - if @tip.featured_image?
+        %span.featured_image
+          = image_tag(@tip.featured_image.url)
+          %span.caption
+            = @tip.featured_image_caption
+      = @tip.short_description
+  .span-220.column_v.box_white
+    = render :partial => "pledge_button"
+    .block-spacer-negative
+    %h3 Related Pitches
+    %p No related Pitches yet.  Stay tuned.
+    .block-spacer-negative
+    %h3 Keywords
+    %p= @tip.keywords
+  .span-160.box_white
+    = render :partial => "supporters"
+.clear
+.block-spacer
+
+- if @tip.editable_by?(current_user)
+  = link_to 'Edit', edit_tip_path(@tip)
+
