@@ -42,8 +42,9 @@ describe Pitch do
   end
 
   it "requires location to be a valid LOCATION" do
-    Factory.build(:pitch, :location => LOCATIONS.first).should be_valid
-    Factory.build(:pitch, :location => "invalid").should_not be_valid
+    user = Factory(:user)
+    Factory.build(:pitch, :location => LOCATIONS.first, :user => user).should be_valid
+    Factory.build(:pitch, :location => "invalid", :user => user).should_not be_valid
   end
 
   describe "to support STI" do
