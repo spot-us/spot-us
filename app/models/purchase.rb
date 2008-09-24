@@ -1,3 +1,4 @@
+require 'lib/dollars'
 class Purchase < ActiveRecord::Base
 
   class GatewayError < RuntimeError; end
@@ -6,7 +7,7 @@ class Purchase < ActiveRecord::Base
     :set_credit_card_number_ending
 
   validates_presence_of :first_name, :last_name, :credit_card_number_ending,
-    :address1, :city, :state, :zip, :user_id, :total_amount_in_cents
+    :address1, :city, :state, :zip, :user_id, :total_amount
   validates_presence_of :credit_card_number, :credit_card_year,
     :credit_card_type, :credit_card_month, :verification_value, :on => :create
   validate :validate_credit_card, :on => :create
@@ -18,6 +19,8 @@ class Purchase < ActiveRecord::Base
   before_create :bill_credit_card
 
   cattr_accessor :gateway
+  
+  has_dollar_field :total_amount
 
   attr_accessor :credit_card_number, :credit_card_year, :credit_card_month,
     :credit_card_type, :verification_value
@@ -53,10 +56,10 @@ class Purchase < ActiveRecord::Base
   end
 
   def set_total
-    self.total_amount_in_cents = 
+    self.total_amount = 
       (@new_donations || []).inject(0) do |sum, donation|
-        sum + donation.amount_in_cents
-      end
+        sum + donation.amount.to_cents
+      end.to_dollars
   end
 
   def set_credit_card_number_ending
