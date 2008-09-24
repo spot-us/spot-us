@@ -50,6 +50,34 @@ Factory.define :pledge do |pledge|
   pledge.amount_in_cents 4200
 end
 
+Factory.define :purchase do |purchase|
+  purchase.first_name 'John'
+  purchase.last_name  'User'
+  purchase.address1   '100 Happy Lane'
+  purchase.address2   'Apt. 2'
+  purchase.city       'Boston'
+  purchase.state      'MA'
+  purchase.zip        '02141'
+  purchase.phone      '6175555464'
+
+  purchase.association :user
+  purchase.credit_card_number '4111111111111111'
+  purchase.credit_card_month '1'
+  purchase.credit_card_type  'bogus'
+  purchase.credit_card_year { Time.now.year + 1 }
+  purchase.verification_value '111'
+end
+
+Factory.define :credit_card, :class => ActiveMerchant::Billing::CreditCard do |cc|
+  cc.first_name         'Billy'
+  cc.last_name          'Joel'
+  cc.number             '1'
+  cc.month              '1'
+  cc.year               { Time.now.year + 1 }
+  cc.verification_value '111'
+  cc.add_attribute(:type, 'bogus')
+end
+
 def upload_fixture_file
   ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, *%w(spec fixtures upload_file.jpg)), "image/jpg", true)
 end
