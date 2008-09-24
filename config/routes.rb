@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'homes', :action => 'show'
 
+  map.resources :news_items
   map.resources :donations
   map.resources :tips
   map.resources :pledges
