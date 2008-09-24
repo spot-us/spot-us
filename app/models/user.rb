@@ -18,6 +18,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :donations
+  has_many :tips
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

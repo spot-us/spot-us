@@ -39,6 +39,13 @@ Factory.define :tip do |tip|
   tip.location               { LOCATIONS.first }
   tip.short_description      "lorem ipsum"
   tip.keywords               "lorem ipsum"
+  tip.association(:user)
+end
+
+Factory.define :pledge do |pledge|
+  pledge.association(:user)
+  pledge.association(:tip)
+  pledge.amount_in_cents 4200
 end
 
 def upload_fixture_file
