@@ -14,6 +14,26 @@ describe NewsItem do
   requires_presence_of NewsItem, :headline
   requires_presence_of NewsItem, :location
 
+  it { Factory(:news_item).should belong_to(:user) }
+
+  describe NewsItem do
+    before(:each) do
+      @news_item = Factory(:news_item, :user => Factory(:user))
+    end
+
+    it "is editable by its owner" do
+      @news_item.editable_by?(@news_item.user).should be_true
+    end
+
+    it "is not editable by a stranger" do
+      @news_item.editable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not editable if not logged in" do
+      @news_item.editable_by?(nil).should_not be_true
+    end
+  end
+
   describe "to support paperclip" do
     it "has a paperclip attachment for featured_image" do
       Factory(:news_item).featured_image.should be_instance_of(Paperclip::Attachment)

@@ -1,7 +1,6 @@
 class Tip < NewsItem
   attr_accessor :pledge_amount_in_cents
 
-  belongs_to :user
   has_many :pledges
 
   before_save :build_initial_pledge

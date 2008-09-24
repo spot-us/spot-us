@@ -38,7 +38,6 @@ class Pitch < NewsItem
   validates_inclusion_of :location, :in => LOCATIONS
 
   has_many    :donations
-  belongs_to  :user
   def donated_to?
     donations.any?
   end
