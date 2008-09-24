@@ -16,19 +16,17 @@ describe Donation do
 
   describe "Donation.unpaid" do
     before(:each) do
-      Donation.destroy_all
-
       Factory(:donation, :paid => true)
       Factory(:donation, :paid => false)
       @donations = Donation.unpaid
     end
 
     it "should not return paid donations" do
-      @donations.select(&:paid?).should be_empty
+      @donations.select(&:paid?).should == []
     end
 
     it "should return all unpaid donations" do
-      @donations.reject(&:paid?).should_not be_empty
+      @donations.reject(&:paid?).should_not == []
     end
   end
 end
