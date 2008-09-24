@@ -10,7 +10,7 @@
     %p 
       - if @tip.featured_image?
         %span.featured_image
-          = image_tag(@tip.featured_image.url)
+          = image_tag(@tip.featured_image.url(:medium))
           %span.caption
             = @tip.featured_image_caption
       = @tip.short_description
