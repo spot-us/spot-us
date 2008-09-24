@@ -31,6 +31,7 @@ end
 Factory.define :donation do |donation|
   donation.association(:user)
   donation.association(:pitch)
+  donation.amount_in_cents 4200
 end
 
 Factory.define :tip do |tip|
