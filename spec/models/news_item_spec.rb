@@ -13,8 +13,6 @@ describe NewsItem do
 
   requires_presence_of NewsItem, :headline
   requires_presence_of NewsItem, :location
-  requires_presence_of NewsItem, :featured_image
-  requires_presence_of NewsItem, :featured_image_caption
 
   describe "to support paperclip" do
     it "has a paperclip attachment for featured_image" do
