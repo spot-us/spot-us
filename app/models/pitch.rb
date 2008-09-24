@@ -37,8 +37,8 @@ class Pitch < NewsItem
   validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
   validates_inclusion_of :location, :in => LOCATIONS
 
-  has_many :donations
-
+  has_many    :donations
+  belongs_to  :user
   def donated_to?
     donations.any?
   end

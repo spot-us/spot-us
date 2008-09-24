@@ -7,6 +7,7 @@ include AuthenticatedTestHelper
 describe User do
   it { Factory(:user).should have_many(:donations) }
   it { Factory(:user).should have_many(:tips) }
+  it { Factory(:user).should have_many(:pitches) }
 
   describe "signup notification emails" do
     it "sends on create" do
