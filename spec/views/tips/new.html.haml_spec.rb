@@ -16,6 +16,13 @@ describe "/tips/new.html.haml" do
     end
   end
 
+  it "renders pledge_amount as text" do
+    render "/tips/new.html.haml"
+    response.should have_tag("form") do
+      with_tag "input[type=text][name=?]", "tip[pledge_amount]"
+    end
+  end
+
   it "renders location as select" do
     render "/tips/new.html.haml"
     response.should have_tag("form") do

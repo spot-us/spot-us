@@ -2,9 +2,9 @@ class Tip < NewsItem
   attr_accessor :pledge_amount
 
   has_many :pledges
-  has_many :supporters, :through => :pledges, :source => :user
+  has_many :supporters, :through => :pledges, :source => :user, :order => "pledges.created_at"
 
-  before_save :build_initial_pledge
+  before_create :build_initial_pledge
  
   validates_presence_of :short_description
   validates_presence_of :keywords
