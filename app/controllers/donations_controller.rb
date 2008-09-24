@@ -1,5 +1,6 @@
 class DonationsController < ApplicationController
-  resources_controller_for :donation
+
+  resources_controller_for :donations
 
   private
 
