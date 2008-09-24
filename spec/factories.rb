@@ -33,6 +33,13 @@ Factory.define :donation do |donation|
   donation.association(:pitch)
 end
 
+Factory.define :tip do |tip|
+  tip.headline               "Headline"
+  tip.location               { LOCATIONS.first }
+  tip.short_description      "lorem ipsum"
+  tip.keywords               "lorem ipsum"
+end
+
 def upload_fixture_file
   ActionController::TestUploadedFile.new(File.join(RAILS_ROOT, *%w(spec fixtures upload_file.jpg)), "image/jpg", true)
 end
