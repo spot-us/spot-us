@@ -1,0 +1,14 @@
+.featured_image.span-220
+  = link_to image_tag(news_item.featured_image.url(:medium)), news_item
+.summary.span-390
+  %h3
+    == #{news_item.class.name.upcase}:
+    = link_to news_item.headline, news_item
+  .dateline
+    Posted
+    = news_item.created_at.to_s(:long_date)
+    by
+    = link_to h(news_item.user.full_name), profile_path(news_item.user)
+    in
+    = news_item.location
+  %p.short_description= news_item.short_description
