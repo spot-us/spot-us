@@ -78,7 +78,7 @@ describe Purchase do
       ActiveMerchant::Billing::CreditCard.stub!(:new).and_return(@credit_card)
       @user = Factory(:user)
       @total = 100
-      @donation = Factory(:donation, :amount_in_cents => @total, :user => @user)
+      @donation = Factory(:donation, :amount => @total, :user => @user)
       @purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
     end
 
@@ -114,7 +114,7 @@ describe Purchase do
         :email    => @purchase.user.email
       } }
       Purchase.gateway.should_receive(:purchase).
-        with(@total, @credit_card, hash).
+        with(@total.to_cents, @credit_card, hash).
         and_return(mock('response', :success? => true))
       do_save
     end
@@ -145,17 +145,17 @@ describe Purchase do
 
   it "should calculate the total when donations are set" do
       @purchase = Factory.build(:purchase)
-      @donations = [Factory(:donation, :amount_in_cents => 5), 
-                    Factory(:donation, :amount_in_cents => 10)]
+      @donations = [Factory(:donation, :amount => 5), 
+                    Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
-      @purchase.total_amount_in_cents.should == 15
+      @purchase.total_amount.should == '15.0'
   end
 
   describe "after being saved with donations" do
     before do
       @purchase = Factory.build(:purchase, :user => Factory(:user))
-      @donations = [Factory(:donation, :amount_in_cents => 5), 
-                    Factory(:donation, :amount_in_cents => 10)]
+      @donations = [Factory(:donation, :amount => 5), 
+                    Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
 
       Purchase.gateway.
@@ -168,7 +168,7 @@ describe Purchase do
     end
 
     it "should use the sum of the donations as the total" do
-      @purchase.total_amount_in_cents.should == 15
+      @purchase.total_amount.should == '15.0'
     end
 
     it "should assign itself as the purchase for each donation" do
