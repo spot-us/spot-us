@@ -28,6 +28,7 @@ describe Pitch do
   end
 
   it { Factory(:pitch).should have_many(:donations) }
+  it { Factory(:pitch).should belong_to(:user) }
 
   it "requires contract_agreement to be true" do
     Factory.build(:pitch, :contract_agreement => false).should_not be_valid

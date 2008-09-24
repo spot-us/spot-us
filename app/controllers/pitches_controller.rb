@@ -9,4 +9,11 @@ class PitchesController < ApplicationController
                     :redirect => pitch_url(pitch)) 
     end
   end
+  
+  protected
+  
+  def new_resource
+    current_user.pitches.new(params[:pitch])
+  end
+  
 end
