@@ -5,9 +5,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 include AuthenticatedTestHelper
 
 describe User do
-  it do
-    Factory(:user).should have_many(:donations)
-  end
+  it { Factory(:user).should have_many(:donations) }
+  it { Factory(:user).should have_many(:tips) }
 
   describe "signup notification emails" do
     it "sends on create" do
