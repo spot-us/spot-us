@@ -28,7 +28,7 @@ end
 def table_has_columns(clazz, type, *column_names)
   column_names.each do |column_name|
     column = clazz.columns.select {|c| c.name == column_name.to_s}.first
-    it "has a string named #{column_name}" do
+    it "has a #{type} named #{column_name}" do
       column.should_not be_nil
       column.type.should == type.to_sym
     end
@@ -60,3 +60,4 @@ def requires_presence_of(clazz, field)
     record.errors.on(field.to_sym).should_not be_nil
   end
 end
+
