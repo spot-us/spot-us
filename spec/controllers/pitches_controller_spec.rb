@@ -1,6 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PitchesController do
+  describe "on GET to /pitchs/new" do
+    before(:each) do
+      @user = Factory(:user)
+      controller.stub!(:current_user).and_return(@user)
+      get :new
+    end
+
+    it "assigns the new pitch the current user" do
+      assigns(:pitch).user_id.should == @user.id
+    end
+  end
+  
   describe "on GET to /pitches/1/edit" do
     describe "without donations" do
       it "renders edit" do
