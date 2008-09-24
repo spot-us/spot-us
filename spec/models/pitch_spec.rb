@@ -21,6 +21,14 @@ describe Pitch do
   requires_presence_of Pitch, :keywords
   requires_presence_of Pitch, :featured_image_caption
 
+  it "returns true on #pitch?" do
+    Factory(:pitch).should be_a_pitch
+  end
+  
+  it "returns false on #tip?" do
+    Factory(:pitch).should_not be_a_tip
+  end
+
   it "requires a featured image to be set" do
     pitch = Factory.build(:pitch, :featured_image => nil)
     pitch.should_not be_valid

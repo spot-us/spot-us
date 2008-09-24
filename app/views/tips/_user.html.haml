@@ -1,0 +1,13 @@
+%p= image_tag news_item.user.photo.url(:thumb)
+%h4.reg-line-height
+  = news_item.class
+  by
+  = h news_item.user.full_name
+%p.reg-line-height
+  Filed in TOPICS
+%p.reg-line-height
+  Located in
+  = h news_item.user.location
+
+.clear
+.double_content_border

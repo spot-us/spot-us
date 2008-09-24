@@ -36,25 +36,10 @@ describe "/tips/show.html.haml" do
     do_render
     response.should_not have_tag('a[href$=?]', edit_tip_path(@tip))
   end
-
-  it "should render the user partial" do
-    template.expect_render(:partial => 'user', :object => @tip.user)
-    do_render
-  end
   
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@tip.short_description}/i)
-  end
-  
-  it "should render the pledge partial" do
-    template.expect_render(:partial => 'pledge_button')
-    do_render    
-  end
-
-  it "should render the supporters partial" do
-    template.expect_render(:partial => 'supporters')
-    do_render    
   end
 
   it "should display photo if there is one" do

@@ -26,3 +26,4 @@ Rails::Initializer.run do |config|
   }
 end
 
+require 'lib/dollars.rb'
