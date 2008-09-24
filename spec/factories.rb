@@ -58,10 +58,9 @@ Factory.define :purchase do |purchase|
   purchase.city       'Boston'
   purchase.state      'MA'
   purchase.zip        '02141'
-  purchase.phone      '6175555464'
 
   purchase.association :user
-  purchase.credit_card_number '4111111111111111'
+  purchase.credit_card_number '1'
   purchase.credit_card_month '1'
   purchase.credit_card_type  'bogus'
   purchase.credit_card_year { Time.now.year + 1 }
