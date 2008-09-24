@@ -1,6 +1,7 @@
-%div#pledge_button
-  = link_to image_tag("pledge_25.png"), new_tip_pledge_url(@tip)
-%div#pledge_custom{:style => "display:none"}
-  stuff
-= link_to_function "OR PLEDGE ANOTHER AMOUNT", :id => "toggle_pledge_button"
+%div#inline_pledge_form
+  %div#pledge_button
+    = link_to_remote image_tag("pledge_25.png"), :update => "#inline_pledge_form", :url => pledges_url
+  %div#pledge_custom{:style => "display:none"}
+    stuff
+  = link_to_function "OR PLEDGE ANOTHER AMOUNT", :id => "toggle_pledge_button"
 
