@@ -7,12 +7,12 @@
       TIP:
       = @tip.headline
     .double_content_border
-    = render :partial => 'user', :locals => { :news_item => @tip }
+    = render :partial => 'news_items/user', :locals => { :news_item => @tip }
     %p 
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @tip}
       = @tip.short_description
   .span-220.column_v.box_white
-    = render :partial => "pledge_button"
+    = render :partial => "pledges/button"
     .block-spacer-negative
     %h3 Related Pitches
     - if @tip.pitches.any?
@@ -29,7 +29,7 @@
       = link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
 
   .span-160.box_white
-    = render :partial => "news_items/supporters"
+    = render :partial => "news_items/supporters", :locals => {:news_item => @tip}
 .clear
 .block-spacer
 

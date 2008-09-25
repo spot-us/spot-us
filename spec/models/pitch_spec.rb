@@ -24,6 +24,8 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:affiliations) }
   it { Factory(:pitch).should have_many(:tips) }
   it { Factory(:pitch).should have_many(:donations) }
+  it { Factory(:pitch).should have_many(:supporters)}
+  
 
   it "returns true on #pitch?" do
     Factory(:pitch).should be_a_pitch
@@ -64,6 +66,15 @@ describe Pitch do
 
     it "has donations" do
       @pitch.should be_donated_to
+    end
+    
+    it "returns all donated money on total_amount_donated" do
+      Factory(:donation, :pitch=> @pitch, :amount => 3000)
+      Factory(:donation, :pitch=> @pitch, :amount => 2)
+      Factory(:donation, :pitch=> @pitch, :amount => 1)
+
+      @pitch.reload
+      @pitch.total_amount_donated.to_f.should == @pitch.donations.map(&:amount).map(&:to_f).sum
     end
   end
 end
