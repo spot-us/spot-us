@@ -1,0 +1,73 @@
+- @title = "Spot.us - Settings"
+.block-spacer
+%h3 My Spot
+
+= render :partial => 'myspot/nav'
+
+- unless @settings.errors.empty?
+  - content_for :error do
+    = error_messages_for_resource
+
+#equalize
+
+  - # first column content 
+  - form_for :settings, :url => myspot_settings_path, :html => { :method => :put } do |f|
+    .span-605.box_white
+      %h3 Contact Info
+
+      .span-595.box_yellow.create_a_tip_form
+        .row
+          = f.label :email, 'Email Address'
+          = f.text_field :email
+        .yellow-spacer-negative
+        .row
+          = f.label :phone, 'Phone Number'
+          = f.text_field :phone
+        .yellow-spacer-negative
+        - if @settings.is_a?(Reporter)
+          .row
+            = f.label :address1, 'Address (1)'
+            = f.text_field :address1
+          .row
+            = f.label :address2, 'Address (2)'
+            = f.text_field :address2
+          .row
+            = f.label :city
+            = f.text_field :city
+          .row
+            = f.label :state
+            = f.text_field :state, :size => 2
+          .row
+            = f.label :zip
+            = f.text_field :zip, :size => 5
+          .row
+            = f.label :country
+            = f.country_select :country, ['United States'], :include_blank => true
+        .clear
+
+      %hr
+
+      %h3 Change Your Password
+      .span-595.box_yellow.create_a_tip_form
+        .row
+          = f.label :password, 'New Password'
+          = f.password_field :password
+        .row
+          = f.label :password_confirmation, 'Confirm New Password'
+          = f.password_field :password_confirmation
+        .clear
+
+  
+      .double_content_border
+
+      .float-right
+        %input{:type => "image", :src=>"/images/save.png"}
+      
+  
+  - # second column content   
+  .span-270.box_white
+    = render :partial => 'layouts/common_questions'
+
+.clear
+.block-spacer
+
