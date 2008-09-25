@@ -1,0 +1,21 @@
+%h2 My Spot
+
+= render :partial => "myspot/nav"
+
+.span-715.box_white
+  = render :partial => "myspot/dashboard_nav"
+  %table.pitches
+    %tr
+      %th.pitch_header Pitches
+      %th.created_header Created
+      %th.donations_header Donations
+      %th.actions_header Actions
+    %tr
+      %td{:colspan => 4}
+        .double_content_border
+    = render :partial => "myspot/pitches/pitch", :collection => @pitches, :spacer_template => "myspot/pitches/pitch_spacer"
+  .double_content_border
+
+
+.span-160.box_white
+  = render :partial => "layouts/common_questions"

@@ -1,5 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :block_if_donated_to, :only => :edit
+  before_filter :store_location, :only => :show
   resources_controller_for :pitch
 
   def block_if_donated_to
@@ -13,7 +14,7 @@ class PitchesController < ApplicationController
   protected
   
   def new_resource
-    current_user.pitches.new(params[:pitch])
+    current_user.pitches.new((params[:pitch] || {}).merge(:headline => params[:headline]))
   end
   
 end

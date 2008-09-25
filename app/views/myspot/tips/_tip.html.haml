@@ -1,0 +1,14 @@
+%tr
+  %td.tip
+    - if tip.featured_image?
+      = link_to image_tag(tip.featured_image.url(:thumb)), tip_url(tip)
+    TIP:
+    = link_to h(tip.headline), tip_url(tip)
+  %td.created= tip.created_at.to_s(:date)
+  %td.pledges
+    = number_to_currency(tip.total_amount_pledged)
+    Pledged
+  %td.actions
+    .action= link_to "Edit", edit_tip_url(tip)
+    .action= link_to "Cancel", '#'
+    

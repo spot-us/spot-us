@@ -61,3 +61,22 @@ def requires_presence_of(clazz, field)
   end
 end
 
+def has_dollar_field(clazz, field_name)
+  field_name = field_name.to_sym
+  class_sym = clazz.to_s.underscore.to_sym 
+  cents_field = :"#{field_name}_in_cents"
+
+  it "returns #{field_name} on ##{field_name}" do
+    rec = Factory(class_sym)
+    rec[cents_field] = "1234"
+    rec.save!
+    rec.reload
+    rec.send(field_name).should == "12.34"
+  end
+
+  it "can set #{field_name} via ##{field_name}=" do
+    rec = Factory(class_sym, field_name => "12.34")
+    rec.reload
+    rec.send(cents_field).should == 1234
+  end
+end

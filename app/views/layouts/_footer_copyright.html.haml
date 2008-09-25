@@ -2,10 +2,10 @@
   .double_footer_border
   .logo-footer= link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-footer-link", :title => "Spot.us - Community Funded Reporting"
   %ul.footer-nav
-    %li= link_to "About", "../ui/about"
-    %li= link_to "Blog", "../ui/blog"
-    %li= link_to "Press", "../ui/press"
-    %li= link_to "Contact", "../ui/contact"
-    %li.no-pipe= link_to "Terms of Use", "../ui/terms"
-  %p== Copyright &copy; #{Time.now.year} Spot.us.
+    %li= link_to "About", page_path('about')
+    %li= link_to "Blog", 'http://blog.spot.us'
+    %li= link_to "Press", page_path('press')
+    %li= mail_to "info@spot.us", "Contact", :encode => "hex"
+    %li.no-pipe= link_to "Terms of Use", page_path('terms')
+  %p== Copyright &copy; #{Time.now.year} Spot.us
   .clear

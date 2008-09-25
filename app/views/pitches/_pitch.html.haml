@@ -1,0 +1,9 @@
+- div_for pitch do
+  .block-spacer-negative
+  .box_white
+    #equalize
+      = render :partial => 'news_items/news_item', :object => pitch
+      .span-280
+        = render :partial => "donations/button", :locals => { :news_item => pitch }
+    .clear
+
