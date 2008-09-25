@@ -436,7 +436,7 @@ ol.create_a_tip_steps li.pitcher {
 .create_a_tip_form .free  textarea {
   width: 450px!important;
   }
-.create_a_tip_form .row label {
+.create_a_tip_form .row label, .create_a_pitch_form .row label {
   float: left;
   width: 200px!important;
   margin: 0 10px 0 0;
@@ -450,14 +450,26 @@ ol.create_a_tip_steps li.pitcher {
   margin: 0 0 0 210px;
   color: #999999;
   }
-.media label{
+.create_a_pitch_form .form_hint {
+  margin: 0 0 0 210px;
+  }
+.create_a_tip_form .media label {
   margin: 0 0 0 10px;
   width: 190px!important;
   }
 .create_a_tip_form .free label {
- float: left;
- width: 420px; 
- }
+  float: left;
+  width: 420px; 
+  }
+.create_a_pitch_form .delivered label {
+  float:left;
+  width: auto!important;
+  }
+.create_a_pitch_form .delivered input {
+   float:left;
+   width: auto!important;
+   margin: 0 10px 0 0;
+   }
 /* -----------------------------------------------------------------------------
  General Column specs part 1 - this the white background color plus the padding
 --------------------------------------------------------------------------------  */
