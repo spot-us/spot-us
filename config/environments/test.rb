@@ -20,3 +20,8 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+  Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
+end

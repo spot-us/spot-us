@@ -31,4 +31,30 @@ describe PitchesController do
       end
     end
   end
+
+  describe "on GET to show" do
+    before do
+      @pitch = Factory(:pitch)
+    end
+
+    it "should store the location in the session" do
+      do_show
+      session[:return_to].should == pitch_path(@pitch)
+    end
+
+    def do_show
+      get :show, :id => @pitch.id
+    end
+  end
+
+  describe "on GET to new with a headline" do
+    before do
+      login_as Factory(:user)
+      get :new, :headline => 'example'
+    end
+
+    it "should prefill the headline on the pitch" do
+      assigns[:pitch].headline.should == 'example'
+    end
+  end
 end
