@@ -8,16 +8,15 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pledges
   map.resources :pitches
   map.resources :profiles
+  map.resources :pages
 
   # TODO: remove when done
   map.resources :ui
   
   map.resource :user
-  map.signup  '/signup', :controller => 'users',    :action => 'new'
 
   map.resource :session
-  map.login   '/login',  :controller => 'sessions', :action => 'new'
-  map.logout  '/logout', :controller => 'sessions', :action => 'destroy'
+  map.destroy_session 'logout', :controller => 'sessions', :action => 'destroy'
 
   map.resource :password_reset
 
