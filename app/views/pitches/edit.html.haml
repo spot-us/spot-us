@@ -18,14 +18,14 @@
     %ul
       %li 
         If you're a professional journalist,
-        = link_to "create a pitch instead of a tip", "#"
+        = link_to "create a pitch instead of a tip", new_pitch_path
       %li
         Or
-        = link_to "browse the community", "#"
+        = link_to "browse the community", news_items_path
         to get inspiration for a new pitch or ping tips for an existing pitch.
     .double_content_border
     .centered
-      = link_to image_tag('../images/create_a_pitch.png'), "#"
+      = link_to image_tag('create_a_pitch.png'), new_pitch_path
     .create_tip_spacer
     .block-spacer-negative
     %h3 Common Questions
