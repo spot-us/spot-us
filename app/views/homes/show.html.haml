@@ -50,7 +50,9 @@
       = image_tag('dark_teal_one.png', :alt => '1: ', :style => 'vertical-align: middle')
       Write your headline.
     - form_tag(start_story_path, :method => :get) do
-      = text_field_tag :headline
+      = text_area_tag :headline, '', :rows => 2
+      .block-spacer-transparent
+      .double_content_border
       .float-right
         = image_submit_tag('next.png', :alt => 'Next')
   .clear
