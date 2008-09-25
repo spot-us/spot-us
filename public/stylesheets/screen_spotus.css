@@ -636,11 +636,17 @@ table.donations td.pitch img {
   padding: 5px;
 }
 
-table.donations td{
+table.donations td, 
+table.pitches td, 
+table.pledges td, 
+table.tips td {
   vertical-align: top;
 }
 
-table.donations th {
+table.donations th, 
+table.pitches th, 
+table.pledges th, 
+table.tips th {
   background: none;
 }
 
