@@ -585,7 +585,13 @@ ul.navigation a:hover {
   background: #fff url(../images/white.png) repeat-x left bottom;
   }
 
-ul.navigation a.selected, .myspot_profiles a#profile_tab, .myspot_settings a#settings_tab {
+ul.navigation a.selected, 
+.myspot_profiles a#profile_tab, 
+.myspot_settings a#settings_tab, 
+.myspot_donations a#dashboard_tab, 
+.myspot_tips a#dashboard_tab, 
+.myspot_pledges a#dashboard_tab,
+.myspot_pitches a#dashboard_tab {
   padding: 9px 15px 5px 15px;
   background-color: #fff;
   background: #fff url(../images/white.png) repeat-x left bottom;
@@ -624,3 +630,63 @@ ul.unpaid_donations {
   margin: 0;
   padding: 0;
 }
+
+table.donations td.pitch img {
+  float: left;
+  padding: 5px;
+}
+
+table.donations td{
+  vertical-align: top;
+}
+
+table.donations th {
+  background: none;
+}
+
+#dashboard_tab_container {
+  width: 625px;
+  margin: 20px 0 0 0;
+  padding-bottom: 5px;
+  }  
+
+ul.dashboard_navigation {
+  list-style: none;
+  margin: 0 0 0 1px;
+  padding: 0;
+  padding-bottom: 4px;
+  }
+
+ul.dashboard_navigation li {
+  display: inline;
+  margin-right: 5px;
+  }
+
+ul.dashboard_navigation a {
+  padding: 6px 25px;
+  color: #3C5359;
+  text-decoration: none;
+  /* background: url(../images/tab_bg.png) repeat-x left bottom; */
+  font-weight: bold;
+  margin: 0 0 -1px 0;
+  }
+
+ul.dashboard_navigation a:hover {
+  /* background: #fff url(../images/white.png) repeat-x left bottom; */
+  background: #909a9d;
+  color: black;
+}
+
+ul.dashboard_navigation a.selected, 
+.myspot_donations a#dashboard_donations_tab, 
+.myspot_tips a#dashboard_tips_tab, 
+.myspot_pledges a#dashboard_pledges_tab,
+.myspot_pitches a#dashboard_pitches_tab {
+  background-color: #3C5359;
+  color: white;
+  }
+
+ul.dashboard_navigation a:focus {
+  outline: none;
+  }
+

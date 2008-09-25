@@ -30,6 +30,9 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resource :settings
     myspot.resources :purchases
     myspot.resources :donations
+    myspot.resources :pledges
+    myspot.resources :tips
+    myspot.resources :pitches
   end
 
 end

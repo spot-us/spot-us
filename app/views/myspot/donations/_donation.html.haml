@@ -1,0 +1,15 @@
+%tr
+  %td.pitch
+    = link_to image_tag(donation.pitch.featured_image.url(:thumb)), pitch_url(donation.pitch)
+    PITCH:
+    = link_to h(donation.pitch.headline), pitch_url(donation.pitch)
+  %td.donated= donation.created_at.to_s(:date)
+  %td.donation= number_to_currency(donation.amount)
+  %td.status
+    = number_to_currency(donation.pitch.total_amount_donated)
+    of 
+    = number_to_currency(donation.pitch.requested_amount)
+    Raised
+  %td.actions
+    = link_to "Donate More", pitch_url(donation.pitch)
+    
