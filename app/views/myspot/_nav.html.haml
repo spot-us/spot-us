@@ -2,9 +2,7 @@
 #tab_container
   %ul.navigation
     %li
-      %a{ :href => "#screens" } Activity
-    %li
-      %a{ :href => "#javascripts" } Dashboard
+      = link_to 'Dashboard', myspot_donations_path, :id => 'dashboard_tab'
     %li
       = link_to 'Profile', myspot_profile_path, :id => 'profile_tab'
     %li
