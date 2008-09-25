@@ -594,3 +594,25 @@ ul.navigation a.selected, .myspot_profiles a#profile_tab {
 ul.navigation a:focus {
   outline: none;
   }
+
+div.featured_image {
+  width: 260px;
+  float: left;
+}
+
+div.featured_image .caption {
+  padding: 5px;
+  color: gray;
+}
+
+div.tip_creator div.person_avatar {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+div.supporters div.person_avatar {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
