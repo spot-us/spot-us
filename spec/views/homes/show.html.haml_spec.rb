@@ -17,7 +17,7 @@ describe 'homes/show' do
 
   it "should have a field to enter a headline" do
     do_render
-    template.should have_text_field_for('headline')
+    template.should have_tag('textarea[name="headline"]')
   end
 
   it "should have a form to create a news item" do

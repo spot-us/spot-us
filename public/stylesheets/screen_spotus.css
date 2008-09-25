@@ -518,6 +518,9 @@ ol.create_a_tip_steps li.pitcher {
   height: 15px;
   background: #f5f5f5;
   }
+.block-spacer-transparent {
+  height: 15px;
+  }
 .block-spacer-negative {
   height: 15px;
   background: #f5f5f5;
@@ -708,3 +711,6 @@ ul.dashboard_navigation a:focus {
   outline: none;
   }
 
+textarea#headline {
+  width: 100%;
+  }
