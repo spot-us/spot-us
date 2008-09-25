@@ -1,0 +1,42 @@
+- @title = "Spot.us - Fund Your Donations"
+.block-spacer
+
+- unless @user.errors.empty?
+  - content_for :error do
+    = error_messages_for :user
+
+#equalize
+
+  - # first column content 
+  .span-715.box_white
+    %h3 Fund Your Donations
+
+    .double_content_border
+
+    - form_for :user, :url => myspot_donations_amounts_path, :html => { :method => :put } do
+      %ul.unpaid_donations
+        - @donations.each do |donation|
+          - content_tag_for :li, donation, :class => 'unpaid' do
+            .column.span-70
+              = link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch
+            .column.span-575
+              %h3 
+                PITCH:
+                = link_to donation.pitch.headline, donation.pitch
+              %p
+                = donation.pitch.short_description
+                = link_to 'Read More &raquo;', donation.pitch
+            .column.span-70
+              = select_tag "user[donation_amounts][#{donation.id}]", options_for_select([%w($5 5.0), %w($10 10.0), %w($25 25.0)], donation.amount)
+            %hr
+
+      .float-right
+        = image_submit_tag 'purchase.png', :alt => 'Purchase'
+
+  - # second column content   
+  .span-160.box_white
+    = render :partial => 'layouts/common_questions'
+
+.clear
+.block-spacer
+

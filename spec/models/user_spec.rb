@@ -245,4 +245,61 @@ describe User do
     user.should be_valid
   end
 
+  describe "updating a user's donation amounts with valid amounts" do
+    before do
+      @user = Factory(:user)
+      @changed_unpaid = Factory(:donation, :user => @user, :paid => false, :amount => 5)
+      @unchanged_unpaid = Factory(:donation, :user => @user, :paid => false, :amount => 15)
+      @paid = Factory(:donation, :user => @user, :paid => true, :amount => 25)
+    end
+
+    it "should update an unpaid amount that had a new value" do
+      lambda { do_update }.should change { @changed_unpaid.amount }
+    end
+
+    it "should not update an unpaid amount that didn't have a new value" do
+      lambda { do_update }.should_not change { @unchanged_unpaid.amount }
+    end
+
+    it "should not update a paid amount" do
+      lambda { do_update }.should_not change { @paid.amount }
+    end
+
+    def do_update
+      @user.donation_amounts = { @changed_unpaid.id => 10,
+                                 @paid.id           => 20,
+                                 0                  => 30 }
+      @user.save
+      @paid.reload
+      @changed_unpaid.reload
+      @unchanged_unpaid.reload
+    end
+  end
+
+  describe "updating a user's donation amounts with invalid amounts" do
+    before do
+      @user = Factory(:user)
+      @donation = Factory(:donation, :user => @user, :amount => 5, :paid => false)
+    end
+
+    it "should not change the donation amount" do
+      lambda { do_update }.should_not change { @donation.amount }
+    end
+
+    it "should add validation errors to the user" do
+      do_update
+      @user.should_not be_valid
+    end
+
+    it "should add an error to base" do
+      do_update
+      @user.should have(1).error_on(:base)
+    end
+
+    def do_update
+      @user.donation_amounts = { @donation.id => -1 }
+      @user.save
+      @donation.reload
+    end
+  end
 end
