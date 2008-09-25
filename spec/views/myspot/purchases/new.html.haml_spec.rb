@@ -13,12 +13,12 @@ describe 'purchases/new' do
 
   it "should have a form to create a purchase" do
     do_render
-    template.should have_form_posting_to(myspot_purchase_path)
+    template.should have_form_posting_to(myspot_purchases_path)
   end
 
   it "should fields for a credit card" do
     do_render
-    template.should have_form_posting_to(myspot_purchase_path)
+    template.should have_form_posting_to(myspot_purchases_path)
     template.should have_text_field_for(:purchase_first_name)
     template.should have_text_field_for(:purchase_last_name)
     template.should have_text_field_for(:purchase_credit_card_number)
