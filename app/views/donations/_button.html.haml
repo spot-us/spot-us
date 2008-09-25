@@ -1,7 +1,13 @@
 %div#inline_donation_form
   %div#donation_button
-    = link_to_remote image_tag("donate_25.png"), :update => "#inline_donate_form", :url => donations_url, :method => :post
+    - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "#inline_donation_form" do |f|
+      = f.hidden_field :amount
+      = f.hidden_field :pitch_id
+      = image_submit_tag "donate_25.png"
   %div#donation_custom{:style => "display:none"}
-    stuff
-  = link_to_function "OR PLEDGE ANOTHER AMOUNT", :id => "toggle_donation_button"
+    - remote_form_for Donation.new(:pitch => news_item), :update => "#inline_donation_form" do |f|
+      = f.text_field :amount
+      = f.hidden_field :pitch_id
+      = f.submit "Donate!"
+  = link_to_function "OR DONATE ANOTHER AMOUNT", 'toggle_divs("#donation_button", "#donation_custom")'
 

@@ -1,4 +1,5 @@
 class PledgesController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   resources_controller_for :pledges
 
   def create
@@ -6,7 +7,7 @@ class PledgesController < ApplicationController
 
     respond_to do |format|
       if resource.save
-        format.js
+        format.js { render :partial => "create" }
       else
         format.js { render :partial => "new" }
       end
