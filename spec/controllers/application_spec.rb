@@ -1,31 +1,32 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe ApplicationController do
-  include ActionController::UrlWriter
-
-  before do
-    ApplicationController.send(:include, ActionController::UrlWriter)
-  end
 
   describe "with a logged in citizen" do
     before do
       controller.stub!(:logged_in?).and_return(true)
-      controller.stub!(:current_user).and_return(Factory(:user, :type => 'Citizen'))
+      user = User.find(Factory(:user, :type => 'Citizen').to_param)
+      violated "user must be a citizen" unless Citizen === user
+      controller.stub!(:current_user).and_return(user)
     end
 
     it "'start a story' should link to the new tip path" do
-      controller.start_story_path.should == new_tip_path
+      controller.should_receive(:new_tip_path).and_return('new tip')
+      controller.start_story_path.should == 'new tip'
     end
   end
 
   describe "with a logged in reporter" do
     before do
       controller.stub!(:logged_in?).and_return(true)
-      controller.stub!(:current_user).and_return(Factory(:user, :type => 'Reporter'))
+      user = User.find(Factory(:user, :type => 'Reporter').to_param)
+      violated "user must be a reporter" unless Reporter === user
+      controller.stub!(:current_user).and_return(user)
     end
 
     it "'start a story' should link to the new pitch path" do
-      controller.start_story_path.should == new_pitch_path
+      controller.should_receive(:new_pitch_path).and_return('new pitch')
+      controller.start_story_path.should == 'new pitch'
     end
   end
 
@@ -36,7 +37,8 @@ describe ApplicationController do
     end
 
     it "'start a story' should link to the new tip path" do
-      controller.start_story_path.should == new_tip_path
+      controller.should_receive(:new_tip_path).and_return('new tip')
+      controller.start_story_path.should == 'new tip'
     end
   end
 end
