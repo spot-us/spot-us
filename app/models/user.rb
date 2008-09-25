@@ -19,6 +19,13 @@
 #  location                  :string(255)     
 #  about_you                 :text            
 #  website                   :string(255)     
+#  address1                  :string(255)     
+#  address2                  :string(255)     
+#  city                      :string(255)     
+#  state                     :string(255)     
+#  zip                       :string(255)     
+#  phone                     :string(255)     
+#  country                   :string(255)     
 #
 
 require 'digest/sha1'
