@@ -1,5 +1,5 @@
 - form_for(@tip, :html => { :multipart => true }) do |f|
-  .span-595.box_yellow.create_a_tip_form
+  .box_yellow.create_a_tip_form
     .row
       = f.label     :headline, "Your Tip's Headline"
       = f.text_area :headline, :rows => 2
@@ -7,6 +7,7 @@
     .row
       = f.label :short_description, "Short Description"
       = f.text_area :short_description, :rows => 11
+    .row
       .form_hint.small
         500 Characters Maximum
     .yellow-spacer-negative
@@ -24,10 +25,8 @@
         %span.add_edit Add a Country
     .yellow-spacer-negative
     .row
-      = f.label :keyword, "Keywords"
-      %br/
-      %span.small.quieter
-        Keywords, or tags, should be separate by commas, for example: “car, automobile, SUVs.”
+      - keyword_note =""
+      = f.label :keyword, "Keywords" + "<br/><span class='small quieter'> Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>"
       = f.text_area :keywords, :rows => 3
     .yellow-spacer-negative
     .row
@@ -35,7 +34,7 @@
         Add Media
         %span.quieter (Optional)
     .yellow-spacer-negative-blank
-    .row.media
+    .row 
       %label.small{:for => ""}
         Upload A Featured Image
         %br
@@ -43,18 +42,14 @@
       = f.file_field :featured_image
     .yellow-spacer-negative-blank
     .row.media
-      = f.label :featured_image_caption, "Add a Featured Image Caption", :class => "small"
-      %br
-      %span.quieter 200 Characters Max
+      = f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small"
       = f.text_area :featured_image_caption, :rows => 2
     .yellow-spacer-negative-blank
     .row.media
-      = f.label :video_embed, "Embed a Video", :class => "small"
-      %br
-      %span.quieter Paste your third-party embeded cide here.
+      = f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here.</span>", :class => "small"
       = f.text_area :video_embed, :rows => 2
-    .yellow-spacer-negative
-
+      .clear
+  .clear
   .double_content_border
 
   .float-right
