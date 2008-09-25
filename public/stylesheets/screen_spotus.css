@@ -479,7 +479,8 @@ ol.create_a_tip_steps li.pitcher {
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
 ------------------------------------------------------------------------------------ */
-.span-205, .span-220, .span-235, .span-280, .span-340, .span-390, .span-455, .span-460, .span-605, .span-715 {float:left;}
+.span-70, .span-205, .span-220, .span-235, .span-280, .span-340, .span-390, .span-455, .span-460, .span-575, .span-605, .span-715 {float:left;}
+.span-70  {width: 70px;}
 .span-205 {width: 205px;}
 .span-220 {width: 220px;}
 .span-235 {width: 235px;}
@@ -488,6 +489,7 @@ ol.create_a_tip_steps li.pitcher {
 .span-390 {width: 390px;}
 .span-455 {width: 455px;}
 .span-460 {width: 460px;}
+.span-575 {width: 575px;}
 .span-605 {width: 605px;}
 .span-715 {width: 715px;}
 /* ---------------------------------------------------------------------------------
@@ -615,4 +617,10 @@ div.supporters div.person_avatar {
   float: left;
   padding-right: 10px;
   padding-bottom: 10px;
+}
+
+ul.unpaid_donations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

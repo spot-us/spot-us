@@ -19,6 +19,7 @@ class Donation < ActiveRecord::Base
   validates_presence_of :pitch_id
   validates_presence_of :user_id
   validates_presence_of :amount
+  validates_numericality_of :amount_in_cents, :greater_than => 0
 
   named_scope :unpaid, :conditions => "not paid"
   has_dollar_field(:amount)

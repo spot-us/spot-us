@@ -21,10 +21,16 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :password_reset
 
+  map.resource :amounts, :name_prefix => 'myspot_donations_',
+                         :path_prefix => 'myspot/donations',
+                         :controller  => 'myspot/donation_amounts'
+
   map.namespace :myspot do |myspot|
     myspot.resource :profile
     myspot.resource :settings
     myspot.resources :purchases
+    myspot.resources :donations
   end
+
 end
 
