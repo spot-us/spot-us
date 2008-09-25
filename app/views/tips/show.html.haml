@@ -6,27 +6,30 @@
     %h2.headline
       TIP:
       = @tip.headline
+    .double_content_border
     = render :partial => 'user', :locals => { :news_item => @tip }
     %p 
-      - if @tip.featured_image?
-        %span.featured_image
-          = image_tag(@tip.featured_image.url(:medium))
-          %span.caption
-            = @tip.featured_image_caption
+      = render :partial => 'news_items/featured_image', :locals => {:news_item => @tip}
       = @tip.short_description
   .span-220.column_v.box_white
     = render :partial => "pledge_button"
     .block-spacer-negative
     %h3 Related Pitches
-    %p No related Pitches yet.  Stay tuned.
+    - if @tip.pitches.any?
+      - @tip.pitches.each do |pitch|
+        .related_pitch
+          = link_to pitch.headline, pitch_url(pitch)
+    - else
+      %p No related Pitches yet.  Stay tuned.
     .block-spacer-negative
     %h3 Keywords
     %p= @tip.keywords
+    - if @tip.editable_by?(current_user)
+      .block-spacer-negative
+      = link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
+
   .span-160.box_white
     = render :partial => "news_items/supporters"
 .clear
 .block-spacer
-
-- if @tip.editable_by?(current_user)
-  = link_to 'Edit', edit_tip_path(@tip)
 

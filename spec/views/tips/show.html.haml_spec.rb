@@ -59,5 +59,9 @@ describe "/tips/show.html.haml" do
     render '/tips/show'
   end
 
+  it "not blow up with related pitches" do
+    @tip.pitches = [Factory(:pitch), Factory(:pitch)]
+    do_render
+  end
 end
 
