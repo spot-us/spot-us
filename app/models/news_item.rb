@@ -41,7 +41,8 @@ class NewsItem < ActiveRecord::Base
                              ":attachment/:id_partition/" <<
                              ":basename_:style.:extension",
                     :url =>  "/system/news_items/:attachment/:id_partition/" <<
-                             ":basename_:style.:extension"
+                             ":basename_:style.:extension",
+                    :default_url => "/images/featured_images/missing_:style.png"
   
   validates_presence_of :location, :headline, :user_id
 
