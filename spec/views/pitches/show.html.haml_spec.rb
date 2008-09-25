@@ -1,6 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/pitches/show.html.haml" do
+  include ActionView::Helpers::AssetTagHelper
+
   before(:each) do
     @pitch = Factory(:pitch)
     assigns[:pitch] = @pitch
@@ -19,23 +21,23 @@ describe "/pitches/show.html.haml" do
     template.stub!(:logged_in?).and_return(true)
     template.stub!(:current_user).and_return(@pitch.user)
     do_render
-    response.should have_tag('a[href$=?]', edit_pitch_path(@pitch))
+    template.should have_tag('a[href$=?]', edit_pitch_path(@pitch))
   end
 
   it "should not have an edit button if the current user isn't the creator of the pitch" do
     template.stub!(:logged_in?).and_return(true)
     template.stub!(:current_user).and_return(Factory(:user))
     do_render
-    response.should_not have_tag('a[href$=?]', edit_pitch_path(@pitch))
+    template.should_not have_tag('a[href$=?]', edit_pitch_path(@pitch))
   end
 
   it "should not have an edit button if not logged in" do
     template.stub!(:logged_in?).and_return(false)
     template.stub!(:current_user).and_return(nil)
     do_render
-    response.should_not have_tag('a[href$=?]', edit_pitch_path(@pitch))
+    template.should_not have_tag('a[href$=?]', edit_pitch_path(@pitch))
   end
-  
+
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@pitch.short_description}/i)
@@ -45,23 +47,43 @@ describe "/pitches/show.html.haml" do
     assigns[:pitch].stub!(:featured_image?).and_return(true)
     assigns[:pitch].stub!(:featured_image).and_return(mock("image", :url => "photo"))
     do_render
-    response.should have_tag('img[src = ?]', "/images/photo")
+    template.should have_tag('img[src = ?]', "/images/photo")
   end
   
   it "should not display a photo if there isn't one" do
     assigns[:pitch].stub!(:featured_image?).and_return(false)
     do_render
-    response.should_not have_tag('img[src = ?]', "/images/photo")
-  end
-
-  def do_render
-    render '/pitches/show.html.haml'
+    template.should_not have_tag('img[src = ?]', "/images/photo")
   end
 
   it "not blow up with related pitches" do
     @pitch.tips = [Factory(:tip), Factory(:tip)]
     do_render
   end
+
+  describe "with a guest user" do
+    before do
+      template.stub!(:logged_in?).and_return(false)
+    end
+
+    it "should display a donation button that links to login" do
+      do_render
+      template.should have_tag('a[href=?]', new_session_path) do
+        with_tag('img[src=?]', image_path('donate_25.png'))
+      end
+    end
+  end
+
+  describe "with a logged in user that hasn't donated" do
+  end
+
+  describe "with a logged in user that has donated" do
+  end
+
+  def do_render
+    render '/pitches/show.html.haml'
+  end
+
 end
 
 

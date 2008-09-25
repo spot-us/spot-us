@@ -1,5 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :block_if_donated_to, :only => :edit
+  before_filter :store_location, :only => :show
   resources_controller_for :pitch
 
   def block_if_donated_to
