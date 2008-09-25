@@ -1,3 +1,35 @@
-= link_to 'Edit', edit_pitch_path(@pitch)
-|
-= link_to 'Back', pitches_path
+- @title = "Spot.us - Pitch: #{@pitch.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      PITCH:
+      = @pitch.headline
+    .double_content_border
+    = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
+    %p 
+      = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
+      = @pitch.short_description
+  .span-220.column_v.box_white
+    = render :partial => "donations/button"
+    .block-spacer-negative
+    %h3 Related Tips
+    - if @pitch.tips.any?
+      - @pitch.tips.each do |tip|
+        .related_tip
+          = link_to tip.headline, tip_url(tip)
+    - else
+      %p No related Tips yet.  Stay tuned.
+    .block-spacer-negative
+    %h3 Keywords
+    %p= @pitch.keywords
+    - if @pitch.editable_by?(current_user)
+      .block-spacer-negative
+      = link_to image_tag("edit_this_pitch.png"), edit_pitch_path(@pitch)
+
+  .span-160.box_white
+    = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
+.clear
+.block-spacer
+
