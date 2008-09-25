@@ -9,7 +9,7 @@ describe "/tips/new.html.haml" do
   end
 
   it "should render new form" do
-    render "/tips/new.html.haml"
+    do_render
     
     response.should have_tag("form[action=?][method=post][enctype='multipart/form-data']", tips_path) do
       with_tag "input[type=image]"
@@ -17,14 +17,14 @@ describe "/tips/new.html.haml" do
   end
 
   it "renders pledge_amount as text" do
-    render "/tips/new.html.haml"
+    do_render
     response.should have_tag("form") do
       with_tag "input[type=text][name=?]", "tip[pledge_amount]"
     end
   end
 
   it "renders location as select" do
-    render "/tips/new.html.haml"
+    do_render
     response.should have_tag("form") do
       with_tag "select[name=?]", "tip[location]" do
         LOCATIONS.each do |location|
@@ -37,7 +37,7 @@ describe "/tips/new.html.haml" do
   %w(featured_image_caption video_embed headline 
      short_description keywords).each do |field|
     it "renders #{field} as textarea" do
-      render "/tips/new.html.haml"
+      do_render
       response.should have_tag("form") do
         with_tag "textarea[name=?]", "tip[#{field}]"
       end
@@ -51,7 +51,7 @@ describe "/tips/new.html.haml" do
 
     it "should not display an error message" do
       template.should_receive(:content_for).with(:errors).never
-      render "/tips/new.html.haml"
+      do_render
     end
   end
 
@@ -62,8 +62,24 @@ describe "/tips/new.html.haml" do
 
     it "should display an error message" do
       template.should_receive(:content_for).once.with(:error)
-      render "/tips/new.html.haml"
+      do_render
     end
+  end
+
+  it "should display the create a pitch link to a reporter" do
+    template.stub!(:current_user).and_return(Factory(:reporter))
+    do_render
+    template.should have_link_to(new_pitch_path)
+  end
+
+  it "should not display the create a pitch link to a citizen" do
+    template.stub!(:current_user).and_return(Factory(:user))
+    do_render
+    template.should_not have_link_to(new_pitch_path)
+  end
+
+  def do_render
+    render 'tips/new'
   end
 end
 
