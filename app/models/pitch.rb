@@ -16,7 +16,7 @@ class Pitch < NewsItem
   has_many :affiliations
   has_many :tips, :through => :affiliations
   has_many :donations
-  has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at"
+  has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
 
   def total_amount_donated
     donations.sum(:amount_in_cents).to_dollars
