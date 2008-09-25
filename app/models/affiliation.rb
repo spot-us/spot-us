@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: affiliations
+#
+#  id         :integer(4)      not null, primary key
+#  tip_id     :integer(4)      
+#  pitch_id   :integer(4)      
+#  created_at :datetime        
+#  updated_at :datetime        
+#
+
 class Affiliation < ActiveRecord::Base
   belongs_to :pitch
   belongs_to :tip
