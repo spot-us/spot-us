@@ -631,7 +631,7 @@ ul.unpaid_donations {
   padding: 0;
 }
 
-table.donations td.pitch img {
+table td img {
   float: left;
   padding: 5px;
 }
@@ -648,6 +648,15 @@ table.pitches th,
 table.pledges th, 
 table.tips th {
   background: none;
+}
+
+table.pledges tr.pledge td.pledge .number {
+	font-size: 200%;
+	padding-top: 0px;
+}
+
+table.pledges tr.pledge td.pledge {
+	text-align: right;
 }
 
 #dashboard_tab_container {
