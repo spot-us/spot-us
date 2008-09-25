@@ -35,6 +35,8 @@ class Tip < NewsItem
 
   has_many :pledges
   has_many :supporters, :through => :pledges, :source => :user, :order => "pledges.created_at"
+  has_many :affiliations
+  has_many :pitches, :through => :affiliations
 
   before_create :build_initial_pledge
  
