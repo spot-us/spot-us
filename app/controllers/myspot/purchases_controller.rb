@@ -1,4 +1,4 @@
-class PurchasesController < ApplicationController
+class Myspot::PurchasesController < ApplicationController
 
   before_filter :login_required
   before_filter :unpaid_donations_required
