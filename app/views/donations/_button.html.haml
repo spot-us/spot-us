@@ -1,15 +1,18 @@
 - if logged_in?
-  %div{:id => "inline_donation_form_#{news_item.id}"}
-    %div{:id => "donation_button_#{news_item.id}"}
-      - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "inline_donation_form_#{news_item.id}" do |f|
-        = f.hidden_field :amount
-        = f.hidden_field :pitch_id
-        = image_submit_tag "donate_25.png"
-    %div{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
-      - remote_form_for Donation.new(:pitch => news_item), :update => "inline_donation_form_#{news_item.id}" do |f|
-        = f.text_field :amount
-        = f.hidden_field :pitch_id
-        = f.submit "Donate!"
-    = link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
+  - if current_user.has_donation_for?(news_item)
+    = render :partial => 'donations/added'
+  - else
+    %div{:id => "inline_donation_form_#{news_item.id}"}
+      %div{:id => "donation_button_#{news_item.id}"}
+        - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "inline_donation_form_#{news_item.id}" do |f|
+          = f.hidden_field :amount
+          = f.hidden_field :pitch_id
+          = image_submit_tag "donate_25.png"
+      %div{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
+        - remote_form_for Donation.new(:pitch => news_item), :update => "inline_donation_form_#{news_item.id}" do |f|
+          = f.text_field :amount
+          = f.hidden_field :pitch_id
+          = f.submit "Donate!"
+      = link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
 - else
   = link_to image_tag('donate_25.png'), new_session_path
