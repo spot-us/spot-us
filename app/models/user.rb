@@ -13,6 +13,12 @@
 #  first_name                :string(255)     
 #  last_name                 :string(255)     
 #  type                      :string(255)     
+#  photo_file_name           :string(255)     
+#  photo_content_type        :string(255)     
+#  photo_file_size           :integer(4)      
+#  location                  :string(255)     
+#  about_you                 :text            
+#  website                   :string(255)     
 #
 
 require 'digest/sha1'
@@ -20,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :tips
   has_many :pitches
+  has_many :pledges
+  has_many :pledged_tips, :through => :pledges, :source => :pledge
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password
@@ -35,10 +43,15 @@ class User < ActiveRecord::Base
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
+  validate                  :validate_new_donation_amounts, 
+    :on => :update, 
+    :if => lambda {|user| user.donation_amounts_changed? }
   before_save :encrypt_password
   before_validation_on_create :generate_password, :set_default_location
 
   after_create :deliver_signup_notification
+  after_update :update_donation_amounts,
+    :if => lambda {|user| user.donation_amounts_changed? }
 
   has_attached_file :photo, 
                     :styles      => { :thumb => '50x50#' }, 
@@ -52,7 +65,19 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo, :location, :about_you, :website
+                  :last_name, :terms_of_service, :photo, :location, :about_you,
+                  :website, :phone, :address1, :address2, :city, :state, :zip,
+                  :country, :donation_amounts
+
+  def self.createable_by?(user)
+    true
+  end
+
+  [Citizen, Reporter, Organization].each do |user_class|
+    define_method :"#{user_class.to_s.underscore}?" do
+      self.is_a? user_class
+    end
+  end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -63,6 +88,18 @@ class User < ActiveRecord::Base
   # Encrypts some data with the salt.
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+  end
+
+  def editable_by?(user)
+    user == self
+  end
+
+  def amount_pledged_to(tip)
+    tip.pledges.find_by_user_id(id).amount
+  end
+
+  def amount_donated_to(pitch)
+    pitch.donations.find_by_user_id(id).amount
   end
 
   # Encrypts the password with the user salt
@@ -115,6 +152,28 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
+  def donation_amounts=(amounts)
+    @changed_donations = []
+    amounts.each do |donation_id, new_amount|
+      if donation = donations.unpaid.find_by_id(donation_id)
+        donation.amount = new_amount
+        @changed_donations << donation
+      end
+    end
+  end
+
+  def donation_amounts_changed?
+    !@changed_donations.blank?
+  end
+
+  def has_donation_for?(pitch)
+    donations.exists?(:pitch_id => pitch.id )
+  end
+
+  def has_pledge_for?(tip)
+    pledges.exists?(:tip_id => tip.id )
+  end
+
   protected
 
   def encrypt_password
@@ -139,6 +198,20 @@ class User < ActiveRecord::Base
 
   def set_default_location
     self.location ||= LOCATIONS.first
+  end
+
+  def update_donation_amounts
+    @changed_donations.each(&:save!)
+  end
+
+  def validate_new_donation_amounts
+    @changed_donations.each do |donation|
+      unless donation.valid?
+        donation.errors.full_messages.each do |error|
+          errors.add_to_base(error)
+        end
+      end
+    end
   end
 end
 

@@ -25,7 +25,10 @@
         %span.add_edit Add a Country
     .yellow-spacer-negative
     .row
-      - keyword_note =""
+      = f.label :pledge_amount, "I would like to pledge..."
+      = f.text_field :pledge_amount
+    .yellow-spacer-negative
+    .row
       = f.label :keyword, "Keywords" + "<br/><span class='small quieter'> Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>"
       = f.text_area :keywords, :rows => 3
     .yellow-spacer-negative

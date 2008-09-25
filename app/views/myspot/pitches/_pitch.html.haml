@@ -1,0 +1,14 @@
+%tr
+  %td.pitch
+    = link_to image_tag(pitch.featured_image.url(:thumb)), pitch_url(pitch)
+    PITCH:
+    = link_to h(pitch.headline), pitch_url(pitch)
+  %td.created= pitch.created_at.to_s(:date)
+  %td.donations
+    = number_to_currency(pitch.total_amount_donated)
+    Donated of
+    = number_to_currency(pitch.requested_amount)
+  %td.actions
+    .action= link_to "Edit", edit_pitch_url(pitch)
+    .action= link_to "Cancel", '#'
+    

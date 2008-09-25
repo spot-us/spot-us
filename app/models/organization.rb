@@ -13,6 +13,12 @@
 #  first_name                :string(255)     
 #  last_name                 :string(255)     
 #  type                      :string(255)     
+#  photo_file_name           :string(255)     
+#  photo_content_type        :string(255)     
+#  photo_file_size           :integer(4)      
+#  location                  :string(255)     
+#  about_you                 :text            
+#  website                   :string(255)     
 #
 
 class Organization < User
