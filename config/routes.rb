@@ -8,7 +8,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pledges
   map.resources :pitches
   map.resources :profiles
-  map.resource :purchase
 
   # TODO: remove when done
   map.resources :ui
@@ -25,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :myspot do |myspot|
     myspot.resource :profile
     myspot.resource :settings
+    myspot.resource :purchase
   end
 end
 
