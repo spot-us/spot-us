@@ -31,5 +31,17 @@ describe Donation do
       @donations.reject(&:paid?).should_not == []
     end
   end
+
+  it "should not allow negative values for donations" do
+    donation = Factory.build(:donation, :amount => -1)
+    donation.should_not be_valid
+    donation.should have(1).error_on(:amount_in_cents)
+  end
+
+  it "should not allow zero for a donation" do
+    donation = Factory.build(:donation, :amount => 0)
+    donation.should_not be_valid
+    donation.should have(1).error_on(:amount_in_cents)
+  end
 end
 

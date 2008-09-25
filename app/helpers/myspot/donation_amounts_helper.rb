@@ -1,0 +1,2 @@
+module Myspot::DonationAmountsHelper
+end
