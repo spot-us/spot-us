@@ -28,6 +28,14 @@ describe PledgesController do
     end
   end
 
+  describe "when can't edit" do
+    before(:each) do
+      Pledge.stub!(:editable_by?).and_return(false)
+      get :edit, :id => 1
+    end
+    it_denies_access
+  end
+
   describe "on PUT to update with valid input" do
     before do
       login_as @user = Factory(:user)
@@ -43,6 +51,7 @@ describe PledgesController do
     end
 
     def do_update
+      Pledge.stub!(:editable_by?).and_return(true)
       xhr :put, :update, :id => @pledge.id, :pledge => {:amount => 75}
     end
   end
