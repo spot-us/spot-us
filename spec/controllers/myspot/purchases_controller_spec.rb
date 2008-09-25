@@ -2,10 +2,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Myspot::PurchasesController do
 
-  route_matches("/myspot/purchase", :post, :controller => "myspot/purchases",
-                                           :action => "create")
-  route_matches("/myspot/purchase/new", :get, :controller => "myspot/purchases",
-                                              :action => "new")
+  route_matches("/myspot/purchases", :post, :controller => "myspot/purchases",
+                                            :action => "create")
+  route_matches("/myspot/purchases/new", :get, :controller => "myspot/purchases",
+                                               :action => "new")
 
   describe "on GET to new when the user has unpaid donations" do
     before do
