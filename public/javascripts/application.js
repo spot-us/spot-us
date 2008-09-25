@@ -1,9 +1,9 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-$(document).ready(function(){ 
-	$('#equalize').equalHeights();
-	$(document).pngFix();
-	$('#example > ul').tabs();
+jQuery(document).ready(function(){ 
+	jQuery('#equalize').equalHeights();
+	jQuery(document).pngFix();
+	jQuery('#example > ul').tabs();
 });
 // Flash dismiss - CARM TALK TO DESI WE ARE MISSING jslivequery.js for this
 /*$('.flash .dismiss a').livequery('click', function(event) {
@@ -12,10 +12,10 @@ $(document).ready(function(){
 });*/
 
 
-$("a").click(function(){
-  $(".navigation a.selected").removeClass("selected");  
+jQuery("a").click(function(){
+  jQuery(".navigation a.selected").removeClass("selected");  
   // remove previous class if there is any
-  $(this).addClass("selected");                                      
+  jQuery(this).addClass("selected");                                      
   // add class to the clicked link
   return false;                                                           
   // this prevents browser from following clicked link
