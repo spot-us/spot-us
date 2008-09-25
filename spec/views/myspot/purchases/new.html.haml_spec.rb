@@ -24,13 +24,13 @@ describe 'purchases/new' do
     template.should have_text_field_for(:purchase_credit_card_number)
     template.should have_text_field_for(:purchase_credit_card_year)
     template.should have_text_field_for(:purchase_credit_card_month)
-    template.should have_text_field_for(:purchase_credit_card_type)
     template.should have_text_field_for(:purchase_verification_value)
     template.should have_text_field_for(:purchase_address1)
     template.should have_text_field_for(:purchase_address2)
     template.should have_text_field_for(:purchase_city)
     template.should have_text_field_for(:purchase_state)
     template.should have_text_field_for(:purchase_zip)
+    template.should have_tag('select[name = ?]', 'purchase[credit_card_type]')
   end
 
   it 'should render' do
