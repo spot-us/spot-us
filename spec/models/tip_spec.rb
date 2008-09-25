@@ -14,6 +14,16 @@ describe Tip do
   it {Factory(:tip).should have_many(:affiliations)}
   it {Factory(:tip).should have_many(:pitches)}
 
+  describe "creating" do
+    it "is creatable by user" do
+      Tip.createable_by?(Factory(:user)).should be
+    end
+
+    it "is not createable if not logged in" do
+      Tip.createable_by?(nil).should_not be_true
+    end
+  end
+
   it "returns true on #tip?" do
     Factory(:tip).should be_a_tip
   end

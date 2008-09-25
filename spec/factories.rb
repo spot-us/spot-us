@@ -7,6 +7,13 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
 end
 
+Factory.define :reporter do |user|
+  user.email { Factory.next(:email) }
+  user.first_name 'Reporter'
+  user.last_name  'Joel'
+  user.add_attribute(:type, 'Reporter')
+end
+
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
   news_item.location { LOCATIONS.first }
