@@ -32,7 +32,7 @@
     %h3 Newest Items
     .double_footer_border
     - for news_item in NewsItem.newest.top_three
-      %div
+      %p.clear
         = link_to image_tag(news_item.featured_image.url(:thumb)), news_item
         = news_item.class.name.upcase + ':'
         = link_to news_item.headline, news_item
