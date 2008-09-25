@@ -1,11 +1,11 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe PurchasesHelper do
+describe Myspot::PurchasesHelper do
   
   #Delete this example and add some real ones or delete this file
   it "should be included in the object returned by #helper" do
     included_modules = (class << helper; self; end).send :included_modules
-    included_modules.should include(PurchasesHelper)
+    included_modules.should include(Myspot::PurchasesHelper)
   end
 
 end
