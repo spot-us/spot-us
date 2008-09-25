@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
 
   helper_method :start_story_path
 
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
+  before_filter :can_create?, :only => [:new, :create]
+  before_filter :can_edit?, :only => [:edit, :update]
+
   protect_from_forgery # :secret => '5e89a8607a729450f876d58cf6d92b8b'
 
   def start_story_path
@@ -17,5 +18,15 @@ class ApplicationController < ActionController::Base
     else
       new_tip_path
     end
+  end
+
+  protected
+
+  def can_create?
+    true
+  end
+
+  def can_edit?
+    true
   end
 end
