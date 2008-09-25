@@ -14,6 +14,14 @@ describe TipsController do
     end
   end
 
+  describe "when can't edit" do
+    before(:each) do
+      Tip.stub!(:editable_by?).and_return(false)
+      get :edit, :id => 1
+    end
+    it_denies_access
+  end
+
   describe "on GET to new with a headline" do
     before do
       login_as Factory(:user)
