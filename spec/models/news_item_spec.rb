@@ -17,6 +17,8 @@ describe NewsItem do
   requires_presence_of NewsItem, :user_id
 
   it { NewsItem.should belong_to(:user) }
+  it { NewsItem.should have_many(:topics) }
+  it { NewsItem.should have_many(:topic_memberships) }
 
   describe "editing" do
     before(:each) do
