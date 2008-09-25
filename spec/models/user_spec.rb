@@ -302,4 +302,31 @@ describe User do
       @donation.reload
     end
   end
+
+  describe "with a donation for a pitch" do
+    before do
+      @user = Factory(:user)
+      @pitch = Factory(:pitch)
+      @donation = Factory(:donation, :user => @user, :pitch => @pitch)
+    end
+
+    it "should know that the user has donated to that pitch" do
+      @user.has_donation_for?(@pitch).should be_true
+    end
+  end
+
+  describe "without a donation for a pitch" do
+    before do
+      @user = Factory(:user)
+      if @user.donations.detect {|donation| donation.pitch == @pitch }
+        violated "the user should not have any donations for the pitch"
+      end
+
+      @pitch = Factory(:pitch)
+    end
+
+    it "should know that the user hasn't donated to that pitch" do
+      @user.has_donation_for?(@pitch).should be_false
+    end
+  end
 end

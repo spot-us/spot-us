@@ -9,7 +9,7 @@ class DonationsController < ApplicationController
 
     respond_to do |format|
       if resource.save
-        format.js { render :partial => "create" }
+        format.js { render :partial => "added" }
       else
         format.js { render :partial => "new" }
       end
