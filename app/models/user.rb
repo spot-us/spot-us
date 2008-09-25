@@ -159,7 +159,11 @@ class User < ActiveRecord::Base
   end
 
   def has_donation_for?(pitch)
-    donations.count(:conditions => { :pitch_id => pitch.id }) != 0
+    donations.exists?(:pitch_id => pitch.id )
+  end
+
+  def has_pledge_for?(tip)
+    pledges.exists?(:tip_id => tip.id )
   end
 
   protected
