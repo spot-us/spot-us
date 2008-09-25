@@ -27,7 +27,8 @@
                 = donation.pitch.short_description
                 = link_to 'Read More &raquo;', donation.pitch
             .column.span-70
-              = select_tag "user[donation_amounts][#{donation.id}]", options_for_select([%w($5 5.0), %w($10 10.0), %w($25 25.0)], donation.amount)
+              $
+              = text_field_tag "user[donation_amounts][#{donation.id}]", number_with_precision(donation.amount, 2), :size => 5
             %hr
 
       .float-right
