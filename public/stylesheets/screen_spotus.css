@@ -411,7 +411,7 @@ ol.create_a_tip_steps li.pledgester, ol.create_a_pitch_steps li.pledgester {
   color: #999999;
   margin: 30px 0 0 0;
   }
-ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
+ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher, ol.create_a_pitch_steps li.journalist{
   color: #999999;
   margin: 30px 0 0 0;
   }
