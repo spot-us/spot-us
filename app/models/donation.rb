@@ -25,6 +25,14 @@ class Donation < ActiveRecord::Base
   named_scope :unpaid, :conditions => "not paid"
   has_dollar_field(:amount)
 
+  def self.createable_by?(user)
+    user
+  end
+
+  def editable_by?(user)
+    self.user == user
+  end
+
   protected
 
   def disable_updating_paid_donations

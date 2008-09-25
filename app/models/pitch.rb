@@ -18,15 +18,19 @@ class Pitch < NewsItem
   has_many :donations
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
 
+  def self.createable_by?(user)
+    user && user.reporter?
+  end
+
+  def self.featured
+    newest.first
+  end
+
   def total_amount_donated
     donations.sum(:amount_in_cents).to_dollars
   end
 
   def donated_to?
     donations.any?
-  end
-
-  def self.featured
-    newest.first
   end
 end
