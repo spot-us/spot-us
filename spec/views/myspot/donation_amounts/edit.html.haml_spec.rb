@@ -21,10 +21,10 @@ describe 'myspot/donation_amounts/edit' do
     end
   end
 
-  it "should have a select tag to change the amount of each donation" do
+  it "should have a text field tag to change the amount of each donation" do
     do_render
     @donations.each do |donation|
-      template.should have_tag('select[name=?]', "user[donation_amounts][#{donation.id}]")
+      template.should have_tag('input[type="text"][name=?]', "user[donation_amounts][#{donation.id}]")
     end
   end
 
