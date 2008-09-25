@@ -1,0 +1,14 @@
+%tr
+  %td.tip
+    - if pledge.tip.featured_image?
+      = link_to image_tag(pledge.tip.featured_image.url(:thumb)), tip_url(pledge.tip)
+    TIP:
+    = link_to h(pledge.tip.headline), tip_url(pledge.tip)
+  %td.pledged= pledge.created_at.to_s(:date)
+  %td.pledge= number_to_currency(pledge.amount)
+  %td.status
+    = number_to_currency(pledge.tip.total_amount_pledged)
+    Pledged
+  %td.actions
+    = link_to "Remove", pledge_url(pledge), :method => :delete, :confirm => "Are you sure you'd like to remove this pledge of #{number_to_currency(pledge.amount)}?"
+    
