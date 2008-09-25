@@ -46,4 +46,15 @@ describe PitchesController do
       get :show, :id => @pitch.id
     end
   end
+
+  describe "on GET to new with a headline" do
+    before do
+      login_as Factory(:user)
+      get :new, :headline => 'example'
+    end
+
+    it "should prefill the headline on the pitch" do
+      assigns[:pitch].headline.should == 'example'
+    end
+  end
 end
