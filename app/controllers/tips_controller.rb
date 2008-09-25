@@ -4,6 +4,8 @@ class TipsController < ApplicationController
   private
 
   def new_resource
-    current_user.tips.new((params[:tip] || {}).merge(:headline => params[:headline]))
+    params[:tip] ||= {}
+    params[:tip][:headline] = params[:headline] if params[:headline]
+    current_user.tips.new(params[:tip])
   end
 end

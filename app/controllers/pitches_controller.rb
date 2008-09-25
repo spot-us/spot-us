@@ -14,7 +14,9 @@ class PitchesController < ApplicationController
   protected
   
   def new_resource
-    current_user.pitches.new((params[:pitch] || {}).merge(:headline => params[:headline]))
+    params[:pitch] ||= {}
+    params[:pitch][:headline] = params[:headline] if params[:headline]
+    current_user.pitches.new(params[:pitch])
   end
   
 end
