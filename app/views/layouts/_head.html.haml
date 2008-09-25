@@ -8,11 +8,11 @@
     = @title || "Spot.us"
   
   /[if IE 6]
-    = stylesheet_link_tag 'ie.css'
     = stylesheet_link_tag 'ie_spotus.css'
   = stylesheet_link_tag 'screen', :media => "screen"
   = stylesheet_link_tag 'screen_spotus', :media => "screen"
   = stylesheet_link_tag 'print', :media => "print"
+  = stylesheet_link_tag 'ie.css'
   
   = javascript_include_tag 'fckeditor/fckeditor.js'
   = javascript_include_tag 'jquery.js'
