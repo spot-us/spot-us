@@ -31,7 +31,7 @@ module ActionView
 		module PrototypeHelper
 			
 			unless const_defined? :JQUERY_VAR
-				JQUERY_VAR = '$'
+				JQUERY_VAR = 'jQuery'
 			end
 					
 			unless const_defined? :JQCALLBACKS

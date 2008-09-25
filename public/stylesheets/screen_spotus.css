@@ -68,6 +68,9 @@ h4.title {
   padding:15px;
   margin: 0px;
   }
+.home-image-box {
+  padding:0px;
+  }
 .home-boxer {
   background: url(../images/spotus_home_boxer.jpg) repeat-y top left;
   }
@@ -342,6 +345,9 @@ body {
   color: #999999;
   }
   
+.fieldWithErrors {
+  display: inline;
+  }
 .fieldWithErrors input {
   border: 1px #a70000 solid;
   }
@@ -476,13 +482,17 @@ ol.create_a_tip_steps li.pitcher {
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
 ------------------------------------------------------------------------------------ */
-.span-205, .span-220, .span-235, .span-340, .span-455, .span-460, .span-605, .span-715 {float:left;}
+.span-70, .span-205, .span-220, .span-235, .span-280, .span-340, .span-390, .span-455, .span-460, .span-575, .span-605, .span-715 {float:left;}
+.span-70  {width: 70px;}
 .span-205 {width: 205px;}
 .span-220 {width: 220px;}
 .span-235 {width: 235px;}
+.span-280 {width: 280px;}
 .span-340 {width: 340px;}
+.span-390 {width: 390px;}
 .span-455 {width: 455px;}
 .span-460 {width: 460px;}
+.span-575 {width: 575px;}
 .span-605 {width: 605px;}
 .span-715 {width: 715px;}
 /* ---------------------------------------------------------------------------------
@@ -507,6 +517,9 @@ ol.create_a_tip_steps li.pitcher {
 .block-spacer {
   height: 15px;
   background: #f5f5f5;
+  }
+.block-spacer-transparent {
+  height: 15px;
   }
 .block-spacer-negative {
   height: 15px;
@@ -578,7 +591,13 @@ ul.navigation a:hover {
   background: #fff url(../images/white.png) repeat-x left bottom;
   }
 
-ul.navigation a.selected, .myspot_profiles a#profile_tab {
+ul.navigation a.selected, 
+.myspot_profiles a#profile_tab, 
+.myspot_settings a#settings_tab, 
+.myspot_donations a#dashboard_tab, 
+.myspot_tips a#dashboard_tab, 
+.myspot_pledges a#dashboard_tab,
+.myspot_pitches a#dashboard_tab {
   padding: 9px 15px 5px 15px;
   background-color: #fff;
   background: #fff url(../images/white.png) repeat-x left bottom;
@@ -588,4 +607,110 @@ ul.navigation a.selected, .myspot_profiles a#profile_tab {
 
 ul.navigation a:focus {
   outline: none;
+  }
+
+div.featured_image {
+  width: 220px;
+  float: left;
+}
+
+div.featured_image .caption {
+  padding: 5px;
+  color: gray;
+}
+
+div.creator div.person_avatar {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+div.supporters div.person_avatar {
+  float: left;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+ul.unpaid_donations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+table td img {
+  float: left;
+  padding: 5px;
+}
+
+table.donations td, 
+table.pitches td, 
+table.pledges td, 
+table.tips td {
+  vertical-align: top;
+}
+
+table.donations th, 
+table.pitches th, 
+table.pledges th, 
+table.tips th {
+  background: none;
+}
+
+table.pledges tr.pledge td.pledge .number {
+	font-size: 200%;
+	padding-top: 0px;
+}
+
+table.pledges tr.pledge td.pledge {
+	text-align: right;
+}
+
+#dashboard_tab_container {
+  width: 625px;
+  margin: 20px 0 0 0;
+  padding-bottom: 5px;
+  }  
+
+ul.dashboard_navigation {
+  list-style: none;
+  margin: 0 0 0 1px;
+  padding: 0;
+  padding-bottom: 4px;
+  }
+
+ul.dashboard_navigation li {
+  display: inline;
+  margin-right: 5px;
+  }
+
+ul.dashboard_navigation a {
+  padding: 6px 25px;
+  color: #3C5359;
+  text-decoration: none;
+  /* background: url(../images/tab_bg.png) repeat-x left bottom; */
+  font-weight: bold;
+  margin: 0 0 -1px 0;
+  }
+
+ul.dashboard_navigation a:hover {
+  /* background: #fff url(../images/white.png) repeat-x left bottom; */
+  background: #909a9d;
+  color: black;
+}
+
+ul.dashboard_navigation a.selected, 
+.myspot_donations a#dashboard_donations_tab, 
+.myspot_tips a#dashboard_tips_tab, 
+.myspot_pledges a#dashboard_pledges_tab,
+.myspot_pitches a#dashboard_pitches_tab {
+  background-color: #3C5359;
+  color: white;
+  }
+
+ul.dashboard_navigation a:focus {
+  outline: none;
+  }
+
+textarea#headline {
+  width: 100%;
   }

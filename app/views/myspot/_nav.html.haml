@@ -1,0 +1,11 @@
+- # nav
+#tab_container
+  %ul.navigation
+    %li
+      = link_to 'Dashboard', myspot_donations_path, :id => 'dashboard_tab'
+    %li
+      = link_to 'Profile', myspot_profile_path, :id => 'profile_tab'
+    %li
+      = link_to 'Settings', edit_myspot_settings_path, :id => 'settings_tab'
+.clear
+

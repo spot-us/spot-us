@@ -21,4 +21,11 @@ $("a").click(function(){
   // this prevents browser from following clicked link
 });
 
+function toggle_divs(div1, div2) {
+  jQuery(div1).toggle();
+  jQuery(div2).toggle();
+}
+
+// jQuery("#toggle_pledge_button").livequery("click", toggle_divs("#pledge_button", "#pledge_custom"));
+
 

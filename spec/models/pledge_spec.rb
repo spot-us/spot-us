@@ -7,9 +7,39 @@ describe Pledge do
 
   requires_presence_of Pledge, :user_id
   requires_presence_of Pledge, :tip_id
-  requires_presence_of Pledge, :amount_in_cents
+  requires_presence_of Pledge, :amount
 
   it { Factory(:pledge).should belong_to(:user) }
   it { Factory(:pledge).should belong_to(:tip) }
+
+  has_dollar_field(Pledge, :amount)
+
+  describe "creating" do
+    it "is creatable by user" do
+      Pledge.createable_by?(Factory(:user)).should be
+    end
+
+    it "is not createable if not logged in" do
+      Pledge.createable_by?(nil).should_not be_true
+    end
+  end
+
+  describe "editing" do
+    before(:each) do
+      @pledge = Factory(:pledge)
+    end
+
+    it "is editable by its owner" do
+      @pledge.editable_by?(@pledge.user).should be
+    end
+
+    it "is not editable by a stranger" do
+      @pledge.editable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not editable if not logged in" do
+      @pledge.editable_by?(nil).should_not be_true
+    end
+  end
 end
 

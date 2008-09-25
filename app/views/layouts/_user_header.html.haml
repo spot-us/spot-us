@@ -1,23 +1,17 @@
 %ul.user-header-nav
   - if current_user
-    %li.no-pipe
+    %li
       Hello,
-      == #{link_to "Chris Amico", user_url}.
-    %li.no-pipe
-      You need
-      = link_to number_to_currency("50"), "#"
-      in credit to fund your donations.
+      == #{link_to h(current_user.full_name), myspot_profile_path}.
     %li
-      = link_to "Purchase &raquo;", "#"
-    %li
-      = link_to "My Spot", "#"
+      = link_to "My Spot", myspot_donations_path
     %li.no-pipe
-      = link_to "Logout", logout_url
+      = link_to "Logout", destroy_session_path
   - else
     %li
-      = link_to "Register", signup_url
+      = link_to "Register", new_session_path
     %li.no-pipe
-      = link_to "Login", login_url
+      = link_to "Login", new_session_path
 
 .slogan
   %span.pink Community 
