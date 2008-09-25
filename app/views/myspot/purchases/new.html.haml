@@ -17,13 +17,13 @@
       .donation
         PITCH:
         = h donation.pitch.headline
-        = donation.amount_in_cents
+        = number_to_currency donation.amount
 
     %hr
 
     .total
       Total:
-      = @purchase.total_amount_in_cents
+      = number_to_currency @purchase.total_amount
 
     .block-spacer-negative
 
