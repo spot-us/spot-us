@@ -77,5 +77,40 @@ describe Pitch do
       @pitch.total_amount_donated.to_f.should == @pitch.donations.map(&:amount).map(&:to_f).sum
     end
   end
+  
+  describe "newest pitches" do
+    before do
+      @items = [Factory(:pitch), Factory(:pitch), Factory(:pitch)]
+      @items.reverse.each_with_index do |item, i|
+        NewsItem.update_all("created_at = '#{i.days.ago.to_s(:db)}'", "id=#{item.id}")
+      end
+      Factory(:tip)
+      @items.each(&:reload)
+      unless @items.collect(&:created_at).uniq.size == 3
+        violated "need 3 different created_at values to test sorting"
+      end
+
+      @result = Pitch.newest
+    end
+
+    it "should return items in reverse created at order" do
+      @result.should == @result.sort {|b, a| a.created_at <=> b.created_at }
+    end
+
+    it "should return all items" do
+      @result.size.should == @items.size
+    end
+
+    it "should only return pitches" do
+      @result.detect {|item| !item.pitch? }.should be_nil
+    end
+  end
+
+  it "should use the newest pitch as the featured pitch" do
+    newest = mock('newest')
+    Pitch.should_receive(:newest).with().and_return(newest)
+    newest.should_receive(:first).and_return('first')
+    Pitch.featured.should == 'first'
+  end
 end
 

@@ -13,10 +13,28 @@
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
     %h3.float-left Help Fund this Story
     .float-right
-      %span= link_to "View more Pitches &raquo;", "#"
+      %span= link_to "View more Pitches &raquo;", news_items_path
     .double_content_border.clear
-    %p
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus.
+    .featured_image.span-220
+      = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch
+    .summary.span-280
+      %h3
+        PITCH:
+        = link_to @featured_pitch.headline, @featured_pitch
+      .dateline
+        Posted
+        = @featured_pitch.created_at.to_s(:long_date)
+        by
+        = link_to h(@featured_pitch.user.full_name), profile_path(@featured_pitch.user)
+        in
+        = @featured_pitch.location
+      %p.short_description 
+        = h @featured_pitch.short_description
+        = link_to 'Read More &raquo;', @featured_pitch
+      .double_content_border
+      .float-right
+        = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
+
   .clear
 - # spotus_ie_pixel.gif is a IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
