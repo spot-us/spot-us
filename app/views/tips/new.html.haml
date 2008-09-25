@@ -39,47 +39,7 @@
     = render :partial => 'form'
       
   -# second column content   
-  .span-160.box_white
-    %h3 What is Spot.us?
-    .double_content_border
-    %ul
-      %li 
-        If you're a professional journalist,
-        = link_to "create a pitch instead of a tip", new_pitch_path
-      %li
-        Or
-        = link_to "browse the community", news_items_path
-        to get inspiration for a new pitch or ping tips for an existing pitch.
-    .double_content_border
-    .centered
-      = link_to image_tag('create_a_pitch.png'), new_pitch_path
-    .create_tip_spacer
-    .block-spacer-negative
-    %h3 Common Questions
-    .double_content_border
-    %h4.title What's a Tip?
-    %p.alt-spotus 
-      Anyone can create a news "tip" about an important topic you think should
-      be reported on? This is often related to the question "what are you
-      passionate about?" You can pledge to this tip, but no money is taken -
-      it's just a way to show how much interest you have in this possibly
-      becoming a pitch (link to pitch Faq). Creating a tip could be the spark
-      that starts an investigation.
-
-    %h4.title What do you mean "Pledge?"
-    %br/ 
-    %p.alt-spotus 
-      Pledges do not represent an actual money transaction. But, they do show
-      the general monetary value that a story might command. When you "pledge"
-      a tip, it's similar to joining a group. If a journalist references this
-      tip in their pitch, you'll be notified and asked to DONATE real money at
-      that point.
-
-    %h4.title What happens next?
-    %p.alt-spotus 
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero.
-      Morbi est nisl, blandit sit amet, ultrices ut, consequat at, ante. Sed
-      nisi sapien, pellentesque vel, vehicula quis, semper quis, orci.
+  = render :partial => 'sidebar'
 .clear
 .block-spacer
 
