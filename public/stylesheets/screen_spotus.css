@@ -68,6 +68,9 @@ h4.title {
   padding:15px;
   margin: 0px;
   }
+.home-image-box {
+  padding:0px;
+  }
 .home-boxer {
   background: url(../images/spotus_home_boxer.jpg) repeat-y top left;
   }

@@ -40,17 +40,19 @@
 %img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-spacer
 .home-boxer
-  %div.home-floater{:style=>"width:345px;float:left;background: #fff;"}
-    %p
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. 
-    %p
-      Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus.
+  %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
+    = image_tag('nyt_article.png')
 
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
-    %h3 Help Fund this Story
+    %h3 Make Headlines
     .double_content_border
-    %p
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus.
+    %h3
+      = image_tag('dark_teal_one.png', :alt => '1: ', :style => 'vertical-align: middle')
+      Write your headline.
+    - form_tag(start_story_path, :method => :get) do
+      = text_field_tag :headline
+      .float-right
+        = image_submit_tag('next.png', :alt => 'Next')
   .clear
 - # spotus_ie_pixel.gif is a IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
