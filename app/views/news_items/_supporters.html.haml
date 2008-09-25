@@ -1,13 +1,17 @@
 .supporters
   %h2.supporters Supporters
-  = number_to_currency @tip.total_amount_pledged
-  pledged by
-  = pluralize(@tip.supporters.count, "person")
+  - if news_item.tip?
+    = number_to_currency news_item.total_amount_pledged
+    pledged by
+  - else
+    = number_to_currency news_item.total_amount_donated
+    donated by
+  = pluralize(news_item.supporters.count, "person")
 
 .double_content_border
 
 .supporters
   .supporter
-    - @tip.supporters.each do |supporter|
-      = render :partial => 'news_items/supporter', :locals => {:news_item => @tip, :supporter => supporter}
+    - news_item.supporters.each do |supporter|
+      = render :partial => 'news_items/supporter', :locals => {:news_item => news_item, :supporter => supporter}
 
