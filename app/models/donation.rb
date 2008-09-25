@@ -20,8 +20,21 @@ class Donation < ActiveRecord::Base
   validates_presence_of :user_id
   validates_presence_of :amount
   validates_numericality_of :amount_in_cents, :greater_than => 0
+  validate_on_update :disable_updating_paid_donations
 
   named_scope :unpaid, :conditions => "not paid"
   has_dollar_field(:amount)
+
+  protected
+
+  def disable_updating_paid_donations
+    if paid? && !being_marked_as_paid?
+      errors.add_to_base('Paid donations cannot be updated')
+    end
+  end
+
+  def being_marked_as_paid?
+    paid_changed? && !paid_was
+  end
 end
 
