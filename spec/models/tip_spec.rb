@@ -10,6 +10,9 @@ describe Tip do
   requires_presence_of Tip, :pledge_amount
 
   it {Factory(:tip).should have_many(:supporters)}
+  it {Factory(:tip).should have_many(:pledges)}
+  it {Factory(:tip).should have_many(:affiliations)}
+  it {Factory(:tip).should have_many(:pitches)}
 
   it "returns true on #tip?" do
     Factory(:tip).should be_a_tip
