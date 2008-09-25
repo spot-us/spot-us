@@ -1,0 +1,9 @@
+- # dashboard navigation
+#dashboard_tab_container
+  %ul.dashboard_navigation
+    %li= link_to "My Donations (#{current_user.donations.count})", myspot_donations_path, :id => "dashboard_donations_tab"
+    %li= link_to "My Pledges (#{current_user.pledges.count})",   myspot_pledges_path,   :id => "dashboard_pledges_tab"
+    - if current_user.reporter?
+      %li= link_to "My Pitches (#{current_user.pledges.count})", myspot_pitches_path,   :id => "dashboard_pitches_tab"
+    %li= link_to "My Tips (#{current_user.pledges.count})",      myspot_tips_path,      :id => "dashboard_tips_tab"
+.clear

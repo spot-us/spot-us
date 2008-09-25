@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
                   :website, :phone, :address1, :address2, :city, :state, :zip,
                   :country, :donation_amounts
 
+  [Citizen, Reporter, Organization].each do |user_class|
+    define_method :"#{user_class.to_s.underscore}?" do
+      self.is_a? user_class
+    end
+  end
+
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
     u = find_by_email(email) # need to get the salt
