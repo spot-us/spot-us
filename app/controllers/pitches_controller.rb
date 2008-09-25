@@ -17,6 +17,10 @@ class PitchesController < ApplicationController
     access_denied unless Pitch.createable_by?(current_user)
   end
 
+  def can_edit?
+    access_denied unless Pitch.editable_by?(current_user)
+  end
+
   def new_resource
     params[:pitch] ||= {}
     params[:pitch][:headline] = params[:headline] if params[:headline]

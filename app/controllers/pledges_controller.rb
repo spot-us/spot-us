@@ -28,6 +28,10 @@ class PledgesController < ApplicationController
   
   protected
 
+  def can_edit?
+    access_denied unless Pledge.editable_by?(current_user)
+  end
+
   def new_resource
     current_user.pledges.new(params[:pledge])
   end

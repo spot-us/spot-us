@@ -21,10 +21,19 @@ describe PitchesController do
     end
     it_denies_access
   end
+
+  describe "when can't edit" do
+    before(:each) do
+      Pitch.stub!(:editable_by?).and_return(false)
+      get :edit, :id => 1
+    end
+    it_denies_access
+  end
   
   describe "on GET to /pitches/1/edit" do
     describe "without donations" do
       it "renders edit" do
+        Pitch.stub!(:editable_by?).and_return(true)
         pitch = Factory(:pitch)
         get :edit, :id => pitch.to_param
         response.should render_template(:edit)
@@ -33,6 +42,7 @@ describe PitchesController do
 
     describe "with donations" do
       it "renders edit" do
+        Pitch.stub!(:editable_by?).and_return(true)
         donation = Factory(:donation)
         get :edit, :id => donation.pitch.to_param
         response.should redirect_to(pitch_url(donation.pitch))
