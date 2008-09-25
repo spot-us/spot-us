@@ -24,4 +24,5 @@ describe TipsController do
       assigns[:tip].headline.should == 'example'
     end
   end
+
 end

@@ -1,5 +1,5 @@
 class TipsController < ApplicationController
-  resources_controller_for :tip
+  resources_controller_for :tip, :except => :destroy
 
   private
 
