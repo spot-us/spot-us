@@ -1,8 +1,8 @@
 class DonationsController < ApplicationController
 
-  before_filter :login_required
+  before_filter :login_required, :can_create?
   skip_before_filter :verify_authenticity_token
-  resources_controller_for :donations
+  resources_controller_for :donations, :only => :create
 
   def create
     self.resource = new_resource
@@ -16,8 +16,11 @@ class DonationsController < ApplicationController
     end
   end
   
-
   protected
+
+  def can_create?
+    access_denied unless Donation.createable_by?(current_user)
+  end
 
   def new_resource
     current_user.donations.new(params[:donation])
