@@ -43,5 +43,18 @@ describe Donation do
     donation.should_not be_valid
     donation.should have(1).error_on(:amount_in_cents)
   end
+
+  it "should not allow a paid donation to be modified" do
+    donation = Factory(:donation, :paid => true)
+    donation.amount = (donation.amount_in_cents + 1).to_dollars
+    donation.should_not be_valid
+    donation.should have(1).error_on(:base)
+  end
+
+  it "should allow an unpaid donation to be marked as paid" do
+    donation = Factory(:donation, :paid => false)
+    donation.paid = true
+    donation.should be_valid
+  end
 end
 
