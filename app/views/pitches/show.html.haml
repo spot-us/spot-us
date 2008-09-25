@@ -5,12 +5,28 @@
   .span-455.box_white
     %h2.headline
       PITCH:
-      = @pitch.headline
+      = h @pitch.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
     %p 
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
-      = @pitch.short_description
+      = h @pitch.short_description
+    .block-spacer-negative
+    %p
+      %h3 Deliverables
+      .double_content_border
+      = h @pitch.delivery_description
+    .block-spacer-negative
+    %p
+      %h3 Qualifications
+      .double_content_border
+      = h @pitch.skills
+    .block-spacer-negative
+    %p
+      %h3 Extended Description
+      .double_content_border
+      = @pitch.extended_description
+    .block-spacer-negative
   .span-220.column_v.box_white
     = render :partial => "donations/button"
     .block-spacer-negative
@@ -18,7 +34,7 @@
     - if @pitch.tips.any?
       - @pitch.tips.each do |tip|
         .related_tip
-          = link_to tip.headline, tip_url(tip)
+          = link_to h(tip.headline), tip_url(tip)
     - else
       %p No related Tips yet.  Stay tuned.
     .block-spacer-negative
