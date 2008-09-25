@@ -4,6 +4,6 @@
     #equalize
       = render :partial => 'news_items/news_item', :object => pitch
       .span-280
-        Pitch content
+        = render :partial => "donations/button", :locals => { :news_item => pitch }
     .clear
 
