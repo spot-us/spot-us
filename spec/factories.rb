@@ -1,4 +1,5 @@
 Factory.sequence(:email) { |n| "email#{n}@example.com" }
+Factory.sequence(:topic_name) { |n| "Topic #{n}" }
 
 Factory.define :user do |user|
   user.email { Factory.next(:email) }
@@ -88,6 +89,10 @@ Factory.define :credit_card, :class => ActiveMerchant::Billing::CreditCard do |c
   cc.year               { Time.now.year + 1 }
   cc.verification_value '111'
   cc.add_attribute(:type, 'bogus')
+end
+
+Factory.define :topic do |topic|
+  topic.name { Factory.next(:topic_name) }
 end
 
 def upload_fixture_file
