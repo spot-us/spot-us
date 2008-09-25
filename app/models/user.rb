@@ -158,6 +158,10 @@ class User < ActiveRecord::Base
     !@changed_donations.blank?
   end
 
+  def has_donation_for?(pitch)
+    donations.count(:conditions => { :pitch_id => pitch.id }) != 0
+  end
+
   protected
 
   def encrypt_password
