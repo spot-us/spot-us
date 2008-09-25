@@ -2,13 +2,11 @@
 
 .block-spacer
 .home-boxer
-  %div.home-floater{:style=>"width:345px;float:left;background: #fff;"}
-    %h3 What is Spot.us?
-    .double_content_border
-    %p
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. 
-    %p
-      Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus.
+  %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
+    .home-floater
+      %h3 What is Spot.Us?
+      .double_content_border
+    = image_tag('intro_video.png')
     
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
     %h3.float-left Help Fund this Story
