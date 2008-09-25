@@ -5,7 +5,7 @@
     %li= link_to "About", page_path('about')
     %li= link_to "Blog", 'http://blog.spot.us'
     %li= link_to "Press", page_path('press')
-    %li= mail_to "info@spot.us", "Contact", :encode => "hex"
+    %li= link_to "Contact", page_path('contact')
     %li.no-pipe= link_to "Terms of Use", page_path('terms')
   %p== Copyright &copy; #{Time.now.year} Spot.us
   .clear
