@@ -241,6 +241,7 @@ body {
   padding: 15px;
   color: #ccc;
   width: 930px;
+  text-align:left;
   }
 #footer ul.footer-nav, #user-header ul.user-header-nav {
   margin: 0px;
