@@ -31,4 +31,19 @@ describe PitchesController do
       end
     end
   end
+
+  describe "on GET to show" do
+    before do
+      @pitch = Factory(:pitch)
+    end
+
+    it "should store the location in the session" do
+      do_show
+      session[:return_to].should == pitch_path(@pitch)
+    end
+
+    def do_show
+      get :show, :id => @pitch.id
+    end
+  end
 end
