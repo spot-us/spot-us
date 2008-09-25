@@ -18,5 +18,13 @@ class Pledge < ActiveRecord::Base
   validates_presence_of :amount
 
   has_dollar_field(:amount)
+
+  def self.createable_by?(user)
+    user
+  end
+
+  def editable_by?(user)
+    self.user == user
+  end
 end
 

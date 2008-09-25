@@ -47,6 +47,10 @@ class Tip < NewsItem
 
   validates_inclusion_of :location, :in => LOCATIONS
 
+  def self.createable_by?(user)
+    !user.nil?
+  end
+
   def total_amount_pledged
     pledges.sum(:amount_in_cents).to_dollars
   end

@@ -18,7 +18,7 @@ describe NewsItem do
 
   it { NewsItem.should belong_to(:user) }
 
-  describe NewsItem do
+  describe "editing" do
     before(:each) do
       @news_item = Factory(:news_item, :user => Factory(:user))
     end

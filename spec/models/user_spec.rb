@@ -11,6 +11,30 @@ describe User do
   it { Factory(:user).should have_many(:pledges) }
   it { Factory(:user).should have_many(:pledges) }
 
+  describe "creating" do
+    it "is creatable by guest" do
+      User.createable_by?(nil).should be
+    end
+  end
+
+  describe "editing" do
+    before(:each) do
+      @user = Factory(:user)
+    end
+
+    it "is editable by its self" do
+      @user.editable_by?(@user).should be
+    end
+
+    it "is not editable by a stranger" do
+      @user.editable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not editable if not logged in" do
+      @user.editable_by?(nil).should_not be_true
+    end
+  end
+
   it "returns the amount pledged on amount_pledged_to(tip)" do
     user = Factory(:user)
     pledge1 = Factory(:pledge, :user => user, :amount => 1)
