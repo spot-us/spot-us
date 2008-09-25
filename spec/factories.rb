@@ -30,6 +30,11 @@ Factory.define :pitch do |pitch|
   pitch.association(:user)
 end
 
+Factory.define :affiliation do |donation|
+  donation.association(:tip)
+  donation.association(:pitch)
+end
+
 Factory.define :donation do |donation|
   donation.association(:user)
   donation.association(:pitch)
