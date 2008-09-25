@@ -367,51 +367,51 @@ body {
   }
   
 /* Create A Tip */  
-.create_a_tip {
+.create_a_tip, .create_a_pitch {
   float: left;
   width: 225px;
   background: #ffffe1 url(../images/yellow_bg.jpg) repeat-x left top;
   padding: 10px 0 10px 10px;
   }
   
-ol.create_a_tip_iconized {
+ol.create_a_tip_iconized, ol.create_a_pitch_iconized {
   float: left;
   margin: 0 20px 0 5px;
   padding: 0;
   width: 50px;
   }
-ol.create_a_tip_iconized li {
+ol.create_a_tip_iconized li, ol.create_a_pitch_iconized {
   margin: 0;
   list-style:none;
   }
-ol.create_a_tip_iconized li.tipster {
+ol.create_a_tip_iconized li.tipster, ol.create_a_pitch_iconized li.tipster {
   background: url(../images/tipster.png) no-repeat left top;
   color: #666666;
   padding: 0;
   margin: 0 ;
   height: 31px;
   }
-ol.create_a_tip_iconized li.pledgester {
+ol.create_a_tip_iconized li.pledgester, ol.create_a_pitch_iconized li.pledgester {
   background: url(../images/pledgester.png) no-repeat left top;
   padding: 0;
   margin: 30px 0 0 0;
   height: 33px;
   }
-ol.create_a_tip_iconized li.pitcher {
+ol.create_a_tip_iconized li.pitcher, ol.create_a_pitch_iconized li.pitcher{
   background: url(../images/pitcher.png) no-repeat left top;
   height: 33px;
   padding: 0;
   margin: 30px 0 0 0;
   }
-ol.create_a_tip_steps  li.tipster {
+ol.create_a_tip_steps  li.tipster, ol.create_a_pitch_steps  li.tipster  {
   color: #666666;
   margin: 15px 0 0 0;
   }
-ol.create_a_tip_steps li.pledgester {
+ol.create_a_tip_steps li.pledgester, ol.create_a_pitch_steps li.pledgester {
   color: #999999;
   margin: 30px 0 0 0;
   }
-ol.create_a_tip_steps li.pitcher {
+ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   color: #999999;
   margin: 30px 0 0 0;
   }
