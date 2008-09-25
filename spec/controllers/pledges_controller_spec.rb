@@ -27,4 +27,23 @@ describe PledgesController do
       xhr :post, :create, :pledge => {:tip_id => @tip.id, :amount => 25}
     end
   end
+
+  describe "on PUT to update with valid input" do
+    before do
+      login_as @user = Factory(:user)
+      @tip = Factory(:tip, :user => @user)
+      @pledge = @tip.pledges.first
+    end
+    
+    it "should update the pledge" do
+      do_update
+      assigns[:pledge].should_not be_nil
+      assigns[:pledge].should be_valid
+      assigns[:pledge].amount.should == "75.0"
+    end
+
+    def do_update
+      xhr :put, :update, :id => @pledge.id, :pledge => {:amount => 75}
+    end
+  end
 end

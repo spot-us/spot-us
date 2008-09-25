@@ -14,7 +14,18 @@ class PledgesController < ApplicationController
     end
   end
   
+  def update
+    self.resource = find_resource
 
+    respond_to do |format|
+      if resource.update_attributes(params[resource_name])
+        format.js   { render :partial => "update" } 
+      else
+        format.js   { render :partial => "edit" }
+      end
+    end
+  end
+  
   protected
 
   def new_resource
