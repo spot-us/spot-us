@@ -1,4 +1,5 @@
 class PitchesController < ApplicationController
+  before_filter :can_create?
   before_filter :block_if_donated_to, :only => :edit
   before_filter :store_location, :only => :show
   resources_controller_for :pitch
@@ -13,6 +14,10 @@ class PitchesController < ApplicationController
   
   protected
   
+  def can_create?
+    access_denied unless Pitch.createable_by?(current_user)
+  end
+
   def new_resource
     params[:pitch] ||= {}
     params[:pitch][:headline] = params[:headline] if params[:headline]

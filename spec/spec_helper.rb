@@ -46,10 +46,22 @@ def route_matches(path, method, params)
 end
 
 def requires_login_for(method, action)
-  it "should require a login for #{method.to_s.upcase} #{action}" do
-    send(method, action)
-    response.should redirect_to(new_session_path)
-    flash[:error].should match(/must be logged in/)
+  describe "in the name of security" do
+    before(:each) { send(method, action) }
+    it_denies_access
+  end
+end
+
+def it_denies_access(opts = {})
+  flash_msg = opts[:flash] || /logged in/i
+  redirect_path = opts[:redirect] || "new_session_path"
+
+  it "sets the flash to #{flash_msg.inspect}" do
+    flash[:error].should match(flash_msg)
+  end
+
+  it "redirects to #{redirect_path}" do
+    response.should redirect_to(eval(redirect_path))
   end
 end
 
