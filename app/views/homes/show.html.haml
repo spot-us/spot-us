@@ -7,31 +7,35 @@
       %h3 What is Spot.Us?
       .double_content_border
     = image_tag('intro_video.png')
-    
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
-    %h3.float-left Help Fund this Story
-    .float-right
-      %span= link_to "View more Pitches &raquo;", news_items_path
-    .double_content_border.clear
-    .featured_image.span-220
-      = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch
-    .summary.span-280
-      %h3
-        PITCH:
-        = link_to @featured_pitch.headline, @featured_pitch
-      .dateline
-        Posted
-        = @featured_pitch.created_at.to_s(:long_date)
-        by
-        = link_to h(@featured_pitch.user.full_name), profile_path(@featured_pitch.user)
-        in
-        = @featured_pitch.location
-      %p.short_description 
-        = h @featured_pitch.short_description
-        = link_to 'Read More &raquo;', @featured_pitch
+    - if @featured_pitch.blank?  
+      %h3 Create the first story
       .double_content_border
+      %p Text about making the first story
+    - else
+      %h3.float-left Help Fund this Story
       .float-right
-        = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
+        %span= link_to "View more Pitches &raquo;", news_items_path
+      .double_content_border.clear
+      .featured_image.span-220
+        = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch
+      .summary.span-280
+        %h3
+          PITCH:
+          = link_to @featured_pitch.headline, @featured_pitch
+        .dateline
+          Posted
+          = @featured_pitch.created_at.to_s(:long_date)
+          by
+          = link_to h(@featured_pitch.user.full_name), profile_path(@featured_pitch.user)
+          in
+          = @featured_pitch.location
+        %p.short_description 
+          = h @featured_pitch.short_description
+          = link_to 'Read More &raquo;', @featured_pitch
+        .double_content_border
+        .float-right
+          = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
 
   .clear
 - # spotus_ie_pixel.gif is a IE fix
