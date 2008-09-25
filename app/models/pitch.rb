@@ -25,4 +25,8 @@ class Pitch < NewsItem
   def donated_to?
     donations.any?
   end
+
+  def self.featured
+    newest.first
+  end
 end
