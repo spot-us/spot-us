@@ -1,13 +1,15 @@
-%p= image_tag news_item.user.photo.url(:thumb)
-%h4.reg-line-height
-  = news_item.class
-  by
-  = h news_item.user.full_name
-%p.reg-line-height
-  Filed in TOPICS
-%p.reg-line-height
-  Located in
-  = h news_item.user.location
+.tip_creator
+  .person_avatar
+    = link_to((image_tag news_item.user.photo.url(:thumb)), profile_path(news_item.user))
+  %h4.reg-line-height
+    = news_item.class
+    by
+    = link_to(h(news_item.user.full_name), profile_path(news_item.user))
+  .reg-line-height
+    Filed in TOPICS
+  .reg-line-height
+    Located in
+    = h news_item.user.location
 
-.clear
-.double_content_border
+  .clear
+  .double_content_border

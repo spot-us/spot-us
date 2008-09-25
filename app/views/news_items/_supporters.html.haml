@@ -1,8 +1,10 @@
-%h2.supporters Supporters
+.supporters
+  %h2.supporters Supporters
+  = number_to_currency @tip.total_amount_pledged
+  pledged by
+  = pluralize(@tip.supporters.count, "person")
+
 .double_content_border
-= number_to_currency @tip.total_amount_pledged
-pledged by
-= pluralize(@tip.supporters.count, "person")
 
 .supporters
   .supporter
