@@ -31,18 +31,11 @@
   .span-6
     %h3 Newest Items
     .double_footer_border
-    %p
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"
-    %p.clear 
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"
-    %p.clear 
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"    
+    - for news_item in NewsItem.newest.top_three
+      %div
+        = link_to image_tag(news_item.featured_image.url(:thumbnail)), news_item
+        = news_item.class.name.upcase + ':'
+        = link_to news_item.headline, news_item
   .span-4
     %h3 The Fine Print
     .double_footer_border
