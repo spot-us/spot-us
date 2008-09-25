@@ -16,6 +16,34 @@ describe Donation do
 
   has_dollar_field(Donation, :amount)
 
+  describe "creating" do
+    it "is creatable by user" do
+      Donation.createable_by?(Factory(:user)).should be
+    end
+
+    it "is not createable if not logged in" do
+      Donation.createable_by?(nil).should_not be_true
+    end
+  end
+
+  describe "editing" do
+    before(:each) do
+      @donation = Factory(:donation)
+    end
+
+    it "is editable by its owner" do
+      @donation.editable_by?(@donation.user).should be
+    end
+
+    it "is not editable by a stranger" do
+      @donation.editable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not editable if not logged in" do
+      @donation.editable_by?(nil).should_not be_true
+    end
+  end
+
   describe "Donation.unpaid" do
     before(:each) do
       Factory(:donation, :paid => true)

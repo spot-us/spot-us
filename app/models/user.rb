@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
                   :website, :phone, :address1, :address2, :city, :state, :zip,
                   :country, :donation_amounts
 
+  def self.createable_by?(user)
+    true
+  end
+
   [Citizen, Reporter, Organization].each do |user_class|
     define_method :"#{user_class.to_s.underscore}?" do
       self.is_a? user_class
@@ -84,6 +88,10 @@ class User < ActiveRecord::Base
   # Encrypts some data with the salt.
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+  end
+
+  def editable_by?(user)
+    user == self
   end
 
   def amount_pledged_to(tip)

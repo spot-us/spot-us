@@ -26,6 +26,19 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:donations) }
   it { Factory(:pitch).should have_many(:supporters)}
   
+  describe "creating" do
+    it "is creatable by reporter" do
+      Pitch.createable_by?(Factory(:reporter)).should be
+    end
+
+    it "is not creatable by user" do
+      Pitch.createable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not creatable if not logged in" do
+      Pitch.createable_by?(nil).should_not be
+    end
+  end
 
   it "returns true on #pitch?" do
     Factory(:pitch).should be_a_pitch
