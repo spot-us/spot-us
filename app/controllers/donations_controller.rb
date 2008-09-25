@@ -1,4 +1,6 @@
 class DonationsController < ApplicationController
+
+  before_filter :login_required
   skip_before_filter :verify_authenticity_token
   resources_controller_for :donations
 
