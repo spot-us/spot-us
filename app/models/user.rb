@@ -60,7 +60,9 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo, :location, :about_you, :website
+                  :last_name, :terms_of_service, :photo, :location, :about_you,
+                  :website, :phone, :address1, :address2, :city, :state, :zip,
+                  :country
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)

@@ -583,7 +583,7 @@ ul.navigation a:hover {
   background: #fff url(../images/white.png) repeat-x left bottom;
   }
 
-ul.navigation a.selected, .myspot_profiles a#profile_tab {
+ul.navigation a.selected, .myspot_profiles a#profile_tab, .myspot_settings a#settings_tab {
   padding: 9px 15px 5px 15px;
   background-color: #fff;
   background: #fff url(../images/white.png) repeat-x left bottom;

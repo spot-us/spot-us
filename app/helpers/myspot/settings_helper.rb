@@ -1,0 +1,2 @@
+module Myspot::SettingsHelper
+end

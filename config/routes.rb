@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :myspot do |myspot|
     myspot.resource :profile
+    myspot.resource :settings
   end
 end
 
