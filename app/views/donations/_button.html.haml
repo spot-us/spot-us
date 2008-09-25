@@ -1,13 +1,13 @@
-%div#inline_donation_form
-  %div#donation_button
-    - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "#inline_donation_form" do |f|
+%div{:id => "inline_donation_form_#{news_item.id}"}
+  %div{:id => "donation_button_#{news_item.id}"}
+    - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "inline_donation_form_#{news_item.id}" do |f|
       = f.hidden_field :amount
       = f.hidden_field :pitch_id
       = image_submit_tag "donate_25.png"
-  %div#donation_custom{:style => "display:none"}
-    - remote_form_for Donation.new(:pitch => news_item), :update => "#inline_donation_form" do |f|
+  %div{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
+    - remote_form_for Donation.new(:pitch => news_item), :update => "inline_donation_form_#{news_item.id}" do |f|
       = f.text_field :amount
       = f.hidden_field :pitch_id
       = f.submit "Donate!"
-  = link_to_function "OR DONATE ANOTHER AMOUNT", 'toggle_divs("#donation_button", "#donation_custom")'
+  = link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
 
