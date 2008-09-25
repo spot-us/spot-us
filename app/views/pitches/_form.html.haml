@@ -32,8 +32,6 @@
     .row
       = f.label :requested_amount, "I pledge..."
       = f.text_field :requested_amount, :maxlength => 15, :size => 15
-      %span.ss_sprite.ss_information
-      %span.small.add_edit= link_to "Why pledge", "#"
     .yellow-spacer-negative
     .row
       = f.label :delivery_description, "What will be delivered?"
@@ -80,7 +78,7 @@
     .free
       .float_left
       = f.check_box :contract_agreement
-      = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", "#", :class => "quieter"})
+      = f.label :contract_agreement, %Q(I agree with the #{link_to "Terms and Conditions.", page_path('terms'), :class => "quieter"})
       .clear
 
   .double_content_border
