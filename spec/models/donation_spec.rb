@@ -60,6 +60,21 @@ describe Donation do
     end
   end
 
+  describe "Donation.paid" do
+    before(:each) do
+      Factory(:donation, :paid => true)
+      Factory(:donation, :paid => false)
+      @donations = Donation.paid
+    end
+
+    it "should not return unpaid donations" do
+      @donations.select(&:paid?).should_not == []
+    end
+
+    it "should return all paid donations" do
+      @donations.reject(&:paid?).should == []
+    end
+  end
   it "should not allow negative values for donations" do
     donation = Factory.build(:donation, :amount => -1)
     donation.should_not be_valid
