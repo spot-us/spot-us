@@ -5,7 +5,7 @@
   .span-455.box_white
     %h2.headline
       PITCH:
-      = h @pitch.headline
+      %strong= h @pitch.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
     .block-spacer-negative
@@ -14,23 +14,23 @@
     .double_content_border
     %p 
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
-      = h @pitch.short_description
+      .alt-spotus= h @pitch.short_description
     .clear
     .block-spacer-negative
     %p
       %h3 Deliverables
       .double_content_border
-      = h @pitch.delivery_description
+      .alt-spotus= h @pitch.delivery_description
     .block-spacer-negative
     %p
       %h3 Qualifications
       .double_content_border
-      = h @pitch.skills
+      .alt-spotus= h @pitch.skills
     .block-spacer-negative
     %p
       %h3 Extended Description
       .double_content_border
-      = @pitch.extended_description
+      .alt-spotus= @pitch.extended_description
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     .block-spacer-negative
@@ -48,7 +48,7 @@
     %p= @pitch.keywords
     - if @pitch.editable_by?(current_user)
       .block-spacer-negative
-      = link_to "Edit this pitch", edit_pitch_path(@pitch)
+      .centered= link_to  image_tag("edit_this_pitch.png"), edit_pitch_path(@pitch)
 
   .span-160.box_white
     = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
