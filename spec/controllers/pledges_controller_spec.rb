@@ -30,8 +30,10 @@ describe PledgesController do
 
   describe "when can't edit" do
     before(:each) do
-      Pledge.stub!(:editable_by?).and_return(false)
-      get :edit, :id => 1
+      pledge = Factory(:pledge)
+      pledge.stub!(:editable_by?).and_return(false)
+      Pledge.stub!(:find).and_return(pledge)
+      get :edit, :id => pledge.id
     end
     it_denies_access
   end
