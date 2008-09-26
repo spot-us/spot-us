@@ -10,7 +10,7 @@
     = render :partial => 'news_items/user', :locals => { :news_item => @tip }
     %p 
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @tip}
-      = @tip.short_description
+      .alt-spotus= @tip.short_description
   .span-220.column_v.box_white
     .centered= render :partial => "pledges/button", :locals => { :news_item => @tip }
     .block-spacer-negative
