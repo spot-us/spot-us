@@ -39,6 +39,25 @@ describe Pitch do
       Pitch.createable_by?(nil).should_not be
     end
   end
+  
+  describe "editing" do
+    before(:each) do
+      @pitch = Factory(:pitch, :user => Factory(:user))
+    end
+
+    it "is editable by its owner" do
+      @pitch.editable_by?(@pitch.user).should be_true
+    end
+
+    it "is not editable by a stranger" do
+      @pitch.editable_by?(Factory(:user)).should_not be_true
+    end
+
+    it "is not editable if not logged in" do
+      @pitch.editable_by?(nil).should_not be_true
+    end
+  end
+  
 
   it "returns true on #pitch?" do
     Factory(:pitch).should be_a_pitch
