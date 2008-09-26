@@ -15,17 +15,20 @@
 
     - @donations.each do |donation|
       .donation
-        %p
+        .float-left
           PITCH:
-          = h donation.pitch.headline
+          %strong= h donation.pitch.headline
+        .float-right
           = number_to_currency donation.amount
-    
+        .clear
+    %br/
     %hr/    
     .total
-      %p
+      %p.float-right
         %strong
           Total:
           = number_to_currency @purchase.total_amount
+      .clear
 
     .block-spacer-negative
 
