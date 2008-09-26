@@ -42,6 +42,10 @@ table.top td.top {vertical-align:top;}
   margin: 0;
   line-height: 11px;
   }
+p.nil-line-height {
+   padding: 0;
+   line-height: 14px;
+   }
 .container a {
   color: #999999;
   text-decoration: none;  
