@@ -317,6 +317,11 @@ body {
   border-bottom: 2px #c9c9c9 solid;
   border-top: 1px #ccc solid;
   border-left: 1px #ccc solid;
+  height: 80px;
+  }
+
+.error p.flash_note, .success p.flash_note {
+  padding: 20px 0 0 0;
   }
   
 .success {
