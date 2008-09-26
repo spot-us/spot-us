@@ -24,16 +24,27 @@ describe PitchesController do
 
   describe "when can't edit" do
     before(:each) do
-      Pitch.stub!(:editable_by?).and_return(false)
-      get :edit, :id => 1
+      pitch = Factory(:pitch)
+      pitch.stub!(:editable_by?).and_return(false)
+      Pitch.stub!(:find).and_return(pitch)
+      get :edit, :id => pitch.id
     end
     it_denies_access
+  end
+  
+  describe "can_edit?" do
+    it "should allow the owner of a pitch to have access" do
+      user = Factory(:user)
+      pitch = Factory(:pitch, :user => user)
+      pitch.should be_editable_by(user)
+      get :edit, :id => pitch.id 
+    end
   end
   
   describe "on GET to /pitches/1/edit" do
     describe "without donations" do
       it "renders edit" do
-        Pitch.stub!(:editable_by?).and_return(true)
+        controller.stub!(:can_edit?).and_return(true)
         pitch = Factory(:pitch)
         get :edit, :id => pitch.to_param
         response.should render_template(:edit)
@@ -42,7 +53,7 @@ describe PitchesController do
 
     describe "with donations" do
       it "renders edit" do
-        Pitch.stub!(:editable_by?).and_return(true)
+        controller.stub!(:can_edit?).and_return(true)
         donation = Factory(:donation)
         get :edit, :id => donation.pitch.to_param
         response.should redirect_to(pitch_url(donation.pitch))
@@ -69,7 +80,7 @@ describe PitchesController do
   describe "on GET to new with a headline" do
     before do
       login_as Factory(:user)
-      Pitch.stub!(:createable_by?).and_return(true)
+      controller.stub!(:can_create?).and_return(true)
       get :new, :headline => 'example'
     end
 
