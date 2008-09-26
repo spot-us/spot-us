@@ -24,6 +24,11 @@ describe TipsController do
     it_denies_access
   end
 
+  describe "when not logged in on get to edit" do
+    before { get :new }
+    it_denies_access
+  end
+
   describe "on GET to new with a headline" do
     before do
       login_as Factory(:user)
