@@ -21,6 +21,7 @@ class Donation < ActiveRecord::Base
   validates_presence_of :amount
   validates_numericality_of :amount_in_cents, :greater_than => 0
   validate_on_update :disable_updating_paid_donations
+  validates_uniqueness_of :pitch_id, :scope => :user_id
 
   named_scope :unpaid, :conditions => "not paid"
   named_scope :paid, :conditions => "paid"
