@@ -16,7 +16,9 @@ describe TipsController do
 
   describe "when can't edit" do
     before(:each) do
-      Tip.stub!(:editable_by?).and_return(false)
+      tip = Factory(:tip)
+      tip.stub!(:editable_by?).and_return(false)
+      Tip.stub!(:find).and_return(tip)
       get :edit, :id => 1
     end
     it_denies_access
