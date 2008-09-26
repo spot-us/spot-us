@@ -14,6 +14,13 @@ describe Donation do
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
 
+  it "isn't valid if there is already a donation for that tip and user" do
+    donation = Factory(:donation)
+    duplicate = Factory.build(:donation, :pitch => donation.pitch, :user => donation.user)
+    duplicate.should_not be_valid
+    duplicate.should have(1).error_on(:pitch_id)
+  end
+
   has_dollar_field(Donation, :amount)
 
   describe "creating" do
