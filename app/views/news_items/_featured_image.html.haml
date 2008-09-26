@@ -1,5 +1,5 @@
 - if news_item.featured_image?
   %div.featured_image
     = image_tag(news_item.featured_image.url(:medium))
-    %span.caption
+    %span.caption.quiet
       = news_item.featured_image_caption
