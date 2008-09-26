@@ -38,6 +38,10 @@ table.top td.top {vertical-align:top;}
 .reg-line-height {
   margin: 0;	
   }
+.nil-line-height {
+  margin: 0;
+  line-height: 11px;
+  }
 .container a {
   color: #999999;
   text-decoration: none;  
