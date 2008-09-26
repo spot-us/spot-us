@@ -38,6 +38,29 @@ describe PledgesController do
     it_denies_access
   end
 
+  describe "on DELETE to destroy" do
+    before do
+      login_as @user = Factory(:user)
+      @tip = Factory(:tip, :user => @user)
+      @pledge = @tip.pledges.first
+    end
+    
+    it "should remove the pledge" do
+      do_destroy
+      Pledge.find_by_id(@pledge.id).should be_nil
+    end
+
+    it "should redirect to /myspot/pledges" do
+      do_destroy
+      response.should redirect_to(myspot_pledges_url)
+    end
+
+    def do_destroy
+      #Pledge.stub!(:editable_by?).and_return(true)
+      delete :destroy, :id => @pledge.id
+    end
+  end
+
   describe "on PUT to update with valid input" do
     before do
       login_as @user = Factory(:user)
