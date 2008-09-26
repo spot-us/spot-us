@@ -28,6 +28,10 @@ class PledgesController < ApplicationController
   
   protected
 
+  def resources_url
+    myspot_pledges_url
+  end
+
   def can_edit?
     access_denied unless find_resource.editable_by?(current_user)
   end
