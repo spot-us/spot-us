@@ -10,13 +10,13 @@
         - if yield(:error)
           .flash.error
             %span.dismiss= link_to image_tag('close_square.png'), '' # empty string means self
-            = yield(:error)
+            %p= yield(:error)
         - if flash.any?
           .flash
             - flash.each do |key, value|
               %div{ :id => "flash_#{key}", :class => key }
                 %span.dismiss= link_to image_tag('close_square.png'), '' # empty string means self
-                = value
+                %p.flash_note= value
         = yield
     #footer
       = render :partial => 'layouts/footer'
