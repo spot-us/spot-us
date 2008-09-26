@@ -4,7 +4,7 @@ class TipsController < ApplicationController
   private
 
   def can_edit?
-    access_denied unless Tip.editable_by?(current_user)
+    access_denied unless find_resource.editable_by?(current_user)
   end
 
   def new_resource
