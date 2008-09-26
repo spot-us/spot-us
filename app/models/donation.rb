@@ -23,6 +23,7 @@ class Donation < ActiveRecord::Base
   validate_on_update :disable_updating_paid_donations
 
   named_scope :unpaid, :conditions => "not paid"
+  named_scope :paid, :conditions => "paid"
   has_dollar_field(:amount)
 
   def self.createable_by?(user)
