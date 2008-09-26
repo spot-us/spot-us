@@ -8,9 +8,14 @@
       = h @pitch.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
+    .block-spacer-negative
+    %h3.description
+      Short Description
+    .double_content_border
     %p 
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
       = h @pitch.short_description
+    .clear
     .block-spacer-negative
     %p
       %h3 Deliverables
@@ -31,6 +36,7 @@
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     .block-spacer-negative
     %h3 Related Tips
+    .double_content_border
     - if @pitch.tips.any?
       - @pitch.tips.each do |tip|
         .related_tip
@@ -39,6 +45,7 @@
       %p No related Tips yet.  Stay tuned.
     .block-spacer-negative
     %h3 Keywords
+    .double_content_border
     %p= @pitch.keywords
     - if @pitch.editable_by?(current_user)
       .block-spacer-negative
