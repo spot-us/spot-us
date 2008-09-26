@@ -12,9 +12,10 @@
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @tip}
       = @tip.short_description
   .span-220.column_v.box_white
-    = render :partial => "pledges/button", :locals => { :news_item => @tip }
+    .centered= render :partial => "pledges/button", :locals => { :news_item => @tip }
     .block-spacer-negative
     %h3 Related Pitches
+    .double_content_border
     - if @tip.pitches.any?
       - @tip.pitches.each do |pitch|
         .related_pitch
@@ -23,10 +24,11 @@
       %p No related Pitches yet.  Stay tuned.
     .block-spacer-negative
     %h3 Keywords
+    .double_content_border
     %p= @tip.keywords
     - if @tip.editable_by?(current_user)
       .block-spacer-negative
-      = link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
+      .centered= link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
 
   .span-160.box_white
     = render :partial => "news_items/supporters", :locals => {:news_item => @tip}
