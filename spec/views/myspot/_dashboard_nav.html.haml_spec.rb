@@ -12,13 +12,21 @@ describe 'myspot/_dashboard_nav.html.haml' do
     do_render
   end
 
-  %w(donations pledges tips).each do |collection|
+  %w(pledges tips).each do |collection|
     it "should look for the current user's #{collection} count" do
       items = mock(collection)
       @user.should_receive(collection).with().and_return(items)
       items.should_receive(:count).with().and_return(1)
       do_render
     end
+  end
+  
+  it "should look for the current user's paid donation count" do
+    items = mock(:donations)
+    @user.should_receive(:donations).with().and_return(items)
+    items.should_receive(:paid).with().and_return(items)
+    items.should_receive(:count).with().and_return(1)
+    do_render
   end
 
   it "should check the pitches count for a reporter" do
