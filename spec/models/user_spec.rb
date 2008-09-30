@@ -54,9 +54,22 @@ describe User do
   end
 
   describe "signup notification emails" do
-    it "sends on create" do
+    it "sends email to citize on create" do
       user = Factory.build(:user)
-      Mailer.should_receive(:deliver_signup_notification).with(user)
+      Mailer.should_receive(:deliver_citizen_signup_notification).with(user)
+      user.save!
+    end
+    
+    it "sends email for news org when user is a new org on create" do
+      user = Factory.build(:organization)
+      Mailer.should_receive(:deliver_organization_signup_notification).with(user)
+      Mailer.should_receive(:deliver_news_org_signup_request).with(user)
+      user.save!
+    end
+    
+    it "sends email for reporter when user is a reporter on create" do
+      user = Factory.build(:reporter)
+      Mailer.should_receive(:deliver_reporter_signup_notification).with(user)
       user.save!
     end
 
