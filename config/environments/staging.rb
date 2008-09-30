@@ -5,16 +5,16 @@ config.action_view.debug_rjs = true
 config.cache_classes = false
 config.whiny_nils = true
 
-config.to_prepare do
-  if APP_CONFIG['action_mailer'].is_a?(Hash)
-    config.action_mailer.delivery_method = APP_CONFIG['action_mailer']['delivery_method']
-    config.action_mailer.smtp_settings   = APP_CONFIG['action_mailer']['smtp_settings']
-  end
+if APP_CONFIG[:action_mailer].is_a?(Hash)
+  config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]
+  config.action_mailer.smtp_settings   = APP_CONFIG[:action_mailer][:smtp_settings]
+end
 
-  if APP_CONFIG['gateway'].is_a?(Hash)
+config.to_prepare do
+  if APP_CONFIG[:gateway].is_a?(Hash)
     Purchase.gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new({
-      :login    => APP_CONFIG['gateway']['login'],
-      :password => APP_CONFIG['gateway']['password'],
+      :login    => APP_CONFIG[:gateway][:login],
+      :password => APP_CONFIG[:gateway][:password],
       :test => true
     })
   else
