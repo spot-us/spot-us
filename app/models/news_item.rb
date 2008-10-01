@@ -5,7 +5,6 @@
 #  id                          :integer(4)      not null, primary key
 #  headline                    :string(255)     
 #  location                    :string(255)     
-#  requested_amount            :string(255)     
 #  state                       :string(255)     
 #  short_description           :text            
 #  delivery_description        :text            
@@ -28,6 +27,7 @@
 #  video_embed                 :string(255)     
 #  featured_image_caption      :string(255)     
 #  user_id                     :integer(4)      
+#  requested_amount_in_cents   :integer(4)      
 #
 
 class NewsItem < ActiveRecord::Base
