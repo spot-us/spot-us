@@ -10,6 +10,10 @@ describe User do
   it { Factory(:user).should have_many(:pitches) }
   it { Factory(:user).should have_many(:pledges) }
   it { Factory(:user).should have_many(:pledges) }
+  table_has_columns(User, :boolean,  "notify_tips")
+  table_has_columns(User, :boolean,  "notify_pitches")
+  table_has_columns(User, :boolean,  "notify_stories")
+  table_has_columns(User, :boolean,  "notify_spotus_news")
 
   describe "creating" do
     it "is creatable by guest" do

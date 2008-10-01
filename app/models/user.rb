@@ -74,7 +74,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :first_name, 
                   :last_name, :terms_of_service, :photo, :location, :about_you,
                   :website, :phone, :address1, :address2, :city, :state, :zip,
-                  :country, :donation_amounts
+                  :country, :donation_amounts, :notify_tips, :notify_pitches, 
+                  :notify_stories, :notify_spotus_news
 
   def self.createable_by?(user)
     true
