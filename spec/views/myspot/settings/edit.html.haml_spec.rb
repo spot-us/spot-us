@@ -21,6 +21,14 @@ describe 'settings/edit' do
     response.should have_password_field_for(:settings_password)
     response.should have_password_field_for(:settings_password_confirmation)
   end
+  
+  it "should have check boxes for email notifications" do
+    do_render
+    response.should have_tag("input[name = ?][type = 'checkbox']", "settings[notify_tips]")
+    response.should have_tag("input[name = ?][type = 'checkbox']", "settings[notify_pitches]")
+    response.should have_tag("input[name = ?][type = 'checkbox']", "settings[notify_stories]")
+    response.should have_tag("input[name = ?][type = 'checkbox']", "settings[notify_spotus_news]")
+  end
 
   address_fields = %w(address1 address2 city state zip)
 
