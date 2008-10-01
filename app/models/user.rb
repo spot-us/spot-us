@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_donated_to(pitch)
-    pitch.donations.find_by_user_id(id).amount
+    pitch.donations.find_all_by_user_id(id).map(&:amount_in_cents).sum.to_dollars
   end
 
   # Encrypts the password with the user salt
