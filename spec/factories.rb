@@ -1,22 +1,21 @@
-Factory.sequence(:email) { |n| "email#{n}@example.com" }
 Factory.sequence(:topic_name) { |n| "Topic #{n}" }
 
 Factory.define :user do |user|
-  user.email { Factory.next(:email) }
+  user.email { random_email_address }
   user.first_name 'Billy'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Citizen')
 end
 
 Factory.define :reporter do |user|
-  user.email { Factory.next(:email) }
+  user.email { random_email_address }
   user.first_name 'Reporter'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Reporter')
 end
 
 Factory.define :organization do |user|
-  user.email { Factory.next(:email) }
+  user.email { random_email_address }
   user.first_name 'News Org'
   user.last_name  'Smith'
   user.add_attribute(:type, 'Organization')
@@ -33,7 +32,7 @@ end
 Factory.define :pitch do |pitch|
   pitch.headline               "Headline"
   pitch.location               { LOCATIONS.first }
-  pitch.requested_amount       100
+  pitch.requested_amount       1000
   pitch.short_description      "lorem ipsum"
   pitch.extended_description   "lorem ipsum"
   pitch.delivery_description   "lorem ipsum"
@@ -53,7 +52,7 @@ end
 Factory.define :donation do |donation|
   donation.association(:user)
   donation.association(:pitch)
-  donation.amount 42
+  donation.amount 10
 end
 
 Factory.define :tip do |tip|
@@ -100,6 +99,32 @@ end
 
 Factory.define :topic do |topic|
   topic.name { Factory.next(:topic_name) }
+end
+
+
+# handy builders ##################################################################################
+
+def create_pitch_with_donations
+  returning Factory(:pitch) do |p|
+    Factory(:donation, :pitch => p)
+    u = Factory :user
+    3.times { Factory(:donation, :pitch => p, :user => u) }
+    p.reload
+  end
+end
+
+
+# helpers for factories ###########################################################################
+
+def random_email_address
+  "#{random_string}@example.com"
+end
+
+def random_string
+  letters = *'a'..'z'
+  random_string_for_uniqueness = ''
+  10.times { random_string_for_uniqueness += letters[rand(letters.size - 1)]}
+  random_string_for_uniqueness
 end
 
 def upload_fixture_file
