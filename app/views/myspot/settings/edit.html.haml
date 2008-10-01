@@ -55,8 +55,25 @@
         .row
           = f.label :password_confirmation, 'Confirm New Password'
           = f.password_field :password_confirmation
-        .clear
+      .clear
 
+      %hr
+      
+      %h3 Email Notifications
+      .span-595.box_yellow
+        .div
+          = f.check_box :notify_tips
+          = f.label     :notify_tips,  "Tips"
+        .div
+          = f.check_box :notify_pitches
+          = f.label     :notify_pitches,  "Pitches"
+        .div
+          = f.check_box :notify_stories
+          = f.label     :notify_stories,  "Stories of Interest"
+        .div
+          = f.check_box :notify_spotus_news
+          = f.label     :notify_spotus_news,  "Spot.Us News"
+      .clear
   
       .double_content_border
 
