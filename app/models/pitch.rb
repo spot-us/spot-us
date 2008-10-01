@@ -5,7 +5,6 @@
 #  id                          :integer(4)      not null, primary key
 #  headline                    :string(255)     
 #  location                    :string(255)     
-#  requested_amount            :string(255)     
 #  state                       :string(255)     
 #  short_description           :text            
 #  delivery_description        :text            
@@ -28,6 +27,7 @@
 #  video_embed                 :string(255)     
 #  featured_image_caption      :string(255)     
 #  user_id                     :integer(4)      
+#  requested_amount_in_cents   :integer(4)      
 #
 
 class Pitch < NewsItem
@@ -39,6 +39,8 @@ class Pitch < NewsItem
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
   validates_presence_of :featured_image_file_name
+  
+  has_dollar_field(:requested_amount)
 
   # Next :accept required because of rails bug: 
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
@@ -47,15 +49,33 @@ class Pitch < NewsItem
 
   has_many :affiliations
   has_many :tips, :through => :affiliations
-  has_many :donations
+  has_many :donations do
+    def for_user(user)
+      find_all_by_user_id(user.id)
+    end
+    
+    def total_amount_in_cents_for_user(user)
+      for_user(user).map(&:amount_in_cents).sum
+    end
+  end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
 
+  MAX_PER_USER_DONATION_PERCENTAGE = 0.20
+  
   def self.createable_by?(user)
     user && user.reporter?
   end
 
   def self.featured
     newest.first
+  end
+  
+  def funding_needed_in_cents
+    requested_amount_in_cents - total_amount_donated.to_cents
+  end  
+  
+  def fully_funded?
+    donations.sum(:amount_in_cents) >= requested_amount_in_cents
   end
 
   def total_amount_donated
@@ -64,5 +84,26 @@ class Pitch < NewsItem
 
   def donated_to?
     donations.any?
+  end
+  
+  def user_can_donate_more?(user, attempted_donation_amount_in_cents)
+    # return false if funding_needed_in_cents == 0
+    return false if attempted_donation_amount_in_cents.nil?
+    return false if attempted_donation_amount_in_cents > funding_needed_in_cents
+    
+    if user.organization?
+      max_donation_amount_in_cents = funding_needed_in_cents
+    else
+      donation_limit_per_user_in_cents = requested_amount_in_cents * MAX_PER_USER_DONATION_PERCENTAGE
+      
+      if funding_needed_in_cents < donation_limit_per_user_in_cents
+        max_donation_amount_in_cents = funding_needed_in_cents
+      else
+        max_donation_amount_in_cents = donation_limit_per_user_in_cents
+      end
+    end
+    
+    user_has_donated_so_far_in_cents = donations.total_amount_in_cents_for_user(user)
+    (user_has_donated_so_far_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents
   end
 end

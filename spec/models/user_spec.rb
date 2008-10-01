@@ -75,7 +75,7 @@ describe User do
 
     it "doesn't send on save" do
       user = Factory(:user)
-      user.email = Factory.next :email
+      user.email = random_email_address
       Mailer.should_not_receive(:deliver_signup_notification).with(user)
       user.save
     end
@@ -113,7 +113,7 @@ describe User do
 
   it "doesn't require password_confirmation on save" do
     user = Factory :user
-    user.email = Factory.next :email
+    user.email = random_email_address
     user.save.should be_true
   end
 
