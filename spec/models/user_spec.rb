@@ -20,6 +20,35 @@ describe User do
       User.createable_by?(nil).should be
     end
   end
+  
+  describe "topics_params=" do
+    it "should create topic associations" do
+      t = Topic.create(:name => "Topic 1")
+      u = Factory(:user)
+      u.topics_params=([t.id])
+      u.reload
+      u.topics.should == [t]      
+    end
+
+    it "should handle record not found gracefully" do
+      u = Factory(:user)
+      u.topics_params=([id])
+      u.reload
+      u.topics.should == []
+    end
+
+    it "should not add duplicate topics" do
+      t = Topic.create(:name => "Topic 1")
+      u = Factory(:user)
+      u.topics_params=([t.id])
+      u.reload
+      u.topics.should == [t]
+      u.topics_params=([t.id])
+      u.reload
+      u.topics.size.should == 1
+      u.topics.should == [t]
+    end
+  end
 
   describe "editing" do
     before(:each) do

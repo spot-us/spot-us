@@ -31,9 +31,8 @@
 #
 
 class NewsItem < ActiveRecord::Base
+  include HasTopics
   belongs_to :user
-  has_many   :topic_memberships, :as => :member
-  has_many   :topics, :through => :topic_memberships
   
   has_attached_file :featured_image, 
                     :styles => { :thumb => '50x50#', :medium => "200x150#" }, 

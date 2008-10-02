@@ -31,7 +31,6 @@
 #
 
 class Pitch < NewsItem
-  include HasTopics
   validates_presence_of :requested_amount
   validates_presence_of :short_description
   validates_presence_of :extended_description
@@ -60,7 +59,6 @@ class Pitch < NewsItem
     end
   end
 
-  
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
@@ -72,8 +70,6 @@ class Pitch < NewsItem
   def self.featured
     newest.first
   end
-  
-
   
   def funding_needed_in_cents
     requested_amount_in_cents - total_amount_donated.to_cents
