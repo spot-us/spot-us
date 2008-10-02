@@ -30,6 +30,7 @@
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
+  include HasTopics
   has_many :donations
   has_many :tips
   has_many :pitches
@@ -75,7 +76,7 @@ class User < ActiveRecord::Base
                   :last_name, :terms_of_service, :photo, :location, :about_you,
                   :website, :phone, :address1, :address2, :city, :state, :zip,
                   :country, :donation_amounts, :notify_tips, :notify_pitches, 
-                  :notify_stories, :notify_spotus_news
+                  :notify_stories, :notify_spotus_news, :topics_params
 
   def self.createable_by?(user)
     true

@@ -51,6 +51,20 @@ describe Pitch do
       p.topics.should == [t]
       p.topics_params=([t.id])
       p.reload
+      p.topics.size.should == 1
+      p.topics.should == [t]
+    end
+    
+    it "should remove topics if they are not part of the values set that comes in" do
+      t = Topic.create(:name => "Topic 1")
+      t2 = Topic.create(:name => "Topic 2")
+      p = Factory(:pitch, :requested_amount => 100)
+      p.topics_params=([t.id, t2.id])
+      p.reload
+      p.topics.should == [t, t2]
+      p.topics_params=([t.id])
+      p.reload
+      p.topics.size.should == 1
       p.topics.should == [t]
     end
   end  
