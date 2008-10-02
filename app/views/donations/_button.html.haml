@@ -4,7 +4,7 @@
   - else
     %div{:id => "inline_donation_form_#{news_item.id}"}
       %div.centered{:id => "donation_button_#{news_item.id}"}
-        - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :update => "inline_donation_form_#{news_item.id}" do |f|
+        - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
           = f.hidden_field :amount
           = f.hidden_field :pitch_id
           = image_submit_tag "donate_25.png"
