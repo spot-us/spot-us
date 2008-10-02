@@ -34,6 +34,12 @@
           = f.select :location, LOCATIONS
         .yellow-spacer-negative
         .row
+          %label{:for => ""}
+            Your Topics of Intest
+        .row
+          = topic_check_boxes(@profile, "profile")
+        .yellow-spacer-negative
+        .row
           = f.label :website
           = f.text_field :website
         .yellow-spacer-negative
