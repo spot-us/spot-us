@@ -14,4 +14,4 @@ topics = [
   "City Infrastructure"
 ]
 
-topics.each { |t| Topic.create_or_update :name => t }
+topics.each_with_index { |t, i| Topic.create_or_update :id => i + 1, :name => t }
