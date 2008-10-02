@@ -17,6 +17,7 @@ describe "/pitches/edit.html.haml" do
     template.expect_render(:partial => "form")
     render "/pitches/edit.html.haml"
   end
+    
 end
 
 
