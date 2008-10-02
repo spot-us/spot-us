@@ -25,6 +25,35 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:tips) }
   it { Factory(:pitch).should have_many(:donations) }
   it { Factory(:pitch).should have_many(:supporters)}
+  it { Factory(:pitch).should have_many(:topics)}
+  
+  describe "topics_params=" do
+    it "should create topic associations" do
+      t = Topic.create(:name => "Topic 1")
+      p = Factory(:pitch, :requested_amount => 100)
+      p.topics_params=([t.id])
+      p.reload
+      p.topics.should == [t]      
+    end
+    
+    it "should handle record not found gracefully" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.topics_params=([id])
+      p.reload
+      p.topics.should == []
+    end
+    
+    it "should not add duplicate topics" do
+      t = Topic.create(:name => "Topic 1")
+      p = Factory(:pitch, :requested_amount => 100)
+      p.topics_params=([t.id])
+      p.reload
+      p.topics.should == [t]
+      p.topics_params=([t.id])
+      p.reload
+      p.topics.should == [t]
+    end
+  end  
   
   describe "funding_needed_in_cents" do
     it "is equal to requested amount initially" do
