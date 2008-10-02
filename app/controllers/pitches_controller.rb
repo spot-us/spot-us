@@ -12,7 +12,7 @@ class PitchesController < ApplicationController
   end
   
   protected
-  
+    
   def can_create?
     access_denied unless Pitch.createable_by?(current_user)
   end

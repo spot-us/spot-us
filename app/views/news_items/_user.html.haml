@@ -6,7 +6,9 @@
     by
     = link_to(h(news_item.user.full_name), profile_path(news_item.user))
   .reg-line-height
-    Filed in TOPICS
+    - if news_item.topics.any?
+      Filed in
+      = show_topics(news_item)
   .reg-line-height
     Located in
     = h news_item.user.location
