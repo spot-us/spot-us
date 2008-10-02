@@ -18,6 +18,12 @@
     .clear
     .block-spacer-negative
     %p
+    - if @pitch.video_embed
+      %h3 Video
+      .double_content_border
+      = sanitize @pitch.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+    .block-spacer-negative
+    %p
       %h3 Deliverables
       .double_content_border
       .alt-spotus= h @pitch.delivery_description
@@ -54,4 +60,5 @@
     = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
 .clear
 .block-spacer
+
 
