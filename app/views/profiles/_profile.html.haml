@@ -7,6 +7,11 @@
 - unless @profile.website.blank?
   %p 
     = link_to(h(@profile.website), @profile.website)
+- if @profile.topics.any?
+  %p.reg-line-height
+    = h @profile.first_name 
+    has shown interest in 
+    = show_topics(@profile)
 %hr
 
 %h3

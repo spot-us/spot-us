@@ -1,3 +1,5 @@
+- model_name = model ? model : resource.class.to_s.downcase
+
 .div
-  = check_box_tag "#{resource.class.to_s.downcase}[topics_params][]", topic.id, resource.topics.include?(topic)
+  = check_box_tag "#{model_name}[topics_params][]", topic.id, resource.topics.include?(topic)
   = label_tag "#{topic.name}"
