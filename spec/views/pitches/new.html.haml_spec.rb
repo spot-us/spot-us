@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/pitches/new.html.haml" do
   include PitchesHelper
+  include ApplicationHelper
   
   before(:each) do
     @pitch = stub_model(Pitch)
