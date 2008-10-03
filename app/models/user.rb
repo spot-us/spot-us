@@ -82,14 +82,20 @@ class User < ActiveRecord::Base
                   :country, :donation_amounts, :notify_tips, :notify_pitches, 
                   :notify_stories, :notify_spotus_news, :topics_params
 
-  def self.createable_by?(user)
-    true
+  def citizen?
+    self.is_a? Citizen
+  end
+  
+  def reporter?
+    self.is_a? Reporter
   end
 
-  [Citizen, Reporter, Organization].each do |user_class|
-    define_method :"#{user_class.to_s.underscore}?" do
-      self.is_a? user_class
-    end
+  def organization?
+    self.is_a? Organization
+  end
+
+  def self.createable_by?(user)
+    true
   end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
