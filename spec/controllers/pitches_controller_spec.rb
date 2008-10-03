@@ -51,10 +51,10 @@ describe PitchesController do
       end
     end
 
-    describe "with donations" do
+    describe "with a paid donation" do
       it "renders edit" do
         controller.stub!(:can_edit?).and_return(true)
-        donation = Factory(:donation)
+        donation = Factory(:donation, :paid => true)
         get :edit, :id => donation.pitch.to_param
         response.should redirect_to(pitch_url(donation.pitch))
         flash[:error].should match(/cannot edit a pitch that has donations/i)

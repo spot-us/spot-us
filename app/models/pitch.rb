@@ -29,9 +29,26 @@
 #  user_id                     :integer(4)      
 #  requested_amount_in_cents   :integer(4)      
 #  current_funding_in_cents    :integer(4)      default(0)
+#  status                      :string(255)     default("active")
 #
 
 class Pitch < NewsItem
+  include AASM
+  aasm_column :status
+  aasm_initial_state  :active
+  
+  aasm_state :active
+  aasm_state :accepted
+  aasm_state :funded
+  
+  aasm_event :fund do
+    transitions :from => :active, :to => :funded
+  end
+  
+  aasm_event :accept do
+    transitions :from => :active, :to => :accepted
+  end
+  
   validates_presence_of :requested_amount
   validates_presence_of :short_description
   validates_presence_of :extended_description
@@ -62,8 +79,13 @@ class Pitch < NewsItem
   end
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
+  before_save :check_if_funded_state
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
+  
+  def check_if_funded_state
+    fund! if fully_funded? && active?
+  end
   
   def self.createable_by?(user)
     user && user.reporter?
@@ -78,22 +100,22 @@ class Pitch < NewsItem
   end  
   
   def fully_funded?
-    donations.sum(:amount_in_cents) >= requested_amount_in_cents
+    donations.paid.sum(:amount_in_cents) >= requested_amount_in_cents
   end
 
   def total_amount_donated
-    donations.sum(:amount_in_cents).to_dollars
+    donations.paid.sum(:amount_in_cents).to_dollars
   end
 
   def donated_to?
-    donations.any?
+    donations.paid.any?
   end
   
   def user_can_donate_more?(user, attempted_donation_amount_in_cents)
     # return false if funding_needed_in_cents == 0
     return false if attempted_donation_amount_in_cents.nil?
     return false if attempted_donation_amount_in_cents > funding_needed_in_cents
-    
+
     if user.organization?
       max_donation_amount_in_cents = funding_needed_in_cents
     else
@@ -106,7 +128,7 @@ class Pitch < NewsItem
       end
     end
     
-    user_has_donated_so_far_in_cents = donations.total_amount_in_cents_for_user(user)
+    user_has_donated_so_far_in_cents = donations.paid.total_amount_in_cents_for_user(user)
     (user_has_donated_so_far_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents
   end
 end

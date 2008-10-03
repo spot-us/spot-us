@@ -10,3 +10,5 @@
     = number_to_currency(pitch.requested_amount)
   %td.actions
     .action= link_to "Edit", edit_pitch_url(pitch)
+    - unless pitch.accepted?
+      .action= link_to "Accept", accept_myspot_pitch_url(pitch), :method => :put, :confirm => "Are you sure you want to accept this pitch, even though it isn't fully funded?"

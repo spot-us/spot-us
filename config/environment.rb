@@ -13,10 +13,9 @@ else
 end
 
 Rails::Initializer.run do |config|
-  config.gem "haml"#, :version => 2.0.3
-  config.gem 'thoughtbot-factory_girl',
-             :lib => 'factory_girl',
-             :source => 'http://gems.github.com'
+  config.gem "haml"
+  config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
+  config.gem "rubyist-aasm", :lib => "aasm", :source => 'http://gems.github.com'
   
   config.time_zone = 'UTC'
   
