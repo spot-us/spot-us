@@ -29,6 +29,7 @@
 #  user_id                     :integer(4)      
 #  requested_amount_in_cents   :integer(4)      
 #  current_funding_in_cents    :integer(4)      default(0)
+#  status                      :string(255)     default("active")
 #
 
 class Tip < NewsItem

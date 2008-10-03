@@ -28,6 +28,33 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
   
+  describe "states of a pitch" do
+    it "should have a state of active when it is first created" do
+      pitch = Factory(:pitch)
+      pitch.active?.should be_true
+    end
+    
+    it "should have a state of funded when total donations reaches requested amount" do
+      pitch = Factory(:pitch, :requested_amount => 100)
+      user = Factory(:organization)
+      donation = Factory(:donation, :pitch => pitch, :user => user, :amount => 100)
+
+      lambda {
+        Factory(:purchase, :donations => [donation], :user => user)
+        pitch.reload
+      }.should change {pitch.funded?}.from(false).to(true)
+    end
+        
+     it "should have state of accepted when the reporter accepts an amount less than the requested amount" do
+       pitch = Factory(:pitch)
+       Factory(:donation, :pitch => pitch, :amount => 25)
+       lambda {
+         pitch.accept!
+         pitch.reload
+       }.should change {pitch.accepted?}.from(false).to(true)
+     end
+  end
+  
   describe "most funded" do
     before(:each) do
       @p = Factory(:pitch, :requested_amount => 100)
@@ -112,19 +139,16 @@ describe Pitch do
     
     it "subtracts donations appropriately" do
       p = Factory(:pitch, :requested_amount => 100)
-      Factory(:donation, :pitch => p, :amount => 20)
+      Factory(:donation, :pitch => p, :amount => 20, :paid => true)
       p.funding_needed_in_cents.should == 80.to_cents
     end
   end
   
   describe "fully_funded?" do
     it "should return true when total donations equals requested amount" do
-      pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
-      Factory(:donation, :pitch => pitch, :amount => 20)
-      Factory(:donation, :pitch => pitch, :amount => 20)
-      Factory(:donation, :pitch => pitch, :amount => 20)
-      Factory(:donation, :pitch => pitch, :amount => 20)
-      Factory(:donation, :pitch => pitch, :amount => 20)
+      user = Factory(:organization)
+      pitch = Factory(:pitch, :user => user, :requested_amount => 100)
+      Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :paid => true)
       pitch.fully_funded?.should be_true
     end
   end
@@ -166,8 +190,8 @@ describe Pitch do
       end
     
       it "return false if the user's total donations + total trying to donate is > 20% of the requested amount" do
-        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10)
-        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10)
+        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :paid => true)
+        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :paid => true)
         @pitch.reload
         @pitch.user_can_donate_more?(@user, 10.to_cents).should be_false
       end
@@ -262,7 +286,7 @@ describe Pitch do
   describe "a pitch with donations" do
     before(:each) do
       @pitch = Factory(:pitch)
-      @donation = Factory(:donation, :pitch => @pitch)
+      @donation = Factory(:donation, :pitch => @pitch, :paid => true)
       @pitch.reload
     end
   
@@ -276,7 +300,7 @@ describe Pitch do
       Factory(:donation, :pitch=> @pitch, :amount => 1)
   
       @pitch.reload
-      @pitch.total_amount_donated.to_f.should == @pitch.donations.map(&:amount).map(&:to_f).sum
+      @pitch.total_amount_donated.to_f.should == @pitch.donations.paid.map(&:amount).map(&:to_f).sum
     end
   end
   
