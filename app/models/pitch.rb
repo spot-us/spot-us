@@ -83,6 +83,14 @@ class Pitch < NewsItem
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
   
+  def can_be_accepted?
+    active?
+  end
+  
+  def can_be_edited?
+    donations.paid.blank? && active?
+  end
+  
   def check_if_funded_state
     fund! if fully_funded? && active?
   end
