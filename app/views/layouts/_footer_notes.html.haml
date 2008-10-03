@@ -13,20 +13,13 @@
       %span.pledge_another_amount.small Or pledge another amount &raquo;
   
   .span-6
-    %h3 Almost Funded
+    %h3 Most Funded
     .double_footer_border
-    %p 
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"
-    %p.clear 
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"
-    %p.clear 
-      %img{:src =>"../images/spotus_thumb_sample.jpg"}
-      PITCH:
-      = link_to "Bay Area Political Advertisement Tactical Unit", "#"
+    - for pitch in Pitch.most_funded.top_three
+      %p.clear
+        = link_to image_tag(pitch.featured_image.url(:thumb)), pitch
+        = pitch.class.name.upcase + ':'
+        = link_to pitch.headline, pitch
   
   .span-6
     %h3 Newest Items

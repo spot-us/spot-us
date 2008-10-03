@@ -24,10 +24,11 @@
 #  featured_image_file_size    :integer(4)      
 #  featured_image_updated_at   :datetime        
 #  type                        :string(255)     
-#  video_embed                 :string(255)     
+#  video_embed                 :text            
 #  featured_image_caption      :string(255)     
 #  user_id                     :integer(4)      
 #  requested_amount_in_cents   :integer(4)      
+#  current_funding_in_cents    :integer(4)      default(0)
 #
 
 class Tip < NewsItem

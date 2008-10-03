@@ -24,10 +24,11 @@
 #  featured_image_file_size    :integer(4)      
 #  featured_image_updated_at   :datetime        
 #  type                        :string(255)     
-#  video_embed                 :string(255)     
+#  video_embed                 :text            
 #  featured_image_caption      :string(255)     
 #  user_id                     :integer(4)      
 #  requested_amount_in_cents   :integer(4)      
+#  current_funding_in_cents    :integer(4)      default(0)
 #
 
 class Pitch < NewsItem
@@ -41,6 +42,7 @@ class Pitch < NewsItem
   validates_presence_of :featured_image_file_name
   
   has_dollar_field(:requested_amount)
+  has_dollar_field(:current_funding)
 
   # Next :accept required because of rails bug: 
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
@@ -58,7 +60,7 @@ class Pitch < NewsItem
       for_user(user).map(&:amount_in_cents).sum
     end
   end
-
+  named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
