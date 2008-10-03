@@ -26,14 +26,14 @@ describe Donation do
       describe "should be invaild and add an error" do
         it "if the pitch is fully funded" do
           pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
-          Factory(:donation, :pitch => pitch, :amount => 20)
-          Factory(:donation, :pitch => pitch, :amount => 20)
-          Factory(:donation, :pitch => pitch, :amount => 20)
-          Factory(:donation, :pitch => pitch, :amount => 20)
-          Factory(:donation, :pitch => pitch, :amount => 20)
+          Factory(:donation, :pitch => pitch, :amount => 20, :paid => true)
+          Factory(:donation, :pitch => pitch, :amount => 20, :paid => true)
+          Factory(:donation, :pitch => pitch, :amount => 20, :paid => true)
+          Factory(:donation, :pitch => pitch, :amount => 20, :paid => true)
+          Factory(:donation, :pitch => pitch, :amount => 20, :paid => true)
           pitch.reload
 
-          donation = Factory.build(:donation, :pitch => pitch, :user => Factory(:user), :amount => 1)
+          donation = Factory.build(:donation, :pitch => pitch, :user => Factory(:user), :amount => 1, :paid => true)
           donation.should_not be_valid
           donation.errors.full_messages.first.should =~ /fully funded/
           donation.should have(1).error_on(:base)
@@ -42,7 +42,7 @@ describe Donation do
          it "if user's total donations + the new donation is >= 20% of the pitches requested amount" do
            user = Factory(:user)
            pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
-           Factory(:donation, :pitch => pitch, :user => user, :amount => 100)
+           Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :paid => true)
            donation = Factory.build(:donation, :pitch => pitch, :user => user, :amount => 101)
            pitch.reload
            donation.should_not be_valid
