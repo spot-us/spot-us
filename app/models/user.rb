@@ -26,6 +26,10 @@
 #  zip                       :string(255)     
 #  phone                     :string(255)     
 #  country                   :string(255)     
+#  notify_tips               :boolean(1)      
+#  notify_pitches            :boolean(1)      
+#  notify_stories            :boolean(1)      
+#  notify_spotus_news        :boolean(1)      
 #
 
 require 'digest/sha1'
