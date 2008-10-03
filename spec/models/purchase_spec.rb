@@ -24,6 +24,26 @@ describe Purchase do
   requires_presence_of(Purchase, :credit_card_type)
   requires_presence_of(Purchase, :verification_value)
   
+  describe "when a purchase happens" do
+    before(:each) do
+      @pitch = Factory(:pitch)
+      @user = Factory(:user)
+      @donation = Factory(:donation, :pitch => @pitch, :user => @user, :amount => 25)
+    end
+    
+    it "should update current_funding for a pitch when donation is paid" do
+      lambda {
+        f = Factory(:purchase, :user => @user, :donations => [@donation])
+        @pitch.reload
+      }.should change {@pitch.current_funding_in_cents}.from(0).to(25.to_cents)
+    end
+    
+    it "should not update current_funding for a pitch if the donation has not been purchased" do
+      @pitch.reload
+      @pitch.current_funding_in_cents.should == 0
+    end
+  end
+  
   it "should have a gateway" do
     Purchase.gateway.should_not be_nil
     Purchase.gateway.should be_instance_of(ActiveMerchant::Billing::BogusGateway)

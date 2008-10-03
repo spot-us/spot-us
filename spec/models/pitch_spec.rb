@@ -20,12 +20,47 @@ describe Pitch do
   requires_presence_of Pitch, :skills
   requires_presence_of Pitch, :keywords
   requires_presence_of Pitch, :featured_image_caption
+  
 
   it { Factory(:pitch).should have_many(:affiliations) }
   it { Factory(:pitch).should have_many(:tips) }
   it { Factory(:pitch).should have_many(:donations) }
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
+  
+  describe "most funded" do
+    before(:each) do
+      @p = Factory(:pitch, :requested_amount => 100)
+      @p2 = Factory(:pitch, :requested_amount => 100)
+      @p3 = Factory(:pitch, :requested_amount => 100)
+      @d = Factory(:donation, :pitch => @p, :amount => 3, :paid => true)
+      @da = Factory(:donation, :pitch => @p, :amount => 3, :paid => :true)
+      @d2 = Factory(:donation, :pitch => @p2, :amount => 20, :paid => :true)
+      @d3 = Factory(:donation, :pitch => @p3, :amount => 10, :paid => true)
+    end
+    
+    it "should return a list of pitches ordered by the funding" do
+      @p.reload
+      @p2.reload
+      @p3.reload
+      Pitch.most_funded == [@p2, @p3, @p]
+    end
+  end
+  
+  describe "current_funding" do
+    it "should be 0 on a pitch when a donation is added" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3)
+      p.current_funding_in_cents.should == 0
+    end
+    
+    it "should equal the donation amount when a donation is paid" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3)
+      purch = Factory(:purchase, :donations => [d])
+      p.current_funding_in_cents.should == 300
+    end
+  end
   
   describe "topics_params=" do
     it "should create topic associations" do

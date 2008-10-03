@@ -71,6 +71,9 @@ class Purchase < ActiveRecord::Base
       donation.purchase = self
       donation.paid = true
       donation.save!
+
+      donation.pitch.current_funding_in_cents += donation.amount_in_cents
+      donation.pitch.save
     end
   end
 
