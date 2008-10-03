@@ -28,6 +28,36 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
   
+  describe "can_be_edited?" do
+    it "should return false when pitch has paid donations" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
+      p.reload
+      p.can_be_edited?.should be_false
+    end
+    
+    it "should return false when pitch has been accepted" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.accept!
+      p.can_be_edited?.should be_false
+    end
+
+  end
+  
+  describe "can_be_accepted?" do
+    it "should return true when the state is active" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.can_be_accepted?.should be_true
+    end
+    
+    it "should not be true if the state is not active" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.fund!
+      p.can_be_accepted?.should be_false
+    end    
+  end
+  
+  
   describe "states of a pitch" do
     it "should have a state of active when it is first created" do
       pitch = Factory(:pitch)
