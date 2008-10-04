@@ -1,5 +1,21 @@
 Factory.sequence(:topic_name) { |n| "Topic #{n}" }
 
+Factory.define :credential do |credential|
+  credential.add_attribute(:type, 'Job')
+  credential.title "Credential"
+  credential.url "http://spot.us/"
+  credential.description "Description"
+  credential.association(:user)
+end
+
+Factory.define :job do |job|
+  job.add_attribute(:type, 'Job')
+  job.title "Job"
+  job.url "http://spot.us/"
+  job.description "Job Description"
+  job.association(:user)
+end
+
 Factory.define :user do |user|
   user.email { random_email_address }
   user.first_name 'Billy'
