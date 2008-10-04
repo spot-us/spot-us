@@ -1,20 +1,15 @@
 class DonationsController < ApplicationController
-
   before_filter :login_required
-  skip_before_filter :verify_authenticity_token
   resources_controller_for :donations, :only => :create
 
-  def create
-    self.resource = new_resource
-
-    respond_to do |format|
-      if resource.save
-        format.js { render :action => "create" }
-      else
-        format.js { render :action => "new"}
-      end
+  response_for :create do |format|
+    if resource_saved?
+      format.js
+    else
+      format.js { render :action => "new"}
     end
   end
+
   
   protected
 
