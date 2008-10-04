@@ -104,10 +104,12 @@ class Pitch < NewsItem
   end
   
   def funding_needed_in_cents
+    return 0 unless active?
     requested_amount_in_cents - total_amount_donated.to_cents
   end  
   
   def fully_funded?
+    return true if accepted?
     donations.paid.sum(:amount_in_cents) >= requested_amount_in_cents
   end
 
