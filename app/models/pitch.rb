@@ -46,7 +46,7 @@ class Pitch < NewsItem
   end
   
   aasm_event :accept do
-    transitions :from => :active, :to => :accepted
+    transitions :from => :active, :to => :accepted, :on_transition => :send_accept_notification
   end
   
   validates_presence_of :requested_amount
@@ -89,6 +89,10 @@ class Pitch < NewsItem
   
   def can_be_edited?
     donations.paid.blank? && active?
+  end
+  
+  def send_accept_notification
+    Mailer.deliver_pitch_accepted_notification(self)
   end
   
   def check_if_funded_state
