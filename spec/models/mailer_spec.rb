@@ -35,5 +35,12 @@ describe Mailer do
       Mailer.deliver_password_reset_notification(@user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
   end
+  
+  it "send an email on pitch accepted" do
+    pitch = stub_model(Pitch)
+    lambda do 
+      Mailer.deliver_pitch_accepted_notification(pitch)
+    end.should change {ActionMailer::Base.deliveries.size }.by(1)
+  end
 
 end

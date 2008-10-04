@@ -85,6 +85,15 @@ describe Pitch do
      end
   end
   
+  describe "email notifications" do
+    it "should deliver an email when the pitch is accepted!" do
+      pitch = Factory(:pitch)
+       lambda {
+         pitch.accept!
+       }.should change { ActionMailer::Base.deliveries.size }.by(1)
+    end
+  end
+  
   describe "most funded" do
     before(:each) do
       @p = Factory(:pitch, :requested_amount => 100)
