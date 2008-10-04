@@ -172,6 +172,18 @@ describe Pitch do
       Factory(:donation, :pitch => p, :amount => 20, :paid => true)
       p.funding_needed_in_cents.should == 80.to_cents
     end
+    
+    it "is 0 when a pitch is accepted" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.accept!
+      p.funding_needed_in_cents.should == 0.to_cents
+    end
+    
+    it "is 0 when a pitch is fully_funded" do
+      p = Factory(:pitch, :requested_amount => 100)
+      p.fund!
+      p.funding_needed_in_cents.should == 0.to_cents
+    end
   end
   
   describe "fully_funded?" do
@@ -179,6 +191,12 @@ describe Pitch do
       user = Factory(:organization)
       pitch = Factory(:pitch, :user => user, :requested_amount => 100)
       Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :paid => true)
+      pitch.fully_funded?.should be_true
+    end
+    
+    it "should return true when a pitch is accepted" do
+      pitch = Factory(:pitch, :requested_amount => 100)
+      pitch.accept!
       pitch.fully_funded?.should be_true
     end
   end
