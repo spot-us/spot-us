@@ -30,6 +30,7 @@
 #  notify_pitches            :boolean(1)      
 #  notify_stories            :boolean(1)      
 #  notify_spotus_news        :boolean(1)      
+#  fact_check_interest       :boolean(1)      not null
 #
 
 class Reporter < User

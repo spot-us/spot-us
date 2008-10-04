@@ -32,6 +32,11 @@
         .row
           = f.label :location
           = f.select :location, LOCATIONS
+        - if @profile.is_a?(Reporter)
+          .yellow-spacer-negative
+          .row
+            = f.label :fact_check_interest, "I am interested in being a Fact-Check Editor"
+            = f.check_box :fact_check_interest
         .yellow-spacer-negative
         .row
           %label{:for => ""}

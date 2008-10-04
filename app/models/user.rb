@@ -30,6 +30,7 @@
 #  notify_pitches            :boolean(1)      
 #  notify_stories            :boolean(1)      
 #  notify_spotus_news        :boolean(1)      
+#  fact_check_interest       :boolean(1)      not null
 #
 
 require 'digest/sha1'
@@ -76,11 +77,11 @@ class User < ActiveRecord::Base
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :password, :password_confirmation, :first_name, 
-                  :last_name, :terms_of_service, :photo, :location, :about_you,
-                  :website, :phone, :address1, :address2, :city, :state, :zip,
-                  :country, :donation_amounts, :notify_tips, :notify_pitches, 
-                  :notify_stories, :notify_spotus_news, :topics_params
+  attr_accessible :about_you, :address1, :address2, :city, :country,
+    :donation_amounts, :email, :fact_check_interest, :first_name, :last_name,
+    :location, :notify_pitches, :notify_spotus_news, :notify_stories,
+    :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
+    :terms_of_service, :topics_params, :website, :zip
 
   def citizen?
     self.is_a? Citizen
