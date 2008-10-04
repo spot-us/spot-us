@@ -19,6 +19,18 @@
 #  location                  :string(255)     
 #  about_you                 :text            
 #  website                   :string(255)     
+#  address1                  :string(255)     
+#  address2                  :string(255)     
+#  city                      :string(255)     
+#  state                     :string(255)     
+#  zip                       :string(255)     
+#  phone                     :string(255)     
+#  country                   :string(255)     
+#  notify_tips               :boolean(1)      
+#  notify_pitches            :boolean(1)      
+#  notify_stories            :boolean(1)      
+#  notify_spotus_news        :boolean(1)      
+#  fact_check_interest       :boolean(1)      not null
 #
 
 class Citizen < User

@@ -73,6 +73,17 @@ describe 'profiles/edit' do
     do_render
   end
 
+  describe "for a reporter" do
+    before do
+      assigns[:profile] = Reporter.new
+      do_render
+    end
+
+    it "has a check box for fact-check editor interest" do
+      response.should have_tag("input[name = ?][type = 'checkbox']", "profile[fact_check_interest]")
+    end
+  end
+
   def do_render
     render 'myspot/profiles/edit'
   end
