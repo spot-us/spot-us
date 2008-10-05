@@ -1,0 +1,22 @@
+%h2 My Spot
+
+= render :partial => "myspot/nav"
+
+.span-715.box_white
+  = render :partial => "myspot/profile_nav"
+  
+  - remote_form_for [:myspot, :profile, @job] do |f|
+    = f.text_field :title
+    %br
+    = f.text_field :url
+    %br
+    = f.text_area :description
+    %br
+    = f.submit
+  
+  %br
+  %br
+  %hr
+  #history
+    = render :partial => @jobs
+
