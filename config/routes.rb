@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.root :controller => 'homes', :action => 'show'
 
   map.resources :news_items
@@ -25,14 +24,16 @@ ActionController::Routing::Routes.draw do |map|
                          :controller  => 'myspot/donation_amounts'
 
   map.namespace :myspot do |myspot|
-    myspot.resource :profile
-    myspot.resource :settings
-    myspot.resources :purchases
-    myspot.resources :donations
-    myspot.resources :pledges
-    myspot.resources :tips
-    myspot.resources :pitches, :member => {:accept => :put}
-  end
+    myspot.resource :profile do |profile|
+      profile.resources :jobs
+    end
 
+    myspot.resource :settings
+    myspot.resources :donations
+    myspot.resources :pitches, :member => {:accept => :put}
+    myspot.resources :pledges
+    myspot.resources :purchases
+    myspot.resources :tips
+  end
 end
 
