@@ -1,6 +1,3 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   include AuthenticatedSystem
@@ -9,8 +6,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
+  
+  map_resource :profile, :singleton => true, :class => User, :find => :current_user
 
-  protect_from_forgery # :secret => '5e89a8607a729450f876d58cf6d92b8b'
+  protect_from_forgery
 
   def start_story_path
     if logged_in? && Reporter === current_user

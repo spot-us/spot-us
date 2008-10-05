@@ -1,0 +1,1 @@
+page[@job].visual_effect :fade
