@@ -1,0 +1,8 @@
+- div_for job do
+  %div{:style => 'background-color: #f5f5f5;'}
+    %h3= job.title
+    %p= link_to job.url, job.url
+    %p= job.description
+  %p{:style => "float: right"}= link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, job], :method => :delete
+  .clear
+
