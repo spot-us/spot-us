@@ -1,5 +1,11 @@
 class PagesController < ApplicationController
-  PAGES = %w(about terms press contact).freeze
+  PAGES = %w(
+    about
+    contact
+    press
+    reporter_contract
+    terms
+  ).freeze
 
   def show
     if PAGES.include?(params[:id])
