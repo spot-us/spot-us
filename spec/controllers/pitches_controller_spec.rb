@@ -56,7 +56,7 @@ describe PitchesController do
         controller.stub!(:can_edit?).and_return(true)
         donation = Factory(:donation, :paid => true)
         get :edit, :id => donation.pitch.to_param
-        response.should redirect_to(pitch_url(donation.pitch))
+        response.should redirect_to(pitch_path(donation.pitch))
         flash[:error].should match(/cannot edit a pitch that has donations/i)
       end
     end

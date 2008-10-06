@@ -365,11 +365,11 @@ describe User do
 
     it "should add an error to base" do
       do_update
-      @user.should have(1).error_on(:base)
+      @user.should have_at_least(1).error_on(:base)
     end
 
     def do_update
-      @user.donation_amounts = { @donation.id => -1 }
+      @user.donation_amounts = { @donation.id => nil }
       @user.save
       @donation.reload
     end

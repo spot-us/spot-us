@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/spec_helper'
+require File.dirname(__FILE__) + '/../spec_helper'
 
 # dummy class on which to test, just uses users table to avoid errors
 class TestDollars < ActiveRecord::Base
