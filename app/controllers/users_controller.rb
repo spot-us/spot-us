@@ -3,11 +3,17 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    # protects against session fixation attacks, wreaks havoc with 
-    # request forgery protection.
-    # uncomment at your own risk
-    # reset_session
-    @user = User.new(params[:user])
+
+    opt_in_defaults = {
+      :notify_tips => true,
+      :notify_pitches => true,
+      :notify_stories => true,
+      :notify_spotus_news => true
+    }
+    
+    user_attributes = params[:user].merge(opt_in_defaults)
+
+    @user = User.new(user_attributes)
     @user.type = params[:user][:type]
     if @user.save
       @user = User.find(@user.to_param)
@@ -18,4 +24,3 @@ class UsersController < ApplicationController
     end
   end
 end
-
