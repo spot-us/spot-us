@@ -1,6 +1,6 @@
 unless Rails.env.production?
   testing_users = [
-    %w(David Cohn david@spot.us),
+    %w(David Cohn dcohn1@gmail.com),
     %w(Desi McAdam desi@hashrocket.com),
     %w(Jon Larkowski lark@hashrocket.com)
   ]
