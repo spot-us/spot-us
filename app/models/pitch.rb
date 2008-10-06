@@ -53,7 +53,6 @@ class Pitch < NewsItem
   validates_presence_of :short_description
   validates_presence_of :extended_description
   validates_presence_of :delivery_description
-  validates_presence_of :keywords
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
   validates_presence_of :featured_image_file_name
