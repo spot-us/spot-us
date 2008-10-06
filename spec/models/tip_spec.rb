@@ -6,7 +6,6 @@ describe Tip do
   
   requires_presence_of Tip, :short_description
   requires_presence_of Tip, :user
-  requires_presence_of Tip, :keywords
   requires_presence_of Tip, :pledge_amount
 
   it {Factory(:tip).should have_many(:supporters)}
