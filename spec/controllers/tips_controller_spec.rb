@@ -15,6 +15,10 @@ describe TipsController do
   end
 
   describe "on GET to /tips/1/edit" do
+    before do
+      login_as Factory(:user)
+    end
+
     describe "without pledges" do
       it "renders edit" do
         controller.stub!(:can_edit?).and_return(true)
@@ -24,12 +28,13 @@ describe TipsController do
       end
     end
 
-    describe "with a paid donation" do
+    describe "with a pledge" do
       it "renders edit" do
         controller.stub!(:can_edit?).and_return(true)
         t = Factory :tip
+        p = Factory :pledge, :tip => t
         get :edit, :id => t.to_param
-        response.should redirect_to(tip_url(t))
+        response.should redirect_to(tip_path(t))
         flash[:error].should match(/cannot edit a tip that has pledges/i)
       end
     end
