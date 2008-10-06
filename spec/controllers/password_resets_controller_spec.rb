@@ -32,13 +32,14 @@ describe PasswordResetsController do
 
   describe "handling POST create for an existing email" do
     before do
-      @user = Factory(:user, :email => 'user@example.com')
+      @random_email_address = random_email_address
+      @user = Factory(:user, :email => @random_email_address)
       @old_crypted_password = @user.crypted_password
     end
 
     it "should redirect to the login page" do
       do_create
-      response.should redirect_to(new_session_url)
+      response.should redirect_to(new_session_path)
     end
 
     it "should set a success flash message" do
@@ -58,7 +59,7 @@ describe PasswordResetsController do
     end
 
     def do_create
-      post :create, :email => 'user@example.com'
+      post :create, :email => @random_email_address
     end
   end
 
