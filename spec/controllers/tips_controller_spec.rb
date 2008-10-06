@@ -14,6 +14,27 @@ describe TipsController do
     end
   end
 
+  describe "on GET to /tips/1/edit" do
+    describe "without pledges" do
+      it "renders edit" do
+        controller.stub!(:can_edit?).and_return(true)
+        t = Factory :tip
+        get :edit, :id => t.to_param
+        response.should render_template(:edit)
+      end
+    end
+
+    describe "with a paid donation" do
+      it "renders edit" do
+        controller.stub!(:can_edit?).and_return(true)
+        t = Factory :tip
+        get :edit, :id => t.to_param
+        response.should redirect_to(tip_url(t))
+        flash[:error].should match(/cannot edit a tip that has pledges/i)
+      end
+    end
+  end
+
   describe "when can't edit" do
     before(:each) do
       tip = Factory(:tip)
