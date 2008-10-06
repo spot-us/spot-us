@@ -115,7 +115,7 @@ describe Donation do
     end
   end
   it "should not allow negative values for donations" do
-    donation = Factory.build(:donation, :amount => -1)
+    donation = Factory.build(:donation, :amount => nil)
     donation.should_not be_valid
     donation.should have(1).error_on(:amount_in_cents)
   end

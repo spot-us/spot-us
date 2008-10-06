@@ -29,8 +29,7 @@ describe 'myspot/donation_amounts/edit' do
   end
 
   it "should display error messages when available" do
-    @user.donation_amounts = { @donations.first.id => -1 }
-    @user.save
+    @user.stub!(:errors).and_return(["oh hai"])
     template.should_receive(:content_for).with(:error).once
     do_render
   end
