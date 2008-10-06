@@ -1,0 +1,62 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Type</th>
+    <th>Photo file name</th>
+    <th>Photo content type</th>
+    <th>Photo file size</th>
+    <th>Location</th>
+    <th>About you</th>
+    <th>Website</th>
+    <th>Address1</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Phone</th>
+    <th>Country</th>
+    <th>Notify tips</th>
+    <th>Notify pitches</th>
+    <th>Notify stories</th>
+    <th>Notify spotus news</th>
+    <th>Fact check interest</th>
+  </tr>
+
+<% for user in @users %>
+  <tr>
+    <td><%=h user.email %></td>
+    <td><%=h user.first_name %></td>
+    <td><%=h user.last_name %></td>
+    <td><%=h user.type %></td>
+    <td><%=h user.photo_file_name %></td>
+    <td><%=h user.photo_content_type %></td>
+    <td><%=h user.photo_file_size %></td>
+    <td><%=h user.location %></td>
+    <td><%=h user.about_you %></td>
+    <td><%=h user.website %></td>
+    <td><%=h user.address1 %></td>
+    <td><%=h user.address2 %></td>
+    <td><%=h user.city %></td>
+    <td><%=h user.state %></td>
+    <td><%=h user.zip %></td>
+    <td><%=h user.phone %></td>
+    <td><%=h user.country %></td>
+    <td><%=h user.notify_tips %></td>
+    <td><%=h user.notify_pitches %></td>
+    <td><%=h user.notify_stories %></td>
+    <td><%=h user.notify_spotus_news %></td>
+    <td><%=h user.fact_check_interest %></td>
+    <td><%= link_to 'Show', admin_user_path(user) %></td>
+    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+    <td><%= link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user', new_admin_user_path %>
