@@ -5,7 +5,7 @@
       = f.text_area :headline, :rows => 2
     .yellow-spacer-negative
     .row
-      = f.label :short_description, "Short Description"
+      = f.label :short_description, "Why would someone care?<br />Explain the story!"
       = f.text_area :short_description, :rows => 11
     .row
       .form_hint.small
@@ -26,13 +26,11 @@
       = f.text_field :pledge_amount
     .yellow-spacer-negative
     .row
-      = f.label :keyword, "Keywords" + "<br/><span class='small quieter'> Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>"
+      = f.label :keyword, "Keywords<br /><span class='small quieter'>Optional.  Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>"
       = f.text_area :keywords, :rows => 3
     .yellow-spacer-negative
     .row
-      %label{:for => ""} 
-        Add Media
-        %span.quieter (Optional)
+      %label{:for => ""} Add Media
     .yellow-spacer-negative-blank
     .row 
       %label.small{:for => ""}
@@ -58,4 +56,3 @@
     - else
       = image_submit_tag image_path('save.png')
       = link_to image_tag('cancel.png', :alt => 'Cancel'), root_url
-

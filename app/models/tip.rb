@@ -43,7 +43,6 @@ class Tip < NewsItem
   before_create :build_initial_pledge
  
   validates_presence_of :short_description
-  validates_presence_of :keywords
   validates_presence_of :user
   validates_presence_of :pledge_amount, :on => :create
 
