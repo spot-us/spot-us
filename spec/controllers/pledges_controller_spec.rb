@@ -52,7 +52,7 @@ describe PledgesController do
 
     it "should redirect to /myspot/pledges" do
       do_destroy
-      response.should redirect_to(myspot_pledges_url)
+      response.should redirect_to(myspot_pledges_path)
     end
 
     def do_destroy
