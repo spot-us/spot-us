@@ -6,7 +6,7 @@ class PitchesController < ApplicationController
   def block_if_donated_to
     pitch = find_resource(params[:id])
     if pitch.donated_to?
-      access_denied(:flash => "You cannot edit a pitch that has donations.", 
+      access_denied(:flash => "You cannot edit a pitch that has donations. For minor changes, contact info@spot.us", 
                     :redirect => pitch_url(pitch)) 
     end
   end
