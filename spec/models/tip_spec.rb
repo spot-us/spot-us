@@ -13,6 +13,37 @@ describe Tip do
   it {Factory(:tip).should have_many(:affiliations)}
   it {Factory(:tip).should have_many(:pitches)}
 
+  describe "edit guards" do
+    it "allows editing of unpledged tip" do
+      t = Factory :tip
+      t.can_be_edited?.should be_false      
+    end
+    
+    it "disallows editing of tip which has a pledge" do
+      t = Factory :tip
+      p = Factory :pledge, :tip => t
+      t.reload
+      t.can_be_edited?.should be_false      
+    end    
+  end
+  
+  describe "pledged to" do
+    it "a new tip isn't pledged to" do
+      # don't confuse this with the fact that an initial pledge amount can be set
+      # this assertion refers to the pledges association collection (pledges by others)
+      
+      t = Factory :tip
+      t.should_not be_pledged_to
+    end
+    
+    it "is pledged to when there's pledges" do
+      t = Factory :tip
+      p = Factory :pledge, :tip => t
+      t.reload
+      t.should be_pledged_to
+    end
+  end
+
   describe "creating" do
     it "is creatable by user" do
       Tip.createable_by?(Factory(:user)).should be
