@@ -52,6 +52,15 @@ class Tip < NewsItem
     !user.nil?
   end
 
+  def can_be_edited?
+    pledges.blank?
+  end
+  
+  def pledged_to?
+    # we don't count the initial pledge, which is self-given
+    pledges.size > 1
+  end
+
   def total_amount_pledged
     pledges.sum(:amount_in_cents).to_dollars
   end
