@@ -22,6 +22,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :amounts, :name_prefix => 'myspot_donations_',
                          :path_prefix => 'myspot/donations',
                          :controller  => 'myspot/donation_amounts'
+                         
+  map.namespace :admin do |admin|
+    admin.resources :users
+  end
 
   map.namespace :myspot do |myspot|
     myspot.resource :profile do |profile|
