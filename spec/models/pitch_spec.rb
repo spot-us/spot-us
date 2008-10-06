@@ -18,9 +18,7 @@ describe Pitch do
   requires_presence_of Pitch, :extended_description
   requires_presence_of Pitch, :delivery_description
   requires_presence_of Pitch, :skills
-  requires_presence_of Pitch, :keywords
   requires_presence_of Pitch, :featured_image_caption
-  
 
   it { Factory(:pitch).should have_many(:affiliations) }
   it { Factory(:pitch).should have_many(:tips) }
