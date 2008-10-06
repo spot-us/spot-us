@@ -21,10 +21,10 @@ Rails::Initializer.run do |config|
   
   config.time_zone = 'UTC'
   
-  config.action_controller.session = {
-    :session_key => '_spotus_session',
-    :secret      => APP_CONFIG[:action_controller][:session][:secret]
-  }
+  DEFAULT_SECRET = "552e024ba5bbf493d1ae37aacb875359804da2f1002fa908f304c7b0746ef9ab67875b69e66361eb9484fc0308cabdced715f7e97f02395874934d401a07d3e0"
+  secret = APP_CONFIG[:action_controller][:session][:secret] rescue DEFAULT_SECRET
+  
+  config.action_controller.session = { :session_key => '_spotus_session', :secret => secret }
 end
 
 require 'lib/dollars.rb'
