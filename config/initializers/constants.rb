@@ -6,3 +6,5 @@ LOCATIONS = [
   "East Bay",
   "South Bay"
 ].freeze
+
+MAIL_FROM_INFO = %("Spot.Us" <info@spot.us>)
