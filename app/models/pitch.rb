@@ -56,7 +56,7 @@ class Pitch < NewsItem
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
   validates_presence_of :featured_image_file_name
-  
+    
   has_dollar_field(:requested_amount)
   has_dollar_field(:current_funding)
 

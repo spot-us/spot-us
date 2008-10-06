@@ -25,6 +25,13 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:donations) }
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
+
+  describe "requested amount" do
+    it "normalizes before validation" do
+      p = Factory(:pitch, :requested_amount => "1,000")
+      p.requested_amount_in_cents.should == 1000.to_cents
+    end
+  end
   
   describe "can_be_edited?" do
     it "should return false when pitch has paid donations" do
