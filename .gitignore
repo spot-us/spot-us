@@ -1,5 +1,7 @@
 config/database.yml
-log/*.log
-.DS_Store
-public/system
+config/deploy.rb
+config/settings.yml
 db/schema.rb
+log/*.log
+public/system
+.DS_Store
