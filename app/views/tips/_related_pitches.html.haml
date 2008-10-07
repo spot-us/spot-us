@@ -1,0 +1,7 @@
+#related_pitches
+  - if related_pitches.any?
+    - related_pitches.each do |pitch|
+      .related_pitch
+        = link_to pitch.headline, pitch_url(pitch)
+  - else
+    %p No related pitches yet.  Stay tuned.
