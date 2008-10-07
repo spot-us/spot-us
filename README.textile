@@ -1,14 +1,14 @@
-h1. spot.us
+h1. Spot.Us
 
 h2. Community Funded Reporting
 
 "Spot Us" is a project of the nonprofit "Center for Media
 Change":http://www.centerformediachange.com/ that allows an individual or group to take control of
 news by sharing the cost ("crowdfunding":http://crowdfunding.pbwiki.com/) to commission freelance
-journalists. Spot Us is "made possible":http://newschallenge.org/spot_journalism by the Knight
+journalists. Spot.Us is "made possible":http://newschallenge.org/spot_journalism by the Knight
 Foundation. "Read more":http://blog.spot.us/about-spot-us/.
 
-Spot Us won't be ready until the Fall - but we've received lots of interest. So we've
+Spot.Us won't be ready until the Fall - but we've received lots of interest. So we've
 "launched a wiki":http://wiki.spot.us/ to capture ideas and test the concept of
 "community funded reporting" in Northern California's Bay Area.
 
@@ -16,13 +16,13 @@ We are looking to partner with news organizations, freelance journalists and civ
 Bay Area. Don't hesitate to "contact us":http://spot.us/contact.
 
 
-h2.  How does Spot.us work?
+h2.  How does Spot.Us work?
 
 # An individual or journalist creates a pitch that outlines an untold story in a local community.
 # Members of your community vote, with their money, on what stories are most important to them.
 # A journalist researches the facts and puts together an article. Editors provide check-and-balance
 on the story.
-# Spot.us publishes the story in its news feeds and works with local media outlets to have the
+# Spot.Us publishes the story in its news feeds and works with local media outlets to have the
 articles published more widely.
 
 "http://www.spot.us/":http://www.spot.us/
