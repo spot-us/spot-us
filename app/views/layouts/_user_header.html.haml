@@ -1,8 +1,9 @@
 %ul.user-header-nav
   - if current_user
-    %li
+    %li.no-pipe
       Hello,
       == #{link_to h(current_user.full_name), myspot_profile_path}.
+    = render :partial => 'layouts/balance'
     %li
       = link_to "My Spot", myspot_donations_path
     %li.no-pipe
