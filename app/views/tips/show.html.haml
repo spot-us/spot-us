@@ -1,7 +1,7 @@
 - @title = "Spot.us - TIP: #{@tip.headline}"
 
-- if current_user.type == Reporter
-  = render :partial => "myspot/reporters_toolbar"
+- if current_user.is_a?(Reporter)
+  = render :partial => "myspot/reporters_toolbar", :locals => {:tip => @tip}
 
 .block-spacer
 #equalize
@@ -25,12 +25,7 @@
     .block-spacer-negative
     %h3 Related Pitches
     .double_content_border
-    - if @tip.pitches.any?
-      - @tip.pitches.each do |pitch|
-        .related_pitch
-          = link_to pitch.headline, pitch_url(pitch)
-    - else
-      %p No related Pitches yet.  Stay tuned.
+    = render :partial => "related_pitches", :object => @tip.pitches
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
