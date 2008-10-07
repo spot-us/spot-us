@@ -48,7 +48,7 @@ p.nil-line-height {
    }
 .container a {
   color: #999999;
-  text-decoration: none;  
+  text-decoration: none;
   }
 .alt-spotus {
   font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
@@ -151,7 +151,7 @@ body {
   overflow: hidden;
   float: left;
   }
-#header .logo-link {  
+#header .logo-link {
   width: 222px;
   height: 31px;
   display: block;
@@ -187,7 +187,7 @@ body {
 #main-nav li.fund_story {
   width: 153px;
   }
-#main-nav li.read_story {  
+#main-nav li.read_story {
   width: 150px
   }
 #main-nav li.about_spotus {
@@ -202,7 +202,7 @@ body {
 .double_content_border {
   background: url(../images/spotus_content_title_border.gif) repeat-x 0 bottom;
   }
-.double_footer_border, .double_content_border {  
+.double_footer_border, .double_content_border {
   height: 3px;
   margin: 0 0 10px 0;
   }
@@ -283,7 +283,7 @@ body {
   float: right;
   margin: -18px 105px 0 0;
   }
-#footer .logo-footer-link {  
+#footer .logo-footer-link {
   width: 331px;
   height: 100px;
   display: block;
@@ -607,19 +607,17 @@ div.progressBar img {
   border-bottom: 1px solid #d5d5d5;
   width: 625px;
   margin: 20px 0 0 0;
-  }  
+  }
 ul.navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
   padding-bottom: 4px;
   }
-
 ul.navigation li {
   display: inline;
   margin-right: 5px;
   }
-
 ul.navigation a {
   padding: 6px 25px;
   color: #3C5359;
@@ -631,11 +629,9 @@ ul.navigation a {
   font-weight: bold;
   margin: 0 0 -1px 0;
   }
-
 ul.navigation a:hover {
   background: #fff url(../images/white.png) repeat-x left bottom;
   }
-
 ul.navigation a.selected, 
 .myspot_profiles a#profile_tab, 
 .myspot_settings a#settings_tab, 
@@ -649,11 +645,9 @@ ul.navigation a.selected,
   border-bottom: 1px solid #fff;
   color: #000;
   }
-
 ul.navigation a:focus {
   outline: none;
   }
-
 div.featured_image {
   width: 220px;
   float: left;
@@ -662,72 +656,65 @@ div.featured_image {
 div.featured_image .caption {
   padding: 5px;
   color: gray;
-}
-
+  }
 div.creator div.person_avatar {
   float: left;
   padding-right: 10px;
   padding-bottom: 10px;
-}
-
+  }
 div.supporters div.person_avatar {
   float: left;
   padding-right: 10px;
   padding-bottom: 10px;
-}
-
+  }
 ul.unpaid_donations {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
+  }
 table td img {
   float: left;
   padding: 5px;
-}
+  }
 
 table.donations td, 
 table.pitches td, 
 table.pledges td, 
 table.tips td {
   vertical-align: top;
-}
+  }
 
 table.donations th, 
 table.pitches th, 
 table.pledges th, 
 table.tips th {
   background: none;
-}
+  }
 
 table.pledges tr.pledge td.pledge .number {
 	font-size: 200%;
 	padding-top: 0px;
-}
+  }
 
 table.pledges tr.pledge td.pledge {
 	text-align: right;
-}
+  }
 
 #dashboard_tab_container {
   width: 625px;
   margin: 20px 0 0 0;
   padding-bottom: 5px;
-  }  
-
+  }
 ul.dashboard_navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
   padding-bottom: 4px;
   }
-
 ul.dashboard_navigation li {
   display: inline;
   margin-right: 5px;
   }
-
 ul.dashboard_navigation a {
   padding: 6px 25px;
   color: #3C5359;
@@ -736,13 +723,11 @@ ul.dashboard_navigation a {
   font-weight: bold;
   margin: 0 0 -1px 0;
   }
-
 ul.dashboard_navigation a:hover {
   /* background: #fff url(../images/white.png) repeat-x left bottom; */
   background: #909a9d;
   color: black;
-}
-
+  }
 ul.dashboard_navigation a.selected, 
 .myspot_donations a#dashboard_donations_tab, 
 .myspot_tips a#dashboard_tips_tab, 
@@ -751,17 +736,14 @@ ul.dashboard_navigation a.selected,
   background-color: #3C5359;
   color: white;
   }
-
 ul.dashboard_navigation a:focus {
   outline: none;
   }
-
 .myspot_profile #profile_tab_container {
   width: 625px;
   margin: 20px 0 0 0;
   padding-bottom: 5px;
-  }  
-
+  }
 ul.profile_navigation {
   list-style: none;
   margin: 0 0 0 1px;
@@ -769,12 +751,10 @@ ul.profile_navigation {
   padding-top: 8px;
   padding-bottom: 12px;
   }
-
 ul.profile_navigation li {
   display: inline;
   margin-right: 5px;
   }
-
 ul.profile_navigation a {
   padding: 6px 25px;
   color: #3C5359;
@@ -783,37 +763,34 @@ ul.profile_navigation a {
   font-weight: bold;
   margin: 0 0 -1px 0;
   }
-
 ul.profile_navigation a:hover {
   /* background: #fff url(../images/white.png) repeat-x left bottom; */
   background: #909a9d;
   color: black;
-}
-
+  }
 ul.profile_navigation a.selected, 
 .myspot_profile a#profile_basic_tab, .myspot_profile a#profile_work_history_tab, 
 .myspot_profile a#profile_work_samples_tab,{
   background-color: #3C5359;
   color: white;
   }
-
 ul.profile_navigation a:focus {
   outline: none;
   }
-
 textarea#headline {
   width: 100%;
   }
   
+/* ---------------------------------------------------------------------------------
+ Reporter's Toolbar Styling
+------------------------------------------------------------------------------------ */
 #repoters_toolbar_box {
   margin: 15px 0 0 0;
   position: relative;
   }
-
 #repoters_toolbar_box .person_avatar {
   float: left;
   }
-
 #repoters_toolbar {
   background: #fff;
   margin:0;
@@ -823,74 +800,62 @@ textarea#headline {
   height: 25px;
   bottom: 0;
   width: 860px;
-  }  
-  
-#repoters_toolbar ul {  
+  }
+#repoters_toolbar ul {
   display:block;
   margin: 0;
   padding: 0;
   }
-
-#repoters_toolbar ul.children {  
-  margin:0;  
-  padding:0;  
-  border-top:1px solid #FCD290;  
-  z-index:100;  
+#repoters_toolbar ul.children {
+  margin:0;
+  padding:0;
+  border-top:1px solid #FCD290;
+  z-index:100;
   visibility:hidden;
-  background: #fff;  
-  }  
-
-#repoters_toolbar li {  
-  display:inline;  
-  float:left;  
+  background: #fff;
+  }
+#repoters_toolbar li {
+  display:inline;
+  float:left;
   height:auto;
   margin: 0 0 0 10px;
-  }  
-
-#repoters_toolbar li li {  
-  display:block;  
-  float:none;  
-  }  
-
-#repoters_toolbar a {  
-  text-decoration:none;  
-  display:block;  
-  font-weight:bold;  
-  line-height:20px;  
-  text-align:center;  
-  width:115px;  
-  }  
-
-#repoters_toolbar a:hover, #repoters_toolbar  a.selected {  
-  color:#FFFFFF;  
-  text-decoration:none;  
-  }  
-
-#repoters_toolbar ul a {  
-  background:#FFF0CE none repeat scroll 0%;  
-  border-bottom:1px solid #FCD290;  
-  border-left:1px solid #FCD290;  
-  border-right:1px solid #FCD290;  
-  color:#666666;  
-  line-height:20px;  
-  width:115px;  
-  }  
-
-#repoters_toolbar ul ul a {  
-  background:#FFF9EA none repeat scroll 0%;  
-  }  
-
-#repoters_toolbar ul a:hover, #repoters_toolbar  ul a.selected {  
-  }  
-
-#repoters_toolbar li:hover ul, #repoters_toolbarli.sf ul {  
-  visibility:visible;  
-  }  
-
-#repoters_toolbar li:hover ul ul, #repoters_toolbar li.sf ul ul {  
-  visibility:hidden;  
-  }  
-  
-#repoters_toolbar li:hover ul, #repoters_toolbar li li:hover ul, #repoters_toolbar li.sf ul, #repoters_toolbar li li.sf ul {  
-  visibility:visible;  
+  }
+#repoters_toolbar li li {
+  display:block;
+  float:none;
+  }
+#repoters_toolbar a {
+  text-decoration:none;
+  display:block;
+  font-weight:bold;
+  line-height:20px;
+  text-align:center;
+  width:115px;
+  }
+#repoters_toolbar a:hover, #repoters_toolbar  a.selected {
+  color:#FFFFFF;
+  text-decoration:none;
+  }
+#repoters_toolbar ul a {
+  background:#FFF0CE none repeat scroll 0%;
+  border-bottom:1px solid #FCD290;
+  border-left:1px solid #FCD290;
+  border-right:1px solid #FCD290;
+  color:#666666;
+  line-height:20px;
+  width:115px;
+  }
+#repoters_toolbar ul ul a {
+  background:#FFF9EA none repeat scroll 0%;
+  }
+#repoters_toolbar ul a:hover, #repoters_toolbar  ul a.selected {
+  }
+#repoters_toolbar li:hover ul, #repoters_toolbarli.sf ul {
+  visibility:visible;
+  }
+#repoters_toolbar li:hover ul ul, #repoters_toolbar li.sf ul ul {
+  visibility:hidden;
+  }
+#repoters_toolbar li:hover ul, #repoters_toolbar li li:hover ul, #repoters_toolbar li.sf ul, #repoters_toolbar li li.sf ul {
+  visibility:visible;
   }
