@@ -13,6 +13,8 @@
   - # first column content 
   - form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true } do |f|
     .span-605.box_white
+      = render :partial => "myspot/profile_nav"
+      
       %h3 Edit Your Profile
       .double_content_border
       .span-595.box_yellow.create_a_tip_form

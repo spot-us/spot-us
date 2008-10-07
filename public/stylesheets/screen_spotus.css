@@ -756,6 +756,53 @@ ul.dashboard_navigation a:focus {
   outline: none;
   }
 
+.myspot_profile #profile_tab_container {
+  width: 625px;
+  margin: 20px 0 0 0;
+  padding-bottom: 5px;
+  }  
+
+ul.profile_navigation {
+  list-style: none;
+  margin: 0 0 0 1px;
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 12px;
+  }
+
+ul.profile_navigation li {
+  display: inline;
+  margin-right: 5px;
+  }
+
+ul.profile_navigation a {
+  padding: 6px 25px;
+  color: #3C5359;
+  text-decoration: none;
+  /* background: url(../images/tab_bg.png) repeat-x left bottom; */
+  font-weight: bold;
+  margin: 0 0 -1px 0;
+  }
+
+ul.profile_navigation a:hover {
+  /* background: #fff url(../images/white.png) repeat-x left bottom; */
+  background: #909a9d;
+  color: black;
+}
+
+ul.profile_navigation a.selected, 
+.myspot_profile a#profile_basic_tab, .myspot_profile a#profile_work_history_tab, 
+.myspot_profile a#profile_work_samples_tab,{
+  background-color: #3C5359;
+  color: white;
+  }
+
+ul.profile_navigation a:focus {
+  outline: none;
+  }
+
+
+
 textarea#headline {
   width: 100%;
   }
