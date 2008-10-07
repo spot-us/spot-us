@@ -33,6 +33,14 @@ describe Pitch do
     end
   end
   
+  describe "current_funding_in_percentage" do
+    it "should return the amount of current funding as a percentage of the funding needed" do
+      pitch = Factory(:pitch, :requested_amount => "1,000")
+      pitch.should_receive(:current_funding_in_cents).and_return(2000)
+      pitch.current_funding_in_percentage.should == 0.02
+    end
+  end
+  
   describe "can_be_edited?" do
     it "should return false when pitch has paid donations" do
       p = Factory(:pitch, :requested_amount => 100)
