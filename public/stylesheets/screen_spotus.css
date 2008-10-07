@@ -594,7 +594,7 @@ div.progressBar div.border {
   width: 100%;
   }
 div.progressBar div.background {
-  background-color: #333;
+  background-color: red;
   height: 18px;
   width: 0%;
   }
