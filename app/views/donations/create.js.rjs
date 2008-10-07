@@ -1,1 +1,2 @@
-page.replace_html "inline_donation_form_#{@donation.pitch.id}", :partial => "added"
+page.replace_html "inline_donation_form_#{@donation.pitch.id}", :partial => "added", :locals => {:news_item => @donation.pitch}
+page.replace_html "current_balance_line", :partial => "layouts/balance"

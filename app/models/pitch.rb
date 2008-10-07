@@ -90,6 +90,10 @@ class Pitch < NewsItem
     donations.paid.blank? && active?
   end
   
+  def current_funding_in_percentage
+    (current_funding_in_cents.to_f/requested_amount_in_cents.to_f)
+  end
+  
   def send_accept_notification
     Mailer.deliver_pitch_accepted_notification(self)
   end
