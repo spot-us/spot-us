@@ -1,0 +1,3 @@
+page.replace_html "reporters_toolbar_box", :partial => "/myspot/reporters_toolbar", :locals => {:pitch => @affiliation.pitch, :tip => @affiliation.tip}
+page.replace_html "related_pitches", :partial => "/tips/related_pitches", :object => @affiliation.tip.pitches
+page["related_pitches"].visual_effect :highlight, :startcolor => "#88ff88", :endcolor => "#114411" 

@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   end
   
   def reporter?
-    self.is_a? Reporter
+    is_a? Reporter
   end
 
   def organization?
