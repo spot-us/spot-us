@@ -1,8 +1,8 @@
-- if current_user.reporter?
+- if @profile.is_a?(Reporter)
   - # profile navigation
-  #dashboard_tab_container
-    %ul.dashboard_navigation
-      -# TODO: fix :id's and CSS
-      %li= link_to "Basic Info", myspot_profile_path, :id => "dashboard_donations_tab"
-      %li= link_to "Work History", myspot_profile_jobs_path, :id => "dashboard_pledges_tab"
+  #profile_tab_container
+    %ul.profile_navigation
+      %li= link_to "Basic Info", edit_myspot_profile_path, :id => "profile_basic_tab"
+      %li= link_to "Work History", new_myspot_profile_job_path, :id => "profile_work_history_tab"
+      %li= link_to "Work Samples", myspot_profile_jobs_path, :id => "profile_work_samples_tab"
   .clear
