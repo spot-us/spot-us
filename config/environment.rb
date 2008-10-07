@@ -3,7 +3,7 @@ RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 require 'yaml'
 
-config_file_path = File.join(RAILS_ROOT, *%w(public system config.yml))
+config_file_path = File.join(RAILS_ROOT, *%w(config settings.yml))
 if File.exist?(config_file_path)
   config = YAML.load_file(config_file_path)
   APP_CONFIG = config.has_key?(RAILS_ENV) ? config[RAILS_ENV] : {}
