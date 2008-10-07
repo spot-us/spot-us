@@ -28,4 +28,16 @@ function toggle_divs(div1, div2) {
 
 // jQuery("#toggle_pledge_button").livequery("click", toggle_divs("#pledge_button", "#pledge_custom"));
 
+$(function() {  
+    if ($.browser.msie && parseInt($.browser.version)< 7) {  
+        $("#repoters_toolbar li").hover(  
+            function() {  
+                $(this).addClass("sf");  
+            },  
+            function() {  
+        $(this).removeClass("sf");  
+            });  
+    }  
+});
+
 
