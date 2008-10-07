@@ -7,16 +7,16 @@
     %h3 Register
     .double_content_border
     .row
-      %label Your First Name
-      = f.text_field :first_name, :class=>"text"
+      = f.label :email, "Your E-mail Address"
+      = f.text_field :email, :class => "text"
+    .row
+      = f.label :first_name, "Your First Name"
+      = f.text_field :first_name, :class => "text"
     .block-padding
     .row
-      %label Your Last Name
-      = f.text_field :last_name, :class=>"text"
+      = f.label :last_name, "Your Last Name"
+      = f.text_field :last_name, :class => "text"
     .block-padding
-    .row
-      %label Your E-mail Address
-      = f.text_field :email, :class=>"text"
     %span I am a:
     .row
       .float_left= f.radio_button :type, 'Citizen'
