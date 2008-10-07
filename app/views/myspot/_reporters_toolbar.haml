@@ -1,29 +1,28 @@
-#repoters_toolbar_box.clearfix
+#reporters_toolbar_box.clearfix
   .person_avatar
     = link_to((image_tag current_user.photo.url(:thumb)), profile_path(current_user))
-  #repoters_toolbar
+  #reporters_toolbar
     / %span User's Reporter Tools
     %ul
       %li 
-        Ping this tip to a Pitch...
+        Associate this tip
         %ul.children
-          %li Dropdown 1
-          %li Dropdown 2
-          %li Dropdown 3
-          %li Dropdown 4
+          - if (current_user.pitches - tip.pitches).blank?
+            %li
+              No pitches to attach
+          - for pitch in current_user.pitches
+            - unless tip.pitches.include?(pitch)
+              %li= link_to_remote "PITCH: #{pitch.headline}", :url => affiliations_path(:affiliation => {:pitch_id => pitch.id, :tip_id => tip.id}), :method => :post
       %li 
         Go to Reporter's Notebook...
         %ul.children
-          %li Dropdown 1
-          %li Dropdown 2
-          %li Dropdown 3
-          %li Dropdown 4
+          - for pitch in current_user.pitches
+            %li= link_to "PITCH: #{pitch.headline}", "#"
       %li 
         Fact Checking Tools
         %ul.children
-          %li Dropdown 1
-          %li Dropdown 2
-          %li Dropdown 3
-          %li Dropdown 4
+          %li Apply To Fact Check
+          %li Update the Reporter's Notebook
+          %li Report Abuse To Spot.Us
       %li 
-        Create a Pitch
+        =link_to "Create a Pitch", new_pitch_path 
