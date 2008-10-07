@@ -801,8 +801,96 @@ ul.profile_navigation a:focus {
   outline: none;
   }
 
-
-
 textarea#headline {
   width: 100%;
+  }
+  
+#repoters_toolbar_box {
+  margin: 15px 0 0 0;
+  position: relative;
+  }
+
+#repoters_toolbar_box .person_avatar {
+  float: left;
+  }
+
+#repoters_toolbar {
+  background: #fff;
+  margin:0;
+  padding:10px 10px 0px 10px;
+  position:absolute;
+  left:50px;
+  height: 25px;
+  bottom: 0;
+  width: 860px;
+  }  
+  
+#repoters_toolbar ul {  
+  display:block;
+  margin: 0;
+  padding: 0;
+  }
+
+#repoters_toolbar ul.children {  
+  margin:0;  
+  padding:0;  
+  border-top:1px solid #FCD290;  
+  z-index:100;  
+  visibility:hidden;
+  background: #fff;  
+  }  
+
+#repoters_toolbar li {  
+  display:inline;  
+  float:left;  
+  height:auto;
+  margin: 0 0 0 10px;
+  }  
+
+#repoters_toolbar li li {  
+  display:block;  
+  float:none;  
+  }  
+
+#repoters_toolbar a {  
+  text-decoration:none;  
+  display:block;  
+  font-weight:bold;  
+  line-height:20px;  
+  text-align:center;  
+  width:115px;  
+  }  
+
+#repoters_toolbar a:hover, #repoters_toolbar  a.selected {  
+  color:#FFFFFF;  
+  text-decoration:none;  
+  }  
+
+#repoters_toolbar ul a {  
+  background:#FFF0CE none repeat scroll 0%;  
+  border-bottom:1px solid #FCD290;  
+  border-left:1px solid #FCD290;  
+  border-right:1px solid #FCD290;  
+  color:#666666;  
+  line-height:20px;  
+  width:115px;  
+  }  
+
+#repoters_toolbar ul ul a {  
+  background:#FFF9EA none repeat scroll 0%;  
+  }  
+
+#repoters_toolbar ul a:hover, #repoters_toolbar  ul a.selected {  
+  }  
+
+#repoters_toolbar li:hover ul, #repoters_toolbarli.sf ul {  
+  visibility:visible;  
+  }  
+
+#repoters_toolbar li:hover ul ul, #repoters_toolbar li.sf ul ul {  
+  visibility:hidden;  
+  }  
+  
+#repoters_toolbar li:hover ul, #repoters_toolbar li li:hover ul, #repoters_toolbar li.sf ul, #repoters_toolbar li li.sf ul {  
+  visibility:visible;  
   }
