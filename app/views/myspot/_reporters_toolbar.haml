@@ -1,0 +1,29 @@
+#repoters_toolbar_box.clearfix
+  .person_avatar
+    = link_to((image_tag current_user.photo.url(:thumb)), profile_path(current_user))
+  #repoters_toolbar
+    / %span User's Reporter Tools
+    %ul
+      %li 
+        Ping this tip to a Pitch...
+        %ul.children
+          %li Dropdown 1
+          %li Dropdown 2
+          %li Dropdown 3
+          %li Dropdown 4
+      %li 
+        Go to Reporter's Notebook...
+        %ul.children
+          %li Dropdown 1
+          %li Dropdown 2
+          %li Dropdown 3
+          %li Dropdown 4
+      %li 
+        Fact Checking Tools
+        %ul.children
+          %li Dropdown 1
+          %li Dropdown 2
+          %li Dropdown 3
+          %li Dropdown 4
+      %li 
+        Create a Pitch
