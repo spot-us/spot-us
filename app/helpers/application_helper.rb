@@ -4,6 +4,10 @@ module ApplicationHelper
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
   end
+  
+  def current_balance
+    current_user.donations.unpaid.map(&:amount).sum
+  end
 
   def topic_check_boxes(resource, model = nil)
     render :partial => "topics/topic", :collection => Topic.all, :locals => {:resource => resource, :model => model}
