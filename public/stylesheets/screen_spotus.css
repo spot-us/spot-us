@@ -272,7 +272,7 @@ body {
   padding-right: 0;
   background: url(../images/spotus_no_pipe.gif) no-repeat top right;
   }
-#footer a, #user-header a {
+#footer a, #user-header a, #user-header #current_balance {
   color: #E9EB98;
   text-decoration: none;
   }
