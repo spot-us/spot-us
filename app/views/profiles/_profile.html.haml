@@ -20,4 +20,25 @@
 
 = sanitize @profile.about_you
 
+- if @profile.is_a?(Reporter) && @profile.samples.any?
+  %h3 Writing Samples
+  %hr
+  - for sample in @profile.samples
+    - if !sample.url.blank?
+      = link_to h(sample.title), sample.url
+    - else
+      = h sample.title
+    = h sample.description
+.double_content_border
+
+- if @profile.is_a?(Reporter) && @profile.jobs.any?
+  %h3 Work History
+  %hr
+  - for job in @profile.jobs
+    - if !job.url.blank?
+      = link_to h(job.title), job.url
+    - else
+      = h job.title
+    = h job.description
+.double_content_border
 .double_content_border
