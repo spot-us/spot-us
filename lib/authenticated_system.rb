@@ -33,6 +33,10 @@ module AuthenticatedSystem
     def authorized?
       logged_in?
     end
+    
+    def admin_required
+      (login_required && current_user.is_a?(Admin)) || access_denied
+    end
 
     # Filter method to enforce a login requirement.
     #

@@ -43,16 +43,26 @@ describe Pitch do
   
   describe "can_be_edited?" do
     it "should return false when pitch has paid donations" do
+      user = Factory(:user)
       p = Factory(:pitch, :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
       p.reload
-      p.can_be_edited?.should be_false
+      p.can_be_edited?(user).should be_false
     end
     
     it "should return false when pitch has been accepted" do
+      user = Factory(:user)
       p = Factory(:pitch, :requested_amount => 100)
       p.accept!
-      p.can_be_edited?.should be_false
+      p.can_be_edited?(user).should be_false
+    end
+    
+    it "should return true regardless when user is an admin" do
+      user = Factory(:admin)
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
+      p.reload
+      p.can_be_edited?(user).should be_true
     end
 
   end
