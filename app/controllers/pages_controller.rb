@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     about
     contact
     press
+    privacy
     reporter_contract
     terms
   ).freeze
