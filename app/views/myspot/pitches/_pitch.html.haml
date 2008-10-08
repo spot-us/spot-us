@@ -5,9 +5,7 @@
     = link_to h(pitch.headline), pitch_url(pitch)
   %td.created= pitch.created_at.to_s(:date)
   %td.donations
-    = number_to_currency(pitch.total_amount_donated)
-    Donated of
-    = number_to_currency(pitch.requested_amount)
+    = render :partial => "shared/table_progress_bar", :locals => {:pitch => pitch}
   %td.actions
     - if pitch.can_be_edited?
       .action= link_to "Edit", edit_pitch_url(pitch)
