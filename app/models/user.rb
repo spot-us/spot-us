@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?, :on => :update
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false
-  validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization)
+  validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization Admin)
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
@@ -96,6 +96,10 @@ class User < ActiveRecord::Base
   def organization?
     self.is_a? Organization
   end
+  
+  def admin?
+    self.is_a? Admin
+  end
 
   def self.createable_by?(user)
     true
@@ -129,7 +133,11 @@ class User < ActiveRecord::Base
   end
 
   def editable_by?(user)
-    user == self
+    if user.nil?
+      false
+    else
+      (user == self) || user.admin?
+    end
   end
 
   def amount_pledged_to(tip)
@@ -231,6 +239,7 @@ class User < ActiveRecord::Base
   end
   
   def deliver_signup_notification
+    return if self.admin?
     Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)    
     if self.organization?
       Mailer.deliver_news_org_signup_request(self)
