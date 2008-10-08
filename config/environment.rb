@@ -16,6 +16,7 @@ DEFAULT_HOST = APP_CONFIG[:default_host] || "localhost:3000"
 
 Rails::Initializer.run do |config|
   config.gem "haml"
+  config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :source => 'http://gems.github.com'
   

@@ -1,0 +1,12 @@
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
+
+describe Admin::UsersController do
+  describe "get to index" do
+    it "should respond to csv" do
+      get :index, :format => "csv"
+      response.headers["type"].should =~ %r(text/csv)
+      response.headers["Content-Disposition"].should =~ /attachment; filename=.*?.csv/
+    end
+  end
+end
+
