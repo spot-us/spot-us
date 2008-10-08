@@ -1,0 +1,2 @@
+page.insert_html :top, "work_sample", :partial => "sample"
+page[@sample].visual_effect :highlight, :startcolor => "#88ff88", :endcolor => "#114411" 
