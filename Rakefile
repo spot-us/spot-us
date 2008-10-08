@@ -20,3 +20,23 @@ end
 task :show_start => :environment do
  timestamp "BUILD"
 end
+
+desc "Copy application sample config for dev/test purposes"
+task :copy_sample_config do
+  raise("Never copy the example config in production!") if Rails.env.production?
+
+  settings_file         = File.join(Rails.root, *%w(config settings.yml))
+  settings_file_example = File.join(Rails.root, *%w(config settings.example.yml))
+
+  unless File.exist?(settings_file)
+    puts "Setting up config/setting.yml from config/settings.example.yml..."
+    FileUtils.cp(settings_file_example, settings_file)
+  end
+end
+
+task :environment => :copy_sample_config
+
+Rake::Task[:default].clear() # clear out the default Rails test::unit tasks...
+
+desc "Default task is to run the specs"
+task :default => :spec
