@@ -84,6 +84,8 @@ class User < ActiveRecord::Base
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip
+  
+  named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
 
   def citizen?
     self.is_a? Citizen

@@ -50,11 +50,12 @@
 
 %h1 Fact Check Interest
 %table
-  - for user in @fact_checkers
+  - for user in User.fact_checkers
     %tr
       %td=h user.first_name
       %td=h user.last_name
       %td=h user.email
       %td=h user.phone
+
 
 
