@@ -6,10 +6,7 @@
   %td.donated= donation.created_at.to_s(:date)
   %td.donation= number_to_currency(donation.amount)
   %td.status
-    = number_to_currency(donation.pitch.total_amount_donated)
-    of 
-    = number_to_currency(donation.pitch.requested_amount)
-    Raised
+    = render :partial => "shared/table_progress_bar", :locals => {:pitch => donation.pitch}
   %td.actions
     = link_to "Donate More", pitch_url(donation.pitch)
     
