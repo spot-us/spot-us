@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :news_items
   map.resources :donations
   map.resources :affiliations
-  map.resources :tips
+  map.resources :tips, :has_many => :affiliations
   map.resources :pledges
   map.resources :pitches
   map.resources :profiles
