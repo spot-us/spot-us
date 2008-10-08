@@ -1,0 +1,11 @@
+:action_controller: &action_controller
+  :session:
+    :secret:  foo
+
+development:
+  :action_controller:
+    <<: *action_controller
+
+test:
+  :action_controller:
+    <<: *action_controller
