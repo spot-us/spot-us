@@ -386,7 +386,7 @@ body {
   }
   
 /* Create A Tip */  
-.create_a_tip, .create_a_pitch, .create_a_job {
+.create_a_tip, .create_a_pitch, .create_a_job, .create_a_sample {
   float: left;
   width: 225px;
   background: #ffffe1 url(../images/yellow_bg.jpg) repeat-x left top;
@@ -463,13 +463,16 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
 .take_action li {
   list-style: square;
   }
-.create_a_tip_form .row  textarea. .create_a_job_form .row textarea {
+.create_a_tip_form .row  textarea, 
+.create_a_job_form .row textarea, 
+.create_a_sample_form .row textarea {
   width: 240px!important;
   }
 .create_a_tip_form .free  textarea {
   width: 450px!important;
   }
-.create_a_tip_form .row label, .create_a_pitch_form .row label, .create_a_job_form .row label {
+.create_a_tip_form .row label, .create_a_pitch_form .row label, 
+.create_a_job_form .row label, .create_a_sample_form .row label {
   float: left;
   width: 200px!important;
   margin: 0 10px 0 0;
@@ -871,23 +874,23 @@ textarea#headline {
   visibility:visible;  
   }
 
-#work_history {
+#work_history, #work_sample {
   padding-bottom: 8px;
   padding-left: 16px;
 }
 
-#work_history .work_row .title {
+#work_history .work_row .title, #work_history .work_row .title {
   font-color: black;
   font-size: 20px;
   margin: 0 0 0 10px;
 }
 
-#work_history .work_row .title a{
+#work_history .work_row .title a, #work_sample .work_row .title a{
   font-size: 20px;
   margin: 0 0 0 10px;
 }
 
-#work_history .description {
+#work_history .description, #work_sample .description {
   padding-left: 26px;
   font-size: 15px;
 }
