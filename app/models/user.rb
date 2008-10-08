@@ -133,11 +133,7 @@ class User < ActiveRecord::Base
   end
 
   def editable_by?(user)
-    if user.nil?
-      false
-    else
-      (user == self) || user.admin?
-    end
+    (user == self)
   end
 
   def amount_pledged_to(tip)

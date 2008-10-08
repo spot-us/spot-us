@@ -1,3 +1,5 @@
+- if @profile.editable_by?(current_user)
+  = link_to 'Edit your profile', edit_myspot_profile_path
 %p= image_tag @profile.photo.url(:thumb)
 %h4.reg-line-height= h @profile.full_name
 %p.reg-line-height= h @profile.location
@@ -29,7 +31,7 @@
     - else
       = h sample.title
     = h sample.description
-.double_content_border
+  .double_content_border
 
 - if @profile.is_a?(Reporter) && @profile.jobs.any?
   %h3 Work History
@@ -40,5 +42,5 @@
     - else
       = h job.title
     = h job.description
-.double_content_border
+  .double_content_border
 .double_content_border
