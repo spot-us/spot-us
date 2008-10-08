@@ -17,6 +17,7 @@
  *  07.24.2008 v 2.0 - added support for widths
 --------------------------------------------------------------------*/
 
+(function($){
 $.fn.equalHeights = function(px) {
   $(this).each(function(){
     var currentTallest = 0;
@@ -103,3 +104,4 @@ Number.prototype.pxToEm = String.prototype.pxToEm = function(settings){
   var result = (settings.reverse == true) ? (pxVal * scopeVal).toFixed(2) + 'px' : (pxVal / scopeVal).toFixed(2) + 'em';
   return result;
 };
+})(jQuery);
