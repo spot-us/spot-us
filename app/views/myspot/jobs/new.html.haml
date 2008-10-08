@@ -1,22 +1,35 @@
 %h2 My Spot
 
 = render :partial => "myspot/nav"
-
+#equalize
 .span-715.box_white
   = render :partial => "myspot/profile_nav"
-  
-  - remote_form_for [:myspot, :profile, @job] do |f|
-    = f.text_field :title
-    %br
-    = f.text_field :url
-    %br
-    = f.text_area :description
-    %br
-    = f.submit
-  
-  %br
-  %br
+  %h3 Edit Work History
+  .double_content_border
+  .span-595.box_yellow.create_a_job_form
+    - remote_form_for [:myspot, :profile, @job] do |f|
+      .row
+        = f.label :title
+        = f.text_field :title
+      .yellow-spacer-negative
+      .row
+        = f.label :url
+        = f.text_field :url
+      .yellow-spacer-negative
+      .row
+        = f.label :description
+        = f.text_area :description
+      .yellow-spacer-negative
+      .float-right
+        = image_submit_tag image_path('add_job.png')
+    .clear
   %hr
-  #history
-    = render :partial => @jobs
+#equalize
+.span-715.box_white
+  %h3 Saved Work History
+  .double_content_border
+  .span-595.box_yellow
+    #work_history
+      = render :partial => @jobs
+  %hr
 
