@@ -9,7 +9,7 @@
 
 #user-header {width:960px;margin:0 auto;display:inline-block;display:block;}
 table.top td.top {vertical-align:top;}
-.debug { background:#ccc; }
+.debug { background:#ccc;}
 
 /* layout dimension */
 .container {
@@ -104,7 +104,7 @@ h4.title {
   margin: 0;
   }
 .add_edit {
-  margin: 0 0 0 10px; 
+  margin: 0 0 0 10px;
   }
 .quieter {
   color:#999999;
@@ -495,7 +495,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   }
 .create_a_tip_form .free label {
   float: left;
-  width: 420px; 
+  width: 420px;
   }
 .create_a_pitch_form .delivered label {
   float:left;
@@ -585,7 +585,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   clear: both;
   margin: 0px -10px 10px -10px;
   }
-.ui-tabs-hide { display: none; }
+.ui-tabs-hide { display: none;}
 
 /* Progress Bar Styling */  
 div.progressBar {
@@ -722,12 +722,12 @@ ul.dashboard_navigation a {
   padding: 6px 25px;
   color: #3C5359;
   text-decoration: none;
-  /* background: url(../images/tab_bg.png) repeat-x left bottom; */
+  /* background: url(../images/tab_bg.png) repeat-x left bottom;*/
   font-weight: bold;
   margin: 0 0 -1px 0;
   }
 ul.dashboard_navigation a:hover {
-  /* background: #fff url(../images/white.png) repeat-x left bottom; */
+  /* background: #fff url(../images/white.png) repeat-x left bottom;*/
   background: #909a9d;
   color: black;
   }
@@ -762,17 +762,17 @@ ul.profile_navigation a {
   padding: 6px 25px;
   color: #3C5359;
   text-decoration: none;
-  /* background: url(../images/tab_bg.png) repeat-x left bottom; */
+  /* background: url(../images/tab_bg.png) repeat-x left bottom;*/
   font-weight: bold;
   margin: 0 0 -1px 0;
   }
 ul.profile_navigation a:hover {
-  /* background: #fff url(../images/white.png) repeat-x left bottom; */
+  /* background: #fff url(../images/white.png) repeat-x left bottom;*/
   background: #909a9d;
   color: black;
   }
-ul.profile_navigation a.selected, 
-.myspot_profile a#profile_basic_tab, .myspot_profile a#profile_work_history_tab, 
+ul.profile_navigation a.selected,
+.myspot_profile a#profile_basic_tab, .myspot_profile a#profile_work_history_tab,
 .myspot_profile a#profile_work_samples_tab,{
   background-color: #3C5359;
   color: white;
