@@ -7,7 +7,7 @@
   %td.donations
     = render :partial => "shared/table_progress_bar", :locals => {:pitch => pitch}
   %td.actions
-    - if pitch.can_be_edited?
+    - if pitch.can_be_edited?(current_user)
       .action= link_to "Edit", edit_pitch_url(pitch)
     - if pitch.can_be_accepted?
       .action= link_to "Accept", accept_myspot_pitch_url(pitch), :method => :put, :confirm => "Are you sure you want to accept this pitch, even though it isn't fully funded?"

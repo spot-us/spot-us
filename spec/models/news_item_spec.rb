@@ -29,6 +29,10 @@ describe NewsItem do
       @news_item.editable_by?(@news_item.user).should be_true
     end
 
+    it "is editable by the admin" do
+      @news_item.editable_by?(Factory(:admin)).should be_true
+    end
+
     it "is not editable by a stranger" do
       @news_item.editable_by?(Factory(:user)).should_not be_true
     end

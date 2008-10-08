@@ -58,7 +58,11 @@ class NewsItem < ActiveRecord::Base
   named_scope :top_three, :limit => 3
 
   def editable_by?(user)
-    self.user == user
+    if user.nil?
+      false
+    else
+      (self.user == user) || user.admin?
+    end
   end
 
   def tip?
@@ -68,5 +72,4 @@ class NewsItem < ActiveRecord::Base
   def pitch?
     is_a?(Pitch)
   end
-
 end

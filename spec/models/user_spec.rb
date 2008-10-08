@@ -69,7 +69,11 @@ describe User do
     end
 
     it "is editable by its self" do
-      @user.editable_by?(@user).should be
+      @user.editable_by?(@user).should be_true
+    end
+    
+    it "is editable by the admin" do
+      @user.editable_by?(Factory(:admin)).should be_true
     end
 
     it "is not editable by a stranger" do
