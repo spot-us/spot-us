@@ -2,6 +2,11 @@ class Admin::UsersController < ApplicationController
   before_filter :admin_required
   layout nil
   
+  def log_in_as
+    self.current_user = User.find(params[:id])
+    redirect_to root_path
+  end
+  
   # GET /users
   # GET /users.xml
   def index
