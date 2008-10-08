@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_filter :admin_required
   layout nil
   
   # GET /users

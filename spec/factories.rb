@@ -23,6 +23,13 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
 end
 
+Factory.define :admin do |user|
+  user.email { random_email_address }
+  user.first_name 'Billy'
+  user.last_name  'Joel'
+  user.add_attribute(:type, 'Admin')
+end
+
 Factory.define :reporter do |user|
   user.email { random_email_address }
   user.first_name 'Reporter'
