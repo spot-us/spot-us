@@ -1,0 +1,60 @@
+%h1 System Users
+.users_table
+  %table
+    %tr
+      %th Email
+      %th First name
+      %th Last name
+      %th Type
+      %th Location
+      %th About you
+      %th Website
+      %th Address1
+      %th Address2
+      %th City
+      %th State
+      %th Zip
+      %th Phone
+      %th Country
+      %th Notify tips
+      %th Notify pitches
+      %th Notify stories
+      %th Notify spotus news
+
+    - for user in @users
+      %tr
+        %td=h user.email 
+        %td=h user.first_name
+        %td=h user.last_name
+        %td=h user.type
+        %td=h user.location
+        %td=h user.about_you
+        %td=h user.website
+        %td=h user.address1
+        %td=h user.address2
+        %td=h user.city
+        %td=h user.state
+        %td=h user.zip
+        %td=h user.phone
+        %td=h user.country
+        %td=h user.notify_tips
+        %td=h user.notify_pitches
+        %td=h user.notify_stories
+        %td=h user.notify_spotus_news
+        %td=link_to 'Show', admin_user_path(user)
+        %td=link_to 'Edit', edit_admin_user_path(user)
+        %td=link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete 
+        %td=link_to 'Log in as', log_in_as_admin_user_path(user)
+
+= link_to 'New user', new_admin_user_path
+
+%h1 Fact Check Interest
+%table
+  - for user in User.fact_check_interest
+    %tr
+      %td=h user.first_name
+      %td=h user.last_name
+      %td=h user.email
+      %td=h user.phone
+
+
