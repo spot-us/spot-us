@@ -11,6 +11,7 @@ class Admin::UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.find(:all)
+    @fact_checkers = User.find_all_by_fact_check_interest(true)
   
     respond_to do |format|
       format.html # index.html.erb
