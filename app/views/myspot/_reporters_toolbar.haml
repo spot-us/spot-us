@@ -14,15 +14,4 @@
             - unless tip.pitches.include?(pitch)
               %li= link_to_remote "PITCH: #{pitch.headline}", :url => tip_affiliations_path(tip, :affiliation => {:pitch_id => pitch.id}), :method => :post, :html => {:id => dom_id(pitch)}
       %li 
-        Go to Reporter's Notebook...
-        %ul.children
-          - for pitch in current_user.pitches
-            %li= link_to "PITCH: #{pitch.headline}", "#"
-      %li 
-        Fact Checking Tools
-        %ul.children
-          %li Apply To Fact Check
-          %li Update the Reporter's Notebook
-          %li Report Abuse To Spot.Us
-      %li 
         =link_to "Create a Pitch", new_pitch_path
