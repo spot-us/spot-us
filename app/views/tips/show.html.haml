@@ -1,8 +1,5 @@
 - @title = "Spot.us - TIP: #{@tip.headline}"
 
-- if current_user.is_a?(Reporter)
-  = render :partial => "myspot/reporters_toolbar", :locals => {:tip => @tip}
-
 .block-spacer
 #equalize
   .span-455.box_white
