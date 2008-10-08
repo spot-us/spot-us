@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :myspot do |myspot|
     myspot.resource :profile do |profile|
       profile.resources :jobs
+      profile.resources :samples
     end
 
     myspot.resource :settings
