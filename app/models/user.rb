@@ -111,6 +111,22 @@ class User < ActiveRecord::Base
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
+  
+  def self.generate_csv
+    FasterCSV.generate do |csv|
+      # header row
+      csv << ["email", "first_name", "last_name", "location", 
+              "notify_tips", "notify_pitches",  "notify_pitches", 
+              "notify_stories", "notify_spotus_news", "fact_check_interest"]
+
+      # data rows
+      User.all.each do |user|
+        csv << [user.email, user.first_name, user.last_name, 
+                user.location, user.notify_tips, user.notify_pitches, 
+                user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
+      end
+    end
+  end
 
   def editable_by?(user)
     user == self

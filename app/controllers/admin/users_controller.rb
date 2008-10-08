@@ -9,6 +9,14 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
+      format.csv do
+            csv_string = User.generate_csv
+
+            # send it to the browsah
+            send_data csv_string,
+                      :type => 'text/csv; charset=iso-8859-1; header=present',
+                      :disposition => "attachment; filename=users.csv"
+      end
     end
   end
   
