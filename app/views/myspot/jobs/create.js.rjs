@@ -1,2 +1,2 @@
-page.insert_html :top, "history", :partial => "job"
+page.insert_html :top, "work_history", :partial => "job"
 page[@job].visual_effect :highlight, :startcolor => "#88ff88", :endcolor => "#114411" 
