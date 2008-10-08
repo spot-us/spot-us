@@ -1,0 +1,7 @@
+.progress_bar
+  .float-left
+    = static_progress_bar("pitch", pitch.current_funding_in_percentage)
+    .clear
+      %strong= number_to_currency(pitch.current_funding)
+      of
+      == #{number_to_currency(pitch.requested_amount_in_cents.to_dollars)} Raised
