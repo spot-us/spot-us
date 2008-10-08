@@ -23,6 +23,17 @@ describe User do
     end
   end
   
+  describe "generate_csv" do
+    it "should return a comma-separated list" do
+      user = Factory(:user, :email => 'happy@happy.com', 
+                     :first_name => "Desi", :last_name => "McAdam",
+                     :notify_tips => "true", :notify_pitches => "true",
+                     :notify_stories => "true", :notify_spotus_news => "true",
+                     :fact_check_interest => "true"  )
+      User.generate_csv.split("\n")[1].should == "happy@happy.com,Desi,McAdam,Bay Area,true,true,true,true,true"
+    end
+  end
+  
   describe "topics_params=" do
     it "should create topic associations" do
       t = Topic.create(:name => "Topic 1")
