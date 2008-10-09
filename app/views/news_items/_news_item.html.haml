@@ -3,7 +3,7 @@
 .summary.span-390
   %h3
     == #{news_item.class.name.upcase}:
-    = link_to news_item.headline, news_item
+    %strong= link_to news_item.headline, news_item
   .dateline.small.quiet
     Posted
     = news_item.created_at.to_s(:long_date)

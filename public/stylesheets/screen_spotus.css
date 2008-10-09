@@ -574,10 +574,16 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
  General Column specs part 4 - this achieves the gray areas for the columns 
  - needed because of support for ie6 and 7 with the spotus_ie_pixel.gif
 ------------------------------------------------------------------------------------ */
+.summary h3 {margin: 0;}
 .summary.span-390 p.short_description {
   padding: 0px;
   margin: -10px 0 0 0;
   width: 350px;
+  text-align: justify;
+  }
+p.short_description {
+  padding: 0px;
+  margin: -20px 0 5px 0;
   text-align: justify;
   }
 .block-padding {
