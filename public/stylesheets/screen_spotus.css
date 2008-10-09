@@ -502,10 +502,28 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   width: auto!important;
   }
 .create_a_pitch_form .delivered input {
-   float:left;
-   width: auto!important;
-   margin: 0 10px 0 0;
-   }
+  float:left;
+  width: auto!important;
+  margin: 0 10px 0 0;
+  }
+.form_topic_box {  
+  margin: 0 0 0 210px;
+  }
+.topic_box {
+  float: left;
+  width: 180px;
+  position: relative;
+  }
+.topic_box label {
+  top: 0;
+  left: 25px;
+  width: auto;
+  position: absolute;
+  }
+.topic_box input {
+  top: 0;
+  left: 0;
+  }
 /* -----------------------------------------------------------------------------
  General Column specs part 1 - this the white background color plus the padding
 --------------------------------------------------------------------------------  */
