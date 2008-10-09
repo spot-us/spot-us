@@ -37,7 +37,10 @@
 #
 
 class Organization < User
-  before_validation_on_create :set_status
+  # commented out till i can figure out why STI isn't working with created_at field
+  # Once that is fixed we can change the controller back to the proper way of setting up 
+  # the user and we can use this before callback
+  # before_validation_on_create :set_status
 
   aasm_state :needs_approval
   aasm_state :approved
