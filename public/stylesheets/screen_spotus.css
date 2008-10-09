@@ -110,6 +110,16 @@ h4.title {
   color:#999999;
   font-weight: normal;
   }
+.uppcased_button_text {
+  text-transform: uppercase;
+  width:210px;
+  text-align:right;
+  margin: 0;
+  }
+.shared_progress_bar {
+  width: 120px;
+  }
+.small-spotus {font-size:.8em;margin-bottom: 0;line-height:1.875em;}
 /* Adjust showgrid to use 960px instead of 950px */
 .showgrid {background:url(src/grid.png) 15px -3px;}
 
@@ -118,7 +128,6 @@ h4.title {
   text-indent: 0;
   margin-top:-1.5em;
   }
-
 .container p + p {
   text-indent: 0;
   margin-top:1.5em;
@@ -575,6 +584,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
  - needed because of support for ie6 and 7 with the spotus_ie_pixel.gif
 ------------------------------------------------------------------------------------ */
 .summary h3 {margin: 0 0 4px 0;}
+.button_news_items {margin: 0;}
 .summary.span-390 p.short_description {
   padding: 0px;
   margin: -10px 0 0 0;
