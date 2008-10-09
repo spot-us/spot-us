@@ -13,8 +13,16 @@ class UsersController < ApplicationController
     
     user_attributes = params[:user].merge(opt_in_defaults)
 
-    @user = (params[:user][:type] || "User").constantize.new(user_attributes)
+    # @user = (params[:user][:type] || "User").constantize.new(user_attributes)
+    @user = User.new(user_attributes)
+    @user.type = params[:user][:type]
     if @user.save
+      # This is a crappy way of dealing with the fact that when using STI the way we were 
+      # on line 16 it doesn't set the created at field wierdness
+      if params[:user][:type] == "Organization"
+        @user.status = "needs_approval"
+        @user.save
+      end
       @user = User.find(@user.to_param)
       self.current_user = @user
       flash[:success] = 'Check your e-mail for your password, then login to change it.'
