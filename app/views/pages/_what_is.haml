@@ -1,6 +1,6 @@
 %a{:name => "top"}
 .block-spacer
-.box_white
+.box_white{:style => "width: 66%;"}
   %h2 What is Spot.Us About?
   .double_content_border
   %p
@@ -43,16 +43,8 @@
   %p
     We have a board of advisors that includes: Dan Gillmor, Jay Rosen, Jeff Jarvis,
     Susan Mernit, Fabrice Florin, Brant Houston, Leonard Witt and Jeremy Toeman.
-    
-  %h2 Take Action!
-  %hr/
 
-  %p
-    What are you passionate about? Create a "news tip." Or - browse to see if there’s already a pitch
-    looking into your issue.
-
-.block-spacer
-.box_white
+  %h2 Got Questions? Try Our FAQ!
 
   .float_left
     %h2
@@ -71,8 +63,8 @@
       %a{:href =>"#faqtip"} What is a tip?
     %li
       %a{:href =>"#pledge_versus_tip"} What's the difference between Pledge and Donate?
-      %li
-        %a{:href =>"#donation_goal"} What if the pitch I donate to doesn't reach it's goal?
+    %li
+      %a{:href =>"#donation_goal"} What if the pitch I donate to doesn't reach it's goal?
     %li
       %a{:href =>"#privacy"} About Your Privacy
 
@@ -93,7 +85,6 @@
     %li
       %a{:href =>"#creative_commons"} What’s the Creative Commons Deal?
 
-
   %h3
     %strong 
       %a{:href =>"#faq_news_organization"} For News Organizations
@@ -101,16 +92,24 @@
     %li
       %a{:href =>"#approval"} Why do We Need Approval to get started?
     %li
-      %a{:href =>"#work_with"} Advice On Working With Spot.Us Bolster your freelance budget.
+      %a{:href =>"#work_with"} Advice On Working With Spot.Us. How to bolster your freelance budget.
    
+  %h3
+    %strong 
+      %a{:href =>"#faq_general"} General FAQ
+  %ul
+    %li
+      %a{:href =>"#future"} What Can We Expect in the Future?
+    %li
+      %a{:href =>"#why_SF"} Why are you focused on just the Bay Area?   
 
 .block-spacer
-.box_white
+.box_white{:style => "width: 66%;"}
 
   .float_left
+    %a{:name =>"faq_citizen"}
     %h2
       For Citizens
-      %a{:name =>"faq_citizen"}
   .float_right
     %span
       %a{:href => "#faq"} Back to FAQ &#94;
@@ -150,7 +149,7 @@
     = link_to 'Privacy Policy.', page_path("privacy")
 
 .block-spacer
-.box_white
+.box_white{:style => "width: 66%;"}
 
   .float_left
     %h2
@@ -215,7 +214,8 @@
   %a{:name => "creative_commons"}
   %h3 What’s the Creative Commons Deal?
   %p
-    Journalism is a process - not a product. The end content produced by Spot.Us will be given away
+    %div{:style => "color: red;"} Red Journalism is a process - not a product. 
+    The end content produced by Spot.Us will be given away
     for free unless a news organization has either contributed between 50 or 100% of the total cost.
     In that situation - we will grant that news organization temporary rights to the article.
     Eventually all Spot.Us stories are licensed under Creative Commons. You can learn more by
@@ -224,12 +224,10 @@
         
     
 .block-spacer
-.box_white
-
+.box_white{:style => "width: 66%;"}
   .float_left
-    %h2
-      For News Organizations
-      %a{:name =>"faq_news_organization"}
+    %a{:name =>"faq_news_organization"}
+    %h2 For News Organizations
   .float_right
     %span
       %a{:href => "#faq"} Back to FAQ &#94;
@@ -238,77 +236,121 @@
   %a{:name => "approval"}
   %h3 Why do We Need Approval to get started?
   %p
-    Explanation goes here
+    News organizations have a special role in Spot.Us. They are the only type of user that is
+    allowed to donate more than 20% of a pitch's goal. As such, we vet news organizations to ensure
+    they ascribe to journalistic ethics as described by the Society of Profesional Journalists. We
+    realize that a waiting period before you become a "news organization" on Spot.Us is less than
+    ideal, but it is important to us that these ethics are followed by anybody that could
+    singlehandedly fund an investigation.
 
   %a{:name => "work_with"}
-  %h3 Advice On Working With Spot.Us Bolster your freelance budget.
+  %h3 Advice On Working With Spot.Us. How to bolster your freelance budget.
   %p
-    Explanation goes here
-  
+    Spot.Us is an opportunity to bolster your freelance budget by working with and for the public.
+    We only work with freelancers, we cannot support staff writers. But if you do work or want to
+    procure freelance work, perhaps part of their wage can be shared with the public. 
+    
+  %p
+  %strong Here's how
+    
+  %ul
+    %li
+      Spot.Us content that is 100% community funded is made available for free to news organizations
+      to republish.
+    %li
+      Donate 50% of the value of an investigation. (This is only available until the investigation
+      has reached 51% funding through community donations, so get in the game early).
+    %li
+      Donate 100% of the value of an investigation. You can do this at any time - all extra proceeds
+      will be given back to community members to invest in another pitch, so in a way you get two
+      investigations for the price of one.
+    %li
+      We encourage you to donate small amounts as well. Even a tiny donations from a news
+      organization can be the push to give a pitch the momentum it needs to get community funding -
+      and you are welcome to the final content or even to apply as a fact-check editor.
 
-  
--#
-  %h2 FAQ FOR NEWS ORGANIZATIONS %a{:name => "faq_news_organization"} FAQ FOR NEWS ORGANIZATIONS
- 
-  .double_content_border
- 
-  .block-spacer
- 
-  Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
-  pledge in your dashboard and make the change. For a donation, if you increase the donation you’ll
-  have to “checkout” again – if you lower your donation, you’ll have spare credits which you can
-  direct to a different pitch (spreading the love).
-  
-  Why Credits? Spot Credits are yours and they will remain in your control until a pitch of your
-  choosing reaches its fundraising goal. All of the money you donate will go to the reporting needed
-  to finish an investigation – Spot.Us asks for tips to the organization, but it is not required and
-  we are transparent in asking for tips. In the future we will be looking into options outside of
-  credits to pay for investigative reporting – but for this version, it is the best way to get the
-  job done.
-  
-  Why Tell a Friend? Spot.Us is about giving groups a new sense of editorial power. The only way an
-  investigation gets funded is if a group or network sees value in it. If you are a civic-leader,
-  you can take ownership of a tip or pitch by spreading word about it and making it a reality.
-  
-  What’s an RSS feed? RSS stands for Really Simple Syndication. That means instead of you having to
-  visit spot.us to find out what is new – we will send updates directly to your RSS reader. If
-  you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and
-  running – then come back and click this funny orange button. FAQ for Reporters
-  
-  What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to converse.
-  It also allows a reporter to upload any reporting they’ve done while working on the larger
-  investigation. The reporter can make this reporting public or private, but Spot.Us encourages
-  transparency at all levels.
-  
-  Why give extra to spot.us? (also for Right coloumn of Profile View) Spot.Us is an exciting
-  nonprofit project to pioneer “community funded reporting.” We believe journalism is a process –
-  not a product and all we want to do is support good local investigative journalism. While we do
-  everything to keep our overhead low, just accepting donations means we are running at a loss.
-  Credit card companies take a small percentage of every transaction. We are trying to cover that
-  cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a small
-  donation that goes to the organization to recoup this loss.
-  
-  How do I add a photo?
-  
-  How do I add a video?
-  
-  How do I publish? FAQ for News Organizations
-  
-  For News Organizations
-  
-  Why do We Need Approval to get started? asdf
-  
-  Advice On Working With Spot.Us Bolster your freelance budget
-  
-  What Can We Expect in the future? asdf
-  
-  Ways we can get exclusive content 1. Donate up to 50 percent of the value of an investigation.
-  This is only available until the investigation has reached 51 percent funding through community
-  donations (so get in the game early). 2. Donate 100 percent of the value of an investigation. You
-  can do this at any time – all proceeds will be given back to community members to invest in
-  another pitch, so in a way you get two investigations for the price of one. 3. You can always run
-  our content for free, unless another news organization has done steps one or two above. 4. We
-  encourage you to donate small amounts as well. Even a tiny donations from a news organization can
-  be the push to get a pitch the momentum it needs to get community funding – and you are welcome to
-  the final content or even to apply as a fact-check editor.
 .block-spacer
+.box_white{:style => "width: 66%;"}
+  .float_left
+    %a{:name =>"faq_general"}
+    %h2 General FAQ
+  .float_right
+    %span
+      %a{:href => "#faq"} Back to FAQ &#94;
+  .double_content_border.clear
+
+  %a{:name => "future"}
+    %h2 What Can We Expect in the Future?
+  %hr/
+  %p
+    SO MUCH!!!
+  %p
+    We have lots planned. Our website is currently 1/4th of what we envision. As we
+    develop the open source code we want to add the ability for journalists to report on their
+    pitches in public on the Spot.Us site. We will add more functionality for all three types of
+    users (citizen, reporter, news organization) and who knows what else we might cook up along the
+    way. We are responsive to you, so your feedback is welcome.
+  
+  %a{:name => "why_sf"}
+  %h2 Why are you focused on just the Bay Area? 
+  %hr/
+  %p
+    We do hope to eventually expand into other regions of the country. We are committed to local
+    journalism for many reasons which we could talk your ear off about. As such, the Bay Area seemed
+    like a great place to launch our 1.0. As we improve the site we will launch in other cities.
+  -#
+
+    .double_content_border
+    
+    .block-spacer
+    
+    Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
+    pledge in your dashboard and make the change. For a donation, if you increase the donation
+    you’ll have to “checkout” again – if you lower your donation, you’ll have spare credits which
+    you can direct to a different pitch (spreading the love).
+    
+    Why Credits? Spot Credits are yours and they will remain in your control until a pitch of your
+    choosing reaches its fundraising goal. All of the money you donate will go to the reporting
+    needed to finish an investigation – Spot.Us asks for tips to the organization, but it is not
+    required and we are transparent in asking for tips. In the future we will be looking into
+    options outside of credits to pay for investigative reporting – but for this version, it is the
+    best way to get the job done.
+    
+    Why Tell a Friend? Spot.Us is about giving groups a new sense of editorial power. The only way
+    an investigation gets funded is if a group or network sees value in it. If you are a
+    civic-leader, you can take ownership of a tip or pitch by spreading word about it and making it
+    a reality.
+    
+    What’s an RSS feed? RSS stands for Really Simple Syndication. That means instead of you having
+    to visit spot.us to find out what is new – we will send updates directly to your RSS reader. If
+    you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and
+    running – then come back and click this funny orange button. FAQ for Reporters
+    
+    What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to
+    converse. It also allows a reporter to upload any reporting they’ve done while working on the
+    larger investigation. The reporter can make this reporting public or private, but Spot.Us
+    encourages transparency at all levels.
+    
+    Why give extra to spot.us? (also for Right coloumn of Profile View) Spot.Us is an exciting
+    nonprofit project to pioneer “community funded reporting.” We believe journalism is a process –
+    not a product and all we want to do is support good local investigative journalism. While we do
+    everything to keep our overhead low, just accepting donations means we are running at a loss.
+    Credit card companies take a small percentage of every transaction. We are trying to cover that
+    cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a
+    small donation that goes to the organization to recoup this loss.
+    
+    How do I add a photo?
+    
+    How do I add a video?
+    
+    How do I publish? FAQ for News Organizations
+    
+    For News Organizations
+    
+    What Can We Expect in the future? asdf
+    
+    Ways we can get exclusive content 1. 2. 3. You can always run our content for free, unless
+    another news organization has done steps one or two above. 4. We encourage you to donate small
+    amounts as well. Even a tiny donations from a news organization can be the push to get a pitch
+    the momentum it needs to get community funding – and you are welcome to the final content or
+    even to apply as a fact-check editor.
