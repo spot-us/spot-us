@@ -34,4 +34,9 @@
 #
 
 class Organization < User
+  
+  def deliver_signup_notification
+    Mailer.deliver_organization_signup_notification(self)
+    Mailer.deliver_news_org_signup_request(self)
+  end
 end
