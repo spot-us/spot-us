@@ -1,0 +1,25 @@
+- if @profile.editable_by?(current_user)
+  = link_to 'Edit your profile', edit_myspot_profile_path
+%p= image_tag @profile.photo.url(:thumb)
+%h4.reg-line-height= h @profile.organization_name
+%p.reg-line-height= h @profile.location
+.date.quiet.reg-line-height
+  Established in
+  = @profile.established_year
+- unless @profile.website.blank?
+  %p 
+    = link_to(h(@profile.website), @profile.website)
+- if @profile.topics.any?
+  %p.reg-line-height
+    = h @profile.organization_name 
+    has shown interest in 
+    = show_topics(@profile)
+%hr
+
+%h3
+  About
+  = @profile.organization_name
+
+= sanitize @profile.about_you
+
+.double_content_border
