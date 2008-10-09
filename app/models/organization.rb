@@ -35,7 +35,7 @@
 #
 
 class Organization < User
-  after_create :set_status
+  before_validation_on_create :set_status
 
   aasm_state :needs_approval
   aasm_state :approved
@@ -75,6 +75,6 @@ class Organization < User
   end
   
   def set_status
-    needs_to_be_approved!
+    needs_to_be_approved! if active?
   end
 end

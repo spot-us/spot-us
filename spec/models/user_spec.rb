@@ -140,6 +140,11 @@ describe User do
       @creating_user.should change(User, :count).by(1)
     end
   end
+  
+  it "should set status to unapproved when user is news org" do
+    user = Factory(:organization)
+    user.status.should == "needs_approval"
+  end
 
   it 'generates password on create' do
     user = Factory(:user, :password => nil)
