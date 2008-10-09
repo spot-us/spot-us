@@ -8,7 +8,10 @@
 
   - # first column content 
   .span-605.box_white
-    = render :partial => 'profiles/profile'
+    - if @profile.is_a?(Organization)
+      = render :partial => 'profiles/news_org_profile'
+    - else
+      = render :partial => 'profiles/profile'
 
   - # second column content   
   .span-270.box_white
