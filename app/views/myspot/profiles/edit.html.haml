@@ -18,18 +18,25 @@
       %h3 Edit Your Profile
       .double_content_border
       .span-595.box_yellow.create_a_tip_form
+        - if @profile.is_a?(Organization)
+          = render :partial => "news_org_profile", :locals => {:f => f}
+        - else
+          .row
+            = f.label :photo
+            = image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
+            = f.file_field :photo
+          .yellow-spacer-negative
+          .row
+            = f.label :first_name
+            = f.text_field :first_name
+          .yellow-spacer-negative
+          .row
+            = f.label :last_name
+            = f.text_field :last_name
+          .yellow-spacer-negative
         .row
-          = f.label :photo
-          = image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
-          = f.file_field :photo
-        .yellow-spacer-negative
-        .row
-          = f.label :first_name
-          = f.text_field :first_name
-        .yellow-spacer-negative
-        .row
-          = f.label :last_name
-          = f.text_field :last_name
+          = f.label :website
+          = f.text_field :website
         .yellow-spacer-negative
         .row
           = f.label :location
@@ -45,10 +52,6 @@
             Your Topics of Intest
         .row
           = topic_check_boxes(@profile, "profile")
-        .yellow-spacer-negative
-        .row
-          = f.label :website
-          = f.text_field :website
         .yellow-spacer-negative
         .row
           = f.label :about_you
