@@ -1,4 +1,14 @@
 %h3 Common Questions
 .double_content_border
-%p
-  Lorem ipsum dolor sit amet, consectetuer adiwpiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu, quam. Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus.
+
+  %p
+    Perhaps you have some questions. That's great. We love them. Don't hesitate to contact us
+    = mail_to "david@spot.us", nil, :encode => "hex"
+    Or check out our
+    %li= link_to "FAQ", page_path('about')
+  %p
+    Some questions for Citizens, Reporters and News Organizations
+  
+  
+    .block-spacer
+    

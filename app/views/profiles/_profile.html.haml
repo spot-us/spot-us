@@ -23,7 +23,7 @@
 = sanitize @profile.about_you
 
 - if @profile.is_a?(Reporter) && @profile.samples.any?
-  %h3 Writing Samples
+  %h3 Work Samples
   %hr
   - for sample in @profile.samples
     - if !sample.url.blank?
