@@ -13,7 +13,7 @@
           = f.text_field :amount
           = f.hidden_field :tip_id
           = f.submit "Pledge"
-      = link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
+      .small.uppcased_button_text= link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
 - else
   = link_to image_tag('pledge_25.png'), new_session_path
 

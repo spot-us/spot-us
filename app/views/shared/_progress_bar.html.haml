@@ -1,7 +1,8 @@
-%div{:style => "float: right;"}
-  %div
-    %strong= number_to_currency(pitch.current_funding)
-    raised
-  %div== #{number_to_currency(pitch.funding_needed_in_cents.to_dollars)} needed
 %div
   = static_progress_bar("pitch", pitch.current_funding_in_percentage)
+%div
+  %p
+    %strong= number_to_currency(pitch.current_funding)
+    raised
+    %br/
+    == #{number_to_currency(pitch.funding_needed_in_cents.to_dollars)} to go
