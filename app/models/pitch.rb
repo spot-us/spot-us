@@ -86,12 +86,12 @@ class Pitch < NewsItem
     active?
   end
   
-  def can_be_edited?(user)
+  def editable_by?(user)
     if user.nil?
       false
     else
-     user.admin? || (donations.paid.blank? && active?)
-   end
+      ((self.user == user) && (donations.paid.blank? && active?)) || user.admin? 
+    end
   end
   
   def current_funding_in_percentage
