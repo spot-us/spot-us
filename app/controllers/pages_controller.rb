@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   PAGES = %w(
     about
     contact
+    license
     press
     privacy
     reporter_contract
