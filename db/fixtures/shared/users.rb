@@ -24,14 +24,17 @@ unless Rails.env.production?
   
     user_hash[:id] = 3*i + 1
     user_hash[:email] = original_email.gsub /@/, "+citizen@"
-    Citizen.create_or_update user_hash
+    user_hash[:type] = Citizen.name
+    User.create_or_update user_hash
 
     user_hash[:id] = 3*i + 2
     user_hash[:email] = original_email.gsub /@/, "+reporter@"
-    Reporter.create_or_update user_hash
+    user_hash[:type] = Reporter.name
+    User.create_or_update user_hash
   
     user_hash[:id] = 3*i + 3
     user_hash[:email] = original_email.gsub /@/, "+organization@"
-    Organization.create_or_update user_hash
+    user_hash[:type] = Organization.name
+    User.create_or_update user_hash
   end
 end
