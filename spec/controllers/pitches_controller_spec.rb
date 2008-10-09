@@ -23,13 +23,25 @@ describe PitchesController do
   end
 
   describe "when can't edit" do
-    before(:each) do
-      pitch = Factory(:pitch)
-      pitch.stub!(:editable_by?).and_return(false)
+    it "should deny access and add flash when not owner" do
+      user = Factory(:user)
+      pitch = Factory(:pitch, :user => Factory(:user))
       Pitch.stub!(:find).and_return(pitch)
       get :edit, :id => pitch.id
+      flash[:error].should match(/You cannot edit this pitch, since you didn't create it./)
+      response.should redirect_to(pitch_path(pitch))
     end
-    it_denies_access
+    
+    it "should deny access and add flash when donations added" do
+      user = Factory(:user)
+      pitch = Factory(:pitch, :user => user)
+      controller.stub!(:current_user).and_return(user)
+      donation = Factory(:donation, :pitch => pitch, :amount => 2, :paid => true)
+      Pitch.stub!(:find).and_return(pitch)
+      get :edit, :id => pitch.id
+      flash[:error].should match(/You cannot edit a pitch that has donations.  For minor changes, contact info@spot.us/)
+      response.should redirect_to(pitch_path(pitch))
+    end
   end
   
   describe "can_edit?" do
@@ -38,6 +50,15 @@ describe PitchesController do
       pitch = Factory(:pitch, :user => user)
       pitch.should be_editable_by(user)
       get :edit, :id => pitch.id 
+    end
+    
+    it "should allow an admin to have access" do
+      user = Factory(:admin)
+      pitch = Factory(:pitch)
+      controller.stub!(:current_user).and_return(user)
+      donation = Factory(:donation, :pitch => pitch, :amount => 3, :paid => true)
+      get :edit, :id => pitch.id
+      flash[:error].should be_nil
     end
   end
   
@@ -48,16 +69,6 @@ describe PitchesController do
         pitch = Factory(:pitch)
         get :edit, :id => pitch.to_param
         response.should render_template(:edit)
-      end
-    end
-
-    describe "with a paid donation" do
-      it "renders edit" do
-        controller.stub!(:can_edit?).and_return(true)
-        donation = Factory(:donation, :paid => true)
-        get :edit, :id => donation.pitch.to_param
-        response.should redirect_to(pitch_path(donation.pitch))
-        flash[:error].should match(/cannot edit a pitch that has donations/i)
       end
     end
   end
