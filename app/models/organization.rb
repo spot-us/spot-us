@@ -46,7 +46,7 @@ class Organization < User
   
   aasm_event :approve do
     transitions :from => :needs_approval, :to => :approved, 
-                :on_transition => :send_approval_notification
+                :on_transition => :do_after_approved_actions
   end
   
   # Due to an extremly crazy bug with paper clip and aasm we must include the has_attachment_for 
@@ -70,10 +70,15 @@ class Organization < User
     Mailer.deliver_news_org_signup_request(self)
   end
   
-  def send_approval_notification
+  def do_after_approved_actions
+    # trick: we need to generate password here so that password field is
+    # populated for sending in the email. the password field is not
+    # otherwise available.
+    
+    generate_password
     Mailer.deliver_organization_approved_notification(self)
   end
-  
+    
   def set_status
     needs_to_be_approved! if active?
   end
