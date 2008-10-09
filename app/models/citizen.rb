@@ -37,18 +37,4 @@
 #
 
 class Citizen < User
-  # Due to an extremly crazy bug with paper clip and aasm we must include the has_attachment_for 
-  # in the child class in order for everything not to blow up. For some reason the include on aasm
-  # messes up the inclusion of paperclip. .shrug not sure. other option is to have aasm in the child
-  # class but figured it was better to have this duplication rather than duplicating all the state
-  # stuff -- DESI
-  
-  has_attached_file :photo, 
-                    :styles      => { :thumb => '50x50#' }, 
-                    :path        => ":rails_root/public/system/profiles/" << 
-                                    ":attachment/:id_partition/" <<
-                                    ":basename_:style.:extension",
-                    :url         => "/system/profiles/:attachment/:id_partition/" <<
-                                    ":basename_:style.:extension",
-                    :default_url => "/images/default_avatar.png"
 end
