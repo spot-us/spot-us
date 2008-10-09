@@ -7,6 +7,12 @@ class Admin::UsersController < ApplicationController
     redirect_to root_path
   end
   
+  def approve 
+    org = Organization.find(params[:id])
+    org.approve!
+    redirect_to(admin_user_path(@user))
+  end
+  
   # GET /users
   # GET /users.xml
   def index
