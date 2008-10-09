@@ -4,11 +4,14 @@
   %h3
     == #{news_item.class.name.upcase}:
     = link_to news_item.headline, news_item
-  .dateline
+  .dateline.small.quiet
     Posted
     = news_item.created_at.to_s(:long_date)
     by
     = link_to h(news_item.user.full_name), profile_path(news_item.user)
     in
     = news_item.location
-  %p.short_description= news_item.short_description
+  %p.short_description.alt-spotus
+    = truncate_words(news_item.short_description, 40)
+    = link_to "Read More &raquo;", news_item
+    
