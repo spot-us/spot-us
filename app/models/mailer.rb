@@ -43,4 +43,11 @@ class Mailer < ActionMailer::Base
     subject    "Spot.Us: Success!! Your Story is Funded!"
     body       :pitch => pitch
   end
+  
+  def organization_approved_notification(user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Important Information on Joining"
+    body       :user => user
+  end
 end
