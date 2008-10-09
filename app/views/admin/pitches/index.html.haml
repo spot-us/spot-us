@@ -1,0 +1,22 @@
+%table
+  %th Headline
+  %th Created At
+  %th Location
+  %th Expiration
+  %th Funding
+  %th Supporters
+  
+  - for pitch in @pitches
+    %tr
+      %td
+        PITCH:
+        = link_to h(pitch.headline), pitch_url(pitch)
+      %td= pitch.created_at.to_s(:date)
+      %td= pitch.location
+      %td= pitch.expiration_date.to_s(:date)
+      %td
+        %strong= number_to_currency(pitch.current_funding)
+        of
+        == #{number_to_currency(pitch.requested_amount_in_cents.to_dollars)} Raised
+      %td
+        = pitch.supporters.map(&:email).join(', ')
