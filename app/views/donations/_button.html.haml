@@ -13,7 +13,7 @@
           = f.text_field :amount
           = f.hidden_field :pitch_id
           = f.submit "Donate!"
-      %div.centered= link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
+      .small.uppcased_button_text= link_to_function "OR DONATE ANOTHER AMOUNT", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
       .double_content_border
         = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
 - else

@@ -3,6 +3,6 @@
   .box_white
     #equalize
       = render :partial => 'news_items/news_item', :object => tip
-      .span-280
+      .span-280.button_news_items
         = render :partial => "pledges/button", :locals => { :news_item => tip }
     .clear
