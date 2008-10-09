@@ -3,18 +3,19 @@
     = render :partial => 'donations/added', :locals => { :news_item => news_item }
   - else
     %div{:id => "inline_donation_form_#{news_item.id}"}
-      %div.centered{:id => "donation_button_#{news_item.id}"}
+      %div{:id => "donation_button_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
           = f.hidden_field :amount
           = f.hidden_field :pitch_id
           = image_submit_tag "donate_25.png"
-      %div.centered{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
+      %div{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item) do |f|
           = f.text_field :amount
           = f.hidden_field :pitch_id
           = f.submit "Donate!"
-      .small.uppcased_button_text= link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
-      .double_content_border
-        = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
+      .small.uppcased_button_text
+        = link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
+        .double_content_border
+      = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
 - else
   = link_to image_tag('donate_25.png'), new_session_path
