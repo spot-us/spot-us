@@ -100,7 +100,7 @@ describe User do
   end
 
   describe "signup notification emails" do
-    it "sends email to citize on create" do
+    it "sends email to citizen on create" do
       user = Factory.build(:user)
       Mailer.should_receive(:deliver_citizen_signup_notification).with(user)
       user.save!
