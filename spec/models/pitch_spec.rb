@@ -41,30 +41,50 @@ describe Pitch do
     end
   end
   
-  describe "can_be_edited?" do
-    it "should return false when pitch has paid donations" do
-      user = Factory(:user)
-      p = Factory(:pitch, :requested_amount => 100)
-      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
-      p.reload
-      p.can_be_edited?(user).should be_false
+  describe "editing" do
+    before(:each) do
+      @pitch = Factory(:pitch, :user => Factory(:user))
+    end
+  
+    it "is editable by its owner" do
+      @pitch.editable_by?(@pitch.user).should be_true
+    end
+  
+    it "is not editable by a stranger" do
+      @pitch.editable_by?(Factory(:user)).should_not be_true
+    end
+  
+    it "is not editable if not logged in" do
+      @pitch.editable_by?(nil).should_not be_true
     end
     
-    it "should return false when pitch has been accepted" do
+    it "is not editable if has donations" do
       user = Factory(:user)
-      p = Factory(:pitch, :requested_amount => 100)
+      p = Factory(:pitch, :user => user, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
+      p.editable_by?(user).should_not be_true
+    end
+    
+    it "is not editable if it is accepted" do
+      user = Factory(:user)
+      p = Factory(:pitch, :user => user, :requested_amount => 100)
       p.accept!
-      p.can_be_edited?(user).should be_false
+      p.editable_by?(user).should_not be_true
     end
     
-    it "should return true regardless when user is an admin" do
+    it "is editable_by an admin even if donations" do
       user = Factory(:admin)
-      p = Factory(:pitch, :requested_amount => 100)
+      p = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
-      p.reload
-      p.can_be_edited?(user).should be_true
+      p.editable_by?(user).should be_true
     end
-
+    
+    it "is editable by admin even if it is accepted" do
+      user = Factory(:admin)
+      p = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
+      p.accept!
+      p.editable_by?(user).should be_true
+    end
   end
   
   describe "can_be_accepted?" do
@@ -314,23 +334,7 @@ describe Pitch do
     end
   end
   
-  describe "editing" do
-    before(:each) do
-      @pitch = Factory(:pitch, :user => Factory(:user))
-    end
-  
-    it "is editable by its owner" do
-      @pitch.editable_by?(@pitch.user).should be_true
-    end
-  
-    it "is not editable by a stranger" do
-      @pitch.editable_by?(Factory(:user)).should_not be_true
-    end
-  
-    it "is not editable if not logged in" do
-      @pitch.editable_by?(nil).should_not be_true
-    end
-  end
+
   
   
   it "returns true on #pitch?" do
