@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
   end
   
   def reporter?
-    is_a? Reporter
+    self.is_a? Reporter
   end
 
   def organization?
@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
   end
   
   def deliver_signup_notification
-    return if self.admin?
+    return if self.type == "Admin"
     Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)    
   end
 
