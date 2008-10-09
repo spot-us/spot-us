@@ -239,9 +239,6 @@ class User < ActiveRecord::Base
   def deliver_signup_notification
     return if self.admin?
     Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)    
-    if self.organization?
-      Mailer.deliver_news_org_signup_request(self)
-    end
   end
 
   def set_default_location
