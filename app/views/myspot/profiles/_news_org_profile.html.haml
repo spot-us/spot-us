@@ -1,0 +1,10 @@
+.row
+  = f.label :photo, "Your Logo"
+  = image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
+  = f.file_field :photo
+.row
+  = f.label :organization_name
+  = f.text_field :organization_name
+.row
+  = f.label :established_year
+  = f.text_field :established_year

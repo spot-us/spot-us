@@ -32,6 +32,8 @@
 #  notify_spotus_news        :boolean(1)      
 #  fact_check_interest       :boolean(1)      not null
 #  status                    :string(255)     default("active")
+#  organization_name         :string(255)     
+#  established_year          :string(255)     
 #
 
 class Citizen < User

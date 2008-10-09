@@ -20,11 +20,11 @@
           = f.label :email, 'Email Address'
           = f.text_field :email
         .yellow-spacer-negative
-        .row
-          = f.label :phone, 'Phone Number'
-          = f.text_field :phone
-        .yellow-spacer-negative
-        - if @settings.is_a?(Reporter)
+        - if @settings.is_a?(Reporter) || @settings.is_a?(Organization)
+          .row
+            = f.label :phone, 'Phone Number'
+            = f.text_field :phone
+          .yellow-spacer-negative
           .row
             = f.label :address1, 'Address (1)'
             = f.text_field :address1
@@ -43,7 +43,7 @@
           .row
             = f.label :country
             = f.country_select :country, ['United States'], :include_blank => true
-        .clear
+          .clear
 
       %hr
 
