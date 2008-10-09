@@ -34,4 +34,30 @@ describe Organization do
       @user.status.should == 'approved'
     end
   end
+  
+  describe "named scopes" do
+    before(:each) do
+      @user1 = Factory(:organization)
+      @user2 = Factory(:organization)
+      @user3 = Factory(:organization)
+      @user4 = Factory(:organization)
+    end
+    
+    describe "when unapproved" do
+      it "should return only a list of unapproved news orgs" do
+        @user2.status.should == "needs_approval"
+        @user2.approve!
+        @user4.approve!
+        User.unapproved_news_orgs.should == [@user1, @user3]
+      end
+    end
+    
+    describe "when approved" do
+      it "should return only a list of approved news orgs" do
+        @user2.approve!
+        @user4.approve!
+        User.approved_news_orgs.should == [@user2, @user4]
+      end
+    end
+  end
 end

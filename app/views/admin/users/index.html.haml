@@ -58,4 +58,14 @@
       %td=h user.phone
 
 
+%h1 News Organizations Awaiting Approval
+%table
+  - for user in User.unapproved_news_orgs
+    %tr
+      %td=h user.first_name
+      %td=h user.last_name
+      %td=h user.email
+      %td=h user.phone
+      %td=link_to 'Approve', approve_admin_user_path(user), :method => :put
+
 
