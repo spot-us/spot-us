@@ -1,3 +1,4 @@
+%a{:name => "top"}
 .block-spacer
 .box_white
   %h2 What is Spot.Us About?
@@ -24,8 +25,8 @@
   %p
     Spot.Us was founded by David Cohn and made possible by a generous grant from
     the Knight Foundation. It has also drawn on support from individual funders
-    like yourself, a fantastic team of advisors, designers and developers
-    == (#{link_to "Hashrocket", "http://www.hashrocket.com/"}).
+    like yourself, a fantastic team of advisors, designers and developers of
+    == #{link_to "Hashrocket", "http://www.hashrocket.com/"}.
     We are proudly hosted by
     == #{link_to "Engine Yard", "http://engineyard.com/"}. We are an open source project 
     and you can contribute on
@@ -42,7 +43,7 @@
   %p
     We have a board of advisors that includes: Dan Gillmor, Jay Rosen, Jeff Jarvis,
     Susan Mernit, Fabrice Florin, Brant Houston, Leonard Witt and Jeremy Toeman.
-     
+    
   %h2 Take Action!
   %hr/
 
@@ -50,11 +51,19 @@
     What are you passionate about? Create a "news tip." Or - browse to see if there’s already a pitch
     looking into your issue.
 
-  %h2 General FAQ!
+.block-spacer
+.box_white
 
-  .double_content_border
+  .float_left
+    %h2
+      General FAQ!
+      %a{:name => "faq"}
+  .float_right
+    %span
+      %a{:href => "#top"} Back to top &#94;
+  .double_content_border.clear
   
-  %h1 
+  %h3 
     %strong 
       %a{:href =>"#faq_citizen"} For Citizens
   %ul
@@ -67,7 +76,7 @@
     %li
       %a{:href =>"#privacy"} About Your Privacy
 
-  %h1 
+  %h3 
     %strong 
       %a{:href =>"#faq_reporter"} For Reporters
   %ul
@@ -85,7 +94,7 @@
       %a{:href =>"#creative_commons"} What’s the Creative Commons Deal?
 
 
-  %h1
+  %h3
     %strong 
       %a{:href =>"#faq_news_organization"} For News Organizations
   %ul
@@ -95,16 +104,20 @@
       %a{:href =>"#work_with"} Advice On Working With Spot.Us Bolster your freelance budget.
    
 
-  .double_content_border
-  %h1 
-    %strong 
-      %a{:name =>"faq_citizen"} For Citizens
-  .double_content_border
-      
+.block-spacer
+.box_white
+
+  .float_left
+    %h2
+      For Citizens
+      %a{:name =>"faq_citizen"}
+  .float_right
+    %span
+      %a{:href => "#faq"} Back to FAQ &#94;
+  .double_content_border.clear
+
   %a{:name => "faqtip"}
-    %h2 
-      What is a Tip?
-  %hr/
+  %h3 What is a Tip?
   %p
     Anyone can create a news "tip" about an important topic you think should be reported on. This is
     often related to the question "what are you passionate about?" You can pledge to this tip, but
@@ -112,8 +125,7 @@
     a pitch. Creating a tip could be the spark that starts an investigation.
     
   %a{:name => "pledge_versus_tip"}
-    %h2 What's the difference between Pledge and Donate?
-  %hr/
+  %h3 What's the difference between Pledge and Donate?
   %p
     Pledges give reporters a sense of community interest in a news &ldquo;tip.&rdquo; It does not
     represent real money. Nothing is committed - although we ask you pledge only what you’d be
@@ -124,28 +136,33 @@
     cards are only charged if the specific pitch you want has reached its funding goal.
         
   %a{:name => "donation_goal"}
-    %h2 What if the pitch I donate to doesn't reach it's goal?
-  %hr/
+  %h3 What if the pitch I donate to doesn't reach it's goal?
   %p
     All credits are returned to your account and you can direct them towards any other existing
     pitch. You will have until the end of the fiscal year to put the money back in circulation
     through the Spot.Us system.
 
   %a{:name => "privacy"}
-    %h2 Your Privacy
-  %hr/
+  %h3 Your Privacy
   %p
     Privacy is very important to us. We will never share your information with a third party. No
-    if’s and’s or but’s. To learn more, please check our = link_to 'our Privacy Policy.',
-    page_path("privacy")
-    
-  %h1 
-    %strong 
-      %a{:name =>"faq_reporter"} For Reporters
-  .double_content_border
+    if’s and’s or but’s. To learn more, please check our 
+    = link_to 'Privacy Policy.', page_path("privacy")
+
+.block-spacer
+.box_white
+
+  .float_left
+    %h2
+      For Reporters
+      %a{:name =>"faq_reporter"}
+  .float_right
+    %span
+      %a{:href => "#faq"} Back to FAQ &#94;
+  .double_content_border.clear
+
   %a{:name => "reporters_tip"}
-  %h2 What is a Tip?
-  %hr/
+  %h3 What is a Tip?
   %p
     Tips are exactly what they sound like – community tips on untold and important stories. 
     Creating a pitch and then referencing a tip will send a note to every member of that group 
@@ -154,8 +171,7 @@
     You can reference as many tips as are relevant to your pitch.
   
   %a{:name => "pitch_advice"}
-    %h2 Advice on Creating a Pitch
-  %hr/
+  %h3 Advice on Creating a Pitch
   %p
     Write the pitch so that anyone who reads it will want to see that story materialize. Sell your
     idea and your expertise on the subject. Don’t be afraid to be personal. Upload a You Tube video
@@ -165,16 +181,14 @@
     == (#{link_to "Read More", "http://blog.spot.us/2008/10/09/independent-journalists-how-to-raise-your-own-income "}).
 
   %a{:name => "tip_attach"}
-    %h2 Attaching a Tip to Your Pitch
-  %hr/
+  %h3 Attaching a Tip to Your Pitch
   %p
     Attaching a tip is a reporters way of tapping the community members on the shoulder and saying
     “hey, I’ve referenced your news tip in my pitch.” You can ping as many tips as you want – but
     they should be related to the pitch you create.
     
   %a{:name => "qa_editor"}
-    %h2 What’s the role of the Fact-Check Editor?
-  %hr/
+  %h3 What’s the role of the Fact-Check Editor?
   %p
     The Fact-Check editor has two main responsibilities – to fact-check the reporting and ensure
     fairness. To do the later the QA editor should be in touch with the journalist before reporting
@@ -184,8 +198,7 @@
     editor's approval. Any journalist can apply to be a Fact-Check editor within their profile.
     
   %a{:name => "pitch_goal"}
-    %h2 What if my pitch doesn’t reach it’s goal?
-  %hr/
+  %h3 What if my pitch doesn’t reach it’s goal?
   %p
     You can accept to do the pitch regardless of whether or not you reach the original goal. So, if
     you raise 80% of the stated goal, you can still accept that money, but you must do the same
@@ -194,15 +207,13 @@
     pitch.
     
   %a{:name => "address"}
-    %h2 Why Do we Need Shipping Address?
-  %hr/
+  %h3 Why Do we Need Shipping Address?
   %p
     We will not share this information with anyone, it’s merely so we can send you a check for the
     work that you do on Spot.Us.
         
   %a{:name => "creative_commons"}
-    %h2 What’s the Creative Commons Deal?
-  %hr/
+  %h3 What’s the Creative Commons Deal?
   %p
     Journalism is a process - not a product. The end content produced by Spot.Us will be given away
     for free unless a news organization has either contributed between 50 or 100% of the total cost.
@@ -212,22 +223,25 @@
     = link_to 'Reporters Contract', page_path("reporter_contract")
         
     
+.block-spacer
+.box_white
 
-  %h1 
-    %strong 
-      %a{:name =>"faq_news_organization"} For News Organizations
-  .double_content_border
+  .float_left
+    %h2
+      For News Organizations
+      %a{:name =>"faq_news_organization"}
+  .float_right
+    %span
+      %a{:href => "#faq"} Back to FAQ &#94;
+  .double_content_border.clear
 
-    
   %a{:name => "approval"}
-    %h2 Why do We Need Approval to get started?
-  %hr/
+  %h3 Why do We Need Approval to get started?
   %p
     Explanation goes here
 
   %a{:name => "work_with"}
-    %h2 Advice On Working With Spot.Us Bolster your freelance budget.
-  %hr/
+  %h3 Advice On Working With Spot.Us Bolster your freelance budget.
   %p
     Explanation goes here
   
@@ -297,3 +311,4 @@
   encourage you to donate small amounts as well. Even a tiny donations from a news organization can
   be the push to get a pitch the momentum it needs to get community funding – and you are welcome to
   the final content or even to apply as a fact-check editor.
+.block-spacer
