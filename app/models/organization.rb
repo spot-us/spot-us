@@ -31,12 +31,50 @@
 #  notify_stories            :boolean(1)      
 #  notify_spotus_news        :boolean(1)      
 #  fact_check_interest       :boolean(1)      not null
+#  status                    :string(255)     default("active")
 #
 
 class Organization < User
+  after_create :set_status
+
+  aasm_state :needs_approval
+  aasm_state :approved
+  
+  aasm_event :needs_to_be_approved do
+    transitions :from => :active, :to => :needs_approval
+  end
+  
+  aasm_event :approve do
+    transitions :from => :needs_approval, :to => :approved, 
+                :on_transition => :send_approval_notification
+  end
+  
+  # Due to an extremly crazy bug with paper clip and aasm we must include the has_attachment_for 
+  # in the child class in order for everything not to blow up. For some reason the include on aasm
+  # messes up the inclusion of paperclip. .shrug not sure. other option is to have aasm in the child
+  # class but figured it was better to have this duplication rather than duplicating all the state
+  # stuff -- DESI
+  
+  has_attached_file :photo, 
+                    :styles      => { :thumb => '50x50#' }, 
+                    :path        => ":rails_root/public/system/profiles/" << 
+                                    ":attachment/:id_partition/" <<
+                                    ":basename_:style.:extension",
+                    :url         => "/system/profiles/:attachment/:id_partition/" <<
+                                    ":basename_:style.:extension",
+                    :default_url => "/images/default_avatar.png"
+  
   
   def deliver_signup_notification
     Mailer.deliver_organization_signup_notification(self)
     Mailer.deliver_news_org_signup_request(self)
+  end
+  
+  def send_approval_notification
+    Mailer.deliver_organization_approved_notification(self)
+  end
+  
+  def set_status
+    needs_to_be_approved!
   end
 end

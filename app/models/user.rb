@@ -31,11 +31,17 @@
 #  notify_stories            :boolean(1)      
 #  notify_spotus_news        :boolean(1)      
 #  fact_check_interest       :boolean(1)      not null
+#  status                    :string(255)     default("active")
 #
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
   include HasTopics
+  include AASM
+  aasm_column :status
+  aasm_initial_state  :active
+  aasm_state :active
+  
   has_many :donations
   has_many :tips
   has_many :pitches
