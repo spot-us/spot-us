@@ -1,16 +1,7 @@
 class PitchesController < ApplicationController
-  before_filter :block_if_donated_to, :only => :edit
   before_filter :store_location, :only => :show
   resources_controller_for :pitch
 
-  def block_if_donated_to
-    pitch = find_resource(params[:id])
-    if pitch.donated_to?
-      access_denied(:flash => "You cannot edit a pitch that has donations. For minor changes, contact info@spot.us", 
-                    :redirect => pitch_url(pitch))
-    end
-  end
-  
   protected
     
   def can_create?
@@ -18,7 +9,26 @@ class PitchesController < ApplicationController
   end
 
   def can_edit?
-    access_denied unless find_resource.editable_by?(current_user)
+    
+    pitch = find_resource
+    
+    if not pitch.editable_by?(current_user)
+      if pitch.user == current_user
+        if pitch.donated_to?
+          access_denied( \
+            :flash => "You cannot edit a pitch that has donations.  For minor changes, contact info@spot.us", 
+            :redirect => pitch_url(pitch))
+        else
+          access_denied( \
+            :flash => "You cannot edit this pitch.  For minor changes, contact info@spot.us", 
+            :redirect => pitch_url(pitch))
+        end
+      else
+        access_denied( \
+          :flash => "You cannot edit this pitch, since you didn't create it.",
+          :redirect => pitch_url(pitch))
+      end
+    end
   end
 
   def new_resource
