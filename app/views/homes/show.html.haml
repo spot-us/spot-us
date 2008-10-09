@@ -22,16 +22,17 @@
       .summary.span-280
         %h3
           PITCH:
-          = link_to @featured_pitch.headline, @featured_pitch
-        .dateline
+          %strong= link_to @featured_pitch.headline, @featured_pitch
+        .dateline.small.quiet
           Posted
           = @featured_pitch.created_at.to_s(:long_date)
           by
           = link_to h(@featured_pitch.user.full_name), profile_path(@featured_pitch.user)
           in
           = @featured_pitch.location
-        %p.short_description 
-          = h @featured_pitch.short_description
+        %p.short_description.alt-spotus
+          = truncate_words(h(@featured_pitch.short_description), 30)
+          =# h @featured_pitch.short_description
           = link_to 'Read More &raquo;', @featured_pitch
         .double_content_border
         .float-right
