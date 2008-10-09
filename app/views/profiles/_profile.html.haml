@@ -1,5 +1,5 @@
 - if @profile.editable_by?(current_user)
-  = link_to 'Edit your profile', edit_myspot_profile_path
+  .float-right= link_to image_tag("edit_your_profile.png"), edit_myspot_profile_path
 %p= image_tag @profile.photo.url(:thumb)
 %h4.reg-line-height= h @profile.full_name
 %p.reg-line-height= h @profile.location
