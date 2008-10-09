@@ -22,19 +22,24 @@ unless Rails.env.production?
     #           lark+reporter@hashrocket.com
     #           lark+organization@hashrocket.com  
   
-    user_hash[:id] = 3*i + 1
+    user_hash[:id] = 4*i + 1
     user_hash[:email] = original_email.gsub /@/, "+citizen@"
     user_hash[:type] = Citizen.name
     User.create_or_update user_hash
-
-    user_hash[:id] = 3*i + 2
+    
+    user_hash[:id] = 4*i + 2
     user_hash[:email] = original_email.gsub /@/, "+reporter@"
     user_hash[:type] = Reporter.name
     User.create_or_update user_hash
   
-    user_hash[:id] = 3*i + 3
+    user_hash[:id] = 4*i + 3
     user_hash[:email] = original_email.gsub /@/, "+organization@"
     user_hash[:type] = Organization.name
+    User.create_or_update user_hash
+
+    user_hash[:id] = 4*i + 4
+    user_hash[:email] = original_email.gsub /@/, "+admin@"
+    user_hash[:type] = Admin.name
     User.create_or_update user_hash
   end
 end
