@@ -8,7 +8,17 @@
     journalists to do investigations into important and perhaps overlooked
     stories. It&rsquo;s a marketplace where independent reporters, community members
     and news organizations can come together and collaborate.
-  
+
+  %h2 Contact
+  %hr/
+  %p
+    We are incredibly passionate and do our best to answer every email. Don't hesitate to contact
+    us:
+    = mail_to "info@spot.us", nil, :encode => "hex"
+  %p
+    Before you send us an email - check our FAQ's below. Perhaps your question
+    has already been answered.
+    
   %h2 Who
   %hr/
   %p
@@ -32,132 +42,258 @@
   %p
     We have a board of advisors that includes: Dan Gillmor, Jay Rosen, Jeff Jarvis,
     Susan Mernit, Fabrice Florin, Brant Houston, Leonard Witt and Jeremy Toeman.
-  
+     
   %h2 Take Action!
+  %hr/
 
   %p
     What are you passionate about? Create a "news tip." Or - browse to see if there’s already a pitch
     looking into your issue.
 
   %h2 General FAQ!
-  %p
-    %a{:href =>"#faqtip"} What is a tip?
-  %p
-    %a{:href =>"#pledge_versus_tip"} What's the difference between Pledge and Donate?
-  %p
-    %a{:href =>"#privacy"} About Your Privacy
-  %p
-    %a{:href =>"#faqtip"} What is a tip?
-  %p
-    %a{:href =>"#faqtip"} What is a tip?
-  %p
-    %a{:href =>"#faqtip"} What is a tip?
-  %p
-    %a{:href =>"#faqtip"} What is a tip?
-    
-
 
   .double_content_border
+  
+  %h1 
+    %strong 
+      %a{:href =>"#faq_citizen"} For Citizens
+  %ul
+    %li
+      %a{:href =>"#faqtip"} What is a tip?
+    %li
+      %a{:href =>"#pledge_versus_tip"} What's the difference between Pledge and Donate?
+      %li
+        %a{:href =>"#donation_goal"} What if the pitch I donate to doesn't reach it's goal?
+    %li
+      %a{:href =>"#privacy"} About Your Privacy
 
+  %h1 
+    %strong 
+      %a{:href =>"#faq_reporter"} For Reporters
+  %ul
+    %li
+      %a{:href =>"#reporters_tip"} What is a tip?
+    %li
+      %a{:href =>"#pitch_advice"} Advice on Creating a Pitch
+    %li
+      %a{:href =>"#tip_attach"} Attaching a Tip to Your Pitch
+    %li
+      %a{:href =>"#pitch_goal"} What if my pitch doesn’t reach it’s goal?
+    %li
+      %a{:href =>"#address"} Why Do we Need Shipping Address?
+    %li
+      %a{:href =>"#creative_commons"} What’s the Creative Commons Deal?
+
+
+  %h1
+    %strong 
+      %a{:href =>"#faq_news_organization"} For News Organizations
+  %ul
+    %li
+      %a{:href =>"#approval"} Why do We Need Approval to get started?
+    %li
+      %a{:href =>"#work_with"} Advice On Working With Spot.Us Bolster your freelance budget.
+   
+
+  .double_content_border
+  %h1 
+    %strong 
+      %a{:name =>"faq_citizen"} For Citizens
+  .double_content_border
+      
   %a{:name => "faqtip"}
-  %h2 What is a Tip?
+    %h2 
+      What is a Tip?
+  %hr/
   %p
-    Anyone can create a news “tip” about an important topic you think should be reported on? 
-    This is often related to the question “what are you passionate about?” You can pledge to 
-    this tip, but no money is taken - it’s just a way to show how much interest you have in this 
-    possibly becoming a pitch (link to pitch Faq). Creating a tip could be the spark that starts 
-    an investigation.
-
+    Anyone can create a news "tip" about an important topic you think should be reported on. This is
+    often related to the question "what are you passionate about?" You can pledge to this tip, but
+    no money is taken - it’s just a way to show how much interest you have in this possibly becoming
+    a pitch. Creating a tip could be the spark that starts an investigation.
+    
   %a{:name => "pledge_versus_tip"}
-  %h2 What's the difference between Pledge and Donate?
+    %h2 What's the difference between Pledge and Donate?
+  %hr/
   %p
-    Pledges give reporters a sense of community interest in a news &ldquo;tip.&rdquo; It does not represent 
-    real money. Nothing is committed - although we ask you pledge only what you’d be willing to 
-    eventually donate if a reporter builds a full "pitch" inspired by this tip. Donations to 
-    pitches are tax-deductable and will become a transaction if the pitch reaches its funding goal. 
-    If not, you will get Spot Credits to re-use elsewhere on the site. (read more). No matter what 
-    your money will go to support journalism. In the future we hope to build out a more dynamic 
-    credit system such that credit cards are only charged if the specific pitch you want has 
-    reached its funding goal.
+    Pledges give reporters a sense of community interest in a news &ldquo;tip.&rdquo; It does not
+    represent real money. Nothing is committed - although we ask you pledge only what you’d be
+    willing to eventually donate if a reporter builds a full "pitch" inspired by this tip. Donations
+    to pitches are tax-deductable and are a transaction. If the pitch is unsuccesful, you will
+    receive money back in the form of Spot.Us credits. No matter what your money will go to support
+    journalism. In the future we hope to build out a more dynamic credit system such that credit
+    cards are only charged if the specific pitch you want has reached its funding goal.
+        
+  %a{:name => "donation_goal"}
+    %h2 What if the pitch I donate to doesn't reach it's goal?
+  %hr/
+  %p
+    All credits are returned to your account and you can direct them towards any other existing
+    pitch. You will have until the end of the fiscal year to put the money back in circulation
+    through the Spot.Us system.
 
   %a{:name => "privacy"}
-  %h2 Your Privacy
+    %h2 Your Privacy
+  %hr/
   %p
-    Privacy is very important to us. We will never share your information with a third party. 
-    No if’s and’s or but’s. To learn more, please check our Privacy Policy page.
+    Privacy is very important to us. We will never share your information with a third party. No
+    if’s and’s or but’s. To learn more, please check our = link_to 'our Privacy Policy.',
+    page_path("privacy")
+    
+  %h1 
+    %strong 
+      %a{:name =>"faq_reporter"} For Reporters
+  .double_content_border
+  %a{:name => "reporters_tip"}
+  %h2 What is a Tip?
+  %hr/
+  %p
+    Tips are exactly what they sound like – community tips on untold and important stories. 
+    Creating a pitch and then referencing a tip will send a note to every member of that group 
+    to let them know their story tip could become a reality in your pitch. In this sense - the 
+    community is your ally in forming pitches. Browse the tips and create pitches based on them. 
+    You can reference as many tips as are relevant to your pitch.
+  
+  %a{:name => "pitch_advice"}
+    %h2 Advice on Creating a Pitch
+  %hr/
+  %p
+    Write the pitch so that anyone who reads it will want to see that story materialize. Sell your
+    idea and your expertise on the subject. Don’t be afraid to be personal. Upload a You Tube video
+    explaining who you are and why you’re the right person for the job. Imagine what civic leaders
+    or organizations would want to partner with you. Remember - the public now has a freelance
+    budget, pitch them like you would the editor of a major metropolitan newspaper. 
+    == (#{link_to "Read More", "http://blog.spot.us/2008/10/09/independent-journalists-how-to-raise-your-own-income "}).
 
+  %a{:name => "tip_attach"}
+    %h2 Attaching a Tip to Your Pitch
+  %hr/
+  %p
+    Attaching a tip is a reporters way of tapping the community members on the shoulder and saying
+    “hey, I’ve referenced your news tip in my pitch.” You can ping as many tips as you want – but
+    they should be related to the pitch you create.
+    
+  %a{:name => "qa_editor"}
+    %h2 What’s the role of the Fact-Check Editor?
+  %hr/
+  %p
+    The Fact-Check editor has two main responsibilities – to fact-check the reporting and ensure
+    fairness. To do the later the QA editor should be in touch with the journalist before reporting
+    begins and before the draft is uploaded. At any time the Fact-Check editor can report suspicious
+    activities to Spot.Us. Fact-Check editors are assigned by spot.Us, and the reporter can reject
+    the first two assigned editors. The investigation will not publish without the Fact-Check
+    editor's approval. Any journalist can apply to be a Fact-Check editor within their profile.
+    
+  %a{:name => "pitch_goal"}
+    %h2 What if my pitch doesn’t reach it’s goal?
+  %hr/
+  %p
+    You can accept to do the pitch regardless of whether or not you reach the original goal. So, if
+    you raise 80% of the stated goal, you can still accept that money, but you must do the same
+    amount of work original stated in the pitch. You can also choose to cancel the pitch at any time
+    and donations will be directed back to the original donors so they may direct it to another
+    pitch.
+    
+  %a{:name => "address"}
+    %h2 Why Do we Need Shipping Address?
+  %hr/
+  %p
+    We will not share this information with anyone, it’s merely so we can send you a check for the
+    work that you do on Spot.Us.
+        
+  %a{:name => "creative_commons"}
+    %h2 What’s the Creative Commons Deal?
+  %hr/
+  %p
+    Journalism is a process - not a product. The end content produced by Spot.Us will be given away
+    for free unless a news organization has either contributed between 50 or 100% of the total cost.
+    In that situation - we will grant that news organization temporary rights to the article.
+    Eventually all Spot.Us stories are licensed under Creative Commons. You can learn more by
+    reading our 
+    = link_to 'Reporters Contract', page_path("reporter_contract")
+        
+    
 
+  %h1 
+    %strong 
+      %a{:name =>"faq_news_organization"} For News Organizations
+  .double_content_border
 
+    
+  %a{:name => "approval"}
+    %h2 Why do We Need Approval to get started?
+  %hr/
+  %p
+    Explanation goes here
 
-
-.block-spacer 
+  %a{:name => "work_with"}
+    %h2 Advice On Working With Spot.Us Bolster your freelance budget.
+  %hr/
+  %p
+    Explanation goes here
   
 
-
+  
 -#
-  Changing a Pledge.
-  You can change a pledge or donation at any time. For a tip, just find the pledge in your dashboard and make the change. For a donation, if you increase the donation you’ll have to “checkout” again – if you lower your donation, you’ll have spare credits which you can direct to a different pitch (spreading the love).
-
-  Why Credits?
-  Spot Credits are yours and they will remain in your control until a pitch of your choosing reaches its fundraising goal. All of the money you donate will go to the reporting needed to finish an investigation – Spot.Us asks for tips to the organization, but it is not required and we are transparent in asking for tips. In the future we will be looking into options outside of credits to pay for investigative reporting – but for this version, it is the best way to get the job done.
-
-  Why Tell a Friend?
-  Spot.Us is about giving groups a new sense of editorial power. The only way an investigation gets funded is if a group or network sees value in it. If you are a civic-leader, you can take ownership of a tip or pitch by spreading word about it and making it a reality.
-
-
-
-  What’s an RSS feed?
-  RSS stands for Really Simple Syndication. That means instead of you having to visit spot.us to find out what is new – we will send updates directly to your RSS reader. If you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and running – then come back and click this funny orange button.
-  FAQ for Reporters
-
-  Community Tips for Reporters
-  Tips are exactly what they sound like – community tips on untold and important stories. Creating a pitch and then referencing a tip will send a note to every member of that group to let them know their story tip could become a reality in your pitch. In this sense – the community is your ally in forming pitches. Browse the tips and create pitches based on them. You can reference as many tips as are relevant to your pitch.
-
-  Advice on Creating a Pitch
-  Write the pitch so that anyone who reads it will want to see that story materialize. Sell your idea and your expertise on the subject. Don’t be afraid to be personal. Upload a video explaining who you are and why you’re the right person for the job. Imagine what civic leaders or organizations would want to partner with you. Remember – the public now has a freelance budget, pitch them like you would the editor of a major metropolitan newspaper.
-
-  Attaching a Tip to Your Pitch
-  Pinging a tip is a reporters way of tapping the community members on the shoulder and saying “hey, I’ve referenced your news tip in my pitch.” You can ping as many tips as you want – but they should be related to the pitch you create.
-
-  What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to converse. It also allows a reporter to upload any reporting they’ve done while working on the larger investigation. The reporter can make this reporting public or private, but Spot.Us encourages transparency at all levels.
-
-  What’s the role of the QA Editor?
-  The Quality Assurance editor has two main responsibilities – to fact-check the reporting and ensure fairness. To do the later the QA editor should be in touch with the journalist before reporting begins and before the draft is uploaded. At any time the QA editor can report suspicious activities to Spot.us. QA editors are assigned by spot.us, and the reporter can reject the first two assigned editors. The investigation will not publish without the QA’s approval.
-
-  What if my pitch doesn’t reach it’s goal?
-  All credits are returned to your account and you can direct them towards any other existing pitch or to a general beat and spot.us will make sure the money is only used for reporting on that topic. You will have until the end of the fiscal year to put the money back in circulation through the Spot.Us system.
-
-  Why give extra to spot.us? (also for Right coloumn of Profile View)
-  Spot.Us is an exciting nonprofit project to pioneer “community funded reporting.” We believe journalism is a process – not a product and all we want to do is support good local investigative journalism. While we do everything to keep our overhead low, just accepting donations means we are running at a loss. Credit card companies take a small percentage of every transaction. We are trying to cover that cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a small donation that goes to the organization to recoup this loss.
-
-  Why Do we Need Shipping Address?
-  We will not share this information with anyone – it’s merely so we can send you a check for the work that you do on Spot.us.
-
-  What’s the Creative Commons Deal?
-  Journalism is a process – not a product. The end content produced by Spot.Us will be given away for free unless a news organization has either contributed between 50-100% of the total cost. In that situation – we will grant that news organization temporary rights to the article. Eventually all Spot.Us stories are licensed under Creative Commons.
-
-  How do I add a photo?
-
-  How do I add a video?
-
-  How do I publish?
-  FAQ for News Organizations
-
-  Why do We Need Approval to get started?
-  asdf
-
-  Advice On Working With Spot.Us
-  Bolster your freelance budget
-
-  What Can We Expect in the future?
-  asdf
-
-  Ways we can get exclusive content
-  1. Donate up to 50 percent of the value of an investigation. This is only available until the investigation has reached 51 percent funding through community donations (so get in the game early).
-  2. Donate 100 percent of the value of an investigation. You can do this at any time – all proceeds will be given back to community members to invest in another pitch, so in a way you get two investigations for the price of one.
-  3. You can always run our content for free, unless another news organization has done steps one or two above.
-  4. We encourage you to donate small amounts as well. Even a tiny donations from a news organization can be the push to get a pitch the momentum it needs to get community funding – and you are welcome to the final content or even to apply as a fact-check editor.
+  %h2 FAQ FOR NEWS ORGANIZATIONS %a{:name => "faq_news_organization"} FAQ FOR NEWS ORGANIZATIONS
+ 
+  .double_content_border
+ 
+  .block-spacer
+ 
+  Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
+  pledge in your dashboard and make the change. For a donation, if you increase the donation you’ll
+  have to “checkout” again – if you lower your donation, you’ll have spare credits which you can
+  direct to a different pitch (spreading the love).
   
-
-
-
+  Why Credits? Spot Credits are yours and they will remain in your control until a pitch of your
+  choosing reaches its fundraising goal. All of the money you donate will go to the reporting needed
+  to finish an investigation – Spot.Us asks for tips to the organization, but it is not required and
+  we are transparent in asking for tips. In the future we will be looking into options outside of
+  credits to pay for investigative reporting – but for this version, it is the best way to get the
+  job done.
+  
+  Why Tell a Friend? Spot.Us is about giving groups a new sense of editorial power. The only way an
+  investigation gets funded is if a group or network sees value in it. If you are a civic-leader,
+  you can take ownership of a tip or pitch by spreading word about it and making it a reality.
+  
+  What’s an RSS feed? RSS stands for Really Simple Syndication. That means instead of you having to
+  visit spot.us to find out what is new – we will send updates directly to your RSS reader. If
+  you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and
+  running – then come back and click this funny orange button. FAQ for Reporters
+  
+  What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to converse.
+  It also allows a reporter to upload any reporting they’ve done while working on the larger
+  investigation. The reporter can make this reporting public or private, but Spot.Us encourages
+  transparency at all levels.
+  
+  Why give extra to spot.us? (also for Right coloumn of Profile View) Spot.Us is an exciting
+  nonprofit project to pioneer “community funded reporting.” We believe journalism is a process –
+  not a product and all we want to do is support good local investigative journalism. While we do
+  everything to keep our overhead low, just accepting donations means we are running at a loss.
+  Credit card companies take a small percentage of every transaction. We are trying to cover that
+  cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a small
+  donation that goes to the organization to recoup this loss.
+  
+  How do I add a photo?
+  
+  How do I add a video?
+  
+  How do I publish? FAQ for News Organizations
+  
+  For News Organizations
+  
+  Why do We Need Approval to get started? asdf
+  
+  Advice On Working With Spot.Us Bolster your freelance budget
+  
+  What Can We Expect in the future? asdf
+  
+  Ways we can get exclusive content 1. Donate up to 50 percent of the value of an investigation.
+  This is only available until the investigation has reached 51 percent funding through community
+  donations (so get in the game early). 2. Donate 100 percent of the value of an investigation. You
+  can do this at any time – all proceeds will be given back to community members to invest in
+  another pitch, so in a way you get two investigations for the price of one. 3. You can always run
+  our content for free, unless another news organization has done steps one or two above. 4. We
+  encourage you to donate small amounts as well. Even a tiny donations from a news organization can
+  be the push to get a pitch the momentum it needs to get community funding – and you are welcome to
+  the final content or even to apply as a fact-check editor.
