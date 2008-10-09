@@ -13,8 +13,7 @@ class UsersController < ApplicationController
     
     user_attributes = params[:user].merge(opt_in_defaults)
 
-    @user = User.new(user_attributes)
-    @user.type = params[:user][:type]
+    @user = (params[:user][:type] || "User").constantize.new(user_attributes)
     if @user.save
       @user = User.find(@user.to_param)
       self.current_user = @user

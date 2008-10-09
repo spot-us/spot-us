@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
                          :controller  => 'myspot/donation_amounts'
                          
   map.namespace :admin do |admin|
-    admin.resources :users, :member => {:log_in_as => :get} 
+    admin.resources :users, :member => {:log_in_as => :get, :approve => :put} 
   end
 
   map.namespace :myspot do |myspot|

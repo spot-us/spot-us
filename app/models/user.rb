@@ -92,6 +92,8 @@ class User < ActiveRecord::Base
     :terms_of_service, :topics_params, :website, :zip
   
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
+  named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
+  named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
 
   def citizen?
     self.is_a? Citizen
