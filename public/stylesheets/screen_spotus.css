@@ -692,7 +692,7 @@ ul.navigation a {
   margin: 0 0 -1px 0;
   }
 ul.navigation a:hover {
-  background: #fff url(../images/white.png) repeat-x left bottom;
+  background: none;
   }
 ul.navigation a.selected, 
 .myspot_profiles a#profile_tab, 
@@ -703,7 +703,7 @@ ul.navigation a.selected,
 .myspot_pitches a#dashboard_tab {
   padding: 9px 15px 5px 15px;
   background-color: #fff;
-  background: #fff url(../images/white.png) repeat-x left bottom;
+  background: none;
   border-bottom: 1px solid #fff;
   color: #000;
   }
@@ -977,3 +977,15 @@ textarea#headline {
   border: 1px solid #ccc;
   font-size: 10px;
 }
+.hashrocket {
+  background: url(../images/logo_hr.png) no-repeat left bottom;
+  padding: 5px 0 5px 30px;
+  float: left;
+  margin: 5px 0 0 10px;
+  }
+.engine_yard {
+  background: url(../images/logo_ey.png) no-repeat left bottom;
+  padding: 10px 0 10px 30px;
+  margin: 0 0 10px 0;
+  float: left;
+  }
