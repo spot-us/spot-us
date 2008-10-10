@@ -1,15 +1,15 @@
--div_for sample do 
-  - if !sample.url.blank?
-    .work_row
-      %span.ss_sprite.ss_newspaper
-      %span.title=link_to sample.title, sample.url
-  - else
-    .work_row
-      %span.ss_sprite.ss_newspaper
-      %span.title=sample.title
-  .description= sample.description
-  .float-right
-    = link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, sample], :method => :delete
-  %hr
-  .clear
-
+-div_for sample do
+  .box_yellow
+    .work_delete= link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, sample], :method => :delete
+    - if !sample.url.blank?
+      .work_row
+        %span.ss_sprite.ss_newspaper
+        %span.work_title=link_to sample.title, sample.url
+    - else
+      .work_row
+        %span.ss_sprite.ss_newspaper
+        %span.work_title=sample.title
+    - unless sample.description.blank?
+      %br/
+      .double_content_border
+      .work_description= sample.description

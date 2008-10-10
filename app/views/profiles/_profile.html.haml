@@ -29,23 +29,26 @@
   %h3 Work Samples
   %hr
   - for sample in @profile.samples
-    - if !sample.url.blank?
-      = link_to h(sample.title), sample.url
-    - else
-      = h sample.title
-    = h sample.description
-  .double_content_border
-
+    .show_profile_jobs
+      - if !sample.url.blank?
+        - # TODO replace .ss_newspaper with company logo
+        %span.ss_sprite.ss_newspaper{:style=>"margin-right:5px"}
+        %span.work_title= link_to h(sample.title), sample.url
+      - else
+        %span.ss_sprite.ss_newspaper{:style=>"margin-right:5px"}
+        %span.work_title= h sample.title
+      .work_description= sanitize(sample.description)
 - if @profile.is_a?(Reporter) && @profile.jobs.any?
   %h3 Work History
   %hr
   - for job in @profile.jobs
     .show_profile_jobs
       - if !job.url.blank?
-        %span.ss_sprite.ss_newspaper
+        - # TODO replace .ss_newspaper with company logo
+        %span.ss_sprite.ss_newspaper{:style=>"margin-right:5px"}
         %span.work_title= link_to h(job.title), job.url
       - else
-        %span.ss_sprite.ss_newspaper
+        %span.ss_sprite.ss_newspaper{:style=>"margin-right:5px"}
         %span.work_title= h job.title
       .work_description= sanitize(job.description)
 .double_content_border
