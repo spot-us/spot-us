@@ -1,11 +1,11 @@
 - form_for(@pitch, :html => { :multipart => true }) do |f|
   .box_yellow.create_a_pitch_form
     .row
-      = f.label     :headline, "Your Pitch's Headline"
+      = f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required"
       = f.text_area :headline, :rows => 2
     .yellow-spacer-negative
     .row
-      = f.label :short_description, "Why would someone care? Sell the story!"
+      = f.label :short_description, "Why would someone care? Sell the story! <br /><span class='small quieter'>Required. <br /><br /> This is your chance to explain what the pitch is about. Think of it like a nut graph. <br /><br />This text box does not accept graph breaks yet."
       = f.text_area :short_description, :rows => 11
     .row
       .form_hint.small
@@ -22,7 +22,7 @@
       = f.select :location, LOCATIONS
     .yellow-spacer-negative
     .row
-      = f.label :skills, "Do you have the skills and access to report on this story?"
+      = f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting."
       = f.text_area :skills, :rows => 3
     .yellow-spacer-negative
     .row
@@ -34,7 +34,7 @@
       = f.text_field :requested_amount, :maxlength => 15, :size => 15
     .yellow-spacer-negative
     .row
-      = f.label :delivery_description, "What will be delivered?"
+      = f.label :delivery_description, "Required: What will be delivered? <br /><span class='small quieter'>Explain in detail what you will produce."
       .form_hint.delivered
         = f.label     :deliver_text,  "Text", :class => "small"
         = f.check_box :deliver_text
@@ -48,7 +48,7 @@
       %br
     .yellow-spacer-negative
     .row
-      = f.label :extended_description
+      = f.label :extended_description, "Extended Description."
       = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
     .yellow-spacer-negative
     .row
@@ -57,17 +57,17 @@
     .yellow-spacer-negative-blank
     .row.media
       %label.small{:for => ""}
-        Upload A Featured Image
+        Required: Upload A Featured Image
         %br
         %span.quieter JPEG, PNG and GIF's less than 5 MB.
       = f.file_field :featured_image
     .yellow-spacer-negative-blank
     .row.media
-      = f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small"
+      = f.label :featured_image_caption, "Required: Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small"
       = f.text_area :featured_image_caption, :rows => 2
     .yellow-spacer-negative-blank
     .row.media
-      = f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here.</span>", :class => "small"
+      = f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small"
       = f.text_area :video_embed, :rows => 4
     .yellow-spacer-negative
     .row
