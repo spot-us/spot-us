@@ -19,11 +19,11 @@
   %br/
 %hr
 
-%h3
-  About
-  = @profile.first_name
-
-.alt-spotus= sanitize @profile.about_you
+- unless @profile.about_you.blank?
+  %h3
+    About
+    = @profile.first_name
+  .alt-spotus= sanitize @profile.about_you
 
 - if @profile.is_a?(Reporter) && @profile.samples.any?
   %h3 Work Samples
