@@ -7,10 +7,11 @@
   member since
   = @profile.created_at.to_s(:date)
 - unless @profile.website.blank?
-  %p.reg-line-height 
+  %p.reg-line-height
     = link_to(h(@profile.website), @profile.website)
+  .clear
 - if @profile.topics.any?
-  %p.reg-line-height{:style=>"margin:0 0 0 0"}
+  %p.reg-line-height.clear
     %span.quieter
       = h @profile.first_name 
       has shown interest in 
