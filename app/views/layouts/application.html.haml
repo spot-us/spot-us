@@ -18,6 +18,7 @@
                 %span.dismiss= link_to image_tag('close_square.png'), '' # empty string means self
                 %p.flash_note= value
         = yield
+        .clear
     #footer
       = render :partial => 'layouts/footer'
     = render :partial => 'layouts/google_analytics'

@@ -110,7 +110,7 @@ h4.title {
   color:#999999;
   font-weight: normal;
   }
-.uppcased_button_text {
+.uppcased_button_text, .inline_pledge, .inline_donate {
   text-transform: uppercase;
   width:210px;
   text-align:right;
@@ -120,6 +120,18 @@ h4.title {
   width: 120px;
   }
 .small-spotus {font-size:.8em;margin-bottom: 0;line-height:1.875em;}
+.inline_pledge input#pledge_amount { 
+  width: 120px; 
+  margin: 3px 0 0 0; 
+  border: 1px solid #C6004A;
+  padding: 6px 0;
+  }
+.inline_donate input#donation_amount { 
+  width: 120px; 
+  margin: 3px 0 0 0; 
+  border: 1px solid #266220;
+  padding: 6px 0;
+  }
 /* Adjust showgrid to use 960px instead of 950px */
 .showgrid {background:url(src/grid.png) 15px -3px;}
 
@@ -745,30 +757,32 @@ table.pledges tr.pledge td.pledge {
 
 #dashboard_tab_container {
   width: 625px;
-  margin: 20px 0 0 0;
-  padding-bottom: 5px;
+  height: 37px;
+  margin: 5px 0 20px 0;
   }
 ul.dashboard_navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
-  padding-bottom: 4px;
+  height: 37px;
   }
 ul.dashboard_navigation li {
-  display: inline;
-  margin-right: 5px;
+  float: left;
+  margin-right: 20px;
+  position: relative;
   }
 ul.dashboard_navigation a {
-  padding: 6px 25px;
+  padding: 5px 0 0 8px;
+  display: block;
   color: #3C5359;
   text-decoration: none;
   /* background: url(../images/tab_bg.png) repeat-x left bottom;*/
   font-weight: bold;
-  margin: 0 0 -1px 0;
+  height: 32px;
+  width: 121px;
   }
 ul.dashboard_navigation a:hover {
-  /* background: #fff url(../images/white.png) repeat-x left bottom;*/
-  background: #909a9d;
+  background: url('../images/nav_lite_teal_bg.png') repeat-y left top;
   color: black;
   }
 ul.dashboard_navigation a.selected, 
@@ -776,8 +790,10 @@ ul.dashboard_navigation a.selected,
 .myspot_tips a#dashboard_tips_tab, 
 .myspot_pledges a#dashboard_pledges_tab,
 .myspot_pitches a#dashboard_pitches_tab {
-  background-color: #3C5359;
+  background: url('../images/nav_dark_teal_bg.png') no-repeat left top;
   color: white;
+  width: 129px;
+  height: 37px;
   }
 ul.dashboard_navigation a:focus {
   outline: none;

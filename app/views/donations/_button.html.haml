@@ -8,11 +8,12 @@
           = f.hidden_field :amount
           = f.hidden_field :pitch_id
           = image_submit_tag "donate_25.png"
-      %div{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
+      %div.inline_donate{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item) do |f|
-          = f.text_field :amount
+          .float_left= f.text_field :amount
           = f.hidden_field :pitch_id
-          = f.submit "Donate!"
+          .float_right= image_submit_tag("donate.png")
+          .clear
       .small.uppcased_button_text
         = link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
         .double_content_border

@@ -1,14 +1,12 @@
 %h3 Common Questions
 .double_content_border
-
-  %p
-    Perhaps you have some questions. That's great. We love them. Don't hesitate to contact us
-    = mail_to "david@spot.us", nil, :encode => "hex"
-    Or check out our
-    %li= link_to "FAQ", page_path('about')
-  %p
-    Some questions for Citizens, Reporters and News Organizations
-  
-  
-    .block-spacer
+%p
+  Perhaps you have some questions. That's great. We love them. Don't hesitate to contact us
+  = mail_to "david@spot.us", nil, :encode => "hex"
+  Or check out our
+%h3= link_to "FAQ", page_path('about')
+.double_content_border
+%p
+  Some questions for Citizens, Reporters and News Organizations
+.negative-block-spacer
     
