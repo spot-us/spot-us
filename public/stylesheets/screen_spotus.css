@@ -692,7 +692,7 @@ ul.navigation a {
   margin: 0 0 -1px 0;
   }
 ul.navigation a:hover {
-  background: none;
+  background: #fff none repeat-x left bottom;
   }
 ul.navigation a.selected, 
 .myspot_profiles a#profile_tab, 
@@ -703,7 +703,7 @@ ul.navigation a.selected,
 .myspot_pitches a#dashboard_tab {
   padding: 9px 15px 5px 15px;
   background-color: #fff;
-  background: none;
+  background: #fff none repeat-x left bottom;
   border-bottom: 1px solid #fff;
   color: #000;
   }
