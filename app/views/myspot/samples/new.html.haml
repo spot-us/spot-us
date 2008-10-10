@@ -3,8 +3,8 @@
 = render :partial => "myspot/nav"
 #equalize
 .span-715.box_white
-  = render :partial => "myspot/profile_nav"
   %h3 Edit Work Samples
+  = render :partial => "myspot/profile_nav"
   .double_content_border
   .span-595.box_yellow.create_a_sample_form
     - remote_form_for [:myspot, :profile, @sample] do |f|
