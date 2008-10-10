@@ -25,7 +25,7 @@
             .float_left= image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
             .float_left{:style=>"margin-left:10px"}
               .small{:style=>"margin:0"} Upload a new image. Photos are 50x50 pixels
-              = f.file_field :photo
+              = f.file_field :photo, :size => 15
             .clear
           .yellow-spacer-negative
           .row
