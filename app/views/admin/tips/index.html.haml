@@ -1,17 +1,19 @@
-%table
-  %th Headline
-  %th Created At
-  %th Location
-  %th Pledged
-  %th Supporters
-  
-  - for tip in @tips
-    %tr
-      %td
-        Tip:
-        = link_to h(tip.headline), tip_url(tip)
-      %td= tip.created_at.to_s(:date)
-      %td= tip.location
-      %td= number_to_currency(tip.total_amount_pledged)
-      %td
-        = tip.supporters.map(&:email).join(', ')
+%h1 Tips
+.box
+  %table
+    %th Headline
+    %th Created At
+    %th Location
+    %th Pledged
+    %th Supporters
+    
+    - for tip in @tips
+      %tr
+        %td
+          Tip:
+          = link_to h(tip.headline), tip_url(tip)
+        %td= tip.created_at.to_s(:date)
+        %td= tip.location
+        %td= number_to_currency(tip.total_amount_pledged)
+        %td
+          = tip.supporters.map(&:email).join(', ')
