@@ -1,5 +1,6 @@
 -div_for job do
-  .float-left
+  .box_yellow
+    .work_delete= link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, job], :method => :delete
     - if !job.url.blank?
       .work_row
         %span.ss_sprite.ss_newspaper
@@ -7,11 +8,14 @@
     - else
       .work_row
         %span.ss_sprite.ss_newspaper
-        %span.title=job.title
-    .url=job.url
-    .description= job.description
-  .float-right
-    = link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, job], :method => :delete
-  %hr
-  .clear
+        %span.work_title=job.title
+    %br/
+    - unless job.description.blank?
+      %br/
+      .double_content_border
+      .work_description= job.description
+
+
+  
+
 

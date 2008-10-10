@@ -936,22 +936,44 @@ textarea#headline {
 
 #work_history, #work_sample {
   padding-bottom: 8px;
-  padding-left: 16px;
-}
+  }
 
-#work_history .work_row .title, #work_history .work_row .title {
+#work_history .work_row .work_title {
   font-color: black;
-  font-size: 20px;
-  margin: 0 0 0 10px;
-}
+  font-size: 14px;
+  margin: 0;
+  }
 
-#work_history .work_row .title a, #work_sample .work_row .title a{
-  font-size: 20px;
-  margin: 0 0 0 10px;
-}
+#work_history .work_row .work_title a, #work_sample .work_row .work_title a, .profiles .show_profile_jobs .work_title a, .myspot_profiles .show_profile_jobs .work_title a {
+  margin: 0 0 0 5px;
+  font-size: 14px;
+  }
 
-#work_history .description, #work_sample .description {
-  padding-left: 26px;
-  font-size: 15px;
-}
+.job {
+  position: relative;
+  }
+.job .work_delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  }
+.job .ss_newspaper {
+  position: absolute;
+  left: 0;
+  }
+.job .work_title {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  font-size: 14px;
+  }
+.job .work_description {
+  font-size: 11px;
+  }
 
+.profiles .show_profile_jobs, .myspot_profiles .show_profile_jobs {
+  margin: 0 0 15px 0; 
+  }
+.show_profile_jobs .work_description {
+  margin: 0 0 0 25px;
+  }
