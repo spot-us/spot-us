@@ -7,20 +7,22 @@
   member since
   = @profile.created_at.to_s(:date)
 - unless @profile.website.blank?
-  %p 
+  %p.reg-line-height 
     = link_to(h(@profile.website), @profile.website)
 - if @profile.topics.any?
-  %p.reg-line-height
-    = h @profile.first_name 
-    has shown interest in 
+  %p.reg-line-height{:style=>"margin:0 0 0 0"}
+    %span.quieter
+      = h @profile.first_name 
+      has shown interest in 
     = show_topics(@profile)
+  %br/
 %hr
 
 %h3
   About
   = @profile.first_name
 
-= sanitize @profile.about_you
+.alt-spotus= sanitize @profile.about_you
 
 - if @profile.is_a?(Reporter) && @profile.samples.any?
   %h3 Work Samples
