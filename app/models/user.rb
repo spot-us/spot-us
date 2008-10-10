@@ -98,8 +98,8 @@ class User < ActiveRecord::Base
     :donation_amounts, :email, :fact_check_interest, :first_name, :last_name,
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
-    :terms_of_service, :topics_params, :website, :zip
-  
+    :terms_of_service, :topics_params, :website, :zip, :organization_name, 
+    :established_year
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
