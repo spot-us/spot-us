@@ -9,27 +9,26 @@
   .block-spacer-negative
   %h3 Common Questions
   .double_content_border
-  %h4.title What's a Tip?
-  %p.alt-spotus 
-    Anyone can create a news "tip" about an important topic you think should
-    be reported on? This is often related to the question "what are you
-    passionate about?" You can pledge to this tip, but no money is taken -
-    it's just a way to show how much interest you have in this possibly
-    becoming a pitch (link to pitch Faq). Creating a tip could be the spark
-    that starts an investigation.
+  %h4.title Building a Pitch?
+  %p.alt-spotus
+    You are about to build a pitch! Traditionall you would pitch an editor, becasue they were the
+    only people with a freelance budget. But through Spot.Us you can pitch the public. Fill out the
+    fields in this form, including an image and caption.
+    == #{link_to "Check our FAQ for for reporters", page_path("about") + "#faq_reporter"},
 
-  %h4.title What do you mean "Pledge?"
+  %h4.title How Much Should I ask for?"
   %br/ 
   %p.alt-spotus 
-    Pledges do not represent an actual money transaction. But, they do show
-    the general monetary value that a story might command. When you "pledge"
-    a tip, it's similar to joining a group. If a journalist references this
-    tip in their pitch, you'll be notified and asked to DONATE real money at
-    that point.
+    How much do you think you are worth? Be reasonable and make sure you can justify your request.
+    The smaller your goal, the easier it will be to achieve it. As you prove your journalistic
+    integrity you can ask for more in your second pitch. You can also accept the pitch at any time,
+    even if you haven't reached your fundraising goal.
 
   %h4.title What happens next?
   %p.alt-spotus 
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero.
-    Morbi est nisl, blandit sit amet, ultrices ut, consequat at, ante. Sed
-    nisi sapien, pellentesque vel, vehicula quis, semper quis, orci.
-
+    We fundraise! It won't be easy, but when it's done, you'll be reporting on a pitch you crafted
+    working directly for the public. If you have questions along the way, don't hesitate to contact
+    us.
+    = mail_to "david@spot.us", nil, :encode => "hex"
+    
+    
