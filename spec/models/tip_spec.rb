@@ -42,6 +42,7 @@ describe Tip do
       t.reload
       t.should be_pledged_to
     end
+    
   end
 
   describe "creating" do
@@ -104,5 +105,10 @@ describe Tip do
     
     tip.reload
     tip.total_amount_pledged.to_f.should == tip.pledges.map(&:amount).map(&:to_f).sum
+  end
+  
+  it "should return 0 when no pledges" do
+    tip = Factory(:tip, :pledge_amount => 0)
+    tip.total_amount_pledged.should == "0.0"
   end
 end
