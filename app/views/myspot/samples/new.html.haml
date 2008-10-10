@@ -18,7 +18,7 @@
         .yellow-spacer-negative
         .row
           = f.label :description
-          = fckeditor_textarea("sample", "description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+          = f.text_area :description
       .double_content_border
       .float-right
         = image_submit_tag image_path('add_job.png')
