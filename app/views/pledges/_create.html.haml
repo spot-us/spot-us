@@ -2,4 +2,4 @@
 .small.uppcased_button_text 
   = link_to "Go To My Pledges Page &raquo;", myspot_pledges_url
   .double_content_border
-= render :partial => "shared/hey_reporters"
+= render :partial => "shared/hey_reporters", :locals => {:tip => tip}
