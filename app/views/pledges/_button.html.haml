@@ -8,13 +8,17 @@
           = f.hidden_field :amount
           = f.hidden_field :tip_id
           = image_submit_tag("pledge_25.png")
-      %div{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
+      %div.inline_pledge{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
         - remote_form_for Pledge.new(:tip => news_item), :update => "inline_pledge_form_#{news_item.id}" do |f|
-          .float_left= f.text_field :amount, :size => 10
+          .float_left= f.text_field :amount
           = f.hidden_field :tip_id
-          .float_left= image_submit_tag("pledge.png")
+          .float_right= image_submit_tag("pledge.png")
           .clear
-      .small.uppcased_button_text= link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
+      .small.uppcased_button_text
+        = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
+        .double_content_border
+      = render :partial => "shared/hey_reporters"
 - else
   = link_to image_tag('pledge_25.png'), new_session_path
+ 
 
