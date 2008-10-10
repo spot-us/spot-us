@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_filter :admin_required
-  layout nil
+  layout "bare"
   
   def log_in_as
     self.current_user = User.find(params[:id])
