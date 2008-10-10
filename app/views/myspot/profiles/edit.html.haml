@@ -13,9 +13,8 @@
   - # first column content 
   - form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true } do |f|
     .span-605.box_white
-      = render :partial => "myspot/profile_nav"
-      
       %h3 Edit Your Profile
+      = render :partial => "myspot/profile_nav"
       .double_content_border
       .span-595.box_yellow.create_a_tip_form
         - if @profile.is_a?(Organization)
@@ -23,8 +22,11 @@
         - else
           .row
             = f.label :photo
-            = image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
-            = f.file_field :photo
+            .float_left= image_tag @profile.photo.url(:thumb), :class => 'thumbnail'
+            .float_left{:style=>"margin-left:10px"}
+              .small{:style=>"margin:0"} Upload a new image. Photos are 50x50 pixels
+              = f.file_field :photo
+            .clear
           .yellow-spacer-negative
           .row
             = f.label :first_name
