@@ -1,83 +1,86 @@
 %h1 System Users
 = link_to 'New user', new_admin_user_path
-%table.users_table 
-  %tr
-    %th Email
-    %th First name
-    %th Last name
-    %th Type
-    %th
-    %th
-    %th
-    %th
-
-  - for user in @users
+.box
+  %table.users_table 
     %tr
-      %td{:style=>"width:335px;font-size:14px"}
-        %strong=h user.email 
-      %td=h user.first_name
-      %td=h user.last_name
-      %td=h user.type
-      %td=link_to 'Show', admin_user_path(user)
-      %td=link_to 'Edit', edit_admin_user_path(user)
-      %td=link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete
-      %td=link_to 'Log in as', log_in_as_admin_user_path(user)
-    %tr
-      %td{:colspan=>9}
-        %div.append-2{:style=>"float:left;width: 480px"}
-          %div
-            About
-            %br/
-            = sanitize(user.about_you)
-          %div
-            Website
-            =h user.website
-          %div
-            Address
-            =h user.address1
-            =h user.address2
-            =h user.city
-            =h user.state
-            =h user.zip
-            =h user.country
-          %div
-            Phone
-            =h user.phone
-        %div{:style=>"float:left;"}
-          %em Notifications
-          %br
-          Tips:
-          =h user.notify_tips
-          %br
-          Pitches:
-          =h user.notify_pitches
-          %br
-          Stories:
-          =h user.notify_stories
-          %br
-          Spot Us News:
-          =h user.notify_spotus_news
-        .clear
-        %hr/
+      %th Email
+      %th First name
+      %th Last name
+      %th Type
+      %th
+      %th
+      %th
+      %th
+  
+    - for user in @users
+      %tr
+        %td{:style=>"width:335px;font-size:14px"}
+          %strong=h user.email 
+        %td=h user.first_name
+        %td=h user.last_name
+        %td=h user.type
+        %td=link_to 'Show', admin_user_path(user)
+        %td=link_to 'Edit', edit_admin_user_path(user)
+        %td=link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete
+        %td=link_to 'Log in as', log_in_as_admin_user_path(user)
+      %tr
+        %td{:colspan=>9}
+          %div.append-2{:style=>"float:left;width:480px"}
+            %div
+              About
+              %br/
+              = sanitize(user.about_you)
+            %div
+              Website
+              =h user.website
+            %div
+              Address
+              =h user.address1
+              =h user.address2
+              =h user.city
+              =h user.state
+              =h user.zip
+              =h user.country
+            %div
+              Phone
+              =h user.phone
+          %div{:style=>"float:left;"}
+            %em Notifications
+            %br
+            Tips:
+            =h user.notify_tips
+            %br
+            Pitches:
+            =h user.notify_pitches
+            %br
+            Stories:
+            =h user.notify_stories
+            %br
+            Spot Us News:
+            =h user.notify_spotus_news
+          .clear
+          %hr/
 
 %h1 Fact Check Interest
-%table
-  - for user in User.fact_checkers
-    %tr
-      %td=h user.first_name
-      %td=h user.last_name
-      %td=h user.email
-      %td=h user.phone
+.box
+  %table
+    - for user in User.fact_checkers
+      %tr
+        %td=h user.first_name
+        %td=h user.last_name
+        %td=h user.email
+        %td=h user.phone
 
 
 %h1 News Organizations Awaiting Approval
-%table
-  - for user in User.unapproved_news_orgs
-    %tr
-      %td=h user.first_name
-      %td=h user.last_name
-      %td=h user.email
-      %td=h user.phone
-      %td=link_to 'Approve', approve_admin_user_path(user), :method => :put
+.box
+  %table
+    - for user in User.unapproved_news_orgs
+      %tr
+        %td=h user.first_name
+        %td=h user.last_name
+        %td=h user.email
+        %td=h user.phone
+        %td=link_to 'Approve', approve_admin_user_path(user), :method => :put
 
 
