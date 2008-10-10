@@ -706,8 +706,7 @@ ul.navigation a:focus {
 div.featured_image {
   width: 220px;
   float: left;
-}
-
+  }
 div.featured_image .caption {
   padding: 5px;
   color: gray;
@@ -731,30 +730,25 @@ table td img {
   float: left;
   padding: 5px;
   }
-
 table.donations td, 
 table.pitches td, 
 table.pledges td, 
 table.tips td {
   vertical-align: top;
   }
-
 table.donations th, 
 table.pitches th, 
 table.pledges th, 
 table.tips th {
   background: none;
   }
-
 table.pledges tr.pledge td.pledge .number {
 	font-size: 200%;
 	padding-top: 0px;
   }
-
 table.pledges tr.pledge td.pledge {
 	text-align: right;
   }
-
 #dashboard_tab_container {
   width: 625px;
   height: 37px;
@@ -769,7 +763,6 @@ ul.dashboard_navigation {
 ul.dashboard_navigation li {
   float: left;
   margin-right: 20px;
-  position: relative;
   }
 ul.dashboard_navigation a {
   padding: 5px 0 0 8px;
@@ -789,7 +782,11 @@ ul.dashboard_navigation a.selected,
 .myspot_donations a#dashboard_donations_tab, 
 .myspot_tips a#dashboard_tips_tab, 
 .myspot_pledges a#dashboard_pledges_tab,
-.myspot_pitches a#dashboard_pitches_tab {
+.myspot_pitches a#dashboard_pitches_tab,
+ul.profile_navigation a.selected,
+.myspot_profiles a#profile_basic_tab,
+.myspot_jobs a#profile_work_history_tab,
+.myspot_samples a#profile_work_samples_tab {
   background: url('../images/nav_dark_teal_bg.png') no-repeat left top;
   color: white;
   width: 129px;
@@ -799,32 +796,32 @@ ul.dashboard_navigation a:focus {
   outline: none;
   }
 .myspot_profile #profile_tab_container {
-  width: 625px;
-  margin: 20px 0 0 0;
-  padding-bottom: 5px;
+  width: 620px;
+  height: 37px;
+  margin: 5px 0 20px 0;
   }
 ul.profile_navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
-  padding-top: 8px;
-  padding-bottom: 12px;
+  height: 37px;
   }
 ul.profile_navigation li {
-  display: inline;
-  margin-right: 5px;
+  float: left;
+  margin-right: 20px;
   }
 ul.profile_navigation a {
-  padding: 6px 25px;
+  padding: 5px 0 0 8px;
+  display: block;
   color: #3C5359;
   text-decoration: none;
   /* background: url(../images/tab_bg.png) repeat-x left bottom;*/
   font-weight: bold;
-  margin: 0 0 -1px 0;
+  height: 32px;
+  width: 121px;
   }
 ul.profile_navigation a:hover {
-  /* background: #fff url(../images/white.png) repeat-x left bottom;*/
-  background: #909a9d;
+  background: url('../images/nav_lite_teal_bg.png') repeat-y left top;
   color: black;
   }
 ul.profile_navigation a.selected,
