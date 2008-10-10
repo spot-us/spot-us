@@ -1,11 +1,11 @@
 - form_for(@tip, :html => { :multipart => true }) do |f|
   .box_yellow.create_a_tip_form
     .row
-      = f.label     :headline, "Your Tip's Headline"
+      = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required"
       = f.text_area :headline, :rows => 2
     .yellow-spacer-negative
     .row
-      = f.label :short_description, "Why would someone care?<br />Explain the story!"
+      = f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you! <br /><br /> This form does not accept paragraphs yet."
       = f.text_area :short_description, :rows => 11
     .row
       .form_hint.small
@@ -22,11 +22,11 @@
       = f.select :location, LOCATIONS
     .yellow-spacer-negative
     .row
-      = f.label :pledge_amount, "I would like to pledge..."
+      = f.label :pledge_amount, "I would like to pledge... <br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. See our FAQ."
       = f.text_field :pledge_amount
     .yellow-spacer-negative
     .row
-      = f.label :keyword, "Keywords<br /><span class='small quieter'>Optional.  Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>"
+      = f.label :keyword, "Keywords<br /><span class='small quieter'>Optional.<br />Keywords, or tags, should be separate by commas, for example: &quot;car, automobile&quot;</span>"
       = f.text_area :keywords, :rows => 3
     .yellow-spacer-negative
     .row
@@ -36,7 +36,7 @@
       %label.small{:for => ""}
         Upload A Featured Image
         %br
-        %span.quieter JPEG, PNG and GIF's less than 5 MB.
+        %span.quieter Optional, but highly recomended <br />JPEG, PNG and GIF's less than 5 MB.
       = f.file_field :featured_image
     .yellow-spacer-negative-blank
     .row.media
