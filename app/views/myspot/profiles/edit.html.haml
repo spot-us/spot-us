@@ -66,12 +66,11 @@
       .float-right
         = link_to image_tag('cancel.png', :alt => 'Cancel'), myspot_profile_path
         %input{:type => "image", :src=>"/images/save.png"}
-      
+      .clear
   
   - # second column content   
-  .span-270.box_white
+  .span-270.box_white{:style=>"position:absolute;top:0;right:0;"}
     = render :partial => 'layouts/common_questions'
-
-.clear
+  .clear
 .block-spacer
 
