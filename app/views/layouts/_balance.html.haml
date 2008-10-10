@@ -1,5 +1,5 @@
 - if current_user && logged_in? && current_balance.to_i > 0
   You need
-  = link_to number_to_currency(current_balance), edit_myspot_donations_amounts_path
+  = link_to number_to_currency(current_balance), edit_myspot_donations_amounts_path, :id => "current_balance"
   to fund your donations.
   = link_to "Purchase &raquo;", edit_myspot_donations_amounts_path
