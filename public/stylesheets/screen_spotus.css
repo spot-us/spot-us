@@ -938,21 +938,17 @@ textarea#headline {
   padding-bottom: 8px;
   }
 
-#work_history .work_row .work_title {
+#work_history .work_row .work_title, .profiles .work_title {
   font-color: black;
   font-size: 14px;
   margin: 0;
+  font-weight: bold;
   }
 
-#work_history .work_row .work_title a, #work_sample .work_row .work_title a, .profiles .show_profile_jobs .work_title a, .myspot_profiles .show_profile_jobs .work_title a {
-  margin: 0 0 0 5px;
-  font-size: 14px;
-  }
-
-.job {
+.job, .sample {
   position: relative;
   }
-.job .work_delete {
+.job .work_delete, .sample .work_delete  {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -961,16 +957,16 @@ textarea#headline {
   position: absolute;
   left: 0;
   }
-.job .work_title {
+.job .work_title, .sample .work_title {
   position: absolute;
   top: 0;
   left: 30px;
   font-size: 14px;
+  font-weight: bold;
   }
-.job .work_description {
+.job .work_description, .sample .work_description {
   font-size: 11px;
   }
-
 .profiles .show_profile_jobs, .myspot_profiles .show_profile_jobs {
   margin: 0 0 15px 0; 
   }
