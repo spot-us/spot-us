@@ -1,35 +1,36 @@
 %h2 My Spot
 
 = render :partial => "myspot/nav"
+
 #equalize
-.span-715.box_white
-  %h3 Edit Work History
-  = render :partial => "myspot/profile_nav"
-  .double_content_border
-  .span-595.box_yellow.create_a_job_form
+  .span-715.box_white
+    %h3 Edit Work History
+    = render :partial => "myspot/profile_nav"
+    .double_content_border
     - remote_form_for [:myspot, :profile, @job] do |f|
-      .row
-        = f.label :title
-        = f.text_field :title
-      .yellow-spacer-negative
-      .row
-        = f.label :url
-        = f.text_field :url
-      .yellow-spacer-negative
-      .row
-        = f.label :description
-        = f.text_area :description
-      .yellow-spacer-negative
+      .span-595.box_yellow.create_a_job_form
+        .row
+          = f.label :title
+          = f.text_field :title
+        .yellow-spacer-negative
+        .row
+          = f.label :url
+          = f.text_field :url
+        .yellow-spacer-negative
+        .row
+          = f.label :description
+          = fckeditor_textarea("job", "description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+      .double_content_border
       .float-right
         = image_submit_tag image_path('add_job.png')
-    .clear
-  %hr
-#equalize
-.span-715.box_white
-  %h3 Saved Work History
-  .double_content_border
-  .span-595.box_yellow
-    #work_history
-      = render :partial => @jobs
-  %hr
+      .clear
+    .block-spacer-negative
+  
+    %h3 Saved Work History
+    .double_content_border
+    .span-595.box_yellow
+      #work_history
+        = render :partial => @jobs
+.clear
+.block-spacer
 
