@@ -7,9 +7,9 @@ class PledgesController < ApplicationController
 
     respond_to do |format|
       if resource.save
-        format.js { render :partial => "create" }
+        format.js { render :partial => "create", :locals => {:tip => resource.tip} }
       else
-        format.js { render :partial => "new" }
+        format.js { render :partial => "new", :locals => {:tip => resource.tip} }
       end
     end
   end
