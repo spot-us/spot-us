@@ -16,6 +16,9 @@ table.top td.top {vertical-align:top;}
   width: 930px;
   padding: 0 15px;
   }
+#equalize {
+  position: relative;
+  }
 #footer {
   padding: 0 5px;
   }
@@ -638,6 +641,10 @@ p.short_description {
   margin: 0px -10px 10px -10px;
   }
 .ui-tabs-hide { display: none;}
+  
+.work_row {
+  position: relative;
+  }
 
 /* Progress Bar Styling */  
 div.progressBar {
