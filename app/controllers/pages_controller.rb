@@ -5,6 +5,7 @@ class PagesController < ApplicationController
     license
     press
     privacy
+    quick_donate
     reporter_contract
     terms
   ).freeze
