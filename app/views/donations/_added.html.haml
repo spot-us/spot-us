@@ -1,6 +1,6 @@
 = link_to image_tag("donation_added.png"), edit_myspot_donations_amounts_path
 .small.uppcased_button_text 
-  Go To My Donations' Cart &raquo;
+  = link_to "Go To My Donations' Cart &raquo;", edit_myspot_donations_amounts_path
   .double_content_border
 .shared_progress_bar.progress_bar
   = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
