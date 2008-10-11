@@ -345,7 +345,7 @@ body {
 #footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
 
 /* Flash Error Styling */
-.error, .success {
+.error, .success, .notice {
   border-color:#FFD324;
   margin-top:15px;
   padding: 10px 15px 15px 65px;
@@ -357,18 +357,16 @@ body {
   min-height: 80px;
   }
 
-.error p.flash_note, .success p.flash_note {
+.error p.flash_note, .success p.flash_note, .notice p.flash_note {
   padding: 20px 0 0 0;
-  }
-  
-.success {
+  }  
+.success, .notice {
   background: #fff url(../images/flash_success_bg.jpg) no-repeat;
   color:#514721;
   }
 .success h2 {
   color: #3a9300;
   }
-  
 .error {
   background: #fff url(../images/flash_error_bg.jpg) no-repeat;
   color: #a70000;
