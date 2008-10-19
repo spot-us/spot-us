@@ -14,7 +14,7 @@
   .span-6
     %h3 Most Funded
     .double_footer_border
-    - for pitch in Pitch.most_funded.top_three
+    - for pitch in Pitch.most_funded.top_five
       %p.clear
         = link_to image_tag(pitch.featured_image.url(:thumb)), pitch
         = pitch.class.name.upcase + ':'
@@ -23,7 +23,7 @@
   .span-6
     %h3 Newest Items
     .double_footer_border
-    - for news_item in NewsItem.newest.top_three
+    - for news_item in NewsItem.newest.top_five
       %p.clear
         = link_to image_tag(news_item.featured_image.url(:thumb)), news_item
         = news_item.class.name.upcase + ':'
@@ -33,9 +33,10 @@
     .double_footer_border
     %p
       Spot.Us is a nonprofit project to pioneer &ldquo;community funded reporting.&rdquo; Through
-      Spot.Us the public can commission journalists to do investigations into important and perhaps
-      overlooked stories. It's a marketplace where the community, journalists, and news
-      organizations can come together and collaborate.
+      Spot.Us the public can commission journalists to do investigations on important and perhaps
+      overlooked stories. All donations are 
+      tax deductable and if a news organization buys exclusive rights to the content, your donation 
+      will be reimbursed. Otherwise, all content is made available to all through a Creative Commons license.
       %br
       = link_to 'Read More', page_path("about")
   .clear
