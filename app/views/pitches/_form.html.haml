@@ -1,5 +1,9 @@
 - form_for(@pitch, :html => { :multipart => true }) do |f|
   .box_yellow.create_a_pitch_form
+    .yellow-spacer-negative
+    .row
+      = f.label :location, "Location"
+      = f.select :location, LOCATIONS
     .row
       = f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required"
       = f.text_area :headline, :rows => 2
@@ -16,10 +20,6 @@
         Topics
     .row
       = topic_check_boxes(@pitch)
-    .yellow-spacer-negative
-    .row
-      = f.label :location, "Location"
-      = f.select :location, LOCATIONS
     .yellow-spacer-negative
     .row
       = f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting."
@@ -48,7 +48,7 @@
       %br
     .yellow-spacer-negative
     .row
-      = f.label :extended_description, "Extended Description."
+      = f.label :extended_description, "Extended Description: <br />How can your journalism help?"
       = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
     .yellow-spacer-negative
     .row

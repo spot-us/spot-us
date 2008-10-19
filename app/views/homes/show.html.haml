@@ -4,7 +4,9 @@
 .home-boxer
   %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
     .home-floater
-      %h3 What is Spot.Us?
+      %h3
+        %div{:style => "color: red;"}
+          %strong What is Spot.Us?
       .double_content_border
     = image_tag('intro_video.png')
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
@@ -47,11 +49,11 @@
     = link_to image_tag('nyt_article.png'), 'http://www.nytimes.com/2008/08/24/weekinreview/24kershaw.html?_r=1&oref&oref=slogin'
 
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
-    %h3 Make Headlines
+    %h3 Start a Story
     .double_content_border
     %h3
       = image_tag('dark_teal_one.png', :alt => '1: ', :style => 'vertical-align: middle')
-      Write your headline.
+      Begin with a short headline. <br /><span class='small quieter'>What are you passionate about? What questions do you have?
     - form_tag(start_story_path, :method => :get) do
       = text_area_tag :headline, '', :rows => 2
       .block-spacer-transparent
