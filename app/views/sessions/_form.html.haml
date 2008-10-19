@@ -1,16 +1,17 @@
 - if login_failed?
   - content_for :error do
-    %h2 Oops
-    %p Please correct these items:
+    %h2 Sorry about that.
+    %p Check below to see what happened:
     %ul
       %li Invalid E-mail Address or Password
     %p 
       If you're experiencing a persistent problem,
-      = link_to "let us know", page_path('contact')
+      = mail_to "david@spot.us", nil, :encode => "hex"
+      
 
 - form_tag session_url do
   .span-6.or_login
-    %h3 Or Login
+    %h3 We Already Know You <br /><span class='small quieter'>Welcome back!
     .double_content_border
     .row
       %label Your E-mail Address 
