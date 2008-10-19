@@ -1,7 +1,7 @@
-%h2 Oops
-%p Please correct these items:
+%h2 Sorry about that.
+%p Check below to see what happened:
 %ul
   %li Invalid E-mail Address or Password
 %p 
   If you're experiencing a persistent problem,
-  = link_to "let us know", page_path('contact')
+  = mail_to "david@spot.us", nil, :encode => "hex"
