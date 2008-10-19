@@ -1,5 +1,10 @@
 - form_for(@tip, :html => { :multipart => true }) do |f|
   .box_yellow.create_a_tip_form
+    .yellow-spacer-negative
+    .row
+      = f.label :location, "Location"
+      = f.select :location, LOCATIONS
+    .yellow-spacer-negative
     .row
       = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required"
       = f.text_area :headline, :rows => 2
@@ -16,10 +21,6 @@
         Topics
     .row
       = topic_check_boxes(@tip)
-    .yellow-spacer-negative
-    .row
-      = f.label :location, "Location"
-      = f.select :location, LOCATIONS
     .yellow-spacer-negative
     .row
       = f.label :pledge_amount, "I would like to pledge... <br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a>"

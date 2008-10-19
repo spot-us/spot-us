@@ -4,7 +4,7 @@
 
 - form_for(@user, :url => user_path) do |f|
   .span-6.register
-    %h3 Register
+    %h3 Just Getting Started? <br /><span class='small quieter'> All We Need...
     .double_content_border
     .row
       = f.label :email, "Your E-mail Address"
@@ -20,12 +20,12 @@
     %span I am a:
     .row
       .float_left= f.radio_button :type, 'Citizen'
-      %label.float_left{:for => 'user_type_citizen'} Community Member
+      %label.float_left{:for => 'user_type_citizen'} Concerned Citizen
     .row
       .float_left= f.radio_button :type, 'Reporter'
       %label.float_left{:for => 'user_type_reporter'} Professional Journalist
     .row
-      .float_left= f.radio_button :type, 'Organization'
+      .float_left= f.radio_button :type, 'News Organization'
       %label.float_left{:for => 'user_type_organization'} News Organization
     .block-padding.clear 
     %p We'll email you a password which you can login and change.
