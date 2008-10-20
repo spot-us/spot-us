@@ -38,7 +38,7 @@ module Ardes#:nodoc:
           alias_method_chain :respond_to?, :named_route_helper
         end
         base.hide_action *instance_methods
-        base.hide_action :method_missing_without_named_route_helper, :respond_to_without_named_route_helper?
+        base.hide_action :method_missing_without_named_route_helper, :respond_to_without_named_route_helper?, :respond_to?
       end
 
       def method_missing_with_named_route_helper(method, *args, &block)

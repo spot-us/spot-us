@@ -71,7 +71,7 @@ describe "resource_service in TagsController via Forum, Post and Comment" do
   before(:each) do
     @forum         = Forum.create
     @post          = Post.create :forum_id => @forum.id
-    @comment       = Comment.create :post_id => @post.id
+    @comment       = Comment.create :post_id => @post.id, :user => User.create!
     @tag           = Tag.create :taggable_id => @comment.id, :taggable_type => 'Comment'
     @other_comment = Comment.create :post_id => @forum.id
     @other_tag     = Tag.create :taggable_id => @other_comment.id, :taggable_type => 'Comment'

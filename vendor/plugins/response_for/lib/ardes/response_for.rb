@@ -5,6 +5,7 @@ module Ardes #:nodoc:
       base.class_eval do
         extend ClassMethods
         alias_method_chain :default_render, :response_for
+        alias_method_chain :template_exists?, :response_for
       end
     end
     
@@ -55,7 +56,7 @@ module Ardes #:nodoc:
       #
       #   response_for :update do |format|          # this example is for a resources_controller controller
       #     if !(resource.new_record? || resource.changed?) # => resource.saved?
-      #       format.js { render(:update) {|page| page.replace(dom_id(resource), :partial => resource}}
+      #       format.js { render(:update) {|page| page.replace dom_id(resource), :partial => resource }}
       #     else
       #       format.js { render(:update) {|page| page.visual_effect :shake, dom_id(resource) }}
       #     end
@@ -63,13 +64,13 @@ module Ardes #:nodoc:
       #
       # === Notes
       #
-      # * If the before_filters or action renders or redirects, then response_for will not be invoked
+      # * If the before_filters or action renders or redirects, then response_for will not be invoked.
       # * you can stack up multiple response_for calls, the most recent has precedence
       # * the specifed block is executed within the controller instance, so you can use controller
       #   instance methods and instance variables (i.e. you can make it look just like a regular
-      #   respond_to block)
-      # * you can add a response_for an action that is just a public template (where there is no
-      #   actual action method defined)
+      #   respond_to block).
+      # * you can add a response_for an action that has no action method defined.  This is just like
+      #   defining a template for an action that has no action method defined.
       # * you can combine the :types option with a block, the block has precedence if you specify the
       #   same mime type in both.
       def response_for(*actions, &block)
@@ -84,10 +85,6 @@ module Ardes #:nodoc:
           action_responses[action] ||= []
           action_responses[action].unshift types_block if types_block
           action_responses[action].unshift block if block
-          
-          # if there's no action yet defined, create an empty one - this is so that you
-          # we may provide responses for templates
-          class_eval "def #{action}; end" unless instance_methods.include?(action)
         end
       end
     
@@ -106,6 +103,14 @@ module Ardes #:nodoc:
         instance_variable_get('@action_responses') || instance_variable_set('@action_responses', copy_of_each_of_superclass_action_responses)
       end
       
+      # takes any responses from the argument (a controller, or responses module) and adds them to this controller's responses
+      def include_responses_from(responses_container)
+        responses_container.action_responses.each do |action, responses|
+          action_responses[action] ||= []
+          action_responses[action].unshift(*responses)
+        end
+      end
+      
     private
       def copy_of_each_of_superclass_action_responses
         (superclass.action_responses rescue {}).inject({}){|m,(k,v)| m.merge(k => v.dup)}
@@ -113,14 +118,31 @@ module Ardes #:nodoc:
     end
     
   protected
-    # if there are responses for the current action, then respond_to them
+    # return the responses defined by response_for for the current action
+    def action_responses
+      self.class.action_responses[action_name] || []
+    end
+    
+    # respond_to sets the content type on the response, so we use that to tell
+    # if respond_to has been performed
+    def respond_to_performed?
+      (response && response.content_type) ? true : false
+    end
+    
+    # we extend template_exists? to return true if a template OR a response exists corresponding to the current action.
+    # This is so that a default render will be triggered when no action, but a repsonse does exist.
+    def template_exists_with_response_for?
+      action_responses.any? || template_exists_without_response_for?
+    end
+
+    # if the response.content_type has not been set (if it has, then responthere are responses for the current action, then respond_to them
     #
     # we rescue the case where there were no responses, so that the default_render
     # action will be performed
     def respond_to_action_responses
-      if (responses = self.class.action_responses[action_name]) && responses.any?
+      if !respond_to_performed? && action_responses.any?
         respond_to do |responder|
-          responses.each {|response| instance_exec(responder, &response) }
+          action_responses.each {|response| instance_exec(responder, &response) }
         end rescue Responder::NoResponsesError
       end
     end
@@ -146,6 +168,14 @@ module Ardes #:nodoc:
           alias_method_chain :respond, :response_for
         end
       end
+    end
+    
+    module VERSION #:nodoc:
+      MAJOR = 0
+      MINOR = 2
+      TINY  = 2
+
+      STRING = [MAJOR, MINOR, TINY].join('.')
     end
   end
 end

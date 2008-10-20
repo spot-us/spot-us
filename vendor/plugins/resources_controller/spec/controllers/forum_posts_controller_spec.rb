@@ -395,7 +395,7 @@ describe "Requesting /forums/2/posts/1 using PUT" do
   end
 
   it "should update the found post" do
-    @post.should_receive(:attributes=)
+    @post.should_receive(:update_attributes)
     do_update
   end
 
