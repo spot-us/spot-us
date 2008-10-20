@@ -79,9 +79,9 @@ describe Myspot::PurchasesController do
       login_as @user
     end
 
-    it "should redirect home" do
+    it "should redirect my donations page" do
       do_new
-      response.should redirect_to(root_path)
+      response.should redirect_to(myspot_donations_path)
     end
 
     def do_new
@@ -99,9 +99,9 @@ describe Myspot::PurchasesController do
       login_as @user
     end
 
-    it "should redirect to the receipt page" do
+    it "should redirect to the myspot donations path" do
       do_create
-      response.should be_redirect
+      response.should redirect_to(myspot_donations_path)
     end
 
     it "should create a new purchase" do
