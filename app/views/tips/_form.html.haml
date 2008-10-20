@@ -6,11 +6,11 @@
       = f.select :location, LOCATIONS
     .yellow-spacer-negative
     .row
-      = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required"
+      = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required</span>"
       = f.text_area :headline, :rows => 2
     .yellow-spacer-negative
     .row
-      = f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you! <br /><br /> This form does not accept paragraphs yet."
+      = f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you! <br /><br /> This form does not accept paragraphs yet.</span>"
       = f.text_area :short_description, :rows => 11
     .row
       .form_hint.small
@@ -23,7 +23,7 @@
       = topic_check_boxes(@tip)
     .yellow-spacer-negative
     .row
-      = f.label :pledge_amount, "I would like to pledge... <br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a>"
+      = f.label :pledge_amount, "I would like to pledge... <br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a></span>"
       = f.text_field :pledge_amount
     .yellow-spacer-negative
     .row
