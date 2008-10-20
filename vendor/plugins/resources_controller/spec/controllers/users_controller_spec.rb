@@ -235,14 +235,12 @@ describe UsersController, "handling PUT /users/dave" do
   end
   
   def put_with_successful_update
-    @user.should_receive(:attributes=).once.ordered
-    @user.should_receive(:save).once.ordered.and_return(true)
+    @user.should_receive(:update_attributes).and_return(true)
     put :update, :id => "dave"
   end
   
   def put_with_failed_update
-    @user.should_receive(:attributes=).once.ordered
-    @user.should_receive(:save).once.ordered.and_return(false)
+    @user.should_receive(:update_attributes).and_return(false)
     put :update, :id => "dave"
   end
   

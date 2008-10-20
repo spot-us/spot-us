@@ -522,7 +522,7 @@ describe "Requesting /admin/forums/1 using PUT" do
   end
 
   it "should update the found forum" do
-    @mock_forum.should_receive(:attributes=)
+    @mock_forum.should_receive(:update_attributes).and_return(true)
     do_update
     assigns(:forum).should == @mock_forum
   end
@@ -558,7 +558,7 @@ describe "Requesting /admin/forums/1 using XHR PUT" do
   end
 
   it "should update the found forum" do
-    @mock_forum.should_receive(:attributes=)
+    @mock_forum.should_receive(:update_attributes).and_return(true)
     do_update
     assigns(:forum).should == @mock_forum
   end
@@ -579,7 +579,7 @@ describe "Requesting /admin/forums/1 using XHR PUT" do
   end
   
   it "should render edit.rjs, on unsuccessful save" do
-    @mock_forum.stub!(:save).and_return(false)
+    @mock_forum.stub!(:update_attributes).and_return(false)
     do_update
     response.should render_template('edit')
   end
