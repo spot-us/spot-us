@@ -19,7 +19,6 @@
 
 require 'lib/dollars'
 class Purchase < ActiveRecord::Base
-
   class GatewayError < RuntimeError; end
 
   before_validation_on_create :build_credit_card, :set_total,
