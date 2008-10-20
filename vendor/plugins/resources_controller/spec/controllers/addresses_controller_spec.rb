@@ -309,7 +309,7 @@ describe "Requesting /users/dave/addresses/1 using PUT" do
   end
 
   it "should update the found address" do
-    @address.should_receive(:attributes=)
+    @address.should_receive(:update_attributes).and_return(true)
     do_update
   end
 
