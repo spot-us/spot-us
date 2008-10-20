@@ -35,6 +35,11 @@ class Donation < ActiveRecord::Base
   def editable_by?(user)
     self.user == user
   end
+  
+  def deletable_by?(user)
+    return false if user.nil?
+    (user.admin? || self.user == user) && !self.paid? 
+  end
 
   protected
 

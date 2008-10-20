@@ -144,6 +144,11 @@ RemoveResponseForSpec::TheController.remove_response_for :bar
 RemoveResponseForSpec::TheController.remove_response_for
 - should have empty action_responses
 
+ResponsesModuleSpec::MyController
+- should have action_response for :foo
+- should have action :foo
+- should have method defined by included
+
 StackingResponsesSpec::TheController with responses conditionally executed GET :foo (no conditions)
 - should execute second, then first, response
 - should NOT execute the html response in first
@@ -165,6 +170,9 @@ StackingResponsesSpec::TheController with responses conditionally executed GET :
 - should redirect from second response
 - should NOT execute first html response
 
-Finished in 0.494693 seconds
+Ardes::ResponseFor::VERSION
+- STRING should be 0.2.1
 
-92 examples, 0 failures
+Finished in 0.851266 seconds
+
+96 examples, 0 failures

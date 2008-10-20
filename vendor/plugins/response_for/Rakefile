@@ -10,28 +10,6 @@ plugin_name = 'response_for'
 
 task :default => :spec
 
-task :cruise do
-  # run the garlic task, capture the output, if succesful make the docs and copy them to ardes
-  begin
-    sh "rake garlic:all > garlic_report.txt"
-    
-    # send abridged rpeort
-    report = File.read('garlic_report.txt').sub(/^.*?==========/m, '==========')
-    report = "garlic report for #{plugin_name}\n#{`git log -n 1 --pretty=oneline --no-color`}\n" + report
-    File.open('garlic_report.txt', 'w+') {|f| f << report }
-    sh "scp -i ~/.ssh/ardes garlic_report.txt ardes@ardes.com:~/subdomains/plugins/httpdocs/doc/#{plugin_name}_garlic_report.txt"
-
-    # build doc and send that
-    cd "garlic/work/edge/vendor/plugins/#{plugin_name}" do
-      sh "rake doc:all"
-      sh "scp -i ~/.ssh/ardes -r doc ardes@ardes.com:~/subdomains/plugins/httpdocs/doc/#{plugin_name}"
-    end
-    
-  ensure
-    puts File.read('garlic_report.txt')
-  end
-end
-
 desc "Run the specs for #{plugin_name}"
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
@@ -98,4 +76,28 @@ end
 desc "clone the garlic repo (for running ci tasks)"
 task :get_garlic do
   sh "git clone git://github.com/ianwhite/garlic.git garlic"
+end
+
+task :cruise do
+  # run the garlic task, capture the output, if succesful make the docs and copy them to ardes
+  begin
+    `cp garlic_example.rb garlic.rb`
+    `rake get_garlic`
+    `cd garlic; git pull`
+    `rake garlic:clean`
+    sh "rake garlic:all"
+    sh "rake garlic:run_targets TARGET=edge > garlic_report.txt"
+    
+    # send abridged report
+    report = File.read('garlic_report.txt').sub(/^.*?==========/m, '==========')
+    report = "garlic report for #{plugin_name}\n#{`git log -n 1 --pretty=oneline --no-color`}\n" + report
+    File.open('garlic_report.txt', 'w+') {|f| f << report }
+    sh "scp -i ~/.ssh/ardes garlic_report.txt ardes@ardes.com:~/subdomains/plugins/httpdocs/doc/#{plugin_name}_garlic_report.txt"
+
+    # build doc and send that
+    cd "garlic/work/edge/vendor/plugins/#{plugin_name}" do
+      sh "rake doc:all"
+      sh "scp -i ~/.ssh/ardes -r doc ardes@ardes.com:~/subdomains/plugins/httpdocs/doc/#{plugin_name}"
+    end
+  end
 end

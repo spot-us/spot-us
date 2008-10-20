@@ -50,8 +50,8 @@ module Ardes#:nodoc:
         self.resources = find_resources
 
         respond_to do |format|
-          format.html { render }# index.rhtml
-          format.js { render }
+          format.html # index.rhtml
+          format.js
           format.xml  { render :xml => resources }
         end
       end
@@ -62,8 +62,8 @@ module Ardes#:nodoc:
         self.resource = find_resource
 
         respond_to do |format|
-          format.html { render } # show.erb.html
-          format.js { render }
+          format.html # show.erb.html
+          format.js
           format.xml  { render :xml => resource }
         end
       end
@@ -73,8 +73,8 @@ module Ardes#:nodoc:
         self.resource = new_resource
 
         respond_to do |format|
-          format.html { render } # new.html.erb
-          format.js { render }
+          format.html # new.html.erb
+          format.js
           format.xml  { render :xml => resource }
         end
       end
@@ -83,8 +83,8 @@ module Ardes#:nodoc:
       def edit
         self.resource = find_resource
         respond_to do |format|
-          format.html { render } # edit.html.erb
-          format.js { render }
+          format.html # edit.html.erb
+          format.js
           format.xml  { render :xml => resource }
         end
       end
@@ -93,14 +93,14 @@ module Ardes#:nodoc:
       # POST /events.xml
       def create
         self.resource = new_resource
-
+        
         respond_to do |format|
-          if resource_saved?
+          if resource.save
             format.html do
-              flash[:success] = "#{resource_name.humanize} was successfully created."
+              flash[:notice] = "#{resource_name.humanize} was successfully created."
               redirect_to resource_url
             end
-            format.js { render }
+            format.js
             format.xml  { render :xml => resource, :status => :created, :location => resource_url }
           else
             format.html { render :action => "new" }
@@ -114,15 +114,14 @@ module Ardes#:nodoc:
       # PUT /events/1.xml
       def update
         self.resource = find_resource
-        resource.attributes = params[resource_name]
-
+        
         respond_to do |format|
-          if resource_saved?
+          if resource.update_attributes(params[resource_name])
             format.html do
-              flash[:success] = "#{resource_name.humanize} was successfully updated."
+              flash[:notice] = "#{resource_name.humanize} was successfully updated."
               redirect_to resource_url
             end
-            format.js { render }
+            format.js
             format.xml  { head :ok }
           else
             format.html { render :action => "edit" }
@@ -139,10 +138,10 @@ module Ardes#:nodoc:
         resource.destroy
         respond_to do |format|
           format.html do
-            flash[:success] = "#{resource_name.humanize} was successfully destroyed."
+            flash[:notice] = "#{resource_name.humanize} was successfully destroyed."
             redirect_to resources_url
           end
-          format.js { render }
+          format.js
           format.xml  { head :ok }
         end
       end
