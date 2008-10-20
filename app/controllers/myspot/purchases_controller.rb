@@ -19,7 +19,7 @@ class Myspot::PurchasesController < ApplicationController
 
     begin
       if @purchase.save
-        redirect_to root_path
+        redirect_to myspot_donations_path
       else
         render :action => 'new'
       end
@@ -32,7 +32,7 @@ class Myspot::PurchasesController < ApplicationController
   protected
 
   def unpaid_donations_required
-    redirect_to root_path if current_user.donations.unpaid.empty?
+    redirect_to myspot_donations_path if current_user.donations.unpaid.empty?
   end
 
 end
