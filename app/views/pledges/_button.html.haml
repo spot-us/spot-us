@@ -19,6 +19,7 @@
         .double_content_border
       = render :partial => "shared/hey_reporters", :locals => {:tip => news_item}
 - else
+  - store_location
   = link_to image_tag('pledge_25.png'), new_session_path
  
 

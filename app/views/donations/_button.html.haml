@@ -19,6 +19,7 @@
         .double_content_border
       = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
 - else
+  - store_location
   = link_to image_tag('donate_25.png'), new_session_path
   .uppcased_button_text{:style=>"margin: 5px 0 0 0;"}
     .double_content_border
