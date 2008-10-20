@@ -77,7 +77,7 @@ describe "resource_service in CommentsController" do
   before(:each) do
     @forum          = Forum.create
     @post           = Post.create :forum_id => @forum.id
-    @comment        = Comment.create :post_id => @post.id
+    @comment        = Comment.create :post_id => @post.id, :user => User.create
     @other_post     = Post.create :forum_id => @forum.id
     @other_comment  = Comment.create :post_id => @other_post.id
     
@@ -342,7 +342,7 @@ describe "Requesting /forums/3/posts/3/comments/1 using PUT" do
   end
 
   it "should update the found comment" do
-    @comment.should_receive(:attributes=)
+    @comment.should_receive(:update_attributes).and_return(true)
     do_update
   end
 

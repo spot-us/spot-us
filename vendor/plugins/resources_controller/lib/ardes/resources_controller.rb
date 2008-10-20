@@ -110,11 +110,11 @@ module Ardes#:nodoc:
   #
   # You may have a named route that maps a url to a particular controller and action,
   # this causes resources_controller problems as it relies on the route to load the
-  # resources.  You can get around this by specifying :erp as a param in routes.rb
+  # resources.  You can get around this by specifying :resource_path as a param in routes.rb
   #
-  #   map.home '', :controller => :forums, :action => :index, :resource_route => '/forums'
+  #   map.root :controller => :forums, :action => :index, :resource_path => '/forums'
   #
-  # When the controller is invoked via the '' url, rc will use :erp to recognize the
+  # When the controller is invoked via the '' url, rc will use :resource_path to recognize the
   # route.
   #
   # ==== Putting it all together
@@ -138,7 +138,7 @@ module Ardes#:nodoc:
   #    forum.resource :image
   #  end
   #
-  #  map.home '', :controller => :forums, :action => :index, :erp => '/forums'
+  #  map.root :controller => :forums, :action => :index, :resource_path => '/forums'
   #
   # app/controllers:
   #
@@ -484,25 +484,12 @@ module Ardes#:nodoc:
       map_enclosing_resource(*args, &block)
     end
     
-    # Include the specified module, optionally specifying which public methods to include
-    #
-    # eg
-    # 
-    #   include_actions ActionMixin, :only => :index
-    #   include_actions ActionMixin, :except => [:create, :new]
+    # Include the specified module, optionally specifying which public methods to include, for example:
+    #  include_actions ActionMixin, :only => :index
+    #  include_actions ActionMixin, :except => [:create, :new]
     def include_actions(mixin, options = {})
-      options.assert_valid_keys(:only, :except)
-      raise ArgumentError, "you can only specify either :except or :only, not both" if options[:only] && options[:except]
-      
-      mixin = mixin.dup
-      if only = options[:only]
-        only = Array(options[:only]).collect(&:to_s)
-        mixin.instance_methods.each {|m| mixin.send(:undef_method, m) unless only.include?(m)}
-      elsif except = options[:except]
-        except = Array(options[:except]).collect(&:to_s)
-        mixin.instance_methods.each {|m| mixin.send(:undef_method, m) if except.include?(m)}
-      end
-      include mixin
+      mixin.extend(IncludeActions) unless mixin.respond_to?(:include_actions)
+      mixin.include_actions(self, options)
     end
   
   private
@@ -641,7 +628,7 @@ module Ardes#:nodoc:
       
       # returns the name of the immediately enclosing resource
       def enclosing_resource_name
-        enclosing_resource.class.name.underscore
+        @enclosing_resource_name
       end
       
       # returns the resource service for the controller - this will be lazilly created
@@ -665,15 +652,28 @@ module Ardes#:nodoc:
         @enclosing_collection_resources ||= []
       end
       
-      # Returns self.resource.save and caches the result for future calls.
-      # This is useful when you want to know outside of an action whether the resource was saved.
+      # NOTE: This method is overly complicated and unecessary.  It's much clearer just to keep
+      # track of record saves yourself, this is here for BC.  For an example of how it should be
+      # done look at the actions module in http://github.com/ianwhite/response_for_rc
       #
-      # Pass true to ignore the cached value
-      def resource_saved?(reload = false)
-        save_resource if reload || @resource_saved.nil?
+      # Has the resource been saved successfully?, if no save has been attempted, save the
+      # record and return the result
+      #
+      # This method uses the @resource_saved tracking var, or the model's state itself if
+      # that is not available (which means if you do resource.update_attributes, then this
+      # method will return the correct result)
+      def resource_saved?
+        save_resource if @resource_saved.nil? && !resource.validation_attempted?
+        @resource_saved = resource.saved? if @resource_saved.nil?
         @resource_saved
       end
       
+      # NOTE: it's clearer to just keep track of record saves yourself, this is here for BC
+      # See the comment on #resource_saved?
+      #
+      # @resource_saved = resource.update_attributes(params[resource_name])
+      #
+      # Save the resource, and keep track of the result
       def save_resource
         @resource_saved = resource.save
       end
@@ -784,14 +784,20 @@ module Ardes#:nodoc:
       def load_enclosing_resource_from_specification(spec)
         spec.segment == route_enclosing_names[enclosing_resources.size].first or ResourcesController.raise_resource_mismatch(self)
         returning spec.find_from(self) do |resource|
-          update_name_prefix(spec.name_prefix)
-          enclosing_resources << resource
-          enclosing_collection_resources << resource unless spec.singleton?
-          instance_variable_set("@#{spec.name}", resource)
-          instance_variable_set("@#{spec.as}", resource) if spec.as
+          add_enclosing_resource(resource, :name => spec.name, :name_prefix => spec.name_prefix, :is_singleton => spec.singleton?, :as => spec.as)
         end
       end
-        
+      
+      def add_enclosing_resource(resource, options = {})
+        name = options[:name] || resource.class.name.underscore
+        update_name_prefix(options[:name_prefix] || (options[:name_prefix] == false ? '' : "#{name}_"))
+        enclosing_resources << resource
+        enclosing_collection_resources << resource unless options[:is_singleton]
+        instance_variable_set("@enclosing_resource_name", options[:name])
+        instance_variable_set("@#{name}", resource)
+        instance_variable_set("@#{options[:as]}", resource) if options[:as]
+      end
+      
       # The name prefix is used for forwarding urls and will be different depending on
       # which route the controller was invoked by.  The resource specifications build
       # up the name prefix as the resources are loaded.

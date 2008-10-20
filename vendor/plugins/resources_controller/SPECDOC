@@ -256,6 +256,53 @@ Requesting /forums/3/posts/3/comments/1 using DELETE
 - should call destroy on the found comment
 - should redirect to the comments list
 
+CommentsController without stubs responding to GET index
+- should expose all comments as @comments
+
+CommentsController without stubs responding to GET index with mime type of xml
+- should render all comments as xml
+
+CommentsController without stubs responding to GET show
+- should expose the requested comment as @comment
+
+CommentsController without stubs responding to GET show with mime type of xml
+- should render the requested comment as xml
+
+CommentsController without stubs responding to GET new
+- should expose a new comment as @comment
+
+CommentsController without stubs responding to GET edit
+- should expose the requested comment as @comment
+
+CommentsController without stubs responding to POST create with valid params
+- should create a comment
+- should expose the newly created comment as @comment
+- should be resource_saved?
+- should redirect to the created comment
+
+CommentsController without stubs responding to POST create with invalid params
+- should not create a comment
+- should expose a newly created but unsaved comment as @comment
+- should not be resource_saved?
+- should re-render the 'new' template
+
+CommentsController without stubs responding to PUT udpate with valid params
+- should update the requested comment
+- should not contain errors on comment
+- should be resource_saved?
+- should expose the requested comment as @comment
+- should redirect to the comment
+
+CommentsController without stubs responding to PUT udpate with invalid params
+- should fail to update the requested comment
+- should not be resource_saved?
+- should expose the requested comment as @comment
+- should re-render the 'edit' template
+
+CommentsController without stubs responding to DELETE destroy
+- should delete the requested comment
+- should redirect to the comments list
+
 Routing shortcuts for ForumPosts (forums/2/posts/1) should map
 - resources_path to /forums/2/posts
 - resource_path to /forums/2/posts/1
@@ -575,6 +622,25 @@ Requesting /forums/2/owner using DELETE
 - should set the flash notice
 - should redirect to forums/2
 
+CommentsController#resource_saved Comment.new(<invalid attrs>)
+- should not be resource saved
+
+CommentsController#resource_saved Comment.new(<invalid attrs>).save
+- should not be resource saved
+
+CommentsController#resource_saved Comment.new(<invalid attrs>).save then update_attributes(<valid attrs>)
+- should be resource saved
+
+CommentsController#resource_saved Comment.find(<id>)
+- should be resource saved
+- .save should be saved
+
+CommentsController#resource_saved Comment.find(<id>) then update_attributes(<invalid attrs>)
+- should not be resource saved
+
+CommentsController#resource_saved Comment.find(<id>) then update_attributes(<new valid attrs>)
+- should be resource saved
+
 Routing shortcuts for Tags should map
 - resources_path to /tags
 - resource_path to /tags/2
@@ -768,6 +834,18 @@ UsersController handling PUT /users/dave
 UsersController handling DELETE /users/dave
 - should be unknown action
 
+(re: saved?) Comment.new(<invalid attrs>)
+- should not be validation attempted
+- should not be saved
+
+(re: saved?) Comment.new(<invalid attrs>).save
+- should be validation attempted
+- should not be saved
+
+(re: saved?) Comment.new(<invalid attrs>).save then update_attributes(<valid attrs>)
+- should be validation attempted
+- should be saved
+
 ActionView with resources_controller Helper
 - should forward #resource_name to controller
 - should forward #resources_name to controller
@@ -791,12 +869,6 @@ Helper#form_for_resource (when resource is existing record)
 
 Helper#remote_form_for_resource (when resource is existing record)
 - should call remote_form_for with update form options
-
-ResourcesController.load_enclosing_resources_filter_exists? when :find_filter defined
-- should call :find_filter with :load_enclosing_resources
-
-ResourcesController.load_enclosing_resources_filter_exists? when :find_filter not defined
-- should call :filter_chain
 
 #load_enclosing_resources for resources_controller_for :tags (when route_enclosing_names is [['users', false]])
 - should call load_wildcard once
@@ -839,6 +911,12 @@ ResourcesController.load_enclosing_resources_filter_exists? when :find_filter no
 - should call load_enclosing_resource_from_specification with user spec, then load_wildcard once with 'taggable'
 - should call Specification.new with ('comment', :singleton => false, :as => 'taggable')
 
+ResourcesController.load_enclosing_resources_filter_exists? when :find_filter defined
+- should call :find_filter with :load_enclosing_resources
+
+ResourcesController.load_enclosing_resources_filter_exists? when :find_filter not defined
+- should call :filter_chain
+
 ResourcesController (in general)
 - nested_in :foo, :polymorphic => true, :class => User should raise argument error (no options or block with polymorphic)
 - resources_controller_for :forums, :in => [:user, '*', '*', :comment] should raise argument error (no multiple wildcards in a row)
@@ -848,6 +926,9 @@ ResourcesController#enclosing_resource_name
 
 A controller's resource_service
 - may be explicitly set with #resource_service=
+
+deprecated methods
+- #save_resource should send resource.save
 
 #route_enclosing_names TagsController for named_route:
 - :tags should be []
@@ -870,6 +951,6 @@ A controller's resource_service
 #route_enclosing_names Admin::Superduper::ForumsController for named_route:
 - :admin_superduper_forums should be []
 
-Finished in 5.097926 seconds
+Finished in 8.455269 seconds
 
-593 examples, 0 failures
+632 examples, 0 failures

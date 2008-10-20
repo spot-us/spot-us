@@ -138,5 +138,31 @@ describe Donation do
     donation.paid = true
     donation.should be_valid
   end
+  
+  describe "deleting a donation" do
+    it "should be deletable by the owner of the unpaid donation" do
+      user = Factory(:user)
+      donation = Factory(:donation, :user => user, :paid => false)
+      donation.deletable_by?(user).should be_true
+    end
+    
+    it "should not be able to delete a paid donation" do
+      user = Factory(:user)
+      donation = Factory(:donation, :user => user, :paid => true)
+      donation.deletable_by?(user).should be_false
+    end
+    
+    it "should be deletable by an admin" do
+      admin = Factory(:admin)
+      donation = Factory(:donation, :user => Factory(:user), :paid => false)
+      donation.deletable_by?(admin).should be_true
+    end 
+    
+    it "should not be deleteable by a nil user" do
+      donation = Factory(:donation, :user => Factory(:user), :paid => false)
+      donation.deletable_by?(nil).should be_false
+    end
+    
+  end
 end
 
