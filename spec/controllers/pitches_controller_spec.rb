@@ -36,7 +36,7 @@ describe PitchesController do
       user = Factory(:user)
       pitch = Factory(:pitch, :user => user)
       controller.stub!(:current_user).and_return(user)
-      donation = Factory(:donation, :pitch => pitch, :amount => 2, :paid => true)
+      donation = Factory(:donation, :pitch => pitch, :amount => 2, :status => 'paid')
       Pitch.stub!(:find).and_return(pitch)
       get :edit, :id => pitch.id
       flash[:error].should match(/You cannot edit a pitch that has donations.  For minor changes, contact info@spot.us/)
@@ -56,7 +56,7 @@ describe PitchesController do
       user = Factory(:admin)
       pitch = Factory(:pitch)
       controller.stub!(:current_user).and_return(user)
-      donation = Factory(:donation, :pitch => pitch, :amount => 3, :paid => true)
+      donation = Factory(:donation, :pitch => pitch, :amount => 3, :status => 'paid')
       get :edit, :id => pitch.id
       flash[:error].should be_nil
     end
