@@ -61,7 +61,7 @@ describe Pitch do
     it "is not editable if has donations" do
       user = Factory(:user)
       p = Factory(:pitch, :user => user, :requested_amount => 100)
-      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.editable_by?(user).should_not be_true
     end
     
@@ -75,7 +75,7 @@ describe Pitch do
     it "is editable_by an admin even if donations" do
       user = Factory(:admin)
       p = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
-      d = Factory(:donation, :pitch => p, :amount => 3, :paid => true)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.editable_by?(user).should be_true
     end
     
@@ -142,10 +142,10 @@ describe Pitch do
       @p = Factory(:pitch, :requested_amount => 100)
       @p2 = Factory(:pitch, :requested_amount => 100)
       @p3 = Factory(:pitch, :requested_amount => 100)
-      @d = Factory(:donation, :pitch => @p, :amount => 3, :paid => true)
-      @da = Factory(:donation, :pitch => @p, :amount => 3, :paid => :true)
-      @d2 = Factory(:donation, :pitch => @p2, :amount => 20, :paid => :true)
-      @d3 = Factory(:donation, :pitch => @p3, :amount => 10, :paid => true)
+      @d = Factory(:donation, :pitch => @p, :amount => 3, :status => 'paid')
+      @da = Factory(:donation, :pitch => @p, :amount => 3, :status => 'paid')
+      @d2 = Factory(:donation, :pitch => @p2, :amount => 20, :status => 'paid')
+      @d3 = Factory(:donation, :pitch => @p3, :amount => 10, :status => 'paid')
     end
     
     it "should return a list of pitches ordered by the funding" do
@@ -221,7 +221,7 @@ describe Pitch do
     
     it "subtracts donations appropriately" do
       p = Factory(:pitch, :requested_amount => 100)
-      Factory(:donation, :pitch => p, :amount => 20, :paid => true)
+      Factory(:donation, :pitch => p, :amount => 20, :status => 'paid')
       p.funding_needed_in_cents.should == 80.to_cents
     end
     
@@ -242,7 +242,7 @@ describe Pitch do
     it "should return true when total donations equals requested amount" do
       user = Factory(:organization)
       pitch = Factory(:pitch, :user => user, :requested_amount => 100)
-      Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :paid => true)
+      Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :status => 'paid')
       pitch.fully_funded?.should be_true
     end
     
@@ -290,8 +290,8 @@ describe Pitch do
       end
     
       it "return false if the user's total donations + total trying to donate is > 20% of the requested amount" do
-        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :paid => true)
-        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :paid => true)
+        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
+        Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
         @pitch.reload
         @pitch.user_can_donate_more?(@user, 10.to_cents).should be_false
       end
@@ -370,7 +370,7 @@ describe Pitch do
   describe "a pitch with donations" do
     before(:each) do
       @pitch = Factory(:pitch)
-      @donation = Factory(:donation, :pitch => @pitch, :paid => true)
+      @donation = Factory(:donation, :pitch => @pitch, :status => 'paid')
       @pitch.reload
     end
   

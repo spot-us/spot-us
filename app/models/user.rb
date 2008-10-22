@@ -26,10 +26,10 @@
 #  zip                       :string(255)     
 #  phone                     :string(255)     
 #  country                   :string(255)     
-#  notify_tips               :boolean(1)      
-#  notify_pitches            :boolean(1)      
-#  notify_stories            :boolean(1)      
-#  notify_spotus_news        :boolean(1)      
+#  notify_tips               :boolean(1)      not null
+#  notify_pitches            :boolean(1)      not null
+#  notify_stories            :boolean(1)      not null
+#  notify_spotus_news        :boolean(1)      not null
 #  fact_check_interest       :boolean(1)      not null
 #  status                    :string(255)     default("active")
 #  organization_name         :string(255)     

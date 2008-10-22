@@ -15,8 +15,8 @@ describe Myspot::DonationAmountsController do
   describe "when logged in with donations" do
     before do
       @user = Factory(:user)
-      @donations = [Factory(:donation, :user => @user, :paid => false),
-                    Factory(:donation, :user => @user, :paid => false)]
+      @donations = [Factory(:donation, :user => @user, :status => 'unpaid'),
+                    Factory(:donation, :user => @user, :status => 'unpaid')]
       login_as @user
     end
 

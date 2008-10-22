@@ -13,8 +13,7 @@ describe Myspot::PurchasesController do
       @pitches = [Factory(:pitch), Factory(:pitch)]
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
-                                                     :pitch => pitch,
-                                                     :paid  => false) }
+                                                     :pitch => pitch) }
 
       controller.stub!(:current_user).and_return(@user)
       @user.stub!(:donations).and_return(@donations)
@@ -126,7 +125,7 @@ describe Myspot::PurchasesController do
   describe "on POST to create with invalid input" do
     before do
       @user = Factory(:user)
-      @donations = [Factory(:donation, :user => @user, :paid => false)]
+      @donations = [Factory(:donation, :user => @user)]
       login_as @user
     end
 
@@ -157,7 +156,7 @@ describe Myspot::PurchasesController do
   describe "on POST to create with a gateway error" do
     before do
       @user = Factory(:user)
-      @donations = [Factory(:donation, :user => @user, :paid => false)]
+      @donations = [Factory(:donation, :user => @user, :status => 'unpaid')]
       login_as @user
       Purchase.gateway.stub!(:purchase).and_raise(Purchase::GatewayError)
     end
