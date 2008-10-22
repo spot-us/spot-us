@@ -42,7 +42,7 @@ class Donation < ActiveRecord::Base
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
   
-  has_dollar_field(:amount)
+  has_dollar_field :amount
 
   def self.createable_by?(user)
     user
