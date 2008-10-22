@@ -125,6 +125,12 @@ Factory.define :topic do |topic|
   topic.name { Factory.next(:topic_name) }
 end
 
+Factory.define :credit do |credit|
+  credit.association(:user)
+  credit.description  'A credit created by a factory'
+  credit.amount   25
+end
+
 
 # handy builders ##################################################################################
 

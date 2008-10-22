@@ -4,6 +4,10 @@ describe Credit do
   table_has_columns(Credit, :integer, "user_id")
   table_has_columns(Credit, :integer, "amount_in_cents")
   table_has_columns(Credit, :string, "description")
-  table_has_columns(Credit, :boolean, "used")
+  
+  it { Credit.should belong_to(:user) }
+  requires_presence_of Credit, :amount
+  requires_presence_of Credit, :description
+  requires_presence_of Credit, :user_id
   
 end
