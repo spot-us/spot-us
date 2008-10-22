@@ -68,8 +68,7 @@ class Purchase < ActiveRecord::Base
   def associate_donations
     (@new_donations || []).each do |donation|
       donation.purchase = self
-      donation.paid = true
-      donation.save!
+      donation.pay!
 
       donation.pitch.current_funding_in_cents += donation.amount_in_cents
       donation.pitch.save

@@ -8,11 +8,27 @@
 #  created_at      :datetime        
 #  updated_at      :datetime        
 #  amount_in_cents :integer(4)      
-#  paid            :boolean(1)      not null
 #  purchase_id     :integer(4)      
+#  status          :string(255)     default("unpaid")
 #
 
 class Donation < ActiveRecord::Base
+  include AASM
+  aasm_column :status
+  aasm_initial_state  :unpaid
+  
+  aasm_state :unpaid
+  aasm_state :paid
+  aasm_state :refunded
+  
+  aasm_event :pay do
+    transitions :from => :unpaid, :to => :paid
+  end
+  
+  aasm_event :refund do
+    transitions :from => :paid, :to => :refunded
+  end
+  
   belongs_to :user
   belongs_to :pitch
   belongs_to :purchase
@@ -23,8 +39,8 @@ class Donation < ActiveRecord::Base
   validate_on_update :disable_updating_paid_donations, :check_donation, :if => lambda { |me| me.pitch }
   validate_on_create :check_donation, :if => lambda { |me| me.pitch }
 
-  named_scope :unpaid, :conditions => "not paid"
-  named_scope :paid, :conditions => "paid"
+  named_scope :unpaid, :conditions => "status = 'unpaid'"
+  named_scope :paid, :conditions => "status = 'paid'"
   
   has_dollar_field(:amount)
 
@@ -50,7 +66,7 @@ class Donation < ActiveRecord::Base
   end
 
   def being_marked_as_paid?
-    paid_changed? && !paid_was
+    status_changed? && status_was == 'unpaid'
   end
     
   def check_donation
