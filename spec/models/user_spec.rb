@@ -336,9 +336,9 @@ describe User do
   describe "updating a user's donation amounts with valid amounts" do
     before do
       @user = Factory(:user)
-      @changed_unpaid = Factory(:donation, :user => @user, :paid => false, :amount => 5)
-      @unchanged_unpaid = Factory(:donation, :user => @user, :paid => false, :amount => 15)
-      @paid = Factory(:donation, :user => @user, :paid => true, :amount => 25)
+      @changed_unpaid = Factory(:donation, :user => @user, :status => 'unpaid', :amount => 5)
+      @unchanged_unpaid = Factory(:donation, :user => @user, :status => 'unpaid', :amount => 15)
+      @paid = Factory(:donation, :user => @user, :status => 'paid', :amount => 25)
     end
 
     it "should update an unpaid amount that had a new value" do
@@ -367,7 +367,7 @@ describe User do
   describe "updating a user's donation amounts with invalid amounts" do
     before do
       @user = Factory(:user)
-      @donation = Factory(:donation, :user => @user, :amount => 5, :paid => false)
+      @donation = Factory(:donation, :user => @user, :amount => 5, :status => 'unpaid')
     end
 
     it "should not change the donation amount" do
