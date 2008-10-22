@@ -1,0 +1,20 @@
+%h1 Credits
+%hr
+
+%h2 Add A Credit
+%hr
+
+%h2 History
+%table
+  %tr
+    %th Name
+    %th Amount
+    %th Description
+  - if @credits.empty?
+    %tr.notice
+      %td{:colspan => 3} No records found
+  - @credits.each do |credit|
+    %tr
+      %td= credit.user.full_name
+      %td= credit.amount
+      %td= credit.description
