@@ -3,7 +3,6 @@ class CreateCredits < ActiveRecord::Migration
     create_table :credits do |t|
       t.belongs_to :user
       t.string  :description
-      t.boolean :used, :default => false, :null => false
       t.integer :amount_in_cents
       t.timestamps
     end

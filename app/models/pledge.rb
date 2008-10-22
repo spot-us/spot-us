@@ -18,7 +18,7 @@ class Pledge < ActiveRecord::Base
   validates_presence_of :amount
   validates_uniqueness_of :tip_id, :scope => :user_id
 
-  has_dollar_field(:amount)
+  has_dollar_field :amount
 
   def self.createable_by?(user)
     user

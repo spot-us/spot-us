@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
                          
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
+    admin.resources :credits 
     admin.resources :pitches 
     admin.resources :tips 
   end

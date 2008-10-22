@@ -57,8 +57,8 @@ class Pitch < NewsItem
   validates_presence_of :featured_image_caption
   validates_presence_of :featured_image_file_name
     
-  has_dollar_field(:requested_amount)
-  has_dollar_field(:current_funding)
+  has_dollar_field :requested_amount
+  has_dollar_field :current_funding 
 
   # Next :accept required because of rails bug: 
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
