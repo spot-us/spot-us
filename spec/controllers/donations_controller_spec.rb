@@ -4,7 +4,7 @@ describe DonationsController do
   describe "on DELETE to destroy" do
     before do
       login_as @user = Factory(:user)
-      @donation = Factory(:donation, :user => @user, :paid => true)
+      @donation = Factory(:donation, :user => @user, :status => 'paid')
     end
     
     it "should remove the donation if paid" do

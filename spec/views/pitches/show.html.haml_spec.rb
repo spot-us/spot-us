@@ -93,7 +93,7 @@ describe "/pitches/show.html.haml" do
   describe "with a logged in user that has donated" do
     before do
       @user = Factory(:user)
-      Factory(:donation, :user => @user, :pitch => @pitch, :paid => false)
+      Factory(:donation, :user => @user, :pitch => @pitch, :status => 'unpaid')
 
       unless @user.donations.detect {|donation| donation.pitch == @pitch }
         violated "user must have donations for the pitch"
