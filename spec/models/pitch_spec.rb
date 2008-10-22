@@ -334,9 +334,6 @@ describe Pitch do
     end
   end
   
-
-  
-  
   it "returns true on #pitch?" do
     Factory(:pitch).should be_a_pitch
   end
@@ -421,6 +418,17 @@ describe Pitch do
     Pitch.should_receive(:newest).with().and_return(newest)
     newest.should_receive(:first).and_return('first')
     Pitch.featured.should == 'first'
+  end
+  
+  
+  describe "news org funding pitch" do
+    it "should allow a news org to fully fund a pitch" do
+      pending
+    end
+    
+    it "should allow a news org to match funding if the pitch is less than 50% funded" do
+      pending
+    end   
   end
 end
 

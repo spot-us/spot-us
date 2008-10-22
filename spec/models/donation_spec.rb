@@ -167,27 +167,30 @@ describe Donation do
   
   describe "states of a donation" do
     it "should have a state of unpaid when it is first created" do
-      pending
+      donation = Factory(:donation)
+      donation.should be_unpaid
     end
     
     it "should have a state of paid when it has been paid" do
-      pending
+      donation = Factory(:donation)
+      donation.pay!
+      donation.should be_paid
     end
     
     it "should have a state of refunded when a refund has been issued" do
-      pending
-    end
-  end
-  
-  describe "news org funding a donation" do
-    it "should allow a news org to fully fund a pitch" do
-      pending
+      donation = Factory(:donation)
+      donation.pay!
+      donation.refund!
+      donation.should be_refunded
     end
     
-    it "should allow a news org to match funding if the pitch is less than 50% funded" do
-      pending
+    it "should not allow a refund on an unpaid donation" do
+      donation = Factory(:donation)
+      lambda {
+        donation.refund!
+      }.should raise_error
     end
-    
   end
+
 end
 
