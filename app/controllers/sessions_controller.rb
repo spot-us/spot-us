@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     @user = User.new
+    store_news_item_for_non_logged_in_user
   end
 
   def create
@@ -12,6 +13,8 @@ class SessionsController < ApplicationController
         current_user.remember_me unless current_user.remember_token?
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
+      
+      handle_first_donation_for_non_logged_in_user
       redirect_back_or_default('/')
     else
       @user = User.new
@@ -26,5 +29,19 @@ class SessionsController < ApplicationController
     flash[:notice] = "Later. Hope to see you again soon."
     redirect_back_or_default('/')
   end
+  
+  protected
+  
+    def handle_first_donation_for_non_logged_in_user
+      if session[:news_item_id]
+        self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => 25)
+        session[:news_item_id] = nil
+      end
+    end
+    
+    def store_news_item_for_non_logged_in_user
+      session[:news_item_id] ||= params[:news_item_id]
+    end
+  
 end
 
