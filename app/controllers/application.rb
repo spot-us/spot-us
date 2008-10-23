@@ -29,4 +29,5 @@ class ApplicationController < ActionController::Base
   def can_edit?
     true
   end
+  
 end
