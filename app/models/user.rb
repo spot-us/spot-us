@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
   has_many :pledged_tips, :through => :pledges, :source => :pledge
   has_many :jobs
   has_many :samples
+  has_many :credits
   
   # Virtual attribute for the unencrypted password
   attr_accessor :password

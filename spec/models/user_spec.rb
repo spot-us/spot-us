@@ -12,6 +12,7 @@ describe User do
   it { Factory(:user).should have_many(:pledges) }
   it { Factory(:user).should have_many(:jobs) }
   it { Factory(:user).should have_many(:samples) }
+  it { Factory(:user).should have_many(:credits) }
   table_has_columns(User, :boolean,  "notify_tips")
   table_has_columns(User, :boolean,  "notify_pitches")
   table_has_columns(User, :boolean,  "notify_stories")
