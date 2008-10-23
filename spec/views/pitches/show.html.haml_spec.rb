@@ -68,7 +68,7 @@ describe "/pitches/show.html.haml" do
 
     it "should display a donation button that links to login" do
       do_render
-      template.should have_tag('a[href=?]', new_session_path) do
+      template.should have_tag('a[href=?]', new_session_path(:news_item_id => @pitch.id)) do
         with_tag('img[src=?]', image_path('donate_25.png'))
       end
     end
