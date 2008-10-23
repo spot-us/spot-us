@@ -29,6 +29,16 @@ describe SessionsController do
     response.should be_redirect
   end
   
+  it "should create a donation for non-logged in user" do
+    user = Factory(:user, :email => 'user@example.com', :password => 'test')
+    donations = mock(:donations)
+    user.stub!(:donations).and_return(donations)
+    User.stub!(:authenticate).and_return(user)
+    donations.should_receive(:create).with(:pitch_id=>1, :amount=>25)
+    session[:news_item_id] = 1
+    post :create, :email => 'user@example.com', :password => 'test'
+  end
+  
   it 'fails login and does not redirect' do
     Factory(:user, :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'bad password'
