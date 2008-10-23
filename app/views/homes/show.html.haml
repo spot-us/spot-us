@@ -8,7 +8,11 @@
         %div{:style => "color: red;"}
           %strong What is Spot.Us?
       .double_content_border
-    = image_tag('intro_video.png')
+    %object{ :height => "197", :width => "350" }
+      %param{ :name => "allowfullscreen", :value => "true" }/
+      %param{ :name => "allowscriptaccess", :value => "always" }/
+      %param{ :name => "movie", :value => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1" }/
+      %embed{ :src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :height => "197", :width => "350" }/
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
     - if @featured_pitch.blank?  
       %h3 Create the first story
