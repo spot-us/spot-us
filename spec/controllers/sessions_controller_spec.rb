@@ -36,6 +36,7 @@ describe SessionsController do
     User.stub!(:authenticate).and_return(user)
     donations.should_receive(:create).with(:pitch_id=>1, :amount=>25)
     session[:news_item_id] = 1
+    session[:donation_amount] = 25
     post :create, :email => 'user@example.com', :password => 'test'
   end
   

@@ -50,6 +50,4 @@ describe DonationsController do
     end
   end
 
-  requires_login_for :post, :create
-
 end
