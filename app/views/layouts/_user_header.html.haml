@@ -1,10 +1,10 @@
 %ul.user-header-nav
-  - if current_user
+  - if current_user && logged_in?
     %li.no-pipe
       Hello,
       == #{link_to h(current_user.full_name), myspot_profile_path}.
     %li#current_balance_line
-      = render :partial => 'layouts/balance'
+      = header_display_message
     %li
       = link_to "My Spot", myspot_donations_path
     %li.no-pipe

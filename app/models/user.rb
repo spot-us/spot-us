@@ -133,6 +133,10 @@ class User < ActiveRecord::Base
   def self.createable_by?(user)
     true
   end
+  
+  def credits?
+    total_credits_in_cents > 0 
+  end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
