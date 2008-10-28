@@ -20,29 +20,34 @@
 require 'lib/dollars'
 class Purchase < ActiveRecord::Base
   class GatewayError < RuntimeError; end
+  
+  attr_accessor :credit_card_number, :credit_card_year, :credit_card_month,
+    :credit_card_type, :verification_value
+  attr_reader :credit_card  
 
-  before_validation_on_create :build_credit_card, :set_total,
-    :set_credit_card_number_ending
+  cattr_accessor :gateway
+
+  after_create :associate_donations, :apply_credits
+  before_create :bill_credit_card
+  before_validation_on_create :build_credit_card, :set_total, :set_credit_card_number_ending
 
   validates_presence_of :first_name, :last_name, :credit_card_number_ending,
-    :address1, :city, :state, :zip, :user_id, :total_amount
+    :address1, :city, :state, :zip, :user_id, :total_amount, :unless => lambda {|p| p.credit_covers_total? }
+    
   validates_presence_of :credit_card_number, :credit_card_year,
-    :credit_card_type, :credit_card_month, :verification_value, :on => :create
-  validate :validate_credit_card, :on => :create
+    :credit_card_type, :credit_card_month, :verification_value,
+    :on => :create, :unless => lambda {|p| p.credit_covers_total? }
+    
+  validate :validate_credit_card, :on => :create, :unless => lambda {|p| p.credit_covers_total? }
 
   belongs_to :user
   has_many   :donations
 
-  after_create :associate_donations, :apply_credits
-  before_create :bill_credit_card
-
-  cattr_accessor :gateway
-  
   has_dollar_field :total_amount
-
-  attr_accessor :credit_card_number, :credit_card_year, :credit_card_month,
-    :credit_card_type, :verification_value
-  attr_reader :credit_card
+  
+  def credit_covers_total?
+    self.total_amount_in_cents == 0
+  end
 
   def donations=(donations)
     @new_donations = donations
@@ -133,10 +138,6 @@ class Purchase < ActiveRecord::Base
       :year               => credit_card_year,
       :verification_value => verification_value,
       :type               => credit_card_type }
-  end
-
-  def credit_covers_total?
-    self.total_amount_in_cents == 0
   end
 
   def email

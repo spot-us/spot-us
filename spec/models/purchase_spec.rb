@@ -43,13 +43,24 @@ describe Purchase do
       @pitch.current_funding_in_cents.should == 0
     end
     
-    it "should not bill the credit card if the purchase amount is 0" do
-      Factory(:credit, :amount => 25, :user => @user)
+    describe "and credits cover amount owed" do
+    
+      it "should not bill the credit card" do
+        Factory(:credit, :amount => 25, :user => @user)
+
+        purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
+        purchase.gateway.should_receive(:purchase).never
+
+        purchase.save
+      end
       
-      purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
-      purchase.gateway.should_receive(:purchase).never
+      it "missing personal data won't fail validations" do
+        Factory(:credit, :amount => 25, :user => @user)
+
+        purchase = Purchase.new(:user => @user, :donations => [@donation])
+        purchase.should be_valid
+      end
       
-      purchase.save
     end
   end
   
@@ -156,6 +167,8 @@ describe Purchase do
       @purchase.save
     end
   end
+
+
 
   it "should set the credit card ending when being saved with a credit card number" do
     @purchase = Factory.build(:purchase, :credit_card_number => '12345678')
