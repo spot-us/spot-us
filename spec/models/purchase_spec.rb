@@ -164,16 +164,37 @@ describe Purchase do
   end
 
   it "should calculate the total when donations are set" do
-      @purchase = Factory.build(:purchase)
-      @donations = [Factory(:donation, :amount => 5), 
-                    Factory(:donation, :amount => 10)]
-      @purchase.donations = @donations
-      @purchase.total_amount.should == '15.0'
+    @purchase = Factory.build(:purchase)
+    @donations = [Factory(:donation, :amount => 5), 
+                  Factory(:donation, :amount => 10)]
+    @purchase.donations = @donations
+    @purchase.total_amount.should == '15.0'
+  end
+  
+  it "should take credits into account when calculating total" do
+    @user = Factory(:user)
+    Factory(:credit, :user => @user, :amount => 10)
+    @purchase = Factory.build(:purchase, :user => @user)
+    @donations = [Factory(:donation, :amount => 5), 
+                  Factory(:donation, :amount => 10)]
+    @purchase.donations = @donations
+    @purchase.total_amount.should == '5.0'   
+  end
+  
+  it "should only use the amount needed when applying credits" do
+    @user = Factory(:user)
+    Factory(:credit, :user => @user, :amount => 20)
+    @purchase = Factory.build(:purchase, :user => @user)
+    @donations = [Factory(:donation, :amount => 5), 
+                  Factory(:donation, :amount => 10)]
+    @purchase.donations = @donations
+    @purchase.total_amount.should == '0.0'
   end
 
   describe "after being saved with donations" do
     before do
-      @purchase = Factory.build(:purchase, :user => Factory(:user))
+      @user = Factory(:user)
+      @purchase = Factory.build(:purchase, :user => @user)
       @donations = [Factory(:donation, :amount => 5), 
                     Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
@@ -199,6 +220,36 @@ describe Purchase do
     it "should mark each donation as paid" do
       @donations.detect {|donation| !donation.paid? }.
         should be_nil
+    end
+
+  end
+  
+  describe "after being saved with donations and credits" do
+    before do
+      @user = Factory(:user)
+      credit = Factory(:credit, :user => @user, :amount => 20)
+      @purchase = Factory.build(:purchase, :user => @user)
+      @donations = [Factory(:donation, :amount => 5), 
+                    Factory(:donation, :amount => 10)]
+      @purchase.donations = @donations
+
+      Purchase.gateway.
+        stub!(:purchase).
+        and_return(mock('response', :success? => true))
+
+      @purchase.save!
+      @purchase.reload
+      @donations.each {|donation| donation.reload }
+    end
+    
+    it "should use the sum of the donations minus the credits" do
+      @purchase.total_amount.should == '0.0'
+    end
+    
+    it "should create a credit for the amount of the credit applied" do
+      @user.reload
+      @user.credits.count.should == 2
+      @user.credits.map(&:amount).should include("-15.0")
     end
   end
 end

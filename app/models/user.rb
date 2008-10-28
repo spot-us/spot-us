@@ -121,6 +121,14 @@ class User < ActiveRecord::Base
   def admin?
     self.is_a? Admin
   end
+  
+  def total_credits_in_cents
+    self.credits.map(&:amount_in_cents).sum
+  end
+  
+  def total_credits_in_dollars
+    total_credits_in_cents.to_dollars
+  end
 
   def self.createable_by?(user)
     true

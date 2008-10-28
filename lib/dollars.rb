@@ -6,7 +6,7 @@ class ActiveRecord::Base
     end
 
     define_method :"#{field_name}=" do |dollars|
-      normalized_dollars = dollars.to_s =~ /[^\d\.]/ ? dollars.to_s.gsub(/[^\d\.]/, "") : dollars
+      normalized_dollars = dollars.to_s =~ /[^\-\d\.]/ ? dollars.to_s.gsub(/[^\-\d\.]/, "") : dollars
       self[:"#{field_name}_in_cents"] = normalized_dollars.to_cents
     end
   end
