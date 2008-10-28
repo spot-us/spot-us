@@ -34,13 +34,15 @@ class SessionsController < ApplicationController
   
     def handle_first_donation_for_non_logged_in_user
       if session[:news_item_id]
-        self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => 25)
+        self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
         session[:news_item_id] = nil
+        session[:donation_amount] = nil
       end
     end
     
     def store_news_item_for_non_logged_in_user
       session[:news_item_id] ||= params[:news_item_id]
+      session[:donation_amount] ||= params[:donation_amount]
     end
   
 end
