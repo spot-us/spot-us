@@ -33,7 +33,7 @@ class Purchase < ActiveRecord::Base
   belongs_to :user
   has_many   :donations
 
-  after_create :associate_donations
+  after_create :associate_donations, :apply_credits
   before_create :bill_credit_card
 
   cattr_accessor :gateway
@@ -50,6 +50,11 @@ class Purchase < ActiveRecord::Base
   end
 
   protected
+  
+  def apply_credits
+    Credit.create(:user => self.user, :description => "Applied to Purchase #{id}",
+                  :amount_in_cents => (0 - credit_to_apply))
+  end
 
   def build_credit_card
     @credit_card = ActiveMerchant::Billing::CreditCard.new(credit_card_hash)
@@ -76,16 +81,25 @@ class Purchase < ActiveRecord::Base
   end
 
   def set_total
-    self.total_amount = 
-      (@new_donations || []).inject(0) do |sum, donation|
-        sum + donation.amount.to_cents
-      end.to_dollars
+    self.total_amount = (sub_total_amount_in_cents - credit_to_apply).to_dollars
   end
 
   def set_credit_card_number_ending
     if credit_card_number
       self.credit_card_number_ending ||= credit_card_number.last(4)
     end
+  end
+  
+  def credit_to_apply
+    return 0 if user.nil?
+    [user.total_credits_in_cents, sub_total_amount_in_cents].min
+  end
+  
+  def sub_total_amount_in_cents
+    @sub_total_amount_in_cents ||=
+      (@new_donations || []).inject(0) do |sum, donation|
+        sum + donation.amount.to_cents
+      end
   end
 
   def bill_credit_card
@@ -96,6 +110,8 @@ class Purchase < ActiveRecord::Base
       raise GatewayError, response.message
     end
   end
+  
+
 
   private
 

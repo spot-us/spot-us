@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 describe 'purchases/new' do
   before do
     @user = Factory(:user)
+    template.stub!(:current_user).and_return(@user)
     @pitches = [Factory(:pitch), Factory(:pitch)]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
