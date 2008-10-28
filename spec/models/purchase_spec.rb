@@ -11,19 +11,19 @@ describe Purchase do
   table_has_columns(Purchase, :string, "zip")
   table_has_columns(Purchase, :integer, "user_id")
 
-  requires_presence_of(Purchase, :first_name)
-  requires_presence_of(Purchase, :last_name)
-  requires_presence_of(Purchase, :address1)
-  requires_presence_of(Purchase, :city)
-  requires_presence_of(Purchase, :state)
-  requires_presence_of(Purchase, :zip)
-  requires_presence_of(Purchase, :user_id)
-  requires_presence_of(Purchase, :credit_card_number)
-  requires_presence_of(Purchase, :credit_card_month)
-  requires_presence_of(Purchase, :credit_card_year)
-  requires_presence_of(Purchase, :credit_card_type)
-  requires_presence_of(Purchase, :verification_value)
-  
+  requires_presence_of_field_on_purchase(Purchase, :first_name)
+  requires_presence_of_field_on_purchase(Purchase, :last_name)
+  requires_presence_of_field_on_purchase(Purchase, :address1)
+  requires_presence_of_field_on_purchase(Purchase, :city)
+  requires_presence_of_field_on_purchase(Purchase, :state)
+  requires_presence_of_field_on_purchase(Purchase, :zip)
+  requires_presence_of_field_on_purchase(Purchase, :user_id)
+  requires_presence_of_field_on_purchase(Purchase, :credit_card_number)
+  requires_presence_of_field_on_purchase(Purchase, :credit_card_month)
+  requires_presence_of_field_on_purchase(Purchase, :credit_card_year)
+  requires_presence_of_field_on_purchase(Purchase, :credit_card_type)
+  requires_presence_of_field_on_purchase(Purchase, :verification_value)
+
   describe "when a purchase happens" do
     before(:each) do
       @pitch = Factory(:pitch)
@@ -81,9 +81,9 @@ describe Purchase do
     before do
       @credit_card = Factory.build(:credit_card, :type => 'fake')
       violated "credit card must be invalid" if @credit_card.valid?
-
+      @donation = Factory(:donation, :pitch => Factory(:pitch), :user => Factory(:user), :amount => 25)
       ActiveMerchant::Billing::CreditCard.stub!(:new).and_return(@credit_card)
-      @purchase = Factory.build(:purchase, :user => Factory(:user))
+      @purchase = Factory.build(:purchase, :user => Factory(:user), :donations => [@donation])
     end
 
     it "should validate the credit card" do
@@ -107,7 +107,8 @@ describe Purchase do
   end
 
   it "should raise a gateway error when the gateway does not return a success response" do
-    lambda { Factory(:purchase, :credit_card_number => '2') }.
+    @donation = Factory(:donation, :pitch => Factory(:pitch), :user => Factory(:user), :amount => 25)
+    lambda { Factory(:purchase, :credit_card_number => '2', :donations => [@donation]) }.
       should raise_error(Purchase::GatewayError,
                          ActiveMerchant::Billing::BogusGateway::FAILURE_MESSAGE)
   end

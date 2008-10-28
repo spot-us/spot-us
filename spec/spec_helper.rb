@@ -73,6 +73,15 @@ def requires_presence_of(clazz, field)
   end
 end
 
+def requires_presence_of_field_on_purchase(clazz, field)
+  it "requires #{field}" do      
+    record = Factory.build(clazz.to_s.underscore.to_sym, field.to_sym => nil)
+    record.stub!(:credit_covers_total?).and_return(false)
+    record.should_not be_valid
+    record.errors.on(field.to_sym).should_not be_nil
+  end
+end
+
 def has_dollar_field(clazz, field_name)
   field_name = field_name.to_sym
   class_sym = clazz.to_s.underscore.to_sym 
