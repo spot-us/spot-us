@@ -39,51 +39,55 @@
     .block-spacer-negative
 
     - form_for :purchase, :url => myspot_purchases_path do |f|
-      %h3 Payment
-      .double_content_border
-      .span-595.box_yellow.create_a_tip_form
-        .row
-          = f.label :first_name
-          = f.text_field :first_name
-        .row
-          = f.label :last_name
-          = f.text_field :last_name
-        .yellow-spacer-negative
-        .row
-          = f.label :credit_card_type
-          = f.select :credit_card_type, ['Visa', 'Mastercard', 'Discover', 'American Express']
-        .row
-          = f.label :credit_card_number
-          = f.text_field :credit_card_number
-        .row
-          = f.label :credit_card_month, 'Expiration Date'
-          = f.text_field :credit_card_month, :size => 2
-          = '/'
-          = f.text_field :credit_card_year, :size => 4
-          (MM/YYYY)
-        .row
-          = f.label :verification_value, 'Security Code'
-          = f.text_field :verification_value, :size => 4
-        .yellow-spacer-negative
-        .row
-          = f.label :address1, 'Address (1)'
-          = f.text_field :address1
-        .row
-          = f.label :address2, 'Address (2)'
-          = f.text_field :address2
-        .row
-          = f.label :city
-          = f.text_field :city
-        .row
-          = f.label :state
-          = f.text_field :state, :size => 2
-        .row
-          = f.label :zip
-          = f.text_field :zip, :size => 5
+      - if @purchase.credit_covers_total?
+        .span-595.box_yellow
+          You have enough credits to cover this transaction. Please click Purchase to continue. 
+      - else
+        %h3 Payment
+        .double_content_border
+        .span-595.box_yellow.create_a_tip_form
+          .row
+            = f.label :first_name
+            = f.text_field :first_name
+          .row
+            = f.label :last_name
+            = f.text_field :last_name
+          .yellow-spacer-negative
+          .row
+            = f.label :credit_card_type
+            = f.select :credit_card_type, ['Visa', 'Mastercard', 'Discover', 'American Express']
+          .row
+            = f.label :credit_card_number
+            = f.text_field :credit_card_number
+          .row
+            = f.label :credit_card_month, 'Expiration Date'
+            = f.text_field :credit_card_month, :size => 2
+            = '/'
+            = f.text_field :credit_card_year, :size => 4
+            (MM/YYYY)
+          .row
+            = f.label :verification_value, 'Security Code'
+            = f.text_field :verification_value, :size => 4
+          .yellow-spacer-negative
+          .row
+            = f.label :address1, 'Address (1)'
+            = f.text_field :address1
+          .row
+            = f.label :address2, 'Address (2)'
+            = f.text_field :address2
+          .row
+            = f.label :city
+            = f.text_field :city
+          .row
+            = f.label :state
+            = f.text_field :state, :size => 2
+          .row
+            = f.label :zip
+            = f.text_field :zip, :size => 5
 
-        .clear
+          .clear
 
-      .double_content_border
+        .double_content_border
 
       .float-right
         %input{:type => "image", :src=>"/images/purchase.png", :alt => 'Purchase'}
