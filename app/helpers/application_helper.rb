@@ -7,7 +7,7 @@ module ApplicationHelper
   
   def current_balance
     return 0 if current_user.donations.unpaid.blank?
-    current_user.donations.unpaid.map(&:amount_in_cents).sum.to_dollars
+    current_user.donations.unpaid.map(&:amount_in_cents).sum
   end
 
   def topic_check_boxes(resource, model = nil)
@@ -22,5 +22,24 @@ module ApplicationHelper
     words = text.split()
     words[0..(length-1)].join(' ') + (words.length > length ? end_string : '')
   end
+  
+  def header_display_message
+    if (current_user.credits? && current_balance == 0) 
+      puts "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credit."
+    end
+    
+    if (current_user.credits? && current_balance > 0) 
+      puts "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credits to use toward your donations."
+      puts link_to("Apply Them &raquo;", edit_myspot_donations_amounts_path)
+    end
+    
+    if (!current_user.credits? && current_balance > 0)
+      puts "You need"
+      puts link_to number_to_currency(current_balance.to_dollars), edit_myspot_donations_amounts_path, :id => "current_balance"
+      puts "to fund your donations."
+      puts link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
+    end
+  end
+
 
 end
