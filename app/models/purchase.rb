@@ -103,6 +103,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def bill_credit_card
+    return true if credit_covers_total?
     response = gateway.purchase(total_amount_in_cents,
                                 credit_card,
                                 billing_hash)
@@ -110,10 +111,19 @@ class Purchase < ActiveRecord::Base
       raise GatewayError, response.message
     end
   end
-  
-
 
   private
+
+  def billing_hash
+    { :billing_address => { :address1 => address1,
+                            :address2 => address2,
+                            :city     => city,
+                            :state    => state,
+                            :zip      => zip,
+                            :country  => 'US',
+                            :email    => email } }
+  end
+
 
   def credit_card_hash
     { :first_name         => first_name,
@@ -125,14 +135,8 @@ class Purchase < ActiveRecord::Base
       :type               => credit_card_type }
   end
 
-  def billing_hash
-    { :billing_address => { :address1 => address1,
-                            :address2 => address2,
-                            :city     => city,
-                            :state    => state,
-                            :zip      => zip,
-                            :country  => 'US',
-                            :email    => email } }
+  def credit_covers_total?
+    self.total_amount_in_cents == 0
   end
 
   def email
