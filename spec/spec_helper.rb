@@ -13,6 +13,14 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.with_options(:behaviour_type => :helpers) do |config|  
+    config.include Haml::Helpers  
+    config.include ActionView::Helpers  
+    config.prepend_before :all do  
+       init_haml_helpers
+    end  
+  end
+  
 
   # == Mock Framework
   #
