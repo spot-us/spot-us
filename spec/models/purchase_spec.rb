@@ -33,7 +33,7 @@ describe Purchase do
     
     it "should update current_funding for a pitch when donation is paid" do
       lambda {
-        f = Factory(:purchase, :user => @user, :donations => [@donation])
+        Factory(:purchase, :user => @user, :donations => [@donation])
         @pitch.reload
       }.should change {@pitch.current_funding_in_cents}.from(0).to(25.to_cents)
     end
@@ -41,6 +41,15 @@ describe Purchase do
     it "should not update current_funding for a pitch if the donation has not been purchased" do
       @pitch.reload
       @pitch.current_funding_in_cents.should == 0
+    end
+    
+    it "should not bill the credit card if the purchase amount is 0" do
+      Factory(:credit, :amount => 25, :user => @user)
+      
+      purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
+      purchase.gateway.should_receive(:purchase).never
+      
+      purchase.save
     end
   end
   
