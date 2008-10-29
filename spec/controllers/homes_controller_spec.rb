@@ -8,7 +8,7 @@ describe HomesController do
     before do
       @featured = Factory(:pitch)
 
-      Pitch.stub!(:featured).and_return(@featured)
+      Pitch.stub!(:featured).and_return([@featured])
     end
 
     it "should be successful" do
@@ -17,7 +17,7 @@ describe HomesController do
     end
 
     it "should find the featured pitch" do
-      Pitch.should_receive(:featured).with().and_return(@featured)
+      Pitch.should_receive(:featured).with().and_return([@featured])
       do_show
     end
 
