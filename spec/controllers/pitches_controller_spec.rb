@@ -72,6 +72,25 @@ describe PitchesController do
       end
     end
   end
+  
+  describe "on POST to /pitches/1/feature" do
+    before do
+      @pitch = Factory(:pitch, :feature => true)
+      @pitch2 = Factory(:pitch)
+    end
+    
+    it "should unset the orginal featured pitch and set new to featured" do
+      put :feature, :id => @pitch2.to_param
+      @pitch2.reload.feature.should be_true
+      @pitch.reload.feature.should be_false
+    end
+    
+    it "should redirect back to the pitch" do
+      post :feature, :id => @pitch2.to_param
+      response.should redirect_to(pitch_path(@pitch2))
+    end
+
+  end
 
   describe "on GET to show" do
     before do

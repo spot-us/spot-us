@@ -2,6 +2,12 @@ class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
   resources_controller_for :pitch
 
+  def feature
+    pitch = find_resource
+    pitch.make_featured
+    redirect_to pitch_path(pitch)
+  end
+  
   protected
     
   def can_create?
