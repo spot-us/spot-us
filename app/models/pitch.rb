@@ -79,6 +79,7 @@ class Pitch < NewsItem
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   before_save :check_if_funded_state
+  named_scope :featured, :conditions => {:feature => true}
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
   
@@ -92,6 +93,10 @@ class Pitch < NewsItem
     else
       ((self.user == user) && (donations.paid.blank? && active?)) || user.admin? 
     end
+  end
+  
+  def featured?
+    self.feature
   end
   
   def current_funding_in_percentage
@@ -109,15 +114,21 @@ class Pitch < NewsItem
   def self.createable_by?(user)
     user && user.reporter?
   end
-
-  def self.featured
-    newest.first
+  
+  def make_featured
+    pitch = Pitch.featured.first
+    pitch.update_attribute(:feature, false) unless pitch.nil? 
+    self.update_attribute(:feature, true)
   end
   
   def funding_needed_in_cents
     return 0 unless active?
     requested_amount_in_cents - total_amount_donated.to_cents
   end  
+  
+  def featureable_by?(user)
+    user.is_a?(Admin)
+  end
   
   def fully_funded?
     return true if accepted?
