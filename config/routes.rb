@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :affiliations
   map.resources :tips, :has_many => :affiliations
   map.resources :pledges
-  map.resources :pitches, :member => {:feature => :put}
+  map.resources :pitches, :member => {:feature => :post}
   map.resources :profiles
   map.resources :pages
 
