@@ -2,7 +2,7 @@
   - content_for :error do
     = error_messages_for :user
 
-- form_for(@user, :url => user_path) do |f|
+- form_for(:user, @user, :url => user_path) do |f|
   .span-6.register
     %h3 Just Getting Started? <br /><span class='small quieter'> All We Need...</span>
     .double_content_border
