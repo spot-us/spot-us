@@ -16,12 +16,12 @@
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
       .alt-spotus= h @pitch.short_description
     .clear
-    .block-spacer-negative
-    %p
     - if @pitch.video_embed
-      %h3 Video
-      .double_content_border
-      = sanitize @pitch.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+      .block-spacer-negative
+      %p
+        %h3 Video
+        .double_content_border
+        = sanitize @pitch.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
     .block-spacer-negative
     %p
       %h3 Deliverables
@@ -53,11 +53,10 @@
     %p= @pitch.keywords
     - if @pitch.editable_by?(current_user)
       .block-spacer-negative
-      .centered= link_to image_tag("edit_this_pitch.png"), edit_pitch_path(@pitch)
+      .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(@pitch)
     - if !@pitch.featured? && @pitch.featureable_by?(current_user)
       .block-spacer-negative
-      .centered= link_to image_tag('add.png'), feature_pitch_path(@pitch), :method => :post 
-    
+      .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(@pitch), :method => :post 
 
   .span-160.box_white
     = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
