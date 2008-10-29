@@ -449,15 +449,7 @@ describe Pitch do
       @result.detect {|item| !item.pitch? }.should be_nil
     end
   end
-  
-  it "should use the newest pitch as the featured pitch" do
-    newest = mock('newest')
-    Pitch.should_receive(:newest).with().and_return(newest)
-    newest.should_receive(:first).and_return('first')
-    Pitch.featured.should == 'first'
-  end
-  
-  
+    
   describe "news org funding pitch" do
     it "should allow a news org to fully fund a pitch" do
       pending
