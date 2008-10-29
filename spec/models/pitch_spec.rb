@@ -12,6 +12,7 @@ describe Pitch do
   table_has_columns(Pitch, :boolean,  "deliver_photo")
   table_has_columns(Pitch, :boolean,  "contract_agreement")
   table_has_columns(Pitch, :datetime, "expiration_date")
+  table_has_columns(Pitch, :boolean, "feature")
 
   requires_presence_of Pitch, :requested_amount
   requires_presence_of Pitch, :short_description
@@ -38,6 +39,23 @@ describe Pitch do
       pitch = Factory(:pitch, :requested_amount => "1,000")
       pitch.should_receive(:current_funding_in_cents).and_return(2000)
       pitch.current_funding_in_percentage.should == 0.02
+    end
+  end
+  
+  describe "make_featured" do
+    it "should unset old pitch and set new pitch" do
+      pitch = Factory(:pitch, :feature => true)
+      Pitch.featured[0].should == pitch
+      pitch2 = Factory(:pitch)
+      pitch2.make_featured
+      pitch2.reload.feature.should be_true
+      pitch.reload.feature.should be_false
+    end
+    
+    it "should just set the pitch to featured if there isn't one already" do
+      pitch = Factory(:pitch)
+      pitch.make_featured
+      pitch.reload.feature.should be_true
     end
   end
   
@@ -331,6 +349,25 @@ describe Pitch do
   
     it "is not creatable if not logged in" do
       Pitch.createable_by?(nil).should_not be
+    end
+  end
+  
+  describe "featuring" do
+    it "is featureable by an admin" do
+      user = Factory(:admin)
+      pitch = Factory(:pitch)
+      pitch.featureable_by?(user).should be_true
+    end
+    
+    it "is not featureable by someone other than admin" do
+      user = Factory(:reporter)
+      pitch = Factory(:pitch)
+      pitch.featureable_by?(user).should be_false
+    end
+    
+    it "is not featureable when user is nil" do
+      pitch = Factory(:pitch)
+      pitch.featureable_by?(nil).should be_false
     end
   end
   
