@@ -80,7 +80,7 @@ describe PitchesController do
     end
     
     it "should unset the orginal featured pitch and set new to featured" do
-      put :feature, :id => @pitch2.to_param
+      post :feature, :id => @pitch2.to_param
       @pitch2.reload.feature.should be_true
       @pitch.reload.feature.should be_false
     end
