@@ -56,7 +56,7 @@
       .centered= link_to image_tag("edit_this_pitch.png"), edit_pitch_path(@pitch)
     - if !@pitch.featured? && @pitch.featureable_by?(current_user)
       .block-spacer-negative
-      .centered= link_to image_tag('add.png'), feature_pitch_path(@pitch), :method => :put 
+      .centered= link_to image_tag('add.png'), feature_pitch_path(@pitch), :method => :post 
     
 
   .span-160.box_white
