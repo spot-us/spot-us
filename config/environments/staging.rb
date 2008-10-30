@@ -5,6 +5,7 @@ config.action_view.debug_rjs = true
 config.action_view.cache_template_loading = false
 config.cache_classes = false
 config.whiny_nils = true
+SslRequirement.disable_ssl_check = true
 
 if APP_CONFIG[:action_mailer].is_a?(Hash)
   config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]

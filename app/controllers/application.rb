@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :credit_card_number
   helper :all # include all helpers, all the time
   include AuthenticatedSystem
+  include SslRequirement
 
   helper_method :start_story_path
 

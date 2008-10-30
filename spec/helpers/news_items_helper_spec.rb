@@ -1,11 +1,23 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe NewsItemsHelper do
+  it "should return true on checkbox for tips when doing sorting" do
+    params[:controller] = 'news_items'
+    params[:news_item_types] = {:tip => "1"}
+    session[@sort_name] = "something"
+    check_box_checked_for?(:tip).should be_true
+  end
   
-  #Delete this example and add some real ones or delete this file
-  it "should be included in the object returned by #helper" do
-    included_modules = (class << helper; self; end).send :included_modules
-    included_modules.should include(NewsItemsHelper)
+  it "should return true on checkbox for tips when doing search without sorting" do
+    params[:controller] = 'news_items'
+    params[:news_item_types] = {:tip => "1"}
+    request.should_receive(:post?).and_return(true)
+    check_box_checked_for?(:tip).should be_true
+  end
+  
+  it "should return false for tips when retrieving /index with no sorting and not checked" do
+    params[:controller] = 'news_items'
+    check_box_checked_for?(:tip).should be_false
   end
 
 end
