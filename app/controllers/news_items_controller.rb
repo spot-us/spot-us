@@ -1,17 +1,27 @@
 class NewsItemsController < ApplicationController
-
+  helper :sort
+  include SortHelper
+  
   def index
+    sort_init 'created_at', :default_order => 'desc'
+    sort_update
     @news_items = NewsItem.newest
   end
   
   def search
+    sort_init 'created_at', :default_order => 'desc'
+    sort_update
     @news_items = []
     if params[:news_item_types].nil?
       @news_items = NewsItem.newest 
     else
-      params[:news_item_types].each do |news_item_type, value|      
-        @news_items += (news_item_type.singularize.capitalize.constantize.find :all) if value == "1"
-      end
+      @news_items = NewsItem.find :all,
+                    :order => sort_clause,
+                    :conditions => {
+                      :type => params[:news_item_types].symbolize_keys!.collect do |item, value| 
+                        item.to_s.capitalize
+                      end
+                    }
     end
     @news_items
     render :action => 'index'
