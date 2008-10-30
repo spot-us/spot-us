@@ -30,4 +30,30 @@ describe NewsItemsController do
       get :index
     end
   end
+  
+  
+  describe "on POST to search" do
+    before do
+      @tip = Factory(:tip)
+      @pitch = Factory(:pitch)
+      @items = [@tip, @pitch]
+    end
+    
+    it "should return all tips and pitches in one collection when both sent" do
+      post :search, :news_item_types => {:tips => "1", :pitches => "1"}
+      assigns[:news_items].should include(@tip)
+      assigns[:news_items].should include(@pitch)
+    end
+    
+    it "should only return pitches when only pitches is requested" do
+      post :search, :news_item_types => {:tips => "0", :pitches => "1"}
+      assigns[:news_items].should == [@pitch]
+    end
+    
+    it "should display all tips and pitches when the input is empty" do
+      post :search
+      assigns[:news_items].should include(@tip)
+      assigns[:news_items].should include(@pitch)
+    end
+  end
 end
