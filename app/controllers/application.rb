@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include HoptoadNotifier::Catcher
-  filter_parameter_logging :password, :credit_card_number
+  filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
   include AuthenticatedSystem
   include SslRequirement
