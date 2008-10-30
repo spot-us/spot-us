@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
-
   map.resources :news_items
   map.resources :donations
   map.resources :affiliations
@@ -47,5 +46,6 @@ ActionController::Routing::Routes.draw do |map|
   end
   
     map.search '/news_items/search', :controller => 'news_items', :action => "search"
+    map.connect ':controller/:action/:sort_key/:sort_order'
 end
 

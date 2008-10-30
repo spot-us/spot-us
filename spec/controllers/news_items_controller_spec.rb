@@ -40,13 +40,13 @@ describe NewsItemsController do
     end
     
     it "should return all tips and pitches in one collection when both sent" do
-      post :search, :news_item_types => {:tips => "1", :pitches => "1"}
+      post :search, :news_item_types => {:tip => "1", :pitch => "1"}
       assigns[:news_items].should include(@tip)
       assigns[:news_items].should include(@pitch)
     end
     
     it "should only return pitches when only pitches is requested" do
-      post :search, :news_item_types => {:tips => "0", :pitches => "1"}
+      post :search, :news_item_types => {:pitch => "1"}
       assigns[:news_items].should == [@pitch]
     end
     

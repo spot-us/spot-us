@@ -1,6 +1,7 @@
 class Myspot::PurchasesController < ApplicationController
 
   before_filter :login_required
+  ssl_required :create
   before_filter :unpaid_donations_required
 
   def new
