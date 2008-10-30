@@ -55,7 +55,7 @@ class NewsItem < ActiveRecord::Base
   validates_attachment_size :featured_image, :in => 1..5.megabytes
 
   named_scope :newest, :order => 'news_items.created_at DESC'
-  named_scope :top_five, :limit => 5
+  named_scope :top_four, :limit => 4
 
   def editable_by?(user)
     if user.nil?
