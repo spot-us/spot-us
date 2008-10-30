@@ -7,13 +7,21 @@
     .span-595.box_yellow
       - form_tag(:search) do
         .div
-          = check_box_tag "news_item_types[tips]", 1, request.post? ? params[:news_item_types][:tips] : false
+          = check_box_tag "news_item_types[tip]", 1, check_box_checked_for?(:tip)
           = label_tag     :tips,  "Tips"
         .div
-          = check_box_tag "news_item_types[pitches]", 1, request.post? ? params[:news_item_types][:pitches] : false
+          = check_box_tag "news_item_types[pitch]", 1, check_box_checked_for?(:pitch)
           = label_tag     :pitches,  "Pitches"
         = image_submit_tag image_path('search_button.png')
-    
+    .double_content_border
+    %ul.profile_navigation
+      %li
+        %h3 Sort By
+      %li
+        = sort_link "created_at", "Newest", newest_sort
+      %li
+        = sort_link "created_at", "Oldest", oldest_sort
+        
     = render :partial => @news_items
 
 .clear
