@@ -3,7 +3,17 @@
 
 #equalize
   .box_white
-    %h3 Browse
+    %h3 Browse By:
+    .span-595.box_yellow
+      - form_tag(:search) do
+        .div
+          = check_box_tag "news_item_types[tips]", 1, request.post? ? params[:news_item_types][:tips] : false
+          = label_tag     :tips,  "Tips"
+        .div
+          = check_box_tag "news_item_types[pitches]", 1, request.post? ? params[:news_item_types][:pitches] : false
+          = label_tag     :pitches,  "Pitches"
+        = image_submit_tag image_path('search_button.png')
+    
     = render :partial => @news_items
 
 .clear
