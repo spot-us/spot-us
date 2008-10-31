@@ -83,9 +83,10 @@ class Pitch < NewsItem
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   before_save :check_if_funded_state
   named_scope :featured, :conditions => {:feature => true}
+  named_scope :almost_funded, :order => "(news_items.current_funding_in_cents / news_items.requested_amount_in_cents * 100)"
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
-  
+
   def can_be_accepted?
     active?
   end
