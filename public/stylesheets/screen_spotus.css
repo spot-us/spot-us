@@ -280,17 +280,17 @@ body {
   width: 930px;
   text-align:left;
   }
-#footer ul.footer-nav, #user-header ul.user-header-nav {
+#footer ul.footer-nav, #user-header ul.user-header-nav, ul.search_navigation {
   margin: 0px;
   }
-#footer #footer-copyright .footer-nav li, #user-header .user-header-nav li {
+#footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
   list-style: none;
   display: inline;
   margin: 0 8px 0 0;
   padding: 0 8px 0 0;
   background: url(../images/spotus_pipe.gif) no-repeat top right;
   }
-#footer #footer-copyright .footer-nav li.no-pipe, #user-header .user-header-nav li.no-pipe {
+#footer #footer-copyright .footer-nav li.no-pipe, #user-header .user-header-nav li.no-pipe, ul.search_navigation li.no-pipe {
   border-right: 0px;
   margin-right: 0;
   padding-right: 0;
@@ -597,7 +597,10 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
  - needed because of support for ie6 and 7 with the spotus_ie_pixel.gif
 ------------------------------------------------------------------------------------ */
 .summary h3 {margin: 0 0 4px 0;}
-.button_news_items {margin: 0;}
+.button_news_items {
+  margin: 0;
+  padding: 0 0 0 45px;
+  }
 .summary.span-390 p.short_description {
   padding: 0px;
   margin: -10px 0 0 0;
@@ -987,3 +990,6 @@ textarea#headline {
   margin: 0 0 10px 0;
   float: left;
   }
+ul.search_navigation a:hover {color:#666;}
+.search_field_button {margin: 10px 0 0 25px;}
+.search-check-box label { font-weight: normal;}
