@@ -4,14 +4,12 @@ describe NewsItemsHelper do
   it "should return true on checkbox for tips when doing sorting" do
     params[:controller] = 'news_items'
     params[:news_item_types] = {:tip => "1"}
-    session[@sort_name] = "something"
     check_box_checked_for?(:tip).should be_true
   end
   
   it "should return true on checkbox for tips when doing search without sorting" do
     params[:controller] = 'news_items'
     params[:news_item_types] = {:tip => "1"}
-    request.should_receive(:post?).and_return(true)
     check_box_checked_for?(:tip).should be_true
   end
   
