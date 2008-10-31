@@ -13,17 +13,13 @@
         .div
           = check_box_tag "news_item_types[pitch]", 1, check_box_checked_for?(:pitch)
           = label_tag     :pitches,  "Pitches"
+        .div
+          = label_tag     :date_sort, "Sort By"
+          = select_tag "date_sort", options_for_select([["Newest", "desc"], ["Oldest", "asc"]], params.fetch(:date_sort, "desc"))
       .span-4.search_field_button
         = image_submit_tag image_path('search_button.png')
     %hr.space
     .double_content_border.clear
-    .span-3
-      %h4 Sort By
-    %ul.search_navigation
-      %li
-        = sort_link "created_at", "Newest", newest_sort
-      %li.no-pipe
-        = sort_link "created_at", "Oldest", oldest_sort
         
     = render :partial => @news_items
 

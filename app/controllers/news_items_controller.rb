@@ -1,30 +1,26 @@
-class NewsItemsController < ApplicationController
-  helper :sort
-  include SortHelper
-  
+class NewsItemsController < ApplicationController  
   def index
-    sort_init 'created_at', :default_order => 'desc'
-    sort_update
-    @news_items = NewsItem.find :all, :order => sort_clause
+    get_news_items
   end
   
   def search
-    sort_init 'created_at', :default_order => 'desc'
-    sort_update
-    @news_items = []
-    if params[:news_item_types].nil?
-      @news_items = NewsItem.newest 
-    else
+    get_news_items
+    render :action => 'index'    
+  end
+  
+  protected
+  def get_news_items
+    unless params[:news_item_types].blank? 
       @news_items = NewsItem.find :all,
-                    :order => sort_clause,
+                    :order => "created_at #{params.fetch(:date_sort, 'desc')}",
                     :conditions => {
                       :type => params[:news_item_types].symbolize_keys!.collect do |item, value| 
                         item.to_s.capitalize
                       end
-                    }
+                      }
+    else
+      @news_items = NewsItem.find :all,
+                    :order => "created_at #{params.fetch(:date_sort, 'desc')}"
     end
-    @news_items
-    render :action => 'index'
   end
-    
 end
