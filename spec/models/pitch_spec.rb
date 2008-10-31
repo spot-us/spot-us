@@ -174,6 +174,25 @@ describe Pitch do
     end
   end
   
+  describe "almost funded" do
+    before(:each) do
+      @p = Factory(:pitch, :requested_amount => 50) #40 %
+      @p2 = Factory(:pitch, :requested_amount => 100) #10 %
+      @p3 = Factory(:pitch, :requested_amount => 150) #13 %
+      @d = Factory(:donation, :pitch => @p, :amount => 10, :status => 'paid')
+      @da = Factory(:donation, :pitch => @p, :amount => 10, :status => 'paid')
+      @d2 = Factory(:donation, :pitch => @p2, :amount => 10, :status => 'paid')
+      @d3 = Factory(:donation, :pitch => @p3, :amount => 20, :status => 'paid')
+    end
+    
+    it "should return a list of pitches ordered by the funding" do
+      @p.reload
+      @p2.reload
+      @p3.reload
+      Pitch.almost_funded == [@p, @p3, @p2]
+    end
+  end
+  
   describe "current_funding" do
     it "should be 0 on a pitch when a donation is added" do
       p = Factory(:pitch, :requested_amount => 100)
