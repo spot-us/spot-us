@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
-  map.resources :news_items
+  map.resources :news_items, :collection => {:search => :any}
   map.resources :donations
   map.resources :affiliations
   map.resources :tips, :has_many => :affiliations
@@ -44,8 +44,6 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :purchases
     myspot.resources :tips
   end
-  
-    map.search '/news_items/search', :controller => 'news_items', :action => "search"
     map.connect ':controller/:action/:sort_key/:sort_order'
 end
 
