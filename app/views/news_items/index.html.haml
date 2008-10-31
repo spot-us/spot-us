@@ -3,23 +3,26 @@
 
 #equalize
   .box_white
-    %h3 Browse By:
-    .span-595.box_yellow
-      - form_tag(:search) do
+    - form_tag(:search) do
+      .span-3
+        %h4 Search
+      .span-12.search-check-box.colborder
         .div
           = check_box_tag "news_item_types[tip]", 1, check_box_checked_for?(:tip)
           = label_tag     :tips,  "Tips"
         .div
           = check_box_tag "news_item_types[pitch]", 1, check_box_checked_for?(:pitch)
           = label_tag     :pitches,  "Pitches"
+      .span-4.search_field_button
         = image_submit_tag image_path('search_button.png')
-    .double_content_border
-    %ul.profile_navigation
-      %li
-        %h3 Sort By
+    %hr.space
+    .double_content_border.clear
+    .span-3
+      %h4 Sort By
+    %ul.search_navigation
       %li
         = sort_link "created_at", "Newest", newest_sort
-      %li
+      %li.no-pipe
         = sort_link "created_at", "Oldest", oldest_sort
         
     = render :partial => @news_items
