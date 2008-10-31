@@ -55,7 +55,10 @@ class Pitch < NewsItem
   validates_presence_of :delivery_description
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
-  validates_presence_of :featured_image_file_name
+  
+  if Rails.env.production?
+    validates_presence_of :featured_image_file_name
+  end
     
   has_dollar_field :requested_amount
   has_dollar_field :current_funding 
