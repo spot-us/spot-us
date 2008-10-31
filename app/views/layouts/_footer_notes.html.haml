@@ -14,7 +14,7 @@
   .span-6
     %h3 Almost Funded!
     .double_footer_border
-    - for pitch in Pitch.most_funded.top_four
+    - for pitch in Pitch.almost_funded.top_four
       %p.clear
         = link_to image_tag(pitch.featured_image.url(:thumb)), pitch
         = pitch.class.name.upcase + ':'
