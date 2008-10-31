@@ -5,7 +5,7 @@ class NewsItemsController < ApplicationController
   def index
     sort_init 'created_at', :default_order => 'desc'
     sort_update
-    @news_items = NewsItem.newest
+    @news_items = NewsItem.find :all, :order => sort_clause
   end
   
   def search
