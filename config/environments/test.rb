@@ -5,7 +5,7 @@
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs.  Don't rely on the data there!
 config.cache_classes = true
-
+SslRequirement.disable_ssl_check = true
 # Log error messages when you accidentally call methods on nil.
 config.whiny_nils = true
 
