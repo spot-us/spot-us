@@ -379,12 +379,6 @@ describe Pitch do
     Factory(:pitch).should_not be_a_tip
   end
   
-  it "requires a featured image to be set" do
-    pitch = Factory.build(:pitch, :featured_image => nil)
-    pitch.should_not be_valid
-    pitch.should have(1).error_on(:featured_image_file_name)
-  end
-  
   it "requires contract_agreement to be true" do
     Factory.build(:pitch, :contract_agreement => false).should_not be_valid
   end

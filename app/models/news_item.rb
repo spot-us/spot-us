@@ -47,13 +47,15 @@ class NewsItem < ActiveRecord::Base
   
   validates_presence_of :location, :headline, :user_id
 
-  validates_attachment_content_type :featured_image,
-    :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 
-                      'image/x-png', 'image/jpg'], 
-    :message      => "Oops! Make sure you are uploading an image file." 
+  if Rails.env.production?
+    validates_attachment_content_type :featured_image,
+      :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 
+                        'image/x-png', 'image/jpg'], 
+      :message      => "Oops! Make sure you are uploading an image file." 
 
-  validates_attachment_size :featured_image, :in => 1..5.megabytes
-
+    validates_attachment_size :featured_image, :in => 1..5.megabytes
+  end
+  
   named_scope :newest, :order => 'news_items.created_at DESC'
   named_scope :top_four, :limit => 4
 
