@@ -22,7 +22,7 @@ describe NewsItemsController do
     end
 
     it "should find the most recent news items" do
-      NewsItem.should_receive(:newest).with().and_return(@items)
+      NewsItem.should_receive(:find).with(:all, {:order=>"created_at desc"}).and_return(@items)
       do_index
     end
 
