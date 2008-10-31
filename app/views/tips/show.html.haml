@@ -1,11 +1,11 @@
-- @title = "Spot.us - TIP: #{@tip.headline}"
+- @title = "Spot.us - TIP: #{h @tip.headline}"
 
 .block-spacer
 #equalize
   .span-455.box_white
     %h2.headline
       TIP:
-      = @tip.headline
+      = h @tip.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @tip }
     %p 
@@ -26,7 +26,7 @@
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
-    %p= @tip.keywords
+    %p= h @tip.keywords
     - if @tip.editable_by?(current_user)
       .block-spacer-negative
       .centered= link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
