@@ -44,6 +44,5 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :purchases
     myspot.resources :tips
   end
-    map.connect ':controller/:action/:sort_key/:sort_order'
 end
 
