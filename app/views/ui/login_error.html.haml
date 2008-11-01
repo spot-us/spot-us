@@ -7,8 +7,9 @@
   %ul
     %li Invalid E-mail Address or Password
   %p 
-    If you're experiencing a persistent problem,
-    = link_to "let us know", "#"
+    If you're experiencing a persistent problem, email 
+    = mail_to "david@spot.us", nil, :encode =>
+    "hex" <br />Seriously, this guy doesn't sleep and he wants the site to work for you!!!
 
 .block-padding
 

@@ -28,11 +28,10 @@
       .float_left= f.radio_button :type, 'Organization'
       %label.float_left{:for => 'user_type_organization'} News Organization
     .block-padding.clear 
-    %p We'll email you a password which you can login and change.
     .row
       .float_left= f.check_box :terms_of_service, {}, '1', '0'
       %label.float_left{:for => 'user_terms_of_service'}
-        I accept the 
+        Accept the 
         = link_to 'Terms of Service', page_path('terms')
     .block-padding.clear 
 
