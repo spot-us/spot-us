@@ -19,12 +19,16 @@
       .double_content_border
       %p Text about making the first story
     - else
-      %h3.float-left Help Fund this Story
+      %h3.float-left{:style => "color: red;"} 
+        %strong Help Fund this Story
       .float-right
         %span= link_to "View more Pitches &raquo;", news_items_path
       .double_content_border.clear
       .featured_image.span-220
         = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch
+        .float-left
+          %strong <br /><br /> If you want to see this story researched, written, and published,
+          %strong click donate to help fund it!
       .summary.span-280
         %h3
           PITCH:
@@ -43,6 +47,7 @@
         .double_content_border
         .float-right
           = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
+
 
   .clear
 - # spotus_ie_pixel.gif is a IE fix
