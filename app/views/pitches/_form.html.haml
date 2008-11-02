@@ -22,6 +22,10 @@
       = topic_check_boxes(@pitch)
     .yellow-spacer-negative
     .row
+      = f.label :extended_description, "How can your reporting help?"
+      = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+      .yellow-spacer-negative
+      .row
       = f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting.</span>"
       = f.text_area :skills, :rows => 3
     .yellow-spacer-negative
@@ -46,10 +50,6 @@
         = f.check_box :deliver_photo
         = f.text_area :delivery_description
       %br
-    .yellow-spacer-negative
-    .row
-      = f.label :extended_description, "Extended Description: <br />How can your journalism help?"
-      = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
     .yellow-spacer-negative
     .row
       %label{:for => ""} 
