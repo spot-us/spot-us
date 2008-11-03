@@ -23,7 +23,4 @@ class NewsItemsController < ApplicationController
                     :order => "created_at #{params.fetch(:sort_by, 'desc')}"
     end
   end
-  
-  
-  
 end
