@@ -47,9 +47,14 @@ class Tip < NewsItem
   validates_presence_of :pledge_amount, :on => :create
 
   validates_inclusion_of :location, :in => LOCATIONS
+  
 
   def self.createable_by?(user)
     !user.nil?
+  end
+  
+  def self.most_pledged
+    Pledge.sum(:amount_in_cents, :group => :tip).sort_by{ |count| count.last }.reverse.map{ |count| count.first }
   end
 
   def can_be_edited?
