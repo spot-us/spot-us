@@ -176,19 +176,12 @@ describe Pitch do
   
   describe "almost funded" do
     before(:each) do
-      @p = Factory(:pitch, :requested_amount => 50) #40 %
-      @p2 = Factory(:pitch, :requested_amount => 100) #10 %
-      @p3 = Factory(:pitch, :requested_amount => 150) #13 %
-      @d = Factory(:donation, :pitch => @p, :amount => 10, :status => 'paid')
-      @da = Factory(:donation, :pitch => @p, :amount => 10, :status => 'paid')
-      @d2 = Factory(:donation, :pitch => @p2, :amount => 10, :status => 'paid')
-      @d3 = Factory(:donation, :pitch => @p3, :amount => 20, :status => 'paid')
+      @p = Factory(:pitch, :requested_amount => 50, :current_funding_in_cents => 2000) #40 %
+      @p2 = Factory(:pitch, :requested_amount => 100, :current_funding_in_cents => 1000) #10 %
+      @p3 = Factory(:pitch, :requested_amount => 150, :current_funding_in_cents => 2000) #13 %
     end
     
     it "should return a list of pitches ordered by the funding" do
-      @p.reload
-      @p2.reload
-      @p3.reload
       Pitch.almost_funded == [@p, @p3, @p2]
     end
   end
