@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
-  map.resources :news_items, :collection => {:search => :any}
+  map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   map.resources :donations
   map.resources :affiliations
   map.resources :tips, :has_many => :affiliations

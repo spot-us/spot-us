@@ -26,6 +26,16 @@ describe Tip do
       t.can_be_edited?.should be_false      
     end    
   end
+
+  describe "most_pledged" do
+    it "should return the most pledged first" do
+      tip1 = Factory :tip
+      pledge1 = Factory :pledge, :tip => tip1, :amount => 5
+      tip2 = Factory :tip
+      pledge2 = Factory :pledge, :tip => tip2, :amount => 10
+      Tip.most_pledged.should == [tip2, tip1]
+    end
+  end
   
   describe "pledged to" do
     it "a new tip isn't pledged to" do
