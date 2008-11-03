@@ -3,19 +3,17 @@
 
 #equalize
   .box_white
-    - form_tag(:search_news_items) do
+    - form_tag(:search_news_items, :method => :get) do
       .span-3
         %h4 Search
       .span-12.search-check-box.colborder
         .div
-          = check_box_tag "news_item_types[tip]", 1, check_box_checked_for?(:tip)
-          = label_tag     :tips,  "Tips"
+          %label Type
+          = select_tag "news_item_type", options_for_select([["All", "news_items"],["Tips","tips"],["Pitches", "pitches"]], params.fetch(:news_item_type, "news_items"))
         .div
-          = check_box_tag "news_item_types[pitch]", 1, check_box_checked_for?(:pitch)
-          = label_tag     :pitches,  "Pitches"
-        .div
-          = label_tag     :date_sort, "Sort By"
-          = select_tag "date_sort", options_for_select([["Newest", "desc"], ["Oldest", "asc"]], params.fetch(:date_sort, "desc"))
+          = label_tag     :sort_by, "Sort By"
+          %select{:name => "sort_by"}
+            = options_for_sorting(params.fetch(:news_item_type, "news_items"), params.fetch(:sort_by,"desc"))
       .span-4.search_field_button
         = image_submit_tag image_path('search_button.png')
     %hr.space

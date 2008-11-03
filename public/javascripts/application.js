@@ -3,6 +3,19 @@
 jQuery(document).ready(function($){
   $('#equalize').equalHeights();
   $(document).pngFix();
+
+  function refreshSortOrder(){
+    var select = $('select[name=sort_by]');
+    var type   = $('select[name=news_item_type]')
+    
+    $.get('/news_items/sort_options', { 
+      sort_by: select.val(), 
+      news_item_type: type.val()
+    }, function(html, status){
+      select.html(html);
+    });
+  };
+  $("select[name=news_item_type]").change(refreshSortOrder);
 });
 // Flash dismiss - CARM TALK TO DESI WE ARE MISSING jslivequery.js for this
 /*$('.flash .dismiss a').livequery('click', function(event) {
