@@ -492,5 +492,22 @@ describe Pitch do
       pending
     end   
   end
+  
+  describe "Being funded" do
+    describe "via fund!" do
+      it "should create a story" do
+        p = Factory(:pitch)
+        p.fund!
+        p.story.should_not be_nil
+      end
+    end
+    describe "via accept!" do
+      it "should create a story on fund!" do
+        p = Factory(:pitch)
+        p.accept!
+        p.story.should_not be_nil
+      end
+    end
+  end
 end
 
