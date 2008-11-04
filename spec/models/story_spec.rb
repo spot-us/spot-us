@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Story do
-  requires_presence_of Story, :extended_description
   requires_presence_of Story, :headline
   requires_presence_of Story, :location
   
