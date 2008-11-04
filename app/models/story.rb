@@ -60,8 +60,7 @@ class Story < NewsItem
   end
 
   belongs_to :pitch
-  belongs_to :user
   belongs_to :fact_checker, :class_name => 'User'
-  validates_presence_of :extended_description
+  validate_on_update :extended_description
   has_many :supporters, :through => :pitch
 end

@@ -43,11 +43,11 @@ class Pitch < NewsItem
   aasm_state :funded
   
   aasm_event :fund do
-    transitions :from => :active, :to => :funded
+    transitions :from => :active, :to => :funded, :on_transition => :create_associated_story
   end
   
   aasm_event :accept do
-    transitions :from => :active, :to => :accepted, :on_transition => :send_accept_notification
+    transitions :from => :active, :to => :accepted, :on_transition => :do_accept_events
   end
   
   validates_presence_of :requested_amount
@@ -82,6 +82,8 @@ class Pitch < NewsItem
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   
+  has_one :story, :foreign_key => 'news_item_id'
+  
   after_save :check_if_funded_state
 
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
@@ -108,10 +110,6 @@ class Pitch < NewsItem
   
   def current_funding_in_percentage
     (current_funding_in_cents.to_f/requested_amount_in_cents.to_f)
-  end
-  
-  def send_accept_notification
-    Mailer.deliver_pitch_accepted_notification(self)
   end
   
   def check_if_funded_state
@@ -172,4 +170,18 @@ class Pitch < NewsItem
     user_has_donated_so_far_in_cents = donations.paid.total_amount_in_cents_for_user(user)
     (user_has_donated_so_far_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents
   end
+  
+  protected
+    def create_associated_story
+      self.create_story(:headline => self.headline, :location => self.location, :user => self.user)
+    end
+    
+    def do_accept_events
+      send_accept_notification 
+      create_associated_story
+    end
+    
+    def send_accept_notification
+      Mailer.deliver_pitch_accepted_notification(self)
+    end
 end
