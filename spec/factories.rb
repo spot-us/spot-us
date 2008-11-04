@@ -66,6 +66,16 @@ Factory.define :pitch do |pitch|
   pitch.association(:user)
 end
 
+Factory.define :story do |story|
+  story.headline               "Headline"
+  story.location               { LOCATIONS.first }
+  story.extended_description   "lorem ipsum"
+  story.featured_image_caption "lorem ipsum"
+  story.keywords               "lorem ipsum"
+  story.association(:pitch)
+  story.association(:user)
+end
+
 Factory.define :affiliation do |donation|
   donation.association(:tip)
   donation.association(:pitch)
