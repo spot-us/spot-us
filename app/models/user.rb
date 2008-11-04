@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   has_many :tips
   has_many :pitches
   has_many :pledges
+  has_many :stories
   has_many :pledged_tips, :through => :pledges, :source => :pledge
   has_many :jobs
   has_many :samples
