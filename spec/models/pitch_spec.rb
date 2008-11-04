@@ -306,6 +306,7 @@ describe Pitch do
         p = Factory(:pitch, :requested_amount => 100)
         p.user_can_donate_more?(Factory(:organization), 20.to_cents).should be_true
       end
+      
     end
     
     describe "as a citizen or reporter" do
@@ -346,6 +347,18 @@ describe Pitch do
         organization = Factory(:organization)
         pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
         pitch.user_can_donate_more?(organization, 100.to_cents).should be_true
+      end
+    end
+    
+    describe "many users" do
+      it "can donate and push a pitch to fully funded" do
+        p = Factory(:pitch, :requested_amount => 50)
+        5.times do
+          d = Donation.create(:user => mock_model(User, :organization? => false), :pitch => p, :amount => 10)
+          d.should be_valid
+          d.pay!
+        end
+        p.reload.should be_funded
       end
     end
   end
@@ -425,6 +438,20 @@ describe Pitch do
   
       @pitch.reload
       @pitch.total_amount_donated.to_f.should == @pitch.donations.paid.map(&:amount).map(&:to_f).sum
+    end
+    
+    describe "becomes fully funded (by way of fund!)" do
+      it "when paid donations equal requested amount" do
+        p = Factory(:pitch, :requested_amount => 50)
+        5.times do
+          donation = Factory(:donation, :pitch => p, :user => Factory(:user), :amount => 10)
+          donation.should be_valid
+          donation.pay!
+        end
+        p.current_funding_in_cents
+        p.should be_valid
+        p.reload.should be_funded
+      end
     end
   end
   
