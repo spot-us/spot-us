@@ -14,6 +14,13 @@
 
 class Donation < ActiveRecord::Base
   include AASM
+  class <<self
+    alias invasive_inherited_from_aasm inherited
+    def inherited(child)
+      invasive_inherited_from_aasm(child)
+      super
+    end
+  end
   aasm_column :status
   aasm_initial_state  :unpaid
   
@@ -22,7 +29,7 @@ class Donation < ActiveRecord::Base
   aasm_state :refunded
   
   aasm_event :pay do
-    transitions :from => :unpaid, :to => :paid
+    transitions :from => :unpaid, :to => :paid 
   end
   
   aasm_event :refund do
@@ -42,6 +49,8 @@ class Donation < ActiveRecord::Base
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
   
+  after_save :update_pitch_funding, :if => lambda {|me| me.paid?}
+  
   has_dollar_field :amount
 
   def self.createable_by?(user)
@@ -58,6 +67,11 @@ class Donation < ActiveRecord::Base
   end
 
   protected
+
+  def update_pitch_funding
+    pitch.current_funding_in_cents += amount_in_cents
+    pitch.save
+  end
 
   def disable_updating_paid_donations
     if paid? && !being_marked_as_paid?

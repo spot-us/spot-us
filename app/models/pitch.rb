@@ -33,7 +33,6 @@
 #
 
 class Pitch < NewsItem
-  include AASM
   aasm_column :status
   aasm_initial_state  :active
   
@@ -79,9 +78,11 @@ class Pitch < NewsItem
       for_user(user).map(&:amount_in_cents).sum
     end
   end
-  named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  before_save :check_if_funded_state
+  
+  after_save :check_if_funded_state
+
+  named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   named_scope :featured, :conditions => {:feature => true}
   named_scope :almost_funded, :order => "(news_items.current_funding_in_cents / news_items.requested_amount_in_cents) desc"
 
@@ -112,7 +113,9 @@ class Pitch < NewsItem
   end
   
   def check_if_funded_state
-    fund! if fully_funded? && active?
+    if fully_funded? && active?
+      fund!
+    end
   end
   
   def self.createable_by?(user)
@@ -135,7 +138,7 @@ class Pitch < NewsItem
   end
   
   def fully_funded?
-    return true if accepted?
+    return true if accepted? || funded?
     donations.paid.sum(:amount_in_cents) >= requested_amount_in_cents
   end
 
