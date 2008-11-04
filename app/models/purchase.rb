@@ -79,9 +79,6 @@ class Purchase < ActiveRecord::Base
     (@new_donations || []).each do |donation|
       donation.purchase = self
       donation.pay!
-
-      donation.pitch.current_funding_in_cents += donation.amount_in_cents
-      donation.pitch.save
     end
   end
 

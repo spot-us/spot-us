@@ -1,8 +1,14 @@
 %div
-  = static_progress_bar("pitch", pitch.current_funding_in_percentage)
+  - if pitch.fully_funded?
+    = static_progress_bar("pitch", 1)
+  - else
+    = static_progress_bar("pitch", pitch.current_funding_in_percentage)
 %div
   %p
     %strong= number_to_currency(pitch.current_funding)
     raised
     %br/
-    == #{number_to_currency(pitch.funding_needed_in_cents.to_dollars)} to go
+    - if pitch.fully_funded?
+      == #{number_to_currency(0)} to go
+    - else
+      == #{number_to_currency(pitch.funding_needed_in_cents.to_dollars)} to go
