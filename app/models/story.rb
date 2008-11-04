@@ -34,47 +34,34 @@
 #  fact_checker_id             :integer(4)      
 #
 
-class Tip < NewsItem
-  attr_accessor :pledge_amount
-
-  has_many :pledges
-  has_many :supporters, :through => :pledges, :source => :user, :order => "pledges.created_at", :uniq => true
-  has_many :affiliations
-  has_many :pitches, :through => :affiliations
-
-  before_create :build_initial_pledge
- 
-  validates_presence_of :short_description
-  validates_presence_of :user
-  validates_presence_of :pledge_amount, :on => :create
-
-  validates_inclusion_of :location, :in => LOCATIONS
+class Story < NewsItem
+  aasm_column :status
+  aasm_initial_state  :draft
   
-
-  def self.createable_by?(user)
-    !user.nil?
+  aasm_state :draft
+  aasm_state :fact_check
+  aasm_state :ready
+  aasm_state :published
+  
+  aasm_event :verify do
+    transitions :from => :draft, :to => :fact_check
   end
   
-  def self.most_pledged
-    Pledge.sum(:amount_in_cents, :group => :tip).sort_by{ |count| count.last }.reverse.map{ |count| count.first }
-  end
-
-  def can_be_edited?
-    pledges.blank?
+  aasm_event :reject do
+    transitions :from => :fact_check, :to => :draft
   end
   
-  def pledged_to?
-    # we don't count the initial pledge, which is self-given
-    pledges.size > 1
+  aasm_event :accept do
+    transitions :from => :fact_check, :to => :ready
+  end
+  
+  aasm_event :publish do
+    transitions :from => :ready, :to => :published
   end
 
-  def total_amount_pledged
-    pledges.sum(:amount_in_cents).to_dollars
-  end
-
-  private
-
-  def build_initial_pledge
-    pledges.build(:user_id => user_id, :amount => pledge_amount)
-  end
+  belongs_to :pitch
+  belongs_to :user
+  belongs_to :fact_checker, :class_name => 'User'
+  validates_presence_of :extended_description
+  has_many :supporters, :through => :pitch
 end
