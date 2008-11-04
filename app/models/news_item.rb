@@ -34,6 +34,14 @@
 
 class NewsItem < ActiveRecord::Base
   include HasTopics
+  include AASM
+  class <<self
+    alias invasive_inherited_from_aasm inherited
+    def inherited(child)
+      invasive_inherited_from_aasm(child)
+      super
+    end
+  end
   belongs_to :user
   
   has_attached_file :featured_image, 
