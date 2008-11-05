@@ -35,7 +35,6 @@
 #
 
 class Pitch < NewsItem
-  aasm_column :status
   aasm_initial_state  :active
   
   aasm_state :active

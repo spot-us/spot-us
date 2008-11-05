@@ -2,15 +2,9 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
-  map.resources :donations
-  map.resources :affiliations
+  map.resources :donations, :affiliations, :pledges, :profiles, :pages, :stories
   map.resources :tips, :has_many => :affiliations
-  map.resources :pledges
-  map.resources :pitches, :member => {:feature => :post} do |pitch|
-    pitch.resource :story, :controller => :story
-  end
-  map.resources :profiles
-  map.resources :pages
+  map.resources :pitches, :member => {:feature => :post}
 
   # TODO: remove when done
   map.resources :ui
