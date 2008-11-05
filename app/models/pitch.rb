@@ -42,11 +42,11 @@ class Pitch < NewsItem
   aasm_state :funded
   
   aasm_event :fund do
-    transitions :from => :active, :to => :funded, :on_transition => :create_associated_story
+    transitions :from => :active, :to => :funded, :on_transition => :do_fund_events
   end
   
   aasm_event :accept do
-    transitions :from => :active, :to => :accepted, :on_transition => :do_accept_events
+    transitions :from => :active, :to => :accepted, :on_transition => :do_fund_events
   end
   
   validates_presence_of :requested_amount
@@ -172,16 +172,16 @@ class Pitch < NewsItem
   end
   
   protected
+    def do_fund_events
+      send_fund_notification 
+      create_associated_story
+    end
+    
     def create_associated_story
       self.create_story(:headline => self.headline, :location => self.location, :user => self.user)
     end
     
-    def do_accept_events
-      send_accept_notification 
-      create_associated_story
-    end
-    
-    def send_accept_notification
+    def send_fund_notification
       Mailer.deliver_pitch_accepted_notification(self)
     end
 end
