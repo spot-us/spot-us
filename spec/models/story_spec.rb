@@ -7,7 +7,6 @@ describe Story do
   
   it { Factory(:story).should belong_to(:pitch) }
   it { Factory(:story).should belong_to(:user) }
-  it { Factory(:story).should belong_to(:fact_checker) }
   it { Factory(:story).should have_many(:supporters) }
   
   describe "to support STI" do
