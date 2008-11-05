@@ -4,17 +4,17 @@
 .home-boxer
   %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
     .home-floater
-      %h3
-        %div{:style => "color: red;"}
-          %strong What is Spot.Us?   
-      .double_content_border
+    %h3
+      %div{:style => "color: red;"}
+        %strong What is Spot.Us?   
+    .double_content_border
     %object{ :height => "197", :width => "350" }
       %param{ :name => "allowfullscreen", :value => "true" }/
       %param{ :name => "allowscriptaccess", :value => "always" }/
       %param{ :name => "movie", :value => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1" }/
       %embed{ :src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :height => "197", :width => "350" }/
-      %h5.float-left
       %p
+      %h5.float-left
         See our FAQ's for 
         == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
         Spot.Us is a marketplace where all three come to collaborate.                
@@ -53,7 +53,6 @@
         .double_content_border
         .float-right
           = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
-.double_content_border
 .clear
 - # spotus_ie_pixel.gif is a IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
