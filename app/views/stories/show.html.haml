@@ -43,7 +43,7 @@
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
-    %p= h @story.keywords
+    %p= h @story.pitch.keywords
   .span-160.box_white
     = render :partial => "news_items/supporters", :locals => {:news_item => @story.pitch}
 .clear
