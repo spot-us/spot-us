@@ -58,7 +58,7 @@ class Story < NewsItem
     transitions :from => :ready, :to => :published
   end
 
-  belongs_to :pitch
+  belongs_to :pitch, :foreign_key => 'news_item_id'
   belongs_to :fact_checker, :class_name => 'User'
   validate_on_update :extended_description
   has_many :supporters, :through => :pitch

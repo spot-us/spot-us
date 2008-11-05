@@ -1,0 +1,43 @@
+- form_for(@story, :html => { :multipart => true }) do |f|
+  .box_yellow.create_a_pitch_form
+    .yellow-spacer-negative
+    .row
+      = f.label :location, "Location"
+      = f.select :location, LOCATIONS
+    .row
+      = f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>"
+      = f.text_area :headline, :rows => 2
+    .yellow-spacer-negative
+    .row
+      = f.label :extended_description, "This is your story body."
+      = fckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '67%', :height => '400px')
+    .row
+      .form_hint.small
+        500 Characters Remain
+
+    .yellow-spacer-negative
+    .row
+      %label{:for => ""} 
+        Add Media
+    .yellow-spacer-negative-blank
+    .row.media
+      %label.small{:for => ""}
+        Required: Upload A Featured Image
+        %br
+        %span.quieter JPEG, PNG and GIF's less than 5 MB.
+      = f.file_field :featured_image
+    .yellow-spacer-negative-blank
+    .row.media
+      = f.label :featured_image_caption, "Required: Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small"
+      = f.text_area :featured_image_caption, :rows => 2
+    .yellow-spacer-negative-blank
+    .row.media
+      = f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small"
+      = f.text_area :video_embed, :rows => 4
+      .clear
+
+  .double_content_border
+
+  .float-right
+    = image_submit_tag image_path('save.png')
+
