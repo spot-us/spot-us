@@ -7,6 +7,7 @@
     %th Expiration
     %th Funding
     %th Supporters
+    %th Fact Checker
     
     - for pitch in @pitches
       %tr
@@ -25,3 +26,8 @@
           == #{number_to_currency(pitch.requested_amount_in_cents.to_dollars)} Raised
         %td
           = pitch.supporters.map(&:email).join(', ')
+        %td.fact_checker
+          - if pitch.fact_checker_id.nil?
+            = render :partial => 'fact_checker_chooser', :locals => { :pitch => pitch }
+          - else
+            == #{pitch.fact_checker.full_name} #{link_to('(change)', fact_checker_chooser_admin_pitch_path(pitch), :class => 'change_fact_checker')}
