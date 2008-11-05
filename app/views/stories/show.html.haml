@@ -1,0 +1,52 @@
+- @title = "Spot.us - Story: #{h @story.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      Story:
+      %strong= h @story.headline
+    .double_content_border
+    = render :partial => 'news_items/user', :locals => { :news_item => @story }
+    .block-spacer-negative
+    .double_content_border
+    %p 
+      = render :partial => 'news_items/featured_image', :locals => {:news_item => @story}
+      .alt-spotus= @story.extended_description
+    .clear
+    - if @story.video_embed
+      .block-spacer-negative
+      %p
+        %h3 Video
+        .double_content_border
+        = sanitize @story.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+    .block-spacer-negative
+  .span-220.column_v.box_white
+    %h3.description
+      History of this story
+    .double_content_border
+    %h4
+      PITCH:
+      %strong= link_to h(@story.pitch.headline), @story.pitch
+    .dateline.small.quiet
+      Posted
+      = @story.pitch.created_at.to_s(:long_date)
+      by
+      = link_to h(@story.pitch.user.full_name), profile_path(@story.pitch.user)
+      in
+      = @story.pitch.location
+    %p.short_description.alt-spotus
+      = truncate_words(@story.pitch.short_description, 30)
+      = link_to 'Read More &raquo;', @story.pitch
+    .double_content_border
+
+    .block-spacer-negative
+    %h3 Keywords
+    .double_content_border
+    %p= h @story.keywords
+  .span-160.box_white
+    = render :partial => "news_items/supporters", :locals => {:news_item => @story.pitch}
+.clear
+.block-spacer
+
+

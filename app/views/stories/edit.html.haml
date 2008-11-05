@@ -1,0 +1,17 @@
+- unless @story.errors.empty?
+  - content_for :error do
+    = error_messages_for :story
+
+- @title = "Spot.us - Edit Your Story"
+.block-spacer
+%h3 Edit Your Story
+
+#equalize
+  -# first column content 
+  .span-715.box_white
+    = render :partial => 'form'
+      
+  -# second column content   
+  = render :partial => 'sidebar'
+.clear
+.block-spacer
