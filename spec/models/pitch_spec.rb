@@ -502,7 +502,7 @@ describe Pitch do
       end
     end
     describe "via accept!" do
-      it "should create a story on fund!" do
+      it "should create a story" do
         p = Factory(:pitch)
         p.accept!
         p.story.should_not be_nil

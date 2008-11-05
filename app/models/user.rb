@@ -40,14 +40,8 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
 
   include HasTopics
-  include AASM
-  class <<self
-    alias invasive_inherited_from_aasm inherited
-    def inherited(child)
-      invasive_inherited_from_aasm(child)
-      super
-    end
-  end
+  include AASMWithFixes
+  
   aasm_column :status
   aasm_initial_state  :active
   aasm_state :active
