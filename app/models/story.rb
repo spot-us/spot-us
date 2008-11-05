@@ -35,7 +35,6 @@
 #
 
 class Story < NewsItem
-  aasm_column :status
   aasm_initial_state  :draft
   
   aasm_state :draft
