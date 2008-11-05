@@ -2,22 +2,21 @@
 
 .block-spacer
 .home-boxer
-  %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
+  %div.home-floater.home-image-box{:style=>"width:375px;float:left;background: #fff;"}
     .home-floater
-    %h3
-      %div{:style => "color: red;"}
-        %strong What is Spot.Us?   
-    .double_content_border
-    %object{ :height => "197", :width => "350" }
-      %param{ :name => "allowfullscreen", :value => "true" }/
-      %param{ :name => "allowscriptaccess", :value => "always" }/
-      %param{ :name => "movie", :value => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1" }/
-      %embed{ :src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :height => "197", :width => "350" }/
-      %p
-      %h5.float-left
-        See our FAQ's for 
-        == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
-        Spot.Us is a marketplace where all three come to collaborate.                
+      %h3{:style => "color: red;"}
+        What is Spot.Us?   
+      .double_content_border
+      %object{ :height => "197", :width => "350" }
+        %param{ :name => "allowfullscreen", :value => "true" }/
+        %param{ :name => "allowscriptaccess", :value => "always" }/
+        %param{ :name => "movie", :value => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1" }/
+        %embed{ :src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :height => "197", :width => "350" }/
+        %p
+        %h5.float-left
+          See our FAQ's for 
+          == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
+          Spot.Us is a marketplace where all three come to collaborate.                
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
     - if @featured_pitch.blank?  
       %h3 Create the first story
@@ -58,7 +57,7 @@
 %img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-spacer
 .home-boxer
-  %div.home-floater.home-image-box{:style=>"width:345px;float:left;background: #fff;"}
+  %div.home-floater.home-image-box{:style=>"width:375px;float:left;background: #fff;"}
     = link_to image_tag('nyt_article.png'), 'http://www.nytimes.com/2008/08/24/weekinreview/24kershaw.html?_r=1&oref&oref=slogin'
 
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
