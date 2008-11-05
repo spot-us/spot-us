@@ -1,7 +1,24 @@
 class Admin::PitchesController < ApplicationController
   before_filter :admin_required
   layout "bare"
-  
-  resources_controller_for :pitches, :only => :index
-  
+
+  resources_controller_for :pitches, :only => [:index, :update]
+
+  response_for :update do |format|
+    format.html{ redirect_to admin_pitches_path }
+  end
+
+  def fact_checker_chooser
+    render :partial => 'fact_checker_chooser', :locals => { :pitch => current_pitch, :cancel => true }
+  end
+
+  protected
+    def all_users
+      @all_users ||= User.all
+    end
+    helper_method :all_users
+
+    def current_pitch
+      @pitch ||= Pitch.find(params[:id])
+    end
 end
