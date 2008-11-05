@@ -38,7 +38,8 @@ class Mailer < ActionMailer::Base
   end
   
   def pitch_accepted_notification(pitch)
-    recipients pitch.supporters.map(&:email).join(', ')
+    # emptor: bruting in admin notification of funding below
+    recipients pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Success!! Your Story is Funded!"
     body       :pitch => pitch
@@ -50,4 +51,5 @@ class Mailer < ActionMailer::Base
     subject    "Spot.Us: Important Information on Joining"
     body       :user => user
   end
+  
 end
