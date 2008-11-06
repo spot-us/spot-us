@@ -82,8 +82,6 @@ class Pitch < NewsItem
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   
   has_one :story, :foreign_key => 'news_item_id'
-  belongs_to :fact_checker, :class_name => 'User'
-  
   after_save :check_if_funded_state
 
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'

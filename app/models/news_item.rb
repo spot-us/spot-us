@@ -40,6 +40,7 @@ class NewsItem < ActiveRecord::Base
   
   aasm_column :status
   belongs_to :user
+  belongs_to :fact_checker, :class_name => 'User'
   
   has_attached_file :featured_image, 
                     :styles => { :thumb => '50x50#', :medium => "200x150#" }, 
