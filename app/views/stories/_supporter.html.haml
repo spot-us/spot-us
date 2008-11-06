@@ -1,0 +1,13 @@
+.person_avatar
+  = link_to((image_tag supporter.photo.url(:thumb)), profile_path(supporter))
+%p.reg-line-height
+  = link_to supporter.full_name, profile_path(supporter)
+  - if @story.user == supporter
+    .nil-line-height.small
+      Created this Story on
+      = @story.created_at.to_s(:date)
+  - else
+    .nil-line-height.small
+      Donated
+      = number_to_currency(supporter.amount_donated_to(@story.pitch))
+.clear
