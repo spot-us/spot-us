@@ -1,0 +1,17 @@
+.supporters
+  %h2.supporters 
+    Supporters
+    
+  = supporters_count
+  - if supporters_count > 1
+    people donated
+  - else
+    person donated
+  = number_to_currency @story.pitch.total_amount_donated
+.double_content_border
+
+.supporters
+  .supporter
+    - @story.pitch.supporters.each do |supporter|
+      = render :partial => 'supporter', :locals => {:supporter => supporter}
+

@@ -60,5 +60,4 @@ class Story < NewsItem
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
   validate_on_update :extended_description
-  has_many :supporters, :through => :pitch
 end
