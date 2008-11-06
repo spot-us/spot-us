@@ -1,17 +1,28 @@
-.creator
-  .person_avatar
-    = link_to((image_tag news_item.user.photo.url(:thumb)), profile_path(news_item.user))
-  %h4.reg-line-height
-    = news_item.class
-    by
-    = link_to(h(news_item.user.full_name), profile_path(news_item.user))
-  .reg-line-height
-    - if news_item.topics.any?
-      Filed in
-      = show_topics(news_item)
-  .reg-line-height
-    Located in
-    = h news_item.user.location
-
+.div
+  .creator
+    .person_avatar
+      = link_to((image_tag news_item.user.photo.url(:thumb)), profile_path(news_item.user))
+    %h3.reg-line-height
+      = news_item.class
+      by
+      = link_to(h(news_item.user.full_name), profile_path(news_item.user))
+    .reg-line-height
+      - if news_item.topics.any?
+        Filed in
+        = show_topics(news_item)
+    .reg-line-height
+      Located in
+      = h news_item.user.location
+  .clear
+  - if news_item.fact_checker  
+    .creator
+      .person_avatar
+        = link_to((image_tag news_item.fact_checker.photo.url(:thumb)), profile_path(news_item.fact_checker))
+      %h3.reg-line-height
+        Fact Check Editor
+      = link_to(h(news_item.fact_checker.full_name), profile_path(news_item.fact_checker))
+      .reg-line-height
+        Located in
+        = h news_item.user.location
   .clear
   .double_content_border
