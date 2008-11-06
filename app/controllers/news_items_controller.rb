@@ -20,7 +20,7 @@ class NewsItemsController < ApplicationController
       @news_items = params[:news_item_type].camelize.singularize.constantize.send(params[:sort_by])
     else
       @news_items = NewsItem.find :all,
-                    :order => "created_at #{params.fetch(:sort_by, 'desc')}"
+                    :order => "created_at #{params.fetch(:sort_by, 'desc')}", :conditions => ["type in (?)", ['Pitch', 'Tip']]
     end
   end
 end
