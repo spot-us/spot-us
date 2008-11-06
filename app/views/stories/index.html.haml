@@ -3,7 +3,11 @@
 
 #equalize
 .box_white
-  = render :partial => @stories
+  - unless @stories.size > 0
+    = render :partial => @stories
+  - else
+    Currently we don't have any stories BUT you can help us get there by making donations to pitches you care about. Check out what we have by going to 
+    = link_to "Fund A Story", news_items_path
     
 .clear
 .block-spacer
