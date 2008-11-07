@@ -60,4 +60,33 @@ class Story < NewsItem
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
   validate_on_update :extended_description
+  
+  def editable_by?(user)
+    return false if user.nil?
+    if user.is_a?(Reporter) 
+      return reporter_edit_permissions(user)
+    end 
+    return false if user.is_a?(Citizen)
+    return true if user.is_a?(Admin) 
+    false 
+  end
+  
+  def viewable_by?(user)
+    return true if user.is_a?(Admin)
+    return true if self.published?
+    if user.is_a?(Reporter)
+      return reporter_view_permissions(user)
+    end
+    false
+  end
+  
+  def reporter_view_permissions(user)
+    return true if (user == self.user || self.fact_checker == user)
+  end
+  
+  def reporter_edit_permissions(user)
+    return (user == self.user) if self.draft?
+    return true if self.fact_check? && self.fact_checker == user
+    false
+  end
 end
