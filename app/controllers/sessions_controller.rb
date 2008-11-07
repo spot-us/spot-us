@@ -9,11 +9,7 @@ class SessionsController < ApplicationController
   def create
     self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
-      if params[:remember_me] == "1"
-        current_user.remember_me unless current_user.remember_token?
-        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-      end
-      
+      handle_remember_me
       handle_first_donation_for_non_logged_in_user
       redirect_back_or_default('/')
     else
@@ -37,6 +33,13 @@ class SessionsController < ApplicationController
         self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
         session[:news_item_id] = nil
         session[:donation_amount] = nil
+      end
+    end
+    
+    def handle_remember_me
+      if params[:remember_me] == "1"
+        current_user.remember_me unless current_user.remember_token?
+        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
     end
     
