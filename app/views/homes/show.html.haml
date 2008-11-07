@@ -12,11 +12,12 @@
         %param{ :name => "allowscriptaccess", :value => "always" }/
         %param{ :name => "movie", :value => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1" }/
         %embed{ :src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :height => "197", :width => "350" }/
-        %p
-        %h5.float-left
-          See our FAQ's for 
-          == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
-          Spot.Us is a marketplace where all three come to collaborate.                
+      %hr.space.clear
+      .double_content_border{:style=>"margin-top:10px;"}
+      %h5{:style=>"margin:0;"}
+        See our FAQ's for 
+        == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
+        Spot.Us is a marketplace where all three come to collaborate.                
   %div.home-floater{:style=>"width:510px;float:right;background: #fff;"}
     - if @featured_pitch.blank?  
       %h3 Create the first story
@@ -29,11 +30,7 @@
         %span= link_to "View more Pitches &raquo;", news_items_path
       .double_content_border.clear
       .featured_image.span-220
-        = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch          
-        %h5.float-left
-          %p
-          <br /><br /><br />If you want to see this story researched, written, and published,
-          click donate to help fund it!
+        = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch        
       .summary.span-280
         %h3
           PITCH:
@@ -52,8 +49,15 @@
         .double_content_border
         .float-right
           = render :partial => 'donations/button', :locals => { :news_item => @featured_pitch }
+      %hr.space.clear
+      %div{:style=>"margin-top:5px;"}
+        .double_content_border
+        %p.small{:style=>"margin:0;"}
+          If you want to see this story researched, written, and published,
+          click donate to help fund it!
+  
 .clear
-- # spotus_ie_pixel.gif is a IE fix
+- # spotus_ie_pixel.gif is an IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-spacer
 .home-boxer
