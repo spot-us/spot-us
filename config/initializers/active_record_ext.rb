@@ -19,4 +19,16 @@ class ActiveRecord::Base
     record.save!
     record
   end
+  
+  def self.create_or_update_by_email(options = {})
+    email = options.delete(:email)
+    record = find_by_email(email) || new
+    record.email = email
+    
+    # we have to override any attribute protections by going to 'send' directly
+    options.each { |k, v| record.send("#{k}=", v) }
+    
+    record.save!
+    record    
+  end
 end
