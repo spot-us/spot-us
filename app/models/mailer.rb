@@ -42,7 +42,7 @@ class Mailer < ActionMailer::Base
     if Rails.env.production?
       bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
     else
-      bcc '"David Cohn" <david@spotus.com>'
+      bcc '"David Cohn" <david@spotus.com>', '"Desi" <desi+spotus@hashrocket.com>'
     end
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Success!! Your Story is Funded!"
