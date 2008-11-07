@@ -2,8 +2,6 @@
   .logo
     %p
       = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Funded Reporting"
-  %p{:style => "text-align: center;"}
-    Spot.Us is currently in a testing phase. Site is safe and secure, launching in full soon. Stay tuned!
   .nav-container
     %ul#main-nav
       %li.start_story= link_to "Start a Story", start_story_path
@@ -11,3 +9,7 @@
       %li.read_story= link_to "Read a Story", stories_path
       %li.about_spotus= link_to "About", page_path('about')
   .clear
+.block-spacer
+.box_white
+  %p{:style => "margin-top: 20px;text-align:center;"}
+    Spot.Us is currently in a testing phase. Site is safe and secure, launching in full soon. Stay tuned!
