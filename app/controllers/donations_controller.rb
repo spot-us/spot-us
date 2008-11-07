@@ -5,6 +5,7 @@ class DonationsController < ApplicationController
 
   response_for :create do |format|
     if resource_saved?
+      update_balance_cookie
       format.js
     else
       format.js { render :action => "new"}
@@ -12,6 +13,7 @@ class DonationsController < ApplicationController
   end
   
   response_for :destroy do |format|
+    update_balance_cookie
     format.html { redirect_to edit_myspot_donations_amounts_path }
   end
   
@@ -36,4 +38,5 @@ class DonationsController < ApplicationController
   def find_resources
     current_user.donations.unpaid
   end
+    
 end
