@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
     self.current_user = User.authenticate(params[:email], params[:password])
     if logged_in?
       handle_remember_me
+      create_current_login_cookie
       handle_first_donation_for_non_logged_in_user
       redirect_back_or_default('/')
     else
@@ -21,12 +22,17 @@ class SessionsController < ApplicationController
   def destroy
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
+    cookies.delete :current_user_full_name
     reset_session
     flash[:notice] = "Later. Hope to see you again soon."
     redirect_back_or_default('/')
   end
   
   protected
+  
+    def create_current_login_cookie
+      cookies[:current_user_full_name] = current_user.full_name
+    end
   
     def handle_first_donation_for_non_logged_in_user
       if session[:news_item_id]
