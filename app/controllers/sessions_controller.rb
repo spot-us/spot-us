@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     if logged_in?
       handle_remember_me
       create_current_login_cookie
+      update_balance_cookie
       handle_first_donation_for_non_logged_in_user
       redirect_back_or_default('/')
     else
@@ -22,6 +23,7 @@ class SessionsController < ApplicationController
   def destroy
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
+    cookies.delete :balance_text
     cookies.delete :current_user_full_name
     reset_session
     flash[:notice] = "Later. Hope to see you again soon."

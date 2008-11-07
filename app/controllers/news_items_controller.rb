@@ -1,5 +1,6 @@
 class NewsItemsController < ApplicationController  
   include NewsItemsHelper
+  
   def index
     get_news_items
   end

@@ -26,12 +26,17 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def can_create?
-    true
-  end
+    def can_create?
+      true
+    end
 
-  def can_edit?
-    true
-  end
+    def can_edit?
+      true
+    end
+    
+    def update_balance_cookie
+      return if not logged_in?    
+      cookies[:balance_text] = render_to_string(:partial => 'layouts/balance')
+    end
   
 end
