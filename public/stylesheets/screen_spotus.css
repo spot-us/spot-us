@@ -83,7 +83,7 @@ h4.title {
   padding:0px;
   }
 .home-boxer {
-  background: url(../images/spotus_home_boxer.jpg) repeat-y top left;
+  background: url(../images/spotus_home_boxer.jpg) repeat-x top left;
   }
 .login-boxer {
   background: url(../images/spotus_login_boxer.gif) repeat-y top left;
