@@ -12,8 +12,7 @@ class HomeSweeper < ActionController::Caching::Sweeper
   private
     
     def expire_pages
-      expire_page(:controller => 'homes', :action => 'show')
-      expire_page(:controller => 'news_items', :action => 'index')
+      expire_page(:controller => '/homes', :action => 'show')
     end
 
 end
