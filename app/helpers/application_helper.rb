@@ -35,7 +35,7 @@ module ApplicationHelper
     
     if (!current_user.credits? && current_balance > 0)
       puts "You need"
-      puts link_to number_to_currency(current_balance.to_dollars), edit_myspot_donations_amounts_path, :id => "current_balance"
+      puts link_to(number_to_currency(current_balance.to_dollars), edit_myspot_donations_amounts_path, :id => "current_balance")
       puts "to fund your donations."
       puts link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
     end
