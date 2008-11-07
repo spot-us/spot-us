@@ -1,17 +1,22 @@
-.featured_image.span-220
-  = link_to image_tag(story.featured_image.url(:medium)), story
-.summary.span-390
-  %h3
-    STORY:
-    %strong= link_to story.headline, story
-  .dateline.small.quiet
-    Posted
-    = story.created_at.to_s(:long_date)
-    by
-    = link_to h(story.user.full_name), profile_path(story.user)
-    in
-    = story.location
-  %p.short_description.alt-spotus
-    = truncate_words(story.extended_description, 45)
-    = link_to "Read More &raquo;", story
+- div_for story do
+  .block-spacer
+  .box_white
+    #equalize
+      .featured_image.span-220
+        = link_to image_tag(story.featured_image.url(:medium)), story
+      .summary.span-390
+        %h3
+          STORY:
+          %strong= link_to story.headline, story
+        .dateline.small.quiet
+          Posted
+          = story.created_at.to_s(:long_date)
+          by
+          = link_to h(story.user.full_name), profile_path(story.user)
+          in
+          = story.location
+        %p.short_description.alt-spotus
+          = truncate_words(story.extended_description, 45)
+          = link_to "Read More &raquo;", story
+    .clear
     
