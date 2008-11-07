@@ -60,6 +60,19 @@ describe SessionsController do
     response.cookies["auth_token"].should_not be_nil
   end
   
+  it 'sets the current user full name cookie' do
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
+    post :create, :email => 'user@example.com', :password => 'test'
+    response.cookies["current_user_full_name"].first.should == "Bob Levine"
+  end
+  
+  it 'sets the current user full name cookie' do
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
+    post :create, :email => 'user@example.com', :password => 'test'
+    get :destroy
+    response.cookies["current_user_full_name"].first.should be_nil
+  end
+  
   it 'does not remember me' do
     Factory(:user, :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "0"
