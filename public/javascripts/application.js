@@ -16,6 +16,7 @@ jQuery(document).ready(function($){
     });
   };
   $("select[name=news_item_type]").change(refreshSortOrder);
+  renderUserHeader();
 });
 // Flash dismiss - CARM TALK TO DESI WE ARE MISSING jslivequery.js for this
 /*$('.flash .dismiss a').livequery('click', function(event) {
@@ -51,5 +52,15 @@ $(function() {
             });  
     }  
 });
+
+function renderUserHeader() {
+  if (jQuery.cookie('current_user_full_name')) {
+    // we are logged in
+    jQuery('#logged_in span').html(jQuery.cookie('current_user_full_name').replace(/\+/," "));
+    jQuery('#logged_in').show();
+  } else {
+    jQuery('#not_logged_in').show();
+  }
+}
 
 
