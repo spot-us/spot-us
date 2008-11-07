@@ -1,15 +1,15 @@
 %ul.user-header-nav
-  - if current_user && logged_in?
+  #logged_in.hide
     %li.no-pipe
       Hello,
-      == #{link_to h(current_user.full_name), myspot_profile_path}.
+      %span.current_user_full_name
     %li#current_balance_line
       = render :partial => 'layouts/balance'
     %li
       = link_to "My Spot", myspot_donations_path
     %li.no-pipe
       = link_to "Logout", destroy_session_path
-  - else
+  #not_logged_in.hide
     %li
       = link_to "Register", new_session_path
     %li.no-pipe
