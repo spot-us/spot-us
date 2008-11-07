@@ -40,9 +40,9 @@ class Mailer < ActionMailer::Base
   def pitch_accepted_notification(pitch)
     # emptor: bruting in admin notification of funding below
     if Rails.env.production?
-      recipients pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+      bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
     else
-      recipients '"David Cohn" <david@spotus.com>'
+      bcc '"David Cohn" <david@spotus.com>'
     end
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Success!! Your Story is Funded!"
