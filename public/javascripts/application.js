@@ -56,7 +56,8 @@ $(function() {
 function renderUserHeader() {
   if (jQuery.cookie('current_user_full_name')) {
     // we are logged in
-    jQuery('#logged_in span').html(jQuery.cookie('current_user_full_name').replace(/\+/," "));
+    jQuery('#logged_in span').html(decodeURI(jQuery.cookie('current_user_full_name').replace(/\+/g," ")));
+    jQuery('#current_balance_line').html(decodeURI(jQuery.cookie('balance_text').replace(/\+/g," ")));
     jQuery('#logged_in').show();
   } else {
     jQuery('#not_logged_in').show();
