@@ -37,11 +37,20 @@
       = truncate_words(@story.pitch.short_description, 30)
       = link_to 'Read More &raquo;', @story.pitch
 
-
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
     %p= h @story.pitch.keywords
+    .block-spacer-negative
+    - if @story.editable_by?(current_user)
+      .centered= link_to image_tag("edit.png"), edit_story_path(@story)
+      .centered= link_to image_tag("send_to_editor.png"), fact_check_story_path(@story)
+    - if @story.fact_checkable_by?(current_user)
+      .centered= link_to "approve", accept_story_path(@story)
+      .centered= link_to "reject", reject_story_path(@story)
+    - if @story.publishable_by?(current_user)
+      .centered= link_to "publish", publish_story_path(@story)
+        
   .span-160.box_white
     = render :partial => "supporters", :locals => {:story => @story}
 .clear
