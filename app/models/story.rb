@@ -61,6 +61,8 @@ class Story < NewsItem
   belongs_to :pitch, :foreign_key => 'news_item_id'
   validate_on_update :extended_description
   
+  named_scope :published, :conditions => {:status => 'published'}
+  
   def editable_by?(user)
     return false if user.nil?
     return false if self.fact_checker == user
