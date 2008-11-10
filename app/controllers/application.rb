@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  
+    def create_current_login_cookie
+      cookies[:current_user_full_name] = current_user.full_name
+    end
 
     def can_create?
       true

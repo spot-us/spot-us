@@ -32,9 +32,7 @@ class SessionsController < ApplicationController
   
   protected
   
-    def create_current_login_cookie
-      cookies[:current_user_full_name] = current_user.full_name
-    end
+
   
     def handle_first_donation_for_non_logged_in_user
       if session[:news_item_id]
