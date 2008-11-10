@@ -6,24 +6,28 @@ class StoriesController < ApplicationController
     story = find_resource
     story.accept!
     flash[:notice] = "Your story has been submitted to spot.us personnel to be published" 
+    redirect_back_or_default("/")
   end
   
   def reject
     story = find_resource
     story.reject!
-    flash[:notice] = "Your story has been sent back to the reporter for edits" 
+    flash[:notice] = "Your story has been sent back to the reporter for edits"
+    redirect_back_or_default("/")
   end
   
   def fact_check
     story = find_resource
     story.verify!
     flash[:notice] = "Your story has been sent to the fact checker"
+    redirect_back_or_default("/")
   end
   
   def publish
     story = find_resource
     story.publish!
     flash[:notice] = "Your story has been published"
+    redirect_back_or_default("/")
   end
   
   protected
