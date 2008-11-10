@@ -39,5 +39,6 @@
   .double_content_border
 
   .float-right
-    = image_submit_tag image_path('save.png')
+    - if @story.draft?
+      = image_submit_tag image_path('save.png')
 
