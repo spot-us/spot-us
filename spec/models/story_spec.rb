@@ -106,11 +106,11 @@ describe Story do
         @story.editable_by?(@reporter).should be_false
       end
       
-      it "should be true for the fact check editor" do
+      it "should be false for the fact check editor" do
         @story.user = @reporter
         @story.fact_checker = @fact_checker
         @story.save
-        @story.editable_by?(@fact_checker).should be_true
+        @story.editable_by?(@fact_checker).should be_false
         # sort of .. it should only be the state that is editable need to figure out how to do that
       end      
     end
@@ -225,7 +225,7 @@ describe Story do
         @story.user = @reporter
         @story.fact_checker = @fact_checker
         @story.save
-        @story.editable_by?(@fact_checker).should be_true
+        @story.viewable_by?(@fact_checker).should be_true
       end
       
       it "should be true for an admin" do
@@ -331,5 +331,63 @@ describe Story do
         @story.viewable_by?(nil).should be_true
       end
     end
-  end 
+  end
+    describe "story in fact_check state" do
+      before do
+        @citizen = Factory(:citizen)
+        @reporter = Factory(:reporter)
+        @fact_checker = Factory(:reporter)
+        @admin = Factory(:admin)
+        @story = Factory(:story, :status => 'fact_check')
+      end
+      describe "fact_checkable_by?" do
+        it "should be false for the reporter" do
+          @story.user = @reporter
+          @story.fact_checker = @fact_checker
+          @story.save
+          @story.fact_checkable_by?(@reporter).should be_false
+        end
+        
+        it "should be true for the admin" do
+          @story.user = @reporter
+          @story.fact_checker = @fact_checker
+          @story.save
+          @story.fact_checkable_by?(@admin).should be_true
+        end
+        
+        it "should be true for the fact checker" do
+          @story.user = @reporter
+          @story.fact_checker = @fact_checker
+          @story.save
+          @story.fact_checkable_by?(@fact_checker).should be_true
+        end
+      end
+    end
+    
+    describe "publishable_by?" do
+      before do
+        @citizen = Factory(:citizen)
+        @reporter = Factory(:reporter)
+        @fact_checker = Factory(:reporter)
+        @admin = Factory(:admin)
+        @story = Factory(:story, :status => 'ready')
+      end
+      it "should be true for the admin" do
+        @story.user = @reporter
+        @story.save
+        @story.publishable_by?(@admin).should be_true
+      end
+      
+      it "should false for anyone else" do
+        @story.user = @reporter
+        @story.save
+        @story.publishable_by?(@reporter).should be_false
+      end
+      
+      it "should be false for anyone not logged in" do
+        @story.user = @reporter
+        @story.save
+        @story.publishable_by?(nil).should be_false
+      end
+    end
 end

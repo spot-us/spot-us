@@ -2,7 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
-  map.resources :donations, :affiliations, :pledges, :profiles, :pages, :stories
+  map.resources :donations, :affiliations, :pledges, :profiles, :pages
+  map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}
   map.resources :tips, :has_many => :affiliations
   map.resources :pitches, :member => {:feature => :post}
 
