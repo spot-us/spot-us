@@ -55,7 +55,7 @@
           .yellow-spacer-negative
           .row
             = f.label :credit_card_type
-            = f.select :credit_card_type, ['Visa', 'MasterCard', 'Discover', ['American Express','Amex']]
+            = f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']]
           .row
             = f.label :credit_card_number
             = f.text_field :credit_card_number
