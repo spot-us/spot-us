@@ -53,4 +53,8 @@ class StoriesController < ApplicationController
           :redirect => story_url(story))
       end
     end
+    
+    def find_resources
+      @stories = Story.published
+    end
 end

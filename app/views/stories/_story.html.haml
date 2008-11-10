@@ -16,7 +16,7 @@
           in
           = story.location
         %p.short_description.alt-spotus
-          = truncate_words(story.extended_description, 45)
+          = truncate_words(story.extended_description, 45) if story.extended_description
           = link_to "Read More &raquo;", story
     .clear
     
