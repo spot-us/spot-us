@@ -4,25 +4,29 @@ module StoriesHelper
   end
   
   def publishing_workflow_buttons_for(user)
-    out = "<div class='centered'>"
+    out = ""
     if (@story.draft? && @story.editable_by?(user)) || user.admin?
-      out << content_tag(:a, tag(:img, :class => 'edit'), :href => '')
+      out << content_tag(:div, link_to(image_tag('edit.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
     end
     case @story.status
     when 'draft' then
       if @story.editable_by?(user)
-        out << content_tag(:a, tag(:img, :class => 'send_to_editor'), :href => '')
+        out << content_tag(:div, link_to(image_tag('send_to_editor.png', :class => 'send_to_editor'), 
+        fact_check_story_path(@story)), :class => 'centered', :method => :put)
       end
     when 'fact_check' then
       if @story.fact_checkable_by?(user)
-        out << content_tag(:a, tag(:img, :class => 'return_to_journalist'), :href => '')
-        out << content_tag(:a, tag(:img, :class => 'ready_for_publishing'), :href => '')
+        out << content_tag(:div, link_to(image_tag('return_to_journalist.png', :class => 'return_to_journalist'), 
+                                reject_story_path(@story)), :class => 'centered', :method => :put)
+        out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
+                                  accept_story_path(@story)), :class => 'centered', :method => :put)
       end      
     when 'ready' then
       if @story.publishable_by?(user)
-        out << content_tag(:a, tag(:img, :class => 'publish'), :href => '')
+        out << content_tag(:div, link_to(image_tag('publish.png', :class => 'publish'), 
+                                  publish_story_path(@story)), :class => 'centered', :method => :put)
       end
     end
-    out << "</div>"
+    out << ""
   end
 end
