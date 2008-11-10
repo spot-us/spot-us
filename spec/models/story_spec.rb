@@ -111,7 +111,6 @@ describe Story do
         @story.fact_checker = @fact_checker
         @story.save
         @story.editable_by?(@fact_checker).should be_false
-        # sort of .. it should only be the state that is editable need to figure out how to do that
       end      
     end
   end
