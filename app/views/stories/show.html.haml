@@ -44,12 +44,12 @@
     .block-spacer-negative
     - if @story.editable_by?(current_user)
       .centered= link_to image_tag("edit.png"), edit_story_path(@story)
-      .centered= link_to image_tag("send_to_editor.png"), fact_check_story_path(@story)
+      .centered= link_to image_tag("send_to_editor.png"), fact_check_story_path(@story), :method => :put
     - if @story.fact_checkable_by?(current_user)
-      .centered= link_to "approve", accept_story_path(@story)
-      .centered= link_to "reject", reject_story_path(@story)
+      .centered= link_to "approve", accept_story_path(@story), :method => :put
+      .centered= link_to "reject", reject_story_path(@story), :method => :put
     - if @story.publishable_by?(current_user)
-      .centered= link_to "publish", publish_story_path(@story)
+      .centered= link_to "publish", publish_story_path(@story), :method => :put
         
   .span-160.box_white
     = render :partial => "supporters", :locals => {:story => @story}
