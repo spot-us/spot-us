@@ -723,11 +723,31 @@ div.featured_image .caption {
   padding: 5px;
   color: gray;
   }
+div.users {
+  position:relative;
+  }
+div.user_news_item_info {
+  margin: 0 0 0 60px;
+  min-height: 60px;
+  }
 div.creator div.person_avatar {
-  float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
   padding-right: 10px;
   padding-bottom: 10px;
+  height: 60px;
   }
+div.fact_checker {
+  margin: 5px 0 0 0;
+  line-height: 15px;
+  min-height: 60px;
+  }
+div.fact_checker div.person_avatar {
+ float: left;
+ padding-right: 10px;
+ padding-bottom: 10px;
+ }
 div.supporters div.person_avatar {
   float: left;
   padding-right: 10px;
