@@ -67,6 +67,11 @@ class NewsItem < ActiveRecord::Base
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
 
+
+  cattr_reader :per_page
+  @@per_page = 10
+
+
   def editable_by?(user)
     if user.nil?
       false
