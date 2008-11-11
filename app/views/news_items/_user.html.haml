@@ -1,28 +1,29 @@
-.div
+.users
   .creator
     .person_avatar
       = link_to((image_tag news_item.user.photo.url(:thumb)), profile_path(news_item.user))
-    %h3.reg-line-height
-      = news_item.class
-      by
-      = link_to(h(news_item.user.full_name), profile_path(news_item.user))
+    .user_news_item_info
+      %h4.reg-line-height
+        = news_item.class
+        by
+        = link_to(h(news_item.user.full_name), profile_path(news_item.user))
+      .reg-line-height
+        %span.quiet Located in
+        = h news_item.user.location
     .reg-line-height
       - if news_item.topics.any?
-        Filed in
+        %span.quiet Filed in
         = show_topics(news_item)
-    .reg-line-height
-      Located in
-      = h news_item.user.location
-  .clear
-  - if news_item.fact_checker  
-    .creator
+  - if news_item.fact_checker
+    %br/
+    %hr/
+    .fact_checker
       .person_avatar
         = link_to((image_tag news_item.fact_checker.photo.url(:thumb)), profile_path(news_item.fact_checker))
-      %h3.reg-line-height
+      %h5.reg-line-height
         Fact Check Editor
       = link_to(h(news_item.fact_checker.full_name), profile_path(news_item.fact_checker))
-      .reg-line-height
-        Located in
+      .reg-line-height.small
+        %span.quiet Located in
         = h news_item.user.location
-  .clear
-  .double_content_border
+.double_content_border
