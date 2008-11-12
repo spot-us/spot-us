@@ -17,6 +17,7 @@
     = render :partial => "myspot/donations/donation", :collection => @donations, :spacer_template => "myspot/donations/donation_spacer"
   .double_content_border
 
+  = will_paginate @donations
 
 .span-160.box_white
   = render :partial => "layouts/common_questions"
