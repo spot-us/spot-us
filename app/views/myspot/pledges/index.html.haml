@@ -15,6 +15,9 @@
       %td{:colspan => 5}
         .double_content_border
     = render :partial => "myspot/pledges/pledge", :collection => @pledges, :spacer_template => "myspot/pledges/pledge_spacer"
+
+  = will_paginate @pledges
+
   .double_content_border
 
 

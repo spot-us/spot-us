@@ -34,7 +34,9 @@
               = text_field_tag "user[donation_amounts][#{donation.id}]", number_with_precision(donation.amount, 2), :size => 5
               .action= link_to "Remove", donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
-
+			
+      = will_paginate @donations
+			
       .float-right
         = image_submit_tag 'purchase.png', :alt => 'Purchase'
 
