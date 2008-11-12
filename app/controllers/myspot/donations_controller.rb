@@ -5,6 +5,6 @@ class Myspot::DonationsController < ApplicationController
   protected
 
   def find_resources
-    current_user.donations.paid
+    current_user.donations.paid.paginate(:all, :page => params[:page])
   end
 end
