@@ -11,6 +11,10 @@
 #
 
 class Pledge < ActiveRecord::Base
+
+  cattr_reader :per_page
+  @@per_page = 10
+
   belongs_to :user
   belongs_to :tip
   validates_presence_of :tip_id

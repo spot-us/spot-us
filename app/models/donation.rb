@@ -13,6 +13,10 @@
 #
 
 class Donation < ActiveRecord::Base
+
+  cattr_reader :per_page
+  @@per_page = 10
+
   include AASM
   class <<self
     alias invasive_inherited_from_aasm inherited
