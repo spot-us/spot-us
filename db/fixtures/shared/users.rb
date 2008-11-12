@@ -3,7 +3,8 @@ unless Rails.env.production?
     %w(David Cohn dcohn1@gmail.com),
     %w(Desi McAdam desi@hashrocket.com),
     %w(Jon Larkowski lark@hashrocket.com),
-    %w(Carmelyne Thompson carmelyne@hashrocket.com)
+    %w(Carmelyne Thompson carmelyne@hashrocket.com),
+    %w(Tien Dung dungtn@gmail.com)
   ]
 
   testing_users.each_with_index do |u, i|
