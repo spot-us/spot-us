@@ -4,7 +4,7 @@ class Myspot::DonationAmountsController < ApplicationController
 
   def edit
     @user      = current_user
-    @donations = @user.donations.unpaid
+    @donations = @user.donations.unpaid.paginate(:all, :page => params[:page])
   end
 
   def update
