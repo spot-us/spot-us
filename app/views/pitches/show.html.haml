@@ -24,6 +24,10 @@
         = sanitize @pitch.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
     .block-spacer-negative
     %p
+      %h3 How Will This Reporting Help?
+      .double_content_border
+      .alt-spotus= @pitch.extended_description
+    %p
       %h3 Deliverables
       .double_content_border
       .alt-spotus= h @pitch.delivery_description
@@ -33,10 +37,7 @@
       .double_content_border
       .alt-spotus= h @pitch.skills
     .block-spacer-negative
-    %p
-      %h3 How Will This Reporting Help?
-      .double_content_border
-      .alt-spotus= @pitch.extended_description
+
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     %h3 Related Tips
