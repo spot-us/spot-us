@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   include SslRequirement
   
-  cache_sweeper :home_sweeper, :except => [:index, :show]
+  # cache_sweeper :home_sweeper, :except => [:index, :show]
 
   helper_method :start_story_path
 
