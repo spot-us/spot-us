@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
+  map.start_story 'start_story', :controller => 'homes', :action => "start_story"
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   map.resources :donations, :affiliations, :pledges, :profiles, :pages
