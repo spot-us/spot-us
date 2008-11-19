@@ -66,6 +66,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :top_four, :limit => 4
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
+  named_scope :fundable_news_item, :conditions => ['type in (?)', ["Pitch", "Tip"]]
 
   def editable_by?(user)
     if user.nil?

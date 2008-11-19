@@ -9,7 +9,7 @@ describe NewsItemsController do
 
   describe "on GET to index" do
     before do
-      @items = [Factory(:tip), Factory(:pitch)]
+      @items = [Factory(:pitch)]
       NewsItem.stub!(:newest).and_return(@items)
     end
 
@@ -24,8 +24,7 @@ describe NewsItemsController do
     end
 
     it "should find the most recent news items" do
-      NewsItem.should_receive(:find).with(:all, {
-                                          :conditions=>["type in (?)", ["Pitch", "Tip"]], 
+      Pitch.should_receive(:find).with(:all, {
                                           :order=>"created_at desc"}).and_return(@items)
       do_index
     end
@@ -83,9 +82,8 @@ describe NewsItemsController do
     end
     
     
-    it "should display all tips and pitches when the input is empty" do
+    it "should display only and pitches when the input is empty" do
       post :search
-      assigns[:news_items].should include(@tip)
       assigns[:news_items].should include(@pitch)
     end
   end
