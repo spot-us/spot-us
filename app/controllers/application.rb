@@ -7,23 +7,13 @@ class ApplicationController < ActionController::Base
   
   # cache_sweeper :home_sweeper, :except => [:index, :show]
 
-  helper_method :start_story_path
-
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
   
   map_resource :profile, :singleton => true, :class => User, :find => :current_user
 
   protect_from_forgery
-
-  def start_story_path
-    if logged_in? && Reporter === current_user
-      new_pitch_path
-    else
-      new_tip_path
-    end
-  end
-
+  
   protected
   
     def create_current_login_cookie
