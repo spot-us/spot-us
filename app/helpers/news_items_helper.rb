@@ -1,12 +1,5 @@
 module NewsItemsHelper
-  def check_box_checked_for?(value)
-    unless params[:news_item_types].nil?
-      !params[:news_item_types][value].nil? ? params[:news_item_types][value].any? : false
-    else
-      false
-    end
-  end
-  
+
   def options_for_sorting(news_type_name, selected)
     out = ""
     case news_type_name
