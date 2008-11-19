@@ -18,10 +18,10 @@ class NewsItemsController < ApplicationController
   def get_news_items   
     unless params[:news_item_type].blank?
       params[:sort_by] = 'desc' unless %w(desc asc most_pledged most_funded almost_funded).include?(params[:sort_by])
-      @news_items = params[:news_item_type].camelize.singularize.constantize.send(params[:sort_by])
-    else
-      @news_items = NewsItem.find :all,
-                    :order => "created_at #{params.fetch(:sort_by, 'desc')}", :conditions => ["type in (?)", ['Pitch', 'Tip']]
+      @news_items = params[:news_item_type].camelize.singularize.constantize.send(params[:sort_by]).fundable_news_item
+    else    
+      @news_items = Pitch.find :all,
+                    :order => "created_at #{params.fetch(:sort_by, 'desc')}"
     end
   end
 end
