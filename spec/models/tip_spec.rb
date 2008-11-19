@@ -13,18 +13,43 @@ describe Tip do
   it {Factory(:tip).should have_many(:affiliations)}
   it {Factory(:tip).should have_many(:pitches)}
 
-  describe "edit guards" do
-    it "allows editing of unpledged tip" do
-      t = Factory :tip
-      t.can_be_edited?.should be_false      
+  describe "editable_by?" do
+    it "allows editing of unpledged tip by owner" do
+      user = Factory(:citizen)
+      t = Factory :tip, :user => user
+      t.editable_by?(user).should be_true      
     end
     
-    it "disallows editing of tip which has a pledge" do
-      t = Factory :tip
+    it "disallows editing of tip with a pledge and the user is not an admin" do
+      user = Factory(:citizen)
+      t = Factory :tip, :user => user
       p = Factory :pledge, :tip => t
       t.reload
-      t.can_be_edited?.should be_false      
+      t.editable_by?(user).should be_false      
     end    
+    
+    it "allows editing by admin" do
+      user = Factory(:admin)
+      t = Factory :tip, :user => user
+      t.reload
+      t.editable_by?(user).should be_true
+    end
+    
+    it "allows editing by admin even if tip has pledges" do
+      user = Factory(:admin)
+      t = Factory :tip, :user => user
+      p = Factory :pledge, :tip => t
+      t.reload
+      t.editable_by?(user).should be_true
+    end
+    
+    it "disallows editing of nil user" do
+      user = Factory(:citizen)
+      t = Factory :tip, :user => user
+      p = Factory :pledge, :tip => t
+      t.reload
+      t.editable_by?(nil).should be_false
+    end
   end
 
   describe "most_pledged" do
