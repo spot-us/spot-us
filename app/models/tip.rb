@@ -58,9 +58,13 @@ class Tip < NewsItem
   def self.most_pledged
     Pledge.sum(:amount_in_cents, :group => :tip).sort_by{ |count| count.last }.reverse.map{ |count| count.first }
   end
-
-  def can_be_edited?
-    pledges.blank?
+  
+  def editable_by?(user)
+    if user.nil?
+      false
+    else
+      ((self.user == user) && !pledged_to?) || user.admin?
+    end
   end
   
   def pledged_to?
