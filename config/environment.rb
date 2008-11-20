@@ -1,7 +1,7 @@
 RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
-require 'yaml'
+require 'yaml' 
 
 config_file_path = File.join(RAILS_ROOT, *%w(config settings.yml))
 if File.exist?(config_file_path)
@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :source => 'http://gems.github.com'
-  
+  config.gem "acts_as_paranoid"
   config.time_zone = 'UTC'
   
   config.load_paths += %W( #{RAILS_ROOT}/app/sweepers )
