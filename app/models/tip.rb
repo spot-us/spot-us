@@ -49,16 +49,14 @@ class Tip < NewsItem
   validates_presence_of :pledge_amount, :on => :create
 
   validates_inclusion_of :location, :in => LOCATIONS
-  
+
+  named_scope :most_pledged, :order => "(select sum(amount_in_cents) from pledges where pledges.tip_id = #{table_name}.id) DESC"
+
 
   def self.createable_by?(user)
     !user.nil?
   end
-  
-  def self.most_pledged
-    Pledge.sum(:amount_in_cents, :group => :tip).sort_by{ |count| count.last }.reverse.map{ |count| count.first }
-  end
-  
+ 
   def editable_by?(user)
     if user.nil?
       false
