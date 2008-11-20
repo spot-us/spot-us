@@ -37,9 +37,9 @@
 class Tip < NewsItem
   attr_accessor :pledge_amount
 
-  has_many :pledges
+  has_many :pledges, :dependent => :destroy
   has_many :supporters, :through => :pledges, :source => :user, :order => "pledges.created_at", :uniq => true
-  has_many :affiliations
+  has_many :affiliations, :dependent => :destroy
   has_many :pitches, :through => :affiliations
 
   before_create :build_initial_pledge
