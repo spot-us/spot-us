@@ -6,6 +6,7 @@
     %th Location
     %th Pledged
     %th Supporters
+    %th Actions
     
     - for tip in @tips
       %tr
@@ -17,3 +18,4 @@
         %td= number_to_currency(tip.total_amount_pledged)
         %td
           = tip.supporters.map(&:email).join(', ')
+        %td=link_to 'Destroy', admin_tip_path(tip), :confirm => 'Are you sure?', :method => :delete
