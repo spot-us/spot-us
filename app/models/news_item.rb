@@ -37,7 +37,7 @@
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
-  
+  acts_as_paranoid
   aasm_column :status
   belongs_to :user
   belongs_to :fact_checker, :class_name => 'User'

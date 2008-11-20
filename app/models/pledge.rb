@@ -11,6 +11,7 @@
 #
 
 class Pledge < ActiveRecord::Base
+  acts_as_paranoid
   belongs_to :user
   belongs_to :tip
   validates_presence_of :tip_id
