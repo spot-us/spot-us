@@ -146,4 +146,27 @@ describe Tip do
     tip = Factory(:tip, :pledge_amount => 0)
     tip.total_amount_pledged.should == "0.0"
   end
+
+  describe "destroy" do
+    it "should set the deleted_at column" do
+      tip = Factory(:tip)
+      tip.should be
+      tip.destroy
+      Tip.find(:all).should_not include(tip)
+      Tip.find_with_deleted(:all).should include(tip)
+    end
+    
+    it "should delete associated pledges" do
+      tip = Factory(:tip)
+      p = Factory(:pledge, :tip=> tip, :amount => 3000)
+      p2 = Factory(:pledge, :tip=> tip, :amount => 2)
+      p3 = Factory(:pledge, :tip=> tip, :amount => 1)
+      tip.reload
+      tip.destroy
+      Pledge.find(:all).should be_empty
+      Pledge.find_with_deleted(:all).should include(p)
+    end
+  end
 end
+
+
