@@ -10,6 +10,7 @@
 #
 
 class Affiliation < ActiveRecord::Base
+  acts_as_paranoid
   belongs_to :pitch
   belongs_to :tip
   validates_presence_of :tip_id
