@@ -11,16 +11,16 @@
 #
 
 class Pledge < ActiveRecord::Base
-
   cattr_reader :per_page
   @@per_page = 10
 
+  acts_as_paranoid
   belongs_to :user
   belongs_to :tip
   validates_presence_of :tip_id
   validates_presence_of :user_id
   validates_presence_of :amount
-  validates_uniqueness_of :tip_id, :scope => :user_id
+  validates_uniqueness_of :tip_id, :scope => [:user_id, :deleted_at]
 
   has_dollar_field :amount
 
