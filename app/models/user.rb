@@ -38,7 +38,7 @@
 
 require 'digest/sha1'
 class User < ActiveRecord::Base
-
+  acts_as_paranoid
   include HasTopics
   include AASMWithFixes
   
@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?, :on => :update
   validates_length_of       :email,    :within => 3..100
-  validates_uniqueness_of   :email, :case_sensitive => false
+  validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
   validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization Admin)
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
   
-  map_resource :profile, :singleton => true, :class => User, :find => :current_user
+  map_resource :profile, :singleton => true, :class => "User", :find => :current_user
 
   protect_from_forgery
   

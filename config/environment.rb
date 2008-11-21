@@ -1,7 +1,7 @@
-RAILS_GEM_VERSION = '2.1.1' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
-require 'yaml'
+require 'yaml' 
 
 config_file_path = File.join(RAILS_ROOT, *%w(config settings.yml))
 if File.exist?(config_file_path)
