@@ -1,25 +1,22 @@
-- if logged_in? 
-  - if current_user.has_pledge_for?(news_item)
-    = render :partial => "pledges/create", :locals => {:tip => news_item}
-  - else
-    %div{:id => "inline_pledge_form_#{news_item.id}"}
-      %div{:id => "pledge_button_#{news_item.id}"}
-        - remote_form_for Pledge.new(:tip => news_item, :amount => 25), :update => "inline_pledge_form_#{news_item.id}" do |f|
-          = f.hidden_field :amount
-          = f.hidden_field :tip_id
-          = image_submit_tag("pledge_25.png")
-      %div.inline_pledge{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
-        - remote_form_for Pledge.new(:tip => news_item), :update => "inline_pledge_form_#{news_item.id}" do |f|
-          .float_left= f.text_field :amount
-          = f.hidden_field :tip_id
-          .float_right= image_submit_tag("pledge.png")
-          .clear
-      .small.uppcased_button_text
-        = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
-        .double_content_border
-      = render :partial => "shared/hey_reporters", :locals => {:tip => news_item}
+- if current_user && current_user.has_pledge_for?(news_item)
+  = render :partial => "pledges/added", :locals => {:tip => news_item}
 - else
-  - store_location
-  = link_to image_tag('pledge_25.png'), new_session_path
+  %div{:id => "inline_pledge_form_#{news_item.id}"}
+    %div{:id => "pledge_button_#{news_item.id}"}
+      - remote_form_for Pledge.new(:tip => news_item, :amount => 25) do |f|
+        = f.hidden_field :amount
+        = f.hidden_field :tip_id
+        = image_submit_tag("pledge_25.png")
+    %div.inline_pledge{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
+      - remote_form_for Pledge.new(:tip => news_item) do |f|
+        .float_left= f.text_field :amount
+        = f.hidden_field :tip_id
+        .float_right= image_submit_tag("pledge.png")
+        .clear
+    .small.uppcased_button_text
+      = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
+      .double_content_border
+    = render :partial => "shared/hey_reporters", :locals => {:tip => news_item}
+
  
 

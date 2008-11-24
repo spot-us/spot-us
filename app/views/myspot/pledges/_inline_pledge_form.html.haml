@@ -1,6 +1,6 @@
 %span[pledge]
   %span{:id => "edit_pledge_#{pledge.id}", :style => "display:none"}
-    - remote_form_for pledge, :update => "pledge_#{pledge.id}" do |f|
+    - remote_form_for pledge do |f|
       = f.text_field :amount
       = f.submit "Update"
       or

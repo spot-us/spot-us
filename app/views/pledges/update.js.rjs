@@ -1,0 +1,2 @@
+page.replace_html "pledge_#{@pledge.id}", :partial => 'myspot/pledges/inline_pledge_form', :locals => {:pledge => @pledge}
+page.replace_html "pledge_#{@pledge.id}_status", "#{number_to_currency(@pledge.tip.total_amount_pledged)} Pledged"
