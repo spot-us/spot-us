@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
       create_current_login_cookie
       update_balance_cookie
       handle_first_donation_for_non_logged_in_user
+      handle_first_pledge_for_non_logged_in_user
       redirect_back_or_default('/')
     else
       @user = User.new
@@ -33,10 +34,18 @@ class SessionsController < ApplicationController
   protected 
   
     def handle_first_donation_for_non_logged_in_user
-      if session[:news_item_id]
+      if session[:news_item_id] && session[:donation_amount]
         self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
         session[:news_item_id] = nil
         session[:donation_amount] = nil
+      end
+    end
+    
+    def handle_first_pledge_for_non_logged_in_user
+      if session[:news_item_id] && session[:pledge_amount]
+        self.current_user.pledges.create(:tip_id => session[:news_item_id], :amount => session[:pledge_amount])
+        session[:news_item_id] = nil
+        session[:pledge_amount] = nil
       end
     end
     
@@ -50,6 +59,7 @@ class SessionsController < ApplicationController
     def store_news_item_for_non_logged_in_user
       session[:news_item_id] ||= params[:news_item_id]
       session[:donation_amount] ||= params[:donation_amount]
+      session[:pledge_amount] ||= params[:pledge_amount]
     end
   
 end
