@@ -30,9 +30,7 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
   
-  protected
-  
-
+  protected 
   
     def handle_first_donation_for_non_logged_in_user
       if session[:news_item_id]
