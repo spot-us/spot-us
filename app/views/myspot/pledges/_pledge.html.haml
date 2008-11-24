@@ -8,8 +8,9 @@
   %td.pledge
     = render :partial => 'inline_pledge_form', :locals => {:pledge => pledge}
   %td.status
-    = number_to_currency(pledge.tip.total_amount_pledged)
-    Pledged
+    %div{:id =>"pledge_#{pledge.id}_status"}
+      = number_to_currency(pledge.tip.total_amount_pledged)
+      Pledged
   %td.actions
     .action= link_to "Remove", pledge_url(pledge), :method => :delete, :confirm => "Are you sure you'd like to remove this pledge of #{number_to_currency(pledge.amount)}?"
 
