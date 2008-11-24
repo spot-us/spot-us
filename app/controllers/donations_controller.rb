@@ -13,6 +13,7 @@ class DonationsController < ApplicationController
       format.js { render :action => "new"}
     end
   end
+
   
   response_for :destroy do |format|
     update_balance_cookie
@@ -23,7 +24,8 @@ class DonationsController < ApplicationController
 
   def can_create?
     if current_user.nil?                             
-      render :update do |page|                             
+      render :update do |page| 
+        session[:return_to] = edit_myspot_donations_amounts_path                           
         page.redirect_to new_session_path(:news_item_id => params[:donation][:pitch_id],
                                           :donation_amount => params[:donation][:amount],
                                           :escape => false)
