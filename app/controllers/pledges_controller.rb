@@ -1,32 +1,39 @@
 class PledgesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  resources_controller_for :pledges
+  before_filter :login_required, :except => :create 
+  resources_controller_for :pledges, :only => [:create, :update, :destroy]
 
-  def create
-    self.resource = new_resource
-
-    respond_to do |format|
-      if resource.save
-        format.js { render :partial => "create", :locals => {:tip => resource.tip} }
-      else
-        format.js { render :partial => "new", :locals => {:tip => resource.tip} }
-      end
+  response_for :create do |format|
+    if resource_saved?
+      format.js 
+    else
+      format.js { render :action => "new"}
     end
   end
   
-  def update
-    self.resource = find_resource
-
-    respond_to do |format|
-      if resource.update_attributes(params[resource_name])
-        format.js   { render :partial => "update" } 
-      else
-        format.js   { render :partial => "edit" }
-      end
+  response_for :update do |format|
+    if resource_saved?
+      format.js 
+    else
+      format.js { render :action => "edit"}
     end
   end
+  
   
   protected
+
+  def can_create?
+    if current_user.nil?                            
+      render :update do |page|
+        session[:return_to] = search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc')
+        page.redirect_to new_session_path(:news_item_id => params[:pledge][:tip_id],
+                                          :pledge_amount => params[:pledge][:amount],
+                                          :escape => false)
+      end and return false
+    end
+    
+    access_denied unless Pledge.createable_by?(current_user)
+  end
 
   def resources_url
     myspot_pledges_url

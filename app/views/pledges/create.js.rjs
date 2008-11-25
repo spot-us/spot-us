@@ -1,0 +1,1 @@
+page.replace_html "inline_pledge_form_#{@pledge.tip.id}", :partial => "added", :locals => {:tip => @pledge.tip}
