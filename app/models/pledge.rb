@@ -25,7 +25,7 @@ class Pledge < ActiveRecord::Base
   has_dollar_field :amount
 
   def self.createable_by?(user)
-    user
+    !user.nil?
   end
 
   def editable_by?(user)
