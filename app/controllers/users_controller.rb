@@ -16,8 +16,6 @@ class UsersController < ApplicationController
     @user = (params[:user][:type] || "User").constantize.new(user_attributes)
 
     if @user.save
-      @user = User.find(@user.to_param)
-      self.current_user = @user
       flash[:success] = 'Check your e-mail for your password, then login to change it.'
     else
       render :template => 'sessions/new'
