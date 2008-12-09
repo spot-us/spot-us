@@ -14,7 +14,7 @@
   .span-6
     %h3 Almost Funded!
     .double_footer_border
-    - for pitch in Pitch.almost_funded.top_four
+    - for pitch in Pitch.almost_funded.unfunded.top_four
       %p.clear
         = link_to image_tag(pitch.featured_image.url(:thumb)), pitch
         = pitch.class.name.upcase + ':'
@@ -23,7 +23,7 @@
   .span-6
     %h3 Newest Items
     .double_footer_border
-    - for news_item in NewsItem.newest.top_four
+    - for news_item in NewsItem.newest.unfunded.pitch_or_tip.top_four
       %p.clear
         = link_to image_tag(news_item.featured_image.url(:thumb)), news_item
         = news_item.class.name.upcase + ':'
