@@ -184,8 +184,9 @@ describe Pitch do
     it "should return a list of pitches ordered by the funding" do
       Pitch.almost_funded == [@p, @p3, @p2]
     end
+
   end
-  
+
   describe "current_funding" do
     it "should be 0 on a pitch when a donation is added" do
       p = Factory(:pitch, :requested_amount => 100)
@@ -484,13 +485,8 @@ describe Pitch do
   end
     
   describe "news org funding pitch" do
-    it "should allow a news org to fully fund a pitch" do
-      pending
-    end
-    
-    it "should allow a news org to match funding if the pitch is less than 50% funded" do
-      pending
-    end   
+    it "should allow a news org to fully fund a pitch"    
+    it "should allow a news org to match funding if the pitch is less than 50% funded"
   end
   
   describe "Being funded" do
