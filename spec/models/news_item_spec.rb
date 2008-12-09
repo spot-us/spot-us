@@ -75,5 +75,30 @@ describe NewsItem do
       @result.size.should == @items.size
     end
   end
+
+  describe "unfunded" do
+    before do
+      @p = Factory(:news_item)
+    end
+
+    it "should not include funded items" do
+      @p.update_attribute(:status, 'funded')
+      NewsItem.unfunded.should_not include(@p4)
+    end
+    it "should not included accepted items" do
+      @p.update_attribute(:status, 'accepted')
+      NewsItem.unfunded.should_not include(@p4)
+    end
+
+  end
+
+  describe "pitch_or_tip" do
+    it "should only return objects of type Pitch or type Tip" do
+      @i1 = Factory(:news_item, :type => 'Pitch')
+      @i2 = Factory(:news_item, :type => 'Tip')
+      @i3 = Factory(:news_item, :type => 'Story')
+      NewsItem.pitch_or_tip.all?{|i| i.type =~ /Pitch|Tip/}.should be_true
+    end
+  end
 end
 
