@@ -1,0 +1,11 @@
+.comment
+  %h5= comment.title
+  .avatar
+    = image_tag comment.user.photo.url(:thumb)
+  .body
+    = comment.body
+    %p.attribution
+      by
+      %span= comment.user.full_name
+      on
+      %span= comment.created_at.to_s(:long)
