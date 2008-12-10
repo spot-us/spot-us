@@ -80,8 +80,9 @@ class Pitch < NewsItem
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  
+
   has_one :story, :foreign_key => 'news_item_id'
+  before_save :dispatch_fact_checker
   after_save :check_if_funded_state
 
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
@@ -167,6 +168,12 @@ class Pitch < NewsItem
     
     user_has_donated_so_far_in_cents = donations.paid.total_amount_in_cents_for_user(user)
     (user_has_donated_so_far_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents
+  end
+
+  def dispatch_fact_checker
+    if self.fact_checker_id_changed? && self.story && self.valid?
+      self.story.update_attribute(:fact_checker_id, self.fact_checker_id)
+    end
   end
   
   protected
