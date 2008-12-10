@@ -37,6 +37,10 @@
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
+
+  include Sanitizy
+  sanitizer.allowed_tags.delete('div')
+
   acts_as_paranoid
   aasm_column :status
   belongs_to :user
@@ -69,6 +73,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
   named_scope :fundable_news_item, :conditions => ['type in (?)', ["Pitch", "Tip"]]
+  before_save :cleanse_descriptions
 
   def editable_by?(user)
     if user.nil?
@@ -84,5 +89,10 @@ class NewsItem < ActiveRecord::Base
 
   def pitch?
     is_a?(Pitch)
+  end
+
+  private
+  def cleanse_descriptions
+    cleanse(:short_description, :extended_description, :delivery_description)
   end
 end
