@@ -38,6 +38,15 @@
       .double_content_border
       .alt-spotus= h @pitch.skills
     .block-spacer-negative
+    %h3 Comments
+    .double_content_border
+    .comments
+      %p= "There are no comments yet, be the first!" if @pitch.comments.empty?
+      = render :partial => 'shared/comment', :collection => @pitch.comments
+    %h3 Post A Comment
+    .double_content_border
+    - form_for [@pitch, Comment.new] do |f|
+      = render :partial => 'comments/form', :locals => {:f => f}
 
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }

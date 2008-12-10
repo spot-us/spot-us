@@ -1017,3 +1017,33 @@ textarea#headline {
 ul.search_navigation a:hover {color:#666;}
 .search_field_button {margin: 10px 0 0 25px;}
 .search-check-box label { font-weight: normal;}
+
+.comments{margin:0 0 1em 0;}
+.comment{
+  overflow: auto;
+}
+.comment h5{
+  margin-bottom: .2em;
+}
+.comment .avatar{
+  float: left;
+  width: 50px;
+}
+.comment .body{
+  float: left;
+  width: 390px;
+  margin: 0 0.5em;
+}
+.comment .body>p{
+  margin-top:0;
+}
+.comment .body p{
+  margin: 0.5em 0;
+}
+.comment .body p.attribution{
+  margin: 0;
+  font-size: 0.9em;
+}
+.comment .body p.attribution span{
+  color: gray;
+}
