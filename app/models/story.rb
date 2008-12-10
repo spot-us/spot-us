@@ -55,7 +55,7 @@ class Story < NewsItem
   end
   
   aasm_event :publish do
-    transitions :from => :ready, :to => :published
+    transitions :from => :ready, :to => :published, :on_transition => :destroy_pitch
   end
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
@@ -97,5 +97,9 @@ class Story < NewsItem
     return true if user.is_a?(Admin)
     user == self.fact_checker
   end
-    
+
+  private
+  def destroy_pitch
+    self.pitch.destroy
+  end
 end
