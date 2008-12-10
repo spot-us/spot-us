@@ -1,0 +1,8 @@
+.row
+  = f.label :title
+  = f.text_field :title
+.row
+  = f.label :body
+  = fckeditor_textarea('comment', 'body', :toolbarSet => 'Spotus', :height => '200px')
+.row
+  = f.submit 'Post Comment'

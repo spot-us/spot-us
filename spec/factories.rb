@@ -37,6 +37,14 @@ Factory.define :admin do |user|
   user.add_attribute(:type, 'Admin')
 end
 
+Factory.define :comment do |comment|
+  comment.add_attribute(:commentable_type, 'Pitch')
+  comment.add_attribute(:commentable_id, '1')
+  comment.association(:user)
+  comment.title 'zOMg!1 PWNiEZ1!!'
+  comment.body  'r Teh AwSUm'
+end
+
 Factory.define :reporter do |user|
   user.email { random_email_address }
   user.first_name 'Reporter'

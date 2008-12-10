@@ -26,6 +26,7 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:donations) }
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
+  it { Factory(:pitch).should have_many(:comments)}
 
   describe "requested amount" do
     it "normalizes before validation" do
