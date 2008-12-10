@@ -12,6 +12,7 @@ describe Tip do
   it {Factory(:tip).should have_many(:pledges)}
   it {Factory(:tip).should have_many(:affiliations)}
   it {Factory(:tip).should have_many(:pitches)}
+  it {Factory(:tip).should have_many(:comments)}
 
   describe "editable_by?" do
     it "allows editing of unpledged tip by owner" do
