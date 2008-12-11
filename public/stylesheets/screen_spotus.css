@@ -1047,3 +1047,8 @@ ul.search_navigation a:hover {color:#666;}
 .comment .body p.attribution span{
   color: gray;
 }
+
+h4#history{
+ height: auto;
+ margin-bottom:0.25em;
+}
