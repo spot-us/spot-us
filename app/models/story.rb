@@ -58,7 +58,7 @@ class Story < NewsItem
     transitions :from => :ready, :to => :published, :on_transition => :destroy_pitch
   end
 
-  belongs_to :pitch, :foreign_key => 'news_item_id'
+  belongs_to :pitch, :foreign_key => 'news_item_id', :with_deleted => true
   validate_on_update :extended_description
   
   named_scope :published, :conditions => {:status => 'published'}
