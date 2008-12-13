@@ -81,7 +81,7 @@ class Pitch < NewsItem
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   has_many :comments, :as => :commentable
-  has_one :story, :foreign_key => 'news_item_id'
+  has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
   before_save :dispatch_fact_checker
   after_save :check_if_funded_state
 
