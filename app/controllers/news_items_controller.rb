@@ -20,8 +20,7 @@ class NewsItemsController < ApplicationController
       params[:sort_by] = 'desc' unless %w(desc asc most_pledged most_funded almost_funded).include?(params[:sort_by])
       @news_items = params[:news_item_type].camelize.singularize.constantize.send(params[:sort_by]).fundable_news_item
     else
-      @news_items = Pitch.find :all,
-                    :order => "created_at #{params.fetch(:sort_by, 'desc')}"
+      @news_items = Pitch.unpublished.sorted(params.fetch(:sort_by, 'desc'))
     end
   end
 end

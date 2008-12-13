@@ -24,8 +24,8 @@ describe NewsItemsController do
     end
 
     it "should find the most recent news items" do
-      Pitch.should_receive(:find).with(:all, {
-                                          :order=>"created_at desc"}).and_return(@items)
+      @items.should_receive(:sorted).with('desc')
+      Pitch.should_receive(:unpublished).and_return(@items)
       do_index
     end
 
