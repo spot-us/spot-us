@@ -81,13 +81,15 @@ class Pitch < NewsItem
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   has_many :comments, :as => :commentable
-  has_one :story, :foreign_key => 'news_item_id'
+  has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
   before_save :dispatch_fact_checker
   after_save :check_if_funded_state
 
   named_scope :most_funded, :order => 'news_items.current_funding_in_cents DESC'
   named_scope :featured, :conditions => {:feature => true}
   named_scope :almost_funded, :order => "(news_items.current_funding_in_cents / news_items.requested_amount_in_cents) desc"
+  named_scope :sorted, lambda {|direction| { :order => "created_at #{direction}" } }
+  named_scope :unpublished, :conditions => 'id NOT IN(SELECT news_item_id FROM news_items WHERE type = "Story" AND status = "published")'
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
