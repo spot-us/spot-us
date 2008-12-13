@@ -68,9 +68,9 @@ class Pitch < NewsItem
   validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
   validates_inclusion_of :location, :in => LOCATIONS
 
-  has_many :affiliations
+  has_many :affiliations, :dependent => :destroy
   has_many :tips, :through => :affiliations
-  has_many :donations do
+  has_many :donations, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
     end
@@ -80,7 +80,7 @@ class Pitch < NewsItem
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  has_many :comments, :as => :commentable
+  has_many :comments, :as => :commentable, :dependent => :destroy
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
   before_save :dispatch_fact_checker
   after_save :check_if_funded_state

@@ -1,12 +1,10 @@
 - @title = "Spot.us - Read A Story"
 
-#equalize
-  - if @stories.size > 0
-    = render :partial => @stories
-  - else
-    .box_white
-      %p
-        Currently we don't have any stories BUT you can help us get there by making donations to pitches you care about. Check out what we have by going to
-        = link_to "Fund A Story.", news_items_path
-  .clear
+- if @stories.size > 0
+  = render :partial => @stories
+- else
+  .box_white
+    %p
+      Currently we don't have any stories BUT you can help us get there by making donations to pitches you care about. Check out what we have by going to
+      = link_to "Fund A Story.", news_items_path
 .block-spacer
