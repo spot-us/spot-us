@@ -55,10 +55,10 @@ class Story < NewsItem
   end
   
   aasm_event :publish do
-    transitions :from => :ready, :to => :published, :on_transition => :destroy_pitch
+    transitions :from => :ready, :to => :published
   end
 
-  belongs_to :pitch, :foreign_key => 'news_item_id', :with_deleted => true
+  belongs_to :pitch, :foreign_key => 'news_item_id'
   validate_on_update :extended_description
   
   named_scope :published, :conditions => {:status => 'published'}
@@ -96,10 +96,5 @@ class Story < NewsItem
   def fact_checkable_by?(user)
     return true if user.is_a?(Admin)
     user == self.fact_checker
-  end
-
-  private
-  def destroy_pitch
-    self.pitch.destroy
   end
 end
