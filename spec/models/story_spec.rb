@@ -137,12 +137,6 @@ describe Story do
         @story.editable_by?(@fact_checker).should be_false
       end
     end
-    describe "transitioning to published" do
-      it "should destroy it's associated pitch" do
-        @story.should_receive(:destroy_pitch)
-        @story.publish!
-      end
-    end
   end
   
   describe "story in published state" do
