@@ -41,7 +41,7 @@ class Donation < ActiveRecord::Base
   end
   
   belongs_to :user
-  belongs_to :pitch, :with_deleted => true
+  belongs_to :pitch
   belongs_to :purchase
   validates_presence_of :pitch_id
   validates_presence_of :user_id
