@@ -41,9 +41,9 @@
     %h3 Keywords
     .double_content_border
     %p= h @story.pitch.keywords
-    .block-spacer-negative
-      = publishing_workflow_buttons_for(current_user)
-        
+    - if logged_in?
+      .block-spacer-negative
+        = publishing_workflow_buttons_for(current_user)
   .span-160.box_white
     = render :partial => "supporters", :locals => {:story => @story}
 .clear
