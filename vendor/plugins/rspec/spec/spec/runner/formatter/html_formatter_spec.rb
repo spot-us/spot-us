@@ -22,9 +22,7 @@ module Spec
               args = ['failing_examples/mocking_example.rb', 'failing_examples/diffing_spec.rb', 'examples/pure/stubbing_example.rb',  'examples/pure/pending_example.rb', '--format', 'html', opt]
               err = StringIO.new
               out = StringIO.new
-              CommandLine.run(
-                OptionParser.parse(args, err, out)
-              )
+              run_with OptionParser.parse(args, err, out)
 
               seconds = /\d+\.\d+ seconds/
               html = out.string.gsub seconds, 'x seconds'
