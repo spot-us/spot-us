@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
   config.gem "haml"
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
-  config.gem "rubyist-aasm", :lib => "aasm", :source => 'http://gems.github.com'
+  config.gem "rubyist-aasm", :lib => "aasm", :version => '>=2.0.5', :source => 'http://gems.github.com'
   config.time_zone = 'UTC'
   
   config.load_paths += %W( #{RAILS_ROOT}/app/sweepers )
