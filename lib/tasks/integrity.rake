@@ -1,6 +1,6 @@
 spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? :has_database : :no_database
 task :no_database do
-  $stderr.puts "No database.yml found."
+  $stderr.puts "No database.yml found. Perhaps you should rename the example?"
 end
 
 task :has_database do
