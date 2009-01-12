@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../../spec_helper.rb'
 module Spec
   module Extensions
     describe Main do
-      it_should_behave_like "sandboxed rspec_options"
       before(:each) do
         @main = Class.new do; include Main; end
       end
@@ -11,46 +10,42 @@ module Spec
       after(:each) do
         $rspec_story_steps = @original_rspec_story_steps
       end
+      
+      [:describe, :context].each do |method|
+        describe "##{method}" do
+          specify {@main.should respond_to(method)}
 
-      it "should create an Options object" do
-        @main.send(:rspec_options).should be_instance_of(Spec::Runner::Options)
-        @main.send(:rspec_options).should === $rspec_options
-      end
-  
-      specify {@main.should respond_to(:describe)}
-      specify {@main.should respond_to(:context)}
+          it "should raise when no block is given to #{method}" do
+            lambda { @main.__send__ method, "foo" }.should raise_error(ArgumentError)
+          end
 
-      it "should raise when no block given to describe" do
-        lambda { @main.describe "foo" }.should raise_error(ArgumentError)
-      end
+          it "should raise when no description is given to #{method}" do
+            lambda { @main.__send__ method do; end }.should raise_error(ArgumentError)
+          end
 
-      it "should raise when no description given to describe" do
-        lambda { @main.describe do; end }.should raise_error(ArgumentError)
-      end
+          it "should run registered ExampleGroups" do
+            example_group = @main.__send__ method, "The ExampleGroup" do end
+            Spec::Runner.options.example_groups.should include(example_group)
+          end
 
-      it "should registered ExampleGroups by default" do
-        example_group = @main.describe("The ExampleGroup") do end
-        rspec_options.example_groups.should include(example_group)
-      end
-
-      it "should not run unregistered ExampleGroups" do
-        example_group = @main.describe("The ExampleGroup") do
-          unregister
+          it "should not run unregistered ExampleGroups" do
+            example_group = @main.__send__ method, "The ExampleGroup" do unregister; end
+            Spec::Runner.options.example_groups.should_not include(example_group)
+          end
         end
-
-        rspec_options.example_groups.should_not include(example_group)
       end
       
-      it "should create a shared ExampleGroup with share_examples_for" do
-        group = @main.share_examples_for "all things" do end
-        group.should be_an_instance_of(Spec::Example::SharedExampleGroup)
+      describe "#share_examples_for" do
+        it "should create a shared ExampleGroup" do
+          group = @main.share_examples_for "all things" do end
+          group.should be_an_instance_of(Spec::Example::SharedExampleGroup)
+        end
       end
       
       describe "#share_as" do
         before(:each) do
           $share_as_examples_example_module_number ||= 1
           $share_as_examples_example_module_number += 1
-          t = Time.new.to_i
           @group_name = "Group#{$share_as_examples_example_module_number}"
         end
 
