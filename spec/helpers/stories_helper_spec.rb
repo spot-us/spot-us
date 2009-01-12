@@ -7,6 +7,7 @@ describe "shared setup", :shared => true do
 end
 
 describe StoriesHelper do
+  include StoriesHelper
   before(:each) do
     @reporter = Factory(:reporter)
     @fact_checker = Factory(:reporter)
