@@ -1,15 +1,9 @@
 module Spec
   module Example
     module ExampleMethods
-      extend ExampleGroupMethods
-      extend ModuleReopeningFix
-      include ModuleInclusionWarnings
       
-
-      PENDING_EXAMPLE_BLOCK = lambda {
-        raise Spec::Example::ExamplePendingError.new("Not Yet Implemented")
-      }
-
+      extend ModuleReopeningFix
+      
       def execute(options, instance_variables)
         options.reporter.example_started(self)
         set_instance_variables_from_hash(instance_variables)
@@ -17,13 +11,13 @@ module Spec
         execution_error = nil
         Timeout.timeout(options.timeout) do
           begin
-            before_example
-            run_with_description_capturing
+            before_each_example
+            eval_block
           rescue Exception => e
             execution_error ||= e
           end
           begin
-            after_example
+            after_each_example
           rescue Exception => e
             execution_error ||= e
           end
@@ -63,7 +57,11 @@ module Spec
       end
 
       def description
-        @_defined_description || @_matcher_description || "NO NAME"
+        @_defined_description || ::Spec::Matchers.generated_description || "NO NAME"
+      end
+      
+      def options
+        @_options
       end
 
       def __full_description
@@ -79,13 +77,8 @@ module Spec
         end
       end
 
-      def run_with_description_capturing
-        begin
-          return instance_eval(&(@_implementation || PENDING_EXAMPLE_BLOCK))
-        ensure
-          @_matcher_description = Spec::Matchers.generated_description
-          Spec::Matchers.clear_generated_description
-        end
+      def eval_block
+        instance_eval(&@_implementation)
       end
 
       def implementation_backtrace
@@ -96,12 +89,12 @@ module Spec
       include Matchers
       include Pending
       
-      def before_example
+      def before_each_example
         setup_mocks_for_rspec
         self.class.run_before_each(self)
       end
 
-      def after_example
+      def after_each_example
         self.class.run_after_each(self)
         verify_mocks_for_rspec
       ensure
