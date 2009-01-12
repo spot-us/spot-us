@@ -113,6 +113,7 @@ module AuthenticatedSystem
     def login_from_cookie
       user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token])
       if user && user.remember_token?
+        cookies[:current_user_full_name] = user.full_name
         cookies[:auth_token] = { :value => user.remember_token, :expires => user.remember_token_expires_at }
         self.current_user = user
       end
