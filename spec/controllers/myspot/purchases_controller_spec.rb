@@ -95,6 +95,7 @@ describe Myspot::PurchasesController do
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
                                                      :pitch => pitch) }
+      controller.stub!(:current_user).and_return(@user)
       login_as @user
     end
 
@@ -109,12 +110,19 @@ describe Myspot::PurchasesController do
 
     it "should create a purchase for the current user" do
       do_create
-      assigns[:purchase].user.should == User.find(@user.to_param)
+      assigns[:purchase].user.should == @user
     end
-    
+
     it "should create a purchase for the current user's donations" do
       do_create
       assigns[:purchase].donations.should == @donations
+    end
+
+    it "should show the users total credit in the user header" do
+      @user.stub!(:credits?).and_return(true)
+      @user.stub!(:total_credits_in_dollars).and_return(30.89)
+      do_create
+      cookies['balance_text'].first.should include('$30.89')
     end
 
     def do_create
