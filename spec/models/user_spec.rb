@@ -419,6 +419,10 @@ describe User do
     it "should know that the user has donated to that pitch" do
       @user.has_donation_for?(@pitch).should be_true
     end
+
+    it "should return the unpaid sum for donations" do
+      @user.unpaid_donations_sum.should == @donation.amount_in_cents
+    end
   end
 
   describe "without a donation for a pitch" do
