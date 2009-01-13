@@ -26,16 +26,16 @@ module ApplicationHelper
   def header_display_message
     returning "" do |text|
       if (current_user.credits? && current_balance == 0)
-        text << "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credit."
+        text << "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credit. "
       end
       if (current_user.credits? && current_balance > 0)
-        text << "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credits to use toward your donations."
+        text << "You have #{number_to_currency(current_user.total_credits_in_dollars)} in credits to use toward your donations. "
         text << link_to("Apply Them &raquo;", edit_myspot_donations_amounts_path)
       end
       if (!current_user.credits? && current_balance > 0)
-        text << "You need"
+        text << "You need "
         text << link_to(number_to_currency(current_balance.to_dollars), edit_myspot_donations_amounts_path, :id => "current_balance")
-        text << "to fund your donations."
+        text << " to fund your donations. "
         text << link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
       end
     end
