@@ -20,6 +20,7 @@ class Myspot::PurchasesController < ApplicationController
 
     begin
       if @purchase.save
+        update_balance_cookie
         redirect_to myspot_donations_path
       else
         render :action => 'new'
