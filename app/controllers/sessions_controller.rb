@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  include AuthenticatedSystem
-
   def new
     @user = User.new
     store_news_item_for_non_logged_in_user
