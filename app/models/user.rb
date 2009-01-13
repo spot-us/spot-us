@@ -240,6 +240,10 @@ class User < ActiveRecord::Base
     donations.exists?(:pitch_id => pitch.id )
   end
 
+  def unpaid_donations_sum
+    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+  end
+
   def has_pledge_for?(tip)
     pledges.exists?(:tip_id => tip.id )
   end
