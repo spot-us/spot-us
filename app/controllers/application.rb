@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include HoptoadNotifier::Catcher
   filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
-  include ApplicationHelper
+
   include AuthenticatedSystem
   include SslRequirement
 
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
 
     def update_balance_cookie
-      cookies[:balance_text] = header_display_message
+      cookies[:balance_text] = render_to_string(:partial => 'shared/balance')
     end
 
 end

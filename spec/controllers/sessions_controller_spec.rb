@@ -98,20 +98,21 @@ describe SessionsController do
       @user = Factory(:user)
       @user.remember_me
       cookies["auth_token"] = cookie_for(@user)
+      controller.stub!(:render_to_string).and_return("")
     end
 
-    it 'logs in with cookie' do
+    it 'logs in successfully' do
       get :new
       controller.send(:logged_in?).should be_true
     end
 
-    it 'fails expired cookie login' do
+    it 'fails expired remember_token cookie' do
       @user.update_attribute :remember_token_expires_at, 5.minutes.ago
       get :new
       controller.send(:logged_in?).should_not be_true
     end
 
-    it 'fails cookie login' do
+    it 'fails login' do
       cookies["auth_token"] = auth_token('invalid_auth_token')
       get :new
       controller.send(:logged_in?).should_not be_true
