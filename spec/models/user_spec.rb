@@ -412,16 +412,31 @@ describe User do
   describe "with a donation for a pitch" do
     before do
       @user = Factory(:user)
-      @pitch = Factory(:pitch)
-      @donation = Factory(:donation, :user => @user, :pitch => @pitch)
+      @pitch = Factory(:pitch, :requested_amount_in_cents => 10000)
     end
 
     it "should know that the user has donated to that pitch" do
+      donation = Factory(:donation, :user => @user, :pitch => @pitch)
       @user.has_donation_for?(@pitch).should be_true
     end
 
     it "should return the unpaid sum for donations" do
-      @user.unpaid_donations_sum.should == @donation.amount_in_cents
+      donation = Factory(:donation, :user => @user, :pitch => @pitch)
+      @user.unpaid_donations_sum_in_cents.should == donation.amount_in_cents
+    end
+
+    it "should allow the user to donate to a pitch after donating < 20%" do
+      @user.can_donate_to?(@pitch).should be_true
+    end
+
+    it "should not allow the user to donate to a pitch after donating 20%" do
+      Pitch.delete_all
+      Donation.delete_all
+      User.delete_all
+      user = Factory(:user)
+      pitch = Factory(:pitch, :requested_amount_in_cents => 10000)
+      donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 20)
+      user.can_donate_to?(pitch).should be_false
     end
   end
 
