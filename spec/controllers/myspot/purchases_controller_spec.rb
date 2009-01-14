@@ -118,7 +118,7 @@ describe Myspot::PurchasesController do
       assigns[:purchase].donations.should == @donations
     end
 
-    it "should show the users total credit in the user header" do
+    it "should update the balance_text cookie after a successful donation" do
       @user.stub!(:credits?).and_return(true)
       @user.stub!(:total_credits_in_dollars).and_return(30.89)
       do_create
