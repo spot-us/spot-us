@@ -9,5 +9,5 @@
     = render :partial => "shared/table_progress_bar", :locals => {:pitch => donation.pitch}
   %td.actions
     - unless donation.pitch.accepted? || donation.pitch.funded?
-      = link_to "Donate More", pitch_url(donation.pitch)
+      = link_to "Donate More", pitch_url(donation.pitch) if current_user.can_donate_to? donation.pitch
     

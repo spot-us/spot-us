@@ -118,14 +118,14 @@ describe Pitch do
       p.can_be_accepted?.should be_false
     end    
   end
-  
-  
+
+
   describe "states of a pitch" do
     it "should have a state of active when it is first created" do
       pitch = Factory(:pitch)
       pitch.active?.should be_true
     end
-    
+
     it "should have a state of funded when total donations reaches requested amount" do
       pitch = Factory(:pitch, :requested_amount => 100)
       user = Factory(:organization)
@@ -136,7 +136,7 @@ describe Pitch do
         pitch.reload
       }.should change {pitch.funded?}.from(false).to(true)
     end
-        
+
      it "should have state of accepted when the reporter accepts an amount less than the requested amount" do
        pitch = Factory(:pitch)
        Factory(:donation, :pitch => pitch, :amount => 25)
@@ -284,7 +284,7 @@ describe Pitch do
       pitch.fully_funded?.should be_true
     end
   end
-    
+
   describe "donations.for_user" do
     it "should not return users other than the one requested" do
       user = Factory(:user)
@@ -295,8 +295,8 @@ describe Pitch do
       pitch.reload
       pitch.donations.for_user(user).size.should == 2
     end
-  end  
-  
+  end
+
   describe "user_can_donate_more?" do
     describe "any user" do
       it "can't donate more, such that funds would exceed the requested amount" do
@@ -308,34 +308,41 @@ describe Pitch do
         p = Factory(:pitch, :requested_amount => 100)
         p.user_can_donate_more?(Factory(:organization), 20.to_cents).should be_true
       end
-      
+
+      it "can donate more at all (passing zero cents as second arg)" do
+        u = Factory(:user)
+        p = Factory(:pitch, :requested_amount => 100)
+        d = Factory(:donation, :pitch => p, :user => u, :amount => 10)
+        p.user_can_donate_more?(u, 0.to_cents).should be_true
+        p.user_can_donate_more?(u, 11.to_cents).should be_true
+      end
     end
-    
+
     describe "as a citizen or reporter" do
       before(:each) do
         @user = Factory(:user)
         @pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
       end
-    
+
       it "allows donation if the user has no existing donations" do
         p = Factory(:pitch, :requested_amount => 100)
         p.user_can_donate_more?(Factory(:user), 10.to_cents)
       end
-    
+
       it "return false if the user's total donations + total trying to donate is > 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
         @pitch.reload
         @pitch.user_can_donate_more?(@user, 10.to_cents).should be_false
       end
-    
+
       it "return true if the user's total donations + total trying to donate is = 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
         @pitch.reload
         @pitch.user_can_donate_more?(@user, 10.to_cents).should be_true
       end
-    
+
       it "return true if the user's total donations + total trying to donate is < 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 3)
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
@@ -343,7 +350,7 @@ describe Pitch do
         @pitch.user_can_donate_more?(@user, 10.to_cents).should be_true
       end
     end
-    
+
     describe "as a news organization" do
       it "return true even if more than 20% because we are an organization" do
         organization = Factory(:organization)
@@ -351,7 +358,7 @@ describe Pitch do
         pitch.user_can_donate_more?(organization, 100.to_cents).should be_true
       end
     end
-    
+
     describe "many users" do
       it "can donate and push a pitch to fully funded" do
         p = Factory(:pitch, :requested_amount => 50)
@@ -364,12 +371,12 @@ describe Pitch do
       end
     end
   end
-    
+
   describe "creating" do
     it "is creatable by reporter" do
       Pitch.createable_by?(Factory(:reporter)).should be
     end
-  
+
     it "is not creatable by user" do
       Pitch.createable_by?(Factory(:user)).should_not be_true
     end
@@ -484,12 +491,7 @@ describe Pitch do
       @result.detect {|item| !item.pitch? }.should be_nil
     end
   end
-    
-  describe "news org funding pitch" do
-    it "should allow a news org to fully fund a pitch"    
-    it "should allow a news org to match funding if the pitch is less than 50% funded"
-  end
-  
+
   describe "Being funded" do
     describe "via fund!" do
       it "should create a story" do
