@@ -128,16 +128,16 @@ class Pitch < NewsItem
     pitch.update_attribute(:feature, false) unless pitch.nil? 
     self.update_attribute(:feature, true)
   end
-  
+
   def funding_needed_in_cents
     return 0 unless active?
     requested_amount_in_cents - total_amount_donated.to_cents
-  end  
-  
+  end
+
   def featureable_by?(user)
     user.is_a?(Admin)
   end
-  
+
   def fully_funded?
     return true if accepted? || funded?
     donations.paid.sum(:amount_in_cents) >= requested_amount_in_cents
@@ -150,26 +150,24 @@ class Pitch < NewsItem
   def donated_to?
     donations.paid.any?
   end
-  
+
+  def donation_limit_per_user_in_cents
+    requested_amount_in_cents * MAX_PER_USER_DONATION_PERCENTAGE
+  end
+
+  def max_donation_amount_in_cents(user)
+    if user.organization? || (funding_needed_in_cents < donation_limit_per_user_in_cents)
+      funding_needed_in_cents
+    else
+      donation_limit_per_user_in_cents
+    end
+  end
+
   def user_can_donate_more?(user, attempted_donation_amount_in_cents)
-    # return false if funding_needed_in_cents == 0
     return false if attempted_donation_amount_in_cents.nil?
     return false if attempted_donation_amount_in_cents > funding_needed_in_cents
-
-    if user.organization?
-      max_donation_amount_in_cents = funding_needed_in_cents
-    else
-      donation_limit_per_user_in_cents = requested_amount_in_cents * MAX_PER_USER_DONATION_PERCENTAGE
-      
-      if funding_needed_in_cents < donation_limit_per_user_in_cents
-        max_donation_amount_in_cents = funding_needed_in_cents
-      else
-        max_donation_amount_in_cents = donation_limit_per_user_in_cents
-      end
-    end
-    
-    user_has_donated_so_far_in_cents = donations.paid.total_amount_in_cents_for_user(user)
-    (user_has_donated_so_far_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents
+    user_donations_in_cents = donations.paid.total_amount_in_cents_for_user(user)
+    (user_donations_in_cents + attempted_donation_amount_in_cents) <= max_donation_amount_in_cents(user)
   end
 
   def dispatch_fact_checker
@@ -177,17 +175,17 @@ class Pitch < NewsItem
       self.story.update_attribute(:fact_checker_id, self.fact_checker_id)
     end
   end
-  
+
   protected
     def do_fund_events
       send_fund_notification 
       create_associated_story
     end
-    
+
     def create_associated_story
       self.create_story(:headline => self.headline, :location => self.location, :user => self.user)
     end
-    
+
     def send_fund_notification
       Mailer.deliver_pitch_accepted_notification(self)
     end
