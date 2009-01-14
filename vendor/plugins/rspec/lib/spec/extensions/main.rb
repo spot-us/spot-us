@@ -16,14 +16,14 @@ module Spec
       # The reason for using different behaviour classes is to have different
       # matcher methods available from within the <tt>describe</tt> block.
       #
-      # See Spec::Example::ExampleFactory#register for details about how to
+      # See Spec::Example::ExampleGroupFactory#register for details about how to
       # register special implementations.
       #
       def describe(*args, &block)
         raise ArgumentError if args.empty?
         raise ArgumentError unless block
         args << {} unless Hash === args.last
-        args.last[:spec_path] = caller(0)[1]
+        args.last[:spec_path] = File.expand_path(caller(0)[1])
         Spec::Example::ExampleGroupFactory.create_example_group(*args, &block)
       end
       alias :context :describe
@@ -79,21 +79,6 @@ module Spec
         rescue NameError => e
           raise NameError.new(e.message + "\nThe first argument to share_as must be a legal name for a constant\n")
         end
-      end
-
-    private
-    
-      def rspec_options
-        $rspec_options ||= begin; \
-          parser = ::Spec::Runner::OptionParser.new(STDERR, STDOUT); \
-          parser.order!(ARGV); \
-          $rspec_options = parser.options; \
-        end
-        $rspec_options
-      end
-      
-      def init_rspec_options(options)
-        $rspec_options = options if $rspec_options.nil?
       end
     end
   end
