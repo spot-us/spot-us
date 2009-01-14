@@ -260,7 +260,7 @@ p.incr, .incr p {font-size:10px;line-height:1.44em;margin-bottom:1.5em;}
 .caps {font-variant:small-caps;letter-spacing:1px;text-transform:lowercase;font-size:1.2em;line-height:1%;font-weight:bold;padding:0 2px;}
 
 /* sprites */
-.ss_sprite {display:inline;overflow:hidden;height:18px;padding-left:18px;padding-bottom:5px;background-repeat:no-repeat;background-image:url( ../images/sprites.png);}
+.ss_sprite {display:inline;overflow:hidden;height:18px;padding-left:18px;padding-bottom:5px;background-repeat:no-repeat;background-image:url(/images/sprites.png);}
 .ss_accept {background-position:0px 0px;}
 .ss_add {background-position:0px -19px;}
 .ss_anchor {background-position:0px -37px;}
