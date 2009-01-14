@@ -1,7 +1,5 @@
 - unless news_item.fully_funded?
-  - if current_user && current_user.has_donation_for?(news_item)
-    = render :partial => 'donations/added', :locals => { :news_item => news_item }
-  - else
+  - if current_user && current_user.can_donate_to?(news_item)
     %div{:id => "inline_donation_form_#{news_item.id}"}
       %div{:id => "donation_button_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
@@ -18,6 +16,8 @@
         = link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
         .double_content_border
       = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
+  - else
+    = render :partial => 'donations/added', :locals => { :news_item => news_item }
 - else
   = image_tag('fully_funded.png')
   .small.uppcased_button_text

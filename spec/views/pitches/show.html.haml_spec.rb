@@ -77,15 +77,10 @@ describe "/pitches/show.html.haml" do
     end
   end
 
-  describe "with a logged in user that has donated" do
+  describe "with a logged in user that has donated the personal maximum" do
     before do
       @user = Factory(:user)
-      Factory(:donation, :user => @user, :pitch => @pitch, :status => 'unpaid')
-
-      unless @user.donations.detect {|donation| donation.pitch == @pitch }
-        violated "user must have donations for the pitch"
-      end
-
+      @user.stub!(:can_donate_to?).and_return(false)
       template.stub!(:logged_in?).and_return(true)
       template.stub!(:current_user).and_return(@user)
     end
@@ -98,6 +93,25 @@ describe "/pitches/show.html.haml" do
     it "should not display a form to add a donation" do
       do_render
       template.should_not have_tag('form[action=?][method="post"]', donations_path)
+    end
+  end
+
+  describe "with a logged in user that has not donated the personal maximum" do
+    before do
+      @user = Factory(:user)
+      @user.stub!(:can_donate_to?).and_return(true)
+      template.stub!(:logged_in?).and_return(true)
+      template.stub!(:current_user).and_return(@user)
+    end
+
+    it "should not have a link to edit donations" do
+      do_render
+      template.should_not have_tag('a[href=?]', edit_myspot_donations_amounts_path)
+    end
+
+    it "should display a form to add a donation" do
+      do_render
+      template.should have_tag('form[action=?][method="post"]', donations_path)
     end
   end
 

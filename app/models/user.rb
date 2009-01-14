@@ -240,7 +240,11 @@ class User < ActiveRecord::Base
     donations.exists?(:pitch_id => pitch.id )
   end
 
-  def unpaid_donations_sum
+  def can_donate_to?(pitch)
+    pitch.donations.total_amount_in_cents_for_user(self) < pitch.max_donation_amount_in_cents(self)
+  end
+
+  def unpaid_donations_sum_in_cents
     donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
   end
 
