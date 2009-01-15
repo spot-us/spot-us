@@ -14,15 +14,26 @@ describe Donation do
   it { Donation.should belong_to(:user) }
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
-  
+
   has_dollar_field(Donation, :amount)
-  
+
   describe "when creating a donation" do
     it "should require user to be logged in" do
       Donation.createable_by?(nil).should_not be_true
     end
 
     describe "as a citizen or reporter" do
+        it "and send a thank you email" do
+          donator =  Factory(:user)
+          Mailer.should_receive(:deliver_user_thank_you_for_donating)
+          donation = Factory.create(:donation,
+                             :pitch => @pitch,
+                             :user => donator,
+                             :amount => 10,
+                             :status => 'unpaid')
+        end
+      end
+
       describe "should be invaild and add an error" do
         it "if the pitch is fully funded" do
           pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
@@ -39,7 +50,7 @@ describe Donation do
           donation.should have(1).error_on(:base)
         end
 
-         it "if user's total donations + the new donation is >= 20% of the pitches requested amount" do
+         it "if user's total donations + the new donation is >= 20% of the pitch's requested amount" do
            user = Factory(:user)
            pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
            Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :status => 'paid')
@@ -51,7 +62,7 @@ describe Donation do
          end
       end
     end
-    
+
     describe "as a news organization" do
       it "allows donation of  an arbitrary amount" do
         organization = Factory(:organization)
@@ -59,7 +70,7 @@ describe Donation do
         d = Factory.build(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
       end
-      
+
       it "still guards against donating more than requested amount" do
       end
     end
@@ -139,51 +150,51 @@ describe Donation do
     donation.pay
     donation.should be_valid
   end
-  
+
   describe "deleting a donation" do
     it "should be deletable by the owner of the unpaid donation" do
       user = Factory(:user)
       donation = Factory(:donation, :user => user, :status => 'unpaid')
       donation.deletable_by?(user).should be_true
     end
-    
+
     it "should not be able to delete a paid donation" do
       user = Factory(:user)
       donation = Factory(:donation, :user => user, :status => 'paid')
       donation.deletable_by?(user).should be_false
     end
-    
+
     it "should be deletable by an admin" do
       admin = Factory(:admin)
       donation = Factory(:donation, :user => Factory(:user), :status => 'unpaid')
       donation.deletable_by?(admin).should be_true
-    end 
-    
+    end
+
     it "should not be deleteable by a nil user" do
       donation = Factory(:donation, :user => Factory(:user), :status => 'unpaid')
       donation.deletable_by?(nil).should be_false
-    end    
+    end
   end
-  
+
   describe "states of a donation" do
     it "should have a state of unpaid when it is first created" do
       donation = Factory(:donation)
       donation.should be_unpaid
     end
-    
+
     it "should have a state of paid when it has been paid" do
       donation = Factory(:donation)
       donation.pay!
       donation.should be_paid
     end
-    
+
     it "should have a state of refunded when a refund has been issued" do
       donation = Factory(:donation)
       donation.pay!
       donation.refund!
       donation.should be_refunded
     end
-    
+
     it "should not allow a refund on an unpaid donation" do
       donation = Factory(:donation)
       lambda {
