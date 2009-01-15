@@ -19,6 +19,16 @@
         %h3 Video
         .double_content_border
         = sanitize @story.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+    - if @story.published?
+      %h3 Comments
+      .double_content_border
+      .comments
+        %p= "There are no comments yet, be the first!" if @story.comments.empty?
+        = render :partial => 'shared/comment', :collection => @story.comments
+      %h3 Post A Comment
+      .double_content_border
+      - form_for [@story, Comment.new] do |f|
+        = render :partial => 'comments/form', :locals => {:f => f}
   .span-220.column_v.box_white
     %h3.description
       History of this story
