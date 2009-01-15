@@ -19,6 +19,7 @@ describe NewsItem do
   it { NewsItem.should belong_to(:user) }
   it { NewsItem.should have_many(:topics) }
   it { NewsItem.should have_many(:topic_memberships) }
+  it { NewsItem.should have_many(:comments)}
 
   describe "editing" do
     before(:each) do

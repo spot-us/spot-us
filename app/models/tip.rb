@@ -41,7 +41,6 @@ class Tip < NewsItem
   has_many :supporters, :through => :pledges, :source => :user, :order => "pledges.created_at", :uniq => true
   has_many :affiliations, :dependent => :destroy
   has_many :pitches, :through => :affiliations
-  has_many :comments, :as => :commentable
 
   before_create :build_initial_pledge
 

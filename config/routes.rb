@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   map.resources :donations, :affiliations, :pledges, :profiles, :pages
-  map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}
+  map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :pitches, :member => {:feature => :post}, :has_many => :comments
 

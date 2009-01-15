@@ -3,67 +3,67 @@
 # Table name: news_items
 #
 #  id                          :integer(4)      not null, primary key
-#  headline                    :string(255)     
-#  location                    :string(255)     
-#  state                       :string(255)     
-#  short_description           :text            
-#  delivery_description        :text            
-#  extended_description        :text            
-#  skills                      :text            
-#  keywords                    :string(255)     
+#  headline                    :string(255)
+#  location                    :string(255)
+#  state                       :string(255)
+#  short_description           :text
+#  delivery_description        :text
+#  extended_description        :text
+#  skills                      :text
+#  keywords                    :string(255)
 #  deliver_text                :boolean(1)      not null
 #  deliver_audio               :boolean(1)      not null
 #  deliver_video               :boolean(1)      not null
 #  deliver_photo               :boolean(1)      not null
 #  contract_agreement          :boolean(1)      not null
-#  expiration_date             :datetime        
-#  created_at                  :datetime        
-#  updated_at                  :datetime        
-#  featured_image_file_name    :string(255)     
-#  featured_image_content_type :string(255)     
-#  featured_image_file_size    :integer(4)      
-#  featured_image_updated_at   :datetime        
-#  type                        :string(255)     
-#  video_embed                 :text            
-#  featured_image_caption      :string(255)     
-#  user_id                     :integer(4)      
-#  requested_amount_in_cents   :integer(4)      
+#  expiration_date             :datetime
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  featured_image_file_name    :string(255)
+#  featured_image_content_type :string(255)
+#  featured_image_file_size    :integer(4)
+#  featured_image_updated_at   :datetime
+#  type                        :string(255)
+#  video_embed                 :text
+#  featured_image_caption      :string(255)
+#  user_id                     :integer(4)
+#  requested_amount_in_cents   :integer(4)
 #  current_funding_in_cents    :integer(4)      default(0)
-#  status                      :string(255)     
-#  feature                     :boolean(1)      
-#  fact_checker_id             :integer(4)      
+#  status                      :string(255)
+#  feature                     :boolean(1)
+#  fact_checker_id             :integer(4)
 #
 
 class Pitch < NewsItem
   aasm_initial_state  :active
-  
+
   aasm_state :active
   aasm_state :accepted
   aasm_state :funded
-  
+
   aasm_event :fund do
     transitions :from => :active, :to => :funded, :on_transition => :do_fund_events
   end
-  
+
   aasm_event :accept do
     transitions :from => :active, :to => :accepted, :on_transition => :do_fund_events
   end
-  
+
   validates_presence_of :requested_amount
   validates_presence_of :short_description
   validates_presence_of :extended_description
   validates_presence_of :delivery_description
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
-  
+
   if Rails.env.production?
     validates_presence_of :featured_image_file_name
   end
-    
-  has_dollar_field :requested_amount
-  has_dollar_field :current_funding 
 
-  # Next :accept required because of rails bug: 
+  has_dollar_field :requested_amount
+  has_dollar_field :current_funding
+
+  # Next :accept required because of rails bug:
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
   validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
   validates_inclusion_of :location, :in => LOCATIONS
@@ -74,13 +74,12 @@ class Pitch < NewsItem
     def for_user(user)
       find_all_by_user_id(user.id)
     end
-    
+
     def total_amount_in_cents_for_user(user)
       for_user(user).map(&:amount_in_cents).sum
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  has_many :comments, :as => :commentable, :dependent => :destroy
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
   before_save :dispatch_fact_checker
   after_save :check_if_funded_state
@@ -96,36 +95,36 @@ class Pitch < NewsItem
   def can_be_accepted?
     active?
   end
-  
+
   def editable_by?(user)
     if user.nil?
       false
     else
-      ((self.user == user) && (donations.paid.blank? && active?)) || user.admin? 
+      ((self.user == user) && (donations.paid.blank? && active?)) || user.admin?
     end
   end
-  
+
   def featured?
     self.feature
   end
-  
+
   def current_funding_in_percentage
     (current_funding_in_cents.to_f/requested_amount_in_cents.to_f)
   end
-  
+
   def check_if_funded_state
     if fully_funded? && active?
       fund!
     end
   end
-  
+
   def self.createable_by?(user)
     user && user.reporter?
   end
-  
+
   def make_featured
     pitch = Pitch.featured.first
-    pitch.update_attribute(:feature, false) unless pitch.nil? 
+    pitch.update_attribute(:feature, false) unless pitch.nil?
     self.update_attribute(:feature, true)
   end
 
@@ -178,7 +177,7 @@ class Pitch < NewsItem
 
   protected
     def do_fund_events
-      send_fund_notification 
+      send_fund_notification
       create_associated_story
     end
 
