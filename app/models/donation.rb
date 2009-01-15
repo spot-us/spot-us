@@ -49,6 +49,7 @@ class Donation < ActiveRecord::Base
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
   
+  after_create :send_thank_you
   after_save :update_pitch_funding, :if => lambda {|me| me.paid?}
   
   has_dollar_field :amount
@@ -67,6 +68,10 @@ class Donation < ActiveRecord::Base
   end
 
   protected
+
+  def send_thank_you
+    Mailer.deliver_user_thank_you_for_donating(self)
+  end
 
   def update_pitch_funding
     pitch.current_funding_in_cents += amount_in_cents
