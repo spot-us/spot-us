@@ -14,7 +14,7 @@ describe Mailer do
       Mailer.deliver_reporter_signup_notification(user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
   end
-  
+
   it "sends an email on deliver_organization_signup_notification" do
     user = Factory(:organization)
     lambda do
@@ -35,19 +35,24 @@ describe Mailer do
       Mailer.deliver_password_reset_notification(user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
   end
-  
+
   it "sends an email on pitch accepted" do
     pitch = stub_model(Pitch)
-    lambda do 
+    lambda do
       Mailer.deliver_pitch_accepted_notification(pitch)
     end.should change {ActionMailer::Base.deliveries.size }.by(1)
   end
-  
+
   it "sends an email to news org when approved" do
     user = stub_model(User)
     lambda do
       Mailer.deliver_organization_approved_notification(user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
+  end
+
+  it "sends an email to user when they donate" do
+    Mailer.should_receive(:deliver_user_thank_you_for_donating)
+    Factory(:donation, :user => Factory(:user), :amount => 2)
   end
 
 end
