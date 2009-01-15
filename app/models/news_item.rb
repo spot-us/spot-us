@@ -39,7 +39,10 @@ class NewsItem < ActiveRecord::Base
   include AASMWithFixes
 
   include Sanitizy
-  sanitizer.allowed_tags.delete('div')
+
+  cleanse_columns(:delivery_description, :extended_description, :short_description) do |sanitizer|
+    sanitizer.allowed_tags.delete('div')
+  end
 
   acts_as_paranoid
   aasm_column :status
@@ -74,7 +77,6 @@ class NewsItem < ActiveRecord::Base
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
   named_scope :fundable_news_item, :conditions => ['type in (?)', ["Pitch", "Tip"]]
-  before_save :cleanse_descriptions
 
   def editable_by?(user)
     if user.nil?
