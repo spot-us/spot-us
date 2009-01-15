@@ -93,9 +93,5 @@ class NewsItem < ActiveRecord::Base
   def pitch?
     is_a?(Pitch)
   end
-
-  private
-  def cleanse_descriptions
-    cleanse(:short_description, :extended_description, :delivery_description)
-  end
 end
+

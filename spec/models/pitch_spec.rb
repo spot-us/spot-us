@@ -9,6 +9,7 @@ describe Pitch do
   table_has_columns(Pitch, :boolean,  "deliver_text")
   table_has_columns(Pitch, :boolean,  "deliver_audio")
   table_has_columns(Pitch, :boolean,  "deliver_video")
+  table_has_columns(Pitch, :boolean,  "deliver_widget")
   table_has_columns(Pitch, :boolean,  "deliver_photo")
   table_has_columns(Pitch, :boolean,  "contract_agreement")
   table_has_columns(Pitch, :datetime, "expiration_date")
