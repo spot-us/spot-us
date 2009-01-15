@@ -23,6 +23,36 @@ describe Donation do
     end
 
     describe "as a citizen or reporter" do
+      describe "should be valid" do
+        before do
+          @pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
+        end
+
+        it "if the pitch needs funds" do
+          donation = Factory.build(:donation,
+                                   :pitch => @pitch,
+                                   :user => Factory(:user),
+                                   :amount => 10,
+                                   :status => 'paid')
+          donation.should be_valid
+        end
+
+        it "if max donation amount in cents < 20% of funding needed in cents" do
+          donator =  Factory(:user)
+          donation = Factory(:donation,
+                             :pitch => @pitch,
+                             :user => donator,
+                             :amount => 10,
+                             :status => 'paid')
+          second_donation = Factory.build(:donation,
+                                   :pitch => @pitch,
+                                   :user => donator,
+                                   :amount => 5,
+                                   :status => 'paid')
+
+          second_donation.should be_valid
+        end
+
         it "and send a thank you email" do
           donator =  Factory(:user)
           Mailer.should_receive(:deliver_user_thank_you_for_donating)
