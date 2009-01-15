@@ -5,12 +5,13 @@ describe NewsItem do
     table_has_columns(NewsItem, :string, :type)
   end
 
-  table_has_columns(NewsItem, :string, "headline")
-  table_has_columns(NewsItem, :string, "location")
-  table_has_columns(NewsItem, :string, "keywords")
-  table_has_columns(NewsItem, :string, "featured_image_caption")
-  table_has_columns(NewsItem, :text, "video_embed")
+  table_has_columns(NewsItem, :string,  "headline")
+  table_has_columns(NewsItem, :string,  "location")
+  table_has_columns(NewsItem, :string,  "keywords")
+  table_has_columns(NewsItem, :string,  "featured_image_caption")
+  table_has_columns(NewsItem, :text,    "video_embed")
   table_has_columns(NewsItem, :integer, "user_id")
+  table_has_columns(NewsItem, :text,    "widget_embed")
 
   requires_presence_of NewsItem, :headline
   requires_presence_of NewsItem, :location
