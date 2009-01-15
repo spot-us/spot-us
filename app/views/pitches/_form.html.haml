@@ -46,6 +46,8 @@
         = f.check_box :deliver_audio
         = f.label     :deliver_video, "Video", :class => "small"
         = f.check_box :deliver_video
+        = f.label     :deliver_widget, "Widget", :class => "small"
+        = f.check_box :deliver_widget
         = f.label     :deliver_photo, "Photos", :class => "small"
         = f.check_box :deliver_photo
         = f.text_area :delivery_description
@@ -69,6 +71,10 @@
     .row.media
       = f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small"
       = f.text_area :video_embed, :rows => 4
+    .yellow-spacer-negative-blank
+    .row.media
+      = f.label :widget_embed, "Embed a Widget" + "<br/><span class='quieter small'>Paste your third-party widget embeded code (e.g. Sprout) here.</span>", :class => "small"
+      = f.text_area :widget_embed, :rows => 4
     .yellow-spacer-negative
     .row
       = f.label :expiration_date, "Expiration Date <br /><span class='quieter small'>(Optional)</span>"
