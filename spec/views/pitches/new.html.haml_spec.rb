@@ -38,7 +38,7 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  %w(featured_image_caption video_embed headline 
+  %w(featured_image_caption video_embed widget_embed headline 
      short_description delivery_description 
      extended_description skills keywords).each do |field|
     it "renders #{field} as textarea" do
@@ -49,7 +49,7 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  %w(deliver_text deliver_audio deliver_video deliver_photo contract_agreement).each do |field|
+  %w(deliver_text deliver_audio deliver_video deliver_widget deliver_photo contract_agreement).each do |field|
     it "renders #{field} as checkbox" do
       render "/pitches/new.html.haml"
       response.should have_tag("form") do
