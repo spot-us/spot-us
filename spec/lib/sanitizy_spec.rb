@@ -5,8 +5,8 @@ class TestSanitizy < ActiveRecord::Base
   include Sanitizy
   set_table_name "news_items"
   cleanse_columns(:video_embed) do |sanitizer|
-    sanitizer.allowed_tags.replace(%w(object param embed a))
-    sanitizer.allowed_attributes.replace(%w(width height name src value allowfullscreen type href allowscriptaccess))
+    sanitizer.allowed_tags.replace(%w(object param embed a img))
+    sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
   end
 end
 
@@ -39,9 +39,38 @@ describe "Sanitizy library" do
       end
 
       it "should keep allowed_tags in the field" do
-        salacious_text = "<object allowfullscreen='true'><param value='salacious' /></object>"
+        salacious_text =<<-EOS
+        <object type="application/x-shockwave-flash"
+          classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+          codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0"
+          width="300" height="271" id="spo_tADnqEL3EfIPb8xR"
+          data="http://farm.sproutbuilder.com/load/tADnqEL3EfIPb8xR.swf">
+          <param name="wmode" value="transparent" />
+          <param name="align" value="middle" />
+          <param name="allowFullScreen" value="true" />
+          <param name="allowScriptAccess" value="always" />
+          <param name="quality" value="best" />
+          <param name="movie" 
+            value="http://farm.sproutbuilder.com/load/tADnqEL3EfIPb8xR.swf" />
+          <embed type="application/x-shockwave-flash" 
+            pluginspage="http://www.macromedia.com/go/getflashplayer" 
+            name="spe_tADnqEL3EfIPb8xR" 
+            src="http://farm.sproutbuilder.com/load/tADnqEL3EfIPb8xR.swf" 
+            width="300"
+            height="271"
+            wmode="transparent"
+            align="middle"
+            allowFullScreen="true"
+            allowScriptAccess="always"
+            quality="best">
+          </embed>
+          </object>
+          <img style="visibility:hidden;width:0px;height:0px;" 
+            border=0 width=0 height=0 
+            src="http://counters.gigya.com/wildfire/IMP/CXNID=2000002.0NXC/bT*xJmx*PTEyMzIxMjA*MjAwNDImcHQ9MTIzMjEyMTE1OTc1OCZwPTEyMDc*MSZkPXRBRG5xRUwzRWZJUGI4eFImZz*xJnQ9Jm89YWI3MzM*ODI1YjQ*NDI3NTg5M2E2YjcyN2Y*YTJjYTU=.gif" />
+        EOS
         @sanitized.update_attribute(:video_embed, salacious_text)
-        @sanitized.video_embed.should =~ /object.*?allowfullscreen.*?param\svalue.*?salacious/i
+        @sanitized.video_embed.should =~ /object.*?classid.*?param\sname.*img/mi
       end
     end
   end
