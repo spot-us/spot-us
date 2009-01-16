@@ -435,7 +435,7 @@ describe User do
       User.delete_all
       user = Factory(:user)
       pitch = Factory(:pitch, :requested_amount_in_cents => 10000)
-      donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 200)
+      donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 20)
       user.can_donate_to?(pitch).should be_false
     end
   end
