@@ -41,11 +41,11 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   include HasTopics
   include AASMWithFixes
-  
+
   aasm_column :status
   aasm_initial_state  :active
   aasm_state :active
-  
+
   has_many :donations
   has_many :tips
   has_many :pitches
