@@ -13,12 +13,12 @@
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @story}
       .alt-spotus= @story.extended_description
     .clear
-    - if @story.video_embed
+    - unless @story.video_embed.blank?
       .block-spacer-negative
       %p
         %h3 Video
         .double_content_border
-        = sanitize @story.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+        = @story.video_embed
     - if @story.published?
       %h3 Comments
       .double_content_border
