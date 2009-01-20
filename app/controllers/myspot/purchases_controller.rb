@@ -8,15 +8,17 @@ class Myspot::PurchasesController < ApplicationController
     @donations = current_user.donations.unpaid
     @purchase = Purchase.new(:user       => current_user,
                              :donations  => @donations,
+                             :spotus_donation => current_user.current_spotus_donation,
                              :first_name => current_user.first_name,
                              :last_name  => current_user.last_name)
   end
 
   def create
-    @purchase           = Purchase.new(params[:purchase])
-    @purchase.user      = current_user
-    @donations          = current_user.donations.unpaid
-    @purchase.donations = @donations
+    @purchase                 = Purchase.new(params[:purchase])
+    @purchase.user            = current_user
+    @donations                = current_user.donations.unpaid
+    @purchase.donations       = @donations
+    @purchase.spotus_donation = current_user.current_spotus_donation
 
     begin
       if @purchase.save

@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Myspot::DonationAmountsController do
 
-  route_matches('/myspot/donations/amounts/edit', 
-                :get, 
+  route_matches('/myspot/donations/amounts/edit',
+                :get,
                 :controller => 'myspot/donation_amounts',
                 :action     => 'edit')
 
-  route_matches('/myspot/donations/amounts', 
-                :put, 
+  route_matches('/myspot/donations/amounts',
+                :put,
                 :controller => 'myspot/donation_amounts',
                 :action     => 'update')
 
@@ -17,6 +17,9 @@ describe Myspot::DonationAmountsController do
       @user = Factory(:user)
       @donations = [Factory(:donation, :user => @user, :status => 'unpaid'),
                     Factory(:donation, :user => @user, :status => 'unpaid')]
+      @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
+                                 :amount_in_cents => 1000)
+      @user.stub!(:current_spotus_donation).and_return(@spotus_donation)
       login_as @user
     end
 
@@ -57,6 +60,11 @@ describe Myspot::DonationAmountsController do
         do_edit
       end
 
+      it "should assign the spotus donation for the view" do
+        do_edit
+        assigns[:spotus_donation].should_not be_blank
+      end
+
       def do_edit
         get :edit
       end
@@ -74,8 +82,17 @@ describe Myspot::DonationAmountsController do
         @donations.first.amount.should == '100.0'
       end
 
+      it "should create a spotus donation if spotus_donation_amount > 0" do
+        do_update_with_spotus_donation
+        assigns[:spotus_donation].should be_an_instance_of(SpotusDonation)
+      end
+
       def do_update
-        put :update, { :user => { :donation_amounts => { @donations.first.to_param => 100 } } }
+        put :update, { :user => { :donation_amounts => { @donations.first.to_param => 100 }, :spotus_donation_amount => "" } }
+      end
+
+      def do_update_with_spotus_donation
+        put :update, { :user => { :donation_amounts => { @donations.first.to_param => 100 }, :spotus_donation_amount => 1 } }
       end
     end
 
