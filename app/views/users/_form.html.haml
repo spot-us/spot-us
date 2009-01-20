@@ -20,13 +20,13 @@
     %span I am a:
     .row
       .float_left= f.radio_button :type, 'Citizen'
-      %label.float_left{:for => 'user_type_citizen'} Concerned Citizen
+      %label.float_left{:for => 'user_type_citizen'} Community Member
     .row
       .float_left= f.radio_button :type, 'Reporter'
-      %label.float_left{:for => 'user_type_reporter'} Professional Journalist
+      %label.float_left{:for => 'user_type_reporter'} Reporter
     .row
       .float_left= f.radio_button :type, 'Organization'
-      %label.float_left{:for => 'user_type_organization'} News Organization
+      %label.float_left{:for => 'user_type_organization'} News Publisher
     .block-padding.clear 
     .row
       .float_left= f.check_box :terms_of_service, {}, '1', '0'

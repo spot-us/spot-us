@@ -3,11 +3,14 @@ class PagesController < ApplicationController
     about
     contact
     license
+    news_org_partners
     press
     privacy
     quick_donate
+    reporter_agreement
     reporter_contract
     terms
+    who
   ).freeze
 
   def show
