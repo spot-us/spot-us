@@ -37,15 +37,18 @@
     and you can contribute on
     == #{link_to "Git Hub", "http://github.com/spot-us"}.
   %strong
-    %li
-      == #{link_to "Our Community Advisory Board", page_path("who") + "#community_advisory_board"},
-    %li
-      == #{link_to "Board of journalism/media advisors", page_path("who") + "#media_advisory_board"},
-    %li
-      == #{link_to "Foundational Support", page_path("who") + "#foundational_support"},
-    %li
-      == #{link_to "Staff", page_path("who") + "#staff"} 
-%div{:style => "color: red;"}
+    %ul
+      %li
+        = link_to "Our Community Advisory Board", page_path("who", :anchor => "community_advisory_board")
+      %li
+        = link_to "Board of journalism/media advisors", page_path("who", :anchor => "media_advisory_board")
+      %li
+        = link_to "Foundational Support", page_path("who", :anchor => "foundation")
+      %li
+        = link_to "Staff", page_path("who", :anchor => "staff")
+
+.block-spacer
+.box_white{:style => "width: 66%;"}
   %h2 Got Questions? Try Our FAQ!
 
   .float_left
