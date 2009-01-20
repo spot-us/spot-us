@@ -22,32 +22,29 @@
   %p
     Before you send us an email - check our FAQ's below. Perhaps your question has already been
     answered.
-    
   %h2 Who
   %hr/
   %p
     Spot.Us was founded by 
     == #{link_to "David Cohn", "http://www.digidave.org"} and made possible by a generous grant from
     the Knight Foundation. Spot.Us has also drawn on support from individual funders
-    like yourself, a fantastic team of advisors, designers and developers of
-    == #{link_to "Hashrocket", "http://www.hashrocket.com/"}.
+    like yourself, a fantastic team of advisors, designers (who used the frealy available 
+    == #{link_to "FamFamFam", "http://www.famfamfam.com/"} 
+    icons) and developers of
+    == #{link_to "Hashrocket", "http://www.hashrocket.com/"}. 
     We are proudly hosted by
     == #{link_to "Engine Yard", "http://engineyard.com/"}. We are an open source project 
     and you can contribute on
     == #{link_to "Git Hub", "http://github.com/spot-us"}.
-    
-  %p
-    == #{link_to "David Cohn", "http://www.digidave.org"} has worked with journalism luminaries
-    such as Jay Rosen and Jeff Jarvis. He has been working in the citizen journalism movement since
-    2005 on projects like NewAssignment.Net, Assignment Zero, Beat Blogging, and Off The Bus. He
-    also co-organized the first and second Networked Journalism Summit. Spot.Us is informed by the
-    growing citizen journalism movement. Spot.Us is an attempt to ensure that journalism remain a 
-    strong and vital part of our local democracies as a participatory process, not just a product.
-  
-  %p
-    We have a board of advisors that includes: Dan Gillmor, Jay Rosen, Jeff Jarvis, Brant Houston,
-    Susan Mernit, Fabrice Florin, Leonard Witt, Neil Vineberg and Jeremy Toeman.
-    
+  %strong
+    %li
+      == #{link_to "Our Community Advisory Board", page_path("who") + "#community_advisory_board"},
+    %li
+      == #{link_to "Board of journalism/media advisors", page_path("who") + "#media_advisory_board"},
+    %li
+      == #{link_to "Foundational Support", page_path("who") + "#foundational_support"},
+    %li
+      == #{link_to "Staff", page_path("who") + "#staff"} 
 %div{:style => "color: red;"}
   %h2 Got Questions? Try Our FAQ!
 
@@ -80,7 +77,10 @@
   %h3 
     %strong 
       %a{:href =>"#faq_reporter"} For Reporters
-  %ul
+  %ul  
+    %li
+      %strong
+        %a{:href =>"#reporters_explanation"} Quick Visual Introduction
     %li
       %a{:href =>"#reporters_tip"} What is a tip?
     %li
@@ -97,11 +97,16 @@
       %a{:href =>"#address"} Why Do we Need Shipping Address?
     %li
       %a{:href =>"#creative_commons"} What’s the Creative Commons Deal?
+    %li
+      %a{:href =>"#mandatory"} REQUIRED READING on Spot.us pricings and reporter agreement
 
   %h3
     %strong 
       %a{:href =>"#faq_news_organization"} For News Organizations
   %ul
+    %li
+      %strong
+        %a{:href =>"#news_org_explanation"} Quick Visual Introduction
     %li
       %a{:href =>"#approval"} Why do We Need Approval to get started?
     %li
@@ -202,6 +207,28 @@
     %span
       %a{:href => "#faq"} Back to FAQ &#94;
   .double_content_border.clear
+  %a{:name => "reporters_explanation"}
+  %p
+  <div style="width:425px;text-align:left" id="__ss_927390"><a style="font:14px
+  Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;"
+  href="http://www.slideshare.net/Digidave/spotus-for-reporters-presentation?type=powerpoint"
+  title="Spot.Us - for reporters">Explanation</a><object style="margin:0px"
+  width="425" height="355"><param name="movie"
+  value="http://static.slideshare.net/swf/ssplayer2.swf?doc=for-reporters-1232234044468507-3&stripped_title=spotus-for-reporters-presentation"
+  /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/>
+  <embed
+  src="http://static.slideshare.net/swf/ssplayer2.swf?doc=for-reporters-1232234044468507-3&stripped_title=spotus-for-reporters-presentation"
+  type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true"
+  width="425" height="355"></embed></object><div
+  style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View SlideShare
+  <a style="text-decoration:underline;"
+  href="http://www.slideshare.net/Digidave/spotus-for-reporters-presentation?type=powerpoint"
+  title="View Spot.Us - for reporters on SlideShare">presentation</a> or <a
+  style="text-decoration:underline;"
+  href="http://www.slideshare.net/upload?type=powerpoint">Upload</a> your own. (tags: <a
+  style="text-decoration:underline;" href="http://slideshare.net/tag/journalism">journalism</a>
+  <a style="text-decoration:underline;"
+  href="http://slideshare.net/tag/spot">spot</a>)</div></div>
 
   %a{:name => "reporters_tip"}
   %h3 What is a Tip?
@@ -216,7 +243,7 @@
   %h3 Advice on Creating a Pitch
   %p
     Write the pitch so that anyone who reads it will want to see that story materialize. Sell your
-    idea and your expertise on the subject. Don’t be afraid to be personal. Upload a You Tube video
+    idea and your expertise on the subject. Don’t be afraid to be personal. Upload a YouTube video
     explaining who you are and why you’re the right person for the job. Imagine what civic leaders
     or organizations would want to partner with you. Remember - the public now has a freelance
     budget, pitch them like you would the editor of a major metropolitan newspaper. 
@@ -230,32 +257,31 @@
     they should be related to the pitch you create.
     
   %a{:name => "qa_editor"}
-  %h3 What’s the role of the Fact-Check Editor?
+  %h3 What’s the Role of the Fact-Check Editor?
   %p
     The Fact-Check editor has two main responsibilities – to ensure fair and accurate reporting. 
-    To do the later the Fact-Check editor should be in touch with the journalist before reporting
+    To do the latter the Fact-Check editor should be in touch with the journalist before reporting
     begins and before the draft is uploaded. At any time the Fact-Check editor can report suspicious
     activities to Spot.Us. Fact-Check editors are assigned by spot.Us, and the reporter can reject
     the first two assigned editors. The investigation will not publish without the Fact-Check
     editor's approval. Any journalist can apply to be a Fact-Check editor within their profile.
     
   %a{:name => "finished_content_reporters"}
-  %h3 What happens to the finished content?
+  %h3 What Happens to the Finished Content?
   %p
     Finished content is licensed under Creative Commons and anyone is free to
     republish it (with attribution to the author). Spot.Us works with local news organizations to get it distributed in as many
     places as possible. See our growing list of registered news organizations. Our partner news
-    organizations can also obtain temporary copyright to the content (first publishing rights) if
-    they donate 50% or more towards a pitch. Extra proceeds go back to community members who
+    organizations can also obtain first publishing rights to the content if they donate 50% or more towards a pitch. Extra proceeds go back to community members who
     originally supported that pitch. 
   %p 
-    Next time an editor rejects your piece purely for monetary reasons, suggest raising the other
+    Next time an editor rejects your piece purely for monetary reasons, suggest raising
     half of your freelance salary on Spot.Us. Spot.Us is happy if you upload pitches to our site and
     try to shop them around to news organizations at the same time under the condition that
-    interested news organizations work with Spot.Us.
+    interested news organizations work with the Spot.Us community.
   
   %a{:name => "pitch_goal"}
-  %h3 What if my pitch doesn’t reach its goal?
+  %h3 What if my Pitch Doesn’t Reach its Goal?
   %p
     You can accept to do the pitch regardless of whether or not you reach the original goal. So, if
     you raise 80% of the stated goal, you can still accept that money, but you must do what was
@@ -264,7 +290,6 @@
   %P    
     In the future we will have a more dynamic credit card system that will only charge a users
     credit cards upon the succesful completion of a pitch.
-    
   %a{:name => "address"}
   %h3 Why Do we Need Shipping Address?
   %p
@@ -278,8 +303,11 @@
     contributed either 50% or 100% of the total cost. In that situation - we will grant that
     news organization temporary copyright to the article. Eventually all Spot.Us stories are licensed
     under Creative Commons. You can learn more by reading our = link_to 'Reporters Contract', page_path("reporter_contract")
-        
-    
+  %a{:name => "mandatory"}
+  %h3{:style => "color: red;"} Agreement to Work with Spot.Us and Pricing Guidlines.
+  %p
+    Curious how much you can ask for in creating a Spot.Us pitch? Want to know what is involved in working with Spot.Us? 
+    == #{link_to "You can find out here", page_path("reporter_agreement")}.    
 .block-spacer
 .box_white{:style => "width: 66%;"}
   .float_left
@@ -290,12 +318,30 @@
       %a{:href => "#faq"} Back to FAQ &#94;
   .double_content_border.clear
 
+  %a{:name => "news_org_explanation"}
+  %p
+  <div style="width:425px;text-align:left" id="__ss_933112"><a style="font:14px
+  Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;"
+  href="http://www.slideshare.net/Digidave/explanation-for-news-orgs-presentation?type=presentation"
+  title="Explanation for News Orgs">Explanation for News Orgs</a><object style="margin:0px"
+  width="425" height="355"><param name="movie"
+  value="http://static.slideshare.net/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
+  /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/>
+  <embed
+  src="http://static.slideshare.net/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
+  type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
+  height="355"></embed></object><div
+  style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a
+  style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> or <a
+  style="text-decoration:underline;"
+  href="http://www.slideshare.net/upload?type=presentation">upload</a> your own.</div></div>
+  
   %a{:name => "approval"}
   %h3 Why do We Need Approval to get started?
   %p
     News organizations have a special role in Spot.Us. They are the only type of user that is
     allowed to donate more than 20% of a pitch's goal. As such, we interview news organizations to ensure
-    they ascribe to journalistic ethics as described by the Society of Profesional Journalists. We
+    they ascribe to journalistic ethics as described by the Society of Professional Journalists. We
     realize that a waiting period before you become a "news organization" on Spot.Us is less than
     ideal, but it is important to us that these ethics are followed by anybody that could
     singlehandedly fund an investigation.
