@@ -108,16 +108,6 @@ describe Myspot::PurchasesController do
       lambda { do_create }.should change { Purchase.count }.by(1)
     end
 
-    it "should create a purchase for the current user" do
-      do_create
-      assigns[:purchase].user.should == @user
-    end
-
-    it "should create a purchase for the current user's donations" do
-      do_create
-      assigns[:purchase].donations.should == @donations
-    end
-
     it "should update the balance_text cookie after a successful donation" do
       @user.stub!(:credits?).and_return(true)
       @user.stub!(:total_credits_in_dollars).and_return(30.89)

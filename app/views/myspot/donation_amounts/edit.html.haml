@@ -1,5 +1,14 @@
 - @title = "Spot.us - Fund Your Donations"
 .block-spacer
+- content_for :head do
+  :javascript
+    jQuery(document).ready(function(){
+      jQuery('#remove_spotus_donation').click(function(){
+        jQuery('input#spotus_donation').val('');
+        jQuery('#support_spotus').hide();
+        return false;
+      });
+    });
 
 - unless @user.errors.empty?
   - content_for :error do
@@ -34,7 +43,17 @@
               = text_field_tag "user[donation_amounts][#{donation.id}]", number_with_precision(donation.amount, 2), :size => 4
               .action= link_to "Remove", donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
-
+        %li#support_spotus
+          .column.span-70
+            = link_to image_tag('support_spotus.png'), '/'
+          .column.span-550
+            %h3 Support Spot.Us
+            %p
+              Spot.Us is a nonprofit project to pioneer "community funded reporting." Through Spot.Us the public can commission journalists to do investigations into important and perhaps overlooked stories.
+          .column.span-95
+            $
+            = text_field_tag "user[spotus_donation_amount]", number_with_precision(@spotus_donation.amount_in_cents.to_dollars, 2), :size => 5, :id => "spotus_donation"
+            .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
         = image_submit_tag 'purchase.png', :alt => 'Purchase'
 

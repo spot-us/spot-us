@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   aasm_state :active
 
   has_many :donations
+  has_many :spotus_donations
   has_many :tips
   has_many :pitches
   has_many :pledges
@@ -55,7 +56,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
-  
+
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -246,6 +247,14 @@ class User < ActiveRecord::Base
 
   def unpaid_donations_sum_in_cents
     donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+  end
+
+  def unpaid_spotus_donation
+    spotus_donations.unpaid.first
+  end
+
+  def current_spotus_donation
+    unpaid_spotus_donation || spotus_donations.build
   end
 
   def has_pledge_for?(tip)
