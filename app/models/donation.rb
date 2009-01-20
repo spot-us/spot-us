@@ -23,19 +23,19 @@ class Donation < ActiveRecord::Base
   end
   aasm_column :status
   aasm_initial_state  :unpaid
-  
+
   aasm_state :unpaid
   aasm_state :paid
   aasm_state :refunded
-  
+
   aasm_event :pay do
     transitions :from => :unpaid, :to => :paid 
   end
-  
+
   aasm_event :refund do
     transitions :from => :paid, :to => :refunded
   end
-  
+
   belongs_to :user
   belongs_to :pitch
   belongs_to :purchase
@@ -48,10 +48,10 @@ class Donation < ActiveRecord::Base
 
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
-  
+
   after_create :send_thank_you
   after_save :update_pitch_funding, :if => lambda {|me| me.paid?}
-  
+
   has_dollar_field :amount
 
   def self.createable_by?(user)
@@ -61,7 +61,7 @@ class Donation < ActiveRecord::Base
   def editable_by?(user)
     self.user == user
   end
-  
+
   def deletable_by?(user)
     return false if user.nil?
     (user.admin? || self.user == user) && !self.paid? 
@@ -87,13 +87,13 @@ class Donation < ActiveRecord::Base
   def being_marked_as_paid?
     status_changed? && status_was == 'unpaid'
   end
-    
+
   def check_donation
     if pitch.fully_funded?
       errors.add_to_base("Great news! This pitch is already fully funded therefore it can't be donated to any longer.")
       return
     end
-    
+
     unless pitch.user_can_donate_more?(user, amount_in_cents)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
     end

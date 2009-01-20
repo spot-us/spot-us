@@ -102,6 +102,12 @@ Factory.define :donation do |donation|
   donation.amount 10
 end
 
+Factory.define :spotus_donation do |spotus_donation|
+  spotus_donation.amount_in_dollars 1
+  spotus_donation.association(:user)
+  spotus_donation.association(:purchase)
+end
+
 Factory.define :tip do |tip|
   tip.headline               "Headline"
   tip.location               { LOCATIONS.first }

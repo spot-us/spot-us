@@ -30,21 +30,21 @@ describe Purchase do
       @user = Factory(:user)
       @donation = Factory(:donation, :pitch => @pitch, :user => @user, :amount => 25)
     end
-    
+
     it "should update current_funding for a pitch when donation is paid" do
       lambda {
         Factory(:purchase, :user => @user, :donations => [@donation])
         @pitch.reload
       }.should change {@pitch.current_funding_in_cents}.from(0).to(25.to_cents)
     end
-    
+
     it "should not update current_funding for a pitch if the donation has not been purchased" do
       @pitch.reload
       @pitch.current_funding_in_cents.should == 0
     end
-    
+
     describe "and credits cover amount owed" do
-    
+
       it "should not bill the credit card" do
         Factory(:credit, :amount => 25, :user => @user)
 
@@ -53,17 +53,17 @@ describe Purchase do
 
         purchase.save
       end
-      
+
       it "missing personal data won't fail validations" do
         Factory(:credit, :amount => 25, :user => @user)
 
         purchase = Purchase.new(:user => @user, :donations => [@donation])
         purchase.should be_valid
       end
-      
+
     end
   end
-  
+
   it "should have a gateway" do
     Purchase.gateway.should_not be_nil
     Purchase.gateway.should be_instance_of(ActiveMerchant::Billing::BogusGateway)
@@ -175,7 +175,7 @@ describe Purchase do
     @purchase = Factory.build(:purchase, :credit_card_number => '12345678')
 
     unless @purchase.credit_card_number_ending.blank?
-      violated "purchase has a credit card number ending" 
+      violated "purchase has a credit card number ending"
     end
     if @purchase.credit_card_number.blank?
       violated "purchase does not have a credit card number"
@@ -187,40 +187,50 @@ describe Purchase do
   end
 
   it "should calculate the total when donations are set" do
+    @user = Factory(:user)
     @purchase = Factory.build(:purchase)
-    @donations = [Factory(:donation, :amount => 5), 
+    @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
-    @purchase.total_amount.should == '15.0'
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @purchase.spotus_donation = @spotus_donation
+    @purchase.total_amount.should == '16.0'
   end
-  
+
   it "should take credits into account when calculating total" do
     @user = Factory(:user)
     Factory(:credit, :user => @user, :amount => 10)
     @purchase = Factory.build(:purchase, :user => @user)
-    @donations = [Factory(:donation, :amount => 5), 
+    @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
-    @purchase.total_amount.should == '5.0'   
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @purchase.spotus_donation = @spotus_donation
+    @purchase.total_amount.should == '6.0'
   end
-  
+
   it "should only use the amount needed when applying credits" do
     @user = Factory(:user)
     Factory(:credit, :user => @user, :amount => 20)
     @purchase = Factory.build(:purchase, :user => @user)
-    @donations = [Factory(:donation, :amount => 5), 
+    @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @purchase.spotus_donation = @spotus_donation
     @purchase.total_amount.should == '0.0'
   end
 
-  describe "after being saved with donations" do
+  describe "after being saved with donations and spotus_donation" do
     before do
       @user = Factory(:user)
       @purchase = Factory.build(:purchase, :user => @user)
-      @donations = [Factory(:donation, :amount => 5), 
+      @donations = [Factory(:donation, :amount => 5),
                     Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
+      @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
+                                 :amount_in_dollars => 1)
+      @purchase.spotus_donation = @spotus_donation
 
       Purchase.gateway.
         stub!(:purchase).
@@ -232,12 +242,17 @@ describe Purchase do
     end
 
     it "should use the sum of the donations as the total" do
-      @purchase.total_amount.should == '15.0'
+      @purchase.total_amount.should == '16.0'
     end
 
     it "should assign itself as the purchase for each donation" do
       @donations.detect {|donation| donation.purchase != @purchase }.
         should be_nil
+    end
+
+    it "should assign itself as the purchase for the spotus donation" do
+      @spotus_donation.reload
+      @spotus_donation.purchase.should == @purchase
     end
 
     it "should mark each donation as paid" do
@@ -246,33 +261,33 @@ describe Purchase do
     end
 
   end
-  
+
   describe "after being saved with donations and credits" do
     before do
       @user = Factory(:user)
       credit = Factory(:credit, :user => @user, :amount => 20)
       @purchase = Factory.build(:purchase, :user => @user)
-      @donations = [Factory(:donation, :amount => 5), 
+      @donations = [Factory(:donation, :amount => 5),
                     Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
+      @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+      @purchase.spotus_donation = @spotus_donation
 
-      Purchase.gateway.
-        stub!(:purchase).
-        and_return(mock('response', :success? => true))
+      Purchase.gateway.stub!(:purchase).and_return(mock('response', :success? => true))
 
       @purchase.save!
       @purchase.reload
       @donations.each {|donation| donation.reload }
     end
-    
+
     it "should use the sum of the donations minus the credits" do
       @purchase.total_amount.should == '0.0'
     end
-    
+
     it "should create a credit for the amount of the credit applied" do
       @user.reload
       @user.credits.count.should == 2
-      @user.credits.map(&:amount).should include("-15.0")
+      @user.credits.map(&:amount).should include("-16.0")
     end
   end
 end
