@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Pitch do
-  table_has_columns(Pitch, :integer,   "requested_amount_in_cents")
+  table_has_columns(Pitch, :decimal,  "requested_amount")
+  table_has_columns(Pitch, :decimal,  "current_funding")
   table_has_columns(Pitch, :text,     "short_description")
   table_has_columns(Pitch, :text,     "delivery_description")
   table_has_columns(Pitch, :text,     "extended_description")
@@ -31,14 +32,14 @@ describe Pitch do
   describe "requested amount" do
     it "normalizes before validation" do
       p = Factory(:pitch, :requested_amount => "1,000")
-      p.requested_amount_in_cents.should == 1000.to_cents
+      p.requested_amount.should == 1000
     end
   end
 
   describe "current_funding_in_percentage" do
     it "should return the amount of current funding as a percentage of the funding needed" do
       pitch = Factory(:pitch, :requested_amount => "1,000")
-      pitch.should_receive(:current_funding_in_cents).and_return(2000)
+      pitch.should_receive(:current_funding).and_return(20)
       pitch.current_funding_in_percentage.should == 0.02
     end
   end
@@ -177,9 +178,9 @@ describe Pitch do
 
   describe "almost funded" do
     before(:each) do
-      @p = Factory(:pitch, :requested_amount => 50, :current_funding_in_cents => 2000) #40 %
-      @p2 = Factory(:pitch, :requested_amount => 100, :current_funding_in_cents => 1000) #10 %
-      @p3 = Factory(:pitch, :requested_amount => 150, :current_funding_in_cents => 2000) #13 %
+      @p = Factory(:pitch, :requested_amount => 50, :current_funding => 2000) #40 %
+      @p2 = Factory(:pitch, :requested_amount => 100, :current_funding => 1000) #10 %
+      @p3 = Factory(:pitch, :requested_amount => 150, :current_funding => 2000) #13 %
     end
 
     it "should return a list of pitches ordered by the funding" do
@@ -192,14 +193,14 @@ describe Pitch do
     it "should be 0 on a pitch when a donation is added" do
       p = Factory(:pitch, :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3)
-      p.current_funding_in_cents.should == 0
+      p.current_funding.should == 0
     end
 
     it "should equal the donation amount when a donation is paid" do
       p = Factory(:pitch, :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3)
       purch = Factory(:purchase, :donations => [d])
-      p.current_funding_in_cents.should == 300
+      p.current_funding.should == BigDecimal.new("3.0")
     end
   end
 
@@ -245,28 +246,28 @@ describe Pitch do
     end
   end
 
-  describe "funding_needed_in_cents" do
+  describe "funding_needed" do
     it "is equal to requested amount initially" do
       p = Factory(:pitch, :requested_amount => 100)
-      p.funding_needed_in_cents.should == 100.to_cents
+      p.funding_needed.should == 100
     end
 
     it "subtracts donations appropriately" do
       p = Factory(:pitch, :requested_amount => 100)
       Factory(:donation, :pitch => p, :amount => 20, :status => 'paid')
-      p.funding_needed_in_cents.should == 80.to_cents
+      p.funding_needed.should == 80
     end
 
     it "is 0 when a pitch is accepted" do
       p = Factory(:pitch, :requested_amount => 100)
       p.accept!
-      p.funding_needed_in_cents.should == 0.to_cents
+      p.funding_needed.should == 0
     end
 
     it "is 0 when a pitch is fully_funded" do
       p = Factory(:pitch, :requested_amount => 100)
       p.fund!
-      p.funding_needed_in_cents.should == 0.to_cents
+      p.funding_needed.should == 0
     end
   end
 
@@ -301,20 +302,20 @@ describe Pitch do
     describe "any user" do
       it "can't donate more, such that funds would exceed the requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 1000.to_cents).should be_false
+        p.user_can_donate_more?(Factory(:organization), 1000).should be_false
       end
 
       it "can donate more, as long as funds plus attempted donation are less than requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 20.to_cents).should be_true
+        p.user_can_donate_more?(Factory(:organization), 20).should be_true
       end
 
-      it "can donate more at all (passing zero cents as second arg)" do
+      it "can donate more at all (passing zero as second arg)" do
         u = Factory(:user)
         p = Factory(:pitch, :requested_amount => 100)
         d = Factory(:donation, :pitch => p, :user => u, :amount => 10)
-        p.user_can_donate_more?(u, 0.to_cents).should be_true
-        p.user_can_donate_more?(u, 11.to_cents).should be_true
+        p.user_can_donate_more?(u, 0).should be_true
+        p.user_can_donate_more?(u, 11).should be_true
       end
     end
 
@@ -326,28 +327,28 @@ describe Pitch do
 
       it "allows donation if the user has no existing donations" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:user), 10.to_cents)
+        p.user_can_donate_more?(Factory(:user), 10)
       end
 
       it "return false if the user's total donations + total trying to donate is > 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 10, :status => 'paid')
         @pitch.reload
-        @pitch.user_can_donate_more?(@user, 10.to_cents).should be_false
+        @pitch.user_can_donate_more?(@user, 10).should be_false
       end
 
       it "return true if the user's total donations + total trying to donate is = 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
         @pitch.reload
-        @pitch.user_can_donate_more?(@user, 10.to_cents).should be_true
+        @pitch.user_can_donate_more?(@user, 10).should be_true
       end
 
       it "return true if the user's total donations + total trying to donate is < 20% of the requested amount" do
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 3)
         Factory(:donation, :pitch => @pitch, :user => @user, :amount => 5)
         @pitch.reload
-        @pitch.user_can_donate_more?(@user, 10.to_cents).should be_true
+        @pitch.user_can_donate_more?(@user, 10).should be_true
       end
     end
 
@@ -355,7 +356,7 @@ describe Pitch do
       it "return true even if more than 20% because we are an organization" do
         organization = Factory(:organization)
         pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
-        pitch.user_can_donate_more?(organization, 100.to_cents).should be_true
+        pitch.user_can_donate_more?(organization, 100).should be_true
       end
     end
 
@@ -457,7 +458,6 @@ describe Pitch do
           donation.should be_valid
           donation.pay!
         end
-        p.current_funding_in_cents
         p.should be_valid
         p.reload.should be_funded
       end
