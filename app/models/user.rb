@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
-  validate                  :validate_new_donation_amounts, 
-    :on => :update, 
+  validate                  :validate_new_donation_amounts,
+    :on => :update,
     :if => lambda {|user| user.donation_amounts_changed? }
   before_save :encrypt_password
   before_validation_on_create :generate_password, :set_default_location
@@ -43,22 +43,22 @@ class User < ActiveRecord::Base
   after_update :update_donation_amounts,
     :if => lambda {|user| user.donation_amounts_changed? }
 
-  has_attached_file :photo, 
-                    :styles      => { :thumb => '50x50#' }, 
-                    :path        => ":rails_root/public/system/profiles/" << 
+  has_attached_file :photo,
+                    :styles      => { :thumb => '50x50#' },
+                    :path        => ":rails_root/public/system/profiles/" <<
                                     ":attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :url         => "/system/profiles/:attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :default_url => "/images/default_avatar.png"
-  
+
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :about_you, :address1, :address2, :city, :country,
     :donation_amounts, :email, :fact_check_interest, :first_name, :last_name,
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
-    :terms_of_service, :topics_params, :website, :zip, :organization_name, 
+    :terms_of_service, :topics_params, :website, :zip, :organization_name,
     :established_year
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   def citizen?
     self.is_a? Citizen
   end
-  
+
   def reporter?
     self.is_a? Reporter
   end
@@ -75,25 +75,25 @@ class User < ActiveRecord::Base
   def organization?
     self.is_a? Organization
   end
-  
+
   def admin?
     self.is_a? Admin
   end
-  
+
   def total_credits_in_cents
-    self.credits.map(&:amount_in_cents).sum
+    (total_credits * 100).to_i
   end
-  
-  def total_credits_in_dollars
-    total_credits_in_cents.to_dollars
+
+  def total_credits
+    self.credits.map(&:amount).sum.to_f
   end
 
   def self.createable_by?(user)
     true
   end
-  
+
   def credits?
-    total_credits_in_cents > 0 
+    total_credits > 0
   end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
@@ -106,18 +106,18 @@ class User < ActiveRecord::Base
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
-  
+
   def self.generate_csv
     FasterCSV.generate do |csv|
       # header row
-      csv << ["type", "email", "first_name", "last_name", "location", 
-              "notify_tips", "notify_pitches",  "notify_pitches", 
+      csv << ["type", "email", "first_name", "last_name", "location",
+              "notify_tips", "notify_pitches",  "notify_pitches",
               "notify_stories", "notify_spotus_news", "fact_check_interest"]
 
       # data rows
       User.all.each do |user|
-        csv << [user.type, user.email, user.first_name, user.last_name, 
-                user.location, user.notify_tips, user.notify_pitches, 
+        csv << [user.type, user.email, user.first_name, user.last_name,
+                user.location, user.notify_tips, user.notify_pitches,
                 user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
       end
     end
@@ -152,7 +152,7 @@ class User < ActiveRecord::Base
   end
 
   def remember_token?
-    remember_token_expires_at && Time.now.utc < remember_token_expires_at 
+    remember_token_expires_at && Time.now.utc < remember_token_expires_at
   end
 
   # These create and unset the fields required for remembering users between browser closes
@@ -240,10 +240,10 @@ class User < ActiveRecord::Base
     self.password ||= (1..6).collect { chars[rand(chars.size)] }.join
     self.password_confirmation = password
   end
-  
+
   def deliver_signup_notification
     return if self.type == "Admin"
-    Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)    
+    Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)
   end
 
   def set_default_location

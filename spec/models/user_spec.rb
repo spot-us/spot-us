@@ -29,15 +29,14 @@ describe User do
       user = Factory(:user)
       Factory(:credit, :amount => 25, :user => user)
       Factory(:credit, :amount => 25, :user => user)
-      user.total_credits_in_cents.should == 5000
-      user.total_credits_in_dollars.should == "50.0"
+      user.total_credits.should == 50.0
     end
     
     it "should return credits when there are negative credits" do
       user = Factory(:user)
       Factory(:credit, :amount => 25, :user => user)
       Factory(:credit, :amount => -25, :user => user)
-      user.total_credits_in_cents.should == 0
+      user.total_credits.should == 0
     end
   end
   

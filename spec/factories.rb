@@ -155,9 +155,9 @@ Factory.define :topic do |topic|
 end
 
 Factory.define :credit do |credit|
-  credit.association(:user)
   credit.description  'A credit created by a factory'
-  credit.amount   25
+  credit.amount       25.00
+  credit.association(:user)
 end
 
 
