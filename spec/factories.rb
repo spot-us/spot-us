@@ -104,7 +104,7 @@ Factory.define :donation do |donation|
 end
 
 Factory.define :spotus_donation do |spotus_donation|
-  spotus_donation.amount_in_dollars 1
+  spotus_donation.amount 1
   spotus_donation.association(:user)
   spotus_donation.association(:purchase)
 end

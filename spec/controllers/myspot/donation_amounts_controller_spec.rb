@@ -18,7 +18,7 @@ describe Myspot::DonationAmountsController do
       @donations = [Factory(:donation, :user => @user, :status => 'unpaid'),
                     Factory(:donation, :user => @user, :status => 'unpaid')]
       @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
-                                 :amount_in_cents => 1000)
+                                 :amount => 10)
       @user.stub!(:current_spotus_donation).and_return(@spotus_donation)
       login_as @user
     end
