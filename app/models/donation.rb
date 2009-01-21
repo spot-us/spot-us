@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: donations
-#
-#  id              :integer(4)      not null, primary key
-#  user_id         :integer(4)      
-#  pitch_id        :integer(4)      
-#  created_at      :datetime        
-#  updated_at      :datetime        
-#  amount_in_cents :integer(4)      
-#  purchase_id     :integer(4)      
-#  status          :string(255)     default("unpaid")
-#
-
 class Donation < ActiveRecord::Base
   include AASM
   class <<self
@@ -99,3 +85,19 @@ class Donation < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+# Schema version: 20090116200734
+#
+# Table name: donations
+#
+#  id              :integer(4)      not null, primary key
+#  user_id         :integer(4)
+#  pitch_id        :integer(4)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  amount_in_cents :integer(4)
+#  purchase_id     :integer(4)
+#  status          :string(255)     default("unpaid")
+#
+
