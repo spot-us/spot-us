@@ -112,8 +112,8 @@ describe User do
     donation1 = Factory(:donation, :user => user, :amount => 1)
     donation2 = Factory(:donation, :user => user, :amount => 3)
     user.reload
-    user.amount_donated_to(donation1.pitch).should == donation1.amount.to_f.to_s
-    user.amount_donated_to(donation2.pitch).should == donation2.amount.to_f.to_s
+    user.amount_donated_to(donation1.pitch).should == donation1.amount
+    user.amount_donated_to(donation2.pitch).should == donation2.amount
   end
 
   describe "signup notification emails" do
@@ -421,7 +421,7 @@ describe User do
 
     it "should return the unpaid sum for donations" do
       donation = Factory(:donation, :user => @user, :pitch => @pitch)
-      @user.unpaid_donations_sum_in_cents.should == donation.amount_in_cents
+      @user.unpaid_donations_sum.should == donation.amount
     end
 
     it "should allow the user to donate to a pitch after donating < 20%" do

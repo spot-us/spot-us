@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_donated_to(pitch)
-    pitch.donations.find_all_by_user_id(id).map(&:amount_in_cents).sum.to_dollars
+    pitch.donations.find_all_by_user_id(id).map(&:amount).sum
   end
 
   # Encrypts the password with the user salt
@@ -204,11 +204,16 @@ class User < ActiveRecord::Base
   end
 
   def can_donate_to?(pitch)
-    pitch.donations.total_amount_in_cents_for_user(self) < pitch.max_donation_amount_in_cents(self)
+    pitch.donations.total_amount_for_user(self) < pitch.max_donation_amount(self)
   end
 
+  # TODO: remove after updating all models with amount
   def unpaid_donations_sum_in_cents
     donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+  end
+
+  def unpaid_donations_sum
+    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount).sum
   end
 
   def unpaid_spotus_donation
