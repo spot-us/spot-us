@@ -18,9 +18,9 @@
 
   - # first column content 
   .span-715.box_white
-    - if current_user.total_credits_in_cents > 0
+    - if current_user.total_credits > 0
       .float-right
-        == You have #{number_to_currency(current_user.total_credits_in_dollars)} in credits
+        == You have #{number_to_currency(current_user.total_credits)} in credits
     %h3 Fund Your Donations
 
     .double_content_border
