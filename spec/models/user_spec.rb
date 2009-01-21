@@ -112,8 +112,8 @@ describe User do
     donation1 = Factory(:donation, :user => user, :amount => 1)
     donation2 = Factory(:donation, :user => user, :amount => 3)
     user.reload
-    user.amount_donated_to(donation1.pitch).should == donation1.amount
-    user.amount_donated_to(donation2.pitch).should == donation2.amount
+    user.amount_donated_to(donation1.pitch).should == donation1.amount.to_f.to_s
+    user.amount_donated_to(donation2.pitch).should == donation2.amount.to_f.to_s
   end
 
   describe "signup notification emails" do

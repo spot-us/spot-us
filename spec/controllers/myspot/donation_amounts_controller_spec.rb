@@ -79,7 +79,7 @@ describe Myspot::DonationAmountsController do
       it "should update the donation amounts" do
         do_update
         @donations.first.reload
-        @donations.first.amount.should == '100.0'
+        @donations.first.amount.to_f.should == 100.0
       end
 
       it "should create a spotus donation if spotus_donation_amount > 0" do
