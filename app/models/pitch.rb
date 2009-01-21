@@ -103,11 +103,11 @@ class Pitch < NewsItem
 
   def fully_funded?
     return true if accepted? || funded?
-    donations.paid.sum(:amount_in_cents) >= requested_amount_in_cents
+    donations.paid.map(&:amount_in_cents).sum >= requested_amount_in_cents
   end
 
   def total_amount_donated
-    donations.paid.sum(:amount_in_cents).to_dollars
+    donations.paid.map(&:amount_in_cents).sum.to_dollars
   end
 
   def donated_to?
