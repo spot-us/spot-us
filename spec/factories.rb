@@ -97,9 +97,9 @@ Factory.define :affiliation do |donation|
 end
 
 Factory.define :donation do |donation|
+  donation.amount 10
   donation.association(:user)
   donation.association(:pitch)
-  donation.amount 10
 end
 
 Factory.define :spotus_donation do |spotus_donation|
