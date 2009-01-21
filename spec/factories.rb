@@ -71,6 +71,7 @@ Factory.define :pitch do |pitch|
   pitch.headline               "Headline"
   pitch.location               { LOCATIONS.first }
   pitch.requested_amount       1000
+  pitch.current_funding        0
   pitch.short_description      "lorem ipsum"
   pitch.extended_description   "lorem ipsum"
   pitch.delivery_description   "lorem ipsum"

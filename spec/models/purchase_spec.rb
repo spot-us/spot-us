@@ -35,12 +35,12 @@ describe Purchase do
       lambda {
         Factory(:purchase, :user => @user, :donations => [@donation])
         @pitch.reload
-      }.should change {@pitch.current_funding_in_cents}.from(0).to(25.to_cents)
+      }.should change {@pitch.current_funding}.from(0).to(25)
     end
 
     it "should not update current_funding for a pitch if the donation has not been purchased" do
       @pitch.reload
-      @pitch.current_funding_in_cents.should == 0
+      @pitch.current_funding.should == 0
     end
 
     describe "and credits cover amount owed" do
