@@ -192,9 +192,9 @@ describe Purchase do
     @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
-    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
     @purchase.spotus_donation = @spotus_donation
-    @purchase.total_amount.should == '16.0'
+    @purchase.total_amount.should == 16.0
   end
 
   it "should take credits into account when calculating total" do
@@ -204,9 +204,9 @@ describe Purchase do
     @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
-    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
     @purchase.spotus_donation = @spotus_donation
-    @purchase.total_amount.should == '6.0'
+    @purchase.total_amount.should == 6.0
   end
 
   it "should only use the amount needed when applying credits" do
@@ -216,9 +216,9 @@ describe Purchase do
     @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
     @purchase.donations = @donations
-    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
     @purchase.spotus_donation = @spotus_donation
-    @purchase.total_amount.should == '0.0'
+    @purchase.total_amount.should == 0.0
   end
 
   describe "after being saved with donations and spotus_donation" do
@@ -229,7 +229,7 @@ describe Purchase do
                     Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
       @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
-                                 :amount_in_dollars => 1)
+                                 :amount => 1)
       @purchase.spotus_donation = @spotus_donation
 
       Purchase.gateway.stub!(:purchase).and_return(mock('response', :success? => true))
@@ -268,7 +268,7 @@ describe Purchase do
       @donations = [Factory(:donation, :amount => 5),
                     Factory(:donation, :amount => 10)]
       @purchase.donations = @donations
-      @spotus_donation = Factory(:spotus_donation, :user => @user, :amount_in_dollars => 1)
+      @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
       @purchase.spotus_donation = @spotus_donation
 
       Purchase.gateway.stub!(:purchase).and_return(mock('response', :success? => true))
@@ -285,7 +285,7 @@ describe Purchase do
     it "should create a credit for the amount of the credit applied" do
       @user.reload
       @user.credits.count.should == 2
-      @user.credits.map{|c| c.amount.to_f}.should include(-16.0)
+      @user.credits.map{|c| c.amount}.should include(-16.0)
     end
   end
 end
