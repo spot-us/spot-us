@@ -11,7 +11,7 @@ describe SpotusDonation do
     before do
       @spotus_donation = Factory(:spotus_donation, :user => @user,
                                  :purchase          => nil,
-                                 :amount_in_dollars => 1)
+                                 :amount            => 1)
     end
 
     it "should only return donations with a nil purchase_id" do
@@ -20,23 +20,18 @@ describe SpotusDonation do
   end
 
   it "should set the default amount to 10% of the user's unpaid donations" do
-    @user.spotus_donations.build.amount_in_cents.should == 200
+    @user.spotus_donations.build.amount.should == 2
   end
 
   it "should round the default amount to the nearest dollar" do
     donation = Factory(:donation, :user => @user, :amount => 54)
     # user's total unpaid donations now == $74
-    @user.spotus_donations.build.amount_in_cents.should == 700
+    @user.spotus_donations.build.amount.should == BigDecimal.new("7.0")
   end
 
   it "should allow the user to donate more than 10%" do
-    spotus_donation = @user.spotus_donations.build(:amount_in_cents => 300)
-    spotus_donation.amount_in_cents.should == 300
-  end
-
-  it "should take an amount in dollars and use it to set amount_in_cents" do
-    spotus_donation = @user.spotus_donations.build(:amount_in_dollars => 3)
-    spotus_donation.amount_in_cents.should == 300
+    spotus_donation = @user.spotus_donations.build(:amount => 3)
+    spotus_donation.amount.should == BigDecimal.new("3.0")
   end
 
 end
