@@ -27,12 +27,12 @@
       .float-right
         = number_to_currency @purchase.spotus_donation.amount_in_dollars
       .clear
-    - if current_user.total_credits_in_cents > 0
+    - if current_user.total_credits > 0
       .donation.credit_line
         .float-left
           CREDIT APPLIED
         .float-right
-          == - #{number_to_currency(current_user.total_credits_in_dollars)}
+          == - #{number_to_currency(current_user.total_credits)}
     %br/
     %hr/
     .total

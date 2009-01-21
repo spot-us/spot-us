@@ -232,9 +232,7 @@ describe Purchase do
                                  :amount_in_dollars => 1)
       @purchase.spotus_donation = @spotus_donation
 
-      Purchase.gateway.
-        stub!(:purchase).
-        and_return(mock('response', :success? => true))
+      Purchase.gateway.stub!(:purchase).and_return(mock('response', :success? => true))
 
       @purchase.save!
       @purchase.reload
@@ -287,7 +285,7 @@ describe Purchase do
     it "should create a credit for the amount of the credit applied" do
       @user.reload
       @user.credits.count.should == 2
-      @user.credits.map(&:amount).should include("-16.0")
+      @user.credits.map{|c| c.amount.to_f}.should include(-16.0)
     end
   end
 end
