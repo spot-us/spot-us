@@ -65,7 +65,7 @@ class Donation < ActiveRecord::Base
 
   # TODO: use amount
   def update_pitch_funding
-    pitch.current_funding_in_cents += amount_in_cents
+    pitch.current_funding += amount
     pitch.save
   end
 
@@ -86,7 +86,7 @@ class Donation < ActiveRecord::Base
     end
 
     #TODO: convert user_can_donate_more? to use BigDecimal and pass in amount
-    unless pitch.user_can_donate_more?(user, amount_in_cents)
+    unless pitch.user_can_donate_more?(user, amount)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
     end
   end
