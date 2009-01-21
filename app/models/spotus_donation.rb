@@ -26,3 +26,17 @@ class SpotusDonation < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+# Schema version: 20090116200734
+#
+# Table name: spotus_donations
+#
+#  id              :integer(4)      not null, primary key
+#  user_id         :integer(4)
+#  amount_in_cents :integer(4)
+#  purchase_id     :integer(4)
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
