@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: affiliations
-#
-#  id         :integer(4)      not null, primary key
-#  tip_id     :integer(4)      
-#  pitch_id   :integer(4)      
-#  created_at :datetime        
-#  updated_at :datetime        
-#
-
 class Affiliation < ActiveRecord::Base
   acts_as_paranoid
   belongs_to :pitch
@@ -24,4 +13,18 @@ class Affiliation < ActiveRecord::Base
     false
   end
 end
+
+
+# == Schema Information
+# Schema version: 20090116200734
+#
+# Table name: affiliations
+#
+#  id         :integer(4)      not null, primary key
+#  tip_id     :integer(4)
+#  pitch_id   :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#  deleted_at :datetime
+#
 
