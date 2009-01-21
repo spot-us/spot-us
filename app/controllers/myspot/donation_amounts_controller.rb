@@ -14,7 +14,7 @@ class Myspot::DonationAmountsController < ApplicationController
 
     if @user.save
       @spotus_donation = @user.current_spotus_donation
-      @spotus_donation.amount_in_dollars = params[:user][:spotus_donation_amount]
+      @spotus_donation.amount = params[:user][:spotus_donation_amount]
       @spotus_donation.save if @spotus_donation.valid?
       redirect_to new_myspot_purchase_path
     else
