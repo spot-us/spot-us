@@ -28,7 +28,7 @@ class Donation < ActiveRecord::Base
   validates_presence_of :pitch_id
   validates_presence_of :user_id
   validates_presence_of :amount
-  validates_numericality_of :amount_in_cents, :greater_than => 0
+  validates_numericality_of :amount, :greater_than => 0
   validate_on_update :disable_updating_paid_donations, :check_donation, :if => lambda { |me| me.pitch }
   validate_on_create :check_donation, :if => lambda { |me| me.pitch }
 
@@ -38,10 +38,14 @@ class Donation < ActiveRecord::Base
   after_create :send_thank_you
   after_save :update_pitch_funding, :if => lambda {|me| me.paid?}
 
-  has_dollar_field :amount
-
   def self.createable_by?(user)
     user
+  end
+
+  # TODO: remove this 'bandaid' method when conversion complete
+  def amount_in_cents
+    return 0 if amount.nil?
+    (amount * 100).to_i
   end
 
   def editable_by?(user)
@@ -59,6 +63,7 @@ class Donation < ActiveRecord::Base
     Mailer.deliver_user_thank_you_for_donating(self)
   end
 
+  # TODO: use amount
   def update_pitch_funding
     pitch.current_funding_in_cents += amount_in_cents
     pitch.save
@@ -80,6 +85,7 @@ class Donation < ActiveRecord::Base
       return
     end
 
+    #TODO: convert user_can_donate_more? to use BigDecimal and pass in amount
     unless pitch.user_can_donate_more?(user, amount_in_cents)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
     end
