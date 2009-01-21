@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Donation do
   table_has_columns(Donation, :integer, "user_id")
   table_has_columns(Donation, :integer, "pitch_id")
-  table_has_columns(Donation, :integer, "amount_in_cents")
+  table_has_columns(Donation, :decimal, "amount")
   table_has_columns(Donation, :string, "status")
 
   # TODO:  Need to figure out how to make these work in spec_helper for these cases.
@@ -14,8 +14,6 @@ describe Donation do
   it { Donation.should belong_to(:user) }
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
-
-  has_dollar_field(Donation, :amount)
 
   describe "when creating a donation" do
     it "should require user to be logged in" do
@@ -37,7 +35,7 @@ describe Donation do
           donation.should be_valid
         end
 
-        it "if max donation amount in cents < 20% of funding needed in cents" do
+        it "if max donation amount < 20% of funding needed" do
           donator =  Factory(:user)
           donation = Factory(:donation,
                              :pitch => @pitch,
@@ -100,9 +98,6 @@ describe Donation do
         d = Factory.build(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
       end
-
-      it "still guards against donating more than requested amount" do
-      end
     end
   end
 
@@ -158,20 +153,20 @@ describe Donation do
   it "should not allow negative values for donations" do
     donation = Factory.build(:donation, :amount => nil)
     donation.should_not be_valid
-    donation.should have(1).error_on(:amount_in_cents)
+    donation.should have_at_least(1).error_on(:amount)
   end
 
   it "should not allow zero for a donation" do
     donation = Factory.build(:donation, :amount => 0)
     donation.should_not be_valid
-    donation.should have(1).error_on(:amount_in_cents)
+    donation.should have_at_least(1).error_on(:amount)
   end
 
   it "should not allow a paid donation to be modified" do
     donation = Factory(:donation, :status => 'paid')
-    donation.amount = (donation.amount_in_cents + 1).to_dollars
+    donation.amount = (donation.amount + 1)
     donation.should_not be_valid
-    donation.should have(1).error_on(:base)
+    donation.should have_at_least(1).error_on(:base)
   end
 
   it "should allow an unpaid donation to be marked as paid" do
