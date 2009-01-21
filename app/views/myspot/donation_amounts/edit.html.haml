@@ -52,7 +52,7 @@
               Spot.Us is a nonprofit project to pioneer "community funded reporting." Through Spot.Us the public can commission journalists to do investigations into important and perhaps overlooked stories.
           .column.span-95
             $
-            = text_field_tag "user[spotus_donation_amount]", number_with_precision(@spotus_donation.amount_in_cents.to_dollars, 2), :size => 5, :id => "spotus_donation"
+            = text_field_tag "user[spotus_donation_amount]", number_with_precision(@spotus_donation.amount, 2), :size => 5, :id => "spotus_donation"
             .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
         = image_submit_tag 'purchase.png', :alt => 'Purchase'

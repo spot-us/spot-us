@@ -34,27 +34,27 @@ class Purchase < ActiveRecord::Base
 
   def total_amount
     return self[:total_amount_in_cents].to_dollars unless self[:total_amount_in_cents].blank?
-    (donations_sum - credit_to_apply).to_dollars
+    donations_sum - credit_to_apply
   end
 
   protected
 
-  # total of all donations in cents
+  # total of all donations
   def donations_sum
     amount = 0
-    amount += donations.map(&:amount_in_cents).sum unless donations.blank?
-    amount += @new_donations.map(&:amount_in_cents).sum unless @new_donations.blank?
-    amount += spotus_donation.amount_in_cents if spotus_donation
+    amount += donations.map(&:amount).sum unless donations.blank?
+    amount += @new_donations.map(&:amount).sum unless @new_donations.blank?
+    amount += spotus_donation.amount if spotus_donation
     amount
   end
 
   def set_total_amount_in_cents
-    self[:total_amount_in_cents] = total_amount.to_cents
+    self[:total_amount_in_cents] = (total_amount * 100).to_i
   end
 
   def apply_credits
     Credit.create(:user => self.user, :description => "Applied to Purchase #{id}",
-                  :amount => (0 - credit_to_apply.to_f/100))
+                  :amount => (0 - credit_to_apply))
   end
 
   def build_credit_card
@@ -91,7 +91,7 @@ class Purchase < ActiveRecord::Base
 
   def credit_to_apply
     return 0 if user.nil?
-    [user.total_credits_in_cents, donations_sum].min
+    [user.total_credits, donations_sum].min
   end
 
   def bill_credit_card
