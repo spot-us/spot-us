@@ -54,7 +54,7 @@ class Purchase < ActiveRecord::Base
 
   def apply_credits
     Credit.create(:user => self.user, :description => "Applied to Purchase #{id}",
-                  :amount_in_cents => (0 - credit_to_apply))
+                  :amount => (0 - credit_to_apply.to_f/100))
   end
 
   def build_credit_card

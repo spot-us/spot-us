@@ -110,7 +110,7 @@ describe Myspot::PurchasesController do
 
     it "should update the balance_text cookie after a successful donation" do
       @user.stub!(:credits?).and_return(true)
-      @user.stub!(:total_credits_in_dollars).and_return(30.89)
+      @user.stub!(:total_credits).and_return(30.89)
       do_create
       cookies['balance_text'].first.should include('$30.89')
     end
