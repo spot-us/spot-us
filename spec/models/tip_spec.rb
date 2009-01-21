@@ -145,7 +145,7 @@ describe Tip do
 
   it "should return 0 when no pledges" do
     tip = Factory(:tip, :pledge_amount => 0)
-    tip.total_amount_pledged.should == "0.0"
+    tip.total_amount_pledged.should == 0.0
   end
 
   describe "destroy" do

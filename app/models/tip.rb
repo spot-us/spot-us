@@ -14,7 +14,7 @@ class Tip < NewsItem
 
   validates_inclusion_of :location, :in => LOCATIONS
 
-  named_scope :most_pledged, :order => "(select sum(amount_in_cents) from pledges where pledges.tip_id = #{table_name}.id) DESC"
+  named_scope :most_pledged, :order => "(select sum(amount) from pledges where pledges.tip_id = #{table_name}.id) DESC"
 
 
   def self.createable_by?(user)
@@ -35,7 +35,7 @@ class Tip < NewsItem
   end
 
   def total_amount_pledged
-    pledges.sum(:amount_in_cents).to_dollars
+    pledges.sum(:amount)
   end
 
   private
