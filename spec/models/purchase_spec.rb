@@ -10,6 +10,7 @@ describe Purchase do
   table_has_columns(Purchase, :string, "state")
   table_has_columns(Purchase, :string, "zip")
   table_has_columns(Purchase, :integer, "user_id")
+  table_has_columns(Purchase, :decimal, "total_amount")
 
   requires_presence_of_field_on_purchase(Purchase, :first_name)
   requires_presence_of_field_on_purchase(Purchase, :last_name)
@@ -155,7 +156,7 @@ describe Purchase do
         :email    => @purchase.user.email
       } }
       Purchase.gateway.should_receive(:purchase).
-        with(@total.to_cents, @credit_card, hash).
+        with(@total, @credit_card, hash).
         and_return(mock('response', :success? => true))
       do_save
     end
@@ -240,7 +241,7 @@ describe Purchase do
     end
 
     it "should use the sum of the donations as the total" do
-      @purchase.total_amount.should == '16.0'
+      @purchase.total_amount.should == 16.0
     end
 
     it "should assign itself as the purchase for each donation" do
@@ -279,7 +280,7 @@ describe Purchase do
     end
 
     it "should use the sum of the donations minus the credits" do
-      @purchase.total_amount.should == '0.0'
+      @purchase.total_amount.should == 0.0
     end
 
     it "should create a credit for the amount of the credit applied" do
