@@ -21,10 +21,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :amounts, :name_prefix => 'myspot_donations_',
                          :path_prefix => 'myspot/donations',
                          :controller  => 'myspot/donation_amounts'
-                         
+
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
-    admin.resources :credits 
+    admin.resources :credits
     admin.resources :pitches, :member => { :fact_checker_chooser => :get }
     admin.resources :tips
   end
