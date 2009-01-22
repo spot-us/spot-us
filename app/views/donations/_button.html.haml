@@ -1,5 +1,5 @@
 - unless news_item.fully_funded?
-  - if current_user && current_user.can_donate_to?(news_item)
+  - if (current_user && current_user.can_donate_to?(news_item)) or !current_user
     %div{:id => "inline_donation_form_#{news_item.id}"}
       %div{:id => "donation_button_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
