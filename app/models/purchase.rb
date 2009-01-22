@@ -1,4 +1,3 @@
-require 'lib/dollars'
 class Purchase < ActiveRecord::Base
   class GatewayError < RuntimeError; end
 
@@ -10,7 +9,7 @@ class Purchase < ActiveRecord::Base
 
   after_create :associate_donations, :apply_credits, :associate_spotus_donations
   before_create :bill_credit_card
-  before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :set_total_amount_in_cents
+  before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :set_total_amount
   validates_presence_of :first_name, :last_name, :credit_card_number_ending,
     :address1, :city, :state, :zip, :user_id, :unless => lambda {|p| p.credit_covers_total? }
 
@@ -25,7 +24,7 @@ class Purchase < ActiveRecord::Base
   has_one    :spotus_donation
 
   def credit_covers_total?
-    self.total_amount_in_cents == 0
+    self.total_amount == 0
   end
 
   def donations=(donations)
@@ -33,7 +32,7 @@ class Purchase < ActiveRecord::Base
   end
 
   def total_amount
-    return self[:total_amount_in_cents].to_dollars unless self[:total_amount_in_cents].blank?
+    return self[:total_amount] unless self[:total_amount].blank?
     donations_sum - credit_to_apply
   end
 
@@ -48,8 +47,8 @@ class Purchase < ActiveRecord::Base
     amount
   end
 
-  def set_total_amount_in_cents
-    self[:total_amount_in_cents] = (total_amount * 100).to_i
+  def set_total_amount
+    self[:total_amount] = total_amount
   end
 
   def apply_credits
@@ -96,7 +95,7 @@ class Purchase < ActiveRecord::Base
 
   def bill_credit_card
     return true if credit_covers_total?
-    response = gateway.purchase(total_amount_in_cents,
+    response = gateway.purchase(total_amount,
                                 credit_card,
                                 billing_hash)
     unless response.success?

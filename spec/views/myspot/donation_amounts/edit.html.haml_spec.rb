@@ -25,6 +25,8 @@ describe 'myspot/donation_amounts/edit' do
   end
 
   it "should have a text field tag to change the amount of each donation" do
+    # The assert_select syntax seems to be off - it is not finding a match for
+    # the ID given below, but the fields are rendering...
     pending
     do_render
     @donations.each do |donation|
