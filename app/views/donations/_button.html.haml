@@ -2,22 +2,31 @@
   - if (current_user && current_user.can_donate_to?(news_item)) or !current_user
     %div{:id => "inline_donation_form_#{news_item.id}"}
       %div{:id => "donation_button_#{news_item.id}"}
-        - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
-          = f.hidden_field :amount
-          = f.hidden_field :pitch_id
-          = image_submit_tag "donate_25.png"
-      %div.inline_donate{:style => "display:none", :id => "donation_custom_#{news_item.id}"}
+        - if current_user && current_user.has_donated_to?(news_item)
+          = link_to image_tag("donation_added.png"), edit_myspot_donations_amounts_path
+        - else
+          - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
+            = f.hidden_field :amount
+            = f.hidden_field :pitch_id
+            = image_submit_tag "donate_25.png"
+      %div.hide.inline_donate{:id => "donation_custom_#{news_item.id}"}
         - remote_form_for Donation.new(:pitch => news_item) do |f|
-          .float_left= f.text_field :amount
+          - if current_user && current_user.has_donated_to?(news_item)
+            .float_left= f.text_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
+          - else
+            .float_left= f.text_field :amount
           = f.hidden_field :pitch_id
           .float_right= image_submit_tag("donate.png")
           .clear
       .small.uppcased_button_text
-        = link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
+        - if current_user && current_user.has_donated_to?(news_item)
+          = link_to_function "DONATE MORE &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}");}
+        - else
+          = link_to_function "OR DONATE ANOTHER AMOUNT &raquo;", %{toggle_divs("#donation_button_#{news_item.id}", "#donation_custom_#{news_item.id}")}
         .double_content_border
       = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
   - else
-    = render :partial => 'donations/added', :locals => { :news_item => news_item }
+    = render :partial => 'donations/added', :locals => {:news_item => news_item}
 - else
   = image_tag('fully_funded.png')
   .small.uppcased_button_text

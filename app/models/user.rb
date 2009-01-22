@@ -203,6 +203,14 @@ class User < ActiveRecord::Base
     donations.exists?(:pitch_id => pitch.id )
   end
 
+  def has_donated_to?(pitch)
+    donations.paid.exists?(:pitch_id => pitch.id)
+  end
+
+  def max_donation_for(pitch)
+    pitch.max_donation_amount(self) - pitch.donations.total_amount_for_user(self)
+  end
+
   def can_donate_to?(pitch)
     pitch.donations.total_amount_for_user(self) < pitch.max_donation_amount(self)
   end
