@@ -89,6 +89,8 @@ describe Myspot::PurchasesController do
   end
 
   describe "on POST to create with valid input" do
+    integrate_views
+
     before do
       @user = Factory(:user)
       @pitches = [Factory(:pitch), Factory(:pitch)]
@@ -109,10 +111,11 @@ describe Myspot::PurchasesController do
     end
 
     it "should update the balance_text cookie after a successful donation" do
+      controller.stub!(:current_balance).and_return(10)
       @user.stub!(:credits?).and_return(true)
       @user.stub!(:total_credits).and_return(30.89)
       do_create
-      cookies['balance_text'].first.should include('$30.89')
+      response.cookies['balance_text'].first.should include('$30.89')
     end
 
     def do_create
