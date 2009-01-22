@@ -31,7 +31,7 @@ describe PitchesController do
       flash[:error].should match(/You cannot edit this pitch, since you didn't create it./)
       response.should redirect_to(pitch_path(pitch))
     end
-    
+
     it "should deny access and add flash when donations added" do
       user = Factory(:user)
       pitch = Factory(:pitch, :user => user)
@@ -43,15 +43,15 @@ describe PitchesController do
       response.should redirect_to(pitch_path(pitch))
     end
   end
-  
+
   describe "can_edit?" do
     it "should allow the owner of a pitch to have access" do
       user = Factory(:user)
       pitch = Factory(:pitch, :user => user)
       pitch.should be_editable_by(user)
-      get :edit, :id => pitch.id 
+      get :edit, :id => pitch.id
     end
-    
+
     it "should allow an admin to have access" do
       user = Factory(:admin)
       pitch = Factory(:pitch)
@@ -61,7 +61,7 @@ describe PitchesController do
       flash[:error].should be_nil
     end
   end
-  
+
   describe "on GET to /pitches/1/edit" do
     describe "without donations" do
       it "renders edit" do
@@ -72,19 +72,19 @@ describe PitchesController do
       end
     end
   end
-  
+
   describe "on POST to /pitches/1/feature" do
     before do
       @pitch = Factory(:pitch, :feature => true)
       @pitch2 = Factory(:pitch)
     end
-    
+
     it "should unset the orginal featured pitch and set new to featured" do
       post :feature, :id => @pitch2.to_param
       @pitch2.reload.feature.should be_true
       @pitch.reload.feature.should be_false
     end
-    
+
     it "should redirect back to the pitch" do
       post :feature, :id => @pitch2.to_param
       response.should redirect_to(pitch_path(@pitch2))
@@ -116,6 +116,13 @@ describe PitchesController do
 
     it "should prefill the headline on the pitch" do
       assigns[:pitch].headline.should == 'example'
+    end
+  end
+
+  describe "on GET to index" do
+    it "should redirect to /news_items" do
+      get :index
+      response.should redirect_to news_items_path
     end
   end
 end
