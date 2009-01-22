@@ -7,7 +7,7 @@ describe ApplicationHelper do
     user = Factory(:user)
     Factory(:donation, :user => user, :amount => 10)
     stub!(:current_user).and_return(user)
-    current_balance.to_dollars.should == "10.0"
+    current_balance.should == 10.0
   end
 
   it "should add correctly" do
@@ -15,7 +15,7 @@ describe ApplicationHelper do
     Factory(:donation, :user => user, :amount => 10)
     Factory(:donation, :user => user, :amount => 10)
     stub!(:current_user).and_return(user)
-    current_balance.to_dollars.should == "20.0"
+    current_balance.should == 20.0
   end
 
   it "should return 0 when there are no unpaid donations" do
