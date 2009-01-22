@@ -10,8 +10,8 @@ ActionController::Routing::Routes.draw do |map|
 
   # TODO: remove when done
   map.resources :ui
-  
-  map.resource :user
+
+  map.resource :user, :only => [:create]
 
   map.resource :session
   map.destroy_session 'logout', :controller => 'sessions', :action => 'destroy'
@@ -42,5 +42,7 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :purchases
     myspot.resources :tips
   end
+
+  map.connect '*path', :controller => 'homes', :action => 'show'
 end
 

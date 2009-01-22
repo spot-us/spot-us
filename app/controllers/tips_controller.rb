@@ -10,6 +10,9 @@ class TipsController < ApplicationController
     end
   end
 
+  def index
+    redirect_to news_items_path
+  end
 
   private
 
