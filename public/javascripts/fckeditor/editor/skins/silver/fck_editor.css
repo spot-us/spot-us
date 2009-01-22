@@ -47,20 +47,18 @@ body
 /*
 	Toolbar
 */
-.TB_ToolbarSet, .TB_Expand, .TB_Collapse, .xExpandHandle
+
+.TB_ToolbarSet, .TB_Expand, .TB_Collapse
 {
-  cursor: default;
+    cursor: default;
 	background-color: #f7f7f7;
-	border-top: #565656 1px solid;
 }
-.TB_Collapse
-{
-  border-left: #565656 1px solid;
-  border-top: #565656 1px solid;
-}
+
 .TB_ToolbarSet
 {
 	padding: 1px;
+	border-top: #efefde 1px outset;
+	border-bottom: #efefde 1px outset;
 }
 
 .TB_ToolbarSet TD
@@ -118,7 +116,7 @@ body
 .TB_Expand, .TB_Collapse
 {
 	padding: 2px 2px 2px 2px;
-	border: #efefde 1px solid;
+	border: #efefde 1px outset;
 }
 
 .TB_Collapse
