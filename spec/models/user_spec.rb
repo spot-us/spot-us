@@ -62,7 +62,7 @@ describe User do
 
     it "should handle record not found gracefully" do
       u = Factory(:user)
-      u.topics_params=([id])
+      u.topics_params=([nil])
       u.reload
       u.topics.should == []
     end
@@ -428,14 +428,24 @@ describe User do
       @user.can_donate_to?(@pitch).should be_true
     end
 
+    it "should know that the user has a paid donation" do
+      donation = Factory(:donation, :user => @user, :pitch => @pitch)
+      donation.pay!
+      @user.has_donated_to?(@pitch).should be_true
+    end
+
     it "should not allow the user to donate to a pitch after donating 20%" do
-      Pitch.delete_all
-      Donation.delete_all
-      User.delete_all
       user = Factory(:user)
       pitch = Factory(:pitch, :requested_amount => 100)
       donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 20)
       user.can_donate_to?(pitch).should be_false
+    end
+
+    it "should return the max donation amount" do
+      user = Factory(:user)
+      pitch = Factory(:pitch, :requested_amount => 100)
+      donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 10)
+      user.max_donation_for(pitch).should == 10
     end
   end
 
