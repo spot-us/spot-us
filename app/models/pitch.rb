@@ -69,6 +69,10 @@ class Pitch < NewsItem
     self.feature
   end
 
+  def current_funding
+    self[:current_funding] || 0
+  end
+
   def current_funding_in_percentage
     (current_funding/requested_amount)
   end

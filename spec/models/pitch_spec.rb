@@ -37,10 +37,23 @@ describe Pitch do
   end
 
   describe "current_funding_in_percentage" do
+    before do
+      @pitch = Factory(:pitch, :requested_amount => "1,000")
+    end
+
+    it "should return 0 if current_funding is 0" do
+      @pitch.current_funding = 0
+      @pitch.current_funding_in_percentage.should == 0
+    end
+
+    it "should return 0 if current_funding is nil" do
+      @pitch.current_funding = nil
+      @pitch.current_funding_in_percentage.should == 0
+    end
+
     it "should return the amount of current funding as a percentage of the funding needed" do
-      pitch = Factory(:pitch, :requested_amount => "1,000")
-      pitch.should_receive(:current_funding).and_return(20)
-      pitch.current_funding_in_percentage.should == 0.02
+      @pitch.should_receive(:current_funding).and_return(20)
+      @pitch.current_funding_in_percentage.should == 0.02
     end
   end
 
