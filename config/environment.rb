@@ -29,4 +29,3 @@ Rails::Initializer.run do |config|
   config.action_controller.session = { :session_key => '_spotus_session', :secret => secret }
 end
 
-require 'lib/dollars.rb'
