@@ -23,7 +23,7 @@ describe User do
       User.createable_by?(nil).should be
     end
   end
-  
+
   describe "total_credits" do
     it "should return the total of credits" do
       user = Factory(:user)
@@ -31,7 +31,7 @@ describe User do
       Factory(:credit, :amount => 25, :user => user)
       user.total_credits.should == 50.0
     end
-    
+
     it "should return credits when there are negative credits" do
       user = Factory(:user)
       Factory(:credit, :amount => 25, :user => user)
@@ -39,10 +39,10 @@ describe User do
       user.total_credits.should == 0
     end
   end
-  
+
   describe "generate_csv" do
     it "should return a comma-separated list" do
-      user = Factory(:user, :type => "Citizen", :email => 'happy@happy.com', 
+      user = Factory(:user, :type => "Citizen", :email => 'happy@happy.com',
                      :first_name => "Desi", :last_name => "McAdam",
                      :notify_tips => "true", :notify_pitches => "true",
                      :notify_stories => "true", :notify_spotus_news => "true",
@@ -50,14 +50,14 @@ describe User do
       User.generate_csv.split("\n").should include("Citizen,happy@happy.com,Desi,McAdam,Bay Area,true,true,true,true,true")
     end
   end
-  
+
   describe "topics_params=" do
     it "should create topic associations" do
       t = Topic.create(:name => "Topic 1")
       u = Factory(:user)
       u.topics_params=([t.id])
       u.reload
-      u.topics.should == [t]      
+      u.topics.should == [t]
     end
 
     it "should handle record not found gracefully" do
@@ -122,14 +122,14 @@ describe User do
       Mailer.should_receive(:deliver_citizen_signup_notification).with(user)
       user.save!
     end
-    
+
     it "sends email for news org when user is a new org on create" do
       user = Factory.build(:organization)
       Mailer.should_receive(:deliver_organization_signup_notification).with(user)
       Mailer.should_receive(:deliver_news_org_signup_request).with(user)
       user.save!
     end
-    
+
     it "sends email for reporter when user is a reporter on create" do
       user = Factory.build(:reporter)
       Mailer.should_receive(:deliver_reporter_signup_notification).with(user)
@@ -152,12 +152,12 @@ describe User do
         violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
       end
     end
-    
+
     it 'increments User#count' do
       @creating_user.should change(User, :count).by(1)
     end
   end
-  
+
   it "should set status to unapproved when user is news org" do
     user = Factory(:organization)
     user.status.should == "needs_approval"
@@ -168,7 +168,7 @@ describe User do
     violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
     user.password.should_not be_nil
     user.password.size.should == 6
-    User.authenticate(user.email, user.password).should == 
+    User.authenticate(user.email, user.password).should ==
       User.find(user.to_param)
   end
 
@@ -305,7 +305,7 @@ describe User do
     user.should_not be_valid
     user.should have(1).error_on(:last_name)
   end
-  
+
   it "should have a photo attachment" do
     Factory(:user).photo.should be_instance_of(Paperclip::Attachment)
   end
@@ -333,79 +333,21 @@ describe User do
     user = Factory(:user, :first_name => 'First', :last_name => 'Second')
     user.full_name.should == 'First Second'
   end
-  
+
   it "should allow a url starting with http" do
     user = Factory.build(:user, :website => "http://something")
     user.should be_valid
   end
-  
+
   it "should not allow a url that does not start with http" do
     user = Factory.build(:user, :website => "bob")
     user.should_not be_valid
     user.should have(1).error_on(:website)
   end
-  
+
   it "should allow for the website to be blank" do
     user = Factory.build(:user, :website => nil)
     user.should be_valid
-  end
-
-  describe "updating a user's donation amounts with valid amounts" do
-    before do
-      @user = Factory(:user)
-      @changed_unpaid = Factory(:donation, :user => @user, :status => 'unpaid', :amount => 5)
-      @unchanged_unpaid = Factory(:donation, :user => @user, :status => 'unpaid', :amount => 15)
-      @paid = Factory(:donation, :user => @user, :status => 'paid', :amount => 25)
-    end
-
-    it "should update an unpaid amount that had a new value" do
-      lambda { do_update }.should change { @changed_unpaid.amount }
-    end
-
-    it "should not update an unpaid amount that didn't have a new value" do
-      lambda { do_update }.should_not change { @unchanged_unpaid.amount }
-    end
-
-    it "should not update a paid amount" do
-      lambda { do_update }.should_not change { @paid.amount }
-    end
-
-    def do_update
-      @user.donation_amounts = { @changed_unpaid.id => 10,
-                                 @paid.id           => 20,
-                                 0                  => 30 }
-      @user.save
-      @paid.reload
-      @changed_unpaid.reload
-      @unchanged_unpaid.reload
-    end
-  end
-
-  describe "updating a user's donation amounts with invalid amounts" do
-    before do
-      @user = Factory(:user)
-      @donation = Factory(:donation, :user => @user, :amount => 5, :status => 'unpaid')
-    end
-
-    it "should not change the donation amount" do
-      lambda { do_update }.should_not change { @donation.amount }
-    end
-
-    it "should add validation errors to the user" do
-      do_update
-      @user.should_not be_valid
-    end
-
-    it "should add an error to base" do
-      do_update
-      @user.should have_at_least(1).error_on(:base)
-    end
-
-    def do_update
-      @user.donation_amounts = { @donation.id => nil }
-      @user.save
-      @donation.reload
-    end
   end
 
   describe "with a donation for a pitch" do

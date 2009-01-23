@@ -20,12 +20,11 @@ describe Myspot::DonationAmountsController do
       @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
                                  :amount => 10)
       @user.stub!(:current_spotus_donation).and_return(@spotus_donation)
-      login_as @user
+      controller.stub!(:current_user).and_return(@user)
     end
 
     describe "on GET to edit" do
       before do
-        controller.stub!(:current_user).and_return(@user)
         @user.stub!(:donations).and_return(@donations)
         @donations.stub!(:unpaid).and_return(@donations)
       end
@@ -46,23 +45,13 @@ describe Myspot::DonationAmountsController do
       end
 
       it "should find the user's donations" do
-        @user.should_receive(:donations).with().and_return(@donations)
         do_edit
-      end
-
-      it "should assign the user for the view" do
-        do_edit
-        assigns[:user].should_not be_blank
-      end
-
-      it "should only find unpaid donations" do
-        @donations.should_receive(:unpaid).with().and_return(@donations)
-        do_edit
+        controller.send(:unpaid_donations).should_not be_blank
       end
 
       it "should assign the spotus donation for the view" do
         do_edit
-        assigns[:spotus_donation].should_not be_blank
+        controller.send(:spotus_donation).should_not be_blank
       end
 
       def do_edit
@@ -88,11 +77,11 @@ describe Myspot::DonationAmountsController do
       end
 
       def do_update
-        put :update, { :user => { :donation_amounts => { @donations.first.to_param => 100 }, :spotus_donation_amount => "" } }
+        put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100} }, :spotus_donation_amount => "" }
       end
 
       def do_update_with_spotus_donation
-        put :update, { :user => { :donation_amounts => { @donations.first.to_param => 100 }, :spotus_donation_amount => 1 } }
+        put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100} }, :spotus_donation_amount => 1 }
       end
     end
 
@@ -106,18 +95,8 @@ describe Myspot::DonationAmountsController do
         lambda { do_update }.should_not change { @donations.first.amount }
       end
 
-      it "should assign donations for the view" do
-        do_update
-        assigns[:donations].should_not be_blank
-      end
-
-      it "should assign the user for the view" do
-        do_update
-        assigns[:user].should_not be_blank
-      end
-
       def do_update
-        put :update, { :user => { :donation_amounts => { @donations.first.to_param => nil } } }
+        put :update, { :donation_amounts => { @donations.first.to_param => {:amount => nil} } }
         @donations.first.reload
       end
     end
