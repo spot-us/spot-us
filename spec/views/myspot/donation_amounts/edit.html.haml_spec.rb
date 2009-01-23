@@ -8,9 +8,8 @@ describe 'myspot/donation_amounts/edit' do
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
     @spotus_donation = Factory(:spotus_donation)
-    assigns[:user] = @user
-    assigns[:donations] = @donations
-    assigns[:spotus_donation] = @spotus_donation
+    template.stub!(:unpaid_donations).and_return(@donations)
+    template.stub!(:spotus_donation).and_return(@spotus_donation)
   end
 
   it 'should render' do
@@ -25,18 +24,15 @@ describe 'myspot/donation_amounts/edit' do
   end
 
   it "should have a text field tag to change the amount of each donation" do
-    # The assert_select syntax seems to be off - it is not finding a match for
-    # the ID given below, but the fields are rendering...
-    pending
     do_render
     @donations.each do |donation|
-      template.should have_tag("input#?", "user_donation_amounts_#{donation.id}]")
+      template.should have_tag("input#?", "donation_amounts_#{donation.id}_amount")
     end
   end
 
   it "should display the spot.us donation field" do
     do_render
-    template.should have_tag('input[type="text"][name=?]', "user[spotus_donation_amount]")
+    template.should have_tag('input[type="text"][name=?]', "spotus_donation_amount")
 
   end
 
