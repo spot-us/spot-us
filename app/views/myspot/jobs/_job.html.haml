@@ -1,4 +1,4 @@
--div_for job do
+%div{:id => dom_id(job), :class => job.class.name.underscore}
   .box_yellow
     .work_delete= link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, job], :method => :delete
     - if !job.url.blank?
