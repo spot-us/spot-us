@@ -93,9 +93,14 @@ class Purchase < ActiveRecord::Base
     [user.total_credits, donations_sum].min
   end
 
+  # the gateway expects the total amount to be an integer or a money obj
+  def total_amount_for_gateway
+    (total_amount.to_f * 100).to_i
+  end
+
   def bill_credit_card
     return true if credit_covers_total?
-    response = gateway.purchase(total_amount,
+    response = gateway.purchase(total_amount_for_gateway,
                                 credit_card,
                                 billing_hash)
     unless response.success?
