@@ -10,9 +10,9 @@
       });
     });
 
-- unless @user.errors.empty?
-  - content_for :error do
-    = error_messages_for :user
+-# unless @errors.empty?
+- content_for :error do
+  = error_messages_for :donations, :object => @donations
 
 #equalize
 
@@ -25,9 +25,9 @@
 
     .double_content_border
 
-    - form_for :user, :url => myspot_donations_amounts_path, :html => { :method => :put } do
+    - form_tag myspot_donations_amounts_path, :method => :put do
       %ul.unpaid_donations
-        - @donations.each do |donation|
+        - unpaid_donations.each do |donation|
           - content_tag_for :li, donation, :class => 'unpaid' do
             .column.span-70
               = link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch
@@ -40,7 +40,7 @@
                 = link_to 'Read More &raquo;', donation.pitch
             .column.span-95
               $
-              = text_field_tag "user[donation_amounts][#{donation.id}]", number_to_currency(donation.amount, :unit => ''), :size => 4, :id => "user_donation_amounts_#{donation.id}"
+              = text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :unit => ''), :size => 4, :id => "donation_amounts_#{donation.id}_amount"
               .action= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
         %li#support_spotus
@@ -52,7 +52,7 @@
               Spot.Us is a nonprofit project to pioneer "community funded reporting." Through Spot.Us the public can commission journalists to do investigations into important and perhaps overlooked stories.
           .column.span-95
             $
-            = text_field_tag "user[spotus_donation_amount]", number_to_currency(@spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation"
+            = text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation"
             .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
         = image_submit_tag 'purchase.png', :alt => 'Purchase'
