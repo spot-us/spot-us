@@ -41,7 +41,7 @@
             .column.span-95
               $
               = text_field_tag "user[donation_amounts][#{donation.id}]", number_to_currency(donation.amount, :unit => ''), :size => 4, :id => "user_donation_amounts_#{donation.id}"
-              .action= link_to "Remove", donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
+              .action= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
         %li#support_spotus
           .column.span-70
