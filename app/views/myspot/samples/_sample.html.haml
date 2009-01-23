@@ -1,4 +1,4 @@
-= div_for sample do
+- div_for sample do
   .box_yellow
     .work_delete= link_to_remote content_tag(:span, "Delete", :class => "ss_sprite ss_delete"), :url => [:myspot, :profile, sample], :method => :delete
     - if !sample.url.blank?
