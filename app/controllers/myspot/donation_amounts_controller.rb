@@ -3,6 +3,12 @@ class Myspot::DonationAmountsController < ApplicationController
   before_filter :login_required
 
   def edit
+    # current_user (remove @user)
+    # current_user.donations.unpaid.each do |unpaid_donation|
+    #  new_amount = params['donation'][unpaid_donation.id]['amount'] 
+    #  unpaid_donation.update_attribute :amount, new_amount
+    # end
+    #   
     @user      = current_user
     @donations = @user.donations.unpaid
     @spotus_donation = @user.current_spotus_donation
