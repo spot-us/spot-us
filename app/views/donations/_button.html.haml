@@ -5,12 +5,12 @@
         - if current_user && current_user.has_donated_to?(news_item)
           = link_to image_tag("donation_added.png"), edit_myspot_donations_amounts_path
         - else
-          - remote_form_for Donation.new(:pitch => news_item, :amount => 25) do |f|
+          - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :url => myspot_donations_path do |f|
             = f.hidden_field :amount
             = f.hidden_field :pitch_id
             = image_submit_tag "donate_25.png"
       %div.hide.inline_donate{:id => "donation_custom_#{news_item.id}"}
-        - remote_form_for Donation.new(:pitch => news_item) do |f|
+        - remote_form_for Donation.new(:pitch => news_item), :url => myspot_donations_path do |f|
           - if current_user && current_user.has_donated_to?(news_item)
             .float_left= f.text_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
           - else
@@ -32,3 +32,4 @@
   .small.uppcased_button_text
     .fully_funded_no_text This News Item is Fully Funded!
     .double_content_border
+
