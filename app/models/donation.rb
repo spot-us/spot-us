@@ -35,8 +35,7 @@ class Donation < ActiveRecord::Base
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
 
-  after_create :send_thank_you
-  after_save :update_pitch_funding, :if => lambda {|me| me.paid?}
+  after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
   def self.createable_by?(user)
     user

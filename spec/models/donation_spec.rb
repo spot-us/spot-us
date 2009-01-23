@@ -51,15 +51,6 @@ describe Donation do
           second_donation.should be_valid
         end
 
-        it "and send a thank you email" do
-          donator =  Factory(:user)
-          Mailer.should_receive(:deliver_user_thank_you_for_donating)
-          donation = Factory.create(:donation,
-                             :pitch => @pitch,
-                             :user => donator,
-                             :amount => 10,
-                             :status => 'unpaid')
-        end
       end
 
       describe "should be invaild and add an error" do
@@ -149,7 +140,9 @@ describe Donation do
     it "should return all paid donations" do
       @donations.reject(&:paid?).should == []
     end
+
   end
+
   it "should not allow negative values for donations" do
     donation = Factory.build(:donation, :amount => nil)
     donation.should_not be_valid
@@ -225,6 +218,15 @@ describe Donation do
       lambda {
         donation.refund!
       }.should raise_error
+    end
+
+    it "should send a thank you email when paid" do
+      Mailer.should_receive(:deliver_user_thank_you_for_donating)
+      Factory(:donation,
+              :pitch => Factory(:pitch),
+              :user => Factory(:user),
+              :amount => 10,
+              :status => 'unpaid').pay!
     end
   end
 
