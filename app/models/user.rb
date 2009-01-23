@@ -33,15 +33,10 @@ class User < ActiveRecord::Base
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
-  validate                  :validate_new_donation_amounts,
-    :on => :update,
-    :if => lambda {|user| user.donation_amounts_changed? }
   before_save :encrypt_password
   before_validation_on_create :generate_password, :set_default_location
 
   after_create :deliver_signup_notification
-  after_update :update_donation_amounts,
-    :if => lambda {|user| user.donation_amounts_changed? }
 
   has_attached_file :photo,
                     :styles      => { :thumb => '50x50#' },
@@ -55,7 +50,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :about_you, :address1, :address2, :city, :country,
-    :donation_amounts, :email, :fact_check_interest, :first_name, :last_name,
+    :email, :fact_check_interest, :first_name, :last_name,
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip, :organization_name,
@@ -185,20 +180,6 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
-  def donation_amounts=(amounts)
-    @changed_donations = []
-    amounts.each do |donation_id, new_amount|
-      if donation = donations.unpaid.find_by_id(donation_id)
-        donation.amount = new_amount
-        @changed_donations << donation
-      end
-    end
-  end
-
-  def donation_amounts_changed?
-    !@changed_donations.blank?
-  end
-
   def has_donation_for?(pitch)
     donations.exists?(:pitch_id => pitch.id )
   end
@@ -263,19 +244,6 @@ class User < ActiveRecord::Base
     self.location ||= LOCATIONS.first
   end
 
-  def update_donation_amounts
-    @changed_donations.each(&:save!)
-  end
-
-  def validate_new_donation_amounts
-    @changed_donations.each do |donation|
-      unless donation.valid?
-        donation.errors.full_messages.each do |error|
-          errors.add_to_base(error)
-        end
-      end
-    end
-  end
 end
 
 
