@@ -1,4 +1,4 @@
-- div_for story do
+%div{:id => dom_id(story), :class => story.class.name.underscore}
   .block-spacer
   .box_white
     #equalize
@@ -19,4 +19,4 @@
           = truncate_words(story.extended_description, 45) if story.extended_description
           = link_to "Read More &raquo;", story
     .clear
-    
+
