@@ -51,8 +51,11 @@ describe Mailer do
   end
 
   it "sends an email to user when they donate" do
-    Mailer.should_receive(:deliver_user_thank_you_for_donating)
-    Factory(:donation, :user => Factory(:user), :amount => 2)
+    user = Factory(:user)
+    donation = Factory(:donation, :user => user)
+    lambda do
+      Mailer.deliver_user_thank_you_for_donating(donation)
+    end.should change { ActionMailer::Base.deliveries.size }.by(1)
   end
 
 end
