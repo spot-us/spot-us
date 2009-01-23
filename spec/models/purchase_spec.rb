@@ -156,7 +156,7 @@ describe Purchase do
         :email    => @purchase.user.email
       } }
       Purchase.gateway.should_receive(:purchase).
-        with(@total, @credit_card, hash).
+        with(@purchase.send(:total_amount_for_gateway), @credit_card, hash).
         and_return(mock('response', :success? => true))
       do_save
     end
