@@ -73,7 +73,7 @@ describe "/pitches/show.html.haml" do
 
     it "should display a form to add a donation" do
       do_render
-      template.should have_tag('form[action=?][method="post"]', donations_path)
+      template.should have_tag('form[action=?][method="post"]', myspot_donations_path)
     end
   end
 
@@ -92,7 +92,7 @@ describe "/pitches/show.html.haml" do
 
     it "should not display a form to add a donation" do
       do_render
-      template.should_not have_tag('form[action=?][method="post"]', donations_path)
+      template.should_not have_tag('form[action=?][method="post"]', myspot_donations_path)
     end
   end
 
@@ -111,7 +111,7 @@ describe "/pitches/show.html.haml" do
 
     it "should display a form to add a donation" do
       do_render
-      template.should have_tag('form[action=?][method="post"]', donations_path)
+      template.should have_tag('form[action=?][method="post"]', myspot_donations_path)
     end
   end
 
