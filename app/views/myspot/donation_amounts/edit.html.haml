@@ -28,7 +28,7 @@
     - form_for :user, :url => myspot_donations_amounts_path, :html => { :method => :put } do
       %ul.unpaid_donations
         - @donations.each do |donation|
-          - content_tag_for :li, donation, :class => 'unpaid' do
+          %li{:id => dom_id(donation), :class => 'donation unpaid'}
             .column.span-70
               = link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch
             .column.span-550
