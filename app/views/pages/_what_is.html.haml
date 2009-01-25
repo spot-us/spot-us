@@ -49,8 +49,6 @@
 
 .block-spacer
 .box_white{:style => "width: 66%;"}
-  %h2 Got Questions? Try Our FAQ!
-
   .float_left
     %h2
       Frequently Asked Questions
@@ -75,6 +73,8 @@
     %li
       %a{:href =>"#thereporters"} Who are these reporters?
     %li
+      %a{:href =>"#priceguide"} How are prices for each pitch determined?
+    %li
       %a{:href =>"#privacy"} About Your Privacy
 
   %h3 
@@ -85,7 +85,7 @@
       %strong
         %a{:href =>"#reporters_explanation"} Quick Visual Introduction
     %li
-        %a{:href =>"#mandatory"} Required reading: How to determine pricing.        
+      %a{:href =>"#mandatory"} Required reading: How to determine pricing.        
     %li
       %a{:href =>"#reporters_tip"} What is a tip?
     %li
@@ -185,12 +185,22 @@
   %a{:name => "thereporters"}
   %h3 Who are these reporters?
   %p
-    All the reporters on Spot.Us are self-identified freelance journalists. Spot.Us does not vet
-    these reporters the way a traditional news organization does. As a marketplace we will continue
-    to build tools that will enable you to find out more about these reporters to judge them on the
-    merits of their work. We encourage every citizen to view the reporters profile and pitch
-    critically before you donate.    
-
+    Reporters on Spot.Us are self-identified freelance journalists. We do speak with every reporter
+    about their pitch and verify their identity. As a marketplace we will continue to build tools to
+    enable you to find out more about these reporters and judge them on the merits of their work.
+    But it is important to note that Spot.Us does not try to define who is and is not a journalist.
+    Any self-identified freelancer can work with us and if they are earnest, we will reciprocate. We
+    encourage every citizen to view the reporters profile and pitch critically before you donate.
+  
+  %a{:name => "priceguide"}
+  %h3 How are prices for each pitch determined?
+  %p
+    As a marketplace Spot.Us is continually updating its 
+    = link_to 'pricing guildines.', page_path("reporter_agreement") 
+    We have built this guidline as a means to explain how much a
+    reporter can reasonable ask for during an investigation. It is based on competitive rates
+    throughout the country for freelancers.
+    
   %a{:name => "privacy"}
   %h3 Your Privacy
   %p
@@ -233,13 +243,13 @@
   href="http://slideshare.net/tag/spot">spot</a>)</div></div>
 
   %a{:name => "mandatory"}
-  %h3{:style => "color: red;"} Agreement to Work with Spot.Us and Pricing Guidlines.
+  %h3 Agreement to Work with Spot.Us and Pricing Guidlines.
   %p
-    We've created a picing guidline based on competitive rates for freelancers across the country.
-    == #{link_to "Required Reading!!!!", page_path("reporter_agreement")}. 
-    This also includes the "reporters agreement" that explains the working relationship between 
+    We've created a picing guidline based on competitive rates for freelancers. This also includes the "reporters agreement" that explains the working relationship between 
     Spot.Us and the reporter.
-  
+  %p 
+    == #{link_to "Required Reading", page_path("reporter_agreement"),:style => "color: red;"}   
+  %p
   %a{:name => "reporters_tip"}
   %h3 What is a Tip?
   %p
@@ -412,6 +422,7 @@
     We do hope to eventually expand into other regions of the country. We are committed to local
     journalism for many reasons which we could talk your ear off about. As such, the Bay Area seemed
     like a great place to launch our 1.0. As we improve the site we will launch in other cities.
+  
   -#
 
     .double_content_border
