@@ -85,6 +85,8 @@
       %strong
         %a{:href =>"#reporters_explanation"} Quick Visual Introduction
     %li
+        %a{:href =>"#mandatory"} Required reading: How to determine pricing.        
+    %li
       %a{:href =>"#reporters_tip"} What is a tip?
     %li
       %a{:href =>"#pitch_advice"} Advice on Creating a Pitch
@@ -100,9 +102,6 @@
       %a{:href =>"#address"} Why Do we Need Shipping Address?
     %li
       %a{:href =>"#creative_commons"} What’s the Creative Commons Deal?
-    %li
-      %a{:href =>"#mandatory"} REQUIRED READING on Spot.us pricings and reporter agreement
-
   %h3
     %strong 
       %a{:href =>"#faq_news_organization"} For News Organizations
@@ -233,6 +232,14 @@
   <a style="text-decoration:underline;"
   href="http://slideshare.net/tag/spot">spot</a>)</div></div>
 
+  %a{:name => "mandatory"}
+  %h3{:style => "color: red;"} Agreement to Work with Spot.Us and Pricing Guidlines.
+  %p
+    We've created a picing guidline based on competitive rates for freelancers across the country.
+    == #{link_to "Required Reading!!!!", page_path("reporter_agreement")}. 
+    This also includes the "reporters agreement" that explains the working relationship between 
+    Spot.Us and the reporter.
+  
   %a{:name => "reporters_tip"}
   %h3 What is a Tip?
   %p
@@ -306,11 +313,7 @@
     contributed either 50% or 100% of the total cost. In that situation - we will grant that
     news organization temporary copyright to the article. Eventually all Spot.Us stories are licensed
     under Creative Commons. You can learn more by reading our = link_to 'Reporters Contract', page_path("reporter_contract")
-  %a{:name => "mandatory"}
-  %h3{:style => "color: red;"} Agreement to Work with Spot.Us and Pricing Guidlines.
-  %p
-    Curious how much you can ask for in creating a Spot.Us pitch? Want to know what is involved in working with Spot.Us? 
-    == #{link_to "You can find out here", page_path("reporter_agreement")}.    
+
 .block-spacer
 .box_white{:style => "width: 66%;"}
   .float_left
