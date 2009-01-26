@@ -93,29 +93,42 @@ describe SessionsController do
     response.cookies["auth_token"].should == []
   end
 
-  it 'logs in with cookie' do
-    user = Factory(:user)
-    user.remember_me
-    request.cookies["auth_token"] = cookie_for(user)
-    get :new
-    controller.send(:logged_in?).should be_true
-  end
-  
-  it 'fails expired cookie login' do
-    user = Factory(:user)
-    user.remember_me
-    user.update_attribute :remember_token_expires_at, 5.minutes.ago
-    request.cookies["auth_token"] = cookie_for(user)
-    get :new
-    controller.send(:logged_in?).should_not be_true
-  end
-  
-  it 'fails cookie login' do
-    user = Factory(:user)
-    user.remember_me
-    request.cookies["auth_token"] = auth_token('invalid_auth_token')
-    get :new
-    controller.send(:logged_in?).should_not be_true
+  describe 'when logging in from cookie' do
+    before do
+      @user = Factory(:user)
+      @user.remember_me
+      cookies["auth_token"] = cookie_for(@user)
+      controller.stub!(:render_to_string).and_return("")
+    end
+
+    it 'logs in successfully' do
+      get :new
+      controller.send(:logged_in?).should be_true
+    end
+
+    it 'fails expired remember_token cookie' do
+      @user.update_attribute :remember_token_expires_at, 5.minutes.ago
+      get :new
+      controller.send(:logged_in?).should_not be_true
+    end
+
+    it 'fails login' do
+      cookies["auth_token"] = auth_token('invalid_auth_token')
+      get :new
+      controller.send(:logged_in?).should_not be_true
+    end
+
+    it 'should initialize the current_user_full_name cookie' do
+      get :new
+      controller.send(:logged_in?)
+      response.cookies.should have_key('current_user_full_name')
+    end
+
+    it 'should initialize the balance_text cookie' do
+      get :new
+      controller.send(:logged_in?)
+      response.cookies.should have_key('balance_text')
+    end
   end
 
   def auth_token(token)

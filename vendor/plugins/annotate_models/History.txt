@@ -1,0 +1,15 @@
+== 1.0.2 2008-03-22
+
+* Add contributions from Michael Bumann (http://github.com/bumi)
+  * added an option "position" to choose to put the annotation, 
+  * spec/fixtures now also get annotated
+  * added a task to remove the annotations
+  * these options can be specified from command line as -d and -p [before|after]
+
+== 1.0.3 2008-05-02
+
+* Add misc changes from Dustin Sallings and Henrik N
+  * Remove trailing whitespace
+  * More intuitive info messages
+  * Update README file with update-to-date example
+

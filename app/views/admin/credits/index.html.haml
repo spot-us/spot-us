@@ -8,6 +8,7 @@
   = f.label :description
   = f.text_field :description
   = f.label :amount
+  $
   = f.text_field :amount
   = image_submit_tag image_path('add.png')
 
@@ -24,5 +25,5 @@
   - @credits.each do |credit|
     %tr
       %td= credit.user.full_name
-      %td= credit.amount
+      %td= number_to_currency(credit.amount)
       %td= credit.description

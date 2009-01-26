@@ -16,12 +16,18 @@
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
       .alt-spotus= @pitch.short_description
     .clear
-    - if @pitch.video_embed
+    - unless @pitch.video_embed.blank?
       .block-spacer-negative
       %p
         %h3 Video
         .double_content_border
-        = sanitize @pitch.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+        = @pitch.video_embed
+    - unless @pitch.widget_embed.blank?
+      .block-spacer-negative
+      %p
+        %h3 Widget
+        .double_content_border
+        = @pitch.widget_embed
     .block-spacer-negative
     %p
       %h3 How Will This Reporting Help?

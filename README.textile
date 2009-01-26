@@ -26,3 +26,22 @@ on the story.
 articles published more widely.
 
 "http://www.spot.us/":http://www.spot.us/
+
+h2. Setting Up Spot.Us
+
+h3. setup configuration files - make any necessary edits to these if the defaults don't work for you
+
+# mv config/database.example.yml config/database.yml
+# mv config/newrelic.example.yml config/newrelic.yml
+# mv config/settings.example.yml config/settings.yml
+
+h3. run basic setup tasks
+
+# rake db:create:all
+# rake db:migrate
+
+h3. start your local server
+
+# ./script/server
+
+Spot.Us should now be running on your computer at the URL "http://localhost:3000":http://localhost:3000

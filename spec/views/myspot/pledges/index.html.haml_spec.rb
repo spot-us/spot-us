@@ -5,6 +5,7 @@ describe 'myspot/pledges/index' do
     @user = Factory(:user)
     @tips = [Factory(:tip), Factory(:tip)]
     @pledges = @tips.collect {|tip| Factory(:pledge, :user => @user, :tip => tip) }
+    template.stub!(:will_paginate)
     assigns[:pledges] = @pledges
     template.stub!(:current_user).and_return(@user)
   end

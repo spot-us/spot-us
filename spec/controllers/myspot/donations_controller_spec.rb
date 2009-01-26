@@ -3,6 +3,62 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Myspot::DonationsController do
   route_matches("/myspot/donations", :get, :controller => "myspot/donations", :action => "index")
 
+  route_matches("/myspot/donations", :post, :controller => "myspot/donations", :action => "create")
+
+  route_matches("/myspot/donations/1", :delete, :id => "1", :controller => "myspot/donations", :action => "destroy")
+
+  describe "on DELETE to destroy" do
+    before do
+      @user = Factory(:user)
+      controller.stub!(:current_user).and_return(@user)
+      @donation = Factory(:donation, :user => @user, :status => 'paid')
+    end
+
+    it "should remove the donation if paid" do
+      Donation.find_by_id(@donation).should_not be_nil
+      do_destroy
+      Donation.find_by_id(@donation).should be_nil
+    end
+
+    it "should redirect to myspot donations AMOUNTS page ie. receipts page" do
+      do_destroy
+      response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+
+    def do_destroy
+      delete :destroy, :id => @donation.id
+    end
+  end
+
+  describe "on POST to create with valid input" do
+    before do
+      @user = Factory(:user)
+      controller.stub!(:current_user).and_return(@user)
+      @pitch = Factory(:pitch)
+    end
+
+    it "should create a valid donation" do
+      do_create
+      assigns[:donation].should_not be_nil
+      assigns[:donation].should be_valid
+    end
+
+    it "should associate donation with current user" do
+      do_create
+      assigns[:donation].user_id.should == @user.id
+    end
+
+    it "should associate donation with the pitch" do
+      do_create
+      assigns[:donation].pitch.should == @pitch
+    end
+
+    def do_create
+      xhr :post, :create, :donation => {:pitch_id => @pitch.id, :amount => 25}
+    end
+  end
+
+
   describe "on GET to index" do
     before do
       @user = Factory(:user)
@@ -11,8 +67,6 @@ describe Myspot::DonationsController do
       controller.stub!(:current_user).and_return(@user)
       @user.stub!(:donations).and_return(@donations)
       @donations.stub!(:paid).and_return(@donations)
-
-      login_as @user
     end
 
     it "should response successfully" do

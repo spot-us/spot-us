@@ -71,6 +71,7 @@ Factory.define :pitch do |pitch|
   pitch.headline               "Headline"
   pitch.location               { LOCATIONS.first }
   pitch.requested_amount       1000
+  pitch.current_funding        0
   pitch.short_description      "lorem ipsum"
   pitch.extended_description   "lorem ipsum"
   pitch.delivery_description   "lorem ipsum"
@@ -97,9 +98,15 @@ Factory.define :affiliation do |donation|
 end
 
 Factory.define :donation do |donation|
+  donation.amount 10
   donation.association(:user)
   donation.association(:pitch)
-  donation.amount 10
+end
+
+Factory.define :spotus_donation do |spotus_donation|
+  spotus_donation.amount 1
+  spotus_donation.association(:user)
+  spotus_donation.association(:purchase)
 end
 
 Factory.define :tip do |tip|
@@ -149,9 +156,9 @@ Factory.define :topic do |topic|
 end
 
 Factory.define :credit do |credit|
-  credit.association(:user)
   credit.description  'A credit created by a factory'
-  credit.amount   25
+  credit.amount       25.00
+  credit.association(:user)
 end
 
 
