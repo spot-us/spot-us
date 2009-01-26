@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
   def log_in_as
     self.current_user = User.find(params[:id])
     create_current_login_cookie
+    update_balance_cookie
     redirect_to root_path
   end
   
