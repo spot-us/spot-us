@@ -57,6 +57,9 @@ p.nil-line-height {
   font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
   font-weight:normal;
   }
+h4 {
+  height: auto;
+}
 h4.title { 
   margin: 0px;
   font-weight: bold;
