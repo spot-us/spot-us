@@ -31,9 +31,9 @@ h2. Setting Up Spot.Us
 
 h3. setup configuration files - make any necessary edits to these if the defaults don't work for you
 
-# mv config/database.example.yml config/database.yml
-# mv config/newrelic.example.yml config/newrelic.yml
-# mv config/settings.example.yml config/settings.yml
+# cp config/database.example.yml config/database.yml
+# cp config/newrelic.example.yml config/newrelic.yml
+# cp config/settings.example.yml config/settings.yml
 
 h3. run basic setup tasks
 
