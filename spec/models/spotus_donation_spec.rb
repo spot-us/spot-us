@@ -19,6 +19,18 @@ describe SpotusDonation do
     end
   end
 
+  describe "#paid" do
+    before do
+      @spotus_donation = Factory(:spotus_donation, :user => @user,
+                                                   :purchase => Factory(:purchase),
+                                                   :amount => 1)
+    end
+
+    it "should only return donations with a purchase_id" do
+      @user.spotus_donations.paid.should include(@spotus_donation)
+    end
+  end
+
   it "should set the default amount to 10% of the user's unpaid donations" do
     @user.spotus_donations.build.amount.should == 2
   end
