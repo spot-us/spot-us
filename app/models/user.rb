@@ -213,6 +213,18 @@ class User < ActiveRecord::Base
     unpaid_spotus_donation || spotus_donations.build
   end
 
+  def has_spotus_donation?
+    spotus_donations.paid.any?
+  end
+
+  def paid_spotus_donations_sum
+    has_spotus_donation? ? spotus_donations.paid.map(&:amount).sum : 0
+  end
+
+  def last_paid_spotus_donation
+    spotus_donations.paid.last
+  end
+
   def has_pledge_for?(tip)
     pledges.exists?(:tip_id => tip.id )
   end
