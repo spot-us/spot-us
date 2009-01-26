@@ -89,12 +89,15 @@ describe Myspot::PurchasesController do
   end
 
   describe "on POST to create with valid input" do
+    integrate_views
+
     before do
       @user = Factory(:user)
       @pitches = [Factory(:pitch), Factory(:pitch)]
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
                                                      :pitch => pitch) }
+      controller.stub!(:current_user).and_return(@user)
       login_as @user
     end
 
@@ -107,14 +110,12 @@ describe Myspot::PurchasesController do
       lambda { do_create }.should change { Purchase.count }.by(1)
     end
 
-    it "should create a purchase for the current user" do
+    it "should update the balance_text cookie after a successful donation" do
+      controller.stub!(:current_balance).and_return(10)
+      @user.stub!(:credits?).and_return(true)
+      @user.stub!(:total_credits).and_return(30.89)
       do_create
-      assigns[:purchase].user.should == User.find(@user.to_param)
-    end
-    
-    it "should create a purchase for the current user's donations" do
-      do_create
-      assigns[:purchase].donations.should == @donations
+      response.cookies['balance_text'].first.should include('$30.89')
     end
 
     def do_create

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Donation do
   table_has_columns(Donation, :integer, "user_id")
   table_has_columns(Donation, :integer, "pitch_id")
-  table_has_columns(Donation, :integer, "amount_in_cents")
+  table_has_columns(Donation, :decimal, "amount")
   table_has_columns(Donation, :string, "status")
 
   # TODO:  Need to figure out how to make these work in spec_helper for these cases.
@@ -14,15 +14,45 @@ describe Donation do
   it { Donation.should belong_to(:user) }
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
-  
-  has_dollar_field(Donation, :amount)
-  
+
   describe "when creating a donation" do
     it "should require user to be logged in" do
       Donation.createable_by?(nil).should_not be_true
     end
 
     describe "as a citizen or reporter" do
+      describe "should be valid" do
+        before do
+          @pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
+        end
+
+        it "if the pitch needs funds" do
+          donation = Factory.build(:donation,
+                                   :pitch => @pitch,
+                                   :user => Factory(:user),
+                                   :amount => 10,
+                                   :status => 'paid')
+          donation.should be_valid
+        end
+
+        it "if max donation amount < 20% of funding needed" do
+          donator =  Factory(:user)
+          donation = Factory(:donation,
+                             :pitch => @pitch,
+                             :user => donator,
+                             :amount => 10,
+                             :status => 'paid')
+          second_donation = Factory.build(:donation,
+                                   :pitch => @pitch,
+                                   :user => donator,
+                                   :amount => 5,
+                                   :status => 'paid')
+
+          second_donation.should be_valid
+        end
+
+      end
+
       describe "should be invaild and add an error" do
         it "if the pitch is fully funded" do
           pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
@@ -39,7 +69,7 @@ describe Donation do
           donation.should have(1).error_on(:base)
         end
 
-         it "if user's total donations + the new donation is >= 20% of the pitches requested amount" do
+         it "if user's total donations + the new donation is >= 20% of the pitch's requested amount" do
            user = Factory(:user)
            pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
            Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :status => 'paid')
@@ -51,16 +81,13 @@ describe Donation do
          end
       end
     end
-    
+
     describe "as a news organization" do
       it "allows donation of  an arbitrary amount" do
         organization = Factory(:organization)
         p = Factory(:pitch, :requested_amount => 100)
         d = Factory.build(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
-      end
-      
-      it "still guards against donating more than requested amount" do
       end
     end
   end
@@ -113,24 +140,26 @@ describe Donation do
     it "should return all paid donations" do
       @donations.reject(&:paid?).should == []
     end
+
   end
+
   it "should not allow negative values for donations" do
     donation = Factory.build(:donation, :amount => nil)
     donation.should_not be_valid
-    donation.should have(1).error_on(:amount_in_cents)
+    donation.should have_at_least(1).error_on(:amount)
   end
 
   it "should not allow zero for a donation" do
     donation = Factory.build(:donation, :amount => 0)
     donation.should_not be_valid
-    donation.should have(1).error_on(:amount_in_cents)
+    donation.should have_at_least(1).error_on(:amount)
   end
 
   it "should not allow a paid donation to be modified" do
     donation = Factory(:donation, :status => 'paid')
-    donation.amount = (donation.amount_in_cents + 1).to_dollars
+    donation.amount = (donation.amount + 1)
     donation.should_not be_valid
-    donation.should have(1).error_on(:base)
+    donation.should have_at_least(1).error_on(:base)
   end
 
   it "should allow an unpaid donation to be marked as paid" do
@@ -139,56 +168,65 @@ describe Donation do
     donation.pay
     donation.should be_valid
   end
-  
+
   describe "deleting a donation" do
     it "should be deletable by the owner of the unpaid donation" do
       user = Factory(:user)
       donation = Factory(:donation, :user => user, :status => 'unpaid')
       donation.deletable_by?(user).should be_true
     end
-    
+
     it "should not be able to delete a paid donation" do
       user = Factory(:user)
       donation = Factory(:donation, :user => user, :status => 'paid')
       donation.deletable_by?(user).should be_false
     end
-    
+
     it "should be deletable by an admin" do
       admin = Factory(:admin)
       donation = Factory(:donation, :user => Factory(:user), :status => 'unpaid')
       donation.deletable_by?(admin).should be_true
-    end 
-    
+    end
+
     it "should not be deleteable by a nil user" do
       donation = Factory(:donation, :user => Factory(:user), :status => 'unpaid')
       donation.deletable_by?(nil).should be_false
-    end    
+    end
   end
-  
+
   describe "states of a donation" do
     it "should have a state of unpaid when it is first created" do
       donation = Factory(:donation)
       donation.should be_unpaid
     end
-    
+
     it "should have a state of paid when it has been paid" do
       donation = Factory(:donation)
       donation.pay!
       donation.should be_paid
     end
-    
+
     it "should have a state of refunded when a refund has been issued" do
       donation = Factory(:donation)
       donation.pay!
       donation.refund!
       donation.should be_refunded
     end
-    
+
     it "should not allow a refund on an unpaid donation" do
       donation = Factory(:donation)
       lambda {
         donation.refund!
       }.should raise_error
+    end
+
+    it "should send a thank you email when paid" do
+      Mailer.should_receive(:deliver_user_thank_you_for_donating)
+      Factory(:donation,
+              :pitch => Factory(:pitch),
+              :user => Factory(:user),
+              :amount => 10,
+              :status => 'unpaid').pay!
     end
   end
 

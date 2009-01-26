@@ -7,8 +7,9 @@ describe 'myspot/donation_amounts/edit' do
     @pitches = [Factory(:pitch), Factory(:pitch)]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
-    assigns[:donations] = @donations
-    assigns[:user]      = @user
+    @spotus_donation = Factory(:spotus_donation)
+    template.stub!(:unpaid_donations).and_return(@donations)
+    template.stub!(:spotus_donation).and_return(@spotus_donation)
   end
 
   it 'should render' do
@@ -25,13 +26,21 @@ describe 'myspot/donation_amounts/edit' do
   it "should have a text field tag to change the amount of each donation" do
     do_render
     @donations.each do |donation|
-      template.should have_tag('input[type="text"][name=?]', "user[donation_amounts][#{donation.id}]")
+      template.should have_tag("input#?", "donation_amounts_#{donation.id}_amount")
     end
   end
 
+  it "should display the spot.us donation field" do
+    do_render
+    template.should have_tag('input[type="text"][name=?]', "spotus_donation_amount")
+
+  end
+
   it "should display error messages when available" do
-    @user.stub!(:errors).and_return(["oh hai"])
-    template.should_receive(:content_for).with(:error).once
+    @donations.stub!(:errors).and_return(["oh hai"])
+    assigns[:donations] = @donations
+    template.stub!(:content_for)
+    template.should_receive(:content_for).with(:error).at_least(:once)
     do_render
   end
 

@@ -38,7 +38,7 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  %w(featured_image_caption video_embed headline 
+  %w(featured_image_caption video_embed widget_embed headline 
      short_description delivery_description 
      extended_description skills keywords).each do |field|
     it "renders #{field} as textarea" do
