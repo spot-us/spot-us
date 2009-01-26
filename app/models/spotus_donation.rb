@@ -5,6 +5,7 @@ class SpotusDonation < ActiveRecord::Base
   validates_presence_of :amount
 
   named_scope :unpaid, :conditions => { :purchase_id => nil }, :limit => 1
+  named_scope :paid, :conditions => 'purchase_id IS NOT NULL'
 
   SPOTUS_TITHE = 0.10
 
