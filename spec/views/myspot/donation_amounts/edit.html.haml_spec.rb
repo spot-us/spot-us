@@ -37,7 +37,8 @@ describe 'myspot/donation_amounts/edit' do
   end
 
   it "should display error messages when available" do
-    @user.stub!(:errors).and_return(["oh hai"])
+    @donations.stub!(:errors).and_return(["oh hai"])
+    assigns[:donations] = @donations
     template.stub!(:content_for)
     template.should_receive(:content_for).with(:error).at_least(:once)
     do_render
