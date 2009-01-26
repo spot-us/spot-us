@@ -72,7 +72,7 @@ describe PledgesController do
       do_update
       assigns[:pledge].should_not be_nil
       assigns[:pledge].should be_valid
-      assigns[:pledge].amount.should == "75.0"
+      assigns[:pledge].amount.should == 75.0
     end
 
     def do_update

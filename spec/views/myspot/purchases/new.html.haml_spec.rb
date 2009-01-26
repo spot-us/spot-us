@@ -7,7 +7,9 @@ describe 'purchases/new' do
     @pitches = [Factory(:pitch), Factory(:pitch)]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
-    @purchase = Purchase.new(:user => @user, :donations => @donations)
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
+    @purchase = Purchase.new(:user => @user, :donations => @donations,
+                             :spotus_donation => @spotus_donation)
     assigns[:donations] = @donations
     assigns[:purchase]  = @purchase
   end

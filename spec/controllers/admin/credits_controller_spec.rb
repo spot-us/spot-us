@@ -31,7 +31,7 @@ describe Admin::CreditsController do
       @user.credits.should be_empty
       do_post
       @user.reload
-      @user.credits.first.amount.should == "35.0"
+      @user.credits.first.amount.to_f.should == 35.0
       @user.credits.first.description.should == "Fatass Sympathy"
     end
     
