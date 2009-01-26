@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Tip do
   table_has_columns(Tip, :text,     "short_description")
   table_has_columns(Tip, :boolean,  "contract_agreement")
-  
+
   requires_presence_of Tip, :short_description
   requires_presence_of Tip, :user
   requires_presence_of Tip, :pledge_amount
@@ -18,24 +18,24 @@ describe Tip do
     it "allows editing of unpledged tip by owner" do
       user = Factory(:citizen)
       t = Factory :tip, :user => user
-      t.editable_by?(user).should be_true      
+      t.editable_by?(user).should be_true
     end
-    
+
     it "disallows editing of tip with a pledge and the user is not an admin" do
       user = Factory(:citizen)
       t = Factory :tip, :user => user
       p = Factory :pledge, :tip => t
       t.reload
-      t.editable_by?(user).should be_false      
-    end    
-    
+      t.editable_by?(user).should be_false
+    end
+
     it "allows editing by admin" do
       user = Factory(:admin)
       t = Factory :tip, :user => user
       t.reload
       t.editable_by?(user).should be_true
     end
-    
+
     it "allows editing by admin even if tip has pledges" do
       user = Factory(:admin)
       t = Factory :tip, :user => user
@@ -43,7 +43,7 @@ describe Tip do
       t.reload
       t.editable_by?(user).should be_true
     end
-    
+
     it "disallows editing of nil user" do
       user = Factory(:citizen)
       t = Factory :tip, :user => user
@@ -62,23 +62,23 @@ describe Tip do
       Tip.most_pledged.should == [tip2, tip1]
     end
   end
-  
+
   describe "pledged to" do
     it "a new tip isn't pledged to" do
       # don't confuse this with the fact that an initial pledge amount can be set
       # this assertion refers to the pledges association collection (pledges by others)
-      
+
       t = Factory :tip
       t.should_not be_pledged_to
     end
-    
+
     it "is pledged to when there's pledges" do
       t = Factory :tip
       p = Factory :pledge, :tip => t
       t.reload
       t.should be_pledged_to
     end
-    
+
   end
 
   describe "creating" do
@@ -94,7 +94,7 @@ describe Tip do
   it "returns true on #tip?" do
     Factory(:tip).should be_a_tip
   end
-  
+
   it "returns false on #pitch?" do
     Factory(:tip).should_not be_a_pitch
   end
@@ -132,20 +132,20 @@ describe Tip do
       Tip.ancestors.include?(NewsItem)
     end
   end
-  
+
   it "returns all pledged money on total_amount_pledged" do
     tip = Factory(:tip)
     Factory(:pledge, :tip=> tip, :amount => 3000)
     Factory(:pledge, :tip=> tip, :amount => 2)
     Factory(:pledge, :tip=> tip, :amount => 1)
-    
+
     tip.reload
     tip.total_amount_pledged.to_f.should == tip.pledges.map(&:amount).map(&:to_f).sum
   end
-  
+
   it "should return 0 when no pledges" do
     tip = Factory(:tip, :pledge_amount => 0)
-    tip.total_amount_pledged.should == "0.0"
+    tip.total_amount_pledged.should == 0.0
   end
 
   describe "destroy" do
@@ -156,7 +156,7 @@ describe Tip do
       Tip.find(:all).should_not include(tip)
       Tip.find_with_deleted(:all).should include(tip)
     end
-    
+
     it "should delete associated pledges" do
       tip = Factory(:tip)
       p = Factory(:pledge, :tip=> tip, :amount => 3000)
@@ -169,5 +169,4 @@ describe Tip do
     end
   end
 end
-
 

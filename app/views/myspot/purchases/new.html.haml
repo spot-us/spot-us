@@ -7,7 +7,7 @@
 
 #equalize
 
-  - # first column content 
+  - # first column content
   .span-715.box_white
     %h3 Your Donations
 
@@ -21,14 +21,20 @@
         .float-right
           = number_to_currency donation.amount
         .clear
-    - if current_user.total_credits_in_cents > 0
+    .donation
+      .float-left
+        %strong Support Spot.Us
+      .float-right
+        = number_to_currency @purchase.spotus_donation.amount
+      .clear
+    - if current_user.total_credits > 0
       .donation.credit_line
         .float-left
           CREDIT APPLIED
         .float-right
-          == - #{number_to_currency(current_user.total_credits_in_dollars)}
+          == - #{number_to_currency(current_user.total_credits)}
     %br/
-    %hr/    
+    %hr/
     .total
       %p.float-right
         %strong
@@ -41,7 +47,7 @@
     - form_for :purchase, :url => myspot_purchases_path do |f|
       - if @purchase.credit_covers_total?
         .span-595.box_yellow
-          You have enough credits to cover this transaction. Please click Purchase to continue. 
+          You have enough credits to cover this transaction. Please click Purchase to continue.
       - else
         %h3 Payment
         .double_content_border
@@ -92,7 +98,7 @@
       .float-right
         %input{:type => "image", :src=>"/images/purchase.png", :alt => 'Purchase'}
 
-  - # second column content   
+  - # second column content
   .span-160.box_white
     = render :partial => 'layouts/common_questions'
 

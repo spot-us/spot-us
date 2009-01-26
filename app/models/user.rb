@@ -1,52 +1,15 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                        :integer(4)      not null, primary key
-#  email                     :string(255)     
-#  crypted_password          :string(40)      
-#  salt                      :string(40)      
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  remember_token            :string(255)     
-#  remember_token_expires_at :datetime        
-#  first_name                :string(255)     
-#  last_name                 :string(255)     
-#  type                      :string(255)     
-#  photo_file_name           :string(255)     
-#  photo_content_type        :string(255)     
-#  photo_file_size           :integer(4)      
-#  location                  :string(255)     
-#  about_you                 :text            
-#  website                   :string(255)     
-#  address1                  :string(255)     
-#  address2                  :string(255)     
-#  city                      :string(255)     
-#  state                     :string(255)     
-#  zip                       :string(255)     
-#  phone                     :string(255)     
-#  country                   :string(255)     
-#  notify_tips               :boolean(1)      not null
-#  notify_pitches            :boolean(1)      not null
-#  notify_stories            :boolean(1)      not null
-#  notify_spotus_news        :boolean(1)      not null
-#  fact_check_interest       :boolean(1)      not null
-#  status                    :string(255)     default("active")
-#  organization_name         :string(255)     
-#  established_year          :string(255)     
-#
-
 require 'digest/sha1'
 class User < ActiveRecord::Base
   acts_as_paranoid
   include HasTopics
   include AASMWithFixes
-  
+
   aasm_column :status
   aasm_initial_state  :active
   aasm_state :active
-  
+
   has_many :donations
+  has_many :spotus_donations
   has_many :tips
   has_many :pitches
   has_many :pledges
@@ -55,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
-  
+
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
@@ -70,32 +33,27 @@ class User < ActiveRecord::Base
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
-  validate                  :validate_new_donation_amounts, 
-    :on => :update, 
-    :if => lambda {|user| user.donation_amounts_changed? }
   before_save :encrypt_password
   before_validation_on_create :generate_password, :set_default_location
 
   after_create :deliver_signup_notification
-  after_update :update_donation_amounts,
-    :if => lambda {|user| user.donation_amounts_changed? }
 
-  has_attached_file :photo, 
-                    :styles      => { :thumb => '50x50#' }, 
-                    :path        => ":rails_root/public/system/profiles/" << 
+  has_attached_file :photo,
+                    :styles      => { :thumb => '50x50#' },
+                    :path        => ":rails_root/public/system/profiles/" <<
                                     ":attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :url         => "/system/profiles/:attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :default_url => "/images/default_avatar.png"
-  
+
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :about_you, :address1, :address2, :city, :country,
-    :donation_amounts, :email, :fact_check_interest, :first_name, :last_name,
+    :email, :fact_check_interest, :first_name, :last_name,
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
-    :terms_of_service, :topics_params, :website, :zip, :organization_name, 
+    :terms_of_service, :topics_params, :website, :zip, :organization_name,
     :established_year
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
@@ -104,7 +62,7 @@ class User < ActiveRecord::Base
   def citizen?
     self.is_a? Citizen
   end
-  
+
   def reporter?
     self.is_a? Reporter
   end
@@ -112,25 +70,25 @@ class User < ActiveRecord::Base
   def organization?
     self.is_a? Organization
   end
-  
+
   def admin?
     self.is_a? Admin
   end
-  
+
   def total_credits_in_cents
-    self.credits.map(&:amount_in_cents).sum
+    (total_credits * 100).to_i
   end
-  
-  def total_credits_in_dollars
-    total_credits_in_cents.to_dollars
+
+  def total_credits
+    self.credits.map(&:amount).sum.to_f
   end
 
   def self.createable_by?(user)
     true
   end
-  
+
   def credits?
-    total_credits_in_cents > 0 
+    total_credits > 0
   end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
@@ -143,18 +101,18 @@ class User < ActiveRecord::Base
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}--#{password}--")
   end
-  
+
   def self.generate_csv
     FasterCSV.generate do |csv|
       # header row
-      csv << ["type", "email", "first_name", "last_name", "location", 
-              "notify_tips", "notify_pitches",  "notify_pitches", 
+      csv << ["type", "email", "first_name", "last_name", "location",
+              "notify_tips", "notify_pitches",  "notify_pitches",
               "notify_stories", "notify_spotus_news", "fact_check_interest"]
 
       # data rows
       User.all.each do |user|
-        csv << [user.type, user.email, user.first_name, user.last_name, 
-                user.location, user.notify_tips, user.notify_pitches, 
+        csv << [user.type, user.email, user.first_name, user.last_name,
+                user.location, user.notify_tips, user.notify_pitches,
                 user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
       end
     end
@@ -169,7 +127,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_donated_to(pitch)
-    pitch.donations.find_all_by_user_id(id).map(&:amount_in_cents).sum.to_dollars
+    pitch.donations.find_all_by_user_id(id).map(&:amount).sum
   end
 
   # Encrypts the password with the user salt
@@ -189,7 +147,7 @@ class User < ActiveRecord::Base
   end
 
   def remember_token?
-    remember_token_expires_at && Time.now.utc < remember_token_expires_at 
+    remember_token_expires_at && Time.now.utc < remember_token_expires_at
   end
 
   # These create and unset the fields required for remembering users between browser closes
@@ -222,22 +180,49 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(' ')
   end
 
-  def donation_amounts=(amounts)
-    @changed_donations = []
-    amounts.each do |donation_id, new_amount|
-      if donation = donations.unpaid.find_by_id(donation_id)
-        donation.amount = new_amount
-        @changed_donations << donation
-      end
-    end
-  end
-
-  def donation_amounts_changed?
-    !@changed_donations.blank?
-  end
-
   def has_donation_for?(pitch)
     donations.exists?(:pitch_id => pitch.id )
+  end
+
+  def has_donated_to?(pitch)
+    donations.paid.exists?(:pitch_id => pitch.id)
+  end
+
+  def max_donation_for(pitch)
+    pitch.max_donation_amount(self) - pitch.donations.total_amount_for_user(self)
+  end
+
+  def can_donate_to?(pitch)
+    pitch.donations.total_amount_for_user(self) < pitch.max_donation_amount(self)
+  end
+
+  # TODO: remove after updating all models with amount
+  def unpaid_donations_sum_in_cents
+    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+  end
+
+  def unpaid_donations_sum
+    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount).sum
+  end
+
+  def unpaid_spotus_donation
+    spotus_donations.unpaid.first
+  end
+
+  def current_spotus_donation
+    unpaid_spotus_donation || spotus_donations.build
+  end
+
+  def has_spotus_donation?
+    spotus_donations.paid.any?
+  end
+
+  def paid_spotus_donations_sum
+    has_spotus_donation? ? spotus_donations.paid.map(&:amount).sum : 0
+  end
+
+  def last_paid_spotus_donation
+    spotus_donations.paid.last
   end
 
   def has_pledge_for?(tip)
@@ -261,28 +246,56 @@ class User < ActiveRecord::Base
     self.password ||= (1..6).collect { chars[rand(chars.size)] }.join
     self.password_confirmation = password
   end
-  
+
   def deliver_signup_notification
     return if self.type == "Admin"
-    Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)    
+    Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)
   end
 
   def set_default_location
     self.location ||= LOCATIONS.first
   end
 
-  def update_donation_amounts
-    @changed_donations.each(&:save!)
-  end
-
-  def validate_new_donation_amounts
-    @changed_donations.each do |donation|
-      unless donation.valid?
-        donation.errors.full_messages.each do |error|
-          errors.add_to_base(error)
-        end
-      end
-    end
-  end
 end
+
+
+# == Schema Information
+# Schema version: 20090116200734
+#
+# Table name: users
+#
+#  id                        :integer(4)      not null, primary key
+#  email                     :string(255)
+#  crypted_password          :string(40)
+#  salt                      :string(40)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  remember_token            :string(255)
+#  remember_token_expires_at :datetime
+#  first_name                :string(255)
+#  last_name                 :string(255)
+#  type                      :string(255)
+#  photo_file_name           :string(255)
+#  photo_content_type        :string(255)
+#  photo_file_size           :integer(4)
+#  location                  :string(255)
+#  about_you                 :text
+#  website                   :string(255)
+#  address1                  :string(255)
+#  address2                  :string(255)
+#  city                      :string(255)
+#  state                     :string(255)
+#  zip                       :string(255)
+#  phone                     :string(255)
+#  country                   :string(255)
+#  notify_tips               :boolean(1)      not null
+#  notify_pitches            :boolean(1)      not null
+#  notify_stories            :boolean(1)      not null
+#  notify_spotus_news        :boolean(1)      not null
+#  fact_check_interest       :boolean(1)      not null
+#  status                    :string(255)     default("active")
+#  organization_name         :string(255)
+#  established_year          :string(255)
+#  deleted_at                :datetime
+#
 

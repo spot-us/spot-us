@@ -4,18 +4,17 @@
     %p Check below to see what happened:
     %ul
       %li Was it an invalid E-mail address or password?
-    %p 
+    %p
       If you're experiencing a persistent problem, email
       = mail_to "david@spot.us", nil, :encode => "hex"
       <br />Seriously, this guy doesn't sleep and he wants the site to work for you!!!
-      
 
 - form_tag session_url do
   .span-6.or_login
     %h3 Welcome Back!!!<br /><span class='small quieter'>We already know you.</span>
     .double_content_border
     .row
-      %label Your E-mail Address 
+      %label Your E-mail Address
       %div{:class => session_field_class_name }
         = text_field_tag "email", nil, :class=>"text"
     .block-padding
@@ -24,7 +23,7 @@
       %div{:class => session_field_class_name }
         = password_field_tag "password", nil, :class=>"text"
     .row
-      = check_box_tag 'remember_me', '1',
+      = check_box_tag 'remember_me', '1'
       %label{:for => 'remember_me'} Remember Me
     .float-right
       %p

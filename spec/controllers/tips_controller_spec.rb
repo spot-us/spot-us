@@ -2,6 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe TipsController do
 
+  describe "on GET to /tips" do
+    it "should redirect to /news_items" do
+      get :index
+      response.should redirect_to(news_items_path)
+    end
+  end
+
   describe "on GET to /tips/new" do
     before(:each) do
       @user = Factory(:user)
