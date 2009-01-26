@@ -12,6 +12,7 @@ class Myspot::DonationAmountsController < ApplicationController
       spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
       redirect_to new_myspot_purchase_path
     else
+      @close_flash_link = edit_myspot_donations_amounts_path
       render :action => 'edit'
     end
   end
