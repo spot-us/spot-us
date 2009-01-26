@@ -405,4 +405,50 @@ describe User do
       @user.has_donation_for?(@pitch).should be_false
     end
   end
+
+  describe "with spotus donations" do
+    before do
+      @user = Factory(:user)
+      @spotus_donation_one = Factory(:spotus_donation, :purchase => Factory(:purchase), :user => @user)
+      @spotus_donation_two = Factory(:spotus_donation, :purchase => nil, :user => @user)
+    end
+
+    it "should return the current unpaid spotus donation" do
+      @user.current_spotus_donation.should == @spotus_donation_two
+    end
+
+    it "should have spotus donations" do
+      @user.has_spotus_donation?.should be_true
+    end
+
+    it "should have an unpaid spotus donation" do
+      @user.unpaid_spotus_donation.should == @spotus_donation_two
+    end
+
+    it "should return the sum of paid spotus donations" do
+      @user.paid_spotus_donations_sum.should == @spotus_donation_one.amount
+    end
+  end
+
+  describe "without any spotus donations" do
+    before do
+      @user = Factory(:user)
+    end
+
+    it "should return a new record for current_spotus_donation" do
+      @user.current_spotus_donation.should be_a_new_record
+    end
+
+    it "should return a SpotusDonation for current_spotus_donation" do
+      @user.current_spotus_donation.should be_a_kind_of(SpotusDonation)
+    end
+
+    it "should not have spotus donations" do
+      @user.has_spotus_donation?.should be_false
+    end
+
+    it "should return 0 for the sum of the paid spotus donations" do
+      @user.paid_spotus_donations_sum.should == 0
+    end
+  end
 end
