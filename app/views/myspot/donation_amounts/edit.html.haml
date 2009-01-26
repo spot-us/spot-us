@@ -1,42 +1,59 @@
 - @title = "Spot.us - Fund Your Donations"
 .block-spacer
+- content_for :head do
+  :javascript
+    jQuery(document).ready(function(){
+      jQuery('#remove_spotus_donation').click(function(){
+        jQuery('input#spotus_donation').val('');
+        jQuery('#support_spotus').hide();
+        return false;
+      });
+    });
 
-- unless @user.errors.empty?
+- if @donations && @donations.any?(&:errors)
   - content_for :error do
-    = error_messages_for :user
+    = error_messages_for :donations, :object => @donations
 
 #equalize
 
   - # first column content 
   .span-715.box_white
-    - if current_user.total_credits_in_cents > 0
+    - if current_user.total_credits > 0
       .float-right
-        == You have #{number_to_currency(current_user.total_credits_in_dollars)} in credits
+        == You have #{number_to_currency(current_user.total_credits)} in credits
     %h3 Fund Your Donations
 
     .double_content_border
 
-    - form_for :user, :url => myspot_donations_amounts_path, :html => { :method => :put } do
+    - form_tag myspot_donations_amounts_path, :method => :put do
       %ul.unpaid_donations
-        - @donations.each do |donation|
+        - unpaid_donations.each do |donation|
           - content_tag_for :li, donation, :class => 'unpaid' do
             .column.span-70
               = link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch
-            .column.span-575
+            .column.span-550
               %h3 
                 PITCH:
                 = link_to donation.pitch.headline, donation.pitch
               %p
-                = donation.pitch.short_description
+                = truncate_words(donation.pitch.short_description)
                 = link_to 'Read More &raquo;', donation.pitch
-            .column.span-70
+            .column.span-95
               $
-              = text_field_tag "user[donation_amounts][#{donation.id}]", number_with_precision(donation.amount, 2), :size => 5
-              .action= link_to "Remove", donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
+              = text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :unit => ''), :size => 4, :id => "donation_amounts_#{donation.id}_amount"
+              .action= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
-			
-      = will_paginate @donations
-			
+        %li#support_spotus
+          .column.span-70
+            = image_tag('support_spotus.png')
+          .column.span-550
+            %h3 Support Spot.Us
+            %p
+              Spot.Us is a nonprofit project to pioneer "community funded reporting." Through Spot.Us the public can commission journalists to do investigations into important and perhaps overlooked stories.
+          .column.span-95
+            $
+            = text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation"
+            .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
         = image_submit_tag 'purchase.png', :alt => 'Purchase'
 

@@ -15,7 +15,7 @@
       .block-spacer-negative
       %h3 Video
       .double_content_border
-      = sanitize @tip.video_embed, :tags => %w(object param embed a), :attributes => %w(width height name src value allowfullscreen type href allowscriptaccess)
+      = @tip.video_embed
     .block-spacer-negative
     %h3 Comments
     .double_content_border

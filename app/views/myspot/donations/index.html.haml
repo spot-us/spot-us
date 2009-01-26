@@ -15,6 +15,17 @@
       %td{:colspan => 5}
         .double_content_border
     = render :partial => "myspot/donations/donation", :collection => @donations, :spacer_template => "myspot/donations/donation_spacer"
+    - if current_user.has_spotus_donation?
+      = render :partial => "myspot/donations/donation_spacer"
+      %tr
+        %td.pitch
+          = image_tag('support_spotus.png')
+          Support Spot.Us
+        %td.donated= current_user.last_paid_spotus_donation.created_at.to_s(:date)
+        %td.donation= number_to_currency(current_user.paid_spotus_donations_sum)
+        %td.status
+        %td.actions
+
   .double_content_border
 
   = will_paginate @donations

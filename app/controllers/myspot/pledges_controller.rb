@@ -5,6 +5,6 @@ class Myspot::PledgesController < ApplicationController
   private
 
   def find_resources
-    current_user.pledges.paginate(:all, :page => params[:page])
+    current_user.pledges.paginate(:page => params[:page])
   end
 end
