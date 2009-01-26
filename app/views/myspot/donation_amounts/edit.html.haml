@@ -18,11 +18,12 @@
 
   - # first column content 
   .span-715.box_white
+    %h2{:style => "color: #800000; text-align: center;"} Almost done! One more step:
+    .block-spacer-negative 
     - if current_user.total_credits > 0
       .float-right
         == You have #{number_to_currency(current_user.total_credits)} in credits
     %h3 Fund Your Donations
-
     .double_content_border
 
     - form_tag myspot_donations_amounts_path, :method => :put do
