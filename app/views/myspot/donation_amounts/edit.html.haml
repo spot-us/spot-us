@@ -10,9 +10,9 @@
       });
     });
 
--# unless @errors.empty?
-- content_for :error do
-  = error_messages_for :donations, :object => @donations
+- if @donations && @donations.any?(&:errors)
+  - content_for :error do
+    = error_messages_for :donations, :object => @donations
 
 #equalize
 
