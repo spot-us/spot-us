@@ -1,0 +1,7 @@
+- form_tag session_url, :method => 'post', :class => 'header-form' do
+  = text_field_tag "email", nil, :class=>"mini-text"
+  = password_field_tag "password", nil, :class=>"mini-text"
+  = submit_tag "Login"
+  = check_box_tag 'remember_me', '1', nil, :class => "header-checkbox"
+  %label.remember_me{:for => 'remember_me'} Remember Me
+  %span#login_close.ss_sprite.ss_cross
