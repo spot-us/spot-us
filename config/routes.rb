@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   # TODO: remove when done
   map.resources :ui
 
-  map.resource :user, :only => [:create]
+  map.resource :user, :only => [:new, :create]
 
   map.resource :session
   map.destroy_session 'logout', :controller => 'sessions', :action => 'destroy'
