@@ -4,7 +4,7 @@
 ----------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------
- Spot.us overrides for Blueprint 
+ Spot.us overrides for Blueprint
 ----------------------------------------------------------------------- */
 
 #user-header {width:960px;margin:0 auto;display:inline-block;display:block;}
@@ -15,36 +15,57 @@ table.top td.top {vertical-align:top;}
 .container {
   width: 930px;
   padding: 0 15px;
-  }
+}
 #equalize {
   position: relative;
-  }
+}
 #footer {
   padding: 0 5px;
-  }
+}
 #user-header {
   width:960px;
-  }
+}
 #header {
   background: #fff;
   margin: 0 -15px 0 -15px;
   padding: 10px 15px;
-  }
+}
 #footer, .body-content {
   width:960px;
   margin:0 auto;
   display:inline-block;
   display:block;
   padding: 0 10px;
-  }
+}
+/* form fields */
+form.header-form, form.header-form div {
+  display: inline;
+}
+input.mini-text {
+  font-size:10px;
+  height:12px;
+  line-height:12px;
+  margin-left:5px;
+  margin-top:0;
+  padding:0;
+  width:100px;
+}
+input.header-checkbox {
+  vertical-align: middle;
+}
+span#login_close {
+  position: relative;
+  bottom: -3px;
+  margin-left: 5px;
+}
 /* styling */
 .reg-line-height {
-  margin: 0;	
-  }
+  margin: 0;
+}
 .nil-line-height {
   margin: 0;
   line-height: 11px;
-  }
+}
 p.nil-line-height {
    padding: 0;
    line-height: 14px;
@@ -52,96 +73,102 @@ p.nil-line-height {
 .container a {
   color: #999999;
   text-decoration: none;
-  }
+}
 .alt-spotus {
   font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
   font-weight:normal;
-  }
+}
 h4 {
   height: auto;
 }
-h4.title { 
+h4.title {
   margin: 0px;
   font-weight: bold;
-  }
+}
 .float_left {
   float: left;
-  }
+}
 .float_right {
   float: right;
-  }
+}
 .box_white {
   background: #fff;
   padding: 10px;
-  }
+}
 .container h3, .container h2 {
   margin: 0 0 10px 0;
   padding: 0;
-  }
+}
 .home-floater {
   padding:15px;
   margin: 0px;
-  }
+}
 .home-image-box {
   padding:0px;
-  }
+}
 .home-boxer {
   background: url(/images/spotus_home_boxer.jpg) repeat-x top left;
-  }
+}
 .login-boxer {
-  background: url(/images/spotus_login_boxer.gif) repeat-y top left;
-  }
+  background: #FFFFFF none repeat scroll 0 0;
+}
 .login-boxer .span-6 {
   padding: 15px;
   margin-right: 15px;
   width: 200px;
-  }
+}
+.login-boxer .span-12 {
+  padding: 15px;
+}
+.login-boxer h3 {
+  padding: 15px 15px 0 15px;
+}
 .float-left {
   float: left;
-  }
+}
 .float-right {
   float: right;
-  }
+}
 .row {
   clear: both;
   margin: 0 0 10px 0;
-  }
+}
 .no_margin {
   margin: 0;
-  }
+}
 .add_edit {
   margin: 0 0 0 10px;
-  }
+}
 .quieter {
   color:#999999;
   font-weight: normal;
-  }
+}
 .uppcased_button_text, .inline_pledge, .inline_donate {
   text-transform: uppercase;
   width:210px;
   text-align:right;
   margin: 0;
-  }
+}
 .fully_funded_no_text {
   text-indent:-10000px;
   font-size: 0;
-  }
+}
 .shared_progress_bar {
   width: 120px;
-  }
+}
 .small-spotus {font-size:.8em;margin-bottom: 0;line-height:1.875em;}
-.inline_pledge input#pledge_amount { 
-  width: 120px; 
-  margin: 3px 0 0 0; 
+.inline_pledge input#pledge_amount {
+  width: 120px;
+  margin: 3px 0 0 0;
   border: 1px solid #C6004A;
   padding: 6px 0;
-  }
-.inline_donate input#donation_amount { 
-  width: 120px; 
-  margin: 3px 0 0 0; 
+}
+.inline_donate input#donation_amount {
+  width: 120px;
+  margin: 3px 0 0 0;
   border: 1px solid #266220;
   padding: 6px 0;
-  }
+}
 /* Adjust showgrid to use 960px instead of 950px */
 .showgrid {background:url(src/grid.png) 15px -3px;}
 
@@ -149,30 +176,30 @@ h4.title {
 #footer-notes .span-6 p + p, #footer-notes .span-4 p + p, .existing_tips_picthes p + p {
   text-indent: 0;
   margin-top:-1.5em;
-  }
+}
 .container p + p {
   text-indent: 0;
   margin-top:1.5em;
-  }
+}
 /* -----------------------------------------------------------------------
- Spot.us CUSTOM CSS 
+ Spot.us CUSTOM CSS
 ----------------------------------------------------------------------- */
 body {
   background: #E3EEEF url(/images/spotus_bg.jpg) repeat-x;
   margin-top: 0px;
   margin-bottom: 0px;
-  }
+}
 .centered {
   text-align: center;
   color: #fff;
-  }
+}
 .centered_text {
   margin: 0 0 0 35px;
   float: left;
-  }
+}
 .text-justify {
   text-align: justify;
-  }
+}
 
 /* Header & Main Nav Styles */
 #header .logo {
@@ -181,65 +208,65 @@ body {
   height: 31px;
   overflow: hidden;
   float: left;
-  }
+}
 #header .logo-link {
   width: 222px;
   height: 31px;
   display: block;
-  }
+}
 #header .nav-container {
   float: right;
   background: url(/images/spotus_nav_bg.gif) no-repeat 0 bottom;
   padding: 6px 0 0 0;
   height: 26px;
   width: 506px;
-  }
+}
 #header .nav-container ul {
   margin: 0;
   padding: 0;
-  }
+}
 .nav-container #main-nav li {
   float: left;
   list-style: none;
-  }
-.nav-container #main-nav li a { 
+}
+.nav-container #main-nav li a {
   text-decoration: none;
   display: block;
   text-size: 18px;
   color: #ef4179;
   font-weight: bold;
-  }
+}
 #main-nav li.start_story, #main-nav li.fund_story, #main-nav li.read_story, #main-nav li.about_spotus  {
   text-align: center;
-  }
+}
 #main-nav li.start_story {
   width: 118px;
-  }
+}
 #main-nav li.fund_story {
   width: 153px;
-  }
+}
 #main-nav li.read_story {
   width: 150px
-  }
+}
 #main-nav li.about_spotus {
   margin: 0 0 0 18px;
   width: 67px
-  }
+}
 
 /* Content Styles */
 .double_footer_border {
   background: url(/images/spotus_footer_title_border.gif) repeat-x 0 bottom;
-  }
+}
 .double_content_border {
   background: url(/images/spotus_content_title_border.gif) repeat-x 0 bottom;
-  }
+}
 .double_footer_border, .double_content_border {
   height: 3px;
   margin: 0 0 10px 0;
-  }
+}
 .register input.text, .or_login input.text {
   width: 190px!important;
-  }
+}
 .gray_button {
   background: url(/images/spotus_button_plain_gray.gif) no-repeat 1px 3px;
   width: 111px;
@@ -252,15 +279,21 @@ body {
   text-decoration: none;
   margin: 0;
   border: 0;
-  }
+}
 .forgot_password {
   text-transform: uppercase;
   color: #8B9C9F;
   font-size: 9px;
   text-decoration: none;
   margin-right: 3px;
-  }
-  
+}
+.remember_me {
+  font-size: 9px;
+  text-transform: uppercase;
+  color: #E9EB98;
+  margin: 0 5px 0 0;
+}
+
 /* User Header & Footer Styles */
 .pink { color: #ce859d;}
 .moss-green { color: #909a9d;}
@@ -269,16 +302,22 @@ body {
   text-transform: uppercase;
   letter-spacing: .15em;
   float: right;
-  }
+}
 #user-header ul.user-header-nav {
-  padding: 5px 0 3px 0;
   margin: 0;
   color: #ccc;
   float: left;
-  }
+}
+#user-header ul.user-header-nav li {
+  line-height: 24px;
+  height: 24px;
+}
+#user-header ul.user-header-nav li a {
+  vertical-align: middle;
+}
 #footer, .body-content {
   background: url(/images/spotus_shadow_bg.jpg) repeat-y;
-  }
+}
 #footer div#footer-copyright, #footer div#footer-notes {
   background: #52656B;
   margin: 0 auto;
@@ -286,58 +325,58 @@ body {
   color: #ccc;
   width: 930px;
   text-align:left;
-  }
+}
 #footer ul.footer-nav, #user-header ul.user-header-nav, ul.search_navigation {
   margin: 0px;
-  }
+}
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
   list-style: none;
   display: inline;
   margin: 0 8px 0 0;
   padding: 0 8px 0 0;
   background: url(/images/spotus_pipe.gif) no-repeat top right;
-  }
+}
 #footer #footer-copyright .footer-nav li.no-pipe, #user-header .user-header-nav li.no-pipe, ul.search_navigation li.no-pipe {
   border-right: 0px;
   margin-right: 0;
   padding-right: 0;
   background: url(/images/spotus_no_pipe.gif) no-repeat top right;
-  }
+}
 #footer a, #user-header a {
   color: #E9EB98;
   text-decoration: none;
-  }
+}
 #footer .logo-footer {
   background: url(/images/spotus_footer_logo.gif) repeat-y;
   width: 331px;
   height: 100px;
   float: right;
   margin: -18px 105px 0 0;
-  }
+}
 #footer .logo-footer-link {
   width: 331px;
   height: 100px;
   display: block;
-  }
+}
 #footer-notes h3 {
   color: #7d8c90;
   margin: 0 0 10px 0;
   padding: 0;
-  }
+}
 #footer-notes .span-6 {
   width: 225px;
   margin-right: 30px;
-  }
+}
 #footer-notes .span-4 {
   width: 165px;
   float: right;
   margin-right: 0;
-  }
+}
 #footer-notes .span-6 .pledge_another_amount {
   text-transform: uppercase;
   color: #8B9C9F;
   font-size: 9px;
-  }
+}
 #footer-notes .span-6  a.i_pledge, .create_a_tip_sidebar a.create_pitch {
   background: url(/images/spotus_button_pink.png) no-repeat;
   width: 170px;
@@ -348,7 +387,7 @@ body {
   position: relative;
   font-size: 18px;
   margin: 0 auto;
-  }
+}
 #footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
 
 /* Flash Error Styling */
@@ -362,121 +401,121 @@ body {
   border-top: 1px #ccc solid;
   border-left: 1px #ccc solid;
   min-height: 80px;
-  }
+}
 
 .error p.flash_note, .success p.flash_note, .notice p.flash_note {
   padding: 20px 0 0 0;
-  }  
+}
 .success, .notice {
   background: #fff url(/images/flash_success_bg.jpg) no-repeat;
   color:#514721;
-  }
+}
 .success h2 {
   color: #3a9300;
-  }
+}
 .error {
   background: #fff url(/images/flash_error_bg.jpg) no-repeat;
   color: #a70000;
-  }
+}
 .error h2 {
   color: #a70000;
-  }
+}
 .error h2, .error p, .error li, .success h2, .success p, .success li {
   margin: 0;
   padding: 0;
-  }
+}
 .error li, .success li {
   list-style: square;
-  }
+}
 .error a, .success a {
   text-decoration: none;
   color: #999999;
-  }
-  
+}
+
 .fieldWithErrors {
   display: inline;
-  }
+}
 .fieldWithErrors input {
   border: 1px #a70000 solid;
-  }
+}
 .fieldWithErrors input, .fieldWithErrors label {
   color: #a70000;
   font-weight: bold;
-  }
+}
 .dismiss {
   float: right;
-  }
+}
 .dismiss a {
   text-decoration: none;
   height: 22px;
   width: 22px;
   background: url('/images/close_square.png') no-repeat;
   display: block;
-  }
-  
-/* Create A Tip */  
+}
+
+/* Create A Tip */
 .create_a_tip, .create_a_pitch, .create_a_job, .create_a_sample {
   float: left;
   width: 225px;
   background: #ffffe1 url(/images/yellow_bg.jpg) repeat-x left top;
   padding: 10px 0 10px 10px;
-  }
-  
+}
+
 ol.create_a_tip_iconized, ol.create_a_pitch_iconized {
   float: left;
   margin: 0 20px 0 5px;
   padding: 0;
   width: 50px;
-  }
+}
 ol.create_a_tip_iconized li, ol.create_a_pitch_iconized {
   margin: 0;
   list-style:none;
-  }
+}
 ol.create_a_tip_iconized li.tipster, ol.create_a_pitch_iconized li.tipster {
   background: url(/images/tipster.png) no-repeat left top;
   color: #666666;
   padding: 0;
   margin: 0 ;
   height: 31px;
-  }
+}
 ol.create_a_tip_iconized li.pledgester, ol.create_a_pitch_iconized li.pledgester {
   background: url(/images/pledgester.png) no-repeat left top;
   padding: 0;
   margin: 30px 0 0 0;
   height: 33px;
-  }
+}
 ol.create_a_tip_iconized li.pitcher, ol.create_a_pitch_iconized li.pitcher {
   background: url(/images/pitcher.png) no-repeat left top;
   height: 33px;
   padding: 0;
   margin: 30px 0 0 0;
-  }
+}
 ol.create_a_pitch_iconized li.journalist {
   background: url(/images/journalist.png) no-repeat left top;
   height: 33px;
   padding: 0;
   margin: 20px 0 0 0;
-  }
+}
 ol.create_a_pitch_steps li.journalist {
   color: #999999;
   margin: 30px 0 0 0;
-  }
+}
 ol.create_a_tip_steps  li.tipster, ol.create_a_pitch_steps  li.tipster  {
   color: #666666;
   margin: 15px 0 0 0;
-  }
+}
 ol.create_a_tip_steps li.pledgester {
   color: #999999;
   margin: 30px 0 0 0;
-  }
+}
 ol.create_a_pitch_steps li.pledgester {
   color: #999999;
   margin: 45px 0 0 0;
-  }
+}
 ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   color: #999999;
   margin: 30px 0 0 0;
-  }
+}
 .take_action {
   float: right;
   width: 445px;
@@ -484,96 +523,96 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
   margin: 0 0 0 10px;
   font-family: Georgia, serif, "Warnock Pro", "Goudy Old Style","Palatino","Book Antiqua";
   line-height: 17px;
-  }
+}
 .take_action ul {
   margin: 0 0 0 10px;
   padding: 0;
-  }
+}
 .take_action li {
   list-style: square;
-  }
-.create_a_tip_form .row  textarea, 
-.create_a_job_form .row textarea, 
+}
+.create_a_tip_form .row  textarea,
+.create_a_job_form .row textarea,
 .create_a_sample_form .row textarea {
   width: 240px!important;
-  }
+}
 .create_a_tip_form .free  textarea {
   width: 450px!important;
-  }
-.create_a_tip_form .row label, .create_a_pitch_form .row label, 
+}
+.create_a_tip_form .row label, .create_a_pitch_form .row label,
 .create_a_job_form .row label, .create_a_sample_form .row label {
   float: left;
   width: 200px!important;
   margin: 0 10px 0 0;
-  }
+}
 .create_a_tip_form .row textarea {
   float: left;
   margin: 0 0 10px 0;
   padding: 0;
-  }
+}
 .create_a_tip_form .form_hint {
   margin: 0 0 0 210px;
   color: #999999;
-  }
+}
 .create_a_pitch_form .form_hint {
   margin: 0 0 0 210px;
-  }
+}
 .create_a_tip_form .media label {
   margin: 0 0 0 10px;
   width: 190px!important;
-  }
+}
 .create_a_tip_form .free label {
   float: left;
   width: 420px;
-  }
+}
 .create_a_pitch_form .delivered label {
   float:left;
   width: auto!important;
-  }
+}
 .create_a_pitch_form .delivered input {
   float:left;
   width: auto!important;
   margin: 0 10px 0 0;
-  }
-.form_topic_box {  
+}
+.form_topic_box {
   margin: 0 0 0 210px;
-  }
+}
 .topic_box {
   float: left;
   width: 180px;
   position: relative;
-  }
+}
 .topic_box label {
   top: 0;
   left: 25px;
   width: auto;
   position: absolute;
-  }
+}
 .topic_box input {
   top: 0;
   left: 0;
-  }
+}
 /* -----------------------------------------------------------------------------
  General Column specs part 1 - this the white background color plus the padding
 --------------------------------------------------------------------------------  */
 .box_white {
   padding: 10px;
   background: #fff;
-  }
+}
 .box_yellow {
   padding: 10px;
   background: #FEFFD9;
   margin: 0 0 10px 0;
-  }
+}
 .box_blue_info {
   padding: 5px 0 0 50px;
   border-bottom: 1px solid #c0c0c0;
   margin: 0 0 10px 0;
   background: url(/images/blue_info.png) no-repeat 10px 5px;
-  }
+}
 .existing_tips_picthes {
   border-bottom: 1px solid #c0c0c0;
-  }
+}
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
 ------------------------------------------------------------------------------------ */
@@ -602,94 +641,94 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
 .span-270 {width:270px;}
 .span-530 {width:530px;}
 /* ---------------------------------------------------------------------------------
- General Column specs part 4 - this achieves the gray areas for the columns 
+ General Column specs part 4 - this achieves the gray areas for the columns
  - needed because of support for ie6 and 7 with the spotus_ie_pixel.gif
 ------------------------------------------------------------------------------------ */
 .summary h3 {margin: 0 0 4px 0;}
 .button_news_items {
   margin: 0;
   padding: 0 0 0 45px;
-  }
+}
 .summary.span-390 p.short_description {
   padding: 0px;
   margin: -10px 0 0 0;
   width: 350px;
   text-align: justify;
-  }
+}
 p.short_description {
   padding: 0px;
   margin: -20px 0 5px 0;
   text-align: justify;
-  }
+}
 .block-padding {
   height: 15px;
-  }
+}
 .column_v {
   margin: 0 15px;
-  }
+}
 .block-spacer {
   height: 15px;
   background: #f5f5f5;
-  }
+}
 .block-spacer-transparent {
   height: 15px;
-  }
+}
 .block-spacer-negative {
   height: 15px;
   background: #f5f5f5;
   margin: 10px -10px;
-  }
+}
 .yellow-spacer-negative {
   height: 2px;
   background: url(/images/spotus_form_border.gif) repeat-x left top;
   clear: both;
   margin: 0px -10px 10px -10px;
-  }
+}
 .yellow-spacer-negative-blank {
   height: 2px;
   clear: both;
   margin: 0px -10px 10px -10px;
-  }
+}
 .ui-tabs-hide { display: none;}
-  
+
 .work_row {
   position: relative;
-  }
+}
 
-/* Progress Bar Styling */  
+/* Progress Bar Styling */
 div.progressBar {
   margin: 5px;
-  }
+}
 div.progressBar div.border {
   background-color: #fff;
   border: 1px solid gray;
   width: 100%;
-  }
+}
 div.progressBar div.background {
   background-color: red;
   height: 18px;
   width: 0%;
-  }
+}
 div.progressBar img {
   margin: 5px;
-  }
+}
 
 /* Tab Styling */
 #tab_container {
   border-bottom: 1px solid #d5d5d5;
   width: 625px;
   margin: 20px 0 0 0;
-  }
+}
 ul.navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
   padding-bottom: 4px;
-  }
+}
 ul.navigation li {
   display: inline;
   margin-right: 5px;
-  }
+}
 ul.navigation a {
   padding: 6px 25px;
   color: #3C5359;
@@ -700,15 +739,15 @@ ul.navigation a {
   background: url(/images/tab_bg.png) repeat-x left bottom;
   font-weight: bold;
   margin: 0 0 -1px 0;
-  }
+}
 ul.navigation a:hover {
   background: #fff none repeat-x left bottom;
-  }
-ul.navigation a.selected, 
-.myspot_profiles a#profile_tab, 
-.myspot_settings a#settings_tab, 
-.myspot_donations a#dashboard_tab, 
-.myspot_tips a#dashboard_tab, 
+}
+ul.navigation a.selected,
+.myspot_profiles a#profile_tab,
+.myspot_settings a#settings_tab,
+.myspot_donations a#dashboard_tab,
+.myspot_tips a#dashboard_tab,
 .myspot_pledges a#dashboard_tab,
 .myspot_pitches a#dashboard_tab {
   padding: 9px 15px 5px 15px;
@@ -716,25 +755,25 @@ ul.navigation a.selected,
   background: #fff none repeat-x left bottom;
   border-bottom: 1px solid #fff;
   color: #000;
-  }
+}
 ul.navigation a:focus {
   outline: none;
-  }
+}
 div.featured_image {
   width: 220px;
   float: left;
-  }
+}
 div.featured_image .caption {
   padding: 5px;
   color: gray;
-  }
+}
 div.users {
   position:relative;
-  }
+}
 div.user_news_item_info {
   margin: 0 0 0 60px;
   min-height: 60px;
-  }
+}
 div.creator div.person_avatar {
   position: absolute;
   top: 0;
@@ -742,12 +781,12 @@ div.creator div.person_avatar {
   padding-right: 10px;
   padding-bottom: 10px;
   height: 60px;
-  }
+}
 div.fact_checker {
   margin: 5px 0 0 0;
   line-height: 15px;
   min-height: 60px;
-  }
+}
 div.fact_checker div.person_avatar {
  float: left;
  padding-right: 10px;
@@ -757,50 +796,50 @@ div.supporters div.person_avatar {
   float: left;
   padding-right: 10px;
   padding-bottom: 10px;
-  }
+}
 ul.unpaid_donations {
   list-style: none;
   margin: 0;
   padding: 0;
-  }
+}
 table td img {
   float: left;
   padding: 5px;
-  }
-table.donations td, 
-table.pitches td, 
-table.pledges td, 
+}
+table.donations td,
+table.pitches td,
+table.pledges td,
 table.tips td {
   vertical-align: top;
-  }
-table.donations th, 
-table.pitches th, 
-table.pledges th, 
+}
+table.donations th,
+table.pitches th,
+table.pledges th,
 table.tips th {
   background: none;
-  }
+}
 table.pledges tr.pledge td.pledge .number {
 	font-size: 200%;
 	padding-top: 0px;
-  }
+}
 table.pledges tr.pledge td.pledge {
 	text-align: right;
-  }
+}
 #dashboard_tab_container {
   width: 625px;
   height: 37px;
   margin: 5px 0 20px 0;
-  }
+}
 ul.dashboard_navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
   height: 37px;
-  }
+}
 ul.dashboard_navigation li {
   float: left;
   margin-right: 20px;
-  }
+}
 ul.dashboard_navigation a {
   padding: 5px 0 0 8px;
   display: block;
@@ -810,14 +849,14 @@ ul.dashboard_navigation a {
   font-weight: bold;
   height: 32px;
   width: 121px;
-  }
+}
 ul.dashboard_navigation a:hover {
   background: url('/images/nav_lite_teal_bg.png') repeat-y left top;
   color: black;
-  }
-ul.dashboard_navigation a.selected, 
-.myspot_donations a#dashboard_donations_tab, 
-.myspot_tips a#dashboard_tips_tab, 
+}
+ul.dashboard_navigation a.selected,
+.myspot_donations a#dashboard_donations_tab,
+.myspot_tips a#dashboard_tips_tab,
 .myspot_pledges a#dashboard_pledges_tab,
 .myspot_pitches a#dashboard_pitches_tab,
 ul.profile_navigation a.selected,
@@ -828,25 +867,25 @@ ul.profile_navigation a.selected,
   color: white;
   width: 129px;
   height: 37px;
-  }
+}
 ul.dashboard_navigation a:focus {
   outline: none;
-  }
+}
 .myspot_profile #profile_tab_container {
   width: 620px;
   height: 37px;
   margin: 5px 0 20px 0;
-  }
+}
 ul.profile_navigation {
   list-style: none;
   margin: 0 0 0 1px;
   padding: 0;
   height: 37px;
-  }
+}
 ul.profile_navigation li {
   float: left;
   margin-right: 20px;
-  }
+}
 ul.profile_navigation a {
   padding: 5px 0 0 8px;
   display: block;
@@ -856,32 +895,32 @@ ul.profile_navigation a {
   font-weight: bold;
   height: 32px;
   width: 121px;
-  }
+}
 ul.profile_navigation a:hover {
   background: url('/images/nav_lite_teal_bg.png') repeat-y left top;
   color: black;
-  }
+}
 ul.profile_navigation a.selected,
 .myspot_profile a#profile_basic_tab, .myspot_profile a#profile_work_history_tab,
 .myspot_profile a#profile_work_samples_tab,{
   background-color: #3C5359;
   color: white;
-  }
+}
 ul.profile_navigation a:focus {
   outline: none;
-  }
+}
 textarea#headline {
   width: 100%;
-  }
-  
+}
+
 #reporters_toolbar_box {
   margin: 15px 0 0 0;
   position: relative;
-  }
+}
 
 #reporters_toolbar_box .person_avatar {
   float: left;
-  }
+}
 
 #reporters_toolbar {
   background: #fff;
@@ -892,117 +931,117 @@ textarea#headline {
   height: 25px;
   bottom: 0;
   width: 860px;
-  }  
-  
-#reporters_toolbar ul {  
+}
+
+#reporters_toolbar ul {
   display:block;
   margin: 0;
   padding: 0;
-  }
+}
 
-#reporters_toolbar ul.children {  
-  margin:0;  
-  padding:0;  
-  border-top:1px solid #FCD290;  
-  z-index:100;  
+#reporters_toolbar ul.children {
+  margin:0;
+  padding:0;
+  border-top:1px solid #FCD290;
+  z-index:100;
   visibility:hidden;
-  background: #fff;  
-  }  
+  background: #fff;
+}
 
-#reporters_toolbar li {  
-  display:inline;  
-  float:left;  
+#reporters_toolbar li {
+  display:inline;
+  float:left;
   height:auto;
   margin: 0 0 0 10px;
-  }  
+}
 
-#reporters_toolbar li li {  
-  display:block;  
-  float:none;  
-  }  
+#reporters_toolbar li li {
+  display:block;
+  float:none;
+}
 
-#reporters_toolbar a {  
-  text-decoration:none;  
-  display:block;  
-  font-weight:bold;  
-  line-height:20px;  
-  text-align:center;  
-  width:115px;  
-  }  
+#reporters_toolbar a {
+  text-decoration:none;
+  display:block;
+  font-weight:bold;
+  line-height:20px;
+  text-align:center;
+  width:115px;
+}
 
-#reporters_toolbar a:hover, #reporters_toolbar  a.selected {  
-  color:#FFFFFF;  
-  text-decoration:none;  
-  }  
+#reporters_toolbar a:hover, #reporters_toolbar  a.selected {
+  color:#FFFFFF;
+  text-decoration:none;
+}
 
-#reporters_toolbar ul a {  
-  background:#FFF0CE none repeat scroll 0%;  
-  border-bottom:1px solid #FCD290;  
-  border-left:1px solid #FCD290;  
-  border-right:1px solid #FCD290;  
-  color:#666666;  
-  line-height:20px;  
-  width:115px;  
-  }  
+#reporters_toolbar ul a {
+  background:#FFF0CE none repeat scroll 0%;
+  border-bottom:1px solid #FCD290;
+  border-left:1px solid #FCD290;
+  border-right:1px solid #FCD290;
+  color:#666666;
+  line-height:20px;
+  width:115px;
+}
 
-#reporters_toolbar ul ul a {  
-  background:#FFF9EA none repeat scroll 0%;  
-  }  
+#reporters_toolbar ul ul a {
+  background:#FFF9EA none repeat scroll 0%;
+}
 
-#reporters_toolbar ul a:hover, #reporters_toolbar  ul a.selected {  
-  }  
+#reporters_toolbar ul a:hover, #reporters_toolbar  ul a.selected {
+}
 
-#reporters_toolbar li:hover ul, #reporters_toolbarli.sf ul {  
-  visibility:visible;  
-  }  
+#reporters_toolbar li:hover ul, #reporters_toolbarli.sf ul {
+  visibility:visible;
+}
 
-#reporters_toolbar li:hover ul ul, #reporters_toolbar li.sf ul ul {  
-  visibility:hidden;  
-  }  
-  
-#reporters_toolbar li:hover ul, #reporters_toolbar li li:hover ul, #reporters_toolbar li.sf ul, #reporters_toolbar li li.sf ul {  
-  visibility:visible;  
-  }
+#reporters_toolbar li:hover ul ul, #reporters_toolbar li.sf ul ul {
+  visibility:hidden;
+}
+
+#reporters_toolbar li:hover ul, #reporters_toolbar li li:hover ul, #reporters_toolbar li.sf ul, #reporters_toolbar li li.sf ul {
+  visibility:visible;
+}
 
 #work_history, #work_sample {
   padding-bottom: 8px;
-  }
+}
 
 #work_history .work_row .work_title, .profiles .work_title {
   font-color: black;
   font-size: 14px;
   margin: 0;
   font-weight: bold;
-  }
+}
 
 .job, .sample {
   position: relative;
-  }
+}
 .job .work_delete, .sample .work_delete  {
   position: absolute;
   top: 10px;
   right: 10px;
-  }
+}
 .job .ss_newspaper {
   position: absolute;
   left: 0;
-  }
+}
 .job .work_title, .sample .work_title {
   position: absolute;
   top: 0;
   left: 30px;
   font-size: 14px;
   font-weight: bold;
-  }
+}
 .job .work_description, .sample .work_description {
   font-size: 11px;
-  }
+}
 .profiles .show_profile_jobs, .myspot_profiles .show_profile_jobs {
-  margin: 0 0 15px 0; 
-  }
+  margin: 0 0 15px 0;
+}
 .show_profile_jobs .work_description {
   margin: 0 0 0 25px;
-  }
+}
 .body_content table.users_table th {
   border: 1px solid #ccc;
   font-size: 10px;
@@ -1012,13 +1051,13 @@ textarea#headline {
   padding: 5px 0 5px 30px;
   float: left;
   margin: 5px 0 0 10px;
-  }
+}
 .engine_yard {
   background: url(/images/logo_ey.png) no-repeat left bottom;
   padding: 10px 0 10px 30px;
   margin: 0 0 10px 0;
   float: left;
-  }
+}
 ul.search_navigation a:hover {color:#666;}
 .search_field_button {margin: 10px 0 0 25px;}
 .search-check-box label { font-weight: normal;}
