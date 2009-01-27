@@ -2,21 +2,37 @@
   - content_for :error do
     = error_messages_for :user
 
+%h3
+  Just Getting Started?
+  %br
+  %span.small.quieter
+    All We Need&hellip;
+.double_content_border
 - form_for(:user, @user, :url => user_path) do |f|
   .span-6.register
-    %h3 Just Getting Started? <br /><span class='small quieter'> All We Need...</span>
-    .double_content_border
-    .row
-      = f.label :email, "Your E-mail Address"
-      = f.text_field :email, :class => "text"
     .row
       = f.label :first_name, "Your First Name"
-      = f.text_field :first_name, :class => "text"
+      = f.text_field :first_name, :class => "text", :tabindex => 1
     .block-padding
     .row
-      = f.label :last_name, "Your Last Name"
-      = f.text_field :last_name, :class => "text"
+      = f.label :password
+      = f.password_field :password, :class => "text", :tabindex => 3
     .block-padding
+    .row
+      = f.label :email, "Your E-mail Address"
+      = f.text_field :email, :class => "text", :tabindex => 5
+    .block-padding
+  .span-6.register
+    .row
+      = f.label :last_name, "Your Last Name"
+      = f.text_field :last_name, :class => "text", :tabindex => 2
+    .block-padding
+    .row
+      = f.label :password_confirmation, "Confirm Password"
+      = f.password_field :password_confirmation, :class => "text", :tabindex => 4
+    .block-padding
+  .clear
+  .span-12.register
     %span I am a:
     .row
       .float_left= f.radio_button :type, 'Citizen'
@@ -34,7 +50,7 @@
         Accept the 
         = link_to 'Terms of Service', page_path('terms')
     .block-padding.clear 
-
-    .double_content_border
-    .float_right
-      %input{:type => "image", :src=>"../images/register.png"}
+  .clear
+  .double_content_border
+  .float_right
+    %input{:type => "image", :src=>"../images/register.png"}
