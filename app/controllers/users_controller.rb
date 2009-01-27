@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   include AuthenticatedSystem
 
+  def new
+    @user = User.new
+  end
+
   def create
     cookies.delete :auth_token
 
@@ -10,7 +14,7 @@ class UsersController < ApplicationController
       :notify_stories => true,
       :notify_spotus_news => true
     }
-    
+
     user_attributes = params[:user].merge(opt_in_defaults)
 
     @user = (params[:user][:type] || "User").constantize.new(user_attributes)

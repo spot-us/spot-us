@@ -12,45 +12,6 @@ describe 'sessions/new' do
     template.should have_tag('a[href=?]', new_password_reset_path)
   end
 
-  it "should have a checkbox for accepting the terms of service" do
-    do_render
-    template.should have_tag('input[type="checkbox"][name=?]', "user[terms_of_service]")
-  end
-
-  describe "without errors" do
-    before do
-      assigns[:user].should be_valid
-    end
-
-    it "should not display an error message" do
-      template.should_receive(:content_for).never
-      do_render
-    end
-  end
-
-  describe "with a new user" do
-    before do
-      assigns[:user] = User.new
-    end
-
-    it "should not display an error message" do
-      template.should_receive(:content_for).never
-      do_render
-    end
-  end
-
-  describe "with errors" do
-    before do
-      assigns[:user].email = nil
-      assigns[:user].should_not be_valid
-    end
-
-    it "should display an error message" do
-      template.should_receive(:content_for).once.with(:error)
-      do_render
-    end
-  end
-
   it 'should render' do
     do_render
   end
