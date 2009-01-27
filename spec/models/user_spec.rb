@@ -111,6 +111,9 @@ describe User do
     user = Factory(:user)
     donation1 = Factory(:donation, :user => user, :amount => 1)
     donation2 = Factory(:donation, :user => user, :amount => 3)
+    [donation1,donation2].each do |donation|
+      donation.pay!
+    end
     user.reload
     user.amount_donated_to(donation1.pitch).should == donation1.amount
     user.amount_donated_to(donation2.pitch).should == donation2.amount
