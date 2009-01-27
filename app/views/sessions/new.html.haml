@@ -1,15 +1,29 @@
 - @title = "Spot.us - Login"
+- if login_failed?
+  - content_for :error do
+    %h2 Sorry about that.
+    %p Check below to see what happened:
+    %ul
+      %li Was it an invalid E-mail address or password?
+    %p
+      If you're experiencing a persistent problem, email
+      = mail_to 'david@spot.us', nil, :encode => "hex"
+      %br
+      Seriously, this guy doesn't sleep and he wants the site to work for you!!!
 
 .block-padding
-
 .login-boxer
-
-  - # Register box 
-  = render :partial => 'users/form'
-        
-  - # Login box 
-  = render :partial => 'sessions/form'    
-    
+  - form_tag session_url do
+    .span-6.or_login
+      %h3 Welcome Back!!!
+      %br
+      %span.small.quieter We already know you.
+      .double_content_border
+      = render :partial => 'sessions/form'
+      .clear
+      .double_content_border
+      .float_right
+        %input{:type => 'image', :src=>'/images/login.png'}
   .clear
-%img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-padding
+
