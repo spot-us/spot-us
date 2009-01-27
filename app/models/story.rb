@@ -1,43 +1,43 @@
 class Story < NewsItem
   aasm_initial_state  :draft
-  
+
   aasm_state :draft
   aasm_state :fact_check
   aasm_state :ready
   aasm_state :published
-  
+
   aasm_event :verify do
     transitions :from => :draft, :to => :fact_check
   end
-  
+
   aasm_event :reject do
     transitions :from => :fact_check, :to => :draft
   end
-  
+
   aasm_event :accept do
-    transitions :from => :fact_check, :to => :ready
+    transitions :from => :fact_check, :to => :ready, :on_transition=> :notify_admin
   end
-  
+
   aasm_event :publish do
     transitions :from => :ready, :to => :published
   end
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
   validate_on_update :extended_description
-  
+
   named_scope :published, :conditions => {:status => 'published'}
-  
+
   def editable_by?(user)
     return false if user.nil?
     return false if self.fact_checker == user
-    if user.is_a?(Reporter) 
+    if user.is_a?(Reporter)
       return (user == self.user) if self.draft?
-    end 
+    end
     return false if user.is_a?(Citizen)
-    return true if user.is_a?(Admin) 
-    false 
+    return true if user.is_a?(Admin)
+    false
   end
-  
+
   def viewable_by?(user)
     return true if user.is_a?(Admin)
     return true if self.published?
@@ -46,13 +46,12 @@ class Story < NewsItem
     end
     false
   end
-  
+
   def publishable_by?(user)
     return false if user.nil?
     self.ready? && user.is_a?(Admin)
   end
-  
-  
+
   def reporter_view_permissions(user)
     return true if (user == self.user || self.fact_checker == user)
   end
@@ -60,6 +59,10 @@ class Story < NewsItem
   def fact_checkable_by?(user)
     return true if user.is_a?(Admin)
     user == self.fact_checker
+  end
+
+  def notify_admin
+    Mailer.deliver_story_ready_notification(self)
   end
 end
 

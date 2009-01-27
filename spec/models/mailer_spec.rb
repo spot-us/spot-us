@@ -43,6 +43,13 @@ describe Mailer do
     end.should change {ActionMailer::Base.deliveries.size }.by(1)
   end
 
+  it "sends an email on story accepted" do
+    story = stub_model(Pitch)
+    lambda do
+      Mailer.deliver_story_ready_notification(story)
+    end.should change {ActionMailer::Base.deliveries.size}.by(1)
+  end
+
   it "sends an email to news org when approved" do
     user = stub_model(User)
     lambda do
