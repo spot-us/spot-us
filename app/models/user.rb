@@ -8,13 +8,22 @@ class User < ActiveRecord::Base
   aasm_initial_state  :active
   aasm_state :active
 
-  has_many :donations
+  has_many :donations do
+    def pitch_sum(pitch)
+      self.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
+    end
+  end
+
   has_many :spotus_donations
   has_many :tips
   has_many :pitches
-  has_many :pledges
+  has_many :pledges do
+    def tip_sum(tip)
+      self.all(:conditions => {:tip_id => tip}).map(&:amount).sum
+    end
+  end
+
   has_many :stories
-  has_many :pledged_tips, :through => :pledges, :source => :pledge
   has_many :jobs
   has_many :samples
   has_many :credits
@@ -123,11 +132,11 @@ class User < ActiveRecord::Base
   end
 
   def amount_pledged_to(tip)
-    tip.pledges.find_by_user_id(id).amount
+    self.pledges.tip_sum(tip)
   end
 
   def amount_donated_to(pitch)
-    pitch.donations.find_all_by_user_id(id).map(&:amount).sum
+    self.donations.pitch_sum(pitch)
   end
 
   # Encrypts the password with the user salt
