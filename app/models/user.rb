@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :donations do
     def pitch_sum(pitch)
-      self.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
+      self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
     end
   end
 
