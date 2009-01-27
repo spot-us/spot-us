@@ -45,6 +45,13 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
+  def story_ready_notification(story)
+    recipients '"David Cohn" <david@spotus.com>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Story ready for publishing"
+    body       :story => story
+  end
+
   def organization_approved_notification(user)
     recipients user.email
     from       MAIL_FROM_INFO
