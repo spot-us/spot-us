@@ -15,7 +15,7 @@ class Story < NewsItem
   end
 
   aasm_event :accept do
-    transitions :from => :fact_check, :to => :ready, :on_transition=> :notify_admin
+    transitions :from => :fact_check, :to => :ready, :on_transition => :notify_admin
   end
 
   aasm_event :publish do
