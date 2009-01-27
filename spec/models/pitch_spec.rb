@@ -131,6 +131,7 @@ describe Pitch do
       p.fund!
       p.can_be_accepted?.should be_false
     end
+
   end
 
 
@@ -473,6 +474,12 @@ describe Pitch do
         end
         p.should be_valid
         p.reload.should be_funded
+      end
+
+      it "should trigger fund events when it's funded" do
+        p = Factory(:pitch, :requested_amount => 100)
+        p.should_receive(:do_fund_events)
+        p.fund!
       end
     end
   end
