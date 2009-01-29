@@ -7,7 +7,7 @@
     %li= link_to "Press", page_path('press')
     %li= link_to "Contact", page_path('contact')
     %li.no-pipe= link_to "Terms of Use", page_path('terms')
-    and
+    %li.no-pipe and
     %li.no-pipe= link_to "Privacy Policy", page_path('privacy')
   %p== Copyright &copy; #{Time.now.year} Spot.us
   = render :partial => 'layouts/partners'
