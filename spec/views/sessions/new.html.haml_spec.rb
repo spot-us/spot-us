@@ -12,6 +12,11 @@ describe 'sessions/new' do
     template.should have_tag('a[href=?]', new_password_reset_path)
   end
 
+  it "should have a link to resend the activation email" do
+    do_render
+    template.should have_tag('a[href=?]', resend_activation_user_path)
+  end
+
   it 'should render' do
     do_render
   end
