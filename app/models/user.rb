@@ -4,9 +4,21 @@ class User < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
 
+  TYPES = ["Citizen", "Reporter", "Organization", "Admin"]
+  CREATABLE_TYPES = TYPES - ["Admin"]
+
   aasm_column :status
-  aasm_initial_state  :active
+  aasm_state :inactive
   aasm_state :active
+  aasm_initial_state  :inactive
+
+  aasm_event :activate do
+    transitions :from => :inactive, :to => :active,
+      :on_transition => lambda{ |user|
+        user.send(:deliver_signup_notification)
+        user.send(:clear_activation_code)
+      }
+  end
 
   has_many :donations do
     def pitch_sum(pitch)
@@ -38,14 +50,14 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?, :on => :update
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
-  validates_inclusion_of    :type, :in => %w(Citizen Reporter Organization Admin)
+  validates_inclusion_of    :type, :in => User::TYPES
   validates_acceptance_of   :terms_of_service
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
-  before_save :encrypt_password
-  before_validation_on_create :generate_password, :set_default_location
 
-  after_create :deliver_signup_notification
+  before_save :encrypt_password
+  before_validation_on_create :generate_activation_code, :set_default_location
+  after_create :deliver_activation_email, :unless => lambda {|user| user.organization? }
 
   has_attached_file :photo,
                     :styles      => { :thumb => '50x50#' },
@@ -67,6 +79,27 @@ class User < ActiveRecord::Base
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
+
+  def self.opt_in_defaults
+    { :notify_tips => true,
+      :notify_pitches => true,
+      :notify_stories => true,
+      :notify_spotus_news => true }
+  end
+
+  def self.new(options = nil, &block)
+    options = (options || {}).stringify_keys
+    options.merge!(opt_in_defaults)
+    if User::CREATABLE_TYPES.include?(options["type"])
+      returning compute_type(options["type"]).allocate do |model|
+        model.send(:initialize, options, &block)
+      end
+    elsif options["type"].blank?
+      super
+    else
+      raise ArgumentError, "invalid subclass of #{inspect}"
+    end
+  end
 
   def citizen?
     self.is_a? Citizen
@@ -103,6 +136,7 @@ class User < ActiveRecord::Base
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
     u = find_by_email(email) # need to get the salt
+    return nil unless u && u.activated?
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -180,9 +214,8 @@ class User < ActiveRecord::Base
     save(false)
   end
 
-  # Returns true if the user has just been activated.
-  def recently_activated?
-    @activated
+  def activated?
+    !activation_code?
   end
 
   def full_name
@@ -261,10 +294,23 @@ class User < ActiveRecord::Base
     Mailer.send(:"deliver_#{self.type.downcase}_signup_notification", self)
   end
 
+  def deliver_activation_email
+    Mailer.deliver_activation_email(self)
+  end
+
   def set_default_location
     self.location ||= LOCATIONS.first
   end
 
+  def generate_activation_code
+    entropy = Time.now.to_s.split(//).sort_by{rand}.join
+    digest = Digest::SHA1.hexdigest(entropy)
+    self.activation_code = Zlib.crc32(digest)
+  end
+
+  def clear_activation_code
+    self.update_attribute(:activation_code, nil)
+  end
 end
 
 
