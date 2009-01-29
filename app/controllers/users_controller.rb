@@ -7,22 +7,25 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-
-    opt_in_defaults = {
-      :notify_tips => true,
-      :notify_pitches => true,
-      :notify_stories => true,
-      :notify_spotus_news => true
-    }
-
-    user_attributes = params[:user].merge(opt_in_defaults)
-
-    @user = (params[:user][:type] || "User").constantize.new(user_attributes)
-
+    @user = User.new(params[:user])
     if @user.save
-      flash[:success] = 'Check your e-mail for your password, then login to change it.'
+      flash[:success] = 'Click the link in the email we just sent you to finish creating your account!'
+    end
+    render :action => 'new'
+  end
+
+  def activate
+    self.current_user = User.find_by_activation_code(params[:activation_code])
+    if current_user
+      current_user.activate!
+      login_cookies
+      flash[:success] = "You have successfully activated your account - welcome to Spot.Us!"
+      redirect_back_or_default('/')
     else
-      render :template => 'sessions/new'
+      flash[:error] = "Sorry, we were unable to find that activation code. Perhaps you have already activated your account?"
+      redirect_to new_session_url
     end
   end
 end
+
+

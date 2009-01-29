@@ -23,7 +23,7 @@ describe SessionsController do
   end
 
   it 'logins and redirects' do
-    Factory(:user, :email => 'user@example.com', :password => 'test')
+    Factory(:user, :email => 'user@example.com', :password => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     session[:user_id].should_not be_nil
     response.should be_redirect
@@ -56,13 +56,13 @@ describe SessionsController do
   end
 
   it 'remembers me' do
-    Factory(:user, :email => 'user@example.com', :password => 'test')
+    Factory(:user, :email => 'user@example.com', :password => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "1"
     response.cookies["auth_token"].should_not be_nil
   end
   
   it 'sets the current user full name cookie' do
-    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     response.cookies["current_user_full_name"].first.should == "Bob Levine"
   end

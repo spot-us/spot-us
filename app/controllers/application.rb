@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def login_cookies
+      create_current_login_cookie
+      update_balance_cookie
+    end
+
     def create_current_login_cookie
       cookies[:current_user_full_name] = current_user.full_name
     end
