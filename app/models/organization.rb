@@ -1,32 +1,28 @@
 class Organization < User
   before_validation_on_create :set_status
+  after_create :deliver_signup_notification
 
   aasm_state :needs_approval
   aasm_state :approved
-  
+
   aasm_event :needs_to_be_approved do
-    transitions :from => :active, :to => :needs_approval
+    transitions :from => :inactive, :to => :needs_approval
   end
-  
+
   aasm_event :approve do
-    transitions :from => :needs_approval, :to => :approved, 
+    transitions :from => :needs_approval, :to => :approved,
                 :on_transition => :do_after_approved_actions
   end
-  
+
   def deliver_signup_notification
     Mailer.deliver_organization_signup_notification(self)
     Mailer.deliver_news_org_signup_request(self)
   end
-  
+
   def do_after_approved_actions
-    # trick: we need to generate password here so that password field is
-    # populated for sending in the email. the password field is not
-    # otherwise available.
-    
-    generate_password
     Mailer.deliver_organization_approved_notification(self)
   end
-    
+
   def set_status
     needs_to_be_approved! if active?
   end

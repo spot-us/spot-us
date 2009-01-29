@@ -2,7 +2,6 @@ module AASM
   class StateMachine
     def clone
       klone = super
-      klone.states = states.clone
       klone.events = events.clone
       klone
     end
