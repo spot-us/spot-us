@@ -28,7 +28,7 @@ describe SessionsController do
     session[:user_id].should_not be_nil
     response.should be_redirect
   end
-  
+
   it "should create a donation for non-logged in user" do
     user = Factory(:user, :email => 'user@example.com', :password => 'test')
     donations = mock(:donations)
@@ -40,7 +40,7 @@ describe SessionsController do
     session[:donation_amount] = 25
     post :create, :email => 'user@example.com', :password => 'test'
   end
-  
+
   it 'fails login and does not redirect' do
     Factory(:user, :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'bad password'
@@ -60,27 +60,27 @@ describe SessionsController do
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "1"
     response.cookies["auth_token"].should_not be_nil
   end
-  
+
   it 'sets the current user full name cookie' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     response.cookies["current_user_full_name"].first.should == "Bob Levine"
   end
-  
+
   it 'clears the current user full name cookie when logging out' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
     response.cookies["current_user_full_name"].first.should be_nil
   end
-  
+
   it 'clears the balance text cookie when logging out' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
     response.cookies["balance_text"].first.should be_nil
   end
-  
+
   it 'does not remember me' do
     Factory(:user, :email => 'user@example.com', :password => 'test')
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "0"
@@ -134,7 +134,7 @@ describe SessionsController do
   def auth_token(token)
     CGI::Cookie.new('name' => 'auth_token', 'value' => token)
   end
-    
+
   def cookie_for(user)
     auth_token user.remember_token
   end
