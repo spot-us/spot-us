@@ -1,34 +1,34 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 # dummy class on which to test, just uses users table to avoisserrors
-class TestSanitizy < ActiveRecord::Base
+class SingularSanitizy < ActiveRecord::Base
   include Sanitizy
   set_table_name "news_items"
   cleanse_columns(:video_embed) do |sanitizer|
-    sanitizer.allowed_tags.replace(%w(object param embed a img))
-    sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
+    sanitizer.allowed_tags = %w(object param embed a img)
+    sanitizer.allowed_attributes = %w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality)
   end
 end
 
 describe "Sanitizy library" do
   before do
-    @sanitized = TestSanitizy.new
+    @sanitized = SingularSanitizy.new
   end
 
   describe "#cleanse_columns" do
     it "should set a class attribute called 'video_embed_sanitizer'" do
-      TestSanitizy.should respond_to(:video_embed_sanitizer)
+      @sanitized.should respond_to(:video_embed_sanitizer)
     end
 
     it "should create an instance of a sanitizer" do
       @sanitized.sanitize_declared_columns
-      TestSanitizy.video_embed_sanitizer.should be_an_instance_of(HTML::WhiteListSanitizer)
+      @sanitized.video_embed_sanitizer.should be_an_instance_of(Sanitizy::Sanitizer)
     end
 
     it "should set the allowed attributes on the sanitizer" do
       @sanitized.sanitize_declared_columns
-      TestSanitizy.video_embed_sanitizer.allowed_attributes.should_not be_empty
-      TestSanitizy.video_embed_sanitizer.allowed_attributes.should be_a_kind_of(Set)
+      @sanitized.video_embed_sanitizer.allowed_attributes.should_not be_empty
+      @sanitized.video_embed_sanitizer.allowed_attributes.should be_a_kind_of(Set)
     end
 
     describe "sanitizing the contents of the field" do
@@ -75,5 +75,66 @@ describe "Sanitizy library" do
     end
   end
 
+end
+
+class MultipleSanitizy < ActiveRecord::Base
+  include Sanitizy
+  set_table_name 'news_items'
+  cleanse_column(:short_description) do |s|
+    s.allowed_tags = %w(baz quuz)
+  end
+  cleanse_column(:video_embed) do |s|
+    s.allowed_tags = %w(foo bar)
+  end
+end
+
+describe "Multiple sanitizers on a model" do
+  before do
+    @sanitized = MultipleSanitizy.new
+  end
+
+  it "should have two columns stored in self.class.sanitizy_columns" do
+    MultipleSanitizy.sanitizy_columns.size.should == 2
+  end
+
+  describe "short description" do
+    it "should only allow baz and quuz tags" do
+      @sanitized.short_description_sanitizer.allowed_tags.should == ['baz', 'quuz'].to_set
+    end
+  end
+  describe "video embed" do
+    it "should only allow foo and bar tags" do
+      @sanitized.video_embed_sanitizer.allowed_tags.should == ['foo', 'bar'].to_set
+    end
+
+    it "should be a new instance of a sanitizer" do
+      @sanitized.video_embed_sanitizer.should_not == @sanitized.short_description_sanitizer
+    end
+  end
+end
+
+class SetSanitizy < ActiveRecord::Base
+  include Sanitizy
+  set_table_name 'news_items'
+  cleanse_column(:short_description) do |s|
+    s.allowed_tags.delete('div')
+  end
+  cleanse_column(:video_embed) do |s|
+    s.allowed_tags.replace(['object'])
+  end
+end
+
+describe "when using Set operations" do
+  before do
+    @sanitized = SetSanitizy.new
+  end
+
+  it "should allow deleting tags" do
+    @sanitized.short_description_sanitizer.allowed_tags.should_not include('div')
+  end
+
+  it "should allow replacing tags" do
+    @sanitized.video_embed_sanitizer.allowed_tags.should == ['object'].to_set
+  end
 end
 
