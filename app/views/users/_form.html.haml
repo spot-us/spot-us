@@ -5,9 +5,12 @@
 %h3
   Just Getting Started?
   %br
-  %span.small.quieter
+  %span.small.quieter.float-left{:style => "margin-bottom: 0;"}
     All We Need&hellip;
-.double_content_border
+  %span.float-right.small.loud{:style => "margin-bottom: 0;"}
+    = link_to 'Already a member?', new_session_url
+
+.double_content_border.clear
 - form_for(:user, @user, :url => user_path) do |f|
   .span-6.register
     .row
@@ -21,7 +24,6 @@
     .row
       = f.label :email, "Your E-mail Address"
       = f.text_field :email, :class => "text", :tabindex => 5
-    .block-padding
   .span-6.register
     .row
       = f.label :last_name, "Your Last Name"
@@ -30,7 +32,6 @@
     .row
       = f.label :password_confirmation, "Confirm Password"
       = f.password_field :password_confirmation, :class => "text", :tabindex => 4
-    .block-padding
   .clear
   .span-12.register
     %span I am a:
@@ -52,5 +53,5 @@
     .block-padding.clear 
   .clear
   .double_content_border
-  .float_right
+  %div{:style => "padding: 0pt 0pt 8px 5px;"}
     %input{:type => "image", :src=>"../images/register.png"}
