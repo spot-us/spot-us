@@ -81,4 +81,44 @@ describe UsersController do
     end
 
   end
+
+  describe "activation email" do
+    route_matches('/user/activation_email', :get, :controller => 'users', :action => "activation_email")
+    route_matches('/user/resend_activation', :post, :controller => 'users', :action => "resend_activation")
+
+    before do
+      @user = Factory(:citizen)
+      Mailer.stub!(:deliver_activation_email)
+    end
+
+    it "should successfully render on GET" do
+      get :activation_email
+      response.should be_success
+    end
+
+    it "should post email address and redirect back or default" do
+      do_resend_activation
+      response.should be_redirect
+    end
+
+    it "should deliver the resend activation email" do
+      do_resend_activation
+      Mailer.should_receive(:deliver_activation_email)
+    end
+
+    it "should display a success flash message" do
+      do_resend_activation
+      flash[:success].should_not be_empty
+    end
+
+    it "should display an error flash message when email not found" do
+      do_resend_activation('invalid@whateverz.com')
+      flash[:error].should_not be_empty
+    end
+
+    def do_resend_activation(email = nil)
+      email ||= @user.email
+      post :resend_activation, :email => email
+    end
+  end
 end
