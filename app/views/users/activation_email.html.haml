@@ -1,0 +1,14 @@
+- @title = "Spot.us - Resend Activation E-mail"
+
+.block-padding
+%div.login-boxer{:style => 'padding:1em'}
+
+  %h3 Resend Activation E-mail
+
+  .double_content_border
+  - form_tag resend_activation_user_path, :method => 'post' do
+    = label :email, "Your E-mail Address"
+    = text_field_tag 'email'
+    = submit_tag "Send it!"
+.block-padding
+
