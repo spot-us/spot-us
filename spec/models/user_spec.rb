@@ -22,6 +22,23 @@ describe User do
     it "is creatable by guest" do
       User.createable_by?(nil).should be
     end
+
+    it "should set default opt-in values" do
+      User.opt_in_defaults.each do |key,value| 
+        User.new.send(key).should == value
+      end
+    end
+
+    it "should only allow valid creatable types" do
+      lambda{ User.new(:type => "Admin") }.should raise_error(ArgumentError)
+    end
+
+    it "should not generate a password" do
+      @user = User.new
+      @user.should_not_receive(:generate_password)
+      @user.save
+    end
+
   end
 
   describe "total_credits" do
@@ -120,28 +137,24 @@ describe User do
   end
 
   describe "signup notification emails" do
-    it "sends email to citizen on create" do
-      user = Factory.build(:user)
-      Mailer.should_receive(:deliver_citizen_signup_notification).with(user)
-      user.save!
+    it "sends email to citizen after activation" do
+      c = Factory(:citizen)
+      Mailer.should_receive(:deliver_citizen_signup_notification)
+      c.activate!
     end
 
-    it "sends email for news org when user is a new org on create" do
-      user = Factory.build(:organization)
-      Mailer.should_receive(:deliver_organization_signup_notification).with(user)
-      Mailer.should_receive(:deliver_news_org_signup_request).with(user)
-      user.save!
+    it "sends email to news org after signup" do
+      Mailer.should_receive(:deliver_organization_signup_notification)
+      Factory(:organization)
     end
 
-    it "sends email for reporter when user is a reporter on create" do
-      user = Factory.build(:reporter)
-      Mailer.should_receive(:deliver_reporter_signup_notification).with(user)
-      user.save!
+    it "sends email to reporter after activation" do
+      Mailer.should_receive(:deliver_reporter_signup_notification)
+      Factory(:reporter).activate!
     end
 
     it "doesn't send on save" do
       user = Factory(:user)
-      user.email = random_email_address
       Mailer.should_not_receive(:deliver_signup_notification).with(user)
       user.save
     end
@@ -164,15 +177,6 @@ describe User do
   it "should set status to unapproved when user is news org" do
     user = Factory(:organization)
     user.status.should == "needs_approval"
-  end
-
-  it 'generates password on create' do
-    user = Factory(:user, :password => nil)
-    violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
-    user.password.should_not be_nil
-    user.password.size.should == 6
-    User.authenticate(user.email, user.password).should ==
-      User.find(user.to_param)
   end
 
   it 'requires password confirmation on update' do
@@ -219,6 +223,7 @@ describe User do
       @user = Factory(:user, :email    => 'user@example.com',
                              :password => @password)
       @user = User.find(@user.to_param) # clear instance vars and get correct type
+      @user.activate!
     end
 
     it 'changes password' do
@@ -229,6 +234,11 @@ describe User do
     it 'does not rehash password' do
       @user.update_attributes!(:email => 'quentin2@example.com')
       User.authenticate('quentin2@example.com', @password).should == @user
+    end
+
+    it "does not authenticate if the user is not activated" do
+      @user.update_attribute(:activation_code, 'foo')
+      User.authenticate(@user.email, @password).should be_nil
     end
 
     it 'is found by correct authentication' do
@@ -288,6 +298,33 @@ describe User do
 
     it "should set the default location to the first location" do
       @user.location.should == LOCATIONS.first
+    end
+  end
+
+  describe "activation" do
+    before do
+      Mailer.stub!(:deliver_activation_email)
+      @user = Citizen.new(Factory.attributes_for(:citizen))
+    end
+
+    it "should send an activation email" do
+      @user.should_receive(:deliver_activation_email)
+      @user.save
+    end
+
+    it "should clear the activation code on activate!" do
+      @user.activate!
+      @user.activation_code.should be_nil
+    end
+
+    it "should return true for activated users on activated?" do
+      @user.activate!
+      @user.should be_activated
+    end
+
+    it "should generate an activation code" do
+      @user.save
+      @user.activation_code.should_not be_nil
     end
   end
 
