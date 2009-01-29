@@ -7,6 +7,11 @@ describe 'users/new' do
     assigns[:user]  = Factory(:user)
   end
 
+  it "should have a link to login" do
+    do_render
+    template.should have_tag('a[href=?]', new_session_url)
+  end
+
   it "should have a password field" do
     do_render
     template.should have_tag('input[type="password"][name=?]', "user[password]")
