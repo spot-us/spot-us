@@ -2,6 +2,13 @@ class Mailer < ActionMailer::Base
   include ActionController::UrlWriter
   default_url_options[:host] = DEFAULT_HOST
 
+  def activation_email(user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    %(Welcome to Spot.Us – Please verify your email address")
+    body :user => user
+  end
+
   def citizen_signup_notification(user)
     recipients user.email
     from       MAIL_FROM_INFO

@@ -11,7 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   # TODO: remove when done
   map.resources :ui
 
-  map.resource :user, :only => [:new, :create]
+  map.resource :user, :only => [:new, :create, :activate]
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
 
   map.resource :session
   map.destroy_session 'logout', :controller => 'sessions', :action => 'destroy'

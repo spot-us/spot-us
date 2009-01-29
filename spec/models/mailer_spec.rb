@@ -1,8 +1,16 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Mailer do
+  it "sends an activation email on deliver_activation_email" do
+    user = Factory(:citizen)
+    lambda do
+      Mailer.deliver_activation_email(user)
+    end.should change {ActionMailer::Base.deliveries.size }.by(1)
+  end
+
   it "sends an email on deliver_citizen_signup_notification" do
     user = Factory(:user)
+    user.activate!
     lambda do
       Mailer.deliver_citizen_signup_notification(user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)

@@ -21,6 +21,8 @@ Factory.define :user do |user|
   user.first_name 'Billy'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Citizen')
+  user.password 'tester'
+  user.password_confirmation 'tester'
 end
 
 Factory.define :citizen do |user|
@@ -28,6 +30,8 @@ Factory.define :citizen do |user|
   user.first_name 'Billy'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Citizen')
+  user.password 'tester'
+  user.password_confirmation 'tester'
 end
 
 Factory.define :admin do |user|
@@ -35,6 +39,8 @@ Factory.define :admin do |user|
   user.first_name 'Billy'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Admin')
+  user.password 'tester'
+  user.password_confirmation 'tester'
 end
 
 Factory.define :comment do |comment|
@@ -50,6 +56,8 @@ Factory.define :reporter do |user|
   user.first_name 'Reporter'
   user.last_name  'Joel'
   user.add_attribute(:type, 'Reporter')
+  user.password 'tester'
+  user.password_confirmation 'tester'
 end
 
 Factory.define :organization do |user|
@@ -58,6 +66,8 @@ Factory.define :organization do |user|
   user.last_name  'Smith'
   user.status 'needs_approval'
   user.add_attribute(:type, 'Organization')
+  user.password 'tester'
+  user.password_confirmation 'tester'
 end
 
 Factory.define :news_item do |news_item|
