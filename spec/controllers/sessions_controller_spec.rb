@@ -23,14 +23,14 @@ describe SessionsController do
   end
 
   it 'logins and redirects' do
-    Factory(:user, :email => 'user@example.com', :password => 'test').activate!
+    Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     session[:user_id].should_not be_nil
     response.should be_redirect
   end
 
   it "should create a donation for non-logged in user" do
-    user = Factory(:user, :email => 'user@example.com', :password => 'test')
+    user = Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     donations = mock(:donations)
     donations.stub!(:unpaid).and_return([])
     user.stub!(:donations).and_return(donations)
@@ -38,11 +38,11 @@ describe SessionsController do
     donations.should_receive(:create).with(:pitch_id=>1, :amount=>25)
     session[:news_item_id] = 1
     session[:donation_amount] = 25
-    post :create, :email => 'user@example.com', :password => 'test'
+    post :create, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test'
   end
 
   it 'fails login and does not redirect' do
-    Factory(:user, :email => 'user@example.com', :password => 'test')
+    Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'bad password'
     session[:user_id].should be_nil
     response.should be_success
@@ -56,33 +56,33 @@ describe SessionsController do
   end
 
   it 'remembers me' do
-    Factory(:user, :email => 'user@example.com', :password => 'test').activate!
+    Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "1"
     response.cookies["auth_token"].should_not be_nil
   end
 
   it 'sets the current user full name cookie' do
-    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test').activate!
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     response.cookies["current_user_full_name"].first.should == "Bob Levine"
   end
 
   it 'clears the current user full name cookie when logging out' do
-    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
     response.cookies["current_user_full_name"].first.should be_nil
   end
 
   it 'clears the balance text cookie when logging out' do
-    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test')
+    user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
     response.cookies["balance_text"].first.should be_nil
   end
 
   it 'does not remember me' do
-    Factory(:user, :email => 'user@example.com', :password => 'test')
+    Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'test', :remember_me => "0"
     response.cookies["auth_token"].should be_nil
   end

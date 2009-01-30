@@ -3,23 +3,6 @@ jQuery(document).ready(function($){
   $(document).pngFix();
   $("select[name=news_item_type]").change(refreshSortOrder);
   renderUserHeader();
-
-  $('#login').livequery(function(){
-    $(this).click(function(){
-      var login_li = $(this).parent('li');
-      var fields_li = $('<li id="login_fields" class="no-pipe">');
-      login_li.after(fields_li);
-      $('#login_fields').load('/session/new');
-      return false;
-    });
-  });
-
-  $('#login_close').livequery(function(){
-    $(this).css('cursor','pointer');
-    $(this).click(function(){
-      $('#login_fields').remove();
-    });
-  });
 });
 
 jQuery("a").click(function($){

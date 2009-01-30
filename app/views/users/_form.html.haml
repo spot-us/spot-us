@@ -2,13 +2,15 @@
   - content_for :error do
     = error_messages_for :user
 
-%h3
+%h3.float-left
   Just Getting Started?
   %br
   %span.small.quieter.float-left{:style => "margin-bottom: 0;"}
     All We Need&hellip;
-  %span.float-right.small.loud{:style => "margin-bottom: 0;"}
-    = link_to 'Already a member?', new_session_url
+%h3.float-right.small
+  = link_to 'Already a member?', new_session_url
+  %br
+  = link_to 'Forgot your password?', reset_password_user_path
 
 .double_content_border.clear
 - form_for(:user, @user, :url => user_path) do |f|

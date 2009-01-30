@@ -5,14 +5,14 @@ require File.dirname(__FILE__) + '/../spec_helper'
 include AuthenticatedTestHelper
 
 describe User do
-  it { Factory(:user).should have_many(:donations) }
-  it { Factory(:user).should have_many(:tips) }
-  it { Factory(:user).should have_many(:pitches) }
-  it { Factory(:user).should have_many(:pledges) }
-  it { Factory(:user).should have_many(:pledges) }
-  it { Factory(:user).should have_many(:jobs) }
-  it { Factory(:user).should have_many(:samples) }
-  it { Factory(:user).should have_many(:credits) }
+  it { Factory(:citizen).should have_many(:donations) }
+  it { Factory(:citizen).should have_many(:tips) }
+  it { Factory(:citizen).should have_many(:pitches) }
+  it { Factory(:citizen).should have_many(:pledges) }
+  it { Factory(:citizen).should have_many(:pledges) }
+  it { Factory(:citizen).should have_many(:jobs) }
+  it { Factory(:citizen).should have_many(:samples) }
+  it { Factory(:citizen).should have_many(:credits) }
   table_has_columns(User, :boolean,  "notify_tips")
   table_has_columns(User, :boolean,  "notify_pitches")
   table_has_columns(User, :boolean,  "notify_stories")
@@ -43,14 +43,14 @@ describe User do
 
   describe "total_credits" do
     it "should return the total of credits" do
-      user = Factory(:user)
+      user = Factory(:citizen)
       Factory(:credit, :amount => 25, :user => user)
       Factory(:credit, :amount => 25, :user => user)
       user.total_credits.should == 50.0
     end
 
     it "should return credits when there are negative credits" do
-      user = Factory(:user)
+      user = Factory(:citizen)
       Factory(:credit, :amount => 25, :user => user)
       Factory(:credit, :amount => -25, :user => user)
       user.total_credits.should == 0
@@ -59,7 +59,7 @@ describe User do
 
   describe "generate_csv" do
     it "should return a comma-separated list" do
-      user = Factory(:user, :type => "Citizen", :email => 'happy@happy.com',
+      user = Factory(:citizen, :type => "Citizen", :email => 'happy@happy.com',
                      :first_name => "Desi", :last_name => "McAdam",
                      :notify_tips => "true", :notify_pitches => "true",
                      :notify_stories => "true", :notify_spotus_news => "true",
@@ -71,14 +71,14 @@ describe User do
   describe "topics_params=" do
     it "should create topic associations" do
       t = Topic.create(:name => "Topic 1")
-      u = Factory(:user)
+      u = Factory(:citizen)
       u.topics_params=([t.id])
       u.reload
       u.topics.should == [t]
     end
 
     it "should handle record not found gracefully" do
-      u = Factory(:user)
+      u = Factory(:citizen)
       u.topics_params=([nil])
       u.reload
       u.topics.should == []
@@ -86,7 +86,7 @@ describe User do
 
     it "should not add duplicate topics" do
       t = Topic.create(:name => "Topic 1")
-      u = Factory(:user)
+      u = Factory(:citizen)
       u.topics_params=([t.id])
       u.reload
       u.topics.should == [t]
@@ -99,7 +99,7 @@ describe User do
 
   describe "editing" do
     before(:each) do
-      @user = Factory(:user)
+      @user = Factory(:citizen)
     end
 
     it "is editable by its self" do
@@ -107,7 +107,7 @@ describe User do
     end
 
     it "is not editable by a stranger" do
-      @user.editable_by?(Factory(:user)).should_not be_true
+      @user.editable_by?(Factory(:citizen)).should_not be_true
     end
 
     it "is not editable if not logged in" do
@@ -116,7 +116,7 @@ describe User do
   end
 
   it "returns the amount pledged on amount_pledged_to(tip)" do
-    user = Factory(:user)
+    user = Factory(:citizen)
     pledge1 = Factory(:pledge, :user => user, :amount => 1)
     pledge2 = Factory(:pledge, :user => user, :amount => 3)
     user.reload
@@ -125,7 +125,7 @@ describe User do
   end
 
   it "returns the amount donated on amount_donated_to(pitch)" do
-    user = Factory(:user)
+    user = Factory(:citizen)
     donation1 = Factory(:donation, :user => user, :amount => 1)
     donation2 = Factory(:donation, :user => user, :amount => 3)
     [donation1,donation2].each do |donation|
@@ -154,7 +154,7 @@ describe User do
     end
 
     it "doesn't send on save" do
-      user = Factory(:user)
+      user = Factory(:citizen)
       Mailer.should_not_receive(:deliver_signup_notification).with(user)
       user.save
     end
@@ -164,7 +164,7 @@ describe User do
     before do
       @user = nil
       @creating_user = lambda do
-        @user = Factory(:user)
+        @user = Factory(:citizen)
         violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
       end
     end
@@ -180,7 +180,7 @@ describe User do
   end
 
   it 'requires password confirmation on update' do
-    user = Factory(:user)
+    user = Factory(:citizen)
     user.update_attributes(:password => 'new password', :password_confirmation => nil)
     user.should_not be_valid
     user.errors.on(:password_confirmation).should_not be_nil
@@ -200,7 +200,7 @@ describe User do
 
   %w(Citizen Reporter Organization).each do |user_type|
     it "should allow a type of #{user_type}" do
-      user = Factory(:user, :type => user_type)
+      user = Factory(:citizen, :type => user_type)
       violated "#{user.errors.full_messages.to_sentence}" if user.new_record?
     end
   end
@@ -220,15 +220,10 @@ describe User do
   describe "after being created" do
     before do
       @password = 'test'
-      @user = Factory(:user, :email    => 'user@example.com',
-                             :password => @password)
-      @user = User.find(@user.to_param) # clear instance vars and get correct type
+      @user = Factory(:citizen, :email    => 'user@example.com',
+                                :password => @password,
+                                :password_confirmation => @password)
       @user.activate!
-    end
-
-    it 'changes password' do
-      @user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
-      User.authenticate('user@example.com', 'new password').should == @user
     end
 
     it 'does not rehash password' do
@@ -347,11 +342,11 @@ describe User do
   end
 
   it "should have a photo attachment" do
-    Factory(:user).photo.should be_instance_of(Paperclip::Attachment)
+    Factory(:citizen).photo.should be_instance_of(Paperclip::Attachment)
   end
 
   it "should allow a valid region for location" do
-    user = Factory(:user)
+    user = Factory(:citizen)
     LOCATIONS.each do |location|
       user.location = location
       user.should be_valid
@@ -370,7 +365,7 @@ describe User do
   end
 
   it "should combine the first and last name for full name" do
-    user = Factory(:user, :first_name => 'First', :last_name => 'Second')
+    user = Factory(:citizen, :first_name => 'First', :last_name => 'Second')
     user.full_name.should == 'First Second'
   end
 
@@ -392,7 +387,7 @@ describe User do
 
   describe "with a donation for a pitch" do
     before do
-      @user = Factory(:user)
+      @user = Factory(:citizen)
       @pitch = Factory(:pitch, :requested_amount => 100)
     end
 
@@ -417,14 +412,14 @@ describe User do
     end
 
     it "should not allow the user to donate to a pitch after donating 20%" do
-      user = Factory(:user)
+      user = Factory(:citizen)
       pitch = Factory(:pitch, :requested_amount => 100)
       donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 20)
       user.can_donate_to?(pitch).should be_false
     end
 
     it "should return the max donation amount" do
-      user = Factory(:user)
+      user = Factory(:citizen)
       pitch = Factory(:pitch, :requested_amount => 100)
       donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 10)
       user.max_donation_for(pitch).should == 10
@@ -433,7 +428,7 @@ describe User do
 
   describe "without a donation for a pitch" do
     before do
-      @user = Factory(:user)
+      @user = Factory(:citizen)
       if @user.donations.detect {|donation| donation.pitch == @pitch }
         violated "the user should not have any donations for the pitch"
       end
@@ -448,7 +443,7 @@ describe User do
 
   describe "with spotus donations" do
     before do
-      @user = Factory(:user)
+      @user = Factory(:citizen)
       @spotus_donation_one = Factory(:spotus_donation, :purchase => Factory(:purchase), :user => @user)
       @spotus_donation_two = Factory(:spotus_donation, :purchase => nil, :user => @user)
     end
@@ -472,7 +467,7 @@ describe User do
 
   describe "without any spotus donations" do
     before do
-      @user = Factory(:user)
+      @user = Factory(:citizen)
     end
 
     it "should return a new record for current_spotus_donation" do

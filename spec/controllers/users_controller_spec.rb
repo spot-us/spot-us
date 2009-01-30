@@ -121,4 +121,60 @@ describe UsersController do
       post :resend_activation, :email => email
     end
   end
+
+  describe "password" do
+    route_matches('/user/password', :get, :controller => 'users', :action => 'password')
+    route_matches('/user/reset_password', :put, :controller => 'users', :action => 'reset_password')
+
+    before do
+      @user = Factory(:citizen)
+      Mailer.stub!(:deliver_reset_password)
+    end
+
+    it "should successfully render on GET" do
+      get :password
+      response.should be_success
+    end
+
+    describe "when email is found" do
+      before do
+        User.stub!(:find_by_email).and_return(@user)
+      end
+
+      it "should redirect to login" do
+        do_reset_password
+        response.should redirect_to(new_session_url)
+      end
+
+      it "should reset the password" do
+        @user.should_receive(:reset_password!)
+        do_reset_password
+      end
+
+      it "should display a flash success message" do
+        do_reset_password
+        flash[:success].should_not be_nil
+      end
+    end
+
+    describe "when email is not found" do
+      before do
+        User.stub!(:find_by_email).and_return(nil)
+      end
+
+      it "should display a flash error message" do
+        do_reset_password
+        flash[:error].should_not be_nil
+      end
+
+      it "should re-render the password form" do
+        do_reset_password
+        response.should render_template('password')
+      end
+    end
+
+    def do_reset_password
+      put :reset_password, :email => @user.email
+    end
+  end
 end
