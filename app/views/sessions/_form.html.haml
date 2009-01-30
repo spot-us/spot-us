@@ -10,8 +10,8 @@
 .row
   = check_box_tag 'remember_me', '1'
   %label{:for => 'remember_me'} Remember Me
-.float-right
-  %p
-    = link_to "Forgot Password?", new_password_reset_path, :class => "forgot_password"
-    = link_to "Resend Activation Email", resend_activation_user_path, :class => "forgot_password"
+%p
+  = link_to "Forgot Password?", password_user_path, :class => "forgot_password"
+  %br
+  = link_to "Resend Activation Email", activation_email_user_path, :class => "forgot_password"
 
