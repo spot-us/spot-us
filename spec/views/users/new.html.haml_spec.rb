@@ -14,7 +14,7 @@ describe 'users/new' do
 
   it "should have a link to forgot password" do
     do_render
-    template.should have_tag('a[href=?]', reset_password_user_path)
+    template.should have_tag('a[href=?]', password_user_path)
   end
 
   it "should have a password field" do

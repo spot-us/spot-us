@@ -10,7 +10,7 @@
 %h3.float-right.small
   = link_to 'Already a member?', new_session_url
   %br
-  = link_to 'Forgot your password?', reset_password_user_path
+  = link_to 'Forgot your password?', password_user_path
 
 .double_content_border.clear
 - form_for(:user, @user, :url => user_path) do |f|
