@@ -3,7 +3,7 @@
     = render :partial => 'donations/fully_funded'
   - when current_user && !current_user.can_donate_to?(news_item)
     = render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item} 
-  - when news_item.funding_needed < 25
+  - when news_item.funding_needed < 25 || (current_user && current_user.max_donation_for(news_item) < 25)
     = render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item} 
   - when !current_user || current_user && current_user.can_donate_to?(news_item)
     = render :partial => 'donations/donate_twenty_five', :locals => {:news_item => news_item} 
