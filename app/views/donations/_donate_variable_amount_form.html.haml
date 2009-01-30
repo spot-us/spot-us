@@ -1,0 +1,8 @@
+- remote_form_for Donation.new(:pitch => news_item), :url => myspot_donations_path do |f|
+  - if current_user && current_user.has_donated_to?(news_item)
+    .float_left= f.text_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
+  - else
+    .float_left= f.text_field :amount, :value => number_to_currency(news_item.default_donation_amount, :unit => '')
+  = f.hidden_field :pitch_id
+  .float_right= image_submit_tag("donate.png")
+  .clear
