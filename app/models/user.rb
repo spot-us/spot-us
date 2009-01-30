@@ -44,10 +44,9 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   validates_presence_of     :email, :first_name, :last_name
-  validates_presence_of     :password,                   :if => :password_required?
-  validates_presence_of     :password_confirmation,      :if => :password_required?, :on => :update
-  validates_length_of       :password, :within => 4..40, :if => :password_required?
-  validates_confirmation_of :password,                   :if => :password_required?, :on => :update
+  validates_presence_of     :password, :password_confirmation, :if => :password_required?
+  validates_length_of       :password, :within => 4..40,       :if => :password_required?
+  validates_confirmation_of :password,                         :if => :password_required?
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
   validates_inclusion_of    :type, :in => User::TYPES
@@ -55,7 +54,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
 
-  before_save :encrypt_password
+  before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
   before_validation_on_create :generate_activation_code, :set_default_location
   after_create :deliver_activation_email, :unless => lambda {|user| user.organization? }
 
@@ -179,9 +178,9 @@ class User < ActiveRecord::Base
   end
 
   def reset_password!
-    self.password = nil
-    generate_password
-    save!
+    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a - %w(l o 0 1 i I L)
+    string = (1..6).collect { chars[rand(chars.size)] }.join
+    update_attributes(:password => string, :password_confirmation => string)
     Mailer.deliver_password_reset_notification(self)
   end
 
@@ -274,19 +273,12 @@ class User < ActiveRecord::Base
   protected
 
   def encrypt_password
-    return if password.blank?
     self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
     self.crypted_password = encrypt(password)
   end
 
   def password_required?
     crypted_password.blank? || !password.blank?
-  end
-
-  def generate_password
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a - %w(l o 0 1 i I L)
-    self.password ||= (1..6).collect { chars[rand(chars.size)] }.join
-    self.password_confirmation = password
   end
 
   def deliver_signup_notification
