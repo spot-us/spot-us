@@ -1,0 +1,5 @@
+%div{:id => "inline_donation_form_#{news_item.id}"}
+  %div.inline_donate{:id => "donation_custom_#{news_item.id}"}
+    = render :partial => 'donations/donate_variable_amount_form', :locals => {:news_item => news_item}
+    .double_content_border
+    = render :partial => "shared/progress_bar", :locals => {:pitch => news_item}

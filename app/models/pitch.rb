@@ -131,6 +131,10 @@ class Pitch < NewsItem
     end
   end
 
+  def default_donation_amount
+    [donation_limit_per_user, funding_needed].min
+  end
+
   def user_can_donate_more?(user, attempted_donation_amount)
     return false if attempted_donation_amount.nil?
     return false if attempted_donation_amount > funding_needed
