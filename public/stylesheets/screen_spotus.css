@@ -143,10 +143,14 @@ h4.title {
   color:#999999;
   font-weight: normal;
 }
-.uppcased_button_text, .inline_pledge, .inline_donate {
+.uppcased_button_text {
   text-transform: uppercase;
   width:210px;
   text-align:right;
+  margin: 0;
+}
+.inline_pledge, .inline_donate {
+  width:210px;
   margin: 0;
 }
 .fully_funded_no_text {
