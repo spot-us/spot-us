@@ -24,7 +24,7 @@ class Organization < User
   end
 
   def set_status
-    needs_to_be_approved! if active?
+    needs_to_be_approved! if inactive?
   end
 end
 
