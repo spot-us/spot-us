@@ -64,7 +64,6 @@ Factory.define :organization do |user|
   user.email { random_email_address }
   user.first_name 'News Org'
   user.last_name  'Smith'
-  user.status 'needs_approval'
   user.add_attribute(:type, 'Organization')
   user.password 'tester'
   user.password_confirmation 'tester'
