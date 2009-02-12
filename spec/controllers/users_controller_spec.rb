@@ -1,8 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead
-# Then, you can remove it from this and the units test.
-include AuthenticatedTestHelper
 include ActionController::UrlWriter
 
 describe UsersController do
@@ -38,6 +35,13 @@ describe UsersController do
 
     it "should render the new user view" do
       response.should render_template('users/new')
+    end
+  end
+
+  describe "when creating a News Org user" do
+    it "should render a needs approval message" do
+      do_create(:type => 'Organization')
+      flash[:success].should =~ /approval/
     end
   end
 
