@@ -9,7 +9,11 @@ class UsersController < ApplicationController
     cookies.delete :auth_token
     @user = User.new(params[:user])
     if @user.save
-      flash[:success] = 'Click the link in the email we just sent to you to finish creating your account!'
+      unless @user.organization?
+        flash[:success] = 'Click the link in the email we just sent to you to finish creating your account!'
+      else
+        flash[:success] = "Your account will be reviewed prior to approval. We'll get back to you as soon as possible."
+      end
     end
     render :action => 'new'
   end
