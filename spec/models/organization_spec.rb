@@ -1,9 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead.
-# Then, you can remove it from this and the functional test.
-include AuthenticatedTestHelper
-
 describe Organization do
   describe "on create" do
     it "sends email for news org on create" do
@@ -12,13 +8,13 @@ describe Organization do
       Mailer.should_receive(:deliver_news_org_signup_request).with(user)
       user.save!
     end
-    
+
     it "should set the status column to 'needs_approval'" do
       user = Factory(:organization)
       user.status.should == "needs_approval"
     end
   end
-  
+
   describe "on approval" do
     before(:each) do
       @user = Factory(:organization)
@@ -28,13 +24,13 @@ describe Organization do
       Mailer.should_receive(:deliver_organization_approved_notification).with(@user)
       @user.approve!
     end
-    
+
     it "should set the status to approved" do
       @user.approve!
       @user.status.should == 'approved'
     end
   end
-  
+
   describe "named scopes" do
     before(:each) do
       @user1 = Factory(:organization)
@@ -42,7 +38,7 @@ describe Organization do
       @user3 = Factory(:organization)
       @user4 = Factory(:organization)
     end
-    
+
     describe "when unapproved" do
       it "should return only a list of unapproved news orgs" do
         @user2.status.should == "needs_approval"
@@ -51,7 +47,7 @@ describe Organization do
         User.unapproved_news_orgs.should == [@user1, @user3]
       end
     end
-    
+
     describe "when approved" do
       it "should return only a list of approved news orgs" do
         @user2.approve!
