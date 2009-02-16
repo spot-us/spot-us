@@ -122,7 +122,7 @@ describe PitchesController do
   describe "on GET to index" do
     it "should redirect to /news_items" do
       get :index
-      response.should redirect_to news_items_path
+      response.should redirect_to(news_items_path)
     end
   end
 end
