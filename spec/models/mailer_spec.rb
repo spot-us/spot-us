@@ -59,7 +59,7 @@ describe Mailer do
   end
 
   it "sends an email to news org when approved" do
-    user = stub_model(User)
+    user = stub_model(User, :activation_code => 17)
     lambda do
       Mailer.deliver_organization_approved_notification(user)
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
