@@ -7,20 +7,8 @@
       %h3{:style => "color: red;"}
         %strong What is Spot.Us?
       .double_content_border
-      = video_content
+      = site_option_content_for(:video_content)
       = change_site_option(:video_content)
-      %hr.space.clear
-      .double_content_border{:style=>"margin-top:10px;"}
-      %h5{:style=>"margin:0;"}
-        See our FAQ's for 
-        == #{link_to "Concerned Citizens, Reporters and News Organizations", page_path("about") + "#faq"}.
-        Spot.Us is a marketplace where all three come to collaborate.  
-        %p
-        %p
-        Check out our 
-        == #{link_to "blog", "http://blog.spot.us"} join our 
-        == #{link_to "Facebook", "http://www.facebook.com/home.php#/group.php?sid=b04b3406bd9281f4fe4df6c39efef5d5&refurl=http%3A%2F%2Fwww.facebook.com%2Fs.php%3Fref%3Dsearch%26init%3Dq%26q%3Dspot.us%26sid%3Db04b3406bd9281f4fe4df6c39efef5d5&gid=29554944739"} or follow us on 
-        == #{link_to "Twitter", "http://twitter.com/spotus"}.
   %div.home-floater{:style=>"width:460px;float:right;background: #fff;"}
     - if @featured_pitch.blank?  
       %h3 Create the first story
@@ -63,22 +51,10 @@
 %img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-spacer
 .home-boxer
-  %div.home-floater.home-image-box{:style=>"width:425px;float:left;background: #fff;"}
-    = link_to image_tag('nyt_article.png'), 'http://www.nytimes.com/2008/08/24/weekinreview/24kershaw.html?_r=1&oref&oref=slogin'
-
-  %div.home-floater{:style=>"width:460px;float:right;background: #fff;"}
-    %h3 Start a Story
-    .double_content_border
-    %h3
-      = image_tag('dark_teal_one.png', :alt => '1: ', :style => 'vertical-align: middle')
-      Begin with a short headline. <br /><span class='small quieter'>What are you passionate about? What questions do you have?</span>
-    - form_tag(start_story_path, :method => :get) do
-      = text_area_tag :headline, '', :rows => 2
-      .block-spacer-transparent
-      .double_content_border
-      .float-right
-        = image_submit_tag('next.png', :alt => 'Next')
-  .clear
+  %div.home-floater.home-image-box{:style=>"width:885px;float:left;background: #fff;"}
+    = site_option_content_for(:bottom_home_page_text)
+    = change_site_option(:bottom_home_page_text)
+.clear
 - # spotus_ie_pixel.gif is a IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
 .block-spacer

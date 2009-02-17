@@ -21,17 +21,6 @@ describe 'homes/show' do
       should_not raise_error
   end
 
-  it "should have a field to enter a headline" do
-    do_render
-    template.should have_tag('textarea[name="headline"]')
-  end
-
-  it "should have a form to create a news item" do
-    template.stub!(:start_story_path).and_return('/start/story')
-    do_render
-    template.should have_tag('form[action=?][method="get"]', '/start/story')
-  end
-
   def do_render
     render 'homes/show'
   end
