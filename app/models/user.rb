@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
         user.send(:deliver_signup_notification)
         user.send(:clear_activation_code)
       }
+    transitions :from => :approved, :to => :active
+ #     :on_transition => lambda {|user|
+ #       user.send(:deliver_activation_email)
+ #     }
   end
 
   has_many :donations do
