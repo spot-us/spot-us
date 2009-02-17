@@ -43,7 +43,7 @@ class Purchase < ActiveRecord::Base
     amount = 0
     amount += donations.map(&:amount).sum unless donations.blank?
     amount += @new_donations.map(&:amount).sum unless @new_donations.blank?
-    amount += spotus_donation.amount if spotus_donation
+    amount += spotus_donation[:amount] unless spotus_donation.nil? || spotus_donation[:amount].nil?
     amount
   end
 
