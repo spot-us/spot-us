@@ -50,3 +50,6 @@ function refreshSortOrder(){
   });
 };
 
+jQuery(document).ready(function($) {
+    $('a[rel*=facebox]').facebox()
+});
