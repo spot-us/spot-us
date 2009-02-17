@@ -170,6 +170,11 @@ Factory.define :credit do |credit|
   credit.association(:user)
 end
 
+Factory.define :site_option do |site_option|
+  site_option.key   'key'
+  site_option.value 'value'
+end
+
 
 # handy builders ##################################################################################
 
