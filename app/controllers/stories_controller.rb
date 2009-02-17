@@ -19,7 +19,7 @@ class StoriesController < ApplicationController
   def fact_check
     story = find_resource
     story.verify!
-    flash[:notice] = "Your story has been sent to the fact checker"
+    flash[:notice] = "Your story has been sent to the peer reviewer"
     redirect_back_or_default("/")
   end
   
