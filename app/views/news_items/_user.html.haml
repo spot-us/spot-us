@@ -21,7 +21,7 @@
       .person_avatar
         = link_to((image_tag news_item.fact_checker.photo.url(:thumb)), profile_path(news_item.fact_checker))
       %h5.reg-line-height
-        Fact Check Editor
+        Peer Review Editor
       = link_to(h(news_item.fact_checker.full_name), profile_path(news_item.fact_checker))
       .reg-line-height.small
         %span.quiet Located in
