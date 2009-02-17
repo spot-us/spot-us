@@ -1,5 +1,5 @@
 - form_for([:admin, @site_option]) do |f|
   = f.label :value
-  = f.text_area :value
+  = fckeditor_textarea("site_option", "value", :toolbarSet => 'Spotus')
   %br/
   = f.submit
