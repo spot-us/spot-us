@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :credits
     admin.resources :pitches, :member => { :fact_checker_chooser => :get }
     admin.resources :tips
+    admin.resources :site_options
   end
 
   map.namespace :myspot do |myspot|
