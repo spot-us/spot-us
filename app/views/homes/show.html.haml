@@ -24,10 +24,10 @@
         = link_to image_tag(@featured_pitch.featured_image.url(:medium)), @featured_pitch
         %hr.space.clear
         %div{:style=>"margin-top:45px;"}
-        %h5.quiet{:style=>"margin:0;"}
+        %h5.quiet{:style=>"margin:0; background-color:#FFFFFF;"}
           If you want to see this story researched, written, and published,
           click donate to help fund it!  
-      .summary.span-280
+      .summary.span-200
         %h3
           PITCH:
           %strong= link_to h(@featured_pitch.headline), @featured_pitch
