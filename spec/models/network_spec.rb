@@ -9,4 +9,8 @@ describe Network do
     network.should_not be_valid
     network.should have(1).errors_on(:name)
   end
+
+  it "should have many categories" do
+    Network.new.categories.should == []
+  end
 end
