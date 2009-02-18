@@ -28,8 +28,8 @@
     <%= f.text_field :type %>
   </p>
   <p>
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
+    <%= f.label :network %><br />
+    <%= f.select :network_id, networks_for_select %>
   </p>
   <p>
     <%= f.label :about_you %><br />

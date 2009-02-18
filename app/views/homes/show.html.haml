@@ -37,7 +37,7 @@
           by
           = link_to h(@featured_pitch.user.full_name), profile_path(@featured_pitch.user)
           in
-          = @featured_pitch.location
+          = @featured_pitch.network_and_category
         %p.short_description.alt-spotus
           = truncate_words(@featured_pitch.short_description, 30)
           =# h @featured_pitch.short_description
