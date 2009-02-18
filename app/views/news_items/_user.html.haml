@@ -9,7 +9,7 @@
         = link_to(h(news_item.user.full_name), profile_path(news_item.user))
       .reg-line-height
         %span.quiet Located in
-        = h news_item.user.location
+        = h news_item.user.network_and_category
     .reg-line-height
       - if news_item.topics.any?
         %span.quiet Filed in
@@ -25,5 +25,5 @@
       = link_to(h(news_item.fact_checker.full_name), profile_path(news_item.fact_checker))
       .reg-line-height.small
         %span.quiet Located in
-        = h news_item.user.location
+        = h news_item.user.network_and_category
 .double_content_border

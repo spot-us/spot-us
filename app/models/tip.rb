@@ -52,8 +52,6 @@ class Tip < NewsItem
   validates_presence_of :user
   validates_presence_of :pledge_amount, :on => :create
 
-  validates_inclusion_of :location, :in => LOCATIONS
-
   named_scope :most_pledged, :order => "(select sum(amount) from pledges where pledges.tip_id = #{table_name}.id) DESC"
 
 

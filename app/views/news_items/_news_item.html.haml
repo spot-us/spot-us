@@ -10,7 +10,7 @@
     by
     = link_to h(news_item.user.full_name), profile_path(news_item.user)
     in
-    = news_item.location
+    = news_item.network_and_category
   %p.short_description.alt-spotus
     = truncate_words(news_item.short_description, 45)
     = link_to "Read More &raquo;", news_item

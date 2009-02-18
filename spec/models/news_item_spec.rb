@@ -6,7 +6,6 @@ describe NewsItem do
   end
 
   table_has_columns(NewsItem, :string,  "headline")
-  table_has_columns(NewsItem, :string,  "location")
   table_has_columns(NewsItem, :string,  "keywords")
   table_has_columns(NewsItem, :string,  "featured_image_caption")
   table_has_columns(NewsItem, :text,    "video_embed")
@@ -14,10 +13,11 @@ describe NewsItem do
   table_has_columns(NewsItem, :text,    "widget_embed")
 
   requires_presence_of NewsItem, :headline
-  requires_presence_of NewsItem, :location
   requires_presence_of NewsItem, :user_id
 
   it { NewsItem.should belong_to(:user) }
+  it { NewsItem.should belong_to(:network) }
+  it { NewsItem.should belong_to(:category) }
   it { NewsItem.should have_many(:topics) }
   it { NewsItem.should have_many(:topic_memberships) }
   it { NewsItem.should have_many(:comments)}

@@ -42,7 +42,7 @@
       by
       = link_to h(@story.pitch.user.full_name), profile_path(@story.pitch.user)
       in
-      = @story.pitch.location
+      = @story.pitch.network.name
     %p.short_description.alt-spotus
       = truncate_words(@story.pitch.short_description, 30)
       = link_to 'Read More &raquo;', @story.pitch

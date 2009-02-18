@@ -2,8 +2,8 @@
   .box_yellow.create_a_pitch_form
     .yellow-spacer-negative
     .row
-      = f.label :location, "Location"
-      = f.select :location, LOCATIONS
+      = f.label :network
+      = f.select :network_id, networks_for_select
     .row
       = f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>"
       = f.text_area :headline, :rows => 2

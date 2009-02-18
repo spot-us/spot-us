@@ -2,8 +2,8 @@
   .box_yellow.create_a_tip_form
     .yellow-spacer-negative
     .row
-      = f.label :location, "Location"
-      = f.select :location, LOCATIONS
+      = f.label :network
+      = f.select :network_id, networks_for_select
     .yellow-spacer-negative
     .row
       = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required</span>"
