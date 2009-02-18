@@ -175,6 +175,10 @@ Factory.define :site_option do |site_option|
   site_option.value 'value'
 end
 
+Factory.define :network do |network|
+  network.name 'network-name'
+end
+
 
 # handy builders ##################################################################################
 
