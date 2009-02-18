@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20090218144012
+#
+# Table name: pledges
+#
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)
+#  tip_id     :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#  deleted_at :datetime
+#  amount     :decimal(15, 2)
+#
+
 class Pledge < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
@@ -19,18 +33,4 @@ class Pledge < ActiveRecord::Base
   end
 end
 
-
-# == Schema Information
-# Schema version: 20090116200734
-#
-# Table name: pledges
-#
-#  id              :integer(4)      not null, primary key
-#  user_id         :integer(4)
-#  tip_id          :integer(4)
-#  amount_in_cents :integer(4)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  deleted_at      :datetime
-#
 

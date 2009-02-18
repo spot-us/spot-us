@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20090218144012
+#
+# Table name: credits
+#
+#  id          :integer(4)      not null, primary key
+#  user_id     :integer(4)
+#  description :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  amount      :decimal(15, 2)
+#
+
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 # one:
