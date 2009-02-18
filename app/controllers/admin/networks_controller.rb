@@ -14,4 +14,10 @@ class Admin::NetworksController < ApplicationController
     end
   end
 
+  response_for :update do |format|
+    format.html do
+      redirect_to edit_admin_network_path(self.resource)
+    end
+  end
+
 end
