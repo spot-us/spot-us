@@ -99,12 +99,6 @@ describe Tip do
     Factory(:tip).should_not be_a_pitch
   end
 
-  it "requires location to be a valid LOCATION" do
-    user = Factory(:user)
-    Factory.build(:tip, :location => LOCATIONS.first, :user => user).should be_valid
-    Factory.build(:tip, :location => "invalid", :user => user).should_not be_valid
-  end
-
   it "has a virtual accessor named pledge_amount" do
     Factory.build(:tip).should respond_to(:pledge_amount)
     Factory.build(:tip).should respond_to(:pledge_amount=)

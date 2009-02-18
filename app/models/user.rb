@@ -62,6 +62,9 @@ class User < ActiveRecord::Base
     transitions :from => :approved, :to => :active
   end
 
+  belongs_to :network
+  belongs_to :category
+
   has_many :donations do
     def pitch_sum(pitch)
       self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
@@ -93,11 +96,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
   validates_inclusion_of    :type, :in => User::TYPES
   validates_acceptance_of   :terms_of_service
-  validates_inclusion_of    :location, :in => LOCATIONS
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
 
   before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
-  before_validation_on_create :generate_activation_code, :set_default_location
+  before_validation_on_create :generate_activation_code, :set_default_network
   after_create :deliver_activation_email, :unless => lambda {|user| user.organization? }
 
   has_attached_file :photo,
@@ -189,14 +191,14 @@ class User < ActiveRecord::Base
   def self.generate_csv
     FasterCSV.generate do |csv|
       # header row
-      csv << ["type", "email", "first_name", "last_name", "location",
+      csv << ["type", "email", "first_name", "last_name", "network",
               "notify_tips", "notify_pitches",  "notify_pitches",
               "notify_stories", "notify_spotus_news", "fact_check_interest"]
 
       # data rows
       User.all.each do |user|
         csv << [user.type, user.email, user.first_name, user.last_name,
-                user.location, user.notify_tips, user.notify_pitches,
+                user.network.name, user.notify_tips, user.notify_pitches,
                 user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
       end
     end
@@ -312,6 +314,12 @@ class User < ActiveRecord::Base
     pledges.exists?(:tip_id => tip.id )
   end
 
+  def network_and_category
+    output =  network.display_name
+    output += "- #{category.name}" if category
+    output
+  end
+
   protected
 
   def encrypt_password
@@ -332,8 +340,8 @@ class User < ActiveRecord::Base
     Mailer.deliver_activation_email(self)
   end
 
-  def set_default_location
-    self.location ||= LOCATIONS.first
+  def set_default_network
+    self.network ||= Network.first
   end
 
   def generate_activation_code

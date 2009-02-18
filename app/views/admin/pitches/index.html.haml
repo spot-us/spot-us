@@ -3,7 +3,7 @@
   %table
     %th Headline
     %th Created At
-    %th Location
+    %th Network
     %th Expiration
     %th Funding
     %th Supporters
@@ -17,7 +17,7 @@
           = link_to h(pitch.headline), pitch_url(pitch)
           = "(Featured)" if pitch.featured?
         %td= pitch.created_at.to_s(:date)
-        %td= pitch.location
+        %td= pitch.network_and_category
         %td
           - unless pitch.expiration_date.nil?
             = pitch.expiration_date.to_s(:date)

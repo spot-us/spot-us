@@ -23,6 +23,8 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
   user.password 'tester'
   user.password_confirmation 'tester'
+  user.association :network
+  user.association :category
 end
 
 Factory.define :citizen do |user|
@@ -32,6 +34,8 @@ Factory.define :citizen do |user|
   user.add_attribute(:type, 'Citizen')
   user.password 'tester'
   user.password_confirmation 'tester'
+  user.association :network
+  user.association :category
 end
 
 Factory.define :admin do |user|
@@ -41,6 +45,8 @@ Factory.define :admin do |user|
   user.add_attribute(:type, 'Admin')
   user.password 'tester'
   user.password_confirmation 'tester'
+  user.association :network
+  user.association :category
 end
 
 Factory.define :comment do |comment|
@@ -58,6 +64,8 @@ Factory.define :reporter do |user|
   user.add_attribute(:type, 'Reporter')
   user.password 'tester'
   user.password_confirmation 'tester'
+  user.association :network
+  user.association :category
 end
 
 Factory.define :organization do |user|
@@ -67,18 +75,20 @@ Factory.define :organization do |user|
   user.add_attribute(:type, 'Organization')
   user.password 'tester'
   user.password_confirmation 'tester'
+  user.association :network
+  user.association :category
 end
 
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
-  news_item.location { LOCATIONS.first }
   news_item.featured_image_caption "lorem ipsum"
+  news_item.association(:network)
+  news_item.association(:category)
   news_item.association(:user)
 end
 
 Factory.define :pitch do |pitch|
   pitch.headline               "Headline"
-  pitch.location               { LOCATIONS.first }
   pitch.requested_amount       1000
   pitch.current_funding        0
   pitch.short_description      "lorem ipsum"
@@ -88,16 +98,19 @@ Factory.define :pitch do |pitch|
   pitch.skills                 "lorem ipsum"
   pitch.keywords               "lorem ipsum"
   pitch.contract_agreement     "1"
+  pitch.association(:network)
+  pitch.association(:category)
   pitch.association(:user)
 end
 
 Factory.define :story do |story|
   story.headline               "Headline"
-  story.location               { LOCATIONS.first }
   story.extended_description   "lorem ipsum"
   story.featured_image_caption "lorem ipsum"
   story.keywords               "lorem ipsum"
   story.association(:pitch)
+  story.association(:network)
+  story.association(:category)
   story.association(:user)
 end
 
@@ -120,10 +133,11 @@ end
 
 Factory.define :tip do |tip|
   tip.headline               "Headline"
-  tip.location               { LOCATIONS.first }
   tip.short_description      "lorem ipsum"
   tip.keywords               "lorem ipsum"
   tip.pledge_amount          100
+  tip.association(:network)
+  tip.association(:category)
   tip.association(:user)
 end
 
@@ -176,7 +190,12 @@ Factory.define :site_option do |site_option|
 end
 
 Factory.define :network do |network|
-  network.name 'network-name'
+  network.name { random_string }
+  network.display_name { random_string }
+end
+
+Factory.define :category do |category|
+  category.name { random_string }
 end
 
 

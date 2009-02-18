@@ -14,7 +14,7 @@
           by
           = link_to h(story.user.full_name), profile_path(story.user)
           in
-          = story.location
+          = story.network.name
         %p.short_description.alt-spotus
           = truncate_words(story.extended_description, 45) if story.extended_description
           = link_to "Read More &raquo;", story

@@ -432,12 +432,6 @@ describe Pitch do
     Factory.build(:pitch, :contract_agreement => false).should_not be_valid
   end
 
-  it "requires location to be a valid LOCATION" do
-    user = Factory(:user)
-    Factory.build(:pitch, :location => LOCATIONS.first, :user => user).should be_valid
-    Factory.build(:pitch, :location => "invalid", :user => user).should_not be_valid
-  end
-
   describe "to support STI" do
     it "descends from NewItem" do
       Pitch.ancestors.include?(NewsItem)

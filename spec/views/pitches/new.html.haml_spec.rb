@@ -27,12 +27,12 @@ describe "/pitches/new.html.haml" do
     end
   end
 
-  it "renders location as select" do
+  it "renders network as select" do
     render "/pitches/new.html.haml"
     response.should have_tag("form") do
-      with_tag "select[name=?]", "pitch[location]" do
-        LOCATIONS.each do |location|
-          with_tag('option[value=?]', location)
+      with_tag "select[name=?]", "pitch[network_id]" do
+        Network.all.map(&:id).each do |network_id|
+          with_tag('option[value=?]', network_id)
         end
       end
     end

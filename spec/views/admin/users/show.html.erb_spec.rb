@@ -12,7 +12,6 @@ describe "/users/show.html.erb" do
     @user.stub!(:photo_file_name).and_return("MyString")
     @user.stub!(:photo_content_type).and_return("MyString")
     @user.stub!(:photo_file_size).and_return("1")
-    @user.stub!(:location).and_return("MyString")
     @user.stub!(:about_you).and_return("MyText")
     @user.stub!(:website).and_return("MyString")
     @user.stub!(:address1).and_return("MyString")
@@ -27,6 +26,7 @@ describe "/users/show.html.erb" do
     @user.stub!(:notify_stories).and_return(false)
     @user.stub!(:notify_spotus_news).and_return(false)
     @user.stub!(:fact_check_interest).and_return(false)
+    @user.stub!(:network_and_category).and_return("MyString")
 
     assigns[:user] = @user
   end
@@ -42,7 +42,6 @@ describe "/users/show.html.erb" do
     response.should have_text(/1/)
     response.should have_text(/MyString/)
     response.should have_text(/MyText/)
-    response.should have_text(/MyString/)
     response.should have_text(/MyString/)
     response.should have_text(/MyString/)
     response.should have_text(/MyString/)
