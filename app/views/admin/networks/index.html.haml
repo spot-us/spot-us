@@ -1,0 +1,8 @@
+.networks
+  - @networks.each do |network|
+    .network
+      = link_to 'Edit', edit_admin_network_path(network)
+      %span.network_name
+        = network.name
+%p
+  = link_to 'New network', new_admin_network_path
