@@ -40,4 +40,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def networks_for_select
+    Network.all.map{|n| [n.display_name, n.id]}
+  end
 end

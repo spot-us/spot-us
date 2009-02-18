@@ -41,8 +41,8 @@
           = f.text_field :website
         .yellow-spacer-negative
         .row
-          = f.label :location
-          = f.select :location, LOCATIONS
+          = f.label :network
+          = f.select :network_id, networks_for_select
         - if @profile.is_a?(Reporter)
           .yellow-spacer-negative
           .row

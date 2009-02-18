@@ -14,6 +14,11 @@ describe "new view" do
     do_render
     response.should have_tag("input[name=?]", "network[name]")
   end
+
+  it "should have a display name field" do
+    do_render
+    response.should have_tag("input[name=?]", "network[display_name]")
+  end
   
   it "should have a submit field" do
     do_render

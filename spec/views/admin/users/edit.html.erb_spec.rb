@@ -11,7 +11,6 @@ describe "/users/edit.html.erb" do
     @user.stub!(:organization_name).and_return("MyString")
     @user.stub!(:established_year).and_return("MyString")
     @user.stub!(:type).and_return("MyString")
-    @user.stub!(:location).and_return("MyString")
     @user.stub!(:about_you).and_return("MyText")
     @user.stub!(:website).and_return("MyString")
     @user.stub!(:address1).and_return("MyString")
@@ -26,6 +25,7 @@ describe "/users/edit.html.erb" do
     @user.stub!(:notify_stories).and_return(false)
     @user.stub!(:notify_spotus_news).and_return(false)
     @user.stub!(:fact_check_interest).and_return(false)
+    @user.stub!(:network_id).and_return("MyString")
     assigns[:user] = @user
   end
 
@@ -39,7 +39,6 @@ describe "/users/edit.html.erb" do
       with_tag('input#user_organization_name[name=?]', "user[organization_name]")
       with_tag('input#user_established_year[name=?]', "user[established_year]")
       with_tag('input#user_type[name=?]', "user[type]")
-      with_tag('input#user_location[name=?]', "user[location]")
       with_tag('textarea#user_about_you[name=?]', "user[about_you]")
       with_tag('input#user_website[name=?]', "user[website]")
       with_tag('input#user_address1[name=?]', "user[address1]")

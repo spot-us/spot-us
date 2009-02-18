@@ -13,7 +13,6 @@ describe "/users/new.html.erb" do
     @user.stub!(:photo_file_name).and_return("MyString")
     @user.stub!(:photo_content_type).and_return("MyString")
     @user.stub!(:photo_file_size).and_return("1")
-    @user.stub!(:location).and_return("MyString")
     @user.stub!(:about_you).and_return("MyText")
     @user.stub!(:website).and_return("MyString")
     @user.stub!(:address1).and_return("MyString")
@@ -28,6 +27,7 @@ describe "/users/new.html.erb" do
     @user.stub!(:notify_stories).and_return(false)
     @user.stub!(:notify_spotus_news).and_return(false)
     @user.stub!(:fact_check_interest).and_return(false)
+    @user.stub!(:network_id).and_return("MyString")
     assigns[:user] = @user
   end
 
@@ -42,7 +42,6 @@ describe "/users/new.html.erb" do
       with_tag("input#user_photo_file_name[name=?]", "user[photo_file_name]")
       with_tag("input#user_photo_content_type[name=?]", "user[photo_content_type]")
       with_tag("input#user_photo_file_size[name=?]", "user[photo_file_size]")
-      with_tag("input#user_location[name=?]", "user[location]")
       with_tag("textarea#user_about_you[name=?]", "user[about_you]")
       with_tag("input#user_website[name=?]", "user[website]")
       with_tag("input#user_address1[name=?]", "user[address1]")
