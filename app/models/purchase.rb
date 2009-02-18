@@ -1,3 +1,23 @@
+# == Schema Information
+# Schema version: 20090218144012
+#
+# Table name: purchases
+#
+#  id                        :integer(4)      not null, primary key
+#  first_name                :string(255)
+#  last_name                 :string(255)
+#  credit_card_number_ending :string(255)
+#  address1                  :string(255)
+#  address2                  :string(255)
+#  city                      :string(255)
+#  state                     :string(255)
+#  zip                       :string(255)
+#  user_id                   :integer(4)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  total_amount              :decimal(15, 2)
+#
+
 class Purchase < ActiveRecord::Base
   class GatewayError < RuntimeError; end
 
@@ -136,24 +156,4 @@ class Purchase < ActiveRecord::Base
   end
 
 end
-
-# == Schema Information
-# Schema version: 20090116200734
-#
-# Table name: purchases
-#
-#  id                        :integer(4)      not null, primary key
-#  first_name                :string(255)
-#  last_name                 :string(255)
-#  credit_card_number_ending :string(255)
-#  address1                  :string(255)
-#  address2                  :string(255)
-#  city                      :string(255)
-#  state                     :string(255)
-#  zip                       :string(255)
-#  user_id                   :integer(4)
-#  total_amount_in_cents     :integer(4)
-#  created_at                :datetime
-#  updated_at                :datetime
-#
 
