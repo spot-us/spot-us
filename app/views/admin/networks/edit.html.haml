@@ -1,0 +1,7 @@
+- form_for([:admin, @network]) do |f|
+  = render :partial => 'form', :locals => {:f => f, :network => @network}
+
+  = f.submit
+
+%p
+  = link_to 'All networks', admin_networks_path
