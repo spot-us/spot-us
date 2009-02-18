@@ -1,8 +1,5 @@
-class Reporter < User
-end
-
 # == Schema Information
-# Schema version: 20090116200734
+# Schema version: 20090218144012
 #
 # Table name: users
 #
@@ -35,9 +32,13 @@ end
 #  notify_stories            :boolean(1)      not null
 #  notify_spotus_news        :boolean(1)      not null
 #  fact_check_interest       :boolean(1)      not null
-#  status                    :string(255)     default("active")
+#  status                    :string(255)
 #  organization_name         :string(255)
 #  established_year          :string(255)
 #  deleted_at                :datetime
+#  activation_code           :string(255)
 #
+
+class Reporter < User
+end
 
