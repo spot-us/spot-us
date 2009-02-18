@@ -1,6 +1,10 @@
 - form_for([:admin, @network]) do |f|
   = render :partial => 'form', :locals => {:f => f, :network => @network}
 
+  = f.render_associated_form(@network.categories, :new => 1)
+  /= f.add_associated_link "New category", @network.categories.build
+  /%br/
+
   = f.submit
 
 %p
