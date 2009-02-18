@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 20090218144012
+#
+# Table name: spotus_donations
+#
+#  id          :integer(4)      not null, primary key
+#  user_id     :integer(4)
+#  purchase_id :integer(4)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  amount      :decimal(15, 2)
+#
+
 class SpotusDonation < ActiveRecord::Base
   belongs_to :user
   belongs_to :purchase
@@ -19,17 +32,4 @@ class SpotusDonation < ActiveRecord::Base
   end
 
 end
-
-# == Schema Information
-# Schema version: 20090116200734
-#
-# Table name: spotus_donations
-#
-#  id              :integer(4)      not null, primary key
-#  user_id         :integer(4)
-#  amount_in_cents :integer(4)
-#  purchase_id     :integer(4)
-#  created_at      :datetime
-#  updated_at      :datetime
-#
 
