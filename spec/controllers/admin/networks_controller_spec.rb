@@ -18,4 +18,9 @@ describe Admin::NetworksController do
     post :create, :network => {:name => 'bogus ///'}
     response.should render_template('new')
   end
+
+  it "should redirect to edit when putting to update" do
+    put :update, :id => @network.id, :network => {:name => @network.name}
+    response.should redirect_to(edit_admin_network_path(@network))
+  end
 end
