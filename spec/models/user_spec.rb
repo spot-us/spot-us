@@ -5,6 +5,8 @@ require File.dirname(__FILE__) + '/../spec_helper'
 include AuthenticatedTestHelper
 
 describe User do
+  it { Factory(:citizen).should belong_to(:network) }
+  it { Factory(:citizen).should belong_to(:category) }
   it { Factory(:citizen).should have_many(:donations) }
   it { Factory(:citizen).should have_many(:tips) }
   it { Factory(:citizen).should have_many(:pitches) }
@@ -64,7 +66,7 @@ describe User do
                      :notify_tips => "true", :notify_pitches => "true",
                      :notify_stories => "true", :notify_spotus_news => "true",
                      :fact_check_interest => "true"  )
-      User.generate_csv.split("\n").should include("Citizen,happy@happy.com,Desi,McAdam,Bay Area,true,true,true,true,true")
+      User.generate_csv.split("\n").should include("Citizen,happy@happy.com,Desi,McAdam,#{Network.first.name},true,true,true,true,true")
     end
   end
 
@@ -291,8 +293,8 @@ describe User do
       @user.reset_password!
     end
 
-    it "should set the default location to the first location" do
-      @user.location.should == LOCATIONS.first
+    it "should set the default network to the first network" do
+      @user.network.should == Network.first
     end
   end
 
@@ -345,23 +347,12 @@ describe User do
     Factory(:citizen).photo.should be_instance_of(Paperclip::Attachment)
   end
 
-  it "should allow a valid region for location" do
+  it "should be valid for each network" do
     user = Factory(:citizen)
-    LOCATIONS.each do |location|
-      user.location = location
+    Network.all.each do |network|
+      user.network = network
       user.should be_valid
     end
-  end
-
-  it "should allow a blank location" do
-    user = Factory.build(:user, :location => nil)
-    user.should be_valid
-  end
-
-  it "should not allow invalid regions for location" do
-    user = Factory.build(:user, :location => 'Mars')
-    user.should_not be_valid
-    user.should have(1).error_on(:location)
   end
 
   it "should combine the first and last name for full name" do

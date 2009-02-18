@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Story do
 
   requires_presence_of Story, :headline
-  requires_presence_of Story, :location
 
   it { Factory(:story).should belong_to(:pitch) }
   it { Factory(:story).should belong_to(:user) }

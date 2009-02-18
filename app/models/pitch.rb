@@ -67,7 +67,6 @@ class Pitch < NewsItem
   # Next :accept required because of rails bug:
   # http://skwpspace.com/2008/02/21/validates_acceptance_of-behavior-in-rails-20/
   validates_acceptance_of :contract_agreement, :accept => true, :allow_nil => false
-  validates_inclusion_of :location, :in => LOCATIONS
 
   has_many :affiliations, :dependent => :destroy
   has_many :tips, :through => :affiliations
@@ -195,7 +194,7 @@ class Pitch < NewsItem
     end
 
     def create_associated_story
-      self.create_story(:headline => self.headline, :location => self.location, :user => self.user)
+      self.create_story(:headline => self.headline, :network => self.network, :user => self.user)
     end
 
     def send_fund_notification

@@ -40,11 +40,11 @@ describe 'profiles/edit' do
     response.should have_tag('input[name = ?]', 'profile[website]')
   end
 
-  it "should have a dropdown to edit the location" do
+  it "should have a dropdown to edit the network" do
     do_render
-    response.should have_tag('select[name = ?]', 'profile[location]') do
-      LOCATIONS.each do |location|
-        with_tag('option[value=?]', location)
+    response.should have_tag('select[name = ?]', 'profile[network_id]') do
+      Network.all.map(&:id).each do |network_id|
+        with_tag('option[value=?]', network_id)
       end
     end
   end

@@ -3,7 +3,7 @@
   %table
     %th Headline
     %th Created At
-    %th Location
+    %th Network
     %th Pledged
     %th Supporters
     %th Actions
@@ -14,7 +14,7 @@
           Tip:
           = link_to h(tip.headline), tip_url(tip)
         %td= tip.created_at.to_s(:date)
-        %td= tip.location
+        %td= tip.network_and_category
         %td= number_to_currency(tip.total_amount_pledged)
         %td
           = tip.supporters.map(&:email).join(', ')

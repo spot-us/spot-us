@@ -15,6 +15,11 @@ describe "index view" do
     response.should have_tag("span.network_name", @networks.first.name)
   end
 
+  it "should have the display name" do
+    do_render
+    response.body.should include(@networks.first.display_name)
+  end
+
   it "should have a link to edit" do
     do_render
     response.should have_tag("a[href=?]", edit_admin_network_path(@networks.first), "Edit")
