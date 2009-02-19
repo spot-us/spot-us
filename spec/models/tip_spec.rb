@@ -109,7 +109,7 @@ describe Tip do
   describe "a new tip with a pledge amount" do
     before(:each) do
       user = Factory(:user)
-      @tip = Factory.build(:tip, :pledge_amount => 1234, :user => user)
+      @tip = Factory.build(:tip, :pledge_amount => 1234, :user => user, :network => Factory(:network))
     end
 
     it "should build the first pledge on save" do

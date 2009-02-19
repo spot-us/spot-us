@@ -22,6 +22,7 @@ describe UsersController do
 
   describe "on POST to create with bad params" do
     before do
+      Factory(:network)
       post :create, :user => {}
     end
 
@@ -46,6 +47,7 @@ describe UsersController do
   end
 
   def do_create(options = {})
+    Factory(:network)
     post :create, :user => { :email      => 'quire@example.com',
                              :first_name => 'Quire',
                              :last_name  => 'User',

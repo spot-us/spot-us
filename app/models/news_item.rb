@@ -41,8 +41,8 @@
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
-
   include Sanitizy
+  include NetworkValidation
 
   cleanse_columns(:delivery_description, :extended_description, :short_description) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
@@ -70,7 +70,7 @@ class NewsItem < ActiveRecord::Base
                              ":basename_:style.:extension",
                     :default_url => "/images/featured_images/missing_:style.png"
 
-  validates_presence_of :headline, :user_id
+  validates_presence_of :headline, :user_id, :network_id
 
   if Rails.env.production?
     validates_attachment_content_type :featured_image,
@@ -119,6 +119,7 @@ class NewsItem < ActiveRecord::Base
   end
 
   def network_and_category
+    return "No network selected" unless network
     output = network.display_name
     output += "- #{category.name}" if category
     output
