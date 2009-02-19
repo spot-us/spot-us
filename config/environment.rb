@@ -31,3 +31,5 @@ Rails::Initializer.run do |config|
   config.action_controller.session = { :session_key => '_spotus_session', :secret => secret }
 end
 
+# These are the subdomains that will be equivalent to no subdomain  
+SubdomainFu.mirrors = ["www", "spotus"]
