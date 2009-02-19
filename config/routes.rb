@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
   map.start_story 'start_story', :controller => 'homes', :action => "start_story"
+  map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   map.resources :donations, :affiliations, :pledges, :profiles, :pages
@@ -33,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :pitches, :member => { :fact_checker_chooser => :get }
     admin.resources :tips
     admin.resources :site_options
-    admin.resources :networks, :member => {:categories => :get}
+    admin.resources :networks
   end
 
   map.namespace :myspot do |myspot|
