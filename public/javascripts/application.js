@@ -3,6 +3,11 @@ jQuery(document).ready(function($){
   $(document).pngFix();
   $("select[name=news_item_type]").change(refreshSortOrder);
   renderUserHeader();
+
+  if (jQuery("#category_select option:selected").val() == 'Sub-network') {
+    id = jQuery("#network_select option:selected").val();
+    load_categories(id);
+  }
 });
 
 jQuery("a").click(function($){
@@ -50,6 +55,17 @@ function refreshSortOrder(){
   });
 };
 
-jQuery(document).ready(function($) {
-    $('a[rel*=facebox]').facebox()
+jQuery("#network_select").live("change", function() {
+    id = jQuery("#network_select option:selected").val();
+    load_categories(id);
 });
+
+function load_categories(id) {
+    jQuery("#category_select").empty();
+    jQuery.getJSON("/admin/networks/" + id + "/categories", function(data){
+      jQuery("<option>Sub-network...</option>").attr("value", "").appendTo("#category_select");
+      jQuery.each(data, function(i, category) {
+        jQuery("<option>" + category.name + "</option>").attr("value", category.id).appendTo("#category_select");
+      });
+    });
+}
