@@ -98,7 +98,7 @@ class NewsItem < ActiveRecord::Base
     if type
       type.classify.constantize.send(sort).paginate(:all, :page => page)
     else
-      Pitch.unpublished.sorted(sort).paginate(:all, :page => page)
+      Pitch.without_a_story.sorted(sort).paginate(:all, :page => page)
     end
   end
 
