@@ -20,6 +20,6 @@ class NewsItemsController < ApplicationController
   protected
 
   def get_news_items
-    @news_items = NewsItem.paginate_by_type(params[:news_item_type], params[:sort_by], params[:page])
+    @news_items = NewsItem.by_sort(params[:news_item_type] || 'pitch', params[:sort_by]).paginate(:all, :page => params[:page])
   end
 end
