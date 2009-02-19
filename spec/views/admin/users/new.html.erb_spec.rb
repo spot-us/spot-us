@@ -27,7 +27,10 @@ describe "/users/new.html.erb" do
     @user.stub!(:notify_stories).and_return(false)
     @user.stub!(:notify_spotus_news).and_return(false)
     @user.stub!(:fact_check_interest).and_return(false)
+    @user.stub!(:network).and_return(Factory(:network))
     @user.stub!(:network_id).and_return("MyString")
+    @user.stub!(:category).and_return(Factory(:category))
+    @user.stub!(:category_id).and_return("MyString")
     assigns[:user] = @user
   end
 

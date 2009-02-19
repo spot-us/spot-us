@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   include HasTopics
   include AASMWithFixes
+  include NetworkValidation
 
   TYPES = ["Citizen", "Reporter", "Organization", "Admin"]
   CREATABLE_TYPES = TYPES - ["Admin"]
@@ -98,8 +99,8 @@ class User < ActiveRecord::Base
   validates_acceptance_of   :terms_of_service
   validates_format_of       :website, :with => %r{^http://}, :allow_blank => true
 
+  before_validation_on_create :generate_activation_code
   before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
-  before_validation_on_create :generate_activation_code, :set_default_network
   after_create :deliver_activation_email, :unless => lambda {|user| user.organization? }
 
   has_attached_file :photo,
@@ -118,7 +119,7 @@ class User < ActiveRecord::Base
     :location, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip, :organization_name,
-    :established_year
+    :established_year, :network_id, :category_id
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
@@ -315,6 +316,7 @@ class User < ActiveRecord::Base
   end
 
   def network_and_category
+    return "No network selected" unless network
     output =  network.display_name
     output += "- #{category.name}" if category
     output
@@ -340,10 +342,6 @@ class User < ActiveRecord::Base
     Mailer.deliver_activation_email(self)
   end
 
-  def set_default_network
-    self.network ||= Network.first
-  end
-
   def generate_activation_code
     entropy = Time.now.to_s.split(//).sort_by{rand}.join
     digest = Digest::SHA1.hexdigest(entropy)
@@ -353,6 +351,7 @@ class User < ActiveRecord::Base
   def clear_activation_code
     self.update_attribute(:activation_code, nil)
   end
+
 end
 
 

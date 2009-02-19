@@ -20,6 +20,10 @@ describe User do
   table_has_columns(User, :boolean,  "notify_stories")
   table_has_columns(User, :boolean,  "notify_spotus_news")
 
+  before do
+    Network.create!(:name => 'sfbay', :display_name => 'Bay Area')
+  end
+
   describe "creating" do
     it "is creatable by guest" do
       User.createable_by?(nil).should be
@@ -65,7 +69,7 @@ describe User do
                      :first_name => "Desi", :last_name => "McAdam",
                      :notify_tips => "true", :notify_pitches => "true",
                      :notify_stories => "true", :notify_spotus_news => "true",
-                     :fact_check_interest => "true"  )
+                     :fact_check_interest => "true", :network => Network.first  )
       User.generate_csv.split("\n").should include("Citizen,happy@happy.com,Desi,McAdam,#{Network.first.name},true,true,true,true,true")
     end
   end
@@ -294,7 +298,9 @@ describe User do
     end
 
     it "should set the default network to the first network" do
-      @user.network.should == Network.first
+      user = User.new
+      user.valid?
+      user.network.should == Network.first
     end
   end
 
@@ -310,11 +316,13 @@ describe User do
     end
 
     it "should clear the activation code on activate!" do
+      @user.valid?
       @user.activate!
       @user.activation_code.should be_nil
     end
 
     it "should return true for activated users on activated?" do
+      @user.valid?
       @user.activate!
       @user.should be_activated
     end

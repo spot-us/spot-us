@@ -31,10 +31,7 @@
     <%= f.label :photo_file_size %><br />
     <%= f.text_field :photo_file_size %>
   </p>
-  <p>
-    <%= f.label :network %><br />
-    <%= f.select :network_id, networks_for_select %>
-  </p>
+  <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @user} %>
   <p>
     <%= f.label :about_you %><br />
     <%= f.text_area :about_you %>
