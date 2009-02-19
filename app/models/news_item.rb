@@ -93,14 +93,25 @@ class NewsItem < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
-  def self.paginate_by_type(type=nil,sort='desc',page=nil)
+  def self.by_sort(type, sort='desc')
+    raise "Cannot search without a type!" and return unless type
     sort = 'desc' unless %w(desc asc most_pledged most_funded almost_funded).include?(sort)
-    if type
-      type.classify.constantize.send(sort).paginate(:all, :page => page)
+    model = type.classify.constantize
+    if model == Pitch
+      model.without_a_story.send(sort)
     else
-      Pitch.without_a_story.sorted(sort).paginate(:all, :page => page)
+      model.send(sort)
     end
   end
+
+  # TODO: Refactor sort_by to follow this pattern
+  # def self.sort_by(sort='desc')
+  #   self.send(sanitize_sort(sort))
+  # end
+
+  # def self.sanitize_sort(sort)
+  #   %w(desc asc most_pledged most_funded almost_funded).include?(sort) ? sort : 'desc'
+  # end
 
   def editable_by?(user)
     if user.nil?
