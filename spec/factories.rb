@@ -23,8 +23,7 @@ Factory.define :user do |user|
   user.add_attribute(:type, 'Citizen')
   user.password 'tester'
   user.password_confirmation 'tester'
-  user.association :network
-  user.association :category
+  user.association(:network)
 end
 
 Factory.define :citizen do |user|
@@ -34,8 +33,7 @@ Factory.define :citizen do |user|
   user.add_attribute(:type, 'Citizen')
   user.password 'tester'
   user.password_confirmation 'tester'
-  user.association :network
-  user.association :category
+  user.association(:network)
 end
 
 Factory.define :admin do |user|
@@ -45,8 +43,7 @@ Factory.define :admin do |user|
   user.add_attribute(:type, 'Admin')
   user.password 'tester'
   user.password_confirmation 'tester'
-  user.association :network
-  user.association :category
+  user.association(:network)
 end
 
 Factory.define :comment do |comment|
@@ -64,8 +61,7 @@ Factory.define :reporter do |user|
   user.add_attribute(:type, 'Reporter')
   user.password 'tester'
   user.password_confirmation 'tester'
-  user.association :network
-  user.association :category
+  user.association(:network)
 end
 
 Factory.define :organization do |user|
@@ -75,15 +71,13 @@ Factory.define :organization do |user|
   user.add_attribute(:type, 'Organization')
   user.password 'tester'
   user.password_confirmation 'tester'
-  user.association :network
-  user.association :category
+  user.association(:network)
 end
 
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
   news_item.featured_image_caption "lorem ipsum"
   news_item.association(:network)
-  news_item.association(:category)
   news_item.association(:user)
 end
 
@@ -99,7 +93,6 @@ Factory.define :pitch do |pitch|
   pitch.keywords               "lorem ipsum"
   pitch.contract_agreement     "1"
   pitch.association(:network)
-  pitch.association(:category)
   pitch.association(:user)
 end
 
@@ -110,7 +103,6 @@ Factory.define :story do |story|
   story.keywords               "lorem ipsum"
   story.association(:pitch)
   story.association(:network)
-  story.association(:category)
   story.association(:user)
 end
 
@@ -137,7 +129,6 @@ Factory.define :tip do |tip|
   tip.keywords               "lorem ipsum"
   tip.pledge_amount          100
   tip.association(:network)
-  tip.association(:category)
   tip.association(:user)
 end
 

@@ -41,8 +41,7 @@
           = f.text_field :website
         .yellow-spacer-negative
         .row
-          = f.label :network
-          = f.select :network_id, networks_for_select
+          = render :partial => 'shared/network.html.erb', :locals => {:f => f, :instance => @profile}
         - if @profile.is_a?(Reporter)
           .yellow-spacer-negative
           .row

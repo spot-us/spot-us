@@ -44,4 +44,12 @@ module ApplicationHelper
   def networks_for_select
     Network.all.map{|n| [n.display_name, n.id]}
   end
+
+  def categories_for_select(object)
+    return ['Sub-network', ''] unless object.network
+    output = []
+    output << ['Sub-network', '']
+    output += object.network.categories.map{|c| [c.name, c.id]}
+    output
+  end
 end

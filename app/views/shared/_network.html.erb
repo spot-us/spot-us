@@ -1,0 +1,4 @@
+<%= f.label :network %>
+<%= f.select :network_id, networks_for_select, {}, :id => 'network_select' %>
+<%= f.label :category, "Sub-network" %><br />
+<%= f.select :category_id, categories_for_select(instance), {}, :id => 'category_select' %>
