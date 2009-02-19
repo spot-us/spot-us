@@ -102,5 +102,10 @@ describe NewsItem do
       NewsItem.pitch_or_tip.all?{|i| i.type =~ /Pitch|Tip/}.should be_true
     end
   end
+
+  describe "#sort" do
+    it "should return a collection of the passed in type"
+    it "should return only unpublished pitches"
+  end
 end
 
