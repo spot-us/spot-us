@@ -1,0 +1,90 @@
+%h1
+  Editing user
+- form_for(:user, :url => admin_user_path(@user), :html => {:method => :put}) do |f|
+  = f.error_messages
+  %p
+    = f.label :email
+    %br/
+    = f.text_field :email
+  %p
+    = f.label :first_name
+    %br/
+    = f.text_field :first_name
+  %p
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
+  %p
+    = f.label :organization_name
+    %br/
+    = f.text_field :organization_name
+  %p
+    = f.label :established_year
+    %br/
+    = f.text_field :established_year
+  %p
+    = f.label :type
+    %br/
+    = f.text_field :type
+  = render :partial => 'shared/network', :locals => {:f => f, :instance => @user}
+  %p
+    = f.label :about_you
+    %br/
+    = f.text_area :about_you
+  %p
+    = f.label :website
+    %br/
+    = f.text_field :website
+  %p
+    = f.label :address1
+    %br/
+    = f.text_field :address1
+  %p
+    = f.label :address2
+    %br/
+    = f.text_field :address2
+  %p
+    = f.label :city
+    %br/
+    = f.text_field :city
+  %p
+    = f.label :state
+    %br/
+    = f.text_field :state
+  %p
+    = f.label :zip
+    %br/
+    = f.text_field :zip
+  %p
+    = f.label :phone
+    %br/
+    = f.text_field :phone
+  %p
+    = f.label :country
+    %br/
+    = f.text_field :country
+  %p
+    = f.label :notify_tips
+    %br/
+    = f.check_box :notify_tips
+  %p
+    = f.label :notify_pitches
+    %br/
+    = f.check_box :notify_pitches
+  %p
+    = f.label :notify_stories
+    %br/
+    = f.check_box :notify_stories
+  %p
+    = f.label :notify_spotus_news
+    %br/
+    = f.check_box :notify_spotus_news
+  %p
+    = f.label :fact_check_interest
+    %br/
+    = f.check_box :fact_check_interest
+  %p
+    = f.submit "Update"
+= link_to 'Show', admin_user_path(@user)
+|
+= link_to 'Back', admin_users_path
