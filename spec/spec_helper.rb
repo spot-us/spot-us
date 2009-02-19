@@ -75,6 +75,7 @@ end
 
 def requires_presence_of(clazz, field)
   it "requires #{field}" do
+    Network.create!(:name => 'sfbay')
     record = Factory.build(clazz.to_s.underscore.to_sym, field.to_sym => nil)
     record.should_not be_valid
     record.errors.on(field.to_sym).should_not be_nil
