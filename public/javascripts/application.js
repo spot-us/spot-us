@@ -44,10 +44,10 @@ function renderUserHeader() {
 }
 
 function refreshSortOrder(){
-  var select = $('select[name=sort_by]');
-  var type   = $('select[name=news_item_type]')
-
-  $.get('/news_items/sort_options', {
+  var select = jQuery('select[name=sort_by]');
+  var type   = jQuery('select[name=news_item_type]')
+  
+  jQuery.get('/news_items/sort_options', {
     sort_by: select.val(),
     news_item_type: type.val()
   }, function(html, status){
