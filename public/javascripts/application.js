@@ -62,7 +62,7 @@ jQuery("#network_select").live("change", function() {
 
 function load_categories(id) {
     jQuery("#category_select").empty();
-    jQuery.getJSON("/admin/networks/" + id + "/categories", function(data){
+    jQuery.getJSON("/networks/" + id + "/categories", function(data){
       jQuery("<option>Sub-network...</option>").attr("value", "").appendTo("#category_select");
       jQuery.each(data, function(i, category) {
         jQuery("<option>" + category.name + "</option>").attr("value", category.id).appendTo("#category_select");
