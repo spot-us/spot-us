@@ -12,8 +12,9 @@
         = h news_item.user.network_and_category
     .reg-line-height
       - if news_item.topics.any?
-        %span.quiet Filed in
+        %span.quiet Filed under
         = show_topics(news_item)
+        == in the #{news_item.network.display_name} network.
   - if news_item.fact_checker
     %br/
     %hr/
