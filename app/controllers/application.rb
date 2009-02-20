@@ -15,27 +15,32 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  def current_network
+    subdomain = current_subdomain.downcase if current_subdomain
+    @current_network ||= Network.find_by_name(subdomain)
+  end
+
   protected
 
-    def login_cookies
-      create_current_login_cookie
-      update_balance_cookie
-    end
+  def login_cookies
+    create_current_login_cookie
+    update_balance_cookie
+  end
 
-    def create_current_login_cookie
-      cookies[:current_user_full_name] = current_user.full_name
-    end
+  def create_current_login_cookie
+    cookies[:current_user_full_name] = current_user.full_name
+  end
 
-    def can_create?
-      true
-    end
+  def can_create?
+    true
+  end
 
-    def can_edit?
-      true
-    end
+  def can_edit?
+    true
+  end
 
-    def update_balance_cookie
-      cookies[:balance_text] = render_to_string(:partial => 'shared/balance')
-    end
+  def update_balance_cookie
+    cookies[:balance_text] = render_to_string(:partial => 'shared/balance')
+  end
 
 end

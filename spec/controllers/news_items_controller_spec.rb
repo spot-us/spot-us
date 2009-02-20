@@ -79,23 +79,41 @@ describe NewsItemsController do
 
   describe "#get_news_items" do
     before do
-      controller.stub!(:params).and_return({:news_item_type => 'pitch', :page => '1'})
+      controller.stub!(:params).and_return({:news_item_type => 'pitches', :page => '1'})
+      controller.stub!(:current_network).and_return(Factory(:network))
+      @with_sort = stub('with_sort')
+      @paginate = []
+      @by_network = stub('by_network', :paginate => @paginate)
+      @with_sort.stub!(:by_network).and_return(@by_network)
+      Pitch.stub!(:with_sort).and_return(@with_sort)
+      NewsItem.stub!(:with_sort).and_return(@with_sort)
     end
-    it "should raise an error if the passed in type is not valid" do
+
+    it "should default to news_item with an invalid type" do
       controller.stub!(:params).and_return({:news_item_type => 'crazy_shit'})
-      lambda do
-        controller.send(:get_news_items)
-      end.should raise_error("Can only search for valid news item types")
-    end
-    it "should call sort_by on the passed in model" do
-      named_scope = stub(:paginate => [])
-      Pitch.should_receive(:sort_by).and_return(named_scope)
+      NewsItem.should_receive(:with_sort).and_return(@with_sort)
       controller.send(:get_news_items)
     end
+
+    it "should call with_sort on the passed in model" do
+      named_scope = stub('a named scope', :paginate => [])
+      Pitch.should_receive(:with_sort).and_return(@with_sort)
+      @with_sort.should_receive(:by_network).and_return(@by_network)
+      controller.send(:get_news_items)
+    end
+
     it "should call paginate on the collection" do
-      named_scope = mock('a named scope')
-      named_scope.should_receive(:paginate).with(:all, :page => '1')
-      Pitch.stub!(:sort_by).and_return(named_scope)
+      @by_network.should_receive(:paginate).and_return(@paginate)
+      controller.send(:get_news_items)
+    end
+
+    it "should assign a news_items instance variable" do
+      controller.send(:get_news_items)
+      controller.instance_variable_get(:@news_items).should_not be_nil
+    end
+
+    it "should use the by_network named scope" do
+      Pitch.should_receive(:with_sort).and_return(@with_sort)
       controller.send(:get_news_items)
     end
   end
