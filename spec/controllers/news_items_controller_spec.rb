@@ -76,4 +76,27 @@ describe NewsItemsController do
       assigns[:news_items].should include(@pitch)
     end
   end
+
+  describe "#get_news_items" do
+    before do
+      controller.stub!(:params).and_return({:news_item_type => 'pitch', :page => '1'})
+    end
+    it "should raise an error if the passed in type is not valid" do
+      controller.stub!(:params).and_return({:news_item_type => 'crazy_shit'})
+      lambda do
+        controller.send(:get_news_items)
+      end.should raise_error("Can only search for valid news item types")
+    end
+    it "should call sort_by on the passed in model" do
+      named_scope = stub(:paginate => [])
+      Pitch.should_receive(:sort_by).and_return(named_scope)
+      controller.send(:get_news_items)
+    end
+    it "should call paginate on the collection" do
+      named_scope = mock('a named scope')
+      named_scope.should_receive(:paginate).with(:all, :page => '1')
+      Pitch.stub!(:sort_by).and_return(named_scope)
+      controller.send(:get_news_items)
+    end
+  end
 end

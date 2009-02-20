@@ -522,5 +522,13 @@ describe Pitch do
       end
     end
   end
+
+  describe "sort_by" do
+    it "should return only pitches without stories" do
+      Pitch.should_receive(:without_a_story).and_return(named_scope = stub("a named scope"))
+      named_scope.should_receive(:desc)
+      Pitch.sort_by
+    end
+  end
 end
 
