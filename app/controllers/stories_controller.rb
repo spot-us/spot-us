@@ -55,6 +55,6 @@ class StoriesController < ApplicationController
     end
     
     def find_resources
-      @stories = Story.published
+      @stories = Story.by_network(current_network).published
     end
 end
