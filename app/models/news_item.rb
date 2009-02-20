@@ -95,6 +95,8 @@ class NewsItem < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
+  # NOTE: You can chain scopes off of by_network, but you can't chain by_network off of scopes.
+  # Well, you can, but you will lose the previous scopes.
   def self.by_network(network=nil)
     return all_news_items unless network
     by_network_id(network.id)
