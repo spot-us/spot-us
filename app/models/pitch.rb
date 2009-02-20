@@ -198,7 +198,7 @@ class Pitch < NewsItem
     end
 
     def create_associated_story
-      self.create_story(:headline => self.headline, :network => self.network, :user => self.user)
+      self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
     end
 
     def send_fund_notification
