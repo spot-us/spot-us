@@ -21,8 +21,8 @@ class NewsItemsController < ApplicationController
 
   def get_news_items
     model_name = params[:news_item_type]
-    raise "Can only search for valid news item types" and return unless %w(tip pitch news_item).include?(model_name)
+    model_name = 'news_item' unless %w(tips pitches news_items).include?(model_name)
     model = model_name.classify.constantize
-    model.sort_by(params[:sort_by]).paginate(:all, :page => params[:page])
+    @news_items = model.with_sort(params[:sort_by]).by_network(current_network).paginate(:page => params[:page])
   end
 end
