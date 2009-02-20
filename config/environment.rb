@@ -19,7 +19,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :version => '>=2.0.5', :source => 'http://gems.github.com'
-  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com/'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '>=2.3.7', :source => 'http://gems.github.com/'
 
   config.time_zone = 'UTC'
 
