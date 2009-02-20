@@ -122,7 +122,7 @@ class Pitch < NewsItem
     end
   end
 
-  def self.sort_by(sort='desc')
+  def self.with_sort(sort='desc')
     self.without_a_story.send(sanitize_sort(sort))
   end
 

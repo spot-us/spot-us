@@ -103,35 +103,46 @@ describe NewsItem do
     end
   end
 
-  describe ".sort_by" do
+  describe ".with_sort" do
     before do
       news_item = NewsItem.new
     end
 
     it "should return a collection of the passed in type" do
       Factory(:pitch)
-      Pitch.sort_by.each do |item|
+      Pitch.with_sort.each do |item|
         item.should be_a_kind_of(Pitch)
       end
       Factory(:tip)
-      Tip.sort_by.each do |item|
+      Tip.with_sort.each do |item|
         item.should be_a_kind_of(Tip)
       end
     end
 
     it "should use desc as a default sort" do
       NewsItem.should_receive(:desc)
-      NewsItem.sort_by
+      NewsItem.with_sort
     end
 
     it "should use the named scope for this sort" do
       NewsItem.should_receive(:almost_funded)
-      NewsItem.sort_by('almost_funded')
+      NewsItem.with_sort('almost_funded')
     end
 
     it "should use the default sort when crazy shit is passed in" do
       NewsItem.should_receive(:desc)
-      NewsItem.sort_by('crazy_shit')
+      NewsItem.with_sort('crazy_shit')
+    end
+  end
+
+  describe ".by_network" do
+    it "should return the by_network_id named scope with a passed in network" do
+      NewsItem.should_receive(:by_network_id).with(17).and_return([])
+      NewsItem.by_network(Factory(:network, :id => 17))
+    end
+    it "should return all results with no passed in network" do
+      NewsItem.should_receive(:all_news_items).and_return([])
+      NewsItem.by_network
     end
   end
 end
