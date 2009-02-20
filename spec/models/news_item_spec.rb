@@ -103,42 +103,35 @@ describe NewsItem do
     end
   end
 
-  describe ".sort" do
+  describe ".sort_by" do
     before do
-      pitch = Pitch.new
-    end
-    it "should raise an error if no type is passed in" do
-      lambda do
-        Pitch.by_sort(nil)
-      end.should raise_error("Cannot search without a type!")
+      news_item = NewsItem.new
     end
 
     it "should return a collection of the passed in type" do
-      NewsItem.by_sort('pitch').each do |item|
+      Factory(:pitch)
+      Pitch.sort_by.each do |item|
         item.should be_a_kind_of(Pitch)
+      end
+      Factory(:tip)
+      Tip.sort_by.each do |item|
+        item.should be_a_kind_of(Tip)
       end
     end
 
     it "should use desc as a default sort" do
-      Tip.should_receive(:desc)
-      NewsItem.by_sort('tip')
+      NewsItem.should_receive(:desc)
+      NewsItem.sort_by
     end
 
     it "should use the named scope for this sort" do
-      Pitch.stub!(:without_a_story).and_return(named_scope = stub('named scope'))
-      named_scope.should_receive(:almost_funded)
-      NewsItem.by_sort('pitch', 'almost_funded')
-    end
-
-    it "should return only pitches without stories" do
-      Pitch.should_receive(:without_a_story).and_return(something = stub("blah"))
-      something.should_receive(:desc)
-      NewsItem.by_sort('pitch')
+      NewsItem.should_receive(:almost_funded)
+      NewsItem.sort_by('almost_funded')
     end
 
     it "should use the default sort when crazy shit is passed in" do
-      Tip.should_receive(:desc)
-      NewsItem.by_sort('tip', 'crazy_shit')
+      NewsItem.should_receive(:desc)
+      NewsItem.sort_by('crazy_shit')
     end
   end
 end

@@ -122,10 +122,9 @@ class Pitch < NewsItem
     end
   end
 
-  # TODO: Refactory sort_by to follow this pattern
-  # def self.sort_by(sort='desc')
-  #   self.without_a_story.send(sanitize_sort(sort))
-  # end
+  def self.sort_by(sort='desc')
+    self.without_a_story.send(sanitize_sort(sort))
+  end
 
   def self.createable_by?(user)
     user && user.reporter?
