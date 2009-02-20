@@ -90,4 +90,21 @@ describe StoriesController do
       story.should be_published
     end
   end
+
+  describe "#find_resources" do
+    before do
+      controller.stub!(:current_network).and_return(Factory(:network))
+      @published = []
+      @by_network = stub('by_network', :published => @published)
+    end
+    it "should load stories for the current network" do
+      Story.should_receive(:by_network).and_return(@by_network)
+      controller.send(:find_resources)
+    end
+    it "should load published stories" do
+      Story.stub!(:by_network).and_return(@by_network)
+      @by_network.should_receive(:published).and_return(@published)
+      controller.send(:find_resources)
+    end
+  end
 end
