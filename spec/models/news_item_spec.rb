@@ -134,16 +134,5 @@ describe NewsItem do
       NewsItem.with_sort('crazy_shit')
     end
   end
-
-  describe ".by_network" do
-    it "should return the by_network_id named scope with a passed in network" do
-      NewsItem.should_receive(:by_network_id).with(17).and_return([])
-      NewsItem.by_network(Factory(:network, :id => 17))
-    end
-    it "should return all results with no passed in network" do
-      NewsItem.should_receive(:all_news_items).and_return([])
-      NewsItem.by_network
-    end
-  end
 end
 
