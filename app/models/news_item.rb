@@ -88,17 +88,15 @@ class NewsItem < ActiveRecord::Base
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
   named_scope :fundable_news_item, :conditions => ['type in (?)', ["Pitch", "Tip"]]
-  named_scope :by_network_id, lambda {|network_id| { :conditions => { :network_id => network_id } } }
+  named_scope :by_network, lambda {|network|
+    return {} unless network
+    { :conditions => { :network_id => network.id } }
+  }
   named_scope :all_news_items
 
 
   cattr_reader :per_page
   @@per_page = 10
-
-  def self.by_network(network=nil)
-    return all_news_items unless network
-    by_network_id(network.id)
-  end
 
   # NOTE: You can chain scopes off of with_sort, but you can't chain with_sort off of scopes.
   # Well, you can, but you will lose the previous scopes.
