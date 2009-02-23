@@ -52,4 +52,8 @@ module ApplicationHelper
     output += object.network.categories.map{|c| [c.name, c.id]}
     output
   end
+
+  def current_network_id
+    @current_network.id if @current_network
+  end
 end
