@@ -73,23 +73,38 @@ describe PitchesController do
     end
   end
 
-  describe "on POST to /pitches/1/feature" do
+  describe "on PUT to /pitches/1/feature" do
     before do
-      @pitch = Factory(:pitch, :feature => true)
-      @pitch2 = Factory(:pitch)
-    end
-
-    it "should unset the orginal featured pitch and set new to featured" do
-      post :feature, :id => @pitch2.to_param
-      @pitch2.reload.feature.should be_true
-      @pitch.reload.feature.should be_false
+      @pitch = Factory(:pitch, :id => 17, :feature => true)
     end
 
     it "should redirect back to the pitch" do
-      post :feature, :id => @pitch2.to_param
-      response.should redirect_to(pitch_path(@pitch2))
+      put :feature, :id => @pitch.to_param
+      response.should redirect_to(pitch_path(@pitch))
     end
 
+    it "should call feature! on the pitch" do
+      controller.stub!(:find_resource).and_return(@pitch)
+      @pitch.should_receive(:feature!).and_return(true)
+      put :feature, :id => @pitch.id
+    end
+  end
+
+  describe "on PUT to /pitches/1/unfeature" do
+    before do
+      @pitch = Factory(:pitch, :id => 17, :feature => true)
+    end
+
+    it "should redirect back to the pitch" do
+      put :unfeature, :id => @pitch.to_param
+      response.should redirect_to(pitch_path(@pitch))
+    end
+
+    it "should call feature! on the pitch" do
+      controller.stub!(:find_resource).and_return(@pitch)
+      @pitch.should_receive(:unfeature!).and_return(true)
+      put :unfeature, :id => @pitch.id
+    end
   end
 
   describe "on GET to show" do
