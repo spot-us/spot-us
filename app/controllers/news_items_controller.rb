@@ -1,9 +1,10 @@
 class NewsItemsController < ApplicationController
   include NewsItemsHelper
 
+  before_filter :load_networks, :only => [:index, :search]
+
   def index
     get_news_items
-    @networks = Network.all
   end
 
   def sort_options
@@ -25,5 +26,9 @@ class NewsItemsController < ApplicationController
     model_name = 'news_item' unless %w(tips pitches news_items).include?(model_name)
     model = model_name.classify.constantize
     @news_items = model.with_sort(params[:sort_by]).by_network(current_network).paginate(:page => params[:page])
+  end
+
+  def load_networks
+    @networks = Network.all
   end
 end
