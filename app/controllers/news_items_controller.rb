@@ -3,6 +3,7 @@ class NewsItemsController < ApplicationController
 
   def index
     get_news_items
+    @networks = Network.all
   end
 
   def sort_options
