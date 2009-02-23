@@ -104,10 +104,6 @@ class Pitch < NewsItem
     end
   end
 
-  def featured?
-    self.feature
-  end
-
   def current_funding
     self[:current_funding] || 0
   end
@@ -130,19 +126,25 @@ class Pitch < NewsItem
     user && user.reporter?
   end
 
-  def make_featured
-    pitch = Pitch.featured.first
-    pitch.update_attribute(:feature, false) unless pitch.nil?
+  def featured?
+    self.feature
+  end
+
+  def feature!
     self.update_attribute(:feature, true)
+  end
+
+  def unfeature!
+    self.update_attribute(:feature, false)
+  end
+
+  def featureable_by?(user)
+    user.is_a?(Admin)
   end
 
   def funding_needed
     return 0 unless active?
     requested_amount - total_amount_donated
-  end
-
-  def featureable_by?(user)
-    user.is_a?(Admin)
   end
 
   def fully_funded?
