@@ -8,7 +8,13 @@ class PitchesController < ApplicationController
 
   def feature
     pitch = find_resource
-    pitch.make_featured
+    pitch.feature!
+    redirect_to pitch_path(pitch)
+  end
+
+  def unfeature
+    pitch = find_resource
+    pitch.unfeature!
     redirect_to pitch_path(pitch)
   end
 
