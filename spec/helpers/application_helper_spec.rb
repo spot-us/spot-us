@@ -74,4 +74,14 @@ describe ApplicationHelper do
     end
   end
 
+  describe "#current_network_id" do
+    it "should return @current_network.id if it exists" do
+      instance_variable_set(:@current_network, Factory(:network, :id => 17))
+      current_network_id.should == 17
+    end
+    it "should return nil otherwise" do
+      current_network_id.should be_nil
+    end
+  end
+
 end
