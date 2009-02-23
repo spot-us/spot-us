@@ -420,11 +420,6 @@ describe Pitch do
         pitch.featureable_by?(nil).should be_false
       end
     end
-
-    describe "random_for" do
-      it "should return a random pitch for a given network"
-      it "should return a random pitch when network is nil"
-    end
   end
 
   it "returns true on #pitch?" do
