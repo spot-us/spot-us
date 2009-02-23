@@ -2,7 +2,12 @@ class HomesController < ApplicationController
   # caches_page :show
 
   def show
-    @featured_pitch = Pitch.by_network(current_network).featured.first
+    @featured = Pitch.by_network(current_network).featured
+    if @featured.any?
+      @featured_pitch = @featured.first
+    else
+      @featured_pitch = Pitch.by_network(current_network).rand
+    end
   end
   
   def start_story
