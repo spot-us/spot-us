@@ -57,23 +57,6 @@ describe Pitch do
     end
   end
 
-  describe "make_featured" do
-    it "should unset old pitch and set new pitch" do
-      pitch = Factory(:pitch, :feature => true)
-      Pitch.featured[0].should == pitch
-      pitch2 = Factory(:pitch)
-      pitch2.make_featured
-      pitch2.reload.feature.should be_true
-      pitch.reload.feature.should be_false
-    end
-
-    it "should just set the pitch to featured if there isn't one already" do
-      pitch = Factory(:pitch)
-      pitch.make_featured
-      pitch.reload.feature.should be_true
-    end
-  end
-
   describe "editing" do
     before(:each) do
       @pitch = Factory(:pitch, :user => Factory(:user))
@@ -402,21 +385,45 @@ describe Pitch do
   end
 
   describe "featuring" do
-    it "is featureable by an admin" do
-      user = Factory(:admin)
-      pitch = Factory(:pitch)
-      pitch.featureable_by?(user).should be_true
+
+    describe "feature!" do
+      it "should set the pitch to featured" do
+        pitch = Factory(:pitch)
+        pitch.feature!
+        pitch.reload.feature.should be_true
+      end
     end
 
-    it "is not featureable by someone other than admin" do
-      user = Factory(:reporter)
-      pitch = Factory(:pitch)
-      pitch.featureable_by?(user).should be_false
+    describe "unfeature!" do
+      it "should set the pitch to unfeatured" do
+        pitch = Factory(:pitch)
+        pitch.unfeature!
+        pitch.reload.feature.should be_false
+      end
     end
 
-    it "is not featureable when user is nil" do
-      pitch = Factory(:pitch)
-      pitch.featureable_by?(nil).should be_false
+    describe "featureable_by?" do
+      it "is featureable by an admin" do
+        user = Factory(:admin)
+        pitch = Factory(:pitch)
+        pitch.featureable_by?(user).should be_true
+      end
+
+      it "is not featureable by someone other than admin" do
+        user = Factory(:reporter)
+        pitch = Factory(:pitch)
+        pitch.featureable_by?(user).should be_false
+      end
+
+      it "is not featureable when user is nil" do
+        pitch = Factory(:pitch)
+        pitch.featureable_by?(nil).should be_false
+      end
+    end
+
+    describe "random_for" do
+      it "should return a random pitch for a given network"
+      it "should return a random pitch when network is nil"
     end
   end
 
