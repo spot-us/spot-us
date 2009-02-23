@@ -78,6 +78,11 @@ describe "/tips/new.html.haml" do
     template.should_not have_link_to(new_pitch_path)
   end
 
+  it "should ask for the current_network_id" do
+    template.should_receive(:current_network_id).and_return(17)
+    do_render
+  end
+
   def do_render
     render 'tips/new'
   end

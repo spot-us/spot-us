@@ -2,7 +2,7 @@
   .box_yellow.create_a_pitch_form
     .yellow-spacer-negative
     .row
-      = render :partial => 'shared/network.html.erb', :locals => {:f => f, :instance => @pitch}
+      = render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch}
     .row
       = f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required</span>"
       = f.text_area :headline, :rows => 2
