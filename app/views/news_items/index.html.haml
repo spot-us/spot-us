@@ -24,7 +24,11 @@
         = image_submit_tag image_path('search_button.png')
     %hr.space
     .double_content_border.clear
-        
+
+    - if @news_items.blank?
+      .box_white
+        %p
+          There were no results for your search.  Try different search terms.
     = render :partial => @news_items
 
     = will_paginate @news_items
