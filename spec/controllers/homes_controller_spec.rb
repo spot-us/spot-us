@@ -7,7 +7,7 @@ describe HomesController do
   describe "on GET to show" do
     before do
       @pitch = Factory(:pitch)
-      @featured = stub('featured scope', :first => @pitch)
+      @featured = stub('featured scope', :first => @pitch, :any? => true)
       @by_network = stub('by_network scope', :featured => @featured)
       Pitch.stub!(:by_network).and_return(@by_network)
       @network = stub('network')
@@ -29,14 +29,25 @@ describe HomesController do
       do_show
     end
 
+    it "should assign the featured pitch" do
+      do_show
+      assigns[:featured_pitch].should == @pitch
+    end
+
+    it "should check if there are any results" do
+      @featured.should_receive(:any?).and_return(true)
+      do_show
+    end
+
     it "should pick the first one returned" do
       @featured.should_receive(:first).and_return(@pitch)
       do_show
     end
 
-    it "should assign the featured pitch" do
+    it "should pick a random pitch otherwise" do
+      @featured.stub!(:any?).and_return(false)
+      @by_network.should_receive(:rand).and_return(@pitch)
       do_show
-      assigns[:featured_pitch].should == @pitch
     end
 
     def do_show
