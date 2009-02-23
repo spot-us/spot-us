@@ -12,7 +12,7 @@ else
   APP_CONFIG = {}
 end
 
-DEFAULT_HOST = APP_CONFIG[:default_host] || "localhost:3000"
+DEFAULT_HOST = APP_CONFIG[:default_host] || "spotus.local"
 
 Rails::Initializer.run do |config|
   config.gem "haml", :version => '>=2.0.6'
@@ -30,6 +30,9 @@ Rails::Initializer.run do |config|
 
   config.action_controller.session = { :session_key => '_spotus_session', :secret => secret }
 end
+
+# use this domain for cookies so switching networks doesn't drop cookies
+ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS[:session_domain] = DEFAULT_HOST
 
 # These are the sizes of the domain (i.e. 0 for localhost, 1 for something.com)  
 # for each of your environments  
