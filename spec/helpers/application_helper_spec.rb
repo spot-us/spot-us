@@ -47,13 +47,18 @@ describe ApplicationHelper do
    end
 
   describe "#networks_for_select" do
+    it "should return the default value first" do
+      networks_for_select.should include(['Select A Network', ''])
+    end
+
     it "should get all Networks" do
       Network.should_receive(:all).and_return([])
       networks_for_select
     end
+
     it "should return an array with name, id pairs" do
       Network.stub!(:all).and_return([Factory(:network, :display_name => 'network-name', :id => 17)])
-      networks_for_select.should == [['network-name', 17]]
+      networks_for_select.should include(['network-name', 17])
     end
   end
 
@@ -61,12 +66,14 @@ describe ApplicationHelper do
     it "should return the default value first" do
       categories_for_select(User.new).should == ['Sub-network', '']
     end
+
     it "should return categories for the given network" do
       network = Factory(:network)
       network.categories = [Factory(:category)]
       user = Factory(:user, :network => network)
       categories_for_select(user).should include([network.categories.first.name, network.categories.first.id])
     end
+
     it "should fail gracefully given an object with no network" do
       lambda do
         categories_for_select(stub('user', :network => nil))
