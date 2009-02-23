@@ -3,10 +3,16 @@
 
 #equalize
   .box_white
+    .span-4.colborder
+      = link_to 'All Networks', news_items_path(:subdomain => false)
+      %br/
+      - @networks.each do |network|
+        = link_to network.display_name, news_items_path(:subdomain => network.name)
+        %br/
     - form_tag(:search_news_items, :method => :get) do
       .span-3
         %h4 Search
-      .span-12.search-check-box.colborder
+      .span-7.search-check-box.colborder
         .div
           %label Type
           = select_tag "news_item_type", options_for_select([["Pitches", "pitches"],["Tips","tips"],["All", "news_items"]], params.fetch(:news_item_type, "pitches"))
