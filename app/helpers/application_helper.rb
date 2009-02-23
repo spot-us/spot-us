@@ -42,7 +42,10 @@ module ApplicationHelper
   end
 
   def networks_for_select
-    Network.all.map{|n| [n.display_name, n.id]}
+    output = []
+    output << ['Select A Network', '']
+    output += Network.all.map{|n| [n.display_name, n.id]}
+    output
   end
 
   def categories_for_select(object)
