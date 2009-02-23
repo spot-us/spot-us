@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
+  before_filter :current_network
 
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
 
