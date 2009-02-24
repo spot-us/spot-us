@@ -84,6 +84,10 @@ Then /^I should see "(.*)"$/ do |text|
   current_dom.inner_text.should include_text(text)
 end
 
+Then /^I should see a tag of "(.*)" with "(.*)"$/ do |tag, text|
+  response.should have_tag(tag, /#{text}/i)
+end
+
 Then /^I should see an? "(.*)" link$/ do |text|
   response.should have_tag("a", /#{text}/i)
 end
@@ -139,6 +143,16 @@ end
 
 When /^I visit the ([\w -]+?) ?page$/ do |name|
   visit(human_route(name))
+end
+
+When /^I view the current ([\w -]+?) ?page$/ do |name|
+  visit(human_route_for_current(name))
+end
+
+
+Then /^I should be on the (.*?) page$/ do |path|
+  action, controller = path.split(/\s/)
+  response.should render_template("#{controller.pluralize}/#{action}")
 end
 
 Given /^I am on the (.*)$/ do |fragment|
