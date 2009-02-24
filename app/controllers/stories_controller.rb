@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_filter :can_view?, :only => [:show]  
+  before_filter :can_edit?, :only => :edit
   resources_controller_for :stories
   
   def accept
