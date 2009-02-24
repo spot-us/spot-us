@@ -1,4 +1,4 @@
 - remote_form_for Donation.new(:pitch => news_item, :amount => 25), :url => myspot_donations_path do |f|
   = f.hidden_field :amount
   = f.hidden_field :pitch_id
-  = image_submit_tag "donate_25.png"
+  = image_submit_tag "donate_25.png", :alt => 'Donate 25'
