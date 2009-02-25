@@ -8,6 +8,7 @@ jQuery(document).ready(function($){
     id = jQuery("#network_select option:selected").val();
     load_categories(id);
   }
+  $('a[rel*=facebox]').facebox()
 });
 
 jQuery("a").click(function($){
@@ -70,6 +71,3 @@ function load_categories(id) {
     });
 }
 
-jQuery(document).ready(function($) {
-  $('a[rel*=facebox]').facebox()
-});
