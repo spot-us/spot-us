@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    cookies.delete :auth_token
+    delete_cookie :auth_token
     @user = User.new(params[:user])
     if @user.save
       unless @user.organization?
