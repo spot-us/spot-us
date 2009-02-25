@@ -15,7 +15,7 @@
       .span-7.search-check-box.colborder
         .div
           %label Type
-          = select_tag "news_item_type", options_for_select([["Pitches", "pitches"],["Tips","tips"],["All", "news_items"]], params.fetch(:news_item_type, "news_items"))
+          = select_tag "news_item_type", options_for_select([["Pitches", "pitches"],["Tips","tips"],["All", "news_items"]], params.fetch(:news_item_type, "pitches"))
         .div
           = label_tag     :sort_by, "Sort By"
           %select{:name => "sort_by"}
