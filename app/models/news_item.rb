@@ -93,6 +93,7 @@ class NewsItem < ActiveRecord::Base
     { :conditions => { :network_id => network.id } }
   }
   named_scope :all_news_items
+  named_scope :exclude_type, lambda {|type| { :conditions => ['type != ?', type] } }
 
 
   cattr_reader :per_page
