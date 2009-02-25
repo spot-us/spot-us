@@ -25,7 +25,7 @@ class NewsItemsController < ApplicationController
     model_name = params[:news_item_type]
     model_name = 'pitches' unless %w(tips pitches news_items).include?(model_name)
     model = model_name.classify.constantize
-    @news_items = model.with_sort(params[:sort_by]).by_network(current_network).paginate(:page => params[:page])
+    @news_items = model.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).paginate(:page => params[:page])
   end
 
   def load_networks
