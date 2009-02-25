@@ -84,7 +84,8 @@ describe NewsItemsController do
       @with_sort = stub('with_sort')
       @paginate = []
       @by_network = stub('by_network', :paginate => @paginate)
-      @with_sort.stub!(:by_network).and_return(@by_network)
+      @exclude_type = stub('exclude_type', :by_network => @by_network)
+      @with_sort.stub!(:exclude_type).and_return(@exclude_type)
       Pitch.stub!(:with_sort).and_return(@with_sort)
       NewsItem.stub!(:with_sort).and_return(@with_sort)
     end
@@ -96,9 +97,14 @@ describe NewsItemsController do
     end
 
     it "should call with_sort on the passed in model" do
-      named_scope = stub('a named scope', :paginate => [])
       Pitch.should_receive(:with_sort).and_return(@with_sort)
-      @with_sort.should_receive(:by_network).and_return(@by_network)
+      @with_sort.should_receive(:exclude_type).and_return(@exclude_type)
+      controller.send(:get_news_items)
+    end
+
+    it "should exclude stories" do
+      Pitch.should_receive(:with_sort).and_return(@with_sort)
+      @exclude_type.should_receive(:by_network).and_return(@by_network)
       controller.send(:get_news_items)
     end
 
