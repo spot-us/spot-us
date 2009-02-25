@@ -16,8 +16,10 @@ namespace :integrity do
   
   desc 'Integrity build target, runs migrations and specs'
   task :build => spec_prereq do
+    Rake::Task["gems:install"].invoke
     Rake::Task["db:migrate"].invoke
     Rake::Task["db:test:prepare"].invoke
     Rake::Task["spec"].invoke
+    Rake::Task["features"].invoke
   end
 end
