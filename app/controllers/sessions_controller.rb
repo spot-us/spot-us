@@ -25,9 +25,9 @@ class SessionsController < ApplicationController
 
   def destroy
     self.current_user.forget_me if logged_in?
-    cookies.delete :auth_token
-    cookies.delete :balance_text
-    cookies.delete :current_user_full_name
+    delete_cookie :auth_token
+    delete_cookie :balance_text
+    delete_cookie :current_user_full_name
     reset_session
     flash[:notice] = "Later. Hope to see you again soon."
     redirect_back_or_default('/')
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
     def handle_remember_me
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
-        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
+        set_cookie("auth_token", { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at })
       end
     end
 

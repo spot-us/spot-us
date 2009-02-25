@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_current_login_cookie
-    cookies[:current_user_full_name] = current_user.full_name
+    set_cookie("current_user_full_name", {:value => current_user.full_name})
   end
 
   def can_create?
@@ -41,7 +41,14 @@ class ApplicationController < ActionController::Base
   end
 
   def update_balance_cookie
-    cookies[:balance_text] = render_to_string(:partial => 'shared/balance')
+    set_cookie("balance_text",  {:value => render_to_string(:partial => 'shared/balance')})
   end
 
+  def set_cookie(name, options={})
+    cookies[name.to_sym] = options.merge(:domain => DEFAULT_HOST)
+  end
+  
+  def delete_cookie(name)
+    cookies.delete(name.to_sym, :domain => DEFAULT_HOST)
+  end
 end
