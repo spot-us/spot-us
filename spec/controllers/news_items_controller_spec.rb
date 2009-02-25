@@ -89,9 +89,9 @@ describe NewsItemsController do
       NewsItem.stub!(:with_sort).and_return(@with_sort)
     end
 
-    it "should default to news_item with an invalid type" do
+    it "should default to pitches with an invalid type" do
       controller.stub!(:params).and_return({:news_item_type => 'crazy_shit'})
-      NewsItem.should_receive(:with_sort).and_return(@with_sort)
+      Pitch.should_receive(:with_sort).and_return(@with_sort)
       controller.send(:get_news_items)
     end
 
