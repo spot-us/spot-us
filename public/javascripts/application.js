@@ -69,3 +69,7 @@ function load_categories(id) {
       });
     });
 }
+
+jQuery(document).ready(function($) {
+  $('a[rel*=facebox]').facebox()
+});
