@@ -18,16 +18,17 @@
 
   %h4.title How Much Should I ask for?"
   %br/ 
-  %p.alt-spotus 
-    Please see our = link_to "Reporters Agreement", page_path("reporter_agreement"). This is filled
-    with suggestions on how much you can ask for and what is expected of you as a reporter on
+  %p.alt-spotus
+    Please see our 
+    == #{link_to "Reporters Agreement", page_path("reporter_agreement")},
+    This is filled with suggestions on how much you can ask for and what is expected of you as a reporter on
     Spot.Us.
 
   %h4.title What happens next?
   %p.alt-spotus 
-    We fundraise! It won't be easy, but when it's done, you'll be reporting on a pitch you crafted
-    working directly for the public. If you have questions along the way, don't hesitate to contact
-    us.
+    We fundraise - and you start blogging! It won't be easy, but when it's done, you'll be reporting
+    on a pitch you crafted working directly for the public. If you have questions along the way,
+    don't hesitate to contact us.
     = mail_to "david@spot.us", nil, :encode => "hex"
     
     

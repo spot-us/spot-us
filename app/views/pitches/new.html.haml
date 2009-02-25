@@ -28,10 +28,11 @@
       %p.no_margin
         %strong What kind of stories are we looking for?
       %ul
-        %li= link_to "Get advice from spot us on how to build good pitches.", "#"
+        %li== #{link_to "Get advice from spot us on how to build good pitches", page_path("about") + "#faq_reporter"},
+        
         %li 
           Don't forget to
-          = link_to "reference community tips", "#"
+          = link_to "reference community tips", "/news_items/search?news_item_type=tips&sort_by=desc&x=85&y=5"          
           Once your pitch is done browse for news tips and if they are related to your pitch, use the reporters toolbar to notify them of your pitch.
     .clear
     
