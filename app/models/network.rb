@@ -16,7 +16,9 @@ class Network < ActiveRecord::Base
   has_many :categories, :attributes => true, :discard_if => Proc.new {|category| category.name.blank? }
   has_many :pitches
 
-  def self.with_pitches
-    all(:conditions => "id in (select distinct network_id from news_items where type = 'pitch' and deleted_at IS NULL)")
+  named_scope :with_pitches, :conditions => "id IN (SELECT DISTINCT network_id FROM news_items WHERE type = 'pitch' AND deleted_at IS NULL)"
+
+  def featured_pitches
+    pitches.featured.blank? ? pitches.all(:limit => 1, :order => 'RAND()') : pitches.featured
   end
 end
