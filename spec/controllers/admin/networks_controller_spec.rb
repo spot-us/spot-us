@@ -10,7 +10,7 @@ describe Admin::NetworksController do
   it "should redirect to networks index upon successful creation" do
     # work around because resources_controller will make a new network
     controller.should_receive(:edit_admin_network_path).and_return('/the correct url')
-    post :create, :network => {:name => 'network-name'}
+    post :create, :network => {:name => 'network-name', :display_name => 'display-name'}
     response.should redirect_to('http://test.host/the correct url')
   end
 
