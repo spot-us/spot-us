@@ -2,7 +2,7 @@
   .box_yellow.create_a_tip_form
     .yellow-spacer-negative
     .row
-      = render :partial => 'shared/network.html.erb', :locals => {:f => f, :instance => @tip}
+      = render :partial => 'shared/network', :locals => {:f => f, :instance => @tip}
     .yellow-spacer-negative
     .row
       = f.label     :headline, "Your Tip's Headline <br /><span class='small quieter'>Required</span>"
