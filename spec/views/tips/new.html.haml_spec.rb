@@ -57,7 +57,7 @@ describe "/tips/new.html.haml" do
 
   describe "with errors" do
     before do
-      assigns[:tip].stub!(:errors).and_return([:one])
+      assigns[:tip] = stub_model(Tip, :errors => [:one])
     end
 
     it "should display an error message" do
