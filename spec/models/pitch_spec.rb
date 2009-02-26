@@ -532,5 +532,22 @@ describe Pitch do
       Pitch.with_sort
     end
   end
+
+  describe ".home_page_pitches" do
+    before do
+      @featured = stub('featured')
+      @by_network = stub('featured pitch', :featured => @featured)
+      Pitch.stub!(:by_network).and_return(@by_network)
+      Network.stub!(:with_pitches).and_return([Factory(:network)])
+    end
+    it "should get the featured pitches by network" do
+      Pitch.home_page_pitches.should == [@featured]
+    end
+    it "should get a random pitch by network" do
+      @by_network.stub!(:featured).and_return([])
+      @by_network.should_receive(:rand).and_return(@featured)
+      Pitch.home_page_pitches.should == [@featured]
+    end
+  end
 end
 
