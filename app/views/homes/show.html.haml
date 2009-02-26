@@ -1,5 +1,4 @@
 - @title = "Spot.us - Home"
-- # TODO Clean home page mark up for equalizing column white backgrounds. - CT
 .block-spacer
 .home-boxer
   %div.home-floater.home-image-box{:style=>"width:425px;float:left;background: #fff;"}
@@ -23,9 +22,10 @@
         .double_content_border.clear
         %ul
           = render :collection => @featured, :partial => 'featured_pitch'
-      .float-right
-        %a.prev prev
-        %a.next next
+      - if @featured.size > 1
+        .float-right
+          %a.prev.arrow.float-left Prev
+          %a.next.arrow.float-right Next
       %h5.quiet{:style=>"margin:0;"}
         If you want to see this story researched, written, and published,
         click donate to help fund it!  
