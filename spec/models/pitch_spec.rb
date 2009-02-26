@@ -533,20 +533,25 @@ describe Pitch do
     end
   end
 
-  describe ".home_page_pitches" do
+  describe ".featured_by_network" do
     before do
-      @featured = stub('featured')
-      @by_network = stub('featured pitch', :featured => @featured)
-      Pitch.stub!(:by_network).and_return(@by_network)
-      Network.stub!(:with_pitches).and_return([Factory(:network)])
+      @pitches = [@pitch]
+      @networks = [stub('network', :featured_pitches => @pitches)]
+      Network.stub!(:with_pitches).and_return(@networks)
     end
-    it "should get the featured pitches by network" do
-      Pitch.home_page_pitches.should == [@featured]
+    context "when no network is supplied" do
+      it "should get the pitches pitches by network" do
+        Pitch.featured_by_network.should == @pitches
+      end
     end
-    it "should get a random pitch by network" do
-      @by_network.stub!(:featured).and_return([])
-      @by_network.should_receive(:rand).and_return(@featured)
-      Pitch.home_page_pitches.should == [@featured]
+    context "when a network is supplied" do
+      before do
+        @network = stub('network', :id => 42)
+      end
+      it "should get featured pitches for that network" do
+        @network.should_receive(:featured_pitches)
+        Pitch.featured_by_network(@network)
+      end
     end
   end
 end
