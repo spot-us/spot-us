@@ -189,6 +189,11 @@ Factory.define :category do |category|
   category.name { random_string }
 end
 
+Factory.define :post do |post|
+  post.title 'Post Title'
+  post.body 'A cool blog post entry thing'
+end
+
 
 # handy builders ##################################################################################
 
