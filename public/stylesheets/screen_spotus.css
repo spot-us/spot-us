@@ -764,6 +764,12 @@ ul.navigation a:focus {
 div.featured_image {
   width: 220px;
   float: left;
+  text-align: center;
+  padding: 0 15px 0 0;
+}
+div.featured_image div.double_content_border{ margin-top: 10px; }
+div.featured_image div.progress_bar{
+  text-align:left;
 }
 div.featured_image .caption {
   padding: 5px;
