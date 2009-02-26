@@ -2,14 +2,9 @@ class HomesController < ApplicationController
   # caches_page :show
 
   def show
-    @featured = Pitch.by_network(current_network).featured
-    if @featured.any?
-      @featured_pitch = @featured.first
-    else
-      @featured_pitch = Pitch.by_network(current_network).rand
-    end
+    @featured = Pitch.featured_by_network(current_network)
   end
-  
+
   def start_story
     if !logged_in?
       session[:return_to] = start_story_path

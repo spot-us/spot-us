@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 describe 'homes/show' do
 
   before do
-    assigns[:featured_pitch] = Factory(:pitch)
+    assigns[:featured] = [Factory(:pitch)]
   end
 
   it 'should render' do
@@ -12,13 +12,7 @@ describe 'homes/show' do
 
   it "should show the featured pitch" do
     do_render
-    template.should have_tag('a[href=?]', pitch_path(assigns[:featured_pitch]))
-  end
-
-  it "should not raise an exception when there is no featured pitch" do
-    assigns[:featured_pitch] = nil
-    lambda { do_render }.
-      should_not raise_error
+    template.should have_tag('a[href=?]', pitch_path(assigns[:featured].first))
   end
 
   def do_render
