@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :donations, :affiliations, :pledges, :profiles, :pages
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
-  map.resources :pitches, :member => {:feature => :put, :unfeature => :put}, :has_many => :comments
+  map.resources :pitches, :member => {:feature => :put, :unfeature => :put}, :has_many => :comments do |pitch|
+    pitch.resources :posts
+  end
 
   # TODO: remove when done
   map.resources :ui
