@@ -81,8 +81,7 @@ class Pitch < NewsItem
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
-  before_save :dispatch_fact_checker
-  after_save :check_if_funded_state
+  after_save :check_if_funded_state, :dispatch_fact_checker
 
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
   named_scope :featured, :conditions => {:feature => true}
@@ -195,7 +194,7 @@ class Pitch < NewsItem
   end
 
   def dispatch_fact_checker
-    if self.fact_checker_id_changed? && self.story && self.valid?
+    if self.fact_checker_id_changed? && self.story
       self.story.update_attribute(:fact_checker_id, self.fact_checker_id)
     end
   end
