@@ -40,8 +40,17 @@ h3. run basic setup tasks
 # rake db:create:all
 # rake db:migrate
 
+h3. setup your local domains
+
+Spot.Us relies on subdomain_fu to route requests to various networks.  To use the site locally, you'll need to add these entries to your /etc/hosts file.  spotus.local will become the main Spot.Us site. Any subdomains you create will need to be added to the file also (in this example, we've added an sfbay network).
+
+# sudo $EDITOR /etc/hosts
+# Add these lines:
+## 127.0.0.1       spotus.local
+## 127.0.0.1       sfbay.spotus.local
+
 h3. start your local server
 
 # ./script/server
 
-Spot.Us should now be running on your computer at the URL "http://localhost:3000":http://localhost:3000
+Spot.Us should now be running on your computer at the URL "http://spotus.local:3000":http://spotus.local:3000
