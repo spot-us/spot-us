@@ -92,10 +92,10 @@ class Pitch < NewsItem
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
-  def self.home_page_pitches
+  def self.featured_by_network(network=nil)
+    return network.featured_pitches if network
     Network.with_pitches.map do |network|
-      featured = by_network(network).featured
-      featured.blank? ? by_network(network).rand : featured
+      network.featured_pitches
     end.flatten
   end
 
