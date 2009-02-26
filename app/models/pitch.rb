@@ -92,6 +92,13 @@ class Pitch < NewsItem
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
+  def self.home_page_pitches
+    Network.with_pitches.map do |network|
+      featured = by_network(network).featured
+      featured.blank? ? by_network(network).rand : featured
+    end.flatten
+  end
+
   def can_be_accepted?
     active?
   end
@@ -194,17 +201,18 @@ class Pitch < NewsItem
   end
 
   protected
-    def do_fund_events
-      send_fund_notification
-      create_associated_story
-    end
 
-    def create_associated_story
-      self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
-    end
+  def do_fund_events
+    send_fund_notification
+    create_associated_story
+  end
 
-    def send_fund_notification
-      Mailer.deliver_pitch_accepted_notification(self)
-    end
+  def create_associated_story
+    self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
+  end
+
+  def send_fund_notification
+    Mailer.deliver_pitch_accepted_notification(self)
+  end
 end
 
