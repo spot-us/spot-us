@@ -16,10 +16,19 @@
       %p Text about making the first story
     - else
       #pitches_carousel
+        %h3.float-left{:style => "color: red;"} 
+          %strong Help Fund this Story
+        .float-right
+          %span= link_to "View more Pitches &raquo;", news_items_path
+        .double_content_border.clear
         %ul
           = render :collection => @featured, :partial => 'featured_pitch'
-      %a.next next
-      %a.prev prev
+      .float-right
+        %a.next next
+        %a.prev prev
+      %h5.quiet{:style=>"margin:0;"}
+        If you want to see this story researched, written, and published,
+        click donate to help fund it!  
 .clear
 - # spotus_ie_pixel.gif is an IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}

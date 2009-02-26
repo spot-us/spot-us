@@ -1,9 +1,4 @@
 %li.pitch_carousel
-  %h3.float-left{:style => "color: red;"} 
-    %strong Help Fund this Story
-  .float-right
-    %span= link_to "View more Pitches &raquo;", news_items_path
-  .double_content_border.clear
   .featured_image.span-220
     = link_to image_tag(featured_pitch.featured_image.url(:medium)), featured_pitch
     .double_content_border
@@ -23,6 +18,3 @@
       = truncate_words(featured_pitch.short_description, 50)
       =# h featured_pitch.short_description
       = link_to 'Read More &raquo;', featured_pitch
-    %h5.quiet{:style=>"margin:0;"}
-      If you want to see this story researched, written, and published,
-      click donate to help fund it!  
