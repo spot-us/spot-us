@@ -10,12 +10,16 @@
       = site_option_content_for(:video_content)
       = change_site_option(:video_content)
   %div.home-floater{:style=>"width:460px;float:right;background: #fff;"}
-    - if @featured_pitch.blank?  
+    - unless @featured
       %h3 Create the first story
       .double_content_border
       %p Text about making the first story
     - else
-      = render :partial => 'featured_pitch', :locals => {:featured_pitch => @featured_pitch}
+      #pitches_carousel
+        %ul
+          = render :collection => @featured, :partial => 'featured_pitch'
+      %a.next next
+      %a.prev prev
 .clear
 - # spotus_ie_pixel.gif is an IE fix
 %img{:src=>"../images/spotus_ie_pixel.gif"}
