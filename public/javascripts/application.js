@@ -9,6 +9,12 @@ jQuery(document).ready(function($){
     load_categories(id);
   }
   $('a[rel*=facebox]').facebox()
+
+  $("#pitches_carousel").jCarouselLite({
+    btnNext: ".next",
+    btnPrev: ".prev",
+    visible: 1
+  });
 });
 
 jQuery("a").click(function($){
@@ -71,3 +77,4 @@ function load_categories(id) {
     });
 }
 
+    
