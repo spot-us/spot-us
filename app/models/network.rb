@@ -14,4 +14,9 @@ class Network < ActiveRecord::Base
   validates_format_of   :name, :with => /^[a-z0-9|-]+$/i
 
   has_many :categories, :attributes => true, :discard_if => Proc.new {|category| category.name.blank? }
+  has_many :pitches
+
+  def self.with_pitches
+    all(:conditions => "id in (select distinct network_id from news_items where type = 'pitch' and deleted_at IS NULL)")
+  end
 end
