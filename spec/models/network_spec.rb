@@ -29,4 +29,29 @@ describe Network do
       Network.with_pitches.all?{|n| n.pitches.count > 0 }.should be_true
     end
   end
+
+  describe "#featured_pitches" do
+    before do
+      @network = Factory(:network)
+    end
+    it "should return an array of pitches for only that network" do
+      pitch = Factory(:pitch, :network => @network)
+      @network.featured_pitches.all?{|p| p.network_id == @network.id }.should be_true
+    end
+    context "with no featured pitches" do
+      it "should return a randomly selected pitch" do
+        pitch1 = Factory(:pitch, :network => @network)
+        pitch2 = Factory(:pitch, :network => @network)
+        [pitch1, pitch2].should include(@network.featured_pitches.first)
+        @network.featured_pitches.size.should == 1
+      end
+    end
+    context "with featured pitches" do
+      it "should return only featured pitches" do
+        pitch1 = Factory(:pitch, :network => @network, :feature => true)
+        pitch2 = Factory(:pitch, :network => @network)
+        @network.featured_pitches.should == [pitch1]
+      end
+    end
+  end
 end
