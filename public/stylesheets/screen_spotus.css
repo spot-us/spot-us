@@ -1104,3 +1104,18 @@ h4#history{
  height: auto;
  margin-bottom:0.25em;
 }
+
+a.arrow{
+  display:block;
+  height: 80px;
+  line-height: 80px;
+  width:40px;
+  text-align:center;
+}
+a.next{
+  background:url(/images/grarrow.png) no-repeat 50% 0;
+}
+a.prev{
+  background:url(/images/glarrow.png) no-repeat 50% 0;
+}
+
