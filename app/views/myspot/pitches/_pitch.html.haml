@@ -17,3 +17,5 @@
           .action= link_to "Report", edit_story_url(pitch.story)
         - elsif pitch.story.published?
           .action= link_to "View Published Story", story_url(pitch.story)
+    = link_to 'Make blog post', new_pitch_post_path(pitch)
+

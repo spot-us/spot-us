@@ -856,7 +856,6 @@ ul.dashboard_navigation a {
   /* background: url(/images/tab_bg.png) repeat-x left bottom;*/
   font-weight: bold;
   height: 32px;
-  width: 121px;
 }
 ul.dashboard_navigation a:hover {
   background: url('/images/nav_lite_teal_bg.png') repeat-y left top;
@@ -867,13 +866,14 @@ ul.dashboard_navigation a.selected,
 .myspot_tips a#dashboard_tips_tab,
 .myspot_pledges a#dashboard_pledges_tab,
 .myspot_pitches a#dashboard_pitches_tab,
+.myspot_posts a#dashboard_posts_tab,
 ul.profile_navigation a.selected,
 .myspot_profiles a#profile_basic_tab,
 .myspot_jobs a#profile_work_history_tab,
 .myspot_samples a#profile_work_samples_tab {
   background: url('/images/nav_dark_teal_bg.png') no-repeat left top;
   color: white;
-  width: 129px;
+  width: 100px;
   height: 37px;
 }
 ul.dashboard_navigation a:focus {
