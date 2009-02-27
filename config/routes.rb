@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resource :settings
     myspot.resources :donations
     myspot.resources :pitches, :member => {:accept => :put}
+    myspot.resources :posts
     myspot.resources :pledges
     myspot.resources :purchases
     myspot.resources :tips
