@@ -1,0 +1,20 @@
+%h2 My Spot
+
+= render :partial => "myspot/nav"
+
+.span-715.box_white
+  = render :partial => "myspot/dashboard_nav"
+  %table
+    %tr
+      %th Pitch
+      %th Title
+      %th Actions
+    - @posts.each do |post|
+      %tr
+        %td.pitch
+          = link_to image_tag(post.pitch.featured_image.url(:thumb)), pitch_url(post.pitch)
+          = link_to post.pitch.headline, pitch_url(post.pitch)
+        %td= link_to post.title, pitch_post_url(post.pitch, post)
+        %td
+          = link_to 'Edit', edit_pitch_post_url(post.pitch, post)
+          = link_to 'Delete', pitch_post_url(post.pitch, post), :method => :delete, :confirm => "Are you sure you want to delete this blog post?"
