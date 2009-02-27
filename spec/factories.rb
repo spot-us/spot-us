@@ -192,6 +192,7 @@ end
 Factory.define :post do |post|
   post.title 'Post Title'
   post.body 'A cool blog post entry thing'
+  post.media_embed '<object>some cool flash</object>'
 end
 
 
