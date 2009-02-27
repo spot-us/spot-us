@@ -1,0 +1,13 @@
+.box_yellow.create_a_pitch_form
+  .row
+    = f.label :title
+    = f.text_field :title
+  .row
+    = f.label :body
+    = fckeditor_textarea("post", "body", :toolbarSet => 'Spotus', :width => '450px', :height => '200px')
+  .row
+    = f.label :media_embed
+    = f.text_area :media_embed, :rows => 4
+  .row
+    = f.submit
+    = link_to 'Back to my pitches', myspot_pitches_path
