@@ -1,0 +1,21 @@
+- @title = "Spot.us - #{h @post.title} - Pitch: #{h @post.pitch.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      %strong= h @post.title
+    .double_content_border
+    = render :partial => 'news_items/user', :locals => { :news_item => @post.pitch }
+    %h2.headline
+      Related pitch
+    .pitch_summary
+      .float-left
+        = link_to image_tag(@post.pitch.featured_image.url(:thumb)), pitch_url(@post.pitch)
+      %h2
+        = link_to @post.pitch.headline, pitch_url(@post.pitch)
+    .block-spacer-negative
+    .double_content_border
+    = @post.body
+    .double_content_border
+    = @post.media_embed
