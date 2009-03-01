@@ -80,7 +80,11 @@ class Pitch < NewsItem
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  has_many :posts
+  has_many :posts do
+    def first(number)
+      find(:all, :limit => number, :order => 'created_at DESC')
+    end
+  end
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
   after_save :check_if_funded_state, :dispatch_fact_checker
 
@@ -198,6 +202,10 @@ class Pitch < NewsItem
     if self.fact_checker_id_changed? && self.story
       self.story.update_attribute(:fact_checker_id, self.fact_checker_id)
     end
+  end
+
+  def has_more_posts_than(number)
+    posts.count > number
   end
 
   protected
