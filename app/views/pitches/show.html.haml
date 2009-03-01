@@ -64,6 +64,17 @@
           = link_to h(tip.headline), tip_url(tip)
     - else
       %p No related Tips yet.  Stay tuned.
+    - if @pitch.posts.any?
+      .block-spacer-negative
+      %h3 Blog Posts
+      .double_content_border
+      - @pitch.posts.first(5).each do |post|
+        %h4
+          = link_to h(post.title), pitch_post_path(@pitch, post)
+          .reg-line-height.small.quiet= post.created_at
+        .body= truncate_words(post.body, 20)
+      - if @pitch.has_more_posts_than(5)
+        = link_to "View all", pitch_posts_path(@pitch)
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
