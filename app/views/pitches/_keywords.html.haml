@@ -1,0 +1,13 @@
+%h3 Keywords
+.double_content_border
+%p= h pitch.keywords
+- if pitch.editable_by?(current_user)
+  .block-spacer-negative
+  .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch)
+- if pitch.featureable_by?(current_user)
+  - if pitch.featured?
+    .block-spacer-negative
+    .centered= link_to 'Un-feature this pitch', unfeature_pitch_path(pitch), :method => :put
+  - else
+    .block-spacer-negative
+    .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :put
