@@ -571,6 +571,11 @@ describe Pitch do
     it "should return false if the passed in user is nil" do
       @pitch.postable_by?(nil).should be_false
     end
+    it "should return true if the passed in user is the peer review editor" do
+      editor = Factory(:reporter)
+      @pitch.fact_checker = editor
+      @pitch.postable_by?(editor).should be_true
+    end
   end
 end
 
