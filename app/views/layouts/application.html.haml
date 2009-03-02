@@ -7,6 +7,18 @@
     .body-content
       .container
         = render :partial => 'layouts/header'
+        .block-spacer-negative.no_margin
+        .box_white
+          - if @current_network.nil?
+            All Networks
+          - else
+            = link_to 'All Networks', root_url(:subdomain => false)
+          - Network.all.each do |network|
+            |
+            - if @current_network != network
+              = link_to network.display_name, root_url(:subdomain => network.name)
+            - else
+              = network.display_name
         - if yield(:error)
           .flash.error
             %span.dismiss= link_to image_tag('close_square.png'), @close_flash_link || '' # empty string means self
