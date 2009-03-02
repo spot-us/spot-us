@@ -24,3 +24,5 @@
     = render :partial => 'pitches/posts', :locals => {:pitch => @post.pitch}
     .block-spacer-negative
     = render :partial => 'pitches/keywords', :locals => {:pitch => @post.pitch}
+  .span-160.box_white
+    = render :partial => "news_items/supporters", :locals => {:news_item => @post.pitch}
