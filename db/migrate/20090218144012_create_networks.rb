@@ -6,7 +6,6 @@ class CreateNetworks < ActiveRecord::Migration
       t.timestamps
     end
 
-    Network.create!(:name => 'sfbay')
   end
 
   def self.down
