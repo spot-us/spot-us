@@ -38,6 +38,18 @@ describe "/pitches/show.html.haml" do
     template.should_not have_tag('a[href$=?]', edit_pitch_path(@pitch))
   end
 
+  it "should have a make a blog post button if the user is allowed to" do
+    @pitch.stub!(:postable_by?).and_return(true)
+    do_render
+    template.should have_tag('a[href=?]', new_pitch_post_path(@pitch))
+  end
+
+  it "should not have a make a blog post button if the user isn't allowed to" do
+    @pitch.stub!(:postable_by?).and_return(false)
+    do_render
+    template.should_not have_tag('a[href=?]', new_pitch_post_path(@pitch))
+  end
+
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@pitch.short_description}/i)
