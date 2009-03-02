@@ -31,4 +31,7 @@ describe "showing a blog post" do
   it "should include the post" do
     response.should have_tag("h4", @post.title)
   end
+  it "should include supporters" do
+    response.should have_tag("h2", "Supporters")
+  end
 end
