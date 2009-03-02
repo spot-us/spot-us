@@ -26,4 +26,7 @@ describe "blog posts index" do
   it "should include keywords" do
     response.should have_tag("h3", "Keywords")
   end
+  it "should include supporters" do
+    response.should have_tag("h2", "Supporters")
+  end
 end
