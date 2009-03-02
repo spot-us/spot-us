@@ -64,6 +64,7 @@
           = link_to h(tip.headline), tip_url(tip)
     - else
       %p No related Tips yet.  Stay tuned.
+    = render :partial => 'action_buttons', :locals => {:pitch => @pitch}
     = render :partial => 'posts', :locals => {:pitch => @pitch}
     .block-spacer-negative
     = render :partial => 'keywords', :locals => {:pitch => @pitch}
