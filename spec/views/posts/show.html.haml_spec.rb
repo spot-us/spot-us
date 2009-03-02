@@ -29,4 +29,12 @@ describe "showing a blog post" do
     do_render
     response.body.should include(@post.pitch.user.full_name)
   end
+  it "should include donations button" do
+    do_render
+    response.should have_tag("div#inline_donation_form_#{@pitch.id}")
+  end
+  it "should include the post" do
+    do_render
+    response.should have_tag("h4", @post.title)
+  end
 end
