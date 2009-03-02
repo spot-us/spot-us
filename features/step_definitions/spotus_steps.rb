@@ -18,3 +18,16 @@ Given /^A "(.*)" exists for the "(.*)"$/ do |child, parent|
   child.classify.constantize.create!(Factory(child.to_sym, parent.to_sym => get_instance_variable(parent)).attributes)
 end
 
+Given /^my current network is (.*?)$/i do |subdomain|
+  network = Network.find_or_create_by_name(subdomain)
+  instance_variable_set("@current_network", network)
+end
+
+Given /^I am at the "(.*?)" network page$/ do |subdomain|
+  visit(root_url(:subdomain => subdomain))
+end
+
+Then /^I should see "(.*?)" not linked$/ do |text|
+  response.body.should include(text)
+  response.should_not have_tag("a", text)
+end
