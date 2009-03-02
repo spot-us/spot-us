@@ -19,3 +19,8 @@
     = @post.body
     .double_content_border
     = @post.media_embed
+  .span-220.column_v.box_white
+    = render :partial => "donations/button", :locals => { :news_item => @post.pitch }
+    = render :partial => 'pitches/posts', :locals => {:pitch => @post.pitch}
+    .block-spacer-negative
+    = render :partial => 'pitches/keywords', :locals => {:pitch => @post.pitch}
