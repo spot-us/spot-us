@@ -1,0 +1,11 @@
+- if pitch.posts.any?
+  .block-spacer-negative
+  %h3 Blog Posts
+  .double_content_border
+  - pitch.posts.first(5).each do |post|
+    %h4.reg-line-height
+      = link_to h(post.title), pitch_post_path(pitch, post)
+    .reg-line-height.small.quiet= post.created_at.to_s(:date)
+    .body= truncate_words(post.body, 20)
+  - if pitch.has_more_posts_than(5)
+    = link_to "View all", pitch_posts_path(pitch)
