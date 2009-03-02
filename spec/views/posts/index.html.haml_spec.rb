@@ -22,4 +22,12 @@ describe "blog posts index" do
     do_render
     response.should have_tag("a[href=?]", pitch_post_path(@pitch, @post), "Read More")
   end
+  it "should include donations button" do
+    do_render
+    response.should have_tag("div#inline_donation_form_#{@pitch.id}")
+  end
+  it "should include keywords" do
+    do_render
+    response.should have_tag("h3", "Keywords")
+  end
 end

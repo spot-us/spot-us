@@ -16,3 +16,7 @@
         = link_to @pitch.headline, pitch_url(@pitch)
     .block-spacer-negative
     = render :partial => @posts
+  .span-220.column_v.box_white
+    = render :partial => "donations/button", :locals => { :news_item => @pitch }
+    .block-spacer-negative
+    = render :partial => 'pitches/keywords', :locals => {:pitch => @pitch}
