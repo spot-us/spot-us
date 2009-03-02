@@ -1118,4 +1118,6 @@ a.next{
 a.prev{
   background:url(/images/glarrow.png) no-repeat 50% 0;
 }
-
+.no_margin{
+  margin:0;
+}
