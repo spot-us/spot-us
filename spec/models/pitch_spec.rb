@@ -554,5 +554,23 @@ describe Pitch do
       end
     end
   end
+  
+  describe "#postable_by?" do
+    before do
+      @pitch = Factory(:pitch)
+    end
+    it "should return true if the passed in user is the reporter" do
+      @pitch.postable_by?(@pitch.user).should be_true
+    end
+    it "should return true if the passed in user is an admin" do
+      @pitch.postable_by?(Factory(:admin)).should be_true
+    end
+    it "should return false otherwise" do
+      @pitch.postable_by?(Factory(:user)).should be_false
+    end
+    it "should return false if the passed in user is nil" do
+      @pitch.postable_by?(nil).should be_false
+    end
+  end
 end
 
