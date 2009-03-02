@@ -33,9 +33,11 @@
       = f.text_area :keywords, :rows => 3
     .yellow-spacer-negative
     .row
-      = f.label :requested_amount, "Requested Amount" 
-      <br /><span class='small quieter'>
-      == #{link_to "Suggested pricings for work", page_path("reporter_agreement")},
+      %label{:for => 'requested_amount'}
+        Requested Amount
+        %br/
+        %span.small.quieter
+          == #{link_to "Suggested pricings for work", page_path("reporter_agreement")},
       = f.text_field :requested_amount, :maxlength => 15, :size => 15
     .yellow-spacer-negative
     .row
