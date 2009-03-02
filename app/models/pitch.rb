@@ -115,6 +115,11 @@ class Pitch < NewsItem
     end
   end
 
+  def postable_by?(other_user)
+    return false if other_user.nil?
+    user == other_user || other_user.admin?
+  end
+
   def current_funding
     self[:current_funding] || 0
   end
