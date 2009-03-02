@@ -10,6 +10,7 @@ describe User do
   it { Factory(:citizen).should have_many(:donations) }
   it { Factory(:citizen).should have_many(:tips) }
   it { Factory(:citizen).should have_many(:pitches) }
+  it { Factory(:citizen).should have_many(:posts) }
   it { Factory(:citizen).should have_many(:pledges) }
   it { Factory(:citizen).should have_many(:pledges) }
   it { Factory(:citizen).should have_many(:jobs) }
