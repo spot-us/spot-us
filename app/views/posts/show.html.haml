@@ -21,6 +21,9 @@
     = @post.media_embed
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @post.pitch }
+    .block-spacer-negative
+    - if @post.pitch.postable_by?(current_user)
+      = link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@post.pitch, @post)
     = render :partial => 'pitches/posts', :locals => {:pitch => @post.pitch}
     .block-spacer-negative
     = render :partial => 'pitches/keywords', :locals => {:pitch => @post.pitch}
