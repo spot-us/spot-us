@@ -120,7 +120,7 @@ class Pitch < NewsItem
 
   def postable_by?(other_user)
     return false if other_user.nil?
-    user == other_user || other_user.admin?
+    user == other_user || other_user.admin? || other_user == fact_checker
   end
 
   def current_funding
