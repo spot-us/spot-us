@@ -86,6 +86,9 @@ class Pitch < NewsItem
     end
   end
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
+
+  belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
+
   after_save :check_if_funded_state, :dispatch_fact_checker
 
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
