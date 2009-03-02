@@ -9,25 +9,21 @@ describe "blog posts index" do
     @post = Factory(:post, :pitch => @pitch)
     assigns[:pitch] = @pitch
     assigns[:posts] = [@post]
+    do_render
   end
   it "should list the title for each post" do
-    do_render
     response.should have_tag("h3", @post.title)
   end
   it "should list the date posted" do
-    do_render
     response.body.should include(@post.created_at.to_s)
   end
   it "should have a link to read the full post" do
-    do_render
     response.should have_tag("a[href=?]", pitch_post_path(@pitch, @post), "Read More")
   end
   it "should include donations button" do
-    do_render
     response.should have_tag("div#inline_donation_form_#{@pitch.id}")
   end
   it "should include keywords" do
-    do_render
     response.should have_tag("h3", "Keywords")
   end
 end
