@@ -75,16 +75,16 @@ class User < ActiveRecord::Base
   has_many :spotus_donations
   has_many :tips
   has_many :pitches
+  has_many :posts, :through => :pitches
+  has_many :stories
+  has_many :jobs
+  has_many :samples
+  has_many :credits
   has_many :pledges do
     def tip_sum(tip)
       self.all(:conditions => {:tip_id => tip}).map(&:amount).sum
     end
   end
-
-  has_many :stories
-  has_many :jobs
-  has_many :samples
-  has_many :credits
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password
