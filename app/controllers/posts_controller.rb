@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   resources_controller_for :post
-  before_filter :login_required
+  before_filter :login_required, :except => [:show, :index]
 
   response_for :create do |format|
     format.html do
