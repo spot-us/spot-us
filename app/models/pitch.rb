@@ -171,6 +171,11 @@ class Pitch < NewsItem
     donations.paid.map(&:amount).sum >= requested_amount
   end
 
+  def fully_fund!(user)
+    donations.unpaid.for_user(user).map(&:destroy)
+    donations.create(:amount => requested_amount, :user => user)
+  end
+
   def requested_amount=(value)
     self[:requested_amount] = value.to_s.gsub(/[^\d\.]/, "") unless value.nil?
   end

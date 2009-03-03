@@ -7,4 +7,3 @@
     = render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item} 
   - when !current_user || current_user && current_user.can_donate_to?(news_item)
     = render :partial => 'donations/donate_twenty_five', :locals => {:news_item => news_item} 
-
