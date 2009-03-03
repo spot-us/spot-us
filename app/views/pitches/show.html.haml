@@ -56,6 +56,8 @@
 
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
+    = render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }
+    .block-spacer-negative
     %h3 Related Tips
     .double_content_border
     - if @pitch.tips.any?

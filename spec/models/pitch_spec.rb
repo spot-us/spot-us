@@ -283,6 +283,25 @@ describe Pitch do
     end
   end
 
+  describe "fully_fund!" do
+    before do
+      @user = Factory(:organization)
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+    it "should create a donation for the requested_amount" do
+      @pitch.donations.should_receive(:create).with(:amount => @pitch.requested_amount, :user => @user)
+      @pitch.fully_fund!(@user)
+    end
+    
+    it "should delete other unpaid donations from the current user" do
+      other_donation = Factory(:donation, :pitch => @pitch, :user => @user)
+      unpaid = stub('named scope', :for_user => [other_donation])
+      @pitch.donations.should_receive(:unpaid).and_return(unpaid)
+      other_donation.should_receive(:destroy).and_return(true)
+      @pitch.fully_fund!(@user)
+    end
+  end
+
   describe "donations.for_user" do
     it "should not return users other than the one requested" do
       user = Factory(:user)
