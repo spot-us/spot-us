@@ -82,7 +82,6 @@ class Donation < ActiveRecord::Base
     Mailer.deliver_user_thank_you_for_donating(self)
   end
 
-  # TODO: use amount
   def update_pitch_funding
     pitch.current_funding += amount
     pitch.save
