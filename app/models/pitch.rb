@@ -151,6 +151,10 @@ class Pitch < NewsItem
     self.feature
   end
 
+  def show_support!(organization)
+    supporting_organizations << organization unless supporting_organizations.include?(organization)
+  end
+
   def feature!
     self.update_attribute(:feature, true)
   end
