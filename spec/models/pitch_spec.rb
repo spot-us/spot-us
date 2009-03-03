@@ -441,6 +441,23 @@ describe Pitch do
     end
   end
 
+  describe "show_support!" do
+    before do
+      @pitch = Factory(:pitch)
+      @organization = Factory(:organization)
+    end
+    it "add the organization to the pitch's supporting organizations" do
+      @pitch.show_support!(@organization)
+      @pitch.supporting_organizations.should include(@organization)
+    end
+
+    it "doesn't add the same organization to the pitch's supporting organizations twice" do
+      @pitch.show_support!(@organization)
+      lambda{@pitch.show_support!(@organization)}.should change(@pitch.supporting_organizations, :size).by(0)
+    end
+
+  end
+
   describe "featuring" do
 
     describe "feature!" do
