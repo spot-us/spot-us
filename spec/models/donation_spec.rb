@@ -53,15 +53,10 @@ describe Donation do
 
       end
 
-      describe "should be invaild and add an error" do
+      describe "should be invalid and add an error" do
         it "if the pitch is fully funded" do
           pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          pitch.reload
+          pitch.stub!(:fully_funded?).and_return(true)
 
           donation = Factory.build(:donation, :pitch => pitch, :user => Factory(:user), :amount => 1, :status => 'paid')
           donation.should_not be_valid
@@ -72,9 +67,8 @@ describe Donation do
          it "if user's total donations + the new donation is >= 20% of the pitch's requested amount" do
            user = Factory(:user)
            pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
-           Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :status => 'paid')
+           pitch.stub!(:user_can_donate_more?).and_return(false)
            donation = Factory.build(:donation, :pitch => pitch, :user => user, :amount => 101)
-           pitch.reload
            donation.should_not be_valid
            donation.errors.full_messages.first.should =~ /20/
            donation.should have(1).error_on(:base)
