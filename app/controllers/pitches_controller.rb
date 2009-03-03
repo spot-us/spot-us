@@ -1,5 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
+  before_filter :organization_required, :only => :fully_fund
   resources_controller_for :pitch
 
   def index
@@ -16,6 +17,18 @@ class PitchesController < ApplicationController
     pitch = find_resource
     pitch.unfeature!
     redirect_to pitch_path(pitch)
+  end
+
+  def fully_fund
+    pitch = find_resource
+    if donation = pitch.fully_fund!(current_user)
+      flash[:success] = "Your donation was successfully created"
+      redirect_to edit_myspot_donations_amounts_path
+    else
+      flash[:error] = "An error occurred while trying to fund this pitch"
+      redirect_to pitch_path(pitch)
+    end
+
   end
 
   protected
@@ -51,6 +64,10 @@ class PitchesController < ApplicationController
     params[:pitch] ||= {}
     params[:pitch][:headline] = params[:headline] if params[:headline]
     current_user.pitches.new(params[:pitch])
+  end
+
+  def organization_required
+    access_denied unless current_user && current_user.organization?
   end
 
 end

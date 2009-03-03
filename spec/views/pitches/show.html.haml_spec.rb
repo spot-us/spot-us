@@ -127,6 +127,36 @@ describe "/pitches/show.html.haml" do
     end
   end
 
+  describe "fully fund widget" do
+    it "should appear for organizations" do
+      template.stub!(:current_user).and_return(Factory(:organization))
+      do_render
+      response.should have_tag("div.fully_fund")
+    end
+    it "should not appear for citizens" do
+      template.stub!(:current_user).and_return(Factory(:citizen))
+      do_render
+      response.should_not have_tag("div.fully_fund")
+    end
+    it "should not appear for reporters" do
+      template.stub!(:current_user).and_return(Factory(:reporter))
+      do_render
+      response.should_not have_tag("div.fully_fund")
+    end
+    it "should not appear for fully funded pitches" do
+      template.stub!(:current_user).and_return(Factory(:organization))
+      @pitch.stub!(:fully_funded?).and_return(true)
+      do_render
+      response.should_not have_tag("div.fully_fund")
+    end
+    it "should appear if the pitch is not fully funded" do
+      template.stub!(:current_user).and_return(Factory(:organization))
+      @pitch.stub!(:fully_funded?).and_return(false)
+      do_render
+      response.should have_tag("div.fully_fund")
+    end
+  end
+
   def do_render
     render '/pitches/show.html.haml'
   end
