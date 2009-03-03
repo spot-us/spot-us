@@ -50,6 +50,25 @@ describe "/pitches/show.html.haml" do
     template.should_not have_tag('a[href=?]', new_pitch_post_path(@pitch))
   end
 
+  it "has a 'go to story' button if current user is peer reviewer and pitch has story" do
+    @reporter = Factory(:reporter)
+    @pitch.stub!(:story).and_return(stub_model(Story))
+    @pitch.stub!(:fact_checker).and_return(@reporter)
+    template.stub!(:logged_in?).and_return(true)
+    template.stub!(:current_user).and_return(@reporter)
+    do_render
+    template.should have_tag('a[href=?]', story_path(@pitch.story))
+  end
+
+  it "should not have a 'go to story' button otherwise" do
+    @pitch.stub!(:story).and_return(Factory(:story))
+    @pitch.stub!(:fact_checker).and_return(Factory(:reporter))
+    template.stub!(:logged_in?).and_return(true)
+    template.stub!(:current_user).and_return(@reporter)
+    do_render
+    template.should_not have_tag('a[href=?]', story_path(@pitch.story))
+  end
+
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@pitch.short_description}/i)
