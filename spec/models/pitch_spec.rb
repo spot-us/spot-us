@@ -292,7 +292,6 @@ describe Pitch do
       @pitch.donations.should_receive(:create).with(:amount => @pitch.requested_amount, :user => @user)
       @pitch.fully_fund!(@user)
     end
-    
     it "should delete other unpaid donations from the current user" do
       other_donation = Factory(:donation, :pitch => @pitch, :user => @user)
       unpaid = stub('named scope', :for_user => [other_donation])
@@ -318,12 +317,12 @@ describe Pitch do
     describe "any user" do
       it "can't donate more, such that funds would exceed the requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 1000).should be_false
+        p.user_can_donate_more?(Factory(:citizen), 1000).should be_false
       end
 
       it "can donate more, as long as funds plus attempted donation are less than requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 20).should be_true
+        p.user_can_donate_more?(Factory(:citizen), 20).should be_true
       end
 
       it "can donate more at all (passing zero as second arg)" do
@@ -332,6 +331,12 @@ describe Pitch do
         d = Factory(:donation, :pitch => p, :user => u, :amount => 10)
         p.user_can_donate_more?(u, 0).should be_true
         p.user_can_donate_more?(u, 11).should be_true
+      end
+
+      it "allows a news organization to donate the requested amount" do
+        p = Factory(:pitch, :requested_amount => 100)
+        Factory(:donation, :pitch => p, :user => Factory(:user), :amount => 10, :status => "paid")
+        p.user_can_donate_more?(Factory(:organization), 100).should be_true
       end
     end
 

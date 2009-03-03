@@ -206,6 +206,7 @@ class Pitch < NewsItem
 
   def user_can_donate_more?(user, attempted_donation_amount)
     return false if attempted_donation_amount.nil?
+    return true if user.organization? && attempted_donation_amount <= requested_amount
     return false if attempted_donation_amount > funding_needed
     user_donations = donations.paid.total_amount_for_user(user)
     (user_donations + attempted_donation_amount) <= max_donation_amount(user)
