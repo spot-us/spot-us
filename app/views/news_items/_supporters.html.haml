@@ -11,12 +11,3 @@
 
 .double_content_border
 
-.supporters
-  .supporter
-    - if news_item.supporters.any?
-      - news_item.supporters.each do |supporter|
-        = render :partial => 'news_items/supporter', :locals => {:news_item => news_item, :supporter => supporter}
-    - else
-      / A Tip will _always_ have a pledge
-      This pitch has not yet received any donations.
-
