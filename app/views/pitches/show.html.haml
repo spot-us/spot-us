@@ -58,6 +58,10 @@
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     = render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }
     = render :partial => "donations/half_fund", :locals => { :news_item => @pitch }
+    - if current_user && current_user.organization? && !current_user.shown_support_for?(@pitch)
+      .block-spacer-negative
+      .show_support
+        = link_to image_tag('show_support.gif'), show_support_pitch_path(@pitch), :method => :put
     .block-spacer-negative
     %h3 Related Tips
     .double_content_border
