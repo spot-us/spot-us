@@ -86,7 +86,7 @@ describe Donation do
       it "allows donation of  an arbitrary amount" do
         organization = Factory(:organization)
         p = Factory(:pitch, :requested_amount => 100)
-        d = Factory.build(:donation, :pitch => p, :user => organization, :amount => 100)
+        d = Factory(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
       end
     end
