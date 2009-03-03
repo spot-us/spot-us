@@ -70,6 +70,8 @@ class Pitch < NewsItem
 
   has_many :affiliations, :dependent => :destroy
   has_many :tips, :through => :affiliations
+  has_many :organization_pitches, :foreign_key => :pitch_id
+  has_many :supporting_organizations, :through => :organization_pitches, :source => :organization
   has_many :donations, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
