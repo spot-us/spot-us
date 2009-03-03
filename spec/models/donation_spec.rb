@@ -104,6 +104,23 @@ describe Donation do
     end
   end
 
+  describe "Donation.from_organizations" do
+    before do
+      @organization = Factory(:organization)
+      @citizen = Factory(:citizen)
+      @pitch = Factory(:pitch, :requested_amount => 1000)
+      Factory(:donation, :user => @organization, :amount => 100)
+      Factory(:donation, :user => @citizen, :amount => 10)
+    end
+
+    it "should include the donating organization" do
+      Donation.from_organizations.map(&:user).should include(@organization)
+    end
+    it "should not include the donating citizen" do
+      Donation.from_organizations.map(&:user).should_not include(@citizen)
+    end
+  end
+
   describe "Donation.unpaid" do
     before(:each) do
       Factory(:donation, :status => 'paid')
