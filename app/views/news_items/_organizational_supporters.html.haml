@@ -1,0 +1,14 @@
+- if news_item.supporting_organizations.any? || news_item.donations.from_organizations.any?
+  .block-spacer-negative
+  .organizational_support
+    %h2.supporters Organizational Donors
+    .double_content_border
+    .supporters
+      - news_item.donations.from_organizations.map(&:user).each do |supporter|
+        = render :partial => 'news_items/organizational_donor', :locals => {:news_item => news_item, :supporter => supporter}
+    .block-spacer-negative
+    %h2.supporters Organizational Support
+    .double_content_border
+    .supporters
+      - news_item.supporting_organizations.each do |supporter|
+        = render :partial => 'news_items/organizational_supporter', :locals => {:news_item => news_item, :supporter => supporter}
