@@ -70,5 +70,13 @@ class Organization < User
   def set_status
     needs_to_be_approved! if inactive?
   end
+
+  def show_support_for(pitch)
+    pitch.supporting_organizations << self
+  end
+
+  def shown_support_for?(pitch)
+    pitch.supporting_organizations.include? self
+  end
 end
 
