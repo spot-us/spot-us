@@ -53,6 +53,7 @@ class Donation < ActiveRecord::Base
 
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
+  named_scope :from_organizations, :include => :user, :conditions => "users.type = 'organization'"
 
   after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
