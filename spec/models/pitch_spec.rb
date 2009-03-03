@@ -287,6 +287,14 @@ describe Pitch do
     before do
       @pitch = Factory(:pitch, :requested_amount => 100)
     end
+    it "should return true if the pitch state is accepted" do
+      @pitch.accept!
+      @pitch.should be_half_funded
+    end
+    it "should return true if the pitch state is funded" do
+      @pitch.fund!
+      @pitch.should be_half_funded
+    end
     it "should return false if the total donations are 50% or less of the requested amount" do
       @pitch.donations.stub!(:paid).and_return([stub('donation', :amount => 50)])
       @pitch.half_funded?.should be_false
