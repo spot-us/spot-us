@@ -1,4 +1,4 @@
-- if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user)
+- if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || (pitch.story && pitch.fact_checker == current_user)
   .block-spacer-negative
 - if pitch.editable_by?(current_user)
   .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch)
@@ -9,3 +9,5 @@
     .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :put
 - if pitch.postable_by?(current_user)
   = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch)
+- if pitch.story && pitch.fact_checker == current_user
+  = link_to image_tag('go_to_story.gif'), story_path(pitch.story)
