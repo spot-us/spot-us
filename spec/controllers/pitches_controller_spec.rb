@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PitchesController do
   route_matches("/pitches/1/fully_fund", :put, :id => "1", :controller => "pitches", :action => "fully_fund")
+  route_matches("/pitches/1/half_fund", :put, :id => "1", :controller => "pitches", :action => "half_fund")
 
   describe "on GET to /pitchs/new" do
     before(:each) do
@@ -106,6 +107,57 @@ describe PitchesController do
       controller.stub!(:find_resource).and_return(@pitch)
       @pitch.should_receive(:unfeature!).and_return(true)
       put :unfeature, :id => @pitch.id
+    end
+  end
+
+  describe "on PUT to half_fund" do
+    before do
+      @organization = Factory(:organization)
+      controller.stub!(:current_user).and_return(@organization)
+      @pitch = Factory(:pitch)
+      Pitch.stub!(:find).and_return(@pitch)
+    end
+
+    it "requires a logged in user" do
+      controller.should_receive(:current_user).and_return(nil)
+      put :half_fund, :id => @pitch.id
+      response.should redirect_to(new_session_path)
+    end
+
+    it "requires the current user is a news organization" do
+      controller.stub!(:current_user).and_return(Factory(:reporter))
+      put :half_fund, :id => @pitch.id
+      flash[:error].should_not be_nil
+      response.should redirect_to(new_session_path)
+    end
+
+    it "creates a donation for half of the amount requested" do
+      @pitch.should_receive(:half_fund!).with(@organization)
+      put :half_fund, :id => @pitch.id
+    end
+
+    it "sets a flash message on success" do
+      put :half_fund, :id => @pitch.id
+      flash[:success].should_not be_nil
+    end
+
+    it "redirects to myspot/donations_amounts/edit on success" do
+      put :half_fund, :id => @pitch.id
+      response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+
+    describe "if the donation creation fails" do
+      before do
+        @pitch.donations.stub!(:create).and_return(false)
+      end
+      it "should set an error message if the donation creation fails" do
+        put :half_fund, :id => @pitch.id
+        flash[:error].should_not be_nil
+      end
+      it "should redirect back to the pitch if the donation creation fails" do
+        put :half_fund, :id => @pitch.id
+        response.should redirect_to(pitch_path(@pitch))
+      end
     end
   end
 

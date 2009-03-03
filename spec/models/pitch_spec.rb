@@ -283,6 +283,39 @@ describe Pitch do
     end
   end
 
+  describe "half_funded?" do
+    before do
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+    it "should return false if the total donations are 50% or less of the requested amount" do
+      @pitch.donations.stub!(:paid).and_return([stub('donation', :amount => 50)])
+      @pitch.half_funded?.should be_false
+    end
+    it "should return true if the total donations are more than 50%" do
+      @pitch.donations.stub!(:paid).and_return([stub('donation', :amount => 60)])
+      @pitch.half_funded?.should be_true
+    end
+  end
+
+  describe "half_fund!" do
+    before do
+      @user = Factory(:organization)
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+
+    it "should create a donation for half the requested amount" do
+      @pitch.donations.should_receive(:create).with(:amount => 50, :user => @user)
+      @pitch.half_fund!(@user)
+    end
+    it "should delete other unpaid donations from the current user" do
+      other_donation = Factory(:donation, :pitch => @pitch, :user => @user)
+      unpaid = stub('named scope', :for_user => [other_donation])
+      @pitch.donations.should_receive(:unpaid).and_return(unpaid)
+      other_donation.should_receive(:destroy).and_return(true)
+      @pitch.half_fund!(@user)
+    end
+  end
+
   describe "fully_fund!" do
     before do
       @user = Factory(:organization)

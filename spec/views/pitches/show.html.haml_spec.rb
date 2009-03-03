@@ -127,6 +127,37 @@ describe "/pitches/show.html.haml" do
     end
   end
 
+  describe "half fund widget" do
+    before do
+      template.stub!(:current_user).and_return(Factory(:organization))
+    end
+    it "should appear for organizations" do
+      do_render
+      response.should have_tag("div.half_fund")
+    end
+    it "should not appear for citizens" do
+      template.stub!(:current_user).and_return(Factory(:citizen))
+      do_render
+      response.should_not have_tag("div.half_fund")
+    end
+    it "should not appear for reporters" do
+      template.stub!(:current_user).and_return(Factory(:reporter))
+      do_render
+      response.should_not have_tag("div.half_fund")
+    end
+    it "should appear for pitches that are 50% or less funded" do
+      @pitch.stub!(:half_funded?).and_return(true)
+      do_render
+      response.should_not have_tag("div.half_fund")
+    end
+    it "should not appear for pitches that are more than 50% funded" do
+      template.stub!(:current_user).and_return(Factory(:organization))
+      @pitch.stub!(:half_funded?).and_return(false)
+      do_render
+      response.should have_tag("div.half_fund")
+    end
+  end
+
   describe "fully fund widget" do
     it "should appear for organizations" do
       template.stub!(:current_user).and_return(Factory(:organization))
