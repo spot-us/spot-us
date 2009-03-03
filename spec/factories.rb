@@ -74,6 +74,11 @@ Factory.define :organization do |user|
   user.association(:network)
 end
 
+Factory.define :organization_pitch do |op|
+  op.association(:organization)
+  op.association(:pitch)
+end
+
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
   news_item.featured_image_caption "lorem ipsum"
