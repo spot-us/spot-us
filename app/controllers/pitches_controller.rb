@@ -1,6 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  before_filter :organization_required, :only => :fully_fund
+  before_filter :organization_required, :only => [:half_fund, :fully_fund]
   resources_controller_for :pitch
 
   def index
@@ -28,7 +28,17 @@ class PitchesController < ApplicationController
       flash[:error] = "An error occurred while trying to fund this pitch"
       redirect_to pitch_path(pitch)
     end
+  end
 
+  def half_fund
+    pitch = find_resource
+    if donation = pitch.half_fund!(current_user)
+      flash[:success] = "Your donation was successfully created"
+      redirect_to edit_myspot_donations_amounts_path
+    else
+      flash[:error] = "An error occurred while trying to fund this pitch"
+      redirect_to pitch_path(pitch)
+    end
   end
 
   protected

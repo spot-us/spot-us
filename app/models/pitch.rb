@@ -166,6 +166,15 @@ class Pitch < NewsItem
     requested_amount - total_amount_donated
   end
 
+  def half_funded?
+    donations.paid.map(&:amount).sum > (requested_amount / 2)
+  end
+
+  def half_fund!(user)
+    donations.unpaid.for_user(user).map(&:destroy)
+    donations.create(:amount => requested_amount / 2, :user => user)
+  end
+
   def fully_funded?
     return true if accepted? || funded?
     donations.paid.map(&:amount).sum >= requested_amount
