@@ -120,6 +120,11 @@ describe User do
     it "is not editable if not logged in" do
       @user.editable_by?(nil).should_not be_true
     end
+
+    it "should require a network" do
+      @user.update_attribute(:network, nil)
+      @user.should have(1).error_on(:network)
+    end
   end
 
   it "returns the amount pledged on amount_pledged_to(tip)" do
