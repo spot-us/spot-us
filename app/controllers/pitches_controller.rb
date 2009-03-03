@@ -1,6 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  before_filter :organization_required, :only => [:half_fund, :fully_fund]
+  before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   resources_controller_for :pitch
 
   def index
@@ -16,6 +16,13 @@ class PitchesController < ApplicationController
   def unfeature
     pitch = find_resource
     pitch.unfeature!
+    redirect_to pitch_path(pitch)
+  end
+
+  def show_support
+    pitch = find_resource
+    pitch.show_support!(current_user)
+    flash[:success] = "Thanks for your support!"
     redirect_to pitch_path(pitch)
   end
 
