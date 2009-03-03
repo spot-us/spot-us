@@ -199,6 +199,19 @@ describe Pitch do
       purch = Factory(:purchase, :donations => [d])
       p.current_funding.should == BigDecimal.new("3.0")
     end
+
+    it "should return total amount donated if accepted" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
+      p.accept!
+      p.current_funding.should == BigDecimal.new("3.0")
+    end
+    it "should return requested amount if there is an overage" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
+      p.fully_fund!(Factory(:organization)).pay!
+      p.reload.current_funding.should == BigDecimal("100.0")
+    end
   end
 
   describe "topics_params=" do
