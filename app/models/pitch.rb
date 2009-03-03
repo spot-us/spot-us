@@ -126,6 +126,8 @@ class Pitch < NewsItem
   end
 
   def current_funding
+    return total_amount_donated if accepted?
+    return requested_amount if self[:current_funding] && self[:current_funding] > requested_amount
     self[:current_funding] || 0
   end
 
@@ -174,7 +176,7 @@ class Pitch < NewsItem
 
   def half_funded?
     return true if accepted? || funded?
-    donations.paid.map(&:amount).sum > (requested_amount / 2)
+    total_amount_donated > (requested_amount / 2)
   end
 
   def half_fund!(user)
@@ -184,7 +186,7 @@ class Pitch < NewsItem
 
   def fully_funded?
     return true if accepted? || funded?
-    donations.paid.map(&:amount).sum >= requested_amount
+    total_amount_donated >= requested_amount
   end
 
   def fully_fund!(user)
