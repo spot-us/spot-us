@@ -77,7 +77,8 @@
     = render :partial => 'keywords', :locals => {:pitch => @pitch}
 
   .span-160.box_white
-    = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
+    = render :partial => "supporters", :locals => {:news_item => @pitch}
+    = render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch}
 .clear
 .block-spacer
 
