@@ -1,8 +1,3 @@
 - if current_user && current_user.organization? && !news_item.half_funded?
-  .block-spacer-negative
   .half_fund
-    %h4
-      Get exclusive rights!
     = link_to image_tag('half_fund.gif'), half_fund_pitch_path(news_item), :method => :put
-    .small.quiet.align_right.no_margin
-      = link_to 'what is this?', page_path(:id => 'about', :anchor => 'work_with')
