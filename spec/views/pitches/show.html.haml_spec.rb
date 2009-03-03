@@ -73,6 +73,13 @@ describe "/pitches/show.html.haml" do
     do_render
   end
 
+  it "shows organizational supporters when they exist" do
+    organization = Factory(:organization)
+    @pitch.stub!(:supporting_organizations).and_return([organization])
+    do_render
+    template.should have_tag('div.organizational_support')
+  end
+
   describe "with a logged in user that hasn't donated" do
     before do
       @user = Factory(:user)
