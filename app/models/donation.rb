@@ -19,7 +19,7 @@ class Donation < ActiveRecord::Base
   @@per_page = 10
 
   include AASM
-  class <<self
+  class << self
     alias invasive_inherited_from_aasm inherited
     def inherited(child)
       invasive_inherited_from_aasm(child)
