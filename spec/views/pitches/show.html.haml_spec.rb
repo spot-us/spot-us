@@ -188,6 +188,34 @@ describe "/pitches/show.html.haml" do
     end
   end
 
+  describe "show support widget" do
+    before do
+
+    end
+    it "should appear for organizations" do
+      template.stub!(:current_user).and_return(Factory(:organization))
+      do_render
+      response.should have_tag("div.show_support")
+    end
+    it "should not appear for citizens" do
+      template.stub!(:current_user).and_return(Factory(:citizen))
+      do_render
+      response.should_not have_tag("div.show_support")
+    end
+    it "should not appear for reporters" do
+      template.stub!(:current_user).and_return(Factory(:reporter))
+      do_render
+      response.should_not have_tag("div.show_support")
+    end
+    it "should not appear if the organization has already supported the pitch" do
+      organization = Factory(:organization)
+      organization.stub!(:shown_support_for?).and_return(true)
+      template.stub!(:current_user).and_return(organization)
+      do_render
+      response.should_not have_tag("div.show_support")
+    end
+  end
+
   def do_render
     render '/pitches/show.html.haml'
   end
