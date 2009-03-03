@@ -173,6 +173,7 @@ class Pitch < NewsItem
   end
 
   def half_funded?
+    return true if accepted? || funded?
     donations.paid.map(&:amount).sum > (requested_amount / 2)
   end
 
