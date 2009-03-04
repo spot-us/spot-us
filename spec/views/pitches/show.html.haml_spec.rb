@@ -184,6 +184,56 @@ describe "/pitches/show.html.haml" do
     end
   end
 
+  describe "fact checking widget" do
+
+    describe "when no fact checker has been assigned" do
+      before do
+        @pitch = Factory(:pitch)
+        @applicant = Factory(:citizen)
+        template.stub!(:current_user).and_return(@applicant)
+        assigns[:pitch] = @pitch
+      end
+      it "should show Apply to Fact Check button" do
+        do_render
+        response.should have_tag("div.apply_to_fact_check")
+      end
+      it "Apply to Fact Check button should link to correct action" do
+        do_render
+        response.should have_tag("a[href=?]", apply_to_fact_check_pitch_path(@pitch))
+      end
+      it "should not show when the current user is the reporter for the pitch" do
+        template.stub!(:current_user).and_return(@pitch.user)
+        do_render
+        response.should_not have_tag("a[href=?]", apply_to_fact_check_pitch_path(@pitch))
+      end
+      it "should show an Applied! image if the current user has applied" do
+        @pitch.stub!(:fact_checker_applicants).and_return([@applicant])
+        do_render
+        response.should have_tag("img.applied_to_fact_check")
+      end
+    end
+
+    describe "when a fact checker has been assigned" do
+      before do
+        @citizen = Factory(:citizen)
+        @pitch = Factory(:pitch, :fact_checker => @citizen)
+        template.stub!(:current_user).and_return(@citizen)
+        assigns[:pitch] = @pitch
+      end
+      it "should not show the Apply to Fact Check button" do
+        do_render
+        response.should_not have_tag('div.apply_to_fact_check')
+      end
+      it "should not show an Applied! image if the current user has applied" do
+        applicant = Factory(:reporter)
+        @pitch.stub!(:fact_checker_applicants).and_return([applicant])
+        template.stub!(:current_user).and_return(applicant)
+        do_render
+        response.should_not have_tag('img.applied_to_fact_check')
+      end
+    end
+  end
+
   describe "fully fund widget" do
     it "should appear for organizations" do
       template.stub!(:current_user).and_return(Factory(:organization))
