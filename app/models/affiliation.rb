@@ -4,9 +4,11 @@ class Affiliation < ActiveRecord::Base
   belongs_to :tip
   validates_presence_of :tip_id
   validates_presence_of :pitch_id
+  validates_uniqueness_of :pitch_id, :scope => :tip_id
 
-  def self.createable_by?(user)
-    user and user.reporter?
+  def createable_by?(user)
+    return false unless user && pitch
+    user && (pitch.user == user || user.admin?)
   end
 
   def editable_by?(user)
