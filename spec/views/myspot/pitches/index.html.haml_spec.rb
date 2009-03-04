@@ -3,15 +3,19 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 describe 'myspot/pitches/index' do
   before do
     @user = Factory(:user)
-    Factory(:pitch, :user => @user)
-    Factory(:pitch, :user => @user)
-    Factory(:pitch, :user => @user)
-    assigns[:pitches] = @user.pitches
+    @story = Factory(:story)
+    @pitch = Factory(:pitch, :user => @user, :story => @story)
+    assigns[:pitches] = [@pitch]
     template.stub!(:current_user).and_return(@user)
   end
 
   it 'should render' do
     do_render
+  end
+
+  it "should display a go to story link if the pitch has a story" do
+    do_render
+    response.should have_tag("a[href=?]", story_path(@story), "Go to story")
   end
 
   def do_render

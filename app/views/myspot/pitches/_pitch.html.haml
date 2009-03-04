@@ -11,6 +11,8 @@
       .action= link_to "Edit", edit_pitch_url(pitch)
     - if pitch.can_be_accepted?
       .action= link_to "Accept", accept_myspot_pitch_url(pitch), :method => :put, :confirm => "Are you sure you want to accept this pitch, even though it isn't fully funded?"
+    - if pitch.story
+      .action= link_to "Go to story", story_path(pitch.story)
     - if pitch.funded? || pitch.accepted?
       - unless pitch.story.nil?
         - if pitch.story.draft? 
