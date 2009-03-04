@@ -10,17 +10,38 @@ describe Affiliation do
   it { Factory(:affiliation).should belong_to(:pitch) }
   it { Factory(:affiliation).should belong_to(:tip) }
 
-  describe "creating" do
-    it "is creatable by reporter" do
-      Affiliation.createable_by?(Factory(:reporter)).should be
+  describe "validation" do
+    before do
+      @tip = Factory(:tip)
+      @pitch = Factory(:pitch)
+      @affiliation = Affiliation.new(:tip => @tip, :pitch => @pitch)
     end
 
-    it "is not creatable by user" do
-      Affiliation.createable_by?(Factory(:user)).should_not be
+    it "requires pitch to be unique to a tip" do
+      Factory(:affiliation, :tip => @tip, :pitch => @pitch)
+      @affiliation.should_not be_valid
+      @affiliation.should have(1).error_on(:pitch_id)
+    end
+  end
+
+  describe "#createable_by?" do
+    before do
+      @reporter = Factory(:reporter)
+      @pitch = Factory(:pitch, :user => @reporter)
+      @tip = Factory(:tip)
     end
 
-    it "is not createable if not logged in" do
-      Affiliation.createable_by?(nil).should_not be_true
+    it "allows the pitch's reporter to create an affiliation" do
+      Affiliation.new(:pitch => @pitch).createable_by?(@reporter).should be_true
+    end
+    it "allows an admin to create an affiliation" do
+      Affiliation.new(:pitch => @pitch).createable_by?(Factory(:admin)).should be_true
+    end
+    it "requires a pitch to create an affiliation" do
+      Affiliation.new(:pitch => nil).createable_by?(@reporter).should be_false
+    end
+    it "returns false otherwise" do
+      Affiliation.new(:pitch => @pitch).createable_by?(Factory(:citizen)).should be_false
     end
   end
 
