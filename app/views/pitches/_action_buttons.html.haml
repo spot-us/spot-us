@@ -13,3 +13,5 @@
   = link_to image_tag('go_to_story.gif'), story_path(pitch.story)
 - if pitch.fully_funded? && current_user == pitch.user
   = link_to image_tag('report.gif'), edit_story_path(pitch.story)
+- if !pitch.fully_funded? && current_user == pitch.user
+  = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "Are you sure you want to stop collecting donations for this pitch?"
