@@ -159,6 +159,11 @@ class Pitch < NewsItem
     supporting_organizations << organization unless supporting_organizations.include?(organization)
   end
 
+  def apply_to_fact_check(user)
+    return false unless user
+    fact_checker_applicants << user unless fact_checker_applicants.include?(user)
+  end
+
   def feature!
     self.update_attribute(:feature, true)
   end
