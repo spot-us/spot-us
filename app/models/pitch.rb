@@ -87,6 +87,8 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
+  has_many :fact_checker_applications
+  has_many :fact_checker_applicants, :through => :fact_checker_applications, :source => :user
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
