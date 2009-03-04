@@ -91,4 +91,19 @@ describe ApplicationHelper do
     end
   end
 
+  describe "#available_pitches_for" do
+    before do
+      @affiliation = Factory(:affiliation)
+      @other_pitch = Factory(:pitch)
+      reporter = Factory(:reporter)
+      reporter.stub!(:pitches).and_return([@affiliation.pitch, @other_pitch])
+      stub!(:current_user).and_return(reporter)
+    end
+    it "should return pitches that aren't affiliated with a given tip" do
+      available_pitches_for(@affiliation.tip).should include([@other_pitch.headline, @other_pitch.id])
+    end
+    it "should not return pitches that are already affiliated with a given tip" do
+      available_pitches_for(@affiliation.tip).should_not include([@affiliation.pitch.headline, @affiliation.pitch.id])
+    end
+  end
 end

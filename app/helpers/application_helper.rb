@@ -59,4 +59,8 @@ module ApplicationHelper
   def current_network_id
     @current_network.id if @current_network
   end
+
+  def available_pitches_for(tip)
+    current_user.pitches.select{|p| !tip.affiliations.map(&:pitch).include?(p) }.map{|p| [p.headline, p.id]}
+  end
 end
