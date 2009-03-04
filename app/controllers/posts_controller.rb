@@ -35,6 +35,6 @@ class PostsController < ApplicationController
   private
 
   def authorized?
-    current_user && (current_user.admin? || enclosing_resource.user == current_user)
+    current_user && enclosing_resource.postable_by?(current_user)
   end
 end
