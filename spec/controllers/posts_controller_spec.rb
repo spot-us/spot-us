@@ -20,25 +20,11 @@ describe PostsController do
   end
 
   describe "#authorized?" do
-    it "should return nil with no current_user" do
-      controller.stub!(:current_user).and_return(nil)
-      controller.send(:authorized?).should be_nil
-    end
-    it "should return true if the current user is an admin" do
-      controller.stub!(:current_user).and_return(Factory(:admin))
+    it "should ask the pitch for authorization" do
+      controller.stub!(:current_user).and_return(Factory(:reporter))
+      controller.stub!(:enclosing_resource).and_return(@pitch)
+      @pitch.should_receive(:postable_by?).and_return(true)
       controller.send(:authorized?).should be_true
-    end
-    it "should return true if the current user is the reporter for the pitch" do
-      user = Factory(:user)
-      pitch = Factory(:pitch, :user => user)
-      controller.stub!(:enclosing_resource).and_return(pitch)
-      controller.stub!(:current_user).and_return(user)
-      controller.send(:authorized?).should be_true
-    end
-    it "should return false if the current user is not the reporter or an admin" do
-      controller.stub!(:enclosing_resource).and_return(Factory(:pitch))
-      controller.stub!(:current_user).and_return(Factory(:user))
-      controller.send(:authorized?).should be_false
     end
   end
 
