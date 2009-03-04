@@ -69,6 +69,21 @@ describe "/pitches/show.html.haml" do
     template.should_not have_tag('a[href=?]', story_path(@pitch.story))
   end
 
+  it "should have a create a story button if the pitch is funded and the current user is the reporter" do
+    @pitch.stub!(:fully_funded?).and_return(true)
+    @pitch.stub!(:story).and_return(Factory(:story))
+    template.stub!(:current_user).and_return(@pitch.user)
+    do_render
+    response.should have_tag("a[href=?]", edit_story_path(@pitch.story))
+  end
+
+  it "should not have a create a story button otherwise" do
+    @pitch.stub!(:fully_funded?).and_return(false)
+    @pitch.stub!(:story).and_return(Factory(:story))
+    do_render
+    response.should_not have_tag("a[href=?]", edit_story_path(@pitch.story))
+  end
+
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@pitch.short_description}/i)
