@@ -1,5 +1,6 @@
 .block-spacer
 %h3== Make a blog post about #{@pitch.headline}
 .span-715.box_white
+  = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
   - form_for([@pitch, @post]) do |f|
     = render :partial => 'form', :locals => {:f => f}
