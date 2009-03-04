@@ -50,6 +50,21 @@ describe "/pitches/show.html.haml" do
     template.should_not have_tag('a[href=?]', new_pitch_post_path(@pitch))
   end
 
+  it "has an accept donations button if the current user is the reporter and the pitch is not fully funded" do
+    @pitch.stub!(:fully_funded?).and_return(false)
+    template.stub!(:current_user).and_return(@pitch.user)
+    do_render
+    response.should have_tag("a[href=?]", accept_myspot_pitch_path(@pitch))
+  end
+
+  it "does not have an accept donations button otherwise" do
+    @pitch.stub!(:fully_funded?).and_return(true)
+    @pitch.stub!(:story).and_return(Factory(:story))
+    template.stub!(:current_user).and_return(@pitch.user)
+    do_render
+    response.should_not have_tag("a[href=?]", accept_myspot_pitch_path(@pitch))
+  end
+
   it "has a 'go to story' button if current user is peer reviewer and pitch has story" do
     @reporter = Factory(:reporter)
     @pitch.stub!(:story).and_return(stub_model(Story))
