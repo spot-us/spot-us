@@ -481,6 +481,23 @@ describe Pitch do
 
   end
 
+  describe "apply_to_fact_check" do
+    before do
+      @pitch = Factory(:pitch)
+      @reporter = Factory(:reporter)
+    end
+    it "returns false if no user is passed in" do
+      @pitch.apply_to_fact_check(nil).should be_false
+    end
+    it "adds the user to the pitch's fact_checker_applicants" do
+      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(1)
+    end
+    it "only adds the user once" do
+      @pitch.stub!(:fact_checker_applicants).and_return([@reporter])
+      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(0)
+    end
+  end
+
   describe "featuring" do
 
     describe "feature!" do
