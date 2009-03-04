@@ -101,6 +101,11 @@ Factory.define :pitch do |pitch|
   pitch.association(:user)
 end
 
+Factory.define :fact_checker_application do |application|
+  application.association(:user)
+  application.association(:pitch)
+end
+
 Factory.define :story do |story|
   story.headline               "Headline"
   story.extended_description   "lorem ipsum"
