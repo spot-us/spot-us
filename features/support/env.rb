@@ -18,7 +18,7 @@ module HumanMethods
   def human_route_for_current(name)
     instance = name.split(' ').last
     instance = "@#{instance}"
-    "#{dehumanize(name)}_path(#{instance})"
+    send("#{dehumanize(name)}_path", instance_variable_get(instance))
   end
 end
 
