@@ -327,6 +327,14 @@ describe User do
       @user.activation_code.should be_nil
     end
 
+    it "should clear the activation code on approved organization's activate!" do
+      organization = Factory(:organization)
+      organization.valid?
+      organization.approve!
+      organization.activate!
+      organization.activation_code.should be_nil
+    end
+
     it "should return true for activated users on activated?" do
       @user.valid?
       @user.activate!

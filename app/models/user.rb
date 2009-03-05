@@ -60,7 +60,10 @@ class User < ActiveRecord::Base
         user.send(:deliver_signup_notification)
         user.send(:clear_activation_code)
       }
-    transitions :from => :approved, :to => :active
+    transitions :from => :approved, :to => :active,
+      :on_transition => lambda{ |user|
+        user.send(:clear_activation_code)
+      }
   end
 
   belongs_to :network
