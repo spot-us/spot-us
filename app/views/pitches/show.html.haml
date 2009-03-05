@@ -65,9 +65,9 @@
       .block-spacer-negative
       .apply_to_fact_check
         - if @pitch.fact_checker_applicants.include?(current_user)
-          = image_tag 'applied_to_fact_check.gif', :class => 'applied_to_fact_check'
+          = image_tag 'applied_to_peer_review.gif', :class => 'applied_to_fact_check'
         - else
-          = link_to image_tag('apply_to_fact_check.gif'), apply_to_fact_check_pitch_path(@pitch), :method => :put
+          = link_to image_tag('apply_to_peer_review.gif'), apply_to_fact_check_pitch_path(@pitch), :method => :put
     - if current_user && current_user.organization? && !current_user.shown_support_for?(@pitch)
       .block-spacer-negative
       .show_support
