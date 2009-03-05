@@ -6,11 +6,11 @@ Feature: Start a story
     Then I should see an "email" text field
 
   Scenario: A citizen should see the tips/new page
-    Given I am logged in as a "citizen"
+    Given I am logged in as a citizen
     When I follow "Start a Story"
     Then I should see a tag of "h3" with "Create a Tip"
 
   Scenario: A reporter should see the pitches/new page
-	  Given I am logged in as a "reporter"
-	  When I follow "Start a Story"
-	  Then I should see a tag of "h3" with "Create a Pitch"
+    Given I am logged in as a reporter
+    When I follow "Start a Story"
+    Then I should see a tag of "h3" with "Create a Pitch"
