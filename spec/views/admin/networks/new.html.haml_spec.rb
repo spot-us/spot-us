@@ -25,4 +25,8 @@ describe "new view" do
     response.should have_tag("input[type=?]", "submit")
   end
 
+  it "has an errors span" do
+    do_render
+    response.should have_tag("div.error")
+  end
 end
