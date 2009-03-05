@@ -89,7 +89,15 @@ Then /^I should see a tag of "(.*)" with "(.*)"$/ do |tag, text|
 end
 
 Then /^I should see an? "(.*)" link$/ do |text|
-  response.should have_tag("a", /#{text}/i)
+  response.should(have_tag("a", /#{text}/i))
+end
+
+Then /^I should see an? "(.*)" titled link$/ do |text|
+  response.should have_tag("a[title=?]", text)
+end
+
+Then /^I should not see an? "(.*)" titled link$/ do |text|
+  response.should_not have_tag("a[title=?]", text)
 end
 
 Then /^I should see a Show\/Hide handle$/ do
@@ -149,9 +157,9 @@ When /^I view the current ([\w -]+?) ?page$/ do |name|
   visit(human_route_for_current(name))
 end
 
-
 Then /^I should be on the (.*?) page$/ do |path|
   action, controller = path.split(/\s/)
+  controller.gsub!('::', '/')
   response.should render_template("#{controller.pluralize}/#{action}")
 end
 
