@@ -10,8 +10,8 @@ Given 'I am logged out' do
   delete "/session"
 end
 
-Given /^I am logged in as a "(.*)"$/ do |model_name|
-  @current_user ||= Factory(model_name.to_sym)
+Given /^I am logged in as a (.*)$/ do |user_type|
+  @current_user ||= Factory(user_type.to_sym)
   @current_user.approve! if @current_user.organization?
   @current_user.activate! unless @current_user.active?
   @user = @current_user
