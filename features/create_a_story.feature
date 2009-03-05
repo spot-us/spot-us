@@ -1,7 +1,7 @@
 Feature: Create a story from a pitch
 
 Scenario: A reporter creates a story from a pitch
-  Given I am logged in as a "reporter"
+  Given I am logged in as a reporter
   And I have created a "pitch"
   And A "donation" exists for the "pitch"
   And I visit the myspot pitches page
