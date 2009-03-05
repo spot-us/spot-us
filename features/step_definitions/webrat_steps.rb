@@ -170,3 +170,7 @@ end
 When /^I save the form$/ do
   When 'I press "Submit"'
 end
+
+Given /^I am at the new blog post page for my pitch$/ do
+  visit(new_pitch_post_path(@pitch))
+end
