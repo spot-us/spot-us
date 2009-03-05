@@ -79,6 +79,24 @@ describe PitchesController do
     end
   end
 
+  describe "on PUT to /pitches/1" do
+    before do
+      @pitch = Factory(:pitch)
+      @reporter = @pitch.user
+      controller.stub!(:current_user).and_return(@reporter)
+      controller.stub!(:can_edit?).and_return(true)
+    end
+
+    it "allows the pitch's reporter to make valid updates" do
+      put :update, :id => @pitch.id, :pitch => { :headline => "A New Headline Is Better!" }
+      response.should redirect_to(pitch_path(@pitch))
+    end
+    it "re-renders edit when the pitch's reporter tries to make invalid updates" do
+      put :update, :id => @pitch.id, :pitch => { :headline => "" }
+      response.should render_template('pitches/edit')
+    end
+  end
+
   describe "on PUT to /pitches/1/show_support" do
     before do
       @pitch = Factory(:pitch)
