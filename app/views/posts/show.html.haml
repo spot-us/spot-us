@@ -6,7 +6,8 @@
     %h2.headline
       %strong= h @post.title
     .double_content_border
-    = render :partial => 'news_items/user', :locals => { :news_item => @post.pitch }
+    = render :partial => 'shared/user', :locals => { :user => @post.user }
+    .double_content_border.clear
     %h2.headline
       Related pitch
     .pitch_summary
