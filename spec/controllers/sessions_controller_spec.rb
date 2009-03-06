@@ -131,6 +131,13 @@ describe SessionsController do
     end
   end
 
+  describe 'sessions#show' do
+    it 'redirects to sessions#new' do
+      get :show
+      response.should redirect_to(new_session_path)
+    end
+  end
+
   def auth_token(token)
     CGI::Cookie.new('name' => 'auth_token', 'value' => token)
   end
