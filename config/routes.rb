@@ -37,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :tips
     admin.resources :site_options
     admin.resources :networks
+    admin.resources :groups
   end
 
   map.namespace :myspot do |myspot|
