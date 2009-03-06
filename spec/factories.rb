@@ -207,6 +207,10 @@ Factory.define :post do |post|
   post.association(:pitch)
 end
 
+Factory.define :group do |group|
+  group.name 'Super Heroes'
+  group.description 'Saving the world one city at a time'
+end
 
 # handy builders ##################################################################################
 
