@@ -4,10 +4,7 @@ class Group < ActiveRecord::Base
 
   has_attached_file :image,
                     :styles      => { :thumb => '50x50#' },
-                    :path        => ":rails_root/public/system/groups/" <<
-                                    ":attachment/:id_partition/" <<
-                                    ":basename_:style.:extension",
-                    :url         => "/system/groups/:attachment/:id_partition/" <<
-                                    ":basename_:style.:extension",
-                    :default_url => "/images/default_avatar.png"
+                    :default_url => "/images/default_avatar.png",
+                    :path        => ":rails_root/public/system/groups/:attachment/:id_partition/:basename_:style.:extension",
+                    :url         => "/system/groups/:attachment/:id_partition/:basename_:style.:extension"
 end
