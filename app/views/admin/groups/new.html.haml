@@ -1,0 +1,19 @@
+.flash.error
+  = error_messages_for :group
+- form_for [:admin, @group], :html => { :multipart => true } do |f|
+  .field
+    = f.label :name
+  .field
+    = f.text_field :name
+  %br/
+  .field
+    = f.label :description
+  .field
+    = fckeditor_textarea("group", "description", :toolbarSet => 'Spotus', :width => '500', :height => '200px')
+  %br/
+  .field
+    = f.label :image
+  .field
+    = f.file_field :image
+  %br/
+  = f.submit
