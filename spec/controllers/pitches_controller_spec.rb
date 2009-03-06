@@ -6,6 +6,7 @@ describe PitchesController do
   route_matches("/pitches/1/show_support", :put, :id => "1", :controller => "pitches", :action => "show_support")
   route_matches("/pitches/1/apply_to_fact_check", :put, :id => "1", :controller => "pitches", :action => "apply_to_fact_check")
   route_matches("/pitches/1/assign_fact_checker", :put, :id => "1", :controller => "pitches", :action => "assign_fact_checker")
+  route_matches("/pitches/1/blog_posts.rss", :get, :id => "1", :controller => "pitches", :action => "blog_posts", :format => "rss")
 
   describe "on GET to /pitchs/new" do
     before(:each) do
@@ -230,6 +231,18 @@ describe PitchesController do
     it "redirects to myspot/donations_amounts/edit on success" do
       put :half_fund, :id => @pitch.id
       response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+
+    describe "on GET to blog_posts.rss" do
+      before do
+        @pitch = Factory(:pitch)
+        @post = Factory(:post, :pitch => @pitch)
+        Pitch.stub!(:find).and_return(@pitch)
+      end
+      it 'renders an rss feed of blog posts' do
+        get :blog_posts, :id => @pitch.id, :format => 'rss'
+        response.content_type.should == 'application/rss+xml'
+      end
     end
 
     describe "if the donation creation fails" do
