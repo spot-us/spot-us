@@ -4,7 +4,15 @@ class NewsItemsController < ApplicationController
   before_filter :load_networks, :only => [:index, :search]
 
   def index
-    get_news_items
+    respond_to do |format|
+      format.rss do
+        @news_items = NewsItem.newest.first(10)
+        render :layout => false
+      end
+      format.html do
+        get_news_items
+      end
+    end
   end
 
   def sort_options
