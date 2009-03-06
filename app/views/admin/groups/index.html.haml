@@ -1,0 +1,19 @@
+%h1 Groups
+
+.box
+  %table
+    %tr
+      %th Icon
+      %th Name
+      %th Description
+      %th
+      %th
+    - @groups.each do |group|
+      %tr
+        %td=image_tag group.image.url(:thumb)
+        %td=h group.name
+        %td=truncate_words(group.description, 30)
+        %td=link_to 'Edit', edit_admin_group_path(group)
+        %td=link_to 'Destroy', admin_group_path(group), :confirm => 'Are you sure?', :method => :delete
+
+= link_to "New", new_admin_group_path
