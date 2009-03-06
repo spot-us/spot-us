@@ -1123,3 +1123,9 @@ a.prev{
 .align_right{
   text-align:right;
 }
+.pitch_summary {
+  font-size: 0.85em;
+}
+.pitch_summary div {
+  margin-right: 10px;
+}
