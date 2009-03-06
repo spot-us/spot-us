@@ -24,7 +24,7 @@ describe "showing a blog post" do
       response.body.should include(@post.media_embed)
     end
     it "should show the user" do
-      response.body.should include(@post.pitch.user.full_name)
+      response.body.should include(@post.user.full_name)
     end
     it "should include donations button" do
       response.should have_tag("div#inline_donation_form_#{@pitch.id}")
