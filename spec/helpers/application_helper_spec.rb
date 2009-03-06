@@ -106,4 +106,38 @@ describe ApplicationHelper do
       available_pitches_for(@affiliation.tip).should_not include([@affiliation.pitch.headline, @affiliation.pitch.id])
     end
   end
+
+  describe "fact_checkers_for" do
+    before do
+      @applicants = [Factory(:reporter), Factory(:citizen)]
+      @interested_users = [Factory(:citizen), Factory(:reporter)]
+      @uninterested_users = [Factory(:citizen)]
+      User.stub!(:fact_checkers).and_return(@interested_users)
+      @pitch = Factory(:pitch)
+      @pitch.stub!(:fact_checker_applicants).and_return(@applicants)
+    end
+    it "should have two option groups" do
+      fact_checkers_for(@pitch).should have_tag('optgroup[label=?]', 'Pitch Applicants')
+      fact_checkers_for(@pitch).should have_tag('optgroup[label=?]', 'General Interest')
+    end
+    it "should include all the applicants for the pitch" do
+      fact_checkers = fact_checkers_for(@pitch)
+      @applicants.each do |applicant|
+        fact_checkers.should have_tag('option[value=?]', applicant.id)
+      end
+    end
+    it "should include all users who have shown an interest in fact checking" do
+      fact_checkers = fact_checkers_for(@pitch)
+      @interested_users.each do |user|
+        fact_checkers.should have_tag('option[value=?]', user.id)
+      end
+    end
+    it "should not include users otherwise" do
+      fact_checkers_for(@pitch).should_not have_tag('option[value=?]', @uninterested_users.first.id)
+    end
+    it "should display 'No applicants' when nobody has applied to fact-check a pitch" do
+      @pitch.stub!(:fact_checker_applicants).and_return([])
+      fact_checkers_for(@pitch).should have_tag('option', 'No applicants')
+    end
+  end
 end

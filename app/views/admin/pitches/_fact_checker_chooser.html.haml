@@ -1,6 +1,6 @@
 - form_for(pitch, :url => admin_pitch_path(pitch)) do |f|
-  = f.select :fact_checker_id, all_users.map{ |u| [u.full_name, u.id] }
+  = select_tag 'pitch[fact_checker_id]', fact_checkers_for(pitch)
   = f.submit 'Assign'
-  
+
 - if defined?(cancel)
   = link_to 'Cancel', admin_pitches_path
