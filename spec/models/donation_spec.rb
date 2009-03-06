@@ -14,6 +14,7 @@ describe Donation do
   it { Donation.should belong_to(:user) }
   it { Donation.should belong_to(:pitch) }
   it { Donation.should belong_to(:purchase) }
+  it { Donation.should belong_to(:group) }
 
   describe "when creating a donation" do
     it "should require user to be logged in" do
