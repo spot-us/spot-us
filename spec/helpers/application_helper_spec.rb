@@ -132,8 +132,10 @@ describe ApplicationHelper do
         fact_checkers.should have_tag('option[value=?]', user.id)
       end
     end
-    it "should not include users otherwise" do
-      fact_checkers_for(@pitch).should_not have_tag('option[value=?]', @uninterested_users.first.id)
+    it "should include all other users in a third group" do
+      fact_checkers_for(@pitch).should have_tag('optgroup[label=?]', 'All Users') do
+        with_tag('option[value=?]', @uninterested_users.first.id)
+      end
     end
     it "should display 'No applicants' when nobody has applied to fact-check a pitch" do
       @pitch.stub!(:fact_checker_applicants).and_return([])
