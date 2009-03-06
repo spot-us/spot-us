@@ -204,6 +204,7 @@ Factory.define :post do |post|
   post.body 'A cool blog post entry thing'
   post.media_embed '<object>some cool flash</object>'
   post.association(:user)
+  post.association(:pitch)
 end
 
 
