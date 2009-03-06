@@ -12,6 +12,24 @@ describe "/pitches/show.html.haml" do
     do_render
   end
 
+  it "should render a link to the story if it has been published" do
+    story = Factory(:story)
+    story.stub!(:published?).and_return(true)
+    @pitch.fact_checker = Factory(:citizen)
+    @pitch.story = story
+    do_render
+    response.should have_tag("a[href=?]", story_path(story))
+  end
+
+  it "should not render a link to the story if it has not been published" do
+    story = Factory(:story)
+    story.stub!(:published?).and_return(false)
+    @pitch.fact_checker = Factory(:citizen)
+    @pitch.story = story
+    do_render
+    response.should_not have_tag("a[href=?]", story_path(story))
+  end
+
   it "should render the headline" do
     do_render
     template.should have_tag('h2.headline', /#{@pitch.headline}/i)
