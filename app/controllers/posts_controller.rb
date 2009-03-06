@@ -34,6 +34,12 @@ class PostsController < ApplicationController
 
   private
 
+  def new_resource
+    returning resource_service.new(params[resource_name]) do |resource|
+      resource.user = current_user
+    end
+  end
+
   def authorized?
     current_user && enclosing_resource.postable_by?(current_user)
   end

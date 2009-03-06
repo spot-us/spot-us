@@ -34,4 +34,20 @@ describe PostsController do
       response.should redirect_to(myspot_posts_path)
     end
   end
+
+  describe "new_resource" do
+    before do
+      controller.stub!(:params).and_return({'post' => {'title' => 'title', 'body' => 'body'}})
+      controller.stub!(:current_user).and_return(@reporter)
+    end
+    it "should assign the current user as the post's author" do
+      post = controller.send(:new_resource)
+      post.user.should == @reporter
+    end
+    it "should set the params for the new post" do
+      post = controller.send(:new_resource)
+      post.title.should == 'title'
+      post.body.should == 'body'
+    end
+  end
 end
