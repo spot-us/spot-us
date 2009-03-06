@@ -63,4 +63,13 @@ module ApplicationHelper
   def available_pitches_for(tip)
     current_user.pitches.select{|p| !tip.affiliations.map(&:pitch).include?(p) }.map{|p| [p.headline, p.id]}
   end
+
+  def fact_checkers_for(pitch)
+    output = ""
+    applicants = pitch.fact_checker_applicants.map{|u| [u.full_name, u.id]}
+    applicants = [['No applicants', '']] if applicants.empty?
+    output += content_tag('optgroup', options_for_select(applicants), :label => 'Pitch Applicants')
+    output += content_tag('optgroup', options_for_select(User.fact_checkers.map{|u| [u.full_name, u.id]}), :label => 'General Interest')
+    output
+  end
 end
