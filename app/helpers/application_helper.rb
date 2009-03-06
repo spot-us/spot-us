@@ -72,4 +72,15 @@ module ApplicationHelper
     output += content_tag('optgroup', options_for_select(User.fact_checkers.map{|u| [u.full_name, u.id]}), :label => 'General Interest')
     output
   end
+
+  def url_for_news_item(news_item)
+    case news_item
+    when Pitch
+      pitch_path(news_item)
+    when Tip
+      tip_path(news_item)
+    when Story
+      story_path(news_item)
+    end
+  end
 end
