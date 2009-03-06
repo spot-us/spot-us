@@ -55,6 +55,15 @@ class PitchesController < ApplicationController
     end
   end
 
+  def blog_posts
+    respond_to do |format|
+      format.rss do
+        @posts = find_resource.posts.first(10)
+        render :layout => false
+      end
+    end
+  end
+
   protected
 
   def can_create?
