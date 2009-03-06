@@ -123,4 +123,11 @@ describe NewsItemsController do
       controller.send(:get_news_items)
     end
   end
+
+  describe "GET index" do
+    it "should render XML" do
+      get :index, :format => 'rss'
+      response.content_type.should == 'application/rss+xml'
+    end
+  end
 end

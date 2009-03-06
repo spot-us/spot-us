@@ -140,4 +140,22 @@ describe ApplicationHelper do
       fact_checkers_for(@pitch).should have_tag('option', 'No applicants')
     end
   end
+
+  describe "#url_for_news_item" do
+    before do
+      @pitch = Factory(:pitch)
+      @tip = Factory(:tip)
+      @story = Factory(:story)
+    end
+
+    it 'generates a link to a pitch' do
+      url_for_news_item(@pitch).should == pitch_path(@pitch)
+    end
+    it 'generates a link to a tip' do
+      url_for_news_item(@tip).should == tip_path(@tip)
+    end
+    it 'generates a link to a story' do
+      url_for_news_item(@story).should == story_path(@story)
+    end
+  end
 end
