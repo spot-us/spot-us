@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   has_many :spotus_donations
   has_many :tips
   has_many :pitches
-  has_many :posts, :through => :pitches
+  has_many :posts
   has_many :stories
   has_many :jobs
   has_many :samples
