@@ -18,6 +18,8 @@
         .float-left
           PITCH:
           %strong= h donation.pitch.headline
+          - if donation.group
+            == (#{donation.group.name})
         .float-right
           = number_to_currency donation.amount
         .clear
