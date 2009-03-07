@@ -691,5 +691,25 @@ describe Pitch do
       @pitch.postable_by?(editor).should be_true
     end
   end
+
+  describe "donating_groups" do
+    before do
+      @pitch = Factory(:pitch)
+      @group1 = Factory(:group)
+      Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 20, :status => 'paid')
+      Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 30, :status => 'paid')
+      @group2 = Factory(:group)
+    end
+    it "should not include duplicates" do
+      @pitch.donating_groups.size.should == 1
+    end
+    it "should list only groups with paid donations" do
+      @pitch.donating_groups.should_not include(@group2)
+    end
+    it "should not include nil groups" do
+      Factory(:donation, :group => nil, :pitch => @pitch, :amount => 45, :status => 'paid')
+      @pitch.donating_groups.should_not include(nil)
+    end
+  end
 end
 
