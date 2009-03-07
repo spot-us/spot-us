@@ -1,0 +1,13 @@
+%h1 Groups Making Donations
+.double_content_border
+- @groups.each do |group|
+  .block-spacer-negative
+  .clear.group{:id => "group_#{group.id}"}
+    #equalize
+      .box_white
+        .featured_image.span-220
+          = image_tag(group.image.url(:medium))
+        .summary.span-390
+          %h3= link_to group.name, group_path(group)
+          = truncate_words(group.description, 30)
+        .filler{:style => 'height:150px'}
