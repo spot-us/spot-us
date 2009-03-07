@@ -14,4 +14,15 @@ class Admin::GroupsController < ApplicationController
     end
   end
 
+  response_for :update do |format|
+    format.html do
+      if resource_saved?
+        flash[:success] = "Success!"
+        redirect_to admin_groups_path
+      else
+        render :action => 'edit'
+      end
+    end
+  end
+
 end
