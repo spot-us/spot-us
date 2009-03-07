@@ -247,6 +247,10 @@ class Pitch < NewsItem
     posts.count > number
   end
 
+  def donating_groups
+    Donation.paid.for_pitch(self).map(&:group).uniq.compact
+  end
+
   protected
 
   def do_fund_events
