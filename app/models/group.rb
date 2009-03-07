@@ -7,4 +7,8 @@ class Group < ActiveRecord::Base
                     :default_url => "/images/default_avatar.png",
                     :path        => ":rails_root/public/system/groups/:attachment/:id_partition/:basename_:style.:extension",
                     :url         => "/system/groups/:attachment/:id_partition/:basename_:style.:extension"
+
+  def donations_for_pitch(pitch)
+    donations.for_pitch(pitch).map(&:amount).sum
+  end
 end
