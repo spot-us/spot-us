@@ -109,6 +109,7 @@
 
   .span-160.box_white
     = render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch}
+    = render :partial => "group_supporters", :locals => {:news_item => @pitch}
     = render :partial => "supporters", :locals => {:news_item => @pitch}
 .clear
 .block-spacer
