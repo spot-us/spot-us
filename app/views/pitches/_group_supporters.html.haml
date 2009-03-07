@@ -1,0 +1,13 @@
+.supporters
+  %h2.supporters Groups
+  - if news_item.donating_groups.any?
+    .supporters
+      - news_item.donating_groups.each do |group|
+        .person_avatar= image_tag(group.image.url(:thumb))
+        %p.nil-line-height= link_to group.name, group_path(group)
+        .nil-line-height.small== This group has donated #{number_to_currency(group.donations_for_pitch(news_item))}
+        .double_content_border{:style => 'padding-top:15px;'}
+  - else
+    No groups have donated to this pitch.  Be the first!
+    .block-spacer-negative
+

@@ -312,6 +312,33 @@ describe "/pitches/show.html.haml" do
     end
   end
 
+  describe "group support widget" do
+    before do
+      @group1 = Factory(:group)
+      Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 1, :status => 'paid')
+      Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 2, :status => 'paid')
+      @group2 = Factory(:group)
+      Factory(:donation, :group => @group2, :pitch => @pitch, :amount => 4, :status => 'paid')
+    end
+    it "should list each donating group" do
+      do_render
+      [@group1, @group2].each {|g| response.body.should include(g.name) }
+    end
+    it "should list the sum of donations for each group" do
+      do_render
+      response.body.should include("$3")
+      response.body.should include("$4")
+    end
+    it "should list the image for each group" do
+      do_render
+      [@group1, @group2].each {|g| response.should have_tag("img[src*=?]", g.image.url)}
+    end
+    it "should link to each group" do
+      do_render
+      [@group1, @group2].each {|g| response.should have_tag("a[href=?]", group_path(g))}
+    end
+  end
+
   describe "show support widget" do
     before do
 
