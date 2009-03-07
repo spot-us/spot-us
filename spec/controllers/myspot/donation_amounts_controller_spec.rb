@@ -71,13 +71,18 @@ describe Myspot::DonationAmountsController do
         @donations.first.amount.to_f.should == 100.0
       end
 
+      it "should update the group_id" do
+        do_update
+        @donations.first.reload.group_id.should == 17
+      end
+
       it "should create a spotus donation if spotus_donation_amount > 0" do
         do_update_with_spotus_donation
         assigns[:spotus_donation].should be_an_instance_of(SpotusDonation)
       end
 
       def do_update
-        put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100} }, :spotus_donation_amount => "" }
+        put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100, :group_id => '17'} }, :spotus_donation_amount => "" }
       end
 
       def do_update_with_spotus_donation
