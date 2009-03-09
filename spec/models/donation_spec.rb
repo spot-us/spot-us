@@ -53,15 +53,10 @@ describe Donation do
 
       end
 
-      describe "should be invaild and add an error" do
+      describe "should be invalid and add an error" do
         it "if the pitch is fully funded" do
           pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          Factory(:donation, :pitch => pitch, :amount => 20, :status => 'paid')
-          pitch.reload
+          pitch.stub!(:fully_funded?).and_return(true)
 
           donation = Factory.build(:donation, :pitch => pitch, :user => Factory(:user), :amount => 1, :status => 'paid')
           donation.should_not be_valid
@@ -72,9 +67,8 @@ describe Donation do
          it "if user's total donations + the new donation is >= 20% of the pitch's requested amount" do
            user = Factory(:user)
            pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
-           Factory(:donation, :pitch => pitch, :user => user, :amount => 100, :status => 'paid')
+           pitch.stub!(:user_can_donate_more?).and_return(false)
            donation = Factory.build(:donation, :pitch => pitch, :user => user, :amount => 101)
-           pitch.reload
            donation.should_not be_valid
            donation.errors.full_messages.first.should =~ /20/
            donation.should have(1).error_on(:base)
@@ -86,7 +80,7 @@ describe Donation do
       it "allows donation of  an arbitrary amount" do
         organization = Factory(:organization)
         p = Factory(:pitch, :requested_amount => 100)
-        d = Factory.build(:donation, :pitch => p, :user => organization, :amount => 100)
+        d = Factory(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
       end
     end
@@ -107,6 +101,23 @@ describe Donation do
 
     it "is not editable if not logged in" do
       @donation.editable_by?(nil).should_not be_true
+    end
+  end
+
+  describe "Donation.from_organizations" do
+    before do
+      @organization = Factory(:organization)
+      @citizen = Factory(:citizen)
+      @pitch = Factory(:pitch, :requested_amount => 1000)
+      Factory(:donation, :user => @organization, :amount => 100)
+      Factory(:donation, :user => @citizen, :amount => 10)
+    end
+
+    it "should include the donating organization" do
+      Donation.from_organizations.map(&:user).should include(@organization)
+    end
+    it "should not include the donating citizen" do
+      Donation.from_organizations.map(&:user).should_not include(@citizen)
     end
   end
 

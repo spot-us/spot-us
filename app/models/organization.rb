@@ -43,6 +43,9 @@ class Organization < User
   before_validation_on_create :set_status
   after_create :deliver_signup_notification
 
+  has_many :organization_pitches, :foreign_key => :organization_id
+  has_many :supported_pitches, :through => :organization_pitches, :source => :pitch
+
   aasm_state :needs_approval
   aasm_state :approved
 
@@ -66,6 +69,14 @@ class Organization < User
 
   def set_status
     needs_to_be_approved! if inactive?
+  end
+
+  def show_support_for(pitch)
+    pitch.supporting_organizations << self
+  end
+
+  def shown_support_for?(pitch)
+    pitch.supporting_organizations.include? self
   end
 end
 

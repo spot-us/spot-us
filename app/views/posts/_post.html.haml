@@ -1,0 +1,9 @@
+%h3
+  = post.title
+.reg-line-height.date.quiet= post.created_at
+.double_content_border
+.post_body
+  = truncate_words(post.body, 50)
+.read_more
+  = link_to "Read More", pitch_post_path(post.pitch, post)
+.block-spacer-negative

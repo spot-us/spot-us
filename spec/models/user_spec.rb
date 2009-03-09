@@ -10,7 +10,7 @@ describe User do
   it { Factory(:citizen).should have_many(:donations) }
   it { Factory(:citizen).should have_many(:tips) }
   it { Factory(:citizen).should have_many(:pitches) }
-  it { Factory(:citizen).should have_many(:pledges) }
+  it { Factory(:citizen).should have_many(:posts) }
   it { Factory(:citizen).should have_many(:pledges) }
   it { Factory(:citizen).should have_many(:jobs) }
   it { Factory(:citizen).should have_many(:samples) }
@@ -324,6 +324,14 @@ describe User do
       @user.valid?
       @user.activate!
       @user.activation_code.should be_nil
+    end
+
+    it "should clear the activation code on approved organization's activate!" do
+      organization = Factory(:organization)
+      organization.valid?
+      organization.approve!
+      organization.activate!
+      organization.activation_code.should be_nil
     end
 
     it "should return true for activated users on activated?" do

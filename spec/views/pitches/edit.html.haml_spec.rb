@@ -14,7 +14,7 @@ describe "/pitches/edit.html.haml" do
   end
 
   it "should render _form partial" do
-    template.expect_render(:partial => "form")
+    template.should_receive(:render).with(:partial => "form")
     render "/pitches/edit.html.haml"
   end
 end

@@ -1,3 +1,5 @@
+.flash.error
+  = error_messages_for :network
 - form_for([:admin, @network]) do |f|
   = render :partial => 'form', :locals => {:f => f, :network => @network}
 

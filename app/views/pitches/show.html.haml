@@ -56,6 +56,24 @@
 
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
+    = render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }
+    = render :partial => "donations/half_fund", :locals => { :news_item => @pitch }
+    - if current_user
+      - if current_user.organization? && (!@pitch.half_funded? || !@pitch.fully_funded?)
+        .small.quiet.align_right.no_margin
+          = link_to 'what is this?', page_path(:id => 'about', :anchor => 'work_with')
+      - if current_user != @pitch.user && !@pitch.fact_checker
+        .block-spacer-negative
+        .apply_to_fact_check
+          - if @pitch.fact_checker_applicants.include?(current_user)
+            = image_tag 'applied_to_peer_review.gif', :class => 'applied_to_fact_check', :title => 'Applied to Peer Review'
+          - else
+            = link_to image_tag('apply_to_peer_review.gif'), apply_to_fact_check_pitch_path(@pitch), :method => :put, :title => 'Apply to Peer Review'
+      - if current_user.organization? && !current_user.shown_support_for?(@pitch)
+        .block-spacer-negative
+        .show_support
+          = link_to image_tag('show_support.gif', :alt => 'Show Support'), show_support_pitch_path(@pitch), :method => :put, :title => 'Show Support'
+    .block-spacer-negative
     %h3 Related Tips
     .double_content_border
     - if @pitch.tips.any?
@@ -64,23 +82,14 @@
           = link_to h(tip.headline), tip_url(tip)
     - else
       %p No related Tips yet.  Stay tuned.
+    = render :partial => 'action_buttons', :locals => {:pitch => @pitch}
+    = render :partial => 'posts', :locals => {:pitch => @pitch}
     .block-spacer-negative
-    %h3 Keywords
-    .double_content_border
-    %p= h @pitch.keywords
-    - if @pitch.editable_by?(current_user)
-      .block-spacer-negative
-      .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(@pitch)
-    - if @pitch.featureable_by?(current_user)
-      - if @pitch.featured?
-        .block-spacer-negative
-        .centered= link_to 'Un-feature this pitch', unfeature_pitch_path(@pitch), :method => :put
-      - else
-        .block-spacer-negative
-        .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(@pitch), :method => :put
+    = render :partial => 'keywords', :locals => {:pitch => @pitch}
 
   .span-160.box_white
-    = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
+    = render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch}
+    = render :partial => "supporters", :locals => {:news_item => @pitch}
 .clear
 .block-spacer
 

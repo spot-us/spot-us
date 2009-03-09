@@ -33,6 +33,9 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
 
+  def show
+    redirect_to(new_session_path)
+  end
   protected
 
     def handle_first_donation_for_non_logged_in_user

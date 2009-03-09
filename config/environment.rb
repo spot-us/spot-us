@@ -40,7 +40,7 @@ ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS[:session_domain] = DEFAULT
 # These are the sizes of the domain (i.e. 0 for localhost, 1 for something.com)  
 # for each of your environments  
 SubdomainFu.tld_sizes = { :development => 1,
-                          :test => 0,
+                          :test => 1,
                           :staging => 2,
                           :production => 1 }
 
