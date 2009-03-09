@@ -36,9 +36,10 @@
               %h3 
                 PITCH:
                 = link_to donation.pitch.headline, donation.pitch
-              %p
-                Donate on behalf of:
-                = select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>Giving for a group?</option>' + options_from_collection_for_select(Group.all, :id, :name), :include_blank => true
+              - if Group.all.any?
+                %p
+                  Donate on behalf of:
+                  = select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>Giving for a group?</option>' + options_from_collection_for_select(Group.all, :id, :name), :include_blank => true
               %p
                 = truncate_words(donation.pitch.short_description)
                 = link_to 'Read More &raquo;', donation.pitch
