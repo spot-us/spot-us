@@ -103,6 +103,11 @@
     - else
       %p No related Tips yet.  Stay tuned.
     = render :partial => 'action_buttons', :locals => {:pitch => @pitch}
+    - if @pitch.license
+      .block-spacer-negative
+      %h3 License
+      .double_content_border
+      = @pitch.license
     = render :partial => 'posts', :locals => {:pitch => @pitch}
     .block-spacer-negative
     = render :partial => 'keywords', :locals => {:pitch => @pitch}
