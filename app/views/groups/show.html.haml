@@ -1,0 +1,26 @@
+.block-spacer
+#equalize
+  .span-655.box_white.group
+    .featured_image.box_white.span-220{:style => "padding-bottom: 10px;"}
+      .person_avatar= image_tag(@group.image.url(:medium))
+    .summary
+      %h2.headline
+        %strong= @group.name
+      %p.amount_donated
+        This group has donated 
+        %b== #{number_to_currency(@group.total_donations)}!
+      %p.description= @group.description
+    .block-spacer-negative.clear
+    .pitches
+      %h2 Pitches This Group Supports
+      .double_content_border
+      - @group.pitches.each do |pitch|
+        .pitch
+          = render :partial => 'news_items/news_item', :locals => {:news_item => pitch}
+        .block-spacer-negative.clear
+  .span-220.column_v.box_white{:style => "margin:0 0 0 15px"}
+    .supporters
+      %h3 Supporters
+      - @group.donors.each do |user|
+        .supporter
+          = render :partial => 'supporter', :locals => {:supporter => user}
