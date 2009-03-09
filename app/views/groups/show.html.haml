@@ -11,13 +11,14 @@
         %b== #{number_to_currency(@group.total_donations)}!
       %p.description= @group.description
     .block-spacer-negative.clear
-    .pitches
-      %h2 Pitches This Group Supports
-      .double_content_border
-      - @group.pitches.each do |pitch|
-        .pitch
-          = render :partial => 'news_items/news_item', :locals => {:news_item => pitch}
-        .block-spacer-negative.clear
+    - unless @group.pitches.empty?
+      .pitches
+        %h2 Pitches This Group Supports
+        .double_content_border
+        - @group.pitches.each do |pitch|
+          .pitch
+            = render :partial => 'news_items/news_item', :locals => {:news_item => pitch}
+          .block-spacer-negative.clear
   .span-220.column_v.box_white{:style => "margin:0 0 0 15px"}
     .supporters
       %h3 Supporters
