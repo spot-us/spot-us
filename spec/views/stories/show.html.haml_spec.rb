@@ -1,4 +1,3 @@
-
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe "/stories/show.html.haml" do
@@ -41,9 +40,26 @@ describe "/stories/show.html.haml" do
     template.should_not have_tag('a[href$=?]', edit_story_path(@story))
   end
 
+  it "should have an external links box if there are external links" do
+    @story.external_links = "some links"
+    do_render
+    response.should have_tag("h3", "External Links")
+    response.should have_tag(".external_links", "some links")
+  end
+  it "should not have an external links box otherwise" do
+    @story.external_links = nil
+    do_render
+    response.should_not have_tag("h3", "External Links")
+  end
+
   it "should render short description" do
     do_render
     template.should have_tag('p', /#{@story.short_description}/i)
+  end
+
+  it "should render extended description" do
+    do_render
+    template.should have_tag('div.alt-spotus', /#{@story.extended_description}/i)
   end
 
   it "should display photo if there is one" do
