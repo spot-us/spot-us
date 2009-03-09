@@ -342,6 +342,10 @@ describe "/pitches/show.html.haml" do
       do_render
       [@group1, @group2].each {|g| response.should have_tag("a[href=?]", group_path(g))}
     end
+    it "includes a link to all groups" do
+      do_render
+      response.should have_tag("a[href=?]", groups_path)
+    end
   end
 
   describe "show support widget" do
