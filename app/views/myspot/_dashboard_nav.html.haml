@@ -5,5 +5,6 @@
     %li= link_to "My Pledges (#{current_user.pledges.count})",   myspot_pledges_path,   :id => "dashboard_pledges_tab"
     - if current_user.reporter?
       %li= link_to "My Pitches (#{current_user.pitches.count})", myspot_pitches_path,   :id => "dashboard_pitches_tab"
+      %li= link_to "My blog posts (#{current_user.posts.count})", myspot_posts_path, :id => "dashboard_posts_tab"
     %li= link_to "My Tips (#{current_user.tips.count})",      myspot_tips_path,      :id => "dashboard_tips_tab"
 .clear

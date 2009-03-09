@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + "/../../spec_helper"
 
 describe 'myspot/_dashboard_nav.html.haml' do
   before do
-    @user = Factory(:user)
+    @user = Factory(:reporter)
 
     template.stub!(:current_user).and_return(@user)
   end
@@ -12,11 +12,11 @@ describe 'myspot/_dashboard_nav.html.haml' do
     do_render
   end
 
-  %w(pledges tips).each do |collection|
+  %w(pledges tips posts).each do |collection|
     it "should look for the current user's #{collection} count" do
       items = mock(collection)
-      @user.should_receive(collection).with().and_return(items)
-      items.should_receive(:count).with().and_return(1)
+      @user.should_receive(collection).and_return(items)
+      items.should_receive(:count).and_return(1)
       do_render
     end
   end

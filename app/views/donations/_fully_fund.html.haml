@@ -1,0 +1,6 @@
+- if current_user && current_user.organization? && !news_item.fully_funded?
+  .block-spacer-negative
+  .fully_fund
+    %h4
+      Get the rights to this story!
+    = link_to image_tag('fully_fund.gif'), fully_fund_pitch_path(news_item), :method => :put, :title => "Fully Fund"

@@ -1,6 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe PitchesController do
+  route_matches("/pitches/1/fully_fund", :put, :id => "1", :controller => "pitches", :action => "fully_fund")
+  route_matches("/pitches/1/half_fund", :put, :id => "1", :controller => "pitches", :action => "half_fund")
+  route_matches("/pitches/1/show_support", :put, :id => "1", :controller => "pitches", :action => "show_support")
+  route_matches("/pitches/1/apply_to_fact_check", :put, :id => "1", :controller => "pitches", :action => "apply_to_fact_check")
+  route_matches("/pitches/1/assign_fact_checker", :put, :id => "1", :controller => "pitches", :action => "assign_fact_checker")
+
   describe "on GET to /pitchs/new" do
     before(:each) do
       Pitch.stub!(:createable_by?).and_return(true)
@@ -73,6 +79,89 @@ describe PitchesController do
     end
   end
 
+  describe "on PUT to /pitches/1" do
+    before do
+      @pitch = Factory(:pitch)
+      @reporter = @pitch.user
+      controller.stub!(:current_user).and_return(@reporter)
+      controller.stub!(:can_edit?).and_return(true)
+    end
+
+    it "allows the pitch's reporter to make valid updates" do
+      put :update, :id => @pitch.id, :pitch => { :headline => "A New Headline Is Better!" }
+      response.should redirect_to(pitch_path(@pitch))
+    end
+    it "re-renders edit when the pitch's reporter tries to make invalid updates" do
+      put :update, :id => @pitch.id, :pitch => { :headline => "" }
+      response.should render_template('pitches/edit')
+    end
+  end
+
+  describe "on PUT to /pitches/1/show_support" do
+    before do
+      @pitch = Factory(:pitch)
+      @organization = Factory(:organization)
+      controller.stub!(:current_user).and_return(@organization)
+    end
+
+    it "requires an organization" do
+      controller.stub!(:current_user).and_return(Factory(:reporter))
+      put :show_support, :id => @pitch.id
+      response.should redirect_to(new_session_path)
+    end
+
+    it "should redirect back to the pitch" do
+      put :show_support, :id => @pitch.to_param
+      response.should redirect_to(pitch_path(@pitch))
+    end
+
+    it "should call show_support! on the pitch" do
+      controller.stub!(:find_resource).and_return(@pitch)
+      @pitch.should_receive(:show_support!).and_return(true)
+      put :show_support, :id => @pitch.id
+    end
+
+    it "shows a success message" do
+      controller.stub!(:find_resource).and_return(@pitch)
+      @pitch.stub!(:show_support!).and_return(true)
+      put :show_support, :id => @pitch.id
+      flash[:success].should_not be_nil
+    end
+  end
+
+  describe "on PUT to /pitches/1/apply_to_fact_check" do
+    before do
+      @pitch = Factory(:pitch)
+      @pitch.stub!(:apply_to_fact_check)
+      @reporter = Factory(:reporter)
+      controller.stub!(:current_user).and_return(@reporter)
+      controller.stub!(:find_resource).and_return(@pitch)
+    end
+
+    it "adds a reporter to fact_checker_applicants" do
+      @pitch.should_receive(:apply_to_fact_check)
+      put :apply_to_fact_check, :id => @pitch.id
+    end
+
+    it "adds a new org to fact_checker_applicants" do
+      organization = Factory(:organization)
+      controller.stub!(:current_user).and_return(organization)
+      @pitch.should_receive(:apply_to_fact_check)
+      put :apply_to_fact_check, :id => @pitch.id
+    end
+    it "adds a citizen to fact_checker_applicants" do
+      citizen = Factory(:citizen)
+      controller.stub!(:current_user).and_return(citizen)
+      @pitch.should_receive(:apply_to_fact_check)
+      put :apply_to_fact_check, :id => @pitch.id
+    end
+    it "displays a success message and redirects back to pitch" do
+      put :apply_to_fact_check, :id => @pitch.id
+      flash[:success].should be
+      response.should redirect_to(pitch_path(@pitch))
+    end
+  end
+
   describe "on PUT to /pitches/1/feature" do
     before do
       @pitch = Factory(:pitch, :id => 17, :feature => true)
@@ -104,6 +193,107 @@ describe PitchesController do
       controller.stub!(:find_resource).and_return(@pitch)
       @pitch.should_receive(:unfeature!).and_return(true)
       put :unfeature, :id => @pitch.id
+    end
+  end
+
+  describe "on PUT to half_fund" do
+    before do
+      @organization = Factory(:organization)
+      controller.stub!(:current_user).and_return(@organization)
+      @pitch = Factory(:pitch)
+      Pitch.stub!(:find).and_return(@pitch)
+    end
+
+    it "requires a logged in user" do
+      controller.should_receive(:current_user).and_return(nil)
+      put :half_fund, :id => @pitch.id
+      response.should redirect_to(new_session_path)
+    end
+
+    it "requires the current user is a news organization" do
+      controller.stub!(:current_user).and_return(Factory(:reporter))
+      put :half_fund, :id => @pitch.id
+      flash[:error].should_not be_nil
+      response.should redirect_to(new_session_path)
+    end
+
+    it "creates a donation for half of the amount requested" do
+      @pitch.should_receive(:half_fund!).with(@organization)
+      put :half_fund, :id => @pitch.id
+    end
+
+    it "sets a flash message on success" do
+      put :half_fund, :id => @pitch.id
+      flash[:success].should_not be_nil
+    end
+
+    it "redirects to myspot/donations_amounts/edit on success" do
+      put :half_fund, :id => @pitch.id
+      response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+
+    describe "if the donation creation fails" do
+      before do
+        @pitch.donations.stub!(:create).and_return(false)
+      end
+      it "should set an error message if the donation creation fails" do
+        put :half_fund, :id => @pitch.id
+        flash[:error].should_not be_nil
+      end
+      it "should redirect back to the pitch if the donation creation fails" do
+        put :half_fund, :id => @pitch.id
+        response.should redirect_to(pitch_path(@pitch))
+      end
+    end
+  end
+
+  describe "on PUT to fully_fund" do
+    before do
+      @organization = Factory(:organization)
+      controller.stub!(:current_user).and_return(@organization)
+      @pitch = Factory(:pitch)
+      Pitch.stub!(:find).and_return(@pitch)
+    end
+
+    it "requires a logged in user" do
+      controller.should_receive(:current_user).and_return(nil)
+      put :fully_fund, :id => @pitch.id
+      response.should redirect_to(new_session_path)
+    end
+
+    it "requires the current user is a news organization" do
+      controller.stub!(:current_user).and_return(Factory(:reporter))
+      put :fully_fund, :id => @pitch.id
+      flash[:error].should_not be_nil
+      response.should redirect_to(new_session_path)
+    end
+
+    it "creates a donation for the full amount requested" do
+      @pitch.should_receive(:fully_fund!).with(@organization)
+      put :fully_fund, :id => @pitch.id
+    end
+
+    it "sets a flash message on success" do
+      put :fully_fund, :id => @pitch.id
+      flash[:success].should_not be_nil
+    end
+    it "redirects to myspot/donations_amounts/edit on success" do
+      put :fully_fund, :id => @pitch.id
+      response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+
+    describe "if the donation creation fails" do
+      before do
+        @pitch.donations.stub!(:create).and_return(false)
+      end
+      it "should set an error message if the donation creation fails" do
+        put :fully_fund, :id => @pitch.id
+        flash[:error].should_not be_nil
+      end
+      it "should redirect back to the pitch if the donation creation fails" do
+        put :fully_fund, :id => @pitch.id
+        response.should redirect_to(pitch_path(@pitch))
+      end
     end
   end
 

@@ -70,6 +70,8 @@ class Pitch < NewsItem
 
   has_many :affiliations, :dependent => :destroy
   has_many :tips, :through => :affiliations
+  has_many :organization_pitches, :foreign_key => :pitch_id
+  has_many :supporting_organizations, :through => :organization_pitches, :source => :organization
   has_many :donations, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
@@ -80,7 +82,17 @@ class Pitch < NewsItem
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
+  has_many :posts do
+    def first(number)
+      find(:all, :limit => number, :order => 'created_at DESC')
+    end
+  end
+  has_many :fact_checker_applications
+  has_many :fact_checker_applicants, :through => :fact_checker_applications, :source => :user
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
+
+  belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
+
   after_save :check_if_funded_state, :dispatch_fact_checker
 
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
@@ -110,7 +122,14 @@ class Pitch < NewsItem
     end
   end
 
+  def postable_by?(other_user)
+    return false if other_user.nil?
+    user == other_user || other_user.admin? || other_user == fact_checker
+  end
+
   def current_funding
+    return total_amount_donated if accepted?
+    return requested_amount if self[:current_funding] && self[:current_funding] > requested_amount
     self[:current_funding] || 0
   end
 
@@ -136,6 +155,15 @@ class Pitch < NewsItem
     self.feature
   end
 
+  def show_support!(organization)
+    supporting_organizations << organization unless supporting_organizations.include?(organization)
+  end
+
+  def apply_to_fact_check(user)
+    return false unless user
+    fact_checker_applicants << user unless fact_checker_applicants.include?(user)
+  end
+
   def feature!
     self.update_attribute(:feature, true)
   end
@@ -153,9 +181,24 @@ class Pitch < NewsItem
     requested_amount - total_amount_donated
   end
 
+  def half_funded?
+    return true if accepted? || funded?
+    total_amount_donated > (requested_amount / 2)
+  end
+
+  def half_fund!(user)
+    donations.unpaid.for_user(user).map(&:destroy)
+    donations.create(:amount => requested_amount / 2, :user => user)
+  end
+
   def fully_funded?
     return true if accepted? || funded?
-    donations.paid.map(&:amount).sum >= requested_amount
+    total_amount_donated >= requested_amount
+  end
+
+  def fully_fund!(user)
+    donations.unpaid.for_user(user).map(&:destroy)
+    donations.create(:amount => requested_amount, :user => user)
   end
 
   def requested_amount=(value)
@@ -188,6 +231,7 @@ class Pitch < NewsItem
 
   def user_can_donate_more?(user, attempted_donation_amount)
     return false if attempted_donation_amount.nil?
+    return true if user.organization? && attempted_donation_amount <= requested_amount
     return false if attempted_donation_amount > funding_needed
     user_donations = donations.paid.total_amount_for_user(user)
     (user_donations + attempted_donation_amount) <= max_donation_amount(user)
@@ -197,6 +241,10 @@ class Pitch < NewsItem
     if self.fact_checker_id_changed? && self.story
       self.story.update_attribute(:fact_checker_id, self.fact_checker_id)
     end
+  end
+
+  def has_more_posts_than(number)
+    posts.count > number
   end
 
   protected

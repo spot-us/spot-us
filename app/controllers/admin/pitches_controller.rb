@@ -20,12 +20,7 @@ class Admin::PitchesController < ApplicationController
   end
 
   protected
-    def all_users
-      @all_users ||= User.all
-    end
-    helper_method :all_users
-
-    def current_pitch
-      @pitch ||= Pitch.find(params[:id])
-    end
+  def current_pitch
+    @pitch ||= Pitch.find(params[:id])
+  end
 end

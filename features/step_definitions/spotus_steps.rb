@@ -7,14 +7,45 @@ Given "A consumer protection topic exists" do
 end
 
 Given /^I have created a "(.*)"$/ do |model_name|
-  set_instance_variable(model_name, model_name.classify.constantize.create!(Factory(model_name.to_sym, :user => @user).attributes))
+  instance_variable_set("@#{model_name}", Factory(model_name.to_sym, :user => @current_user))
 end
 
 Given /^A "(.*)" exists$/ do |model_name| 
-  set_instance_variable(model_name, model_name.classify.constantize.create!(Factory(model_name.to_sym).attributes))
+  instance = Factory(model_name.to_sym)
+  instance_variable_set("@#{model_name}", instance)
 end
 
 Given /^A "(.*)" exists for the "(.*)"$/ do |child, parent|
-  child.classify.constantize.create!(Factory(child.to_sym, parent.to_sym => get_instance_variable(parent)).attributes)
+  instance = Factory(child.to_sym, parent.to_sym => instance_variable_get("@#{parent}"))
+  instance_variable_set("@#{child}", instance)
 end
 
+Given /^my current network is (.*?)$/i do |subdomain|
+  network = Network.find_or_create_by_name(subdomain)
+  instance_variable_set("@current_network", network)
+end
+
+Given /^I am at the "(.*?)" network page$/ do |subdomain|
+  visit(root_url(:subdomain => subdomain))
+end
+
+Then /^I should see "(.*?)" not linked$/ do |text|
+  response.body.should include(text)
+  response.should_not have_tag("a", text)
+end
+
+Then /^I should see a dropdown named "(.*?)"$/ do |text|
+  response.should have_tag('select[name=?]', text)
+end
+
+Then /^I should not see a dropdown named "(.*?)"$/ do |text|
+  response.should_not have_tag('select[name=?]', text)
+end
+
+Then /^I should see a form identified by "(.*?)"$/ do |id|
+  response.should have_tag("form##{id}")
+end
+
+Then /^I should not see a form identified by "(.*?)"$/ do |id|
+  response.should_not have_tag("form##{id}")
+end

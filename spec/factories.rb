@@ -74,6 +74,11 @@ Factory.define :organization do |user|
   user.association(:network)
 end
 
+Factory.define :organization_pitch do |op|
+  op.association(:organization)
+  op.association(:pitch)
+end
+
 Factory.define :news_item do |news_item|
   news_item.headline "Headline"
   news_item.featured_image_caption "lorem ipsum"
@@ -94,6 +99,11 @@ Factory.define :pitch do |pitch|
   pitch.contract_agreement     "1"
   pitch.association(:network)
   pitch.association(:user)
+end
+
+Factory.define :fact_checker_application do |application|
+  application.association(:user)
+  application.association(:pitch)
 end
 
 Factory.define :story do |story|
@@ -187,6 +197,13 @@ end
 
 Factory.define :category do |category|
   category.name { random_string }
+end
+
+Factory.define :post do |post|
+  post.title 'Post Title'
+  post.body 'A cool blog post entry thing'
+  post.media_embed '<object>some cool flash</object>'
+  post.association(:user)
 end
 
 

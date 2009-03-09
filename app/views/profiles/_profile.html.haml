@@ -1,15 +1,6 @@
 - if @profile.editable_by?(current_user)
   .float-right= link_to image_tag("edit_your_profile.png"), edit_myspot_profile_path
-%p= image_tag @profile.photo.url(:thumb)
-%h4.reg-line-height= h @profile.full_name
-%p.reg-line-height= h @profile.network_and_category
-.date.quiet.reg-line-height
-  member since
-  = @profile.created_at.to_s(:date)
-- unless @profile.website.blank?
-  %p.reg-line-height
-    = link_to(h(@profile.website), @profile.website)
-  .clear
+= render :partial => 'shared/user', :locals => { :user => @profile }
 - if @profile.topics.any?
   %p.reg-line-height.clear
     %span.quieter
