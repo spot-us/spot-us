@@ -9,7 +9,7 @@ describe Story do
 
   describe "to support STI" do
     it "descends from NewItem" do
-      Story.ancestors.include?(NewsItem)
+      Story.ancestors.should include(NewsItem)
     end
   end
 
