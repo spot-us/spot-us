@@ -615,7 +615,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
 /* ---------------------------------------------------------------------------------
  General Column specs part 2 - this achieves the float left and size for the columns
 ------------------------------------------------------------------------------------ */
-.span-70, .span-95, .span-205, .span-220, .span-235, .span-280, .span-340, .span-390, .span-455, .span-460, .span-550, .span-575, .span-605, .span-715 {float:left;}
+.span-70, .span-95, .span-205, .span-220, .span-235, .span-280, .span-340, .span-390, .span-455, .span-460, .span-550, .span-575, .span-605, .span-655, .span-715 {float:left;}
 .span-70  {width: 70px;}
 .span-95  {width: 95px;}
 .span-205 {width: 205px;}
@@ -629,6 +629,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
 .span-550 {width: 550px;}
 .span-575 {width: 575px;}
 .span-605 {width: 605px;}
+.span-655 {width: 655px;}
 .span-715 {width: 715px;}
 /* ---------------------------------------------------------------------------------
  General Column specs part 3 - this achieves the float right and size for the columns
@@ -1128,4 +1129,8 @@ a.prev{
 }
 .pitch_summary div {
   margin-right: 10px;
+}
+.amount_donated{
+  padding: 5px 0 5px 245px;
+  background-color:#FFFFCC;
 }
