@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   acts_as_paranoid
   include HasTopics
   include AASMWithFixes
-  include NetworkValidation
+  include NetworkMethods
 
   TYPES = ["Citizen", "Reporter", "Organization", "Admin"]
   CREATABLE_TYPES = TYPES - ["Admin"]
@@ -66,7 +66,6 @@ class User < ActiveRecord::Base
       }
   end
 
-  belongs_to :network
   belongs_to :category
 
   has_many :donations do
@@ -316,13 +315,6 @@ class User < ActiveRecord::Base
 
   def has_pledge_for?(tip)
     pledges.exists?(:tip_id => tip.id )
-  end
-
-  def network_and_category
-    return "No network selected" unless network
-    output =  network.display_name
-    output += "- #{category.name}" if category
-    output
   end
 
   protected
