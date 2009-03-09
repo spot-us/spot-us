@@ -1,0 +1,5 @@
+.person_avatar
+  = link_to(image_tag(supporter.photo.url(:thumb)), profile_path(supporter))
+%p.reg-line-height
+  = link_to supporter.full_name, profile_path(supporter)
+.clear
