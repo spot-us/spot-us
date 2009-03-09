@@ -8,6 +8,8 @@ describe "/pitches/new.html.haml" do
     @pitch = stub_model(Pitch)
     @pitch.stub!(:new_record?).and_return(true)
     assigns[:pitch] = @pitch
+    @current_user = Factory(:admin)
+    template.stub!(:current_user).and_return(@current_user)
   end
 
   it "should render new form" do
