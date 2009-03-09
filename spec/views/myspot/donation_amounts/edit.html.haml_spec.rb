@@ -8,6 +8,7 @@ describe 'myspot/donation_amounts/edit' do
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
     @spotus_donation = Factory(:spotus_donation)
+    @group = Factory(:group)
     template.stub!(:unpaid_donations).and_return(@donations)
     template.stub!(:spotus_donation).and_return(@spotus_donation)
   end
@@ -42,6 +43,21 @@ describe 'myspot/donation_amounts/edit' do
     template.stub!(:content_for)
     template.should_receive(:content_for).with(:error).at_least(:once)
     do_render
+  end
+
+  it "doesn't display the group selector if no groups exist" do
+    assigns[:donations] = @donations
+    Group.stub!(:all).and_return([])
+    do_render
+    response.should_not have_tag("select[name=?]", "donation_amounts[#{@donations.first.id}][group_id]")
+  end
+  it "displays the group selector with each group listed" do
+    assigns[:donations] = @donations
+    Group.stub!(:all).and_return([@group])
+    do_render
+    response.should have_tag("select[name=?]", "donation_amounts[#{@donations.first.id}][group_id]") do
+      with_tag("option[value=?]", @group.id, @group.name)
+    end
   end
 
   def do_render
