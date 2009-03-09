@@ -16,9 +16,10 @@
 .login-boxer
   - form_tag session_url do
     .span-6.or_login
-      %h3 Welcome Back!!!
+      %h3 Thanks for joining us!
       %br
-      %span.small.quieter We already know you.
+      %span.small.quieter
+        = link_to "Make sure you register first!", new_user_path
       .double_content_border
       = render :partial => 'sessions/form'
       .clear

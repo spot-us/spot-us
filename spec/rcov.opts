@@ -1,2 +1,5 @@
---exclude "spec/*,gems/*" 
+--exclude "spec/*,gems/*,features/*"
 --rails
+-o "public/coverage"
+--sort coverage
+--sort-reverse
