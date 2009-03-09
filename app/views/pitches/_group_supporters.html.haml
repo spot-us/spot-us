@@ -7,4 +7,6 @@
         %p.nil-line-height= link_to group.name, group_path(group)
         .nil-line-height.small== This group has donated #{number_to_currency(group.donations_for_pitch(news_item))}
         .double_content_border{:style => 'padding-top:15px;'}
+  .small.nil-line-height.align_right
+    = link_to 'View all groups &raquo;', groups_path
   .block-spacer-negative
