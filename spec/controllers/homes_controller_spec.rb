@@ -30,4 +30,37 @@ describe HomesController do
     end
   end
 
+  describe "on GET to start_story" do
+    it 'redirects to login' do
+      get :start_story
+      response.should redirect_to(new_session_path)
+    end
+
+    describe "for logged in reporters" do
+      before do
+        @reporter = Factory(:reporter)
+        controller.stub!(:logged_in?).and_return(true)
+        controller.stub!(:current_user).and_return(@reporter)
+      end
+
+      it 'redirects to new_pitch_path' do
+        get :start_story
+        response.should redirect_to(new_pitch_path)
+      end
+    end
+
+    describe "for logged in citizens" do
+      before do
+        @citizen = Factory(:citizen)
+        controller.stub!(:logged_in?).and_return(true)
+        controller.stub!(:current_user).and_return(@citizen)
+      end
+
+      it 'redirects to new tip path' do
+        get :start_story
+        response.should redirect_to(new_tip_path)
+      end
+    end
+  end
+
 end

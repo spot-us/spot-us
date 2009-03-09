@@ -19,7 +19,7 @@ class Donation < ActiveRecord::Base
   @@per_page = 10
 
   include AASM
-  class <<self
+  class << self
     alias invasive_inherited_from_aasm inherited
     def inherited(child)
       invasive_inherited_from_aasm(child)
@@ -53,6 +53,7 @@ class Donation < ActiveRecord::Base
 
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
+  named_scope :from_organizations, :include => :user, :conditions => "users.type = 'organization'"
 
   after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
@@ -81,7 +82,6 @@ class Donation < ActiveRecord::Base
     Mailer.deliver_user_thank_you_for_donating(self)
   end
 
-  # TODO: use amount
   def update_pitch_funding
     pitch.current_funding += amount
     pitch.save

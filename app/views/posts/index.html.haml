@@ -1,0 +1,24 @@
+- @title = "Spot.us - Blog posts for Pitch: #{h @pitch.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      %strong= h @pitch.headline
+    .double_content_border
+    = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
+    %h2.headline
+      Related pitch
+    .pitch_summary
+      .float-left
+        = link_to image_tag(@pitch.featured_image.url(:thumb)), pitch_url(@pitch)
+      %h2
+        = link_to @pitch.headline, pitch_url(@pitch)
+    .block-spacer-negative
+    = render :partial => @posts
+  .span-220.column_v.box_white
+    = render :partial => "donations/button", :locals => { :news_item => @pitch }
+    .block-spacer-negative
+    = render :partial => 'pitches/keywords', :locals => {:pitch => @pitch}
+  .span-160.box_white
+    = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}
