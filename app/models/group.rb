@@ -11,4 +11,21 @@ class Group < ActiveRecord::Base
   def donations_for_pitch(pitch)
     donations.for_pitch(pitch).map(&:amount).sum
   end
+
+  def donors
+    donations.map(&:user).uniq
+  end
+
+  def total_donations
+    donations.map(&:amount).sum
+  end
+
+  def amount_donated_by(user)
+    donations.by_user(user).map(&:amount).sum
+  end
+
+  def pitches
+    donations.map(&:pitch).uniq
+  end
+
 end
