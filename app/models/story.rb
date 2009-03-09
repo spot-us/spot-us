@@ -39,8 +39,12 @@
 #
 
 class Story < NewsItem
-  aasm_initial_state  :draft
+  cleanse_columns(:extended_description) do |sanitizer|
+    sanitizer.allowed_tags.replace(%w(object param embed a img))
+    sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
+  end
 
+  aasm_initial_state  :draft
   aasm_state :draft
   aasm_state :fact_check
   aasm_state :ready
