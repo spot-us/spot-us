@@ -320,6 +320,11 @@ describe "/pitches/show.html.haml" do
       @group2 = Factory(:group)
       Factory(:donation, :group => @group2, :pitch => @pitch, :amount => 4, :status => 'paid')
     end
+    it 'only displays if there are supporting groups' do
+      @pitch.stub!(:donating_groups).and_return([])
+      do_render
+      response.should_not have_tag("div.group_supporters")
+    end
     it "should list each donating group" do
       do_render
       [@group1, @group2].each {|g| response.body.should include(g.name) }
