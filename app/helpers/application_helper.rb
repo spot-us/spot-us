@@ -70,6 +70,7 @@ module ApplicationHelper
     applicants = [['No applicants', '']] if applicants.empty?
     output += content_tag('optgroup', options_for_select(applicants), :label => 'Pitch Applicants')
     output += content_tag('optgroup', options_for_select(User.fact_checkers.map{|u| [u.full_name, u.id]}), :label => 'General Interest')
+    output += content_tag('optgroup', options_for_select(User.all.map{|u| [u.full_name, u.id]}), :label => 'All Users')
     output
   end
 
