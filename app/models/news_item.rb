@@ -44,7 +44,7 @@ class NewsItem < ActiveRecord::Base
   include Sanitizy
   include NetworkValidation
 
-  cleanse_columns(:delivery_description, :extended_description, :short_description) do |sanitizer|
+  cleanse_columns(:delivery_description, :extended_description, :short_description, :external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
 
