@@ -128,11 +128,23 @@ describe "/pitches/show.html.haml" do
     do_render
     template.should have_tag('img[src = ?]', "/images/photo")
   end
-  
+
   it "should not display a photo if there isn't one" do
     assigns[:pitch].stub!(:featured_image?).and_return(false)
     do_render
     template.should_not have_tag('img[src = ?]', "/images/photo")
+  end
+
+  it "displays license if there is one" do
+    assigns[:pitch].stub!(:license).and_return('<a href="http://creativecommons.org/licenses/by-nd/3.0/legalcode"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/us/88x31.png"/></a>')
+    do_render
+    response.should have_tag("a[href*=?]", 'http://creativecommons.org')
+  end
+
+  it "doesn't display the license header if it doesn't have a license" do
+    assigns[:pitch].stub!(:license).and_return(nil)
+    do_render
+    response.should_not have_tag("h3", "License")
   end
 
   it "not blow up with related pitches" do
