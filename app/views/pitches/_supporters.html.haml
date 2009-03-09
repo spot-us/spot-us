@@ -1,0 +1,14 @@
+.supporters
+  %h2.supporters Supporters
+  - if news_item.supporters.any?
+    = number_to_currency news_item.total_amount_donated
+    donated by
+    = pluralize(news_item.supporters.count, "person")
+
+.double_content_border
+
+.supporters
+  .supporter
+    - if citizen_supporters_for(news_item).any?
+      - citizen_supporters_for(news_item).each do |supporter|
+        = render :partial => 'news_items/supporter', :locals => {:news_item => news_item, :supporter => supporter}

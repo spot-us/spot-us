@@ -60,7 +60,10 @@ class User < ActiveRecord::Base
         user.send(:deliver_signup_notification)
         user.send(:clear_activation_code)
       }
-    transitions :from => :approved, :to => :active
+    transitions :from => :approved, :to => :active,
+      :on_transition => lambda{ |user|
+        user.send(:clear_activation_code)
+      }
   end
 
   belongs_to :network
@@ -75,16 +78,16 @@ class User < ActiveRecord::Base
   has_many :spotus_donations
   has_many :tips
   has_many :pitches
+  has_many :posts
+  has_many :stories
+  has_many :jobs
+  has_many :samples
+  has_many :credits
   has_many :pledges do
     def tip_sum(tip)
       self.all(:conditions => {:tip_id => tip}).map(&:amount).sum
     end
   end
-
-  has_many :stories
-  has_many :jobs
-  has_many :samples
-  has_many :credits
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

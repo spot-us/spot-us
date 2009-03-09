@@ -1,9 +1,17 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
+  before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   resources_controller_for :pitch
 
   def index
     redirect_to(news_items_path)
+  end
+
+  def apply_to_fact_check
+    pitch = find_resource
+    pitch.apply_to_fact_check(current_user)
+    flash[:success] = "You're signed up!  Thanks for applying to be a peer review editor"
+    redirect_to pitch_path(pitch)
   end
 
   def feature
@@ -16,6 +24,35 @@ class PitchesController < ApplicationController
     pitch = find_resource
     pitch.unfeature!
     redirect_to pitch_path(pitch)
+  end
+
+  def show_support
+    pitch = find_resource
+    pitch.show_support!(current_user)
+    flash[:success] = "Thanks for your support!"
+    redirect_to pitch_path(pitch)
+  end
+
+  def fully_fund
+    pitch = find_resource
+    if donation = pitch.fully_fund!(current_user)
+      flash[:success] = "Your donation was successfully created"
+      redirect_to edit_myspot_donations_amounts_path
+    else
+      flash[:error] = "An error occurred while trying to fund this pitch"
+      redirect_to pitch_path(pitch)
+    end
+  end
+
+  def half_fund
+    pitch = find_resource
+    if donation = pitch.half_fund!(current_user)
+      flash[:success] = "Your donation was successfully created"
+      redirect_to edit_myspot_donations_amounts_path
+    else
+      flash[:error] = "An error occurred while trying to fund this pitch"
+      redirect_to pitch_path(pitch)
+    end
   end
 
   protected
@@ -51,6 +88,10 @@ class PitchesController < ApplicationController
     params[:pitch] ||= {}
     params[:pitch][:headline] = params[:headline] if params[:headline]
     current_user.pitches.new(params[:pitch])
+  end
+
+  def organization_required
+    access_denied unless current_user && current_user.organization?
   end
 
 end

@@ -28,6 +28,8 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
   it { Factory(:pitch).should have_many(:comments)}
+  it { Factory(:pitch).should have_many(:fact_checker_applications)}
+  it { Factory(:pitch).should have_many(:fact_checker_applicants)}
 
   describe "requested amount" do
     it "normalizes before validation" do
@@ -199,6 +201,19 @@ describe Pitch do
       purch = Factory(:purchase, :donations => [d])
       p.current_funding.should == BigDecimal.new("3.0")
     end
+
+    it "should return total amount donated if accepted" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
+      p.accept!
+      p.current_funding.should == BigDecimal.new("3.0")
+    end
+    it "should return requested amount if there is an overage" do
+      p = Factory(:pitch, :requested_amount => 100)
+      d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
+      p.fully_fund!(Factory(:organization)).pay!
+      p.reload.current_funding.should == BigDecimal("100.0")
+    end
   end
 
   describe "topics_params=" do
@@ -283,6 +298,65 @@ describe Pitch do
     end
   end
 
+  describe "half_funded?" do
+    before do
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+    it "should return true if the pitch state is accepted" do
+      @pitch.accept!
+      @pitch.should be_half_funded
+    end
+    it "should return true if the pitch state is funded" do
+      @pitch.fund!
+      @pitch.should be_half_funded
+    end
+    it "should return false if the total donations are 50% or less of the requested amount" do
+      @pitch.donations.stub!(:paid).and_return([stub('donation', :amount => 50)])
+      @pitch.half_funded?.should be_false
+    end
+    it "should return true if the total donations are more than 50%" do
+      @pitch.donations.stub!(:paid).and_return([stub('donation', :amount => 60)])
+      @pitch.half_funded?.should be_true
+    end
+  end
+
+  describe "half_fund!" do
+    before do
+      @user = Factory(:organization)
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+
+    it "should create a donation for half the requested amount" do
+      @pitch.donations.should_receive(:create).with(:amount => 50, :user => @user)
+      @pitch.half_fund!(@user)
+    end
+    it "should delete other unpaid donations from the current user" do
+      other_donation = Factory(:donation, :pitch => @pitch, :user => @user)
+      unpaid = stub('named scope', :for_user => [other_donation])
+      @pitch.donations.should_receive(:unpaid).and_return(unpaid)
+      other_donation.should_receive(:destroy).and_return(true)
+      @pitch.half_fund!(@user)
+    end
+  end
+
+  describe "fully_fund!" do
+    before do
+      @user = Factory(:organization)
+      @pitch = Factory(:pitch, :requested_amount => 100)
+    end
+    it "should create a donation for the requested_amount" do
+      @pitch.donations.should_receive(:create).with(:amount => @pitch.requested_amount, :user => @user)
+      @pitch.fully_fund!(@user)
+    end
+    it "should delete other unpaid donations from the current user" do
+      other_donation = Factory(:donation, :pitch => @pitch, :user => @user)
+      unpaid = stub('named scope', :for_user => [other_donation])
+      @pitch.donations.should_receive(:unpaid).and_return(unpaid)
+      other_donation.should_receive(:destroy).and_return(true)
+      @pitch.fully_fund!(@user)
+    end
+  end
+
   describe "donations.for_user" do
     it "should not return users other than the one requested" do
       user = Factory(:user)
@@ -299,12 +373,12 @@ describe Pitch do
     describe "any user" do
       it "can't donate more, such that funds would exceed the requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 1000).should be_false
+        p.user_can_donate_more?(Factory(:citizen), 1000).should be_false
       end
 
       it "can donate more, as long as funds plus attempted donation are less than requested amount" do
         p = Factory(:pitch, :requested_amount => 100)
-        p.user_can_donate_more?(Factory(:organization), 20).should be_true
+        p.user_can_donate_more?(Factory(:citizen), 20).should be_true
       end
 
       it "can donate more at all (passing zero as second arg)" do
@@ -313,6 +387,12 @@ describe Pitch do
         d = Factory(:donation, :pitch => p, :user => u, :amount => 10)
         p.user_can_donate_more?(u, 0).should be_true
         p.user_can_donate_more?(u, 11).should be_true
+      end
+
+      it "allows a news organization to donate the requested amount" do
+        p = Factory(:pitch, :requested_amount => 100)
+        Factory(:donation, :pitch => p, :user => Factory(:user), :amount => 10, :status => "paid")
+        p.user_can_donate_more?(Factory(:organization), 100).should be_true
       end
     end
 
@@ -381,6 +461,40 @@ describe Pitch do
 
     it "is not creatable if not logged in" do
       Pitch.createable_by?(nil).should_not be
+    end
+  end
+
+  describe "show_support!" do
+    before do
+      @pitch = Factory(:pitch)
+      @organization = Factory(:organization)
+    end
+    it "add the organization to the pitch's supporting organizations" do
+      @pitch.show_support!(@organization)
+      @pitch.supporting_organizations.should include(@organization)
+    end
+
+    it "doesn't add the same organization to the pitch's supporting organizations twice" do
+      @pitch.show_support!(@organization)
+      lambda{@pitch.show_support!(@organization)}.should change(@pitch.supporting_organizations, :size).by(0)
+    end
+
+  end
+
+  describe "apply_to_fact_check" do
+    before do
+      @pitch = Factory(:pitch)
+      @reporter = Factory(:reporter)
+    end
+    it "returns false if no user is passed in" do
+      @pitch.apply_to_fact_check(nil).should be_false
+    end
+    it "adds the user to the pitch's fact_checker_applicants" do
+      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(1)
+    end
+    it "only adds the user once" do
+      @pitch.stub!(:fact_checker_applicants).and_return([@reporter])
+      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(0)
     end
   end
 
@@ -552,6 +666,29 @@ describe Pitch do
         @network.should_receive(:featured_pitches)
         Pitch.featured_by_network(@network)
       end
+    end
+  end
+  
+  describe "#postable_by?" do
+    before do
+      @pitch = Factory(:pitch)
+    end
+    it "should return true if the passed in user is the reporter" do
+      @pitch.postable_by?(@pitch.user).should be_true
+    end
+    it "should return true if the passed in user is an admin" do
+      @pitch.postable_by?(Factory(:admin)).should be_true
+    end
+    it "should return false otherwise" do
+      @pitch.postable_by?(Factory(:user)).should be_false
+    end
+    it "should return false if the passed in user is nil" do
+      @pitch.postable_by?(nil).should be_false
+    end
+    it "should return true if the passed in user is the peer review editor" do
+      editor = Factory(:reporter)
+      @pitch.fact_checker = editor
+      @pitch.postable_by?(editor).should be_true
     end
   end
 end

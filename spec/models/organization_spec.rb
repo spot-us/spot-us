@@ -56,4 +56,29 @@ describe Organization do
       end
     end
   end
+
+  describe "#show_support" do
+    before do
+      @organization = Factory(:organization)
+      @pitch = Factory(:pitch)
+    end
+
+    it "adds the organization to the pitch's supporters" do
+      lambda{@organization.show_support_for(@pitch)}.should change(@pitch.supporting_organizations, :size).by(1)
+    end
+  end
+
+  describe "shown_support_for?" do
+    before do
+      @organization = Factory(:organization)
+      @pitch = Factory(:pitch)
+    end
+    it "should return true if the organization is in the pitches supporting_organizations" do
+      @pitch.supporting_organizations.stub!(:include?).and_return(true)
+      @organization.shown_support_for?(@pitch).should be_true
+    end
+    it "should return false otherwise" do
+      @organization.shown_support_for?(@pitch).should be_false
+    end
+  end
 end

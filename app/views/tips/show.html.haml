@@ -32,6 +32,14 @@
     %h3 Related Pitches
     .double_content_border
     = render :partial => "related_pitches", :object => @tip.pitches
+    - if current_user && current_user.reporter? && current_user.pitches.any?
+      .double_content_border
+      Add this tip to your pitch
+      %br/
+      - form_for Affiliation.new do |f|
+        = f.hidden_field :tip_id, :value => @tip.id
+        = f.select :pitch_id, available_pitches_for(@tip)
+        = f.submit "Attach"
     .block-spacer-negative
     %h3 Keywords
     .double_content_border
@@ -41,7 +49,7 @@
       .centered= link_to image_tag("edit_this_tip.png"), edit_tip_path(@tip)
 
   .span-160.box_white
-    = render :partial => "news_items/supporters", :locals => {:news_item => @tip}
+    = render :partial => "supporters", :locals => {:news_item => @tip}
 .clear
 .block-spacer
 

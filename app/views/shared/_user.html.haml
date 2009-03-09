@@ -1,0 +1,10 @@
+%p= image_tag user.photo.url(:thumb)
+%h4.reg-line-height= h user.full_name
+%p.reg-line-height= h user.network_and_category
+.date.quiet.reg-line-height
+  member since
+  = user.created_at.to_s(:date)
+- unless user.website.blank?
+  %p.reg-line-height
+    = link_to(h(user.website), user.website)
+  .clear
