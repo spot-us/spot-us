@@ -9,7 +9,7 @@ describe StoriesController do
   route_matches('/stories/1', :put, :controller => 'stories',
                                           :action     => 'update',
                                           :id => "1")
-                                          
+
   route_matches('/stories/1', :get, :controller => 'stories',
                                           :action     => 'show',
                                           :id => "1")
@@ -25,15 +25,15 @@ describe StoriesController do
   route_matches('/stories/1/fact_check', :put, :controller => 'stories',
                                           :action     => 'fact_check',
                                           :id => "1")
-                                          
+
   describe "can_edit?" do
     it "should allow owner to edit if in draft state" do
       user = Factory(:user)
       story = Factory(:story, :user => user)
       controller.stub!(:current_user).and_return(user)
-      get :edit, :id => story.id 
+      get :edit, :id => story.id
     end
-    
+
     it "should not allow the owner to edit if it is in any state other than draft" do
       user = Factory(:user)
       story = Factory(:story, :user => user, :status => "accepted")
@@ -41,48 +41,48 @@ describe StoriesController do
       get :edit, :id => story.id
       flash[:error].should_not be_nil
     end
-    
+
   end
-  
+
   describe "changing state" do
-    
-    it "should accept a story" do 
+
+    it "should accept a story" do
       user = Factory(:reporter)
       controller.stub!(:current_user).and_return(user)
-      story = Factory(:story, :status => "fact_check")     
+      story = Factory(:story, :status => "fact_check")
       story.fact_checker = user
       story.save
-      put "accept", :id => story.to_param
+      put :accept, :id => story.to_param
       story.reload
       story.should be_ready
     end
-                             
+
     it "should reject a story" do
       user = Factory(:reporter)
       controller.stub!(:current_user).and_return(user)
-      story = Factory(:story, :status => "fact_check")     
+      story = Factory(:story, :status => "fact_check")
       story.fact_checker = user
       story.save
-      put "reject", :id => story.to_param
+      put :reject, :id => story.to_param
       story.reload
       story.should be_draft
     end
-    
+
     it "should fact_check a story" do
       user = Factory(:reporter)
       controller.stub!(:current_user).and_return(user)
-      story = Factory(:story, :status => "draft")     
+      story = Factory(:story, :status => "draft")
       story.fact_checker = user
       story.save
       put "fact_check", :id => story.to_param
       story.reload
       story.should be_fact_check
     end
-    
+
     it "should publish a story" do
       user = Factory(:reporter)
       controller.stub!(:current_user).and_return(user)
-      story = Factory(:story, :status => "ready")     
+      story = Factory(:story, :status => "ready")
       story.fact_checker = user
       story.save
       put "publish", :id => story.to_param
