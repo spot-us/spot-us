@@ -11,6 +11,9 @@
     .row
       .form_hint.small
         500 Characters Remain
+    .row
+      = f.label :external_links
+      = fckeditor_textarea("story", "external_links", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
 
     .yellow-spacer-negative
     .row
