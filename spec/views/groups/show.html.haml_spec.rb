@@ -37,6 +37,11 @@ describe "group show" do
     do_render
     response.should have_tag("p.amount_donated")
   end
+  it "shouldn't show the pitch header if there are no donations" do
+    @group.stub!(:pitches).and_return([])
+    do_render
+    response.should_not have_tag("h2", "Pitches This Group Supports")
+  end
 
   def do_render
     render '/groups/show.html.haml'
