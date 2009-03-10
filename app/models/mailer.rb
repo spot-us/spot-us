@@ -44,6 +44,13 @@ class Mailer < ActionMailer::Base
     body       :user => user
   end
 
+  def pitch_created_notification(pitch)
+    recipients '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: A pitch needs approval!"
+    body       :pitch => pitch
+  end
+
   def pitch_accepted_notification(pitch)
     recipients '"David Cohn" <david@spot.us>'
     bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
