@@ -4,7 +4,7 @@ describe PitchesController do
   route_matches("/pitches/1/fully_fund", :put, :id => "1", :controller => "pitches", :action => "fully_fund")
   route_matches("/pitches/1/half_fund", :put, :id => "1", :controller => "pitches", :action => "half_fund")
   route_matches("/pitches/1/show_support", :put, :id => "1", :controller => "pitches", :action => "show_support")
-  route_matches("/pitches/1/apply_to_fact_check", :put, :id => "1", :controller => "pitches", :action => "apply_to_fact_check")
+  route_matches("/pitches/1/apply_to_contribute", :put, :id => "1", :controller => "pitches", :action => "apply_to_contribute")
   route_matches("/pitches/1/assign_fact_checker", :put, :id => "1", :controller => "pitches", :action => "assign_fact_checker")
   route_matches("/pitches/1/blog_posts.rss", :get, :id => "1", :controller => "pitches", :action => "blog_posts", :format => "rss")
 
@@ -130,34 +130,34 @@ describe PitchesController do
     end
   end
 
-  describe "on PUT to /pitches/1/apply_to_fact_check" do
+  describe "on PUT to /pitches/1/apply_to_contribute" do
     before do
       @pitch = Factory(:pitch)
-      @pitch.stub!(:apply_to_fact_check)
+      @pitch.stub!(:apply_to_contribute)
       @reporter = Factory(:reporter)
       controller.stub!(:current_user).and_return(@reporter)
       controller.stub!(:find_resource).and_return(@pitch)
     end
 
-    it "adds a reporter to fact_checker_applicants" do
-      @pitch.should_receive(:apply_to_fact_check)
-      put :apply_to_fact_check, :id => @pitch.id
+    it "adds a reporter to contributors" do
+      @pitch.should_receive(:apply_to_contribute)
+      put :apply_to_contribute, :id => @pitch.id
     end
 
-    it "adds a new org to fact_checker_applicants" do
+    it "adds a new org to contributors" do
       organization = Factory(:organization)
       controller.stub!(:current_user).and_return(organization)
-      @pitch.should_receive(:apply_to_fact_check)
-      put :apply_to_fact_check, :id => @pitch.id
+      @pitch.should_receive(:apply_to_contribute)
+      put :apply_to_contribute, :id => @pitch.id
     end
-    it "adds a citizen to fact_checker_applicants" do
+    it "adds a citizen to contributors" do
       citizen = Factory(:citizen)
       controller.stub!(:current_user).and_return(citizen)
-      @pitch.should_receive(:apply_to_fact_check)
-      put :apply_to_fact_check, :id => @pitch.id
+      @pitch.should_receive(:apply_to_contribute)
+      put :apply_to_contribute, :id => @pitch.id
     end
     it "displays a success message and redirects back to pitch" do
-      put :apply_to_fact_check, :id => @pitch.id
+      put :apply_to_contribute, :id => @pitch.id
       flash[:success].should be
       response.should redirect_to(pitch_path(@pitch))
     end
