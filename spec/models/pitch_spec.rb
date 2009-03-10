@@ -61,45 +61,61 @@ describe Pitch do
 
   describe "editing" do
     before(:each) do
-      @pitch = Factory(:pitch, :user => Factory(:user))
+      @pitch = active_pitch(:user => Factory(:user))
     end
 
-    it "is editable by its owner" do
-      @pitch.editable_by?(@pitch.user).should be_true
+    describe "in the active state" do
+      it "is editable by its owner" do
+        @pitch.editable_by?(@pitch.user).should be_true
+      end
+      it "is not editable by a stranger" do
+        @pitch.editable_by?(Factory(:user)).should_not be_true
+      end
+      it "is not editable if not logged in" do
+        @pitch.editable_by?(nil).should_not be_true
+      end
     end
 
-    it "is not editable by a stranger" do
-      @pitch.editable_by?(Factory(:user)).should_not be_true
+    describe "in the unapproved state" do
+      before do
+        @pitch.update_attribute(:status, 'unapproved')
+      end
+      it "is editable by its owner" do
+        @pitch.editable_by?(@pitch.user).should be_true
+      end
+      it "is not editable by a stranger" do
+        @pitch.editable_by?(Factory(:user)).should_not be_true
+      end
+      it "is not editable if not logged in" do
+        @pitch.editable_by?(nil).should_not be_true
+      end
     end
 
-    it "is not editable if not logged in" do
-      @pitch.editable_by?(nil).should_not be_true
-    end
 
     it "is not editable if has donations" do
       user = Factory(:user)
-      p = Factory(:pitch, :user => user, :requested_amount => 100)
+      p = active_pitch(:user => user, :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.editable_by?(user).should_not be_true
     end
 
     it "is not editable if it is accepted" do
       user = Factory(:user)
-      p = Factory(:pitch, :user => user, :requested_amount => 100)
+      p = active_pitch(:user => user, :requested_amount => 100)
       p.accept!
       p.editable_by?(user).should_not be_true
     end
 
     it "is editable_by an admin even if donations" do
       user = Factory(:admin)
-      p = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
+      p = active_pitch(:user => Factory(:user), :requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.editable_by?(user).should be_true
     end
 
     it "is editable by admin even if it is accepted" do
       user = Factory(:admin)
-      p = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
+      p = active_pitch(:user => Factory(:user), :requested_amount => 100)
       p.accept!
       p.editable_by?(user).should be_true
     end
@@ -107,12 +123,12 @@ describe Pitch do
 
   describe "can_be_accepted?" do
     it "should return true when the state is active" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       p.can_be_accepted?.should be_true
     end
 
     it "should not be true if the state is not active" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       p.fund!
       p.can_be_accepted?.should be_false
     end
@@ -121,13 +137,25 @@ describe Pitch do
 
 
   describe "states of a pitch" do
-    it "should have a state of active when it is first created" do
+    it "should have a state of unapproved when it is first created" do
       pitch = Factory(:pitch)
-      pitch.active?.should be_true
+      pitch.should be_unapproved
+    end
+
+    it "should have a state of active when it is approved" do
+      pitch = active_pitch
+      pitch.should be_active
+    end
+
+    it "should have a state of unapproved when it is unapproved" do
+      pitch = active_pitch
+      pitch.unapprove!
+      pitch.should be_unapproved
     end
 
     it "should have a state of funded when total donations reaches requested amount" do
-      pitch = Factory(:pitch, :requested_amount => 100)
+      pitch = active_pitch
+      pitch.update_attribute(:requested_amount, 100)
       user = Factory(:organization)
       donation = Factory(:donation, :pitch => pitch, :user => user, :amount => 100)
 
@@ -137,19 +165,19 @@ describe Pitch do
       }.should change {pitch.funded?}.from(false).to(true)
     end
 
-     it "should have state of accepted when the reporter accepts an amount less than the requested amount" do
-       pitch = Factory(:pitch)
-       Factory(:donation, :pitch => pitch, :amount => 25)
-       lambda {
-         pitch.accept!
-         pitch.reload
-       }.should change {pitch.accepted?}.from(false).to(true)
-     end
+    it "should have state of accepted when the reporter accepts an amount less than the requested amount" do
+      pitch = active_pitch(:requested_amount => 1000)
+      Factory(:donation, :pitch => pitch, :amount => 10)
+      lambda {
+        pitch.accept!
+        pitch.reload
+      }.should change {pitch.accepted?}.from(false).to(true)
+    end
   end
 
   describe "email notifications" do
     it "should deliver an email when the pitch is accepted!" do
-      pitch = Factory(:pitch)
+      pitch = active_pitch
        lambda {
          pitch.accept!
        }.should change { ActionMailer::Base.deliveries.size }.by(1)
@@ -158,9 +186,9 @@ describe Pitch do
 
   describe "most funded" do
     before(:each) do
-      @p = Factory(:pitch, :requested_amount => 100)
-      @p2 = Factory(:pitch, :requested_amount => 100)
-      @p3 = Factory(:pitch, :requested_amount => 100)
+      @p = active_pitch(:requested_amount => 100)
+      @p2 = active_pitch(:requested_amount => 100)
+      @p3 = active_pitch(:requested_amount => 100)
       @d = Factory(:donation, :pitch => @p, :amount => 3, :status => 'paid')
       @da = Factory(:donation, :pitch => @p, :amount => 3, :status => 'paid')
       @d2 = Factory(:donation, :pitch => @p2, :amount => 20, :status => 'paid')
@@ -177,9 +205,9 @@ describe Pitch do
 
   describe "almost funded" do
     before(:each) do
-      @p = Factory(:pitch, :requested_amount => 50, :current_funding => 20) #40 %
-      @p2 = Factory(:pitch, :requested_amount => 100, :current_funding => 10) #10 %
-      @p3 = Factory(:pitch, :requested_amount => 150, :current_funding => 20) #13 %
+      @p = active_pitch(:requested_amount => 50, :current_funding => 20) #40 %
+      @p2 = active_pitch(:requested_amount => 100, :current_funding => 10) #10 %
+      @p3 = active_pitch(:requested_amount => 150, :current_funding => 20) #13 %
       @p4 = Factory(:pitch, :requested_amount => 100, :current_funding => 50, :status => 'accepted') #50%
     end
 
@@ -192,26 +220,26 @@ describe Pitch do
 
   describe "current_funding" do
     it "should be 0 on a pitch when a donation is added" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3)
       p.current_funding.should == 0
     end
 
     it "should equal the donation amount when a donation is paid" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3)
       purch = Factory(:purchase, :donations => [d])
       p.current_funding.should == BigDecimal.new("3.0")
     end
 
     it "should return total amount donated if accepted" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.accept!
       p.current_funding.should == BigDecimal.new("3.0")
     end
     it "should return requested amount if there is an overage" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       d = Factory(:donation, :pitch => p, :amount => 3, :status => 'paid')
       p.fully_fund!(Factory(:organization)).pay!
       p.reload.current_funding.should == BigDecimal("100.0")
@@ -221,14 +249,14 @@ describe Pitch do
   describe "topics_params=" do
     it "should create topic associations" do
       t = Topic.create(:name => "Topic 1")
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       p.topics_params=([t.id])
       p.reload
       p.topics.should == [t]
     end
 
     it "should handle record not found gracefully" do
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       p.topics_params=([nil])
       p.reload
       p.topics.should == []
@@ -236,7 +264,7 @@ describe Pitch do
 
     it "should not add duplicate topics" do
       t = Topic.create(:name => "Topic 1")
-      p = Factory(:pitch, :requested_amount => 100)
+      p = active_pitch(:requested_amount => 100)
       p.topics_params=([t.id])
       p.reload
       p.topics.should == [t]
@@ -261,27 +289,27 @@ describe Pitch do
   end
 
   describe "funding_needed" do
+    before do
+      @pitch = active_pitch(:requested_amount => 100)
+    end
     it "is equal to requested amount initially" do
-      p = Factory(:pitch, :requested_amount => 100)
-      p.funding_needed.should == 100
+      @pitch.funding_needed.should == 100
     end
-
     it "subtracts donations appropriately" do
-      p = Factory(:pitch, :requested_amount => 100)
-      Factory(:donation, :pitch => p, :amount => 20, :status => 'paid')
-      p.funding_needed.should == 80
+      Factory(:donation, :pitch => @pitch, :amount => 20, :status => 'paid')
+      @pitch.funding_needed.should == 80
     end
-
+    it "is the initial amount when a pitch is unapproved" do
+      @pitch.update_attribute(:status, 'unapproved')
+      @pitch.funding_needed.should == 100
+    end
     it "is 0 when a pitch is accepted" do
-      p = Factory(:pitch, :requested_amount => 100)
-      p.accept!
-      p.funding_needed.should == 0
+      @pitch.accept!
+      @pitch.funding_needed.should == 0
     end
-
     it "is 0 when a pitch is fully_funded" do
-      p = Factory(:pitch, :requested_amount => 100)
-      p.fund!
-      p.funding_needed.should == 0
+      @pitch.fund!
+      @pitch.funding_needed.should == 0
     end
   end
 
@@ -294,7 +322,7 @@ describe Pitch do
     end
 
     it "should return true when a pitch is accepted" do
-      pitch = Factory(:pitch, :requested_amount => 100)
+      pitch = active_pitch(:requested_amount => 100)
       pitch.accept!
       pitch.fully_funded?.should be_true
     end
@@ -302,7 +330,7 @@ describe Pitch do
 
   describe "half_funded?" do
     before do
-      @pitch = Factory(:pitch, :requested_amount => 100)
+      @pitch = active_pitch(:requested_amount => 100)
     end
     it "should return true if the pitch state is accepted" do
       @pitch.accept!
@@ -362,7 +390,7 @@ describe Pitch do
   describe "donations.for_user" do
     it "should not return users other than the one requested" do
       user = Factory(:user)
-      pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
+      pitch = active_pitch(:user => Factory(:user), :requested_amount => 100)
       Factory(:donation, :pitch => pitch, :user => user, :amount => 10)
       Factory(:donation, :pitch => pitch, :user => user, :amount => 10)
       Factory(:donation, :pitch => pitch, :user => Factory(:user), :amount => 10)
@@ -379,20 +407,20 @@ describe Pitch do
       end
 
       it "can donate more, as long as funds plus attempted donation are less than requested amount" do
-        p = Factory(:pitch, :requested_amount => 100)
+        p = active_pitch(:requested_amount => 100)
         p.user_can_donate_more?(Factory(:citizen), 20).should be_true
       end
 
       it "can donate more at all (passing zero as second arg)" do
         u = Factory(:user)
-        p = Factory(:pitch, :requested_amount => 100)
+        p = Factory(:pitch, :requested_amount => 100, :status => 'active')
         d = Factory(:donation, :pitch => p, :user => u, :amount => 10)
         p.user_can_donate_more?(u, 0).should be_true
         p.user_can_donate_more?(u, 11).should be_true
       end
 
       it "allows a news organization to donate the requested amount" do
-        p = Factory(:pitch, :requested_amount => 100)
+        p = active_pitch(:requested_amount => 100)
         Factory(:donation, :pitch => p, :user => Factory(:user), :amount => 10, :status => "paid")
         p.user_can_donate_more?(Factory(:organization), 100).should be_true
       end
@@ -401,11 +429,11 @@ describe Pitch do
     describe "as a citizen or reporter" do
       before(:each) do
         @user = Factory(:user)
-        @pitch = Factory(:pitch, :user => Factory(:user), :requested_amount => 100)
+        @pitch = active_pitch(:user => Factory(:user), :requested_amount => 100)
       end
 
       it "allows donation if the user has no existing donations" do
-        p = Factory(:pitch, :requested_amount => 100)
+        p = active_pitch(:requested_amount => 100)
         p.user_can_donate_more?(Factory(:user), 10)
       end
 
@@ -441,7 +469,7 @@ describe Pitch do
 
     describe "many users" do
       it "can donate and push a pitch to fully funded" do
-        pitch = Factory(:pitch, :requested_amount => 50)
+        pitch = active_pitch(:requested_amount => 50)
         5.times do
           donation = Donation.create(:pitch => pitch, :user => Factory(:user, :type => 'Organization'), :amount => 10)
           donation.should be_valid
@@ -558,7 +586,7 @@ describe Pitch do
 
   describe "a pitch with donations" do
     before(:each) do
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @donation = Factory(:donation, :pitch => @pitch, :status => 'paid')
       @pitch.reload
     end
@@ -578,7 +606,7 @@ describe Pitch do
 
     describe "becomes fully funded (by way of fund!)" do
       it "when paid donations equal requested amount" do
-        p = Factory(:pitch, :requested_amount => 50)
+        p = active_pitch(:requested_amount => 50)
         5.times do
           donation = Factory(:donation, :pitch => p, :user => Factory(:user), :amount => 10)
           donation.should be_valid
@@ -589,7 +617,7 @@ describe Pitch do
       end
 
       it "should trigger fund events when it's funded" do
-        p = Factory(:pitch, :requested_amount => 100)
+        p = active_pitch(:requested_amount => 100)
         p.should_receive(:do_fund_events)
         p.fund!
       end
@@ -627,14 +655,14 @@ describe Pitch do
   describe "Being funded" do
     describe "via fund!" do
       it "should create a story" do
-        p = Factory(:pitch)
+        p = active_pitch
         p.fund!
         p.story.should_not be_nil
       end
     end
     describe "via accept!" do
       it "should create a story" do
-        p = Factory(:pitch)
+        p = active_pitch
         p.accept!
         p.story.should_not be_nil
       end
@@ -643,8 +671,16 @@ describe Pitch do
 
   describe "with_sort" do
     it "should return only pitches without stories" do
-      Pitch.should_receive(:without_a_story).and_return(named_scope = stub("a named scope"))
+      named_scope = stub("a named scope")
+      browsable = stub('browsable')
+      Pitch.stub!(:browsable).and_return(browsable)
+      browsable.should_receive(:without_a_story).and_return(named_scope)
       named_scope.should_receive(:desc)
+      Pitch.with_sort
+    end
+    it "should return only approved pitches" do
+      Pitch.should_receive(:browsable).and_return(named_scope = stub("a named scope"))
+      named_scope.stub!(:without_a_story).and_return(stub('named scope', :desc => []))
       Pitch.with_sort
     end
   end
@@ -673,7 +709,7 @@ describe Pitch do
   
   describe "#postable_by?" do
     before do
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
     end
     it "should return true if the passed in user is the reporter" do
       @pitch.postable_by?(@pitch.user).should be_true
@@ -696,7 +732,7 @@ describe Pitch do
 
   describe "donating_groups" do
     before do
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @group1 = Factory(:group)
       Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 20, :status => 'paid')
       Factory(:donation, :group => @group1, :pitch => @pitch, :amount => 30, :status => 'paid')

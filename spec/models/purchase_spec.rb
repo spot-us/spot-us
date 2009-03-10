@@ -27,7 +27,7 @@ describe Purchase do
 
   describe "when a purchase happens" do
     before(:each) do
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @user = Factory(:user)
       @donation = Factory(:donation, :pitch => @pitch, :user => @user, :amount => 25)
     end
@@ -82,7 +82,7 @@ describe Purchase do
     before do
       @credit_card = Factory.build(:credit_card, :type => 'fake')
       violated "credit card must be invalid" if @credit_card.valid?
-      @donation = Factory(:donation, :pitch => Factory(:pitch), :user => Factory(:user), :amount => 25)
+      @donation = Factory(:donation, :user => Factory(:user), :amount => 25)
       ActiveMerchant::Billing::CreditCard.stub!(:new).and_return(@credit_card)
       @purchase = Factory.build(:purchase, :user => Factory(:user), :donations => [@donation])
     end
@@ -108,7 +108,7 @@ describe Purchase do
   end
 
   it "should raise a gateway error when the gateway does not return a success response" do
-    @donation = Factory(:donation, :pitch => Factory(:pitch), :user => Factory(:user), :amount => 25)
+    @donation = Factory(:donation, :user => Factory(:user), :amount => 25)
     lambda { Factory(:purchase, :credit_card_number => '2', :donations => [@donation]) }.
       should raise_error(Purchase::GatewayError,
                          ActiveMerchant::Billing::BogusGateway::FAILURE_MESSAGE)

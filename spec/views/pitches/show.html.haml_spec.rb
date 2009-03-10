@@ -4,7 +4,7 @@ describe "/pitches/show.html.haml" do
   include ActionView::Helpers::AssetTagHelper
 
   before(:each) do
-    @pitch = Factory(:pitch)
+    @pitch = active_pitch
     assigns[:pitch] = @pitch
   end
 
