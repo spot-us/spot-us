@@ -114,7 +114,7 @@ describe ApplicationHelper do
       @uninterested_users = [Factory(:citizen)]
       User.stub!(:fact_checkers).and_return(@interested_users)
       @pitch = active_pitch
-      @pitch.stub!(:contributors).and_return(@applicants)
+      @pitch.stub!(:contributor_applicants).and_return(@applicants)
     end
     it "should have two option groups" do
       fact_checkers_for(@pitch).should have_tag('optgroup[label=?]', 'Pitch Applicants')
@@ -138,7 +138,7 @@ describe ApplicationHelper do
       end
     end
     it "should display 'No applicants' when nobody has applied to fact-check a pitch" do
-      @pitch.stub!(:contributors).and_return([])
+      @pitch.stub!(:contributor_applicants).and_return([])
       fact_checkers_for(@pitch).should have_tag('option', 'No applicants')
     end
   end
