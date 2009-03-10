@@ -33,4 +33,8 @@
           - else
             == #{pitch.fact_checker.full_name} #{link_to('(change)', fact_checker_chooser_admin_pitch_path(pitch), :class => 'change_fact_checker')}
         %td.actions
+          - if pitch.unapproved?
+            = link_to 'approve', approve_admin_pitch_url(pitch), :method => :put
+          - if pitch.active?
+            = link_to 'un-approve', unapprove_admin_pitch_url(pitch), :method => :put
           = link_to 'delete', admin_pitch_url(pitch), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?'

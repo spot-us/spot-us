@@ -2,9 +2,9 @@
   .block-spacer-negative
 - if pitch.approvable_by?(current_user)
   - if pitch.unapproved?
-    .centered= link_to image_tag("approve.gif"), approve_pitch_path(pitch), :title => "Approve This Pitch"
+    .centered= link_to image_tag("approve.gif"), approve_admin_pitch_path(pitch), :title => "Approve This Pitch"
   - elsif pitch.active?
-    .centered= link_to image_tag("unapprove.gif"), unapprove_pitch_path(pitch), :title => "Un-approve This Pitch"
+    .centered= link_to image_tag("unapprove.gif"), unapprove_admin_pitch_path(pitch), :title => "Un-approve This Pitch"
 
 - if pitch.editable_by?(current_user)
   .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch), :title => "Edit This Pitch"
