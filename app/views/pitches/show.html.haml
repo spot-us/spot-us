@@ -84,11 +84,11 @@
             = link_to 'what is this?', page_path(:id => 'about', :anchor => 'work_with')
         - if current_user != @pitch.user && !@pitch.fact_checker
           .block-spacer-negative
-          .apply_to_fact_check
-            - if @pitch.fact_checker_applicants.include?(current_user)
-              = image_tag 'applied_to_peer_review.gif', :class => 'applied_to_fact_check', :title => 'Applied to Peer Review'
+          .apply_to_contribute
+            - if @pitch.contributors.include?(current_user)
+              = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
             - else
-              = link_to image_tag('apply_to_peer_review.gif'), apply_to_fact_check_pitch_path(@pitch), :method => :put, :title => 'Apply to Peer Review'
+              = link_to image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :method => :put, :title => 'Join Reporting Team'
         - if current_user.organization? && !current_user.shown_support_for?(@pitch)
           .block-spacer-negative
           .show_support
