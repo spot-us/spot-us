@@ -55,11 +55,11 @@ class Pitch < NewsItem
   end
 
   aasm_event :fund do
-    transitions :from => :active, :to => :funded, :on_transition => :do_fund_events
+    transitions :from => [:unapproved, :active], :to => :funded, :on_transition => :do_fund_events
   end
 
   aasm_event :accept do
-    transitions :from => :active, :to => :accepted, :on_transition => :do_fund_events
+    transitions :from => [:unapproved, :active], :to => :accepted, :on_transition => :do_fund_events
   end
 
   validates_presence_of :requested_amount
