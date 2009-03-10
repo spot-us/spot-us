@@ -301,29 +301,9 @@ describe "/pitches/show.html.haml" do
         response.should_not have_tag("a[href=?]", apply_to_contribute_pitch_path(@pitch))
       end
       it "should show an Applied! image if the current user has applied" do
-        @pitch.stub!(:contributors).and_return([@applicant])
+        @pitch.stub!(:contributor_applicants).and_return([@applicant])
         do_render
         response.should have_tag("img.applied_to_fact_check")
-      end
-    end
-
-    describe "when a fact checker has been assigned" do
-      before do
-        @citizen = Factory(:citizen)
-        @pitch = Factory(:pitch, :fact_checker => @citizen)
-        template.stub!(:current_user).and_return(@citizen)
-        assigns[:pitch] = @pitch
-      end
-      it "should not show the Join Reporting Team button" do
-        do_render
-        response.should_not have_tag('div.apply_to_contribute')
-      end
-      it "should not show an Applied! image if the current user has applied" do
-        applicant = Factory(:reporter)
-        @pitch.stub!(:contributors).and_return([applicant])
-        template.stub!(:current_user).and_return(applicant)
-        do_render
-        response.should_not have_tag('img.applied_to_fact_check')
       end
     end
   end
