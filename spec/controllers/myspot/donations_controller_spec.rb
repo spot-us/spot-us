@@ -34,7 +34,7 @@ describe Myspot::DonationsController do
     before do
       @user = Factory(:user)
       controller.stub!(:current_user).and_return(@user)
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
     end
 
     it "should create a valid donation" do

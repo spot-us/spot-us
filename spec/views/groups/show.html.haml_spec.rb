@@ -6,10 +6,10 @@ describe "group show" do
     @group = Factory(:group)
     @user1 = Factory(:citizen, :first_name => 'Lex', :last_name => 'Luthor')
     @user2 = Factory(:reporter, :first_name => 'Clark', :last_name => 'Kent')
-    @pitch1 = Factory(:pitch)
+    @pitch1 = active_pitch
     Factory(:donation, :group => @group, :pitch => @pitch1, :user => @user1, :status => 'paid', :amount => 5)
     Factory(:donation, :group => @group, :pitch => @pitch1, :user => @user2, :status => 'paid', :amount => 2)
-    @pitch2 = Factory(:pitch)
+    @pitch2 = active_pitch
     Factory(:donation, :group => @group, :pitch => @pitch2, :user => @user2, :status => 'paid', :amount => 1)
     assigns[:group] = @group
   end

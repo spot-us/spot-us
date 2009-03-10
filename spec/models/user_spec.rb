@@ -400,7 +400,7 @@ describe User do
   describe "with a donation for a pitch" do
     before do
       @user = Factory(:citizen)
-      @pitch = Factory(:pitch, :requested_amount => 100)
+      @pitch = active_pitch(:requested_amount => 100)
     end
 
     it "should know that the user has donated to that pitch" do
@@ -425,14 +425,14 @@ describe User do
 
     it "should not allow the user to donate to a pitch after donating 20%" do
       user = Factory(:citizen)
-      pitch = Factory(:pitch, :requested_amount => 100)
+      pitch = active_pitch(:requested_amount => 100)
       donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 20)
       user.can_donate_to?(pitch).should be_false
     end
 
     it "should return the max donation amount" do
       user = Factory(:citizen)
-      pitch = Factory(:pitch, :requested_amount => 100)
+      pitch = active_pitch(:requested_amount => 100)
       donation = Factory(:donation, :user => user, :pitch => pitch, :amount => 10)
       user.max_donation_for(pitch).should == 10
     end
@@ -445,7 +445,7 @@ describe User do
         violated "the user should not have any donations for the pitch"
       end
 
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
     end
 
     it "should know that the user hasn't donated to that pitch" do
