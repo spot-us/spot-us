@@ -287,21 +287,21 @@ describe "/pitches/show.html.haml" do
         template.stub!(:current_user).and_return(@applicant)
         assigns[:pitch] = @pitch
       end
-      it "should show Apply to Fact Check button" do
+      it "should show Join Reporting Team button" do
         do_render
-        response.should have_tag("div.apply_to_fact_check")
+        response.should have_tag("div.apply_to_contribute")
       end
-      it "Apply to Fact Check button should link to correct action" do
+      it "Join Reporting Team button should link to correct action" do
         do_render
-        response.should have_tag("a[href=?]", apply_to_fact_check_pitch_path(@pitch))
+        response.should have_tag("a[href=?]", apply_to_contribute_pitch_path(@pitch))
       end
       it "should not show when the current user is the reporter for the pitch" do
         template.stub!(:current_user).and_return(@pitch.user)
         do_render
-        response.should_not have_tag("a[href=?]", apply_to_fact_check_pitch_path(@pitch))
+        response.should_not have_tag("a[href=?]", apply_to_contribute_pitch_path(@pitch))
       end
       it "should show an Applied! image if the current user has applied" do
-        @pitch.stub!(:fact_checker_applicants).and_return([@applicant])
+        @pitch.stub!(:contributors).and_return([@applicant])
         do_render
         response.should have_tag("img.applied_to_fact_check")
       end
@@ -314,13 +314,13 @@ describe "/pitches/show.html.haml" do
         template.stub!(:current_user).and_return(@citizen)
         assigns[:pitch] = @pitch
       end
-      it "should not show the Apply to Fact Check button" do
+      it "should not show the Join Reporting Team button" do
         do_render
-        response.should_not have_tag('div.apply_to_fact_check')
+        response.should_not have_tag('div.apply_to_contribute')
       end
       it "should not show an Applied! image if the current user has applied" do
         applicant = Factory(:reporter)
-        @pitch.stub!(:fact_checker_applicants).and_return([applicant])
+        @pitch.stub!(:contributors).and_return([applicant])
         template.stub!(:current_user).and_return(applicant)
         do_render
         response.should_not have_tag('img.applied_to_fact_check')

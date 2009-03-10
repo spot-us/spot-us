@@ -28,8 +28,8 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:supporters)}
   it { Factory(:pitch).should have_many(:topics)}
   it { Factory(:pitch).should have_many(:comments)}
-  it { Factory(:pitch).should have_many(:fact_checker_applications)}
-  it { Factory(:pitch).should have_many(:fact_checker_applicants)}
+  it { Factory(:pitch).should have_many(:contributor_applications)}
+  it { Factory(:pitch).should have_many(:contributors)}
 
   describe "requested amount" do
     it "normalizes before validation" do
@@ -528,20 +528,20 @@ describe Pitch do
 
   end
 
-  describe "apply_to_fact_check" do
+  describe "apply to contribute" do
     before do
       @pitch = Factory(:pitch)
       @reporter = Factory(:reporter)
     end
     it "returns false if no user is passed in" do
-      @pitch.apply_to_fact_check(nil).should be_false
+      @pitch.apply_to_contribute(nil).should be_false
     end
-    it "adds the user to the pitch's fact_checker_applicants" do
-      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(1)
+    it "adds the user to the pitch's contributors" do
+      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributors, :size).by(1)
     end
     it "only adds the user once" do
-      @pitch.stub!(:fact_checker_applicants).and_return([@reporter])
-      lambda{@pitch.apply_to_fact_check(@reporter)}.should change(@pitch.fact_checker_applicants, :size).by(0)
+      @pitch.stub!(:contributors).and_return([@reporter])
+      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributors, :size).by(0)
     end
   end
 
