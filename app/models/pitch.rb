@@ -97,7 +97,8 @@ class Pitch < NewsItem
     end
   end
   has_many :contributor_applications
-  has_many :contributors, :through => :contributor_applications, :source => :user
+  has_many :contributors, :through => :contributor_applications, :source => :user, :conditions => ['contributor_applications.approved = ?', true]
+  has_many :contributor_applicants, :through => :contributor_applications, :source => :user
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
@@ -135,7 +136,7 @@ class Pitch < NewsItem
 
   def postable_by?(other_user)
     return false if other_user.nil?
-    user == other_user || other_user.admin? || other_user == fact_checker
+    user == other_user || other_user.admin? || other_user == fact_checker || contributors.include?(other_user)
   end
 
   def approvable_by?(current_user)
