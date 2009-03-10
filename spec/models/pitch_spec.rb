@@ -29,6 +29,7 @@ describe Pitch do
   it { Factory(:pitch).should have_many(:topics)}
   it { Factory(:pitch).should have_many(:comments)}
   it { Factory(:pitch).should have_many(:contributor_applications)}
+  it { Factory(:pitch).should have_many(:contributor_applicants)}
   it { Factory(:pitch).should have_many(:contributors)}
 
   describe "requested amount" do
@@ -537,11 +538,24 @@ describe Pitch do
       @pitch.apply_to_contribute(nil).should be_false
     end
     it "adds the user to the pitch's contributors" do
-      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributors, :size).by(1)
+      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributor_applicants, :size).by(1)
     end
     it "only adds the user once" do
       @pitch.stub!(:contributors).and_return([@reporter])
-      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributors, :size).by(0)
+      lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributor_applicants, :size).by(0)
+    end
+  end
+
+  describe "contributor scopes" do
+    before do
+      @pitch = active_pitch
+      Factory(:contributor_application, :pitch => @pitch, :approved => true)
+      Factory(:contributor_application, :pitch => @pitch, :approved => false)
+    end
+    describe "contributors" do
+      it "should only contain contributors with approved applications" do
+        @pitch.contributors.all? {|c| ContributorApplication.find_by_user_id_and_pitch_id(c.id, @pitch.id).approved? }.should be_true
+      end
     end
   end
 
@@ -768,6 +782,11 @@ describe Pitch do
     end
     it "should return false if the passed in user is nil" do
       @pitch.postable_by?(nil).should be_false
+    end
+    it "should return true if the passed in user is a contributor" do
+      user = Factory(:citizen)
+      @pitch.stub!(:contributors).and_return([user])
+      @pitch.should be_postable_by(user)
     end
     it "should return true if the passed in user is the peer review editor" do
       editor = Factory(:reporter)
