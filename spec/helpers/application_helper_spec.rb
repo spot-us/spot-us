@@ -94,7 +94,7 @@ describe ApplicationHelper do
   describe "#available_pitches_for" do
     before do
       @affiliation = Factory(:affiliation)
-      @other_pitch = Factory(:pitch)
+      @other_pitch = active_pitch
       reporter = Factory(:reporter)
       reporter.stub!(:pitches).and_return([@affiliation.pitch, @other_pitch])
       stub!(:current_user).and_return(reporter)
@@ -113,7 +113,7 @@ describe ApplicationHelper do
       @interested_users = [Factory(:citizen), Factory(:reporter)]
       @uninterested_users = [Factory(:citizen)]
       User.stub!(:fact_checkers).and_return(@interested_users)
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @pitch.stub!(:fact_checker_applicants).and_return(@applicants)
     end
     it "should have two option groups" do
@@ -145,7 +145,7 @@ describe ApplicationHelper do
 
   describe "#url_for_news_item" do
     before do
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @tip = Factory(:tip)
       @story = Factory(:story)
     end

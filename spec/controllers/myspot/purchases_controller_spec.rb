@@ -10,7 +10,7 @@ describe Myspot::PurchasesController do
   describe "on GET to new when the user has unpaid donations" do
     before do
       @user = Factory(:user)
-      @pitches = [Factory(:pitch), Factory(:pitch)]
+      @pitches = [active_pitch, active_pitch]
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
                                                      :pitch => pitch) }
@@ -93,7 +93,7 @@ describe Myspot::PurchasesController do
 
     before do
       @user = Factory(:user)
-      @pitches = [Factory(:pitch), Factory(:pitch)]
+      @pitches = [active_pitch, active_pitch]
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
                                                      :pitch => pitch) }

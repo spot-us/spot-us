@@ -124,7 +124,7 @@ end
 Factory.define :donation do |donation|
   donation.amount 10
   donation.association(:user)
-  donation.association(:pitch)
+  donation.pitch{ active_pitch }
 end
 
 Factory.define :spotus_donation do |spotus_donation|
@@ -223,6 +223,12 @@ def create_pitch_with_donations
   end
 end
 
+def active_pitch(attributes={})
+  returning Factory(:pitch) do |p|
+    p.update_attributes(attributes) if attributes
+    p.approve!
+  end
+end
 
 # helpers for factories ###########################################################################
 

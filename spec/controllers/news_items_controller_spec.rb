@@ -49,7 +49,7 @@ describe NewsItemsController do
   describe "on POST to search" do
     before do
       @tip = Factory(:tip)
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       @items = [@tip, @pitch]
     end
 

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/../../../spec_helper"
 describe 'myspot/donations/index' do
   before do
     @user = Factory(:user)
-    @pitches = [Factory(:pitch), Factory(:pitch)]
+    @pitches = [active_pitch, active_pitch]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user, :pitch => pitch) }
     @user.stub!(:has_spotus_donation?).and_return(true)
     @user.stub!(:last_paid_spotus_donation).and_return(Factory(:spotus_donation))

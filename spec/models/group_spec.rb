@@ -13,10 +13,10 @@ describe Group do
   describe "donations_for_pitch" do
     before do
       @group = Factory(:group)
-      @pitch = Factory(:pitch)
+      @pitch = active_pitch
       Factory(:donation, :group => @group, :pitch => @pitch, :amount => 10)
       Factory(:donation, :group => @group, :pitch => @pitch, :amount => 30)
-      Factory(:donation, :group => @group, :pitch => Factory(:pitch), :amount => 90)
+      Factory(:donation, :group => @group, :amount => 90)
       Factory(:donation, :group => Factory(:group), :pitch => @pitch, :amount => 120)
     end
     it "should return the sum of donations for a pitch" do
@@ -75,8 +75,8 @@ describe Group do
   describe "pitches" do
     before do
       @group = Factory(:group)
-      @pitch1 = Factory(:pitch)
-      @pitch2 = Factory(:pitch)
+      @pitch1 = active_pitch
+      @pitch2 = active_pitch
       Factory(:donation, :group => @group, :pitch => @pitch1)
       Factory(:donation, :group => @group, :pitch => @pitch1)
     end

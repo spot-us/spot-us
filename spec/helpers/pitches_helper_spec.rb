@@ -7,7 +7,7 @@ describe PitchesHelper do
     before do
       @organization = Factory(:organization)
       @citizen = Factory(:citizen)
-      @pitch = Factory(:pitch, :requested_amount => 1000)
+      @pitch = active_pitch(:requested_amount => 1000)
       Factory(:donation, :pitch => @pitch, :user => @citizen, :amount => 10)
       Factory(:donation, :pitch => @pitch, :user => @organization, :amount => 100)
     end
