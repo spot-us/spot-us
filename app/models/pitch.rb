@@ -51,7 +51,7 @@ class Pitch < NewsItem
   end
 
   aasm_event :approve do
-    transitions :from => :unapproved, :to => :active
+    transitions :from => :unapproved, :to => :active, :on_transition => :send_approved_notification
   end
 
   aasm_event :fund do
@@ -284,6 +284,10 @@ class Pitch < NewsItem
 
   def send_admin_notification
     Mailer.deliver_pitch_created_notification(self)
+  end
+
+  def send_approved_notification
+    Mailer.deliver_pitch_approved_notification(self)
   end
 end
 
