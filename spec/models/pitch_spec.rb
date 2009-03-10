@@ -685,15 +685,25 @@ describe Pitch do
 
   describe "Being funded" do
     describe "via fund!" do
-      it "should create a story" do
+      it "creates a story from an active pitch" do
         p = active_pitch
+        p.fund!
+        p.story.should_not be_nil
+      end
+      it "creates a story from an unapproved pitch" do
+        p = Factory(:pitch)
         p.fund!
         p.story.should_not be_nil
       end
     end
     describe "via accept!" do
-      it "should create a story" do
+      it "creates a story from an active pitch" do
         p = active_pitch
+        p.accept!
+        p.story.should_not be_nil
+      end
+      it "creates a story from an unapproved pitch" do
+        p = Factory(:pitch)
         p.accept!
         p.story.should_not be_nil
       end
