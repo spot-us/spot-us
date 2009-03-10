@@ -19,6 +19,12 @@ class Admin::PitchesController < ApplicationController
     render :partial => 'fact_checker_chooser', :locals => { :pitch => current_pitch, :cancel => true }
   end
 
+  def approve_blogger
+    current_pitch.approve_blogger!(params[:user_id])
+    flash[:success] = "Successfully added blogger to '#{current_pitch.headline}'!"
+    redirect_to :back
+  end
+
   def approve
     current_pitch.approve!
     flash[:success] = "You have approved the pitch '#{current_pitch.headline}'!"

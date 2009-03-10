@@ -1,40 +1,41 @@
 %h1 Pitches
 .box
-  %table
-    %th Headline
-    %th Created At
-    %th Network
-    %th Expiration
+  %table.admin_pitches
+    %th General Information
     %th Funding
     %th Supporters
-    %th Peer Reviewer
+    %th Reporting Team
     %th Actions
 
-    - for pitch in @pitches
-      %tr
+    - @pitches.each do |pitch|
+      %tr.quiet
         %td
-          PITCH:
-          = link_to h(pitch.headline), pitch_url(pitch)
-          = "(Featured)" if pitch.featured?
-        %td= pitch.created_at.to_s(:date)
-        %td= pitch.network_and_category
-        %td
-          - unless pitch.expiration_date.nil?
-            = pitch.expiration_date.to_s(:date)
+          = render :partial => 'pitch', :locals => { :pitch => pitch }
         %td
           %strong= number_to_currency(pitch.current_funding)
           of
           == #{number_to_currency(pitch.requested_amount)} Raised
         %td
-          = pitch.supporters.map(&:email).join(', ')
+          = pitch.supporters.map(&:email).join(',<br/>')
         %td.fact_checker
+          %b Peer Reviewer:
+          %br/
           - if pitch.fact_checker_id.nil?
             = render :partial => 'fact_checker_chooser', :locals => { :pitch => pitch }
           - else
             == #{pitch.fact_checker.full_name} #{link_to('(change)', fact_checker_chooser_admin_pitch_path(pitch), :class => 'change_fact_checker')}
+          - if pitch.contributors.any? || pitch.contributor_applications.unapproved.any?
+            %div{:style => "margin-top: 5px;"}
+              %b Blog Posters:
+              - if pitch.contributors.any?
+                = pitch.contributors.map(&:full_name).join(', ')
+                %br/
+              - if pitch.contributor_applications.unapproved.any?
+                = render :partial => 'blog_poster_chooser', :locals => { :pitch => pitch }
+
         %td.actions
           - if pitch.unapproved?
-            = link_to 'approve', approve_admin_pitch_url(pitch), :method => :put
+            = button_to 'approve', approve_admin_pitch_url(pitch), :method => :put, :class => "approve_button"
           - if pitch.active?
-            = link_to 'un-approve', unapprove_admin_pitch_url(pitch), :method => :put
-          = link_to 'delete', admin_pitch_url(pitch), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?'
+            = button_to 'unapprove', unapprove_admin_pitch_url(pitch), :method => :put, :class => "unapprove_button"
+          = button_to 'delete', admin_pitch_url(pitch), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?', :class => 'delete_button'

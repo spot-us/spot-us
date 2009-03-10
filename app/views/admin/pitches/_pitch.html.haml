@@ -1,0 +1,12 @@
+%strong= link_to pitch.headline, pitch
+%br/
+Posted: 
+= pitch.created_at.to_s(:super_short)
+%br/
+Expires: 
+= pitch.expiration_date.to_s(:super_short) unless pitch.expiration_date.nil?
+By: 
+= link_to h(pitch.user.full_name), profile_path(pitch.user)
+%br/
+Network:  
+= pitch.network_and_category
