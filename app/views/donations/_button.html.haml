@@ -6,4 +6,4 @@
   - when news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT)
     = render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item} 
   - when !current_user || current_user && current_user.can_donate_to?(news_item)
-    = render :partial => 'donations/donate_twenty_five', :locals => {:news_item => news_item} 
+    = render :partial => 'donations/donate_default', :locals => {:news_item => news_item} 

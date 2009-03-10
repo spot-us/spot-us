@@ -1,6 +1,6 @@
 %div{:id => "inline_donation_form_#{news_item.id}"}
   %div{:id => "donation_button_#{news_item.id}"}
-    = render :partial => 'donations/donate_twenty_five_form', :locals => {:news_item => news_item}
+    = render :partial => 'donations/donate_default_form', :locals => {:news_item => news_item}
   %div.hide.inline_donate{:id => "donation_custom_#{news_item.id}"}
     = render :partial => 'donations/donate_variable_amount_form', :locals => {:news_item => news_item}
   .small.uppcased_button_text
