@@ -50,7 +50,7 @@ describe "/pitches/show.html.haml" do
       @pitch.stub!(:unapproved?).and_return(true)
       assigns[:pitch] = @pitch
       do_render
-      template.should have_tag('a[href$=?]', approve_pitch_path(@pitch))
+      template.should have_tag('a[href$=?]', approve_admin_pitch_path(@pitch))
     end
     it "should have an unapprove button if it's currently active" do
       @pitch = active_pitch
@@ -58,7 +58,7 @@ describe "/pitches/show.html.haml" do
       @pitch.stub!(:active?).and_return(true)
       assigns[:pitch] = @pitch
       do_render
-      template.should have_tag('a[href$=?]', unapprove_pitch_path(@pitch))
+      template.should have_tag('a[href$=?]', unapprove_admin_pitch_path(@pitch))
     end
   end
 
@@ -66,7 +66,7 @@ describe "/pitches/show.html.haml" do
     template.stub!(:logged_in?).and_return(true)
     template.stub!(:current_user).and_return(@pitch.user)
     do_render
-    template.should_not have_tag('a[href$=?]', approve_pitch_path(@pitch))
+    template.should_not have_tag('a[href$=?]', approve_admin_pitch_path(@pitch))
   end
 
   it "should have an edit button if the current user is the creator of the pitch" do
