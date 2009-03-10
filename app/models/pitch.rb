@@ -102,6 +102,7 @@ class Pitch < NewsItem
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
 
+  after_create :send_admin_notification
   after_save :check_if_funded_state, :dispatch_fact_checker
 
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
@@ -274,6 +275,10 @@ class Pitch < NewsItem
 
   def send_fund_notification
     Mailer.deliver_pitch_accepted_notification(self)
+  end
+
+  def send_admin_notification
+    Mailer.deliver_pitch_created_notification(self)
   end
 end
 
