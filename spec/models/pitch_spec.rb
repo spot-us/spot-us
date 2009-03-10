@@ -59,6 +59,18 @@ describe Pitch do
     end
   end
 
+  describe "notifications" do
+    it 'emails the admin when a pitch is created' do
+      Mailer.should_receive(:deliver_pitch_created_notification)
+      Factory(:pitch)
+    end
+    it 'does not email the admin when a pitch is updated' do
+      p = active_pitch
+      Mailer.should_not_receive(:deliver_pitch_created_notification)
+      p.accept!
+    end
+  end
+
   describe "editing" do
     before(:each) do
       @pitch = active_pitch(:user => Factory(:user))
