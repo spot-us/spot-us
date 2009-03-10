@@ -3,19 +3,20 @@
   %head
     %meta{ :name => "keywords",    :content => "Keywords" }/
     %meta{ :name => "description", :content => "Description" }/
-  
+
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }/
-  
+
     %title
       = @title || "Spot.us"
-    
+
+    = stylesheet_link_tag 'admin', :media => "screen"
     = stylesheet_link_tag 'screen', :media => "screen"
     = stylesheet_link_tag 'hashrocket', :media => "screen"
     = stylesheet_link_tag 'print', :media => "print"
     /[if IE 6]
       = stylesheet_link_tag 'ie'
     = javascript_include_tag 'fckeditor/fckeditor.js'
-    
+
     = javascript_include_tag 'jquery-1.3.1.min.js'
     = javascript_include_tag 'jquery-ui.js'
     = javascript_include_tag 'jrails.js'
@@ -37,7 +38,7 @@
         - if flash.any?
           #flash
             - flash.each do |key, value|
-              %div{ :id => "flash_#{key}", :class => key } 
+              %div{ :id => "flash_#{key}", :class => key }
                 = value
         = yield
     #footer
