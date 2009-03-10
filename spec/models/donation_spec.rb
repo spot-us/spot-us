@@ -24,7 +24,7 @@ describe Donation do
     describe "as a citizen or reporter" do
       describe "should be valid" do
         before do
-          @pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
+          @pitch = active_pitch(:requested_amount => 100, :user => Factory(:user))
         end
 
         it "if the pitch needs funds" do
@@ -56,7 +56,7 @@ describe Donation do
 
       describe "should be invalid and add an error" do
         it "if the pitch is fully funded" do
-          pitch = Factory(:pitch, :requested_amount => 100, :user => Factory(:user))
+          pitch = active_pitch(:requested_amount => 100, :user => Factory(:user))
           pitch.stub!(:fully_funded?).and_return(true)
 
           donation = Factory.build(:donation, :pitch => pitch, :user => Factory(:user), :amount => 1, :status => 'paid')
@@ -67,7 +67,7 @@ describe Donation do
 
          it "if user's total donations + the new donation is >= 20% of the pitch's requested amount" do
            user = Factory(:user)
-           pitch = Factory(:pitch, :requested_amount => 1000, :user => user)
+           pitch = active_pitch(:requested_amount => 1000, :user => user)
            pitch.stub!(:user_can_donate_more?).and_return(false)
            donation = Factory.build(:donation, :pitch => pitch, :user => user, :amount => 101)
            donation.should_not be_valid
@@ -80,7 +80,7 @@ describe Donation do
     describe "as a news organization" do
       it "allows donation of  an arbitrary amount" do
         organization = Factory(:organization)
-        p = Factory(:pitch, :requested_amount => 100)
+        p = active_pitch(:requested_amount => 100)
         d = Factory(:donation, :pitch => p, :user => organization, :amount => 100)
         d.should be_valid
       end
@@ -109,7 +109,7 @@ describe Donation do
     before do
       @organization = Factory(:organization)
       @citizen = Factory(:citizen)
-      @pitch = Factory(:pitch, :requested_amount => 1000)
+      @pitch = active_pitch(:requested_amount => 1000)
       Factory(:donation, :user => @organization, :amount => 100)
       Factory(:donation, :user => @citizen, :amount => 10)
     end
@@ -207,35 +207,33 @@ describe Donation do
   end
 
   describe "states of a donation" do
+    before do
+      @donation = Factory(:donation)
+    end
     it "should have a state of unpaid when it is first created" do
-      donation = Factory(:donation)
-      donation.should be_unpaid
+      @donation.should be_unpaid
     end
 
     it "should have a state of paid when it has been paid" do
-      donation = Factory(:donation)
-      donation.pay!
-      donation.should be_paid
+      @donation.pay!
+      @donation.should be_paid
     end
 
     it "should have a state of refunded when a refund has been issued" do
-      donation = Factory(:donation)
-      donation.pay!
-      donation.refund!
-      donation.should be_refunded
+      @donation.pay!
+      @donation.refund!
+      @donation.should be_refunded
     end
 
-    it "should not allow a refund on an unpaid donation" do
-      donation = Factory(:donation)
+    it "should not allow a refund on an unpaid @donation" do
       lambda {
-        donation.refund!
+        @donation.refund!
       }.should raise_error
     end
 
     it "should send a thank you email when paid" do
       Mailer.should_receive(:deliver_user_thank_you_for_donating)
       Factory(:donation,
-              :pitch => Factory(:pitch),
               :user => Factory(:user),
               :amount => 10,
               :status => 'unpaid').pay!
