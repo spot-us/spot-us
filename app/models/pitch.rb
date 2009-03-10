@@ -39,11 +39,20 @@
 #
 
 class Pitch < NewsItem
-  aasm_initial_state  :active
+  aasm_initial_state  :unapproved
 
+  aasm_state :unapproved
   aasm_state :active
   aasm_state :accepted
   aasm_state :funded
+
+  aasm_event :unapprove do
+    transitions :from => :active, :to => :unapproved
+  end
+
+  aasm_event :approve do
+    transitions :from => :unapproved, :to => :active
+  end
 
   aasm_event :fund do
     transitions :from => :active, :to => :funded, :on_transition => :do_fund_events
@@ -100,6 +109,7 @@ class Pitch < NewsItem
   named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
   named_scope :sorted, lambda {|direction| { :order => "created_at #{direction}" } }
   named_scope :without_a_story, :conditions => 'id NOT IN (SELECT news_item_id FROM news_items WHERE type = "Story" AND status = "published")'
+  named_scope :browsable, :conditions => "status != 'unapproved'"
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
@@ -118,7 +128,7 @@ class Pitch < NewsItem
     if user.nil?
       false
     else
-      ((self.user == user) && (donations.paid.blank? && active?)) || user.admin?
+      ((self.user == user) && (donations.paid.blank? && (unapproved? || active?))) || user.admin?
     end
   end
 
@@ -144,7 +154,7 @@ class Pitch < NewsItem
   end
 
   def self.with_sort(sort='desc')
-    self.without_a_story.send(sanitize_sort(sort))
+    self.browsable.without_a_story.send(sanitize_sort(sort))
   end
 
   def self.createable_by?(user)
@@ -177,7 +187,7 @@ class Pitch < NewsItem
   end
 
   def funding_needed
-    return 0 unless active?
+    return 0 unless active? || unapproved?
     requested_amount - total_amount_donated
   end
 

@@ -15,6 +15,10 @@ Given /^A "(.*)" exists$/ do |model_name|
   instance_variable_set("@#{model_name}", instance)
 end
 
+Given /^I call the (.*?) transition on the current (.*?)$/ do |transition, object|
+  instance_variable_get("@#{object}").send("#{transition}!".to_sym)
+end
+
 Given /^A "(.*)" exists for the "(.*)"$/ do |child, parent|
   instance = Factory(child.to_sym, parent.to_sym => instance_variable_get("@#{parent}"))
   instance_variable_set("@#{child}", instance)

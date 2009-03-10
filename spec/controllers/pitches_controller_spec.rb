@@ -41,7 +41,7 @@ describe PitchesController do
 
     it "should deny access and add flash when donations added" do
       user = Factory(:user)
-      pitch = Factory(:pitch, :user => user)
+      pitch = active_pitch(:user => user)
       controller.stub!(:current_user).and_return(user)
       donation = Factory(:donation, :pitch => pitch, :amount => 2, :status => 'paid')
       Pitch.stub!(:find).and_return(pitch)
@@ -54,14 +54,14 @@ describe PitchesController do
   describe "can_edit?" do
     it "should allow the owner of a pitch to have access" do
       user = Factory(:user)
-      pitch = Factory(:pitch, :user => user)
+      pitch = active_pitch(:user => user)
       pitch.should be_editable_by(user)
       get :edit, :id => pitch.id
     end
 
     it "should allow an admin to have access" do
       user = Factory(:admin)
-      pitch = Factory(:pitch)
+      pitch = active_pitch
       controller.stub!(:current_user).and_return(user)
       donation = Factory(:donation, :pitch => pitch, :amount => 3, :status => 'paid')
       get :edit, :id => pitch.id

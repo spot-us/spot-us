@@ -4,7 +4,7 @@ describe 'myspot/donation_amounts/edit' do
   before do
     @user = Factory(:user)
     template.stub!(:current_user).and_return(@user)
-    @pitches = [Factory(:pitch), Factory(:pitch)]
+    @pitches = [active_pitch, active_pitch]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
                                                               :pitch => pitch) }
     @spotus_donation = Factory(:spotus_donation)
