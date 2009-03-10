@@ -58,6 +58,13 @@ describe Mailer do
     end.should change {ActionMailer::Base.deliveries.size }.by(1)
   end
 
+  it "sends an email on pitch approved" do
+    pitch = active_pitch
+    lambda do
+      Mailer.deliver_pitch_approved_notification(pitch)
+    end.should change {ActionMailer::Base.deliveries.size }.by(1)
+  end
+
   it "sends an email on story accepted" do
     story = stub_model(Pitch)
     lambda do
