@@ -3,10 +3,10 @@
 - else
   %div{:id => "inline_pledge_form_#{news_item.id}"}
     %div{:id => "pledge_button_#{news_item.id}"}
-      - remote_form_for Pledge.new(:tip => news_item, :amount => 25) do |f|
+      - remote_form_for Pledge.new(:tip => news_item, :amount => Donation::DEFAULT_AMOUNT) do |f|
         = f.hidden_field :amount
         = f.hidden_field :tip_id
-        = image_submit_tag("pledge_25.png")
+        = image_submit_tag("pledge_default.png")
     %div.inline_pledge{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
       - remote_form_for Pledge.new(:tip => news_item) do |f|
         .float_left= f.text_field :amount
