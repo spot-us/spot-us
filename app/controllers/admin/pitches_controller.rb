@@ -22,13 +22,13 @@ class Admin::PitchesController < ApplicationController
   def approve
     current_pitch.approve!
     flash[:success] = "You have approved the pitch '#{current_pitch.headline}'!"
-    redirect_to admin_pitches_path
+    redirect_to :back
   end
 
   def unapprove
     current_pitch.unapprove!
     flash[:success] = "You have un-approved the pitch '#{current_pitch.headline}'!"
-    redirect_to admin_pitches_path
+    redirect_to :back
   end
 
 
