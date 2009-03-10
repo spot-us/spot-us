@@ -1134,3 +1134,7 @@ a.prev{
   padding: 5px 0 5px 245px;
   background-color:#FFFFCC;
 }
+.pitches .status {
+  color:#990000;
+  font-weight: bold;
+}

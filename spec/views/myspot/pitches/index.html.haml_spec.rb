@@ -5,7 +5,7 @@ describe 'myspot/pitches/index' do
     @user = Factory(:user)
     @story = Factory(:story)
     @pitch = Factory(:pitch, :user => @user, :story => @story)
-    assigns[:pitches] = [@pitch]
+    assigns[:pitches] = [@pitch, active_pitch]
     template.stub!(:current_user).and_return(@user)
   end
 
@@ -16,6 +16,11 @@ describe 'myspot/pitches/index' do
   it "should display a go to story link if the pitch has a story" do
     do_render
     response.should have_tag("a[href=?]", story_path(@story), "Go to story")
+  end
+
+  it "should display 'pending' if a pitch is awaiting approval" do
+    do_render
+    response.should have_tag(".status#?", @pitch.id, "Pending approval")
   end
 
   def do_render
