@@ -15,7 +15,7 @@
 
 class Donation < ActiveRecord::Base
 
-  DEFAULT_AMOUNT = 25
+  DEFAULT_AMOUNT = 20
 
   cattr_reader :per_page
   @@per_page = 10
