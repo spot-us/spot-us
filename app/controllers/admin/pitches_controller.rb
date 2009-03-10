@@ -2,7 +2,7 @@ class Admin::PitchesController < ApplicationController
   before_filter :admin_required
   layout "bare"
 
-  resources_controller_for :pitches, :only => [:index, :update, :destroy]
+  resources_controller_for :pitches, :only => [:index, :update, :destroy, :approve, :unapprove]
 
   response_for :update do |format|
     format.html{ redirect_to admin_pitches_path }
@@ -18,6 +18,19 @@ class Admin::PitchesController < ApplicationController
   def fact_checker_chooser
     render :partial => 'fact_checker_chooser', :locals => { :pitch => current_pitch, :cancel => true }
   end
+
+  def approve
+    current_pitch.approve!
+    flash[:success] = "You have approved the pitch '#{current_pitch.headline}'!"
+    redirect_to admin_pitches_path
+  end
+
+  def unapprove
+    current_pitch.unapprove!
+    flash[:success] = "You have un-approved the pitch '#{current_pitch.headline}'!"
+    redirect_to admin_pitches_path
+  end
+
 
   protected
   def current_pitch
