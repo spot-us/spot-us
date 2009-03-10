@@ -138,6 +138,11 @@ class Pitch < NewsItem
     user == other_user || other_user.admin? || other_user == fact_checker
   end
 
+  def approvable_by?(current_user)
+    return false if current_user.nil?
+    current_user.admin? && (active? || unapproved?)
+  end
+
   def current_funding
     return total_amount_donated if accepted?
     return requested_amount if self[:current_funding] && self[:current_funding] > requested_amount
