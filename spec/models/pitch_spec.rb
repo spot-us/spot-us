@@ -69,6 +69,11 @@ describe Pitch do
       Mailer.should_not_receive(:deliver_pitch_created_notification)
       p.accept!
     end
+    it 'emails the reporter when the pitch is approved' do
+      p = Factory(:pitch)
+      Mailer.should_receive(:deliver_pitch_approved_notification)
+      p.approve!
+    end
   end
 
   describe "editing" do
