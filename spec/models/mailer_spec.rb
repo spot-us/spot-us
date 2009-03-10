@@ -44,6 +44,13 @@ describe Mailer do
     end.should change { ActionMailer::Base.deliveries.size }.by(1)
   end
 
+  it "sends an email on pitch creation" do
+    pitch = stub_model(Pitch)
+    lambda do
+      Mailer.deliver_pitch_created_notification(pitch)
+    end.should change {ActionMailer::Base.deliveries.size }.by(1)
+  end
+
   it "sends an email on pitch accepted" do
     pitch = stub_model(Pitch)
     lambda do
