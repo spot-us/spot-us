@@ -1,4 +1,4 @@
-class FactCheckerApplication < ActiveRecord::Base
+class ContributorApplication < ActiveRecord::Base
   belongs_to :user
   belongs_to :pitch
 

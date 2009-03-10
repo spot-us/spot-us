@@ -96,8 +96,8 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
-  has_many :fact_checker_applications
-  has_many :fact_checker_applicants, :through => :fact_checker_applications, :source => :user
+  has_many :contributor_applications
+  has_many :contributors, :through => :contributor_applications, :source => :user
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
@@ -175,9 +175,9 @@ class Pitch < NewsItem
     supporting_organizations << organization unless supporting_organizations.include?(organization)
   end
 
-  def apply_to_fact_check(user)
+  def apply_to_contribute(user)
     return false unless user
-    fact_checker_applicants << user unless fact_checker_applicants.include?(user)
+    contributors << user unless contributors.include?(user)
   end
 
   def feature!

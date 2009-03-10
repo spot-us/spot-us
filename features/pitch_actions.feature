@@ -6,7 +6,7 @@ Feature: Action Buttons for a Pitch
     Then I should not see a "Show Support" titled link
     And I should not see a "Fully Fund" titled link
     And I should not see a "Half Fund" titled link
-    And I should not see a "Apply to Peer Review" titled link
+    And I should not see a "Join Reporting Team" titled link
 
   Scenario: A logged in citizen viewing a pitch
     Given A "pitch" exists
@@ -15,7 +15,7 @@ Feature: Action Buttons for a Pitch
     Then I should not see a "Show Support" titled link
     And I should not see a "Fully Fund" titled link
     And I should not see a "Half Fund" titled link
-    And I should see a "Apply to Peer Review" titled link
+    And I should see a "Join Reporting Team" titled link
     And I should not see a "Make Blog Post" titled link
 
   Scenario: A logged in reporter viewing my own pitch
@@ -25,7 +25,7 @@ Feature: Action Buttons for a Pitch
     Then I should not see a "Show Support" titled link
     And I should not see a "Fully Fund" titled link
     And I should not see a "Half Fund" titled link
-    And I should not see an "Apply to Peer Review" titled link
+    And I should not see an "Join Reporting Team" titled link
     And I should see a "Make Blog Post" titled link
 
   Scenario: A logged in reporter viewing a pitch
@@ -35,7 +35,7 @@ Feature: Action Buttons for a Pitch
     Then I should not see a "Show Support" titled link
     And I should not see a "Fully Fund" titled link
     And I should not see a "Half Fund" titled link
-    And I should see an "Apply to Peer Review" titled link
+    And I should see an "Join Reporting Team" titled link
     And I should not see a "Make Blog Post" titled link
 
   Scenario: A logged in news organization viewing a pitch
@@ -45,5 +45,5 @@ Feature: Action Buttons for a Pitch
     Then I should see a "Show Support" titled link
     And I should see a "Fully Fund" titled link
     And I should see a "Half Fund" titled link
-    And I should see a "Apply to Peer Review" titled link
+    And I should see a "Join Reporting Team" titled link
     And I should not see a "Make Blog Post" titled link
