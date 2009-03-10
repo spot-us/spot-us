@@ -1,0 +1,40 @@
+table.admin_pitches {
+  font-size:0.9em;
+  line-height: 1.4em;
+  border: 0 solid;
+  border-collapse: collapse;
+}
+table.admin_pitches tr th {
+  font-size: 1.3em;
+}
+table.admin_pitches tr {
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+table.admin_pitches tr td {
+  vertical-align: top;
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+table.admin_pitches tr td.fact_checker {
+  min-width: 220px;
+  padding: 5px;
+}
+table.admin_pitches tr td.fact_checker form select {
+  width: 120px;
+}
+table.admin_pitches tr td form input[type=submit], table.admin_pitches tr td form input[type=button] {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 1px;
+  text-transform: uppercase;
+}
+table.admin_pitches tr td form input.approve_button {
+  color: #009900;
+  border: 1px solid #009900;
+}
+table.admin_pitches tr td form input.delete_button {
+  color: #990000;
+  border: 1px solid #990000;
+  text-transform: uppercase;
+}

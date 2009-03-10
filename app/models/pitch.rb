@@ -96,9 +96,14 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
-  has_many :contributor_applications
+  has_many :contributor_applications do
+    def unapproved
+      find_all_by_approved(false)
+    end
+  end
   has_many :contributors, :through => :contributor_applications, :source => :user, :conditions => ['contributor_applications.approved = ?', true]
   has_many :contributor_applicants, :through => :contributor_applications, :source => :user
+
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
@@ -191,6 +196,12 @@ class Pitch < NewsItem
 
   def featureable_by?(user)
     user.is_a?(Admin)
+  end
+
+  def approve_blogger!(user_id)
+    return if user_id.nil?
+    return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
+    application.update_attribute(:approved, true)
   end
 
   def funding_needed
