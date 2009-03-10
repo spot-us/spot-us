@@ -6,6 +6,8 @@ describe "/pitches/show.html.haml" do
   before(:each) do
     @pitch = active_pitch
     assigns[:pitch] = @pitch
+    @citizen = Factory(:citizen)
+    template.stub!(:current_user).and_return(@citizen)
   end
 
   it "should render" do
@@ -34,7 +36,39 @@ describe "/pitches/show.html.haml" do
     do_render
     template.should have_tag('h2.headline', /#{@pitch.headline}/i)
   end
-  
+
+  describe "approving and unapproving as an admin" do
+    before do
+      @admin = Factory(:admin)
+      @admin.stub!(:admin?).and_return(true)
+      template.stub!(:logged_in?).and_return(true)
+      template.stub!(:current_user).and_return(@admin)
+    end
+    it "should have an approve button if it's currently unapproved" do
+      @pitch = Factory(:pitch)
+      @pitch.stub!(:approvable_by?).and_return(true)
+      @pitch.stub!(:unapproved?).and_return(true)
+      assigns[:pitch] = @pitch
+      do_render
+      template.should have_tag('a[href$=?]', approve_pitch_path(@pitch))
+    end
+    it "should have an unapprove button if it's currently active" do
+      @pitch = active_pitch
+      @pitch.stub!(:approvable_by?).and_return(true)
+      @pitch.stub!(:active?).and_return(true)
+      assigns[:pitch] = @pitch
+      do_render
+      template.should have_tag('a[href$=?]', unapprove_pitch_path(@pitch))
+    end
+  end
+
+  it 'should not have approval buttons if the current user is not an admin' do
+    template.stub!(:logged_in?).and_return(true)
+    template.stub!(:current_user).and_return(@pitch.user)
+    do_render
+    template.should_not have_tag('a[href$=?]', approve_pitch_path(@pitch))
+  end
+
   it "should have an edit button if the current user is the creator of the pitch" do
     template.stub!(:logged_in?).and_return(true)
     template.stub!(:current_user).and_return(@pitch.user)
