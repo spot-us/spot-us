@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :donations, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
-  map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_fact_check => :put, :assign_fact_checker => :put, :blog_posts => :get, :approve => :put, :unapprove => :put}, :has_many => :comments do |pitch|
+  map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_fact_check => :put, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
     pitch.resources :posts
   end
 
@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
     admin.resources :credits
-    admin.resources :pitches, :member => { :fact_checker_chooser => :get }
+    admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put}
     admin.resources :tips
     admin.resources :site_options
     admin.resources :networks
