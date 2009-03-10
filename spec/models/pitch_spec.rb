@@ -718,7 +718,36 @@ describe Pitch do
       end
     end
   end
-  
+
+  describe "#approvable_by?" do
+    before do
+      @pitch = Factory(:pitch)
+      @active_pitch = active_pitch
+      @admin = Factory(:admin)
+    end
+    it "should return true if admin and pitch.unapproved?" do
+      @pitch.approvable_by?(@admin).should be_true
+    end
+    it "should return true if admin and pitch.active?" do
+      @active_pitch.approvable_by?(@admin).should be_true
+    end
+    it "should return false if admin and pitch.funded?" do
+      @active_pitch.fund!
+      @active_pitch.approvable_by?(@admin).should be_false
+    end
+    it "should return false if admin and pitch.accepted?" do
+      @active_pitch.accept!
+      @active_pitch.approvable_by?(@admin).should be_false
+    end
+    it "should return false if the passed in user is nil" do
+      @pitch.approvable_by?(nil).should be_false
+    end
+    it "should return false if the passed in user is not an admin" do
+      editor = Factory(:reporter)
+      @pitch.approvable_by?(editor).should be_false
+    end
+  end
+
   describe "#postable_by?" do
     before do
       @pitch = active_pitch
