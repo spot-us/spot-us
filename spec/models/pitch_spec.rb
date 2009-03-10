@@ -546,6 +546,24 @@ describe Pitch do
     end
   end
 
+  describe "#approve_blogger!" do
+    before do
+      @pitch = active_pitch
+      @reporter = Factory(:reporter)
+      Factory(:contributor_application, :user => @reporter, :pitch => @pitch, :approved => false)
+    end
+    it "doesn't raise an error if no user is passed in" do
+      lambda{@pitch.approve_blogger!(nil)}.should_not raise_error
+    end
+    it "approves the user's contributor application" do
+      lambda{@pitch.approve_blogger!(@reporter.id)}.should change(@pitch.contributors, :size).by(1)
+    end
+    it "only adds the user once" do
+      @pitch.stub!(:contributors).and_return([@reporter])
+      lambda{@pitch.approve_blogger!(@reporter.id)}.should change(@pitch.contributors, :size).by(0)
+    end
+  end
+
   describe "contributor scopes" do
     before do
       @pitch = active_pitch
