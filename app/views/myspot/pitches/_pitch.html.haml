@@ -3,6 +3,9 @@
     = link_to image_tag(pitch.featured_image.url(:thumb)), pitch_url(pitch)
     PITCH:
     = link_to h(pitch.headline), pitch_url(pitch)
+    - if pitch.unapproved?
+      %br/
+      .status{:id => pitch.id} Pending approval
   %td.created= pitch.created_at.to_s(:date)
   %td.donations
     = render :partial => "shared/table_progress_bar", :locals => {:pitch => pitch}
