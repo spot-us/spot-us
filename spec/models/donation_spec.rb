@@ -240,5 +240,10 @@ describe Donation do
     end
   end
 
+  describe "DEFAULT_AMOUNT" do
+    it "should exist" do
+      Donation::DEFAULT_AMOUNT.should == 25
+    end
+  end
 end
 
