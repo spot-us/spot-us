@@ -101,7 +101,7 @@ Factory.define :pitch do |pitch|
   pitch.association(:user)
 end
 
-Factory.define :fact_checker_application do |application|
+Factory.define :contributor_application do |application|
   application.association(:user)
   application.association(:pitch)
 end

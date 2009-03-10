@@ -7,10 +7,10 @@ class PitchesController < ApplicationController
     redirect_to(news_items_path)
   end
 
-  def apply_to_fact_check
+  def apply_to_contribute
     pitch = find_resource
-    pitch.apply_to_fact_check(current_user)
-    flash[:success] = "You're signed up!  Thanks for applying to be a peer review editor"
+    pitch.apply_to_contribute(current_user)
+    flash[:success] = "You're signed up!  Thanks for applying to join the reporting team."
     redirect_to pitch_path(pitch)
   end
 
