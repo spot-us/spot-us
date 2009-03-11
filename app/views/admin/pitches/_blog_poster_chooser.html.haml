@@ -1,4 +1,4 @@
 - form_for(pitch, :url => approve_blogger_admin_pitch_path(pitch)) do |f|
-  = select_tag 'user_id', options_for_select(pitch.contributor_applicants.map{|c| [c.full_name, c.id]})
+  = select_tag 'user_id', options_for_select(pitch.contributor_applications.unapproved.map{|c| [c.user.full_name, c.user.id]})
   = f.submit 'Approve'
 
