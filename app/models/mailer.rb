@@ -87,6 +87,13 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
+  def applied_reporting_team_notification(pitch, user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: We received your application!"
+    body       :pitch => pitch
+  end
+
   def story_ready_notification(story)
     recipients '"David Cohn" <david@spot.us>'
     from       MAIL_FROM_INFO
