@@ -21,4 +21,11 @@ describe PagesController do
       should raise_error(ActiveRecord::RecordNotFound)
   end
 
+  describe "index" do
+    it "should redirect to the home page" do
+      get :index
+      response.should redirect_to(root_path)
+    end
+  end
+
 end
