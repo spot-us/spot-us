@@ -2,7 +2,7 @@ class Admin::PitchesController < ApplicationController
   before_filter :admin_required
   layout "bare"
 
-  resources_controller_for :pitches, :only => [:index, :update, :destroy, :approve, :unapprove]
+  resources_controller_for :pitches, :only => [:index, :update, :destroy, :approve, :unapprove, :approve_blogger, :unapprove_blogger]
 
   response_for :update do |format|
     format.html{ redirect_to admin_pitches_path }
@@ -22,6 +22,12 @@ class Admin::PitchesController < ApplicationController
   def approve_blogger
     current_pitch.approve_blogger!(params[:user_id])
     flash[:success] = "Successfully added blogger to '#{current_pitch.headline}'!"
+    redirect_to :back
+  end
+
+  def unapprove_blogger
+    current_pitch.unapprove_blogger!(params[:user_id])
+    flash[:success] = "Successfully removed blogger from '#{current_pitch.headline}'!"
     redirect_to :back
   end
 
