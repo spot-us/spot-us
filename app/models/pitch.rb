@@ -187,6 +187,7 @@ class Pitch < NewsItem
       contributors << user
       Mailer.deliver_admin_reporting_team_notification(self)
       Mailer.deliver_reporter_reporting_team_notification(self)
+      Mailer.deliver_applied_reporting_team_notification(self, user)
     end
   end
 
