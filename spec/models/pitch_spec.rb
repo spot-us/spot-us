@@ -552,6 +552,10 @@ describe Pitch do
       Mailer.should_receive(:deliver_reporter_reporting_team_notification)
       @pitch.apply_to_contribute(Factory(:citizen))
     end
+    it "sends an email to the applicant" do
+      Mailer.should_receive(:deliver_applied_reporting_team_notification)
+      @pitch.apply_to_contribute(Factory(:citizen))
+    end
   end
 
   describe "#approve_blogger!" do
