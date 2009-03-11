@@ -66,6 +66,20 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
+  def admin_reporting_team_notification(pitch)
+    recipients '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Someone wants to join a pitch's reporting team!"
+    body       :pitch => pitch
+  end
+
+  def reporter_reporting_team_notification(pitch)
+    recipients pitch.user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Someone wants to join your reporting team!"
+    body       :pitch => pitch
+  end
+
   def story_ready_notification(story)
     recipients '"David Cohn" <david@spot.us>'
     from       MAIL_FROM_INFO

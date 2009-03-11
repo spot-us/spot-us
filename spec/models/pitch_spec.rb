@@ -544,6 +544,14 @@ describe Pitch do
       @pitch.stub!(:contributors).and_return([@reporter])
       lambda{@pitch.apply_to_contribute(@reporter)}.should change(@pitch.contributor_applicants, :size).by(0)
     end
+    it "sends an email to admin" do
+      Mailer.should_receive(:deliver_admin_reporting_team_notification)
+      @pitch.apply_to_contribute(Factory(:citizen))
+    end
+    it "sends an email to the reporter" do
+      Mailer.should_receive(:deliver_reporter_reporting_team_notification)
+      @pitch.apply_to_contribute(Factory(:citizen))
+    end
   end
 
   describe "#approve_blogger!" do
