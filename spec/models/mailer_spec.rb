@@ -63,6 +63,12 @@ describe Mailer do
       Mailer.deliver_reporter_reporting_team_notification(pitch)
     end.should change {ActionMailer::Base.deliveries.size }.by(1)
   end
+  it "sends an email to the user after applying to blog" do
+    pitch = stub_model(Pitch, :user => stub_model(Reporter))
+    lambda do
+      Mailer.deliver_applied_reporting_team_notification(pitch, stub_model(User, :email => "someone@example.com"))
+    end.should change {ActionMailer::Base.deliveries.size }.by(1)
+  end
   it "sends an email to the user when approved to blog" do
     pitch = stub_model(Pitch, :user => stub_model(Reporter))
     lambda do
