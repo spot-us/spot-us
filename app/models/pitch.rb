@@ -206,6 +206,7 @@ class Pitch < NewsItem
     return if user_id.nil?
     return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
     application.update_attribute(:approved, true)
+    Mailer.deliver_approved_reporting_team_notification(self, application.user)
   end
 
   def unapprove_blogger!(user_id)

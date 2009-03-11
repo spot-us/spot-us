@@ -570,6 +570,10 @@ describe Pitch do
       @pitch.stub!(:contributors).and_return([@reporter])
       lambda{@pitch.approve_blogger!(@reporter.id)}.should change(@pitch.contributors, :size).by(0)
     end
+    it "emails the user" do
+      Mailer.should_receive(:deliver_approved_reporting_team_notification)
+      @pitch.approve_blogger!(@reporter.id)
+    end
   end
 
   describe "#unapprove_blogger!" do
