@@ -183,7 +183,11 @@ class Pitch < NewsItem
 
   def apply_to_contribute(user)
     return false unless user
-    contributors << user unless contributors.include?(user)
+    unless contributors.include?(user)
+      contributors << user
+      Mailer.deliver_admin_reporting_team_notification(self)
+      Mailer.deliver_reporter_reporting_team_notification(self)
+    end
   end
 
   def feature!
