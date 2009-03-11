@@ -21,4 +21,8 @@ class PagesController < ApplicationController
             "No such static page: #{params[:id].inspect}"
     end
   end
+
+  def index
+    redirect_to root_path
+  end
 end
