@@ -572,6 +572,20 @@ describe Pitch do
     end
   end
 
+  describe "#unapprove_blogger!" do
+    before do
+      @pitch = active_pitch
+      @reporter = Factory(:reporter)
+      Factory(:contributor_application, :user => @reporter, :pitch => @pitch, :approved => true)
+    end
+    it "doesn't raise an error if no user is passed in" do
+      lambda{@pitch.unapprove_blogger!(nil)}.should_not raise_error
+    end
+    it "unapproves the pitch's contributors" do
+      lambda{@pitch.unapprove_blogger!(@reporter.id)}.should change(@pitch.contributors, :size).by(-1)
+    end
+  end
+
   describe "contributor scopes" do
     before do
       @pitch = active_pitch

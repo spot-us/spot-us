@@ -208,6 +208,12 @@ class Pitch < NewsItem
     application.update_attribute(:approved, true)
   end
 
+  def unapprove_blogger!(user_id)
+    return if user_id.nil?
+    return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
+    application.update_attribute(:approved, false)
+  end
+
   def funding_needed
     return 0 unless active? || unapproved?
     requested_amount - total_amount_donated
