@@ -82,17 +82,17 @@
         - if current_user.organization? && (!@pitch.half_funded? || !@pitch.fully_funded?)
           .small.quiet.align_right.no_margin
             = link_to 'what is this?', page_path(:id => 'about', :anchor => 'work_with')
-        - if current_user != @pitch.user
-          .block-spacer-negative
-          .apply_to_contribute
-            - if @pitch.contributor_applicants.include?(current_user)
-              = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
-            - else
-              = link_to image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :method => :put, :title => 'Join Reporting Team'
         - if current_user.organization? && !current_user.shown_support_for?(@pitch)
           .block-spacer-negative
           .show_support
             = link_to image_tag('show_support.gif', :alt => 'Show Support'), show_support_pitch_path(@pitch), :method => :put, :title => 'Show Support'
+      - if current_user != @pitch.user or !current_user
+        .block-spacer-negative
+        .apply_to_contribute
+          - if @pitch.contributor_applicants.include?(current_user)
+            = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
+          - else
+            = link_to image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team'
     .block-spacer-negative
     %h3 Related Tips
     .double_content_border
