@@ -1,4 +1,7 @@
-- remote_form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path do |f|
+- remote_form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}"} do |f|
   = f.hidden_field :amount
   = f.hidden_field :pitch_id
-  = image_submit_tag "donate_default.png", :alt => "Donate #{Donation::DEFAULT_AMOUNT}"
+  - if logged_in?
+    = image_submit_tag "donate_default.png", :alt => "Donate #{Donation::DEFAULT_AMOUNT}"
+  - else
+    = link_to image_tag("donate_default.png"), new_session_path(:return_to => edit_myspot_donations_amounts_path, :donation_amount => Donation::DEFAULT_AMOUNT, :pitch_id => news_item.id), :rel => "facebox"

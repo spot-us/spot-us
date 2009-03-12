@@ -50,6 +50,10 @@ Then /^I should see a form identified by "(.*?)"$/ do |id|
   response.should have_tag("form##{id}")
 end
 
+Then /^I should see a form with class "(.*?)"$/ do |id|
+  response.should have_tag("form.#{id}")
+end
+
 Then /^I should not see a form identified by "(.*?)"$/ do |id|
   response.should_not have_tag("form##{id}")
 end
