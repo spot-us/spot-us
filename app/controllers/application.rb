@@ -51,4 +51,21 @@ class ApplicationController < ActionController::Base
   def delete_cookie(name)
     cookies.delete(name.to_sym, :domain => DEFAULT_HOST)
   end
+
+  def handle_first_donation_for_non_logged_in_user
+    if session[:news_item_id] && session[:donation_amount]
+      self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
+      session[:news_item_id] = nil
+      session[:donation_amount] = nil
+    end
+  end
+
+  def handle_first_pledge_for_non_logged_in_user
+    if session[:news_item_id] && session[:pledge_amount]
+      self.current_user.pledges.create(:tip_id => session[:news_item_id], :amount => session[:pledge_amount])
+      session[:news_item_id] = nil
+      session[:pledge_amount] = nil
+    end
+  end
+
 end
