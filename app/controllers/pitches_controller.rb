@@ -1,5 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
+  before_filter :login_required, :only => [:apply_to_contribute]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   resources_controller_for :pitch
 
