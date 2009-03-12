@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
     id = jQuery("#network_select option:selected").val();
     load_categories(id);
   }
-  $('a[rel*=facebox]').facebox()
+  $('a[rel*=facebox]').facebox();
 
   $("#pitches_carousel").jCarouselLite({
     btnNext: ".next",
@@ -22,6 +22,15 @@ jQuery("a").click(function($){
   $(this).addClass("selected");
   return false;
 });
+
+function submitToLogin(form) {
+  form_action = jQuery('#' + form).attr("action");
+  amount = jQuery('#' + form + ' input[name="donation[amount]"]').val();
+  pitch_id = jQuery('#' + form + ' input[name="donation[pitch_id]"]').val();
+  jQuery.facebox(function($) {
+    jQuery.post(form_action, { amount : amount, pitch_id : pitch_id }, function(data) { jQuery.facebox(data) });
+  });
+}
 
 function toggle_divs(div1, div2) {
   jQuery(div1).toggle();
