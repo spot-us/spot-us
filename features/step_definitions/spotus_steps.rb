@@ -10,7 +10,7 @@ Given /^I have created a "(.*)"$/ do |model_name|
   instance_variable_set("@#{model_name}", Factory(model_name.to_sym, :user => @current_user))
 end
 
-Given /^A "(.*)" exists$/ do |model_name| 
+Given /^A (\w+) exists$/ do |model_name| 
   instance = Factory(model_name.to_sym)
   instance_variable_set("@#{model_name}", instance)
 end
@@ -19,7 +19,7 @@ Given /^I call the (.*?) transition on the current (.*?)$/ do |transition, objec
   instance_variable_get("@#{object}").send("#{transition}!".to_sym)
 end
 
-Given /^A "(.*)" exists for the "(.*)"$/ do |child, parent|
+Given /^A (\w+) exists for the (.*)$/ do |child, parent|
   instance = Factory(child.to_sym, parent.to_sym => instance_variable_get("@#{parent}"))
   instance_variable_set("@#{child}", instance)
 end
@@ -31,6 +31,11 @@ end
 
 Given /^I am at the "(.*?)" network page$/ do |subdomain|
   visit(root_url(:subdomain => subdomain))
+end
+
+When /^I activate my account with email "(.*)"$/ do |email|
+  u = User.find_by_email(email)
+  visit(activate_url(u.activation_code))
 end
 
 Then /^I should see "(.*?)" not linked$/ do |text|
