@@ -81,6 +81,11 @@ describe UsersController do
       controller.should be_logged_in
     end
 
+    it "should redirect to the stored location" do
+      controller.should_receive(:redirect_back_or_default).with('/')
+      do_activate
+    end
+
     def do_activate(activation_code = nil)
       activation_code ||= @user.activation_code
       get :activate, :activation_code => activation_code
