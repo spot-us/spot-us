@@ -22,7 +22,6 @@ class Myspot::DonationsController < ApplicationController
 
   def can_create?
     if current_user.nil?
-      # yo this shit is whack!
       session[:return_to] = edit_myspot_donations_amounts_path
       session[:news_item_id] = params[:pitch_id]
       session[:donation_amount] = params[:amount]

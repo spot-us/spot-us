@@ -23,6 +23,8 @@ class UsersController < ApplicationController
     if current_user
       current_user.activate!
       login_cookies
+      handle_first_donation_for_non_logged_in_user
+      handle_first_pledge_for_non_logged_in_user
       flash[:success] = "You have successfully activated your account - welcome to Spot.Us!"
       redirect_back_or_default('/')
     else
