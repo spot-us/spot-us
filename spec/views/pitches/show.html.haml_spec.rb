@@ -287,7 +287,8 @@ describe "/pitches/show.html.haml" do
         template.stub!(:current_user).and_return(@applicant)
         assigns[:pitch] = @pitch
       end
-      it "should show Join Reporting Team button" do
+      it "should show Join Reporting Team button always" do
+        template.stub!(:current_user).and_return(nil)
         do_render
         response.should have_tag("div.apply_to_contribute")
       end
