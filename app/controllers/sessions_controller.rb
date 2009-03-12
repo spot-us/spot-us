@@ -46,7 +46,8 @@ class SessionsController < ApplicationController
     end
 
     def store_news_item_for_non_logged_in_user
-      session[:news_item_id] ||= params[:news_item_id]
+      session[:return_to] = edit_myspot_donations_amounts_path
+      session[:news_item_id] ||= params[:pitch_id]
       session[:donation_amount] ||= params[:donation_amount]
       session[:pledge_amount] ||= params[:pledge_amount]
     end

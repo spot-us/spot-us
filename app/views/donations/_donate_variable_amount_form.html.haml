@@ -6,7 +6,8 @@
   = f.hidden_field :pitch_id
   .float_right
     - if logged_in?
-      = image_submit_tag("donate.png")
+      = image_submit_tag("donate.png", :title => "Donate another amount")
     - else
-      = link_to_function image_tag("donate.png"), "submitToLogin('custom_donation_#{news_item.id}')", :rel => 'facebox'
+      = link_to_function image_tag("donate.png"), "submitToLogin('custom_donation_#{news_item.id}')", :rel => 'facebox', :title => "Donate another amount"
+
   .clear
