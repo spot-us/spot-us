@@ -20,7 +20,7 @@ Feature: Creating a pitch
     Then I should be on the show pitch page
     And I should see "Pitch was successfully created"
     And I should see "Pitch Headline"
-    And I should see a form identified by "new_donation"
+    And I should see a form with class "new_donation"
     And I should see an "Edit This Pitch" titled link
 
   Scenario: A reporter creates an invalid pitch
