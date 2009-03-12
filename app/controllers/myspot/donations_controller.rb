@@ -23,12 +23,10 @@ class Myspot::DonationsController < ApplicationController
   def can_create?
     if current_user.nil?
       # yo this shit is whack!
-      render :update do |page|
-        session[:return_to] = edit_myspot_donations_amounts_path
-        page.redirect_to new_session_path(:news_item_id => params[:donation][:pitch_id],
-                                          :donation_amount => params[:donation][:amount],
-                                          :escape => false)
-      end and return false
+      session[:return_to] = edit_myspot_donations_amounts_path
+      session[:news_item_id] = params[:pitch_id]
+      session[:donation_amount] = params[:amount]
+      render :partial => "sessions/header_form" and return false
     end
 
     access_denied unless Donation.createable_by?(current_user)
