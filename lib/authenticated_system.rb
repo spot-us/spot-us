@@ -109,7 +109,7 @@ module AuthenticatedSystem
       end
     end
 
-    # Called from #current_user.  Finaly, attempt to login by an expiring token in the cookie.
+    # Called from #current_user.  Finally, attempt to login by an expiring token in the cookie.
     def login_from_cookie
       user = cookies[:auth_token] && User.find_by_remember_token(cookies[:auth_token])
       if user && user.remember_token?
@@ -117,6 +117,7 @@ module AuthenticatedSystem
         cookies[:current_user_full_name] = user.full_name
         cookies[:auth_token] = { :value => user.remember_token, :expires => user.remember_token_expires_at }
         update_balance_cookie
+        user
       end
     end
 end
