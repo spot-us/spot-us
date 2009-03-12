@@ -38,22 +38,6 @@ class SessionsController < ApplicationController
   end
   protected
 
-    def handle_first_donation_for_non_logged_in_user
-      if session[:news_item_id] && session[:donation_amount]
-        self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
-        session[:news_item_id] = nil
-        session[:donation_amount] = nil
-      end
-    end
-
-    def handle_first_pledge_for_non_logged_in_user
-      if session[:news_item_id] && session[:pledge_amount]
-        self.current_user.pledges.create(:tip_id => session[:news_item_id], :amount => session[:pledge_amount])
-        session[:news_item_id] = nil
-        session[:pledge_amount] = nil
-      end
-    end
-
     def handle_remember_me
       if params[:remember_me] == "1"
         current_user.remember_me unless current_user.remember_token?
