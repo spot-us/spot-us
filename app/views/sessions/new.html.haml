@@ -17,9 +17,11 @@
   - form_tag session_url do
     .span-6.or_login
       %h3 Thanks for joining us!
+      = link_to "New users: REGISTER HERE", new_user_path
       %br
       %span.small.quieter
-        = link_to "Make sure you register first!", new_user_path
+        If we already know you - login below.
+      %br
       .double_content_border
       = render :partial => 'sessions/form'
       .clear
