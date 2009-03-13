@@ -81,12 +81,25 @@ describe Myspot::DonationAmountsController do
         assigns[:spotus_donation].should be_an_instance_of(SpotusDonation)
       end
 
+      describe "with only a spotus donation" do
+        it "should not throw an error" do
+          lambda { do_update_with_only_spotus_donation }.should_not raise_error
+        end
+        it "should redirect to purchase page" do
+          do_update_with_only_spotus_donation
+          response.should redirect_to(new_myspot_purchase_path)
+        end
+      end
+
       def do_update
         put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100, :group_id => '17'} }, :spotus_donation_amount => "" }
       end
 
       def do_update_with_spotus_donation
         put :update, { :donation_amounts => { @donations.first.to_param => {:amount => 100} }, :spotus_donation_amount => 1 }
+      end
+      def do_update_with_only_spotus_donation
+        put :update, { :spotus_donation_amount => 1 }
       end
     end
 
