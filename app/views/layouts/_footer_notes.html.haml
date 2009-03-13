@@ -21,6 +21,8 @@
         = link_to pitch.headline, pitch
   
   .span-6
+    .float_right{:style => 'padding-top:3px;'}
+      = link_to image_tag('rss_16.png'), formatted_news_items_path(:rss)
     %h3 Newest Items
     .double_footer_border
     - for news_item in NewsItem.newest.unfunded.pitch_or_tip.top_four
