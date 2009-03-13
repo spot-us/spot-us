@@ -50,18 +50,28 @@ describe Myspot::PurchasesController do
     end
 
     it "should find the current user" do
-      controller.should_receive(:current_user).at_least(1).with().and_return(@user)
+      controller.should_receive(:current_user).at_least(1).and_return(@user)
       do_new
     end
 
     it "should find donations for the current user" do
-      @user.should_receive(:donations).at_least(1).with().and_return(@donations)
+      @user.should_receive(:donations).at_least(1).and_return(@donations)
       do_new
     end
 
     it "should only find unpaid donations" do
-      @donations.should_receive(:unpaid).at_least(1).with().and_return(@donations)
+      @donations.should_receive(:unpaid).at_least(1).and_return(@donations)
       do_new
+    end
+
+    it "should allow only spotus donations" do
+      donations = stub('named_scope', :unpaid => [])
+      @user.stub!(:donations).and_return(donations)
+      @user.stub!(:unpaid_spotus_donation).and_return(Factory(:spotus_donation))
+      purchase = Factory(:purchase)
+      Purchase.should_receive(:new).and_return(purchase)
+      do_new
+      assigns[:purchase].should == purchase
     end
 
     def do_new
