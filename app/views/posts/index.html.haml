@@ -21,6 +21,10 @@
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     .block-spacer-negative
+    .subscribe_via_rss
+      = link_to image_tag('rss_16.png'), formatted_blog_posts_pitch_path(@pitch, :rss)
+      = link_to 'Subscribe to this blog', formatted_blog_posts_pitch_path(@pitch, :rss)
+    .block-spacer-negative
     = render :partial => 'pitches/keywords', :locals => {:pitch => @pitch}
   .span-160.box_white
     = render :partial => "news_items/supporters", :locals => {:news_item => @pitch}

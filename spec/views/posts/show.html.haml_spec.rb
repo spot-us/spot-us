@@ -35,6 +35,9 @@ describe "showing a blog post" do
     it "should include supporters" do
       response.should have_tag("h2", "Supporters")
     end
+    it "should have an RSS link" do
+      response.should have_tag("a[href=?]", formatted_blog_posts_pitch_path(@pitch, :rss))
+    end
   end
 
   describe 'special cases' do
