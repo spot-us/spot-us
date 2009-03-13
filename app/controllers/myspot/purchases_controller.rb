@@ -36,7 +36,7 @@ class Myspot::PurchasesController < ApplicationController
   protected
 
   def unpaid_donations_required
-    redirect_to myspot_donations_path if current_user.donations.unpaid.empty?
+    redirect_to myspot_donations_path if current_user.donations.unpaid.empty? && (current_user.unpaid_spotus_donation.nil? || current_user.unpaid_spotus_donation.amount <= 0)
   end
 
 end
