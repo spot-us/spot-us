@@ -4,4 +4,4 @@
   - if logged_in?
     = image_submit_tag "donate_default.png", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Donate #{Donation::DEFAULT_AMOUNT}"
   - else
-    = link_to image_tag("donate_default.png"), new_session_path(:return_to => edit_myspot_donations_amounts_path, :donation_amount => Donation::DEFAULT_AMOUNT, :pitch_id => news_item.id), :rel => "facebox", :title => "Donate #{Donation::DEFAULT_AMOUNT}"
+    = link_to image_tag("donate_default.png"), new_session_path(:return_to => edit_myspot_donations_amounts_path, :donation_amount => Donation::DEFAULT_AMOUNT, :news_item_id => news_item.id), :rel => "facebox", :title => "Donate #{Donation::DEFAULT_AMOUNT}"
