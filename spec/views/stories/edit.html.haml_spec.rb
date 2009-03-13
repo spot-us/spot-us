@@ -6,6 +6,7 @@ describe "/stories/edit.html.haml" do
   before(:each) do
     @story = Factory(:story)
     assigns[:story] = @story
+    template.stub!(:current_user).and_return(Factory(:reporter))
   end
 
   it "should render" do
@@ -23,6 +24,21 @@ describe "/stories/edit.html.haml" do
   it 'includes a textarea for external links' do
     do_render
     response.should have_tag('textarea[name=?]', 'story[external_links]')
+  end
+  it 'includes a license text area if user.admin?' do
+    current_user = Factory(:admin)
+    current_user.stub!(:admin?).and_return(true)
+    template.stub!(:current_user).and_return(current_user)
+    do_render
+    response.should have_tag('textarea[name=?]', 'story[license]')
+  end
+
+  it 'does not include a license text area if !user.admin?' do
+    current_user = Factory(:admin)
+    current_user.stub!(:admin?).and_return(false)
+    template.stub!(:current_user).and_return(current_user)
+    do_render
+    response.should_not have_tag('textarea[name=?]', 'story[license]')
   end
 
   def do_render
