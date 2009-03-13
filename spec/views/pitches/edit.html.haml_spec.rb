@@ -20,18 +20,6 @@ describe "/pitches/edit.html.haml" do
     do_render
   end
 
-  it 'includes a license text area if user.admin?' do
-    @current_user.stub!(:admin?).and_return(true)
-    do_render
-    response.should have_tag('textarea[name=?]', 'pitch[license]')
-  end
-
-  it 'does not include a license text area if !user.admin?' do
-    @current_user.stub!(:admin?).and_return(false)
-    do_render
-    response.should_not have_tag('textarea[name=?]', 'pitch[license]')
-  end
-
   def do_render
     render "/pitches/edit.html.haml"
   end
