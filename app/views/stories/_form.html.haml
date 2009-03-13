@@ -16,6 +16,11 @@
       = fckeditor_textarea("story", "external_links", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
 
     .yellow-spacer-negative
+    - if current_user.admin?
+      .row
+        = f.label :license
+        = fckeditor_textarea("story", "license", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
+    .yellow-spacer-negative
     .row
       %label{:for => ""} 
         Add Media
