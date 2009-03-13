@@ -80,19 +80,19 @@ class NewsItem < ActiveRecord::Base
     validates_attachment_size :featured_image, :in => 1..5.megabytes
   end
 
-  named_scope :newest, :order => 'news_items.created_at DESC'
-  named_scope :unfunded, :conditions => "status NOT IN('accepted','funded')"
-  named_scope :pitch_or_tip, :conditions => 'type IN("Pitch","Tip")'
+  named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
+  named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded')"
+  named_scope :pitch_or_tip, :conditions => 'news_items.type IN("Pitch","Tip")'
   named_scope :top_four, :limit => 4
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
-  named_scope :fundable_news_item, :conditions => ['type in (?)', ["Pitch", "Tip"]]
+  named_scope :fundable_news_item, :conditions => ['news_items.type in (?)', ["Pitch", "Tip"]]
   named_scope :by_network, lambda {|network|
     return {} unless network
     { :conditions => { :network_id => network.id } }
   }
   named_scope :all_news_items
-  named_scope :exclude_type, lambda {|type| { :conditions => ['type != ?', type] } }
+  named_scope :exclude_type, lambda {|type| { :conditions => ['news_items.type != ?', type] } }
 
 
   cattr_reader :per_page
