@@ -34,3 +34,10 @@ Feature: Creating a pitch
     And I should see "Headline can't be blank"
     And I should see "Short description can't be blank"
     And I should see "Contract agreement must be accepted"
+
+  Scenario: A non-logged in user starts a story
+    Given I am at the Home Page
+    And I follow "Start a Story"
+    And I login as a reporter
+    Then I should be on the new pitch page
+
