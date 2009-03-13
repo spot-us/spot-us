@@ -114,9 +114,9 @@ class Pitch < NewsItem
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
   named_scope :featured, :conditions => {:feature => true}
   named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
-  named_scope :sorted, lambda {|direction| { :order => "created_at #{direction}" } }
-  named_scope :without_a_story, :conditions => 'id NOT IN (SELECT news_item_id FROM news_items WHERE type = "Story" AND status = "published")'
-  named_scope :browsable, :conditions => "status != 'unapproved'"
+  named_scope :sorted, lambda {|direction| { :order => "news_items.created_at #{direction}" } }
+  named_scope :without_a_story, :conditions => 'news_items.id NOT IN (SELECT news_item_id FROM news_items WHERE news_items.type = "Story" AND news_items.status = "published")'
+  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
 
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
