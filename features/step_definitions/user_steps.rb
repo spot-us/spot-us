@@ -20,3 +20,13 @@ Given /^I am logged in as a (.*)$/ do |user_type|
   fill_in("password", :with => @current_user.password)
   click_button("Login")
 end
+
+Given /^I login as a (.*)$/ do |user_type|
+  @current_user ||= Factory(user_type.to_sym)
+  @current_user.approve! if @current_user.organization?
+  @current_user.activate! unless @current_user.active?
+  @user = @current_user
+  fill_in("email",    :with => @current_user.email)
+  fill_in("password", :with => @current_user.password)
+  click_button("Login")
+end

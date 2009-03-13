@@ -28,7 +28,7 @@ function submitToLogin(form) {
   amount = jQuery('#' + form + ' input[name="donation[amount]"]').val();
   pitch_id = jQuery('#' + form + ' input[name="donation[pitch_id]"]').val();
   jQuery.facebox(function($) {
-    jQuery.post(form_action, { amount : amount, pitch_id : pitch_id }, function(data) { jQuery.facebox(data) });
+    jQuery.post(form_action, { amount : amount, news_item_id : pitch_id }, function(data) { jQuery.facebox(data) });
   });
 }
 
