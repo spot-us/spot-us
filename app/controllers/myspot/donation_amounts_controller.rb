@@ -1,9 +1,14 @@
 class Myspot::DonationAmountsController < ApplicationController
 
-  before_filter :login_required
+  before_filter :login_required, :except => [:show]
   helper_method :unpaid_donations, :spotus_donation
 
-  def edit; end
+  def show
+    redirect_to :action => 'edit'
+  end
+
+  def edit
+  end
 
   def update
     donation_amounts = params[:donation_amounts]
