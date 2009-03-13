@@ -110,4 +110,10 @@ describe Myspot::DonationAmountsController do
   requires_login_for :get, :edit
   requires_login_for :put, :update
 
+  describe "redirects" do
+    it "show goes to edit" do
+      get :show
+      response.should redirect_to(edit_myspot_donations_amounts_path)
+    end
+  end
 end

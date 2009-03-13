@@ -11,4 +11,22 @@ describe ProfilesController do
     response.should be_success
   end
 
+  it "should redirect index" do
+    get :index
+    response.should be_redirect
+  end
+
+  describe "redirect_appropriately" do
+    it "redirects logged in users to their profile" do
+      controller.stub!(:logged_in?).and_return(true)
+      get :index
+      response.should redirect_to(myspot_profile_path)
+    end
+    it "redirects non-logged in users to the home page" do
+      controller.stub!(:logged_in?).and_return(false)
+      get :index
+      response.should redirect_to(root_path)
+    end
+  end
+
 end
