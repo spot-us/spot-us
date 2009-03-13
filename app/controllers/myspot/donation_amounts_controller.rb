@@ -12,8 +12,11 @@ class Myspot::DonationAmountsController < ApplicationController
 
   def update
     donation_amounts = params[:donation_amounts]
-    @donations = Donation.update(donation_amounts.keys, donation_amounts.values)
-    if @donations.all?{|d| d.valid? }
+    if donation_amounts
+      @donations = Donation.update(donation_amounts.keys, donation_amounts.values)
+    end
+
+    if donation_amounts.nil? || @donations.all?{|d| d.valid? }
       spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
       redirect_to new_myspot_purchase_path
     else
