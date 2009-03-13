@@ -23,6 +23,9 @@
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @post.pitch }
     .block-spacer-negative
+    .subscribe_via_rss
+      = link_to image_tag('rss_16.png'), formatted_blog_posts_pitch_path(@post.pitch, :rss)
+      = link_to 'Subscribe to this blog', formatted_blog_posts_pitch_path(@post.pitch, :rss)
     - if @post.pitch.postable_by?(current_user)
       = link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@post.pitch, @post)
     = render :partial => 'pitches/posts', :locals => {:pitch => @post.pitch}
