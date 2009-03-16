@@ -13,6 +13,14 @@ describe Story do
     end
   end
 
+  describe "validation" do
+    it "should allow p tags in extended description" do
+      story = Factory(:story)
+      story.extended_description = "<p>Some html</p>"
+      story.save
+      story.extended_description.should include("<p>")
+    end
+  end
   describe "status" do
     before(:each) do
       @story = Factory(:story)
