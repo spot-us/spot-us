@@ -40,8 +40,8 @@
 
 class Story < NewsItem
   cleanse_columns(:extended_description) do |sanitizer|
-    sanitizer.allowed_tags.replace(%w(object param embed a img))
-    sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
+    sanitizer.allowed_tags.add(%w(object param embed a img))
+    sanitizer.allowed_attributes.add(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
   end
 
   aasm_initial_state  :draft
