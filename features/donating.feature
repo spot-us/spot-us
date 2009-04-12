@@ -4,7 +4,7 @@ Feature: Donating
     Given A pitch exists
     And I view the current pitch page
     And I follow "Donate 20"
-    And I follow "New users: REGISTER HERE"
+    And I follow "New USERS: REGISTER HERE"
     And I fill in "Your First Name" with "My First Name"
     And I fill in "Your Last Name" with "My Last Name"
     And I fill in "Password" with "password"

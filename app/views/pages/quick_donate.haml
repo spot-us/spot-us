@@ -4,14 +4,23 @@
   %h2 Quick Donate
   .double_content_border
   %p
-    This feature is coming. Spot.Us is a living breathing website and we have lots of features, like
-    the ability to donate to a beat rather than a specific pitch. We have lots on our plate. Before
-    we can push forward we first have to make sure Spot.Us' website is running strong and serving
-    you.
-
-  %hr/
+    Do you want to support journalism but don't have the time to go through all the Spot.Us pitches to find the right one?
   %p
-    For now we ask that you find a specific pitch (Fund a story above) and donate to that.
+    Now you can donate to beats and Spot.Us promises that any money donated to these beats will be used ONLY for reporting within those subjects.
+  %p
+    %ul
+      %li
+        Donate to
+        == #{link_to "Environment Reporting", "http://spot.us/pitches/183"},        
+      %li
+        Donate to 
+        == #{link_to "Education Reporting", "http://spot.us/pitches/182"}, 
+      %li
+        Donate to local   
+        == #{link_to "Political Reporting", "http://spot.us/pitches/184"}, 
+  %p
+    Didn't see the topic you want to support? Let us know:
+    = mail_to "info@spot.us", nil, :encode => "hex"
 
 .block-spacer
 .block-spacer
