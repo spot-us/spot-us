@@ -41,7 +41,7 @@
       = f.text_field :requested_amount, :maxlength => 15, :size => 15
     .yellow-spacer-negative
     .row
-      = f.label :delivery_description, "Required: What will be delivered? <br /><span class='small quieter'>Explain in detail what you will produce.</span>"
+      = f.label :delivery_description, "Required:<br />What will be delivered?<br />How long will it take you? <br /> How many hours of work will this take?<br /><span class='small quieter'>Explain in detail what you will produce to justify your pricing</span>"
       .form_hint.delivered
         = f.label     :deliver_text,  "Text", :class => "small"
         = f.check_box :deliver_text
