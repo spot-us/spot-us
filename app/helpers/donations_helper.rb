@@ -3,7 +3,7 @@ module DonationsHelper
     if current_user && current_user.has_donated_to?(news_item)
       'DONATE MORE &raquo;'
     else
-      'OR DONATE ANOTHER AMOUNT &raquo;'
+      'OR DONATE ANOTHER AMOUNT &raquo;' 
     end
   end
 end
