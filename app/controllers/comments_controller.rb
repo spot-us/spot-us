@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :login_required
 
-  resources_controller_for :comments, :only => [:create]
+  resources_controller_for :comments, :only => [:create, :index]
 
   response_for :create do |format|
     format.html do
@@ -11,6 +11,12 @@ class CommentsController < ApplicationController
       else
         render :action => :new
       end
+    end
+  end
+
+  response_for :index do |format|
+    format.any do
+      redirect_to(enclosing_resource)
     end
   end
 
