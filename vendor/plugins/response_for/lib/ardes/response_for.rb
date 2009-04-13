@@ -5,7 +5,6 @@ module Ardes #:nodoc:
       base.class_eval do
         extend ClassMethods
         alias_method_chain :default_render, :response_for
-        alias_method_chain :template_exists?, :response_for
       end
     end
     
@@ -129,12 +128,6 @@ module Ardes #:nodoc:
       (response && response.content_type) ? true : false
     end
     
-    # we extend template_exists? to return true if a template OR a response exists corresponding to the current action.
-    # This is so that a default render will be triggered when no action, but a repsonse does exist.
-    def template_exists_with_response_for?
-      action_responses.any? || template_exists_without_response_for?
-    end
-
     # if the response.content_type has not been set (if it has, then responthere are responses for the current action, then respond_to them
     #
     # we rescue the case where there were no responses, so that the default_render
@@ -143,7 +136,7 @@ module Ardes #:nodoc:
       if !respond_to_performed? && action_responses.any?
         respond_to do |responder|
           action_responses.each {|response| instance_exec(responder, &response) }
-        end rescue Responder::NoResponsesError
+        end
       end
     end
     
@@ -154,26 +147,10 @@ module Ardes #:nodoc:
       default_render_without_response_for unless performed?
     end
     
-    # included into ActionController::MimeResponds::Responder
-    module Responder
-      class NoResponsesError < RuntimeError; end
-      
-      def self.included(responder)
-        responder.class_eval do
-          # we make the responder raise an error if there are no responses
-          def respond_with_response_for
-            raise NoResponseError if @responses.empty?
-            respond_without_response_for
-          end
-          alias_method_chain :respond, :response_for
-        end
-      end
-    end
-    
     module VERSION #:nodoc:
       MAJOR = 0
-      MINOR = 2
-      TINY  = 2
+      MINOR = 3
+      TINY  = 1
 
       STRING = [MAJOR, MINOR, TINY].join('.')
     end
