@@ -36,7 +36,7 @@ describe "showing a blog post" do
       response.should have_tag("h2", "Supporters")
     end
     it "should have an RSS link" do
-      response.should have_tag("a[href=?]", formatted_blog_posts_pitch_path(@pitch, :rss))
+      response.should have_tag("a[href=?]", blog_posts_pitch_path(@pitch, :format => :rss))
     end
   end
 

@@ -4,13 +4,13 @@ describe ApplicationController do
 
   describe "#current_network" do
     before do
-      controller.stub!(:current_subdomain).and_return('sfbay')
+      controller.stubs(:current_subdomain).returns('sfbay')
       @network = Factory(:network, :name => 'sfbay')
       Network.stub!(:find_by_name).and_return(@network)
     end
 
     it "should ask for the current subdomain" do
-      controller.should_receive(:current_subdomain).and_return('sfbay')
+      controller.expects(:current_subdomain).returns('sfbay')
       controller.current_network
     end
 
@@ -20,7 +20,7 @@ describe ApplicationController do
     end
 
     it "should lower case the network name" do
-      controller.stub!(:current_subdomain).and_return('SFBAY')
+      controller.stubs(:current_subdomain).returns('SFBAY')
       Network.should_receive(:find_by_name).with('sfbay').and_return(@network)
       controller.current_network
     end

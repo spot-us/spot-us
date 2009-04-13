@@ -30,14 +30,14 @@ describe StoriesController do
     it "should allow owner to edit if in draft state" do
       user = Factory(:user)
       story = Factory(:story, :user => user)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       get :edit, :id => story.id
     end
 
     it "should not allow the owner to edit if it is in any state other than draft" do
       user = Factory(:user)
       story = Factory(:story, :user => user, :status => "accepted")
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       get :edit, :id => story.id
       flash[:error].should_not be_nil
     end
@@ -48,7 +48,7 @@ describe StoriesController do
 
     it "should accept a story" do
       user = Factory(:reporter)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       story = Factory(:story, :status => "fact_check")
       story.fact_checker = user
       story.save
@@ -59,7 +59,7 @@ describe StoriesController do
 
     it "should reject a story" do
       user = Factory(:reporter)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       story = Factory(:story, :status => "fact_check")
       story.fact_checker = user
       story.save
@@ -70,7 +70,7 @@ describe StoriesController do
 
     it "should fact_check a story" do
       user = Factory(:reporter)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       story = Factory(:story, :status => "draft")
       story.fact_checker = user
       story.save
@@ -81,7 +81,7 @@ describe StoriesController do
 
     it "should publish a story" do
       user = Factory(:reporter)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       story = Factory(:story, :status => "ready")
       story.fact_checker = user
       story.save
@@ -93,7 +93,7 @@ describe StoriesController do
 
   describe "#find_resources" do
     before do
-      controller.stub!(:current_network).and_return(Factory(:network))
+      controller.stubs(:current_network).returns(Factory(:network))
       @published = []
       @by_network = stub('by_network', :published => @published)
     end

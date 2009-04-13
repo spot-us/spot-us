@@ -1,75 +1,74 @@
 class Admin::UsersController < ApplicationController
   before_filter :admin_required
   layout "bare"
-  
+
   def log_in_as
     self.current_user = User.find(params[:id])
     create_current_login_cookie
     update_balance_cookie
     redirect_to root_path
   end
-  
-  def approve 
+
+  def approve
     org = Organization.find(params[:id])
     org.approve!
     redirect_to(admin_user_path(org))
   end
-  
+
   # GET /users
   # GET /users.xml
   def index
     @users = User.find(:all)
     @fact_checkers = User.find_all_by_fact_check_interest(true)
-  
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
       format.csv do
-            csv_string = User.generate_csv
+        csv_string = User.generate_csv
 
-            # send it to the browsah
-            send_data csv_string,
-                      :type => 'text/csv; charset=iso-8859-1; header=present',
-                      :disposition => "attachment; filename=users.csv"
+        # send it to the browsah
+        send_data csv_string, :type => 'text/csv; charset=iso-8859-1; header=present',
+                              :disposition => "attachment; filename=users.csv"
       end
     end
   end
-  
+
   # GET /users/1
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-  
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
     end
   end
-  
+
   # GET /users/new
   # GET /users/new.xml
   def new
     @user = User.new
-  
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
     end
   end
-  
+
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
-  
+
   # POST /users
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-    
+
     # we have to manually set this due to attr_accessible mass-assignment guard on the model
     @user.type = params[:user][:type]
-  
+
     respond_to do |format|
       if @user.save
         flash[:notice] = 'User was successfully created.'
@@ -81,12 +80,12 @@ class Admin::UsersController < ApplicationController
       end
     end
   end
-  
+
   # PUT /users/1
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-  
+
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
@@ -98,13 +97,13 @@ class Admin::UsersController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-  
+
     respond_to do |format|
       format.html { redirect_to(admin_users_url) }
       format.xml  { head :ok }

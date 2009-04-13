@@ -20,7 +20,7 @@ describe Myspot::DonationAmountsController do
       @spotus_donation = Factory(:spotus_donation, :user => @user, :purchase => nil,
                                  :amount => 10)
       @user.stub!(:current_spotus_donation).and_return(@spotus_donation)
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
     end
 
     describe "on GET to edit" do
@@ -35,7 +35,7 @@ describe Myspot::DonationAmountsController do
       end
 
       it "should find the logged in user" do
-        controller.should_receive(:current_user).at_least(1).with().and_return(@user)
+        controller.expects(:current_user).at_least(1).returns(@user)
         do_edit
       end
 

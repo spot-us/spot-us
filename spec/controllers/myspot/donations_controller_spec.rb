@@ -7,10 +7,13 @@ describe Myspot::DonationsController do
 
   route_matches("/myspot/donations/1", :delete, :id => "1", :controller => "myspot/donations", :action => "destroy")
 
+  before do
+    @user = Factory(:user)
+    controller.stubs(:current_user).returns(@user)
+  end
+
   describe "on DELETE to destroy" do
     before do
-      @user = Factory(:user)
-      controller.stub!(:current_user).and_return(@user)
       @donation = Factory(:donation, :user => @user, :status => 'paid')
     end
 
@@ -32,8 +35,6 @@ describe Myspot::DonationsController do
 
   describe "on POST to create with valid input" do
     before do
-      @user = Factory(:user)
-      controller.stub!(:current_user).and_return(@user)
       @pitch = active_pitch
     end
 
@@ -61,12 +62,9 @@ describe Myspot::DonationsController do
 
   describe "on GET to index" do
     before do
-      @user = Factory(:user)
       @donations = [Factory(:donation)]
-
-      controller.stub!(:current_user).and_return(@user)
-      @user.stub!(:donations).and_return(@donations)
-      @donations.stub!(:paid).and_return(@donations)
+      @user.stubs(:donations).returns(@donations)
+      @donations.stubs(:paid).returns(@donations)
     end
 
     it "should response successfully" do
@@ -80,7 +78,7 @@ describe Myspot::DonationsController do
     end
 
     it "should find the current user" do
-      controller.should_receive(:current_user).at_least(1).with().and_return(@user)
+      controller.expects(:current_user).at_least(1).with().returns(@user)
       do_index
     end
 

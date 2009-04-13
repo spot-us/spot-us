@@ -39,8 +39,8 @@ describe HomesController do
     describe "for logged in reporters" do
       before do
         @reporter = Factory(:reporter)
-        controller.stub!(:logged_in?).and_return(true)
-        controller.stub!(:current_user).and_return(@reporter)
+        controller.stubs(:logged_in?).returns(true)
+        controller.stubs(:current_user).returns(@reporter)
       end
 
       it 'redirects to new_pitch_path' do
@@ -52,8 +52,8 @@ describe HomesController do
     describe "for logged in citizens" do
       before do
         @citizen = Factory(:citizen)
-        controller.stub!(:logged_in?).and_return(true)
-        controller.stub!(:current_user).and_return(@citizen)
+        controller.stubs(:logged_in?).returns(true)
+        controller.stubs(:current_user).returns(@citizen)
       end
 
       it 'redirects to new tip path' do
