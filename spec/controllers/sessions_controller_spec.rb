@@ -64,21 +64,22 @@ describe SessionsController do
   it 'sets the current user full name cookie' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
-    response.cookies["current_user_full_name"].first.should == "Bob Levine"
+    # ASK JACQUI
+    response.cookies["current_user_full_name"].should == "Bob+Levine"
   end
 
   it 'clears the current user full name cookie when logging out' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
-    response.cookies["current_user_full_name"].first.should be_nil
+    response.cookies["current_user_full_name"].should be_nil
   end
 
   it 'clears the balance text cookie when logging out' do
     user = Factory(:user, :first_name => "Bob", :last_name => "Levine", :email => 'user@example.com', :password => 'test', :password_confirmation => 'test')
     post :create, :email => 'user@example.com', :password => 'test'
     get :destroy
-    response.cookies["balance_text"].first.should be_nil
+    response.cookies["balance_text"].should be_nil
   end
 
   it 'does not remember me' do
@@ -90,7 +91,7 @@ describe SessionsController do
   it 'deletes token on logout' do
     login_as Factory(:user)
     get :destroy
-    response.cookies["auth_token"].should == []
+    response.cookies["auth_token"].should be_nil
   end
 
   describe 'when logging in from cookie' do
@@ -98,7 +99,7 @@ describe SessionsController do
       @user = Factory(:user)
       @user.remember_me
       cookies["auth_token"] = cookie_for(@user)
-      controller.stub!(:render_to_string).and_return("")
+      controller.stubs(:render_to_string).returns("")
     end
 
     it 'logs in successfully' do

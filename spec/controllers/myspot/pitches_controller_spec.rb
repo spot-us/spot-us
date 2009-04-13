@@ -7,7 +7,7 @@ describe Myspot::PitchesController do
       @user = Factory(:user)
       @pitches = [Factory(:pitch)]
 
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       @user.stub!(:pitches).and_return(@pitches)
 
       login_as @user
@@ -24,7 +24,7 @@ describe Myspot::PitchesController do
     end
 
     it "should find the current user" do
-      controller.should_receive(:current_user).at_least(1).with().and_return(@user)
+      controller.expects(:current_user).at_least(1).with().returns(@user)
       do_index
     end
 

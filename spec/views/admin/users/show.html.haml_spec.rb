@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe "/users/show.html.erb" do
+describe "/users/show.html.haml" do
   include UsersHelper
   
   before(:each) do
@@ -32,7 +32,7 @@ describe "/users/show.html.erb" do
   end
 
   it "should render attributes in <p>" do
-    render "/admin/users/show.html.erb"
+    render "/admin/users/show.html.haml"
     response.should have_text(/MyString/)
     response.should have_text(/MyString/)
     response.should have_text(/MyString/)
