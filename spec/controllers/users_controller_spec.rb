@@ -82,8 +82,8 @@ describe UsersController do
     end
 
     it "should redirect to the stored location" do
-      controller.should_receive(:redirect_back_or_default).with('/')
       do_activate
+      response.should redirect_to(root_url)
     end
 
     def do_activate(activation_code = nil)
@@ -113,8 +113,8 @@ describe UsersController do
     end
 
     it "should deliver the resend activation email" do
-      do_resend_activation
       Mailer.should_receive(:deliver_activation_email)
+      do_resend_activation
     end
 
     it "should display a success flash message" do

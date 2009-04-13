@@ -8,7 +8,7 @@ describe Myspot::TipsController do
       @user = Factory(:user)
       @tips = [Factory(:tip)]
 
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       @user.stub!(:tips).and_return(@tips)
 
       login_as @user
@@ -25,7 +25,7 @@ describe Myspot::TipsController do
     end
 
     it "should find the current user" do
-      controller.should_receive(:current_user).at_least(1).with().and_return(@user)
+      controller.expects(:current_user).at_least(1).with().returns(@user)
       do_index
     end
 

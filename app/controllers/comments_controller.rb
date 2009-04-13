@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
         flash[:notice] = "Successfully created comment"
         redirect_to :back
       else
-        render :action => :new
+        flash[:error] = "An error occurred while trying to post your comment."
+        redirect_to enclosing_resource
       end
     end
   end

@@ -5,9 +5,8 @@ class Myspot::DonationsController < ApplicationController
   response_for :create do |format|
     if resource_saved?
       update_balance_cookie
-      render :update do |page|
-        page.redirect_to edit_myspot_donations_amounts_path
-      end
+      format.js { render :text => "document.location = '#{edit_myspot_donations_amounts_url}';" }
+      format.html { redirect_to edit_myspot_donations_amounts_path }
     else
       format.js { render :action => "new"}
     end
