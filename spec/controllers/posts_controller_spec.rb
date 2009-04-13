@@ -21,8 +21,8 @@ describe PostsController do
 
   describe "#authorized?" do
     it "should ask the pitch for authorization" do
-      controller.stub!(:current_user).and_return(Factory(:reporter))
-      controller.stub!(:enclosing_resource).and_return(@pitch)
+      controller.stubs(:current_user).returns(Factory(:reporter))
+      controller.stubs(:enclosing_resource).returns(@pitch)
       @pitch.should_receive(:postable_by?).and_return(true)
       controller.send(:authorized?).should be_true
     end
@@ -37,8 +37,8 @@ describe PostsController do
 
   describe "new_resource" do
     before do
-      controller.stub!(:params).and_return({'post' => {'title' => 'title', 'body' => 'body'}})
-      controller.stub!(:current_user).and_return(@reporter)
+      controller.stubs(:params).returns({'post' => {'title' => 'title', 'body' => 'body'}})
+      controller.stubs(:current_user).returns(@reporter)
     end
     it "should assign the current user as the post's author" do
       post = controller.send(:new_resource)

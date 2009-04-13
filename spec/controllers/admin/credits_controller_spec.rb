@@ -3,19 +3,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe Admin::CreditsController do
   describe "GET to index" do
     it "should supply list of credits in descending order" do
-      controller.should_receive(:admin_required).and_return(true)
+      controller.expects(:admin_required).returns(true)
       get :index
       assigns[:credits].should_not be_nil
     end
     
     it "should supply a blank credit for the add credit form" do
-      controller.should_receive(:admin_required).and_return(true)
+      controller.expects(:admin_required).returns(true)
       get :index
       assigns[:credit].should_not be_nil
     end
     
     it "should supply list of users for the add credit form" do
-      controller.should_receive(:admin_required).and_return(true)
+      controller.expects(:admin_required).returns(true)
       get :index
       assigns[:users].should_not be_nil
     end

@@ -3,7 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe CommentsController do
   before do
     @user = Factory(:user)
-    controller.stub!(:current_user).and_return(@user)
+    controller.stubs(:current_user).returns(@user)
+    request.env["HTTP_REFERER"] = root_url
   end
 
   describe "GET to index" do
@@ -41,8 +42,9 @@ describe CommentsController do
       end
 
       it "errors" do
+        controller.stubs(:resource_saved?).returns(false)
         post :create, :comment => {:title => '', :body => ''}, :pitch_id => @pitch.id
-        response.should render_template('new')
+        response.should redirect_to(pitch_path(@pitch))
       end
     end
   end

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../../spec_helper')
 
-describe "/users/edit.html.erb" do
+describe "/users/edit.html.haml" do
   include UsersHelper
   
   before do
@@ -33,7 +33,7 @@ describe "/users/edit.html.erb" do
   end
 
   it "should render edit form" do
-    render "/admin/users/edit.html.erb"
+    render "/admin/users/edit.html.haml"
     
     response.should have_tag("form[action=#{admin_user_path(@user)}][method=post]") do
       with_tag('input#user_email[name=?]', "user[email]")

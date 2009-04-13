@@ -12,7 +12,7 @@ describe PitchesController do
     before(:each) do
       Pitch.stub!(:createable_by?).and_return(true)
       @user = Factory(:user)
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       get :new
     end
 
@@ -42,7 +42,7 @@ describe PitchesController do
     it "should deny access and add flash when donations added" do
       user = Factory(:user)
       pitch = active_pitch(:user => user)
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       donation = Factory(:donation, :pitch => pitch, :amount => 2, :status => 'paid')
       Pitch.stub!(:find).and_return(pitch)
       get :edit, :id => pitch.id
@@ -62,7 +62,7 @@ describe PitchesController do
     it "should allow an admin to have access" do
       user = Factory(:admin)
       pitch = active_pitch
-      controller.stub!(:current_user).and_return(user)
+      controller.stubs(:current_user).returns(user)
       donation = Factory(:donation, :pitch => pitch, :amount => 3, :status => 'paid')
       get :edit, :id => pitch.id
       flash[:error].should be_nil
@@ -72,7 +72,7 @@ describe PitchesController do
   describe "on GET to /pitches/1/edit" do
     describe "without donations" do
       it "renders edit" do
-        controller.stub!(:can_edit?).and_return(true)
+        controller.stubs(:can_edit?).returns(true)
         pitch = Factory(:pitch)
         get :edit, :id => pitch.to_param
         response.should render_template(:edit)
@@ -84,8 +84,8 @@ describe PitchesController do
     before do
       @pitch = Factory(:pitch)
       @reporter = @pitch.user
-      controller.stub!(:current_user).and_return(@reporter)
-      controller.stub!(:can_edit?).and_return(true)
+      controller.stubs(:current_user).returns(@reporter)
+      controller.stubs(:can_edit?).returns(true)
     end
 
     it "allows the pitch's reporter to make valid updates" do
@@ -102,11 +102,11 @@ describe PitchesController do
     before do
       @pitch = Factory(:pitch)
       @organization = Factory(:organization)
-      controller.stub!(:current_user).and_return(@organization)
+      controller.stubs(:current_user).returns(@organization)
     end
 
     it "requires an organization" do
-      controller.stub!(:current_user).and_return(Factory(:reporter))
+      controller.stubs(:current_user).returns(Factory(:reporter))
       put :show_support, :id => @pitch.id
       response.should redirect_to(new_session_path)
     end
@@ -117,13 +117,13 @@ describe PitchesController do
     end
 
     it "should call show_support! on the pitch" do
-      controller.stub!(:find_resource).and_return(@pitch)
+      controller.stubs(:find_resource).returns(@pitch)
       @pitch.should_receive(:show_support!).and_return(true)
       put :show_support, :id => @pitch.id
     end
 
     it "shows a success message" do
-      controller.stub!(:find_resource).and_return(@pitch)
+      controller.stubs(:find_resource).returns(@pitch)
       @pitch.stub!(:show_support!).and_return(true)
       put :show_support, :id => @pitch.id
       flash[:success].should_not be_nil
@@ -135,8 +135,8 @@ describe PitchesController do
       @pitch = Factory(:pitch)
       @pitch.stub!(:apply_to_contribute)
       @reporter = Factory(:reporter)
-      controller.stub!(:current_user).and_return(@reporter)
-      controller.stub!(:find_resource).and_return(@pitch)
+      controller.stubs(:current_user).returns(@reporter)
+      controller.stubs(:find_resource).returns(@pitch)
     end
 
     it "adds a reporter to contributors" do
@@ -146,13 +146,13 @@ describe PitchesController do
 
     it "adds a new org to contributors" do
       organization = Factory(:organization)
-      controller.stub!(:current_user).and_return(organization)
+      controller.stubs(:current_user).returns(organization)
       @pitch.should_receive(:apply_to_contribute)
       get :apply_to_contribute, :id => @pitch.id
     end
     it "adds a citizen to contributors" do
       citizen = Factory(:citizen)
-      controller.stub!(:current_user).and_return(citizen)
+      controller.stubs(:current_user).returns(citizen)
       @pitch.should_receive(:apply_to_contribute)
       get :apply_to_contribute, :id => @pitch.id
     end
@@ -174,7 +174,7 @@ describe PitchesController do
     end
 
     it "should call feature! on the pitch" do
-      controller.stub!(:find_resource).and_return(@pitch)
+      controller.stubs(:find_resource).returns(@pitch)
       @pitch.should_receive(:feature!).and_return(true)
       put :feature, :id => @pitch.id
     end
@@ -191,7 +191,7 @@ describe PitchesController do
     end
 
     it "should call feature! on the pitch" do
-      controller.stub!(:find_resource).and_return(@pitch)
+      controller.stubs(:find_resource).returns(@pitch)
       @pitch.should_receive(:unfeature!).and_return(true)
       put :unfeature, :id => @pitch.id
     end
@@ -200,19 +200,19 @@ describe PitchesController do
   describe "on PUT to half_fund" do
     before do
       @organization = Factory(:organization)
-      controller.stub!(:current_user).and_return(@organization)
+      controller.stubs(:current_user).returns(@organization)
       @pitch = Factory(:pitch)
       Pitch.stub!(:find).and_return(@pitch)
     end
 
     it "requires a logged in user" do
-      controller.should_receive(:current_user).and_return(nil)
+      controller.expects(:current_user).returns(nil)
       put :half_fund, :id => @pitch.id
       response.should redirect_to(new_session_path)
     end
 
     it "requires the current user is a news organization" do
-      controller.stub!(:current_user).and_return(Factory(:reporter))
+      controller.stubs(:current_user).returns(Factory(:reporter))
       put :half_fund, :id => @pitch.id
       flash[:error].should_not be_nil
       response.should redirect_to(new_session_path)
@@ -263,19 +263,19 @@ describe PitchesController do
   describe "on PUT to fully_fund" do
     before do
       @organization = Factory(:organization)
-      controller.stub!(:current_user).and_return(@organization)
+      controller.stubs(:current_user).returns(@organization)
       @pitch = Factory(:pitch)
       Pitch.stub!(:find).and_return(@pitch)
     end
 
     it "requires a logged in user" do
-      controller.should_receive(:current_user).and_return(nil)
+      controller.expects(:current_user).returns(nil)
       put :fully_fund, :id => @pitch.id
       response.should redirect_to(new_session_path)
     end
 
     it "requires the current user is a news organization" do
-      controller.stub!(:current_user).and_return(Factory(:reporter))
+      controller.stubs(:current_user).returns(Factory(:reporter))
       put :fully_fund, :id => @pitch.id
       flash[:error].should_not be_nil
       response.should redirect_to(new_session_path)
@@ -328,7 +328,7 @@ describe PitchesController do
   describe "on GET to new with a headline" do
     before do
       login_as Factory(:user)
-      controller.stub!(:can_create?).and_return(true)
+      controller.stubs(:can_create?).returns(true)
       get :new, :headline => 'example'
     end
 
