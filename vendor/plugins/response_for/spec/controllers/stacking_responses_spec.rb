@@ -6,6 +6,12 @@ require File.expand_path(File.join(File.dirname(__FILE__), '../spec_helper'))
 module StackingResponsesSpec
   class TheController < ActionController::Base
     response_for :foo do |format|
+      format.html do
+        render :text => "default"
+      end
+    end
+    
+    response_for :foo do |format|
       in_first
       if params[:first]
         format.html do
@@ -24,7 +30,7 @@ module StackingResponsesSpec
         end
       end
     end
-    
+        
   protected
     def in_first; end
     def in_first_html; end
@@ -50,9 +56,9 @@ module StackingResponsesSpec
         get :foo
       end
       
-      it "should render :action => :foo (the default response)" do
+      it "should render the default response" do
         get :foo
-        response.should render_template(:foo)
+        response.body.should == "default"
       end
     end
     

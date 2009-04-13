@@ -3,46 +3,34 @@ require File.expand_path(File.join(File.dirname(__FILE__), '../spec_helper'))
 module NoResponseIfPerformedSpec
   # example setup
   class TheController < ActionController::Base
-    before_filter :redirect
+    before_filter :do_redirect
     
     response_for :an_action do |format|
-      format.html { in_response_for }
+      format.html { render :text => "in response for" }
     end
     
   protected
-    def redirect
+    def do_redirect
       redirect_to 'http://redirected.from.before_filter'
     end
-    
-    def in_response_for; end
   end
   
   describe TheController do
-    describe "when before_filter redirects, GET :an_action" do
-      it "should redirect to 'http://redirected.from.before_filter'" do
+    describe "(when before_filter redirects)" do
+      it "GET :an_action should redirect to 'http://redirected.from.before_filter'" do
         get :an_action
         response.should redirect_to('http://redirected.from.before_filter')
       end
-    
-      it "should not execute inside response_for" do
-        @controller.should_not_receive :in_response_for
-        get :an_action
-      end
     end
     
-    describe "when before_filter doesn't redirect, GET :an_action" do
+    describe "(when before_filter doesn't redirect)" do
       before do
-        @controller.stub!(:redirect)
+        @controller.stub!(:do_redirect)
       end
       
-      it "should execute inside response for" do
-        @controller.should_receive :in_response_for
+      it "GET :an_action should execute inside response for" do
         get :an_action
-      end
-      
-      it "should render :an_action" do
-        get :an_action
-        response.should render_template(:an_action)
+        response.body.should == 'in response for'
       end
     end
   end

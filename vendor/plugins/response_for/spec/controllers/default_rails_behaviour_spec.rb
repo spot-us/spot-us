@@ -5,6 +5,7 @@ module DefaultRailsBehaviourSpec
     def two_respond_tos
       respond_to {|f| f.html { first }}
       respond_to {|f| f.html { second }}
+      render :text => ""
     end
   
     def two_responses
@@ -12,6 +13,7 @@ module DefaultRailsBehaviourSpec
         f.html { first }
         f.html { second }
       end
+      render :text => ""
     end
   end
 
