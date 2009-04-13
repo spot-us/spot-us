@@ -824,8 +824,8 @@ module Ardes#:nodoc:
         resource_specification.find ? resource_specification.find_custom(controller) : super
       end
       
-      def respond_to?(method)
-        super || service.respond_to?(method)
+      def respond_to?(method, include_private = false)
+        super || service.respond_to?(method, include_private)
       end
     
       def service

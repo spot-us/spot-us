@@ -54,8 +54,8 @@ module Ardes#:nodoc:
         end
       end
 
-      def respond_to_with_named_route_helper?(method)
-        respond_to_without_named_route_helper?(method) || resource_named_route_helper_method?(method)
+      def respond_to_with_named_route_helper?(method, include_private = false)
+        respond_to_without_named_route_helper?(method, include_private) || resource_named_route_helper_method?(method)
       end
 
       # return true if the passed method (e.g. 'resources_path') corresponds to a defined
