@@ -63,30 +63,42 @@ module InheritedControllerSpec
   describe SuperController do
     describe "GET :an_action" do
       it "should execute action" do
-        @controller.should_receive :inside_an_action
-        get :an_action
+        spec = lambda do
+          @controller.should_receive :inside_an_action
+          get :an_action
+        end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
     
       it "should render :an_action" do
-        get :an_action
-        # different rails/rspec behaviour catered for
-        begin
-          response.should render_template('an_action')
-        rescue
-          response.should render_template('inherited_spec/super/an_action')
+        spec = lambda do
+          get :an_action
+          # different rails/rspec behaviour catered for
+          begin
+            response.should render_template('an_action')
+          rescue
+            response.should render_template('inherited_spec/super/an_action')
+          end
         end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
     end
     
     describe "GET :a_response" do
       it "should execute inside the super response block" do
-        @controller.should_receive :super_inside_a_response
-        get :a_response
+        spec = lambda do
+          @controller.should_receive :super_inside_a_response
+          get :a_response
+        end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
       
       it "should NOT execute inside the sub response block" do
-        @controller.should_not_receive :sub_inside_a_response
-        get :a_response
+        spec = lambda do
+          @controller.should_not_receive :sub_inside_a_response
+          get :a_response
+        end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
     end
     
@@ -113,13 +125,19 @@ module InheritedControllerSpec
     
     describe "GET :a_response (decorated with a new response)" do
       it "should NOT execute the super response" do
-        @controller.should_not_receive :super_inside_a_response
-        get :a_response
+        spec = lambda do
+          @controller.should_not_receive :super_inside_a_response
+          get :a_response
+        end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
 
       it "should execute the sub response" do
-        @controller.should_receive :sub_inside_a_response
-        get :a_response
+        spec = lambda do
+          @controller.should_receive :sub_inside_a_response
+          get :a_response
+        end
+        Rails.version >= '2.3' ? pending("rspec/rails2.3 integrate_views working") { spec.call } : spec.call
       end
     end
     
