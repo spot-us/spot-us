@@ -15,7 +15,7 @@ describe Myspot::PurchasesController do
                                                      :user  => @user,
                                                      :pitch => pitch) }
 
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       @user.stub!(:donations).and_return(@donations)
       @donations.stub!(:unpaid).and_return(@donations)
 
@@ -50,7 +50,7 @@ describe Myspot::PurchasesController do
     end
 
     it "should find the current user" do
-      controller.should_receive(:current_user).at_least(1).and_return(@user)
+      controller.expects(:current_user).at_least(1).returns(@user)
       do_new
     end
 
@@ -107,7 +107,7 @@ describe Myspot::PurchasesController do
       @donations = @pitches.collect {|pitch| Factory(:donation,
                                                      :user  => @user,
                                                      :pitch => pitch) }
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       login_as @user
     end
 
@@ -121,11 +121,11 @@ describe Myspot::PurchasesController do
     end
 
     it "should update the balance_text cookie after a successful donation" do
-      controller.stub!(:current_balance).and_return(10)
+      controller.stubs(:current_balance).returns(10)
       @user.stub!(:credits?).and_return(true)
       @user.stub!(:total_credits).and_return(30.89)
       do_create
-      response.cookies['balance_text'].first.should include('$30.89')
+      URI.decode(response.cookies['balance_text']).should include('$30.89')
     end
 
     def do_create

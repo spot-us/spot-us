@@ -12,7 +12,7 @@ describe TipsController do
   describe "on GET to /tips/new" do
     before(:each) do
       @user = Factory(:user)
-      controller.stub!(:current_user).and_return(@user)
+      controller.stubs(:current_user).returns(@user)
       get :new
     end
 
@@ -28,7 +28,7 @@ describe TipsController do
 
     describe "without pledges" do
       it "renders edit" do
-        controller.stub!(:can_edit?).and_return(true)
+        controller.stubs(:can_edit?).returns(true)
         t = Factory :tip
         get :edit, :id => t.to_param
         response.should render_template(:edit)
@@ -37,7 +37,7 @@ describe TipsController do
 
     describe "with a pledge" do
       it "renders edit" do
-        controller.stub!(:can_edit?).and_return(true)
+        controller.stubs(:can_edit?).returns(true)
         t = Factory :tip
         p = Factory :pledge, :tip => t
         get :edit, :id => t.to_param

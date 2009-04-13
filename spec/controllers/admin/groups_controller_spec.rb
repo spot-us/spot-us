@@ -4,11 +4,11 @@ describe Admin::GroupsController do
   route_matches('/admin/groups', :get, :controller => 'admin/groups', :action => 'index')
 
   before do
-    controller.stub!(:current_user).and_return(Factory(:admin))
+    controller.stubs(:current_user).returns(Factory(:admin))
   end
 
   it 'redirects to login if not an admin' do
-    controller.stub!(:current_user).and_return(Factory(:citizen))
+    controller.stubs(:current_user).returns(Factory(:citizen))
     get :new
     response.should redirect_to(new_session_path)
   end

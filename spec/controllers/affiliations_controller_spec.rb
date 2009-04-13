@@ -10,8 +10,8 @@ describe AffiliationsController do
       @pitch = Factory(:pitch, :user => @reporter)
       @tip = Factory(:tip)
       @affiliation = Affiliation.new(:tip => @tip, :pitch => @pitch)
-      controller.stub!(:new_resource).and_return(@affiliation)
-      controller.stub!(:current_user).and_return(@reporter)
+      controller.stubs(:new_resource).returns(@affiliation)
+      controller.stubs(:current_user).returns(@reporter)
     end
     it "requires the current user to be the pitch's reporter" do
       @affiliation.stub!(:createable_by?).and_return(false)
@@ -20,14 +20,14 @@ describe AffiliationsController do
     end
     it "redirects back to tip and displays an error message when it fails" do
       @affiliation.stub!(:createable_by?).and_return(true)
-      controller.stub!(:resource_saved?).and_return(false)
+      controller.stubs(:resource_saved?).returns(false)
       do_create
       flash[:error].should_not be_nil
       response.should redirect_to(tip_path(@tip))
     end
     it "redirects back to tip and displays a success message when it succeeds" do
       @affiliation.stub!(:createable_by?).and_return(true)
-      controller.stub!(:resource_saved?).and_return(true)
+      controller.stubs(:resource_saved?).returns(true)
       do_create
       flash[:success].should_not be_nil
       response.should redirect_to(tip_path(@tip))

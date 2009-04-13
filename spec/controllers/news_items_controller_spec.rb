@@ -36,7 +36,7 @@ describe NewsItemsController do
     end
 
     it "should call options_for_sorting" do
-      controller.should_receive(:options_for_sorting)
+      controller.expects(:options_for_sorting)
       do_sort_options
     end
 
@@ -79,8 +79,8 @@ describe NewsItemsController do
 
   describe "#get_news_items" do
     before do
-      controller.stub!(:params).and_return({:news_item_type => 'pitches', :page => '1'})
-      controller.stub!(:current_network).and_return(Factory(:network))
+      controller.stubs(:params).returns({:news_item_type => 'pitches', :page => '1'})
+      controller.stubs(:current_network).returns(Factory(:network))
       @with_sort = stub('with_sort')
       @paginate = []
       @by_network = stub('by_network', :paginate => @paginate)
@@ -91,7 +91,7 @@ describe NewsItemsController do
     end
 
     it "should default to pitches with an invalid type" do
-      controller.stub!(:params).and_return({:news_item_type => 'crazy_shit'})
+      controller.stubs(:params).returns({:news_item_type => 'crazy_shit'})
       Pitch.should_receive(:with_sort).and_return(@with_sort)
       controller.send(:get_news_items)
     end

@@ -18,12 +18,12 @@ describe ProfilesController do
 
   describe "redirect_appropriately" do
     it "redirects logged in users to their profile" do
-      controller.stub!(:logged_in?).and_return(true)
+      controller.stubs(:logged_in?).returns(true)
       get :index
       response.should redirect_to(myspot_profile_path)
     end
     it "redirects non-logged in users to the home page" do
-      controller.stub!(:logged_in?).and_return(false)
+      controller.stubs(:logged_in?).returns(false)
       get :index
       response.should redirect_to(root_path)
     end
