@@ -284,7 +284,7 @@ class Pitch < NewsItem
   end
 
   def has_more_posts_than(number)
-    posts.count > number
+    posts.size > number
   end
 
   def donating_groups
