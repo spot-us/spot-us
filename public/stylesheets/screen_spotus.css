@@ -116,7 +116,7 @@ h4.title {
   width: 200px;
 }
 .login-boxer .span-12 {
-  padding: 0 15px;
+  padding-top: 10px;
 }
 .float-left {
   float: left;
@@ -263,8 +263,23 @@ body {
   height: 3px;
   margin: 0 0 10px 0;
 }
+.login-boxer h3 div.float-left, .login-boxer h3 div.float-right {
+  padding-top: 10px;
+}
 .register input.text, .or_login input.text {
   width: 190px!important;
+}
+.register label {
+  display: block;
+  float: left;
+  font-weight: bold;
+  margin: 0.5em 0;
+  width: 150px;
+}
+.register label.unpadded {
+  float: left;
+  margin: 0;
+  padding: 0;
 }
 .gray_button {
   background: url(/images/spotus_button_plain_gray.gif) no-repeat 1px 3px;
