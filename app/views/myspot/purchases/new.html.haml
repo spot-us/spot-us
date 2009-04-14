@@ -50,15 +50,17 @@
     .span-595.box_yellow.create_a_tip_form
       Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
       .float-right
-        - form_tag "https://www.paypal.com/cgi-bin/webscr" do
+        - form_tag PAYPAL_POST_URL do
           = hidden_field_tag "cmd", "_cart"
           = hidden_field_tag "upload", "1"
-          = hidden_field_tag "business", Purchase::PAYPAL_EMAIL
+          = hidden_field_tag "business", PAYPAL_EMAIL
           - i = 1
           - @donations.each do |donation|
+            = hidden_field_tag "item_number_#{i}", "#{donation.id}"
             = hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}"
             = hidden_field_tag "amount_#{i}", donation.amount
             - i += 1
+          = hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}"
           = hidden_field_tag "item_name_#{i}", "Support Spot.Us"
           = hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount]
           = image_submit_tag "buy_now.gif"

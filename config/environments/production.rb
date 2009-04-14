@@ -17,3 +17,5 @@ config.after_initialize do
     :password => APP_CONFIG[:gateway][:password],
   })
 end
+PAYPAL_POST_URL = "https://www.paypal.com/cgi-bin/webscr"
+PAYPAL_EMAIL = "info@spot.us"
