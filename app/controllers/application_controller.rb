@@ -68,4 +68,21 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def store_comment_for_non_logged_in_user
+    if params[:title] && params[:body] && params[:new_item_id]
+      session[:return_to] = url_for_news_item(NewsItem.find_by_id(params[:news_item_id]))
+      session[:title] = params[:title]
+      session[:body] = params[:body]
+      session[:news_item_id] = params[:news_item_id]
+    end
+  end
+
+  def handle_comment_for_non_logged_in_user
+    if session[:title] && session[:body] && session[:news_item_id]
+      self.current_user.comments.create(:commentable_id => session[:news_item_id], :commentable_type => "NewsItem", :title => session[:title], :body => session[:body])
+      session[:news_item_id] = nil
+      session[:title] = nil
+      session[:body] = nil
+    end
+  end
 end

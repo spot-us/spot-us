@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def new
     @user = User.new
     store_news_item_for_non_logged_in_user
+    store_comment_for_non_logged_in_user
     respond_to do |format|
       format.html
       format.js { render :partial => "header_form", :layout => false }
@@ -16,6 +17,7 @@ class SessionsController < ApplicationController
       update_balance_cookie
       handle_first_donation_for_non_logged_in_user
       handle_first_pledge_for_non_logged_in_user
+      handle_comment_for_non_logged_in_user
       redirect_back_or_default('/')
     else
       @user = User.new
