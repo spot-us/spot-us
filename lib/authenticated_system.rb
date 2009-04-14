@@ -66,13 +66,10 @@ module AuthenticatedSystem
     # simply close itself.
     def access_denied(opts = {})
       respond_to do |format|
-        format.html do
+        format.any do
           flash[:error] = opts[:flash] || 'You must be logged in to access this page.'
           store_location
           redirect_to opts[:redirect] || new_session_path
-        end
-        format.any do
-          request_http_basic_authentication 'Web Password'
         end
       end
     end
@@ -80,8 +77,8 @@ module AuthenticatedSystem
     # Store the URI of the current request in the session.
     #
     # We can return to this location by calling #redirect_back_or_default.
-    def store_location
-      session[:return_to] = request.request_uri
+    def store_location(url = nil)
+      session[:return_to] = url || request.request_uri
     end
 
     # Redirect to the URI stored by the most recent store_location call or
@@ -94,7 +91,7 @@ module AuthenticatedSystem
     # Inclusion hook to make #current_user and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :logged_in?
+      base.send :helper_method, :current_user, :logged_in?, :store_location
     end
 
     # Called from #current_user.  First attempt to login by the user id stored in the session.
