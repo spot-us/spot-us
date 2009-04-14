@@ -45,13 +45,32 @@
       .clear
 
     .block-spacer-negative
+    %h3 Pay With PayPal
+    .double_content_border
+    .span-595.box_yellow.create_a_tip_form
+      Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
+      .float-right
+        - form_tag "https://www.paypal.com/cgi-bin/webscr" do
+          = hidden_field_tag "cmd", "_cart"
+          = hidden_field_tag "upload", "1"
+          = hidden_field_tag "business", Purchase::PAYPAL_EMAIL
+          - i = 1
+          - @donations.each do |donation|
+            = hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}"
+            = hidden_field_tag "amount_#{i}", donation.amount
+            - i += 1
+          = hidden_field_tag "item_name_#{i}", "Support Spot.Us"
+          = hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount]
+          = image_submit_tag "buy_now.gif"
+      .clear
+    .block-spacer-negative
 
     - form_for :purchase, :url => myspot_purchases_path do |f|
       - if @purchase.credit_covers_total?
         .span-595.box_yellow
           You have enough credits to cover this transaction. Please click Purchase to continue.
       - else
-        %h3 Payment
+        %h3 Pay With Credit Card
         .double_content_border
         .span-595.box_yellow.create_a_tip_form
           .row
