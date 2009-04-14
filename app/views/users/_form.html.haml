@@ -2,58 +2,40 @@
   - content_for :error do
     = error_messages_for :user
 
-%h3.float-left
+%h3
   Just Getting Started?
-  %br
-  %span.small.quieter.float-left{:style => "margin-bottom: 0;"}
-    All We Need&hellip;
-%h3.float-right.small
-  = link_to 'Already a member?', new_session_url
-  %br
-  = link_to 'Forgot your password?', password_user_path
-
-.double_content_border.clear
+  .float-left
+    = link_to "Forgot Password?", password_user_path, :class => "forgot_password"
+  .float-right
+    = link_to "Resend Activation Email", activation_email_user_path, :class => "forgot_password"
+.double_content_border
 - form_for(:user, @user, :url => user_path) do |f|
-  .span-6.register
-    .row
+  .register
+    %div
       = f.label :first_name, "Your First Name"
       = f.text_field :first_name, :class => "text", :tabindex => 1
-    .block-padding
-    .row
-      = f.label :password
-      = f.password_field :password, :class => "text", :tabindex => 3
-    .block-padding
-    .row
-      = f.label :email, "Your E-mail Address"
-      = f.text_field :email, :class => "text", :tabindex => 5
-  .span-6.register
-    .row
+    %div
       = f.label :last_name, "Your Last Name"
       = f.text_field :last_name, :class => "text", :tabindex => 2
-    .block-padding
-    .row
+    %div
+      = f.label :password
+      = f.password_field :password, :class => "text", :tabindex => 3
+    %div
       = f.label :password_confirmation, "Confirm Password"
       = f.password_field :password_confirmation, :class => "text", :tabindex => 4
-  .clear
-  .span-12.register
-    %span I am a:
-    .row
-      .float_left= f.radio_button :type, 'Citizen'
-      %label.float_left{:for => 'user_type_citizen'} Community Member
-    .row
-      .float_left= f.radio_button :type, 'Reporter'
-      %label.float_left{:for => 'user_type_reporter'} Reporter
-    .row
-      .float_left= f.radio_button :type, 'Organization'
-      %label.float_left{:for => 'user_type_organization'} News Publisher
-    .block-padding.clear 
+    %div
+      = f.label :email, "Your E-mail Address"
+      = f.text_field :email, :class => "text", :tabindex => 5
+    %div
+      = f.label :type, "I am a"
+      = f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]]
+    .block-padding.clear
     .row
       .float_left= f.check_box :terms_of_service, {}, '1', '0'
-      %label.float_left{:for => 'user_terms_of_service'}
-        Accept the 
+      %label{:for => 'user_terms_of_service', :class => "unpadded", :style => "width: auto;"}
+        Accept the
         = link_to 'Terms of Service', page_path('terms')
-    .block-padding.clear 
-  .clear
-  .double_content_border
-  %div{:style => "padding: 0pt 0pt 8px 5px;"}
-    %input{:type => "image", :src => "../images/register.png", :value => "Register"}
+      .block-padding.clear
+      .double_content_border
+      %div{:style => "padding: 0pt 0pt 8px 5px;"}
+        %input{:type => "image", :src => "../images/register.png", :value => "Register", :class => "float-right"}

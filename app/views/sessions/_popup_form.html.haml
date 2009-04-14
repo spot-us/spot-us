@@ -1,0 +1,13 @@
+.span-12.register
+  %div
+    %label Your E-mail Address
+    %div{:class => session_field_class_name }
+      = text_field_tag "email", nil, :class=>"text"
+  %div
+    %label Your Password
+    %div{:class => session_field_class_name }
+      = password_field_tag "password", nil, :class=>"text"
+  .clear
+  = check_box_tag 'remember_me', '1', false, :class => "float-left"
+  %label{:for => 'remember_me', :class => "unpadded"} Remember Me
+  .clear
