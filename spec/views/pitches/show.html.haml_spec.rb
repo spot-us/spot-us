@@ -37,6 +37,21 @@ describe "/pitches/show.html.haml" do
     template.should have_tag('h2.headline', /#{@pitch.headline}/i)
   end
 
+  describe "blog posts" do
+    before do
+      @pitch.stubs(:posts).returns([Factory(:post, :body => "<div><p>Some blog post text</p></div>", :pitch => @pitch)])
+    end
+    it "should include blog posts" do
+      do_render
+      template.should have_tag("h3", "Blog Posts")
+    end
+
+    it "should strip html out of blog posts" do
+      do_render
+      template.should have_tag("div.body", "Some blog post text")
+    end
+  end
+
   describe "approving and unapproving as an admin" do
     before do
       @admin = Factory(:admin)
