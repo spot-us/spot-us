@@ -160,4 +160,23 @@ describe ApplicationHelper do
       url_for_news_item(@story).should == story_path(@story)
     end
   end
+
+  describe "facebox_login_link_to" do
+    before do
+      stub!(:current_user).and_return(nil)
+      stub!(:store_location)
+      @pitch = active_pitch
+    end
+    it "returns a regular link_to if user is logged in" do
+      stub!(:current_user).and_return(Factory.build(:reporter))
+      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should == link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team')
+    end
+    it "returns a link to login with facebox if user is not logged in" do
+      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[rel='facebox'][href=?]", new_session_path)
+    end
+    it "stores the location" do
+      expects(:store_location)
+      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team')
+    end
+  end
 end

@@ -1,5 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def facebox_login_link_to(*args, &block)
+    return link_to(*args, &block) if current_user
+    url = url_for(args.second)
+    store_location(url)
+    link_to args.first, new_session_path, :rel => 'facebox'
+  end
 
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
