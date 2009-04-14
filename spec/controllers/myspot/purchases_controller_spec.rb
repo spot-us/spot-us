@@ -208,6 +208,89 @@ describe Myspot::PurchasesController do
       post :create, :purchase => Factory.attributes_for(:purchase)
     end
   end
+
+  describe "PayPal response" do
+    before do
+      @params =  {"protection_eligibility"=>"Eligible", 
+        "tax"=>"0.00",
+        "payment_status"=>"Completed",
+        "address_name"=>"Test User",
+        "business"=>"dev+pa_1239041752_biz@hashrocket.com",
+        "address_country"=>"United States",
+        "address_city"=>"San Jose",
+        "payer_email"=>"dev+pa_1239041717_per@hashrocket.com",
+        "receiver_id"=>"HQ79EJ4KFPWAU",
+        "residence_country"=>"US",
+        "payment_gross"=>"440.00",
+        "mc_shipping"=>"0.00",
+        "receiver_email"=>"dev+pa_1239041752_biz@hashrocket.com",
+        "mc_gross_1"=>"200.00",
+        "address_street"=>"1 Main St",
+        "mc_handling1"=>"0.00",
+        "verify_sign"=>"AVv2fa0VdjSSQ6PhgLCpIgZ3PpygAdpa6bB9AXSMUbqY5xLKMkkniUrh",
+        "mc_gross_2"=>"200.00",
+        "address_zip"=>"95131",
+        "mc_handling2"=>"0.00",
+        "item_name1"=>"PITCH: testing testing",
+        "txn_type"=>"cart",
+        "mc_currency"=>"USD",
+        "mc_gross_3"=>"40.00",
+        "transaction_subject"=>"Shopping Cart",
+        "charset"=>"windows-1252",
+        "address_country_code"=>"US",
+        "mc_handling3"=>"0.00",
+        "txn_id"=>"0PB07920SY555151E",
+        "item_name2"=>"PITCH: testing testing",
+        "item_number1"=>"",
+        "notify_version"=>"2.8",
+        "payer_status"=>"verified",
+        "tax1"=>"0.00",
+        "address_state"=>"CA",
+        "payment_fee"=>"13.06",
+        "item_name3"=>"Support Spot.Us",
+        "quantity1"=>"1",
+        "address_status"=>"confirmed",
+        "item_number2"=>"",
+        "payment_date"=>"13:16:29 Apr 14, 2009 PDT",
+        "mc_handling"=>"0.00",
+        "mc_fee"=>"13.06",
+        "tax2"=>"0.00",
+        "quantity2"=>"1",
+        "item_number3"=>"",
+        "first_name"=>"Test",
+        "num_cart_items"=>"3",
+        "mc_shipping1"=>"0.00",
+        "tax3"=>"0.00",
+        "payment_type"=>"instant",
+        "quantity3"=>"1",
+        "test_ipn"=>"1",
+        "mc_gross"=>"440.00",
+        "payer_id"=>"XABGXAPTSL7QS",
+        "mc_shipping2"=>"0.00",
+        "last_name"=>"User",
+        "custom"=>"",
+        "mc_shipping3"=>"0.00"}
+    end
+
+    describe "when the payment has been completed" do
+      it "posts to the paypal url with an additional cmd parameter" do
+        HTTParty.expects(:post).with(PAYPAL_POST_URL, @params.merge({"cmd" => "_notify_validate"}))
+        post :paypal_response, @params
+      end
+    end
+
+    describe "when a payment was been successful" do
+      it "creates a purchase"
+      it "marks donations paid"
+      it "marks the spot-us donation paid"
+    end
+
+    describe "when a payment was unsuccessful" do
+      it "does not mark donations paid"
+      it "does not mark the spot-us donation paid"
+    end
+  end
+
   requires_login_for :get, :new
   requires_login_for :post, :create
 

@@ -51,7 +51,7 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :pitches, :member => {:accept => :put}
     myspot.resources :posts
     myspot.resources :pledges
-    myspot.resources :purchases
+    myspot.resources :purchases, :collection => {:paypal_response => :post}
     myspot.resources :tips
   end
 
