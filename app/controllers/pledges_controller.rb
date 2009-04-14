@@ -5,7 +5,8 @@ class PledgesController < ApplicationController
 
   response_for :create do |format|
     if resource_saved?
-      format.js
+      format.js { render :text => "document.location = '#{search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc')}';" }
+      format.html { redirect_to search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc') }
     else
       format.js { render :action => "new"}
     end
@@ -24,12 +25,10 @@ class PledgesController < ApplicationController
 
   def can_create?
     if current_user.nil?
-      render :update do |page|
-        session[:return_to] = search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc')
-        page.redirect_to new_session_path(:news_item_id => params[:pledge][:tip_id],
-                                          :pledge_amount => params[:pledge][:amount],
-                                          :escape => false)
-      end and return false
+      session[:return_to] = search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc')
+      session[:news_item_id] = params[:tip_id]
+      session[:pledge_amount] = params[:amount]
+      render :partial => "sessions/header_form" and return false
     end
 
     access_denied unless Pledge.createable_by?(current_user)
