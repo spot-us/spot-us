@@ -7,11 +7,6 @@ describe 'users/new' do
     assigns[:user]  = Factory(:user)
   end
 
-  it "should have a link to login" do
-    do_render
-    template.should have_tag('a[href=?]', new_session_url)
-  end
-
   it "should have a link to forgot password" do
     do_render
     template.should have_tag('a[href=?]', password_user_path)
@@ -37,9 +32,9 @@ describe 'users/new' do
     template.should have_tag('input[type="text"][name=?]', "user[last_name]")
   end
 
-  it "should have radio buttons for different user types" do
+  it "should have a dropdown menu for different user types" do
     do_render
-    template.should have_tag('input[type="radio"][name=?]', "user[type]")
+    template.should have_tag('select[name=?]', "user[type]")
   end
 
   it "should have a checkbox for accepting the terms of service" do
