@@ -9,6 +9,7 @@ jQuery(document).ready(function($){
     load_categories(id);
   }
   $('a[rel*=facebox]').facebox();
+  $('form[rel*=facebox]').facebox();
 
   $("#pitches_carousel").jCarouselLite({
     btnNext: ".next",
@@ -23,12 +24,36 @@ jQuery("a").click(function($){
   return false;
 });
 
-function submitToLogin(form) {
-  form_action = jQuery('#' + form).attr("action");
-  amount = jQuery('#' + form + ' input[name="donation[amount]"]').val();
-  pitch_id = jQuery('#' + form + ' input[name="donation[pitch_id]"]').val();
+function submitCommentToLogin() {
+  form_action = jQuery('#comments_form').attr("action");
+  title = jQuery('#comments_form input[name="comment[title]"]').val();
+  window.frames[0].FCK.UpdateLinkedField();
+  body = window.frames[0].FCK.LinkedField.value
+  news_item_id = jQuery('#comments_form input[name="comment[news_item_id]"]').val();
+
   jQuery.facebox(function($) {
-    jQuery.post(form_action, { amount : amount, pitch_id : pitch_id }, function(data) { jQuery.facebox(data) });
+    jQuery.post(form_action, { title : title, body : body, news_item_id : news_item_id }, function(data) { jQuery.facebox(data) });
+  });
+}
+
+function submitToLogin(form, type) {
+  if ( type == undefined ) {
+    type = "donation";
+    news_item = "pitch_id";
+  } else {
+    type = "pledge";
+    news_item = "tip_id";
+  }
+
+  form_action = jQuery('#' + form).attr("action");
+  amount = jQuery('#' + form + ' input[name="' + type + '[amount]"]').val();
+  news_item_id = jQuery('#' + form + ' input[name="' + type + '[' + news_item + ']"]').val();
+  jQuery.facebox(function($) {
+    if ( type == "donation" ) {
+      jQuery.post(form_action, { amount : amount, pitch_id : news_item_id }, function(data) { jQuery.facebox(data) });
+    } else {
+      jQuery.post(form_action, { amount : amount, tip_id : news_item_id }, function(data) { jQuery.facebox(data) });
+    }
   });
 }
 

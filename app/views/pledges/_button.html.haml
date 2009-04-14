@@ -6,12 +6,19 @@
       - remote_form_for Pledge.new(:tip => news_item, :amount => Donation::DEFAULT_AMOUNT) do |f|
         = f.hidden_field :amount
         = f.hidden_field :tip_id
-        = image_submit_tag("pledge_default.png")
+        - if logged_in?
+          = image_submit_tag("pledge_default.png")
+        - else
+          = link_to image_tag("pledge_default.png"), new_session_path(:return_to => myspot_pledges_path, :pledge_amount => Donation::DEFAULT_AMOUNT, :news_item_id => news_item.id), :rel => "facebox", :title => "Pledge #{Donation::DEFAULT_AMOUNT}"
+
     %div.inline_pledge{:style => "display:none", :id => "pledge_custom_#{news_item.id}"}
-      - remote_form_for Pledge.new(:tip => news_item) do |f|
+      - remote_form_for Pledge.new(:tip => news_item), :html => { :id => "custom_pledge_#{news_item.id}" } do |f|
         .float_left= f.text_field :amount
         = f.hidden_field :tip_id
-        .float_right= image_submit_tag("pledge.png")
+        - if logged_in?
+          .float_right= image_submit_tag("pledge.png")
+        - else
+          .float_right= link_to_function image_tag("pledge.png"), "submitToLogin('custom_pledge_#{news_item.id}', 'pledge')", :rel => "facebox", :title => "Pledge #{Donation::DEFAULT_AMOUNT}"
         .clear
     .small.uppcased_button_text
       = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
