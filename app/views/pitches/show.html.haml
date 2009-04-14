@@ -53,7 +53,7 @@
       = render :partial => 'shared/comment', :collection => @pitch.comments
     %h3 Post A Comment
     .double_content_border
-    - form_for [@pitch, Comment.new] do |f|
+    - form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form' } do |f|
       = render :partial => 'comments/form', :locals => {:f => f}
 
   .span-220.column_v.box_white
@@ -92,7 +92,7 @@
           - if @pitch.contributor_applicants.include?(current_user)
             = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
           - else
-            = link_to image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team'
+            = facebox_login_link_to(image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team')
     .block-spacer-negative
     %h3 Related Tips
     .double_content_border
