@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :login_required
+  skip_before_filter :verify_authenticity_token
+  before_filter :login_required, :except => :create
 
   resources_controller_for :comments, :only => [:create, :index]
 
@@ -22,6 +23,15 @@ class CommentsController < ApplicationController
   end
 
   protected
+  def can_create?
+    if current_user.nil?
+      store_comment_for_non_logged_in_user
+      render :partial => "sessions/header_form" and return false
+    end
+
+    access_denied unless current_user
+  end
+
   def new_resource
     returning resource_service.new(params[resource_name]) do |resource|
       resource.user = current_user
