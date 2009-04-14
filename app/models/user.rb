@@ -83,6 +83,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
+  has_many :comments
   has_many :contributor_applications
   has_many :pledges do
     def tip_sum(tip)
