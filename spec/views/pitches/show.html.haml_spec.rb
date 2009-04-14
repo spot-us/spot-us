@@ -311,6 +311,11 @@ describe "/pitches/show.html.haml" do
         do_render
         response.should have_tag("a[href=?]", apply_to_contribute_pitch_path(@pitch))
       end
+      it "Join Reporting Team button should link to login in a facebox if necessary" do
+        template.stub!(:current_user).and_return(nil)
+        do_render
+        response.should have_tag("a[href=?][rel='facebox']", new_session_path)
+      end
       it "should not show when the current user is the reporter for the pitch" do
         template.stub!(:current_user).and_return(@pitch.user)
         do_render
