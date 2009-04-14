@@ -1,4 +1,5 @@
 class Myspot::PurchasesController < ApplicationController
+  include HTTParty
 
   before_filter :login_required
   ssl_required :create, :new
@@ -31,6 +32,10 @@ class Myspot::PurchasesController < ApplicationController
       flash[:error] = e.message
       render :action => 'new'
     end
+  end
+
+  def paypal_response
+    HTTParty.post(PAYPAL_POST_URL, params.merge({"cmd" => "_notify_validate"}))
   end
 
   protected

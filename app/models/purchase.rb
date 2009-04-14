@@ -21,8 +21,6 @@
 class Purchase < ActiveRecord::Base
   class GatewayError < RuntimeError; end
 
-  PAYPAL_EMAIL = "info@spot.us"
-
   attr_accessor :credit_card_number, :credit_card_year, :credit_card_month,
     :credit_card_type, :verification_value
   attr_reader :credit_card

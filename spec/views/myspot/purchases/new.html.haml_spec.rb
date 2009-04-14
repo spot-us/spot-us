@@ -18,10 +18,10 @@ describe 'purchases/new' do
     it "has a Pay with PayPal section" do
       do_render
       template.should have_tag("h3", "Pay With PayPal")
-      template.should have_tag("form[action=?]", "https://www.paypal.com/cgi-bin/webscr") do
+      template.should have_tag("form[action=?]", PAYPAL_POST_URL) do
         with_tag("input[name='cmd'][value=?]", "_cart")
         with_tag("input[name='upload'][value=?]", "1")
-        with_tag("input[name='business'][value=?]", Purchase::PAYPAL_EMAIL)
+        with_tag("input[name='business'][value=?]", PAYPAL_EMAIL)
       end
     end
     it "includes all donations as line items" do
