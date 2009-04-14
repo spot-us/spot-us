@@ -14,6 +14,30 @@ describe 'purchases/new' do
     assigns[:purchase]  = @purchase
   end
 
+  describe "PayPal" do
+    it "has a Pay with PayPal section" do
+      do_render
+      template.should have_tag("h3", "Pay With PayPal")
+      template.should have_tag("form[action=?]", "https://www.paypal.com/cgi-bin/webscr") do
+        with_tag("input[name='cmd'][value=?]", "_cart")
+        with_tag("input[name='upload'][value=?]", "1")
+        with_tag("input[name='business'][value=?]", Purchase::PAYPAL_EMAIL)
+      end
+    end
+    it "includes all donations as line items" do
+      do_render
+      @donations.each do |donation|
+        template.should have_tag("input[type='hidden'][value=?]", "PITCH: #{donation.pitch.headline}")
+        template.should have_tag("input[type='hidden'][value=?]", "#{donation.amount}")
+      end
+    end
+    it "includes the Spot.Us donation" do
+      do_render
+      template.should have_tag("input[name='item_name_#{@donations.size + 1}'][value=?]", "Support Spot.Us")
+      template.should have_tag("input[name='amount_#{@donations.size + 1}'][value=?]", @spotus_donation.amount)
+    end
+  end
+
   it "should have a form to create a purchase" do
     do_render
     template.should have_form_posting_to(myspot_purchases_path)
