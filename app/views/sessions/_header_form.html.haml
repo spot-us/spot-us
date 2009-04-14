@@ -1,16 +1,13 @@
-.login-boxer
-  - form_tag session_url do
-    .span-6.or_login
-    %h3 Thanks for joining us!
-    = link_to "NEW USERS: REGISTER HERE", new_user_path
-    %br
-    %span.small.quieter
-      If we already know you - login below.
-    %br
-    .double_content_border
-      = render :partial => 'sessions/form'
-      .clear
+.login-boxer.span-13
+  .span-12
+    - form_tag session_url do
+      %h3 Thanks for joining us!
       .double_content_border
-      .float_right
-        %input{:type => 'image', :src=>'/images/login.png', :alt => "Login"}
+      = render :partial => 'sessions/popup_form'
+      .block-padding.clear 
+      .double_content_border
+      %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :class => "float-right"}
+
+  .span-12
+    = render :partial => "users/form"
 .clear
