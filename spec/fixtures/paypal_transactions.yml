@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  txn_id: MyString
+  purchase_id: 1
+  status: MyString
+  paypal_response: MyText
+
+two:
+  txn_id: MyString
+  purchase_id: 1
+  status: MyString
+  paypal_response: MyText
