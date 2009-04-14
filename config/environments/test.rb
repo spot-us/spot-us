@@ -25,3 +25,6 @@ config.after_initialize do
   ActiveMerchant::Billing::Base.mode = :test
   Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
 end
+
+PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+PAYPAL_EMAIL = "dev+pa_1239041752_biz@hashrocket.com"
