@@ -19,6 +19,21 @@ describe SpotusDonation do
     end
   end
 
+  describe "#unpaid?" do
+    before do
+      @spotus_donation = Factory(:spotus_donation, :user => @user,
+                                 :purchase          => nil,
+                                 :amount            => 1)
+    end
+    it "should return true with no purchase id" do
+      @spotus_donation.unpaid?.should be_true
+    end
+    it "returns false otherwise" do
+      @spotus_donation.purchase = mock_model(Purchase)
+      @spotus_donation.unpaid?.should be_false
+    end
+  end
+
   describe "#paid" do
     before do
       @spotus_donation = Factory(:spotus_donation, :user => @user,

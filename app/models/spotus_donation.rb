@@ -31,6 +31,10 @@ class SpotusDonation < ActiveRecord::Base
     (user.unpaid_donations_sum * SPOTUS_TITHE).round
   end
 
+  def unpaid?
+    purchase.blank?
+  end
+
   def self.find_from_paypal(paypal_params)
     spotus_donation = if spotus_keys = paypal_params.detect{|k,v| v =~ /support spot\.us/i}
       spotus_donation_id = paypal_params.delete(spotus_keys.first.gsub(/name/, 'number'))
