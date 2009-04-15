@@ -113,5 +113,21 @@ class Donation < ActiveRecord::Base
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
     end
   end
+
+  def self.find_all_from_paypal(paypal_params)
+    strip_spotus_donations(paypal_params)
+    items = paypal_params.select{|k,v| k =~ /item_number/}
+    return [] if items.blank?
+    donation_keys = items.collect{|a| a.first}
+    donation_ids = donation_keys.map{|k| paypal_params.values_at(k)}.flatten
+    Donation.find(donation_ids)
+  end
+
+  def self.strip_spotus_donations(paypal_params)
+    if spotus_keys = paypal_params.detect{|k,v| v =~ /support spot\.us/i}
+      paypal_params.delete(spotus_keys.first.gsub(/name/, 'number'))
+      paypal_params.delete(spotus_keys.first)
+    end
+  end
 end
 
