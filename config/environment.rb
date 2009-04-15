@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "cucumber", :lib => false, :version => "= 0.1.12"
   config.gem "webrat", :lib => false, :version => "= 0.3.2"
   config.gem "httparty", :version => "=0.4.2"
+  config.gem "money", :version => ">=2.1.3"
 
   config.time_zone = 'UTC'
 
