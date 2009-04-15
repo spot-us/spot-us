@@ -46,4 +46,26 @@ describe SpotusDonation do
     spotus_donation.amount.should == BigDecimal.new("3.0")
   end
 
+  describe ".find_from_paypal" do
+    before do
+      @params = { "item_number2"=>"28", "item_name2"=>"Support Spot.Us", "item_number1" => "10", "item_name1" => "PITCH: Some headline"}
+    end
+    subject do
+      SpotusDonation.find_from_paypal(@params)
+    end
+    it "finds the spotus donation" do
+      spotus_donation = mock_model(SpotusDonation)
+      SpotusDonation.should_receive(:find).with("28").and_return(spotus_donation)
+      should == spotus_donation
+    end
+    it "returns nil if no spotus donation is present" do
+      @params = { "item_number1" => "10", "item_name1" => "PITCH: Some headline"}
+      should be_nil
+    end
+    it "deletes the spotus donation params" do
+      SpotusDonation.stub!(:find)
+      subject
+      @params.should_not have_key("item_number2")
+    end
+  end
 end

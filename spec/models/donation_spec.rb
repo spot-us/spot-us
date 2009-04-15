@@ -245,5 +245,39 @@ describe Donation do
       Donation::DEFAULT_AMOUNT.should == 20
     end
   end
+
+  describe ".strip_spotus_donations" do
+    before do
+      @params = { "item_number2"=>"28", "item_name2"=>"Support Spot.Us", "item_number1" => "10", "item_name1" => "PITCH: Some headline"}
+    end
+    it "should remove spotus donations" do
+      Donation.strip_spotus_donations(@params)
+      @params.should_not have_key("item_number2")
+      @params.should_not have_key("item_name2")
+    end
+    it "should leave all other donations" do
+      Donation.strip_spotus_donations(@params)
+      @params.should have_key("item_number1")
+      @params.should have_key("item_name1")
+    end
+  end
+
+  describe ".find_all_from_paypal" do
+    before do
+      @params = { "item_number2"=>"28", "item_name2"=>"Support Spot.Us", "item_number1" => "10", "item_name1" => "PITCH: Some headline"}
+    end
+    subject do
+      Donation.find_all_from_paypal(@params)
+    end
+    it "finds the donations" do
+      donation = mock_model(Donation)
+      Donation.should_receive(:find).with(["10"]).and_return([donation])
+      should == [donation]
+    end
+    it "returns empty array if no donation is present" do
+      @params = { "item_number1" => "28", "item_name1" => "Support Spot.Us"}
+      should be_empty
+    end
+  end
 end
 
