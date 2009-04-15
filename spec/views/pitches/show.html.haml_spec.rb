@@ -39,7 +39,7 @@ describe "/pitches/show.html.haml" do
 
   describe "blog posts" do
     before do
-      @pitch.stubs(:posts).returns([Factory(:post, :body => "<div><p>Some blog post text</p></div>", :pitch => @pitch)])
+      @pitch.stub!(:posts).and_return([Factory(:post, :body => "<div><p>Some blog post text</p></div>", :pitch => @pitch)])
     end
     it "should include blog posts" do
       do_render
