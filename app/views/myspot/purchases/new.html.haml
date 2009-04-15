@@ -51,6 +51,7 @@
       Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
       .float-right
         - form_tag PAYPAL_POST_URL do
+          = hidden_field_tag "return", paypal_return_myspot_purchases_url
           = hidden_field_tag "cmd", "_cart"
           = hidden_field_tag "upload", "1"
           = hidden_field_tag "business", PAYPAL_EMAIL

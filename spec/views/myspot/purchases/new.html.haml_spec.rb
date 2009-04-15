@@ -6,8 +6,9 @@ describe 'purchases/new' do
     template.stub!(:current_user).and_return(@user)
     @pitches = [active_pitch, active_pitch]
     @donations = @pitches.collect {|pitch| Factory(:donation, :user => @user,
-                                                              :pitch => pitch) }
-    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1)
+                                                              :pitch => pitch,
+                                                              :purchase => nil) }
+    @spotus_donation = Factory(:spotus_donation, :user => @user, :amount => 1, :purchase => nil)
     @purchase = Purchase.new(:user => @user, :donations => @donations,
                              :spotus_donation => @spotus_donation)
     assigns[:donations] = @donations
@@ -22,6 +23,7 @@ describe 'purchases/new' do
         with_tag("input[name='cmd'][value=?]", "_cart")
         with_tag("input[name='upload'][value=?]", "1")
         with_tag("input[name='business'][value=?]", PAYPAL_EMAIL)
+        with_tag("input[name='return'][value=?]", paypal_return_myspot_purchases_url)
       end
     end
     it "includes all donations as line items" do
