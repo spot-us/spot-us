@@ -28,16 +28,18 @@ class Purchase < ActiveRecord::Base
   cattr_accessor :gateway
 
   after_create :associate_donations, :apply_credits, :associate_spotus_donations
-  before_create :bill_credit_card
-  before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :set_total_amount
+  before_create :bill_credit_card, :unless => lambda {|p| p.paypal_transaction? }
+
+  before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :unless => lambda {|p| p.paypal_transaction? }
+  before_validation_on_create :set_total_amount
   validates_presence_of :first_name, :last_name, :credit_card_number_ending,
-    :address1, :city, :state, :zip, :user_id, :unless => lambda {|p| p.credit_covers_total? }
+    :address1, :city, :state, :zip, :user_id, :unless => lambda {|p| p.credit_covers_total? || p.paypal_transaction? }
 
   validates_presence_of :credit_card_number, :credit_card_year,
     :credit_card_type, :credit_card_month, :verification_value,
-    :on => :create, :unless => lambda {|p| p.credit_covers_total? }
+    :on => :create, :unless => lambda {|p| p.credit_covers_total? || p.paypal_transaction? }
 
-  validate :validate_credit_card, :on => :create, :unless => lambda {|p| p.credit_covers_total? }
+  validate :validate_credit_card, :on => :create, :unless => lambda {|p| p.credit_covers_total? || p.paypal_transaction? }
 
   belongs_to :user
   has_many   :donations
@@ -45,6 +47,10 @@ class Purchase < ActiveRecord::Base
 
   def credit_covers_total?
     self.total_amount == 0
+  end
+
+  def paypal_transaction?
+    !paypal_transaction_id.blank?
   end
 
   def donations=(donations)
