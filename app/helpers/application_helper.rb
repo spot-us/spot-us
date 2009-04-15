@@ -3,8 +3,10 @@ module ApplicationHelper
   def facebox_login_link_to(*args, &block)
     return link_to(*args, &block) if current_user
     url = url_for(args.second)
+    options = args.third || {}
+    options.merge!({:rel => 'facebox'})
     store_location(url)
-    link_to args.first, new_session_path, :rel => 'facebox'
+    link_to args.first, new_session_path, options
   end
 
   def body_class
