@@ -111,6 +111,27 @@ describe Purchase do
     end
   end
 
+  describe "when a paypal transaction" do
+    before do
+      @donation = Factory.build(:donation)
+      @purchase = Factory.build(:paypal_purchase, :user => Factory(:user), :donations => [@donation])
+      @purchase.paypal_transaction_id = '28C98632UU123291R'
+    end
+    it "knows it is a paypal transaction" do
+      @purchase.should be_paypal_transaction
+    end
+    it "should not have credit card callbacks" do
+      @purchase.should_receive(:bill_credit_card).never
+      @purchase.should_receive(:build_credit_card).never
+      @purchase.should_receive(:set_credit_card_number_ending).never
+      @purchase.should_receive(:validate_credit_card).never
+      @purchase.save
+    end
+    it "is valid without credit card information" do
+      @purchase.should be_valid
+    end
+  end
+
   it "should raise a gateway error when the gateway does not return a success response" do
     @donation = Factory(:donation, :user => Factory(:user), :amount => 25)
     lambda { Factory(:purchase, :credit_card_number => '2', :donations => [@donation]) }.
