@@ -1,9 +1,9 @@
 class Myspot::PurchasesController < ApplicationController
-  include HTTParty
+  include ActiveMerchant::Billing::Integrations
 
-  before_filter :login_required
+  before_filter :login_required, :except => :paypal_ipn
   ssl_required :create, :new
-  before_filter :unpaid_donations_required
+  before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
 
   def new
     @donations = current_user.donations.unpaid
@@ -34,8 +34,44 @@ class Myspot::PurchasesController < ApplicationController
     end
   end
 
-  def paypal_response
-    HTTParty.post(PAYPAL_POST_URL, params.merge({"cmd" => "_notify_validate"}))
+  def paypal_return
+    update_balance_cookie
+    if current_user.donations.unpaid.any?
+      flash[:success] = "Thanks! Your donations will be marked paid when PayPal clears them."
+    else
+      flash[:success] = "Thanks! Your payment has been received."
+    end
+    redirect_to myspot_donations_path
+  end
+
+  def paypal_ipn
+    notify = Paypal::Notification.new(request.raw_post)
+
+    @spotus_donation = SpotusDonation.find_from_paypal(notify.params)
+    @donations = Donation.find_all_from_paypal(notify.params)
+    @user = @donations.first.user
+
+    unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten)
+      logger.error("Invalid users for PayPal transaction 28C98632UU123291R")
+      render :nothing => true and return
+    end
+
+    purchase = Purchase.new
+    purchase.spotus_donation = @spotus_donation
+    purchase.donations = @donations
+    purchase.user = @user
+
+    if notify.acknowledge
+      if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
+        purchase.save
+      else
+        logger.error("PayPal acknowledgement was unpaid or the amounts didn't match for the following transaction: #{notify.params['txn_id']}")
+      end
+    else
+      logger.error("Failed to verify Paypal's notification, please investigate: #{notify.params['txn_id']}")
+    end
+
+    render :nothing => true
   end
 
   protected
