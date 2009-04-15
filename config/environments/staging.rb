@@ -19,3 +19,6 @@ config.to_prepare do
     Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
   end
 end
+
+PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+PAYPAL_EMAIL = "dev+pa_1239041752_biz@hashrocket.com"
