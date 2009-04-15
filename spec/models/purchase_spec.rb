@@ -307,5 +307,40 @@ describe Purchase do
       @user.credits.map{|c| c.amount}.should include(-16.0)
     end
   end
+
+  describe "valid_donations_for_user?" do
+    before do
+      @user = Factory(:user)
+      @other_user = Factory(:user)
+    end
+    describe "all donations are for the same user id" do
+      before do
+        @donations = [Factory(:donation, :amount => 5, :user => @user),
+                      Factory(:spotus_donation, :amount => 2, :user => @user, :purchase => nil),
+                      Factory(:donation, :amount => 10, :user => @user)]
+      end
+      it "returns true if all donations are unpaid" do
+        Purchase.valid_donations_for_user?(@user, @donations).should be_true
+      end
+      it "returns false if all donations are not unpaid" do
+        @donations.first.stub!(:unpaid?).and_return(false)
+        Purchase.valid_donations_for_user?(@user, @donations).should be_false
+      end
+    end
+    describe "donations are for different user ids" do
+      before do
+        @donations = [Factory(:donation, :amount => 5, :user => @user),
+                      Factory(:spotus_donation, :amount => 2, :user => @user),
+                      Factory(:donation, :amount => 10, :user => @other_user)]
+      end
+      it "returns false if any donation is paid" do
+        @donations.first.stub!(:unpaid?).and_return(false)
+        Purchase.valid_donations_for_user?(@user, @donations).should be_false
+      end
+      it "returns false if donations are unpaid" do
+        Purchase.valid_donations_for_user?(@user, @donations).should be_false
+      end
+    end
+  end
 end
 
