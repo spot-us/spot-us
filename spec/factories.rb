@@ -158,11 +158,25 @@ Factory.define :purchase do |purchase|
   purchase.zip        '02141'
 
   purchase.association :user
+
   purchase.credit_card_number '1'
   purchase.credit_card_month '1'
   purchase.credit_card_type  'bogus'
   purchase.credit_card_year { Time.now.year + 1 }
   purchase.verification_value '111'
+end
+
+Factory.define :paypal_purchase, :class => Purchase do |purchase|
+  purchase.first_name 'John'
+  purchase.last_name  'User'
+  purchase.address1   '100 Happy Lane'
+  purchase.address2   'Apt. 2'
+  purchase.city       'Boston'
+  purchase.state      'MA'
+  purchase.zip        '02141'
+  purchase.paypal_transaction_id '28C98632UU123291R'
+
+  purchase.association :user
 end
 
 Factory.define :credit_card, :class => ActiveMerchant::Billing::CreditCard do |cc|
