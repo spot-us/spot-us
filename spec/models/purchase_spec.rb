@@ -32,7 +32,6 @@ describe Purchase do
   describe "when a purchase happens" do
     before(:each) do
       @pitch = active_pitch
-#      @user = Factory(:user)
       @donation = Factory(:donation, :pitch => @pitch, :user => @user, :amount => 25)
     end
 
@@ -143,7 +142,6 @@ describe Purchase do
     before do
       @credit_card = Factory.build(:credit_card)
       ActiveMerchant::Billing::CreditCard.stub!(:new).and_return(@credit_card)
-#      @user = Factory(:user)
       @total = 100
       @donation = Factory(:donation, :amount => @total, :user => @user)
       @purchase = Factory.build(:purchase, :user => @user, :donations => [@donation])
@@ -213,7 +211,6 @@ describe Purchase do
   end
 
   it "should calculate the total when donations are set" do
-    #@user = Factory(:user)
     @purchase = Factory.build(:purchase)
     @donations = [Factory(:donation, :amount => 5),
                   Factory(:donation, :amount => 10)]
@@ -224,7 +221,6 @@ describe Purchase do
   end
 
   it "should take credits into account when calculating total" do
-#    @user = Factory(:user)
     Factory(:credit, :user => @user, :amount => 10)
     @purchase = Factory.build(:purchase, :user => @user)
     @donations = [Factory(:donation, :amount => 5),
@@ -236,7 +232,6 @@ describe Purchase do
   end
 
   it "should only use the amount needed when applying credits" do
-#    @user = Factory(:user)
     Factory(:credit, :user => @user, :amount => 20)
     @purchase = Factory.build(:purchase, :user => @user)
     @donations = [Factory(:donation, :amount => 5),
@@ -249,7 +244,6 @@ describe Purchase do
 
   describe "after being saved with donations and spotus_donation" do
     before do
-#      @user = Factory(:user)
       @purchase = Factory.build(:purchase, :user => @user)
       @donations = [Factory(:donation, :amount => 5),
                     Factory(:donation, :amount => 10)]
@@ -288,7 +282,6 @@ describe Purchase do
 
   describe "after being saved with donations and credits" do
     before do
-#      @user = Factory(:user)
       credit = Factory(:credit, :user => @user, :amount => 20)
       @purchase = Factory.build(:purchase, :user => @user)
       @donations = [Factory(:donation, :amount => 5),
