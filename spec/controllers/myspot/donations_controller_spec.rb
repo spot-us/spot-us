@@ -63,8 +63,8 @@ describe Myspot::DonationsController do
   describe "on GET to index" do
     before do
       @donations = [Factory(:donation)]
-      @user.stubs(:donations).returns(@donations)
-      @donations.stubs(:paid).returns(@donations)
+      @user.stub!(:donations).and_return(@donations)
+      @donations.stub!(:paid).and_return(@donations)
     end
 
     it "should response successfully" do
