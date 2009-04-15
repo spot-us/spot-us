@@ -10,7 +10,7 @@ Feature: Donating
     And I fill in "Password" with "password"
     And I fill in "Confirm Password" with "password"
     And I fill in "Your E-mail Address" with "me@example.com"
-    And I choose "Community Member"
+    And I select "Community Member" from "user[type]"
     And I check "user_terms_of_service"
     And I press "Register"
     And I should see "Click the link in the email we just sent to you to finish creating your account!"
