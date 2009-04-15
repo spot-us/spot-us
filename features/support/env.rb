@@ -37,3 +37,7 @@ module HelperMethods
     instance_variable_get(instance_variable_name)
   end
 end
+
+Webrat.configure do |config|
+  config.mode = :rails
+end
