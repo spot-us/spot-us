@@ -62,6 +62,10 @@ class Purchase < ActiveRecord::Base
     donations_sum - credit_to_apply
   end
 
+  def self.valid_donations_for_user?(user, donations)
+    donations.all? {|d| d.user == user && d.unpaid? }
+  end
+
   protected
 
   # total of all donations
