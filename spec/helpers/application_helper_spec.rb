@@ -175,7 +175,7 @@ describe ApplicationHelper do
       facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[rel='facebox'][href=?]", new_session_path)
     end
     it "stores the location" do
-      expects(:store_location)
+      should_receive(:store_location)
       facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team')
     end
   end
