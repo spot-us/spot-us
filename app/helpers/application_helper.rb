@@ -5,8 +5,7 @@ module ApplicationHelper
     url = url_for(args.second)
     options = args.third || {}
     options.merge!({:rel => 'facebox'})
-    store_location(url)
-    link_to args.first, new_session_path, options
+    link_to args.first, new_session_path(:return_to => url), options
   end
 
   def body_class
