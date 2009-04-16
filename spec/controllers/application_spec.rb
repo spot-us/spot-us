@@ -60,4 +60,37 @@ describe ApplicationController do
     end
   end
 
+  describe "#store_comment_for_non_logged_in_user" do
+    before do
+      controller.stub!(:params).and_return({"action"=>"create", "controller"=>"comments", "pitch_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}})
+    end
+    it "saves the comment title and body to session" do
+      controller.send(:store_comment_for_non_logged_in_user)
+      session[:title].should_not be_nil
+      session[:body].should_not be_nil
+    end
+    it "calls params_for_comment" do
+      controller.should_receive(:params_for_comment)
+      controller.send(:store_comment_for_non_logged_in_user)
+    end
+    it "stores the url_for_news_item return_to url" do
+      controller.stub!(:url_for_news_item).and_return('a url')
+      controller.send(:store_comment_for_non_logged_in_user)
+      session[:return_to].should == 'a url'
+    end
+  end
+
+  describe "#params_for_comment" do
+    before do
+      @html_params = {"action"=>"create", "controller"=>"comments", "pitch_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}}
+      @js_params = {:title => "foo", :body => "bar", :news_item_id => "1"}
+    end
+
+    it "returns title, body and news_item_id for html params" do
+      controller.send(:params_for_comment, @html_params).should == ["foo", "bar", "1"]
+    end
+    it "returns title, body and news_item_id for javascript params" do
+      controller.send(:params_for_comment, @js_params).should == ["foo", "bar", "1"]
+    end
+  end
 end

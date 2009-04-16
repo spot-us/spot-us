@@ -47,5 +47,14 @@ describe CommentsController do
         response.should redirect_to(pitch_path(@pitch))
       end
     end
+    
+    describe "without a logged in user" do
+      before do
+        controller.stubs(:current_user).returns(nil)
+      end
+      it "stores location and shows login/register facebox" do
+        post :create, :comment => {:title => 'foo', :body => 'bar'}, :pitch_id => @pitch.id
+      end
+    end
   end
 end

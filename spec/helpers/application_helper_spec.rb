@@ -154,11 +154,8 @@ describe ApplicationHelper do
       facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should == link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team')
     end
     it "returns a link to login with facebox if user is not logged in" do
-      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[rel='facebox'][href=?]", new_session_path)
-    end
-    it "stores the location" do
-      should_receive(:store_location)
-      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team')
+      stub!(:current_user).and_return(nil)
+      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[rel='facebox'][href*=?]", new_session_path)
     end
   end
 end
