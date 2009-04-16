@@ -1,4 +1,4 @@
-- unless @user.errors.blank?
+- if @user && @user.errors.any?
   - content_for :error do
     = error_messages_for :user
 
