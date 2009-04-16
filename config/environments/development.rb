@@ -19,6 +19,8 @@ config.action_mailer.raise_delivery_errors = false
 # use_gateway = false
 use_gateway = true
 
+ActiveMerchant::Billing::Base.mode = :test
+
 config.to_prepare do
   if use_gateway && APP_CONFIG[:gateway].is_a?(Hash)
     Purchase.gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new({
@@ -27,7 +29,6 @@ config.to_prepare do
       :test => true
     })
   else
-    ActiveMerchant::Billing::Base.mode = :test
     Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
   end
 end
