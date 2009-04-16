@@ -42,4 +42,22 @@ describe ApplicationController do
     end
   end
 
+  describe "#url_for_news_item" do
+    before do
+      @pitch = active_pitch
+      @tip = Factory(:tip)
+      @story = Factory(:story)
+    end
+
+    it 'generates a link to a pitch' do
+      controller.send(:url_for_news_item, @pitch).should == pitch_path(@pitch)
+    end
+    it 'generates a link to a tip' do
+      controller.send(:url_for_news_item, @tip).should == tip_path(@tip)
+    end
+    it 'generates a link to a story' do
+      controller.send(:url_for_news_item, @story).should == story_path(@story)
+    end
+  end
+
 end
