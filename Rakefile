@@ -23,8 +23,3 @@ task :copy_sample_config do
 end
 
 task :environment => :copy_sample_config
-
-Rake::Task[:default].clear() # clear out the default Rails test::unit tasks...
-
-desc "Default task is to run the specs"
-task :default => :spec
