@@ -61,6 +61,7 @@ class Myspot::PurchasesController < ApplicationController
     purchase.spotus_donation = @spotus_donation
     purchase.donations = @donations
     purchase.user = @user
+    purchase.paypal_transaction_id = notify.transaction_id
 
     if notify.acknowledge
       if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
