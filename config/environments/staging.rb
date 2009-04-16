@@ -7,6 +7,7 @@ config.whiny_nils = true
 config.action_mailer.perform_deliveries = false
 SslRequirement.disable_ssl_check = true
 
+ActiveMerchant::Billing::Base.mode = :test
 config.to_prepare do
   if APP_CONFIG[:gateway].is_a?(Hash)
     Purchase.gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new({
@@ -15,7 +16,6 @@ config.to_prepare do
       :test => true
     })
   else
-    ActiveMerchant::Billing::Base.mode = :test
     Purchase.gateway = ActiveMerchant::Billing::BogusGateway.new
   end
 end
