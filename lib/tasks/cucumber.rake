@@ -16,4 +16,4 @@ namespace :features do
     t.rcov_opts << %[-o "public/features_rcov"]
   end
 end
-
+task :default => :features
