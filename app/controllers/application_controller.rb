@@ -81,11 +81,22 @@ class ApplicationController < ActionController::Base
   end
 
   def store_comment_for_non_logged_in_user
-    if params[:title] && params[:body] && params[:new_item_id]
+    title, body, news_item_id = params_for_comment(params)
+    if title && body && news_item_id
       session[:return_to] = url_for_news_item(NewsItem.find_by_id(params[:news_item_id]))
-      session[:title] = params[:title]
-      session[:body] = params[:body]
-      session[:news_item_id] = params[:news_item_id]
+      session[:title] = title
+      session[:body] = body
+      session[:news_item_id] = news_item_id
+    end
+  end
+
+  def params_for_comment(comment_params)
+    comment_params.symbolize_keys!
+    if comment_params[:comment]
+      comment_params[:comment].symbolize_keys!
+      [comment_params[:comment][:title], comment_params[:comment][:body], comment_params[:pitch_id]]
+    else
+      [comment_params[:title], comment_params[:body], comment_params[:news_item_id]]
     end
   end
 
