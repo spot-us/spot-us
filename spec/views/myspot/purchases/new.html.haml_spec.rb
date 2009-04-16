@@ -45,6 +45,12 @@ describe 'purchases/new' do
     template.should have_form_posting_to(myspot_purchases_path)
   end
 
+  it "doesn't display the PayPal section if the user has enough credits" do
+    @purchase.stub!(:credit_covers_total?).and_return(true)
+    do_render
+    template.should_not have_tag("h3", "Pay With PayPal")
+  end
+
   it "should fields for a credit card" do
     do_render
     template.should have_form_posting_to(myspot_purchases_path)
