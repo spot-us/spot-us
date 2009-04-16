@@ -68,6 +68,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :url_for_news_item
+  def url_for_news_item(news_item)
+    case news_item
+    when Pitch
+      pitch_path(news_item)
+    when Tip
+      tip_path(news_item)
+    when Story
+      story_path(news_item)
+    end
+  end
+
   def store_comment_for_non_logged_in_user
     if params[:title] && params[:body] && params[:new_item_id]
       session[:return_to] = url_for_news_item(NewsItem.find_by_id(params[:news_item_id]))
