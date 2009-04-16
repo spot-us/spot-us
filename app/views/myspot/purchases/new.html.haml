@@ -44,29 +44,30 @@
           = number_to_currency @purchase.total_amount
       .clear
 
-    .block-spacer-negative
-    %h3 Pay With PayPal
-    .double_content_border
-    .span-595.box_yellow.create_a_tip_form
-      Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
-      .float-right
-        - form_tag PAYPAL_POST_URL do
-          = hidden_field_tag "return", paypal_return_myspot_purchases_url
-          = hidden_field_tag "cmd", "_cart"
-          = hidden_field_tag "upload", "1"
-          = hidden_field_tag "business", PAYPAL_EMAIL
-          - i = 1
-          - @donations.each do |donation|
-            = hidden_field_tag "item_number_#{i}", "#{donation.id}"
-            = hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}"
-            = hidden_field_tag "amount_#{i}", donation.amount
-            - i += 1
-          = hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}"
-          = hidden_field_tag "item_name_#{i}", "Support Spot.Us"
-          = hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount]
-          = image_submit_tag "buy_now.gif"
-      .clear
-    .block-spacer-negative
+    - unless @purchase.credit_covers_total?
+      .block-spacer-negative
+      %h3 Pay With PayPal
+      .double_content_border
+      .span-595.box_yellow.create_a_tip_form
+        Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
+        .float-right
+          - form_tag PAYPAL_POST_URL do
+            = hidden_field_tag "return", paypal_return_myspot_purchases_url
+            = hidden_field_tag "cmd", "_cart"
+            = hidden_field_tag "upload", "1"
+            = hidden_field_tag "business", PAYPAL_EMAIL
+            - i = 1
+            - @donations.each do |donation|
+              = hidden_field_tag "item_number_#{i}", "#{donation.id}"
+              = hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}"
+              = hidden_field_tag "amount_#{i}", donation.amount
+              - i += 1
+            = hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}"
+            = hidden_field_tag "item_name_#{i}", "Support Spot.Us"
+            = hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount]
+            = image_submit_tag "buy_now.gif"
+        .clear
+      .block-spacer-negative
 
     - form_for :purchase, :url => myspot_purchases_path do |f|
       - if @purchase.credit_covers_total?
