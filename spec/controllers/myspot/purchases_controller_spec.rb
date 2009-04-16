@@ -252,8 +252,9 @@ describe Myspot::PurchasesController do
         @purchase.stub!(:donations=)
         @purchase.stub!(:spotus_donation=)
         @purchase.stub!(:user=)
+        @purchase.stub!(:paypal_transaction_id=)
         Purchase.stub!(:new).and_return(@purchase)
-        @notify = stub('notify', :params => @paypal_params, :acknowledge => false, :amount => "240")
+        @notify = stub('notify', :params => @paypal_params, :acknowledge => false, :amount => "240", :transaction_id => '17')
         Paypal::Notification.stub!(:new).and_return(@notify)
       end
       it "finds spotus donation" do
@@ -274,6 +275,10 @@ describe Myspot::PurchasesController do
         @purchase.should_receive(:donations=).with(@donations)
         @purchase.should_receive(:spotus_donation=).with(@spotus_donation)
         @purchase.should_receive(:user=).with(@user)
+        do_post
+      end
+      it "stores the purchase id" do
+        @purchase.should_receive(:paypal_transaction_id=).with('17')
         do_post
       end
       it "acknowledges the notification" do
