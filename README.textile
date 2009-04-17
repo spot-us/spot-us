@@ -29,7 +29,7 @@ articles published more widely.
 
 h2. Setting Up Spot.Us
 
-h3. setup configuration files - make any necessary edits to these if the defaults don't work for you
+h3. setup configuration files - make any necessary edits to these if the defaults don't work for you. Spot.Us is dependent on MySQL because it uses the rand() function.
 
 # cp config/database.example.yml config/database.yml
 # cp config/newrelic.example.yml config/newrelic.yml
