@@ -16,6 +16,10 @@ describe Donation do
   it { Donation.should belong_to(:purchase) }
   it { Donation.should belong_to(:group) }
 
+  it "belongs to a paypal cart" do
+    Donation.new.should respond_to(:paypal_cart)
+  end
+
   describe "when creating a donation" do
     it "should require user to be logged in" do
       Donation.createable_by?(nil).should_not be_true

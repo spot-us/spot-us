@@ -13,6 +13,7 @@ class Myspot::PurchasesController < ApplicationController
                              :spotus_donation => current_user.current_spotus_donation,
                              :first_name => current_user.first_name,
                              :last_name  => current_user.last_name)
+    @paypal_cart = PaypalCart.create_from_purchase(@purchase)
   end
 
   def create

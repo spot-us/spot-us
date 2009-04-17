@@ -75,6 +75,22 @@ describe Myspot::PurchasesController do
       assigns[:purchase].should == purchase
     end
 
+    describe "paypal actions" do
+      before do
+        @purchase = Factory(:purchase)
+        Purchase.stub!(:new).and_return(@purchase)
+      end
+      it "creates a paypal cart from the purchase" do
+        PaypalCart.should_receive(:create_from_purchase).with(@purchase)
+        do_new
+      end
+
+      it "assigns a paypal_cart instance variable" do
+        do_new
+        assigns[:paypal_cart].should == @paypal_cart
+      end
+    end
+
     def do_new
       get :new
     end
@@ -84,7 +100,7 @@ describe Myspot::PurchasesController do
     before do
       @user = Factory(:user)
       unless @user.donations.unpaid.empty?
-        violated "user should not have unpaid donations" 
+        violated "user should not have unpaid donations"
       end
       login_as @user
     end

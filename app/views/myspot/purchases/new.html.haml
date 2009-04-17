@@ -62,6 +62,7 @@
               = hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}"
               = hidden_field_tag "amount_#{i}", donation.amount
               - i += 1
+            = hidden_field_tag "item_number_1", "#{cart.id}"
             = hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}"
             = hidden_field_tag "item_name_#{i}", "Support Spot.Us"
             = hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount]

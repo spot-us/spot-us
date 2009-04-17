@@ -7,6 +7,12 @@ describe SpotusDonation do
     @donation2 = Factory(:donation, :user => @user, :amount => 10)
   end
 
+  describe "validations" do
+    it "belongs to a paypal cart" do
+      SpotusDonation.new.should respond_to(:paypal_cart)
+    end
+  end
+
   describe "#unpaid" do
     before do
       @spotus_donation = Factory(:spotus_donation, :user => @user,
