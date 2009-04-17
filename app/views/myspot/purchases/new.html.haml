@@ -49,7 +49,15 @@
       %h3 Pay With PayPal
       .double_content_border
       .span-595.box_yellow.create_a_tip_form
-        Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
+        - if @purchase.credit_covers_partial?
+          #paypal_credit_notice
+            Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
+            %ol
+              %li Remove the donations you wanted to purchase with PayPal from your cart
+              %li Come back and purchase just the items covered by credit
+              %li Re-donate and select PayPal for the items you wanted use PayPal for
+        - else
+          Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
         .float-right
           - form_tag PAYPAL_POST_URL do
             = hidden_field_tag "return", paypal_return_myspot_purchases_url
