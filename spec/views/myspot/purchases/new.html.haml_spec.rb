@@ -38,6 +38,16 @@ describe 'purchases/new' do
       template.should have_tag("input[name='item_name_#{@donations.size + 1}'][value=?]", "Support Spot.Us")
       template.should have_tag("input[name='amount_#{@donations.size + 1}'][value=?]", @spotus_donation.amount)
     end
+    it "displays a message about credits if it should" do
+      @purchase.stub!(:credit_covers_partial?).and_return(true)
+      do_render
+      template.should have_tag("#paypal_credit_notice")
+    end
+    it "doesn't display the message if it shouldn't" do
+      @purchase.stub!(:credit_covers_partial?).and_return(false)
+      do_render
+      template.should_not have_tag("#paypal_credit_notice")
+    end
   end
 
   it "should have a form to create a purchase" do
