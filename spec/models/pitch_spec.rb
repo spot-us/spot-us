@@ -221,6 +221,12 @@ describe Pitch do
     end
   end
 
+  describe "featured" do
+    it "should be randomized" do
+      Pitch.featured.proxy_options[:order].should match(/rand\(\)/i)
+    end
+  end
+
   describe "almost funded" do
     before(:each) do
       @p = active_pitch(:requested_amount => 50, :current_funding => 20) #40 %
