@@ -49,6 +49,10 @@ class Purchase < ActiveRecord::Base
     self.total_amount == 0
   end
 
+  def credit_covers_partial?
+    !credit_covers_total? && credit_to_apply > 0
+  end
+
   def paypal_transaction?
     !paypal_transaction_id.blank?
   end

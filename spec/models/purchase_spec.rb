@@ -68,6 +68,24 @@ describe Purchase do
     end
   end
 
+
+  describe "#credit_covers_partial?" do
+    before do
+      @purchase = Factory.build(:purchase)
+    end
+    it "returns false if there are no credits" do
+      @purchase.credit_covers_partial?.should be_false
+    end
+    it "returns true if there are some credits" do
+      @purchase.stub!(:credit_to_apply).and_return(1)
+      @purchase.credit_covers_partial?.should be_true
+    end
+    it "returns false if there are enough credits to cover the purchase" do
+      @purchase.stub!(:credit_covers_total?).and_return(true)
+      @purchase.credit_covers_partial?.should be_false
+    end
+  end
+
   it "should have a gateway" do
     Purchase.gateway.should_not be_nil
     Purchase.gateway.should be_instance_of(ActiveMerchant::Billing::BogusGateway)
