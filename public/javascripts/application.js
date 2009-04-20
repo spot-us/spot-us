@@ -57,11 +57,6 @@ function submitToLogin(form, type) {
   });
 }
 
-function toggle_divs(div1, div2) {
-  jQuery(div1).toggle();
-  jQuery(div2).toggle();
-}
-
 $(function() {
   if ($.browser.msie && parseInt($.browser.version)< 7) {
     $("#reporters_toolbar li").hover(
