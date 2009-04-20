@@ -1,4 +1,3 @@
-= hidden_field_tag 'comment[news_item_id]', f.object.commentable_id
 .row
   = f.label :title
   = f.text_field :title
@@ -6,6 +5,8 @@
   = f.label :body
   = fckeditor_textarea('comment', 'body', :toolbarSet => 'Spotus', :height => '200px')
 .row
+  = f.hidden_field :commentable_id
+  = f.hidden_field :commentable_type
   - if logged_in?
     = f.submit 'Post Comment'
   - else
