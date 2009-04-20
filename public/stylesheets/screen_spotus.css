@@ -417,7 +417,7 @@ body {
   min-height: 80px;
 }
 
-.error p.flash_note, .success p.flash_note, .notice p.flash_note {
+#flash p {
   padding: 20px 0 0 0;
 }
 .success, .notice {
