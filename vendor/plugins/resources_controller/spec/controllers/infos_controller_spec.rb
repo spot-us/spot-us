@@ -37,8 +37,8 @@ describe InfosController, " (its actions)" do
     setup_mocks
   end
   
-  it "should have only ['show', 'edit', 'update'] in action_methods" do
-    @controller.class.send(:action_methods).should == Set.new(['show', 'edit', 'update'])
+  it "should not have ['new', 'index', 'destroy', 'create'] in action_methods" do
+    (@controller.class.send(:action_methods) & Set.new(['new', 'index', 'destroy', 'create'])).should be_empty
   end
   
   it "GET /account/info should be successful" do

@@ -101,8 +101,8 @@ module Ardes#:nodoc:
       end
 
       # delegate url help method creation to the controller
-      def respond_to_with_named_route_helper?(method, include_private = false)
-        respond_to_without_named_route_helper?(method, include_private = false) || controller.resource_named_route_helper_method?(method)
+      def respond_to_with_named_route_helper?(*args)
+        respond_to_without_named_route_helper?(*args) || controller.resource_named_route_helper_method?(args.first)
       end
     
     private

@@ -146,9 +146,7 @@ end
 
 describe ForumsController, " (checking that non actions are hidden)" do
   it "should only have CRUD actions as action_methods" do
-    @controller.class.send(:action_methods).should == Set.new([
-      'index', 'show', 'edit', 'new', 'update', 'create', 'destroy'
-    ])
+    (@controller.class.send(:action_methods) & Set.new(['resource', 'resources'])).should be_empty
   end
 end
 
