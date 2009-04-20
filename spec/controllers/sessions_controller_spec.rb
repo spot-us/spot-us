@@ -22,11 +22,11 @@ describe SessionsController do
     assigns[:user].should_not be_nil
   end
 
-  it 'logins and redirects' do
+  it 'logs in and redirects' do
     Factory(:user, :email => 'user@example.com', :password => 'test', :password_confirmation => 'test').activate!
     post :create, :email => 'user@example.com', :password => 'test'
     session[:user_id].should_not be_nil
-    response.should be_redirect
+    response.should redirect_to(root_path)
   end
 
   it "should create a donation for non-logged in user" do
