@@ -7,7 +7,4 @@
 .row
   = f.hidden_field :commentable_id
   = f.hidden_field :commentable_type
-  - if logged_in?
-    = f.submit 'Post Comment'
-  - else
-    = button_to_function "Post Comment", "submitCommentToLogin();", :rel => "facebox"
+  = f.submit 'Post Comment'

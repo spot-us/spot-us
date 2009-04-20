@@ -20,15 +20,14 @@
             - else
               = network.display_name
         - if yield(:error)
-          .flash.error
+          .error
             %span.dismiss= link_to image_tag('close_square.png'), @close_flash_link || '' # empty string means self
             %p= yield(:error)
-        - if flash.any?
-          .flash
-            - flash.each do |key, value|
-              %div{ :id => "flash_#{key}", :class => key }
-                %span.dismiss= link_to image_tag('close_square.png'), @close_flash_link || '' # empty string means self
-                %p.flash_note= value
+        #flash
+          - flash.each do |key, value|
+            %div{:class => key }
+              %span.dismiss= link_to image_tag('close_square.png'), @close_flash_link || '' # empty string means self
+              %p= value
         = yield
         .clear
     #footer

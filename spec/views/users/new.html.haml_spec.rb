@@ -68,7 +68,7 @@ describe 'users/new' do
     end
 
     it "should display an error message" do
-      template.should_receive(:content_for).once.with(:error)
+      template.should_receive(:error_messages_for).with(:user)
       do_render
     end
   end
