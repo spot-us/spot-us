@@ -21,7 +21,7 @@
           .float_right= link_to_function image_tag("pledge.png"), "submitToLogin('custom_pledge_#{news_item.id}', 'pledge')", :rel => "facebox", :title => "Pledge #{Donation::DEFAULT_AMOUNT}"
         .clear
     .small.uppcased_button_text
-      = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{toggle_divs("#pledge_button_#{news_item.id}", "#pledge_custom_#{news_item.id}")}
+      = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{jQuery("#pledge_button_#{news_item.id}, #pledge_custom_#{news_item.id}").toggle();}
       .double_content_border
     = render :partial => "shared/hey_reporters", :locals => {:tip => news_item}
 
