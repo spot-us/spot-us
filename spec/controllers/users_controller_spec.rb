@@ -6,8 +6,7 @@ describe UsersController do
   it 'allows signup' do
     lambda do
       do_create
-      response.should be_success
-      response.should render_template('new')
+      response.should redirect_to(root_path)
       flash[:success].should_not be_blank
     end.should change(User, :count).by(1)
   end

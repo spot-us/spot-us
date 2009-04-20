@@ -10,9 +10,9 @@
       = link_to "Logout", destroy_session_path
   #not_logged_in.hide
     %li
-      = link_to "Register", new_user_path
+      = link_to "Register", new_session_path, :rel => 'facebox'
     %li.no-pipe
-      = link_to "Login", new_session_path
+      = link_to "Login", new_session_path, :rel => 'facebox'
 
 .slogan
   %span.pink Community
