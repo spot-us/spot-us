@@ -101,8 +101,8 @@ describe ForumPostsController, " errors" do
     lambda{ get :index }.should raise_error(Ardes::ResourcesController::ResourceMismatch)
   end
 
-  it "should raise MissingSegment, when route does not contain the resource segment" do
-    lambda{ get :index, :foo_id => 1}.should raise_error(Ardes::ResourcesController::MissingSegment)
+  it "should raise ResourceMismatch, when route does not contain the resource segment" do
+    lambda{ get :index, :foo_id => 1}.should raise_error(Ardes::ResourcesController::ResourceMismatch)
   end
   
   it "should raise NoRecognizedRoute when no route is recognized" do
