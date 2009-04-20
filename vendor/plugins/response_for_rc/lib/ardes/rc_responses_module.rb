@@ -14,10 +14,10 @@ module Ardes
       remove_response_for action
     end
     
-    # when we dup, we need to copy our action_responses
-    def dup
+    # when we clone, we need to copy our action_responses
+    def clone
       returning super do |mixin|
-        mixin.instance_variable_set('@action_responses', action_responses.dup)
+        mixin.instance_variable_set('@action_responses', action_responses.clone)
       end
     end    
   end

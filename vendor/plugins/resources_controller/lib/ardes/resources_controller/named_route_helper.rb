@@ -54,8 +54,8 @@ module Ardes#:nodoc:
         end
       end
 
-      def respond_to_with_named_route_helper?(method, include_private = false)
-        respond_to_without_named_route_helper?(method, include_private) || resource_named_route_helper_method?(method)
+      def respond_to_with_named_route_helper?(*args)
+        respond_to_without_named_route_helper?(*args) || resource_named_route_helper_method?(args.first)
       end
 
       # return true if the passed method (e.g. 'resources_path') corresponds to a defined
@@ -124,7 +124,7 @@ Currently:
         name_prefix = method.to_s.sub(/^.*_for_/,'')
         if resource_method =~ /enclosing_resource/
           route, route_method = *route_and_method_from_enclosing_resource_method_and_name_prefix(resource_method, name_prefix)
-          required_args = route.significant_keys.reject{|k| [:controller, :action].include?(k)}.size
+          required_args = (route.significant_keys - [:controller, :action, :format]).size
         
           self.class.send :module_eval, <<-end_eval, __FILE__, __LINE__
             def #{method}(*args)
@@ -137,7 +137,7 @@ Currently:
                   
         else
           route, route_method = *route_and_method_from_resource_method_and_name_prefix(resource_method, name_prefix)
-          required_args = route.significant_keys.reject{|k| [:controller, :action].include?(k)}.size
+          required_args = (route.significant_keys - [:controller, :action, :format]).size
 
           self.class.send :module_eval, <<-end_eval, __FILE__, __LINE__
             def #{method}(*args)
