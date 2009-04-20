@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @user = User.new
     store_news_item_for_non_logged_in_user
     store_comment_for_non_logged_in_user
-    store_location(params[:return_to])
+    store_location(params[:return_to] || root_path)
     respond_to do |format|
       format.html
       format.js { render :partial => "header_form", :layout => false }
