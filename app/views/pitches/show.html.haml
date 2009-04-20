@@ -53,7 +53,7 @@
       = render :partial => 'shared/comment', :collection => @pitch.comments
     %h3 Post A Comment
     .double_content_border
-    - form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form' } do |f|
+    - form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f|
       = render :partial => 'comments/form', :locals => {:f => f}
 
   .span-220.column_v.box_white

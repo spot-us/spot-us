@@ -1,5 +1,5 @@
 .login-boxer.span-13
-  .span-12
+  .span-12.login
     - form_tag session_url do
       %h3 Thanks for joining us!
       .double_content_border
@@ -8,6 +8,6 @@
       .double_content_border
       %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :class => "float-right"}
 
-  .span-12
+  .span-12.register
     = render :partial => "users/form"
 .clear

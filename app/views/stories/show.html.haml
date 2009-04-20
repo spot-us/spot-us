@@ -27,7 +27,7 @@
         = render :partial => 'shared/comment', :collection => @story.comments
       %h3 Post A Comment
       .double_content_border
-      - form_for [@story, Comment.new] do |f|
+      - form_for [@story, Comment.new], :html => {:class => 'auth'} do |f|
         = render :partial => 'comments/form', :locals => {:f => f}
   .span-220.column_v.box_white
     %h3.description

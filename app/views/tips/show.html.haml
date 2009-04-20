@@ -24,7 +24,7 @@
       = render :partial => 'shared/comment', :collection => @tip.comments
     %h3 Post A Comment
     .double_content_border
-    - form_for [@tip, Comment.new] do |f|
+    - form_for [@tip, Comment.new], :html => {:class => 'auth'} do |f|
       = render :partial => 'comments/form', :locals => {:f => f}
   .span-220.column_v.box_white
     .centered= render :partial => "pledges/button", :locals => { :news_item => @tip }

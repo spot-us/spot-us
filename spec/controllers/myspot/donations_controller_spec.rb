@@ -55,7 +55,7 @@ describe Myspot::DonationsController do
     end
 
     def do_create
-      xhr :post, :create, :donation => {:pitch_id => @pitch.id, :amount => 25}
+      post :create, :donation => {:pitch_id => @pitch.id, :amount => 25}
     end
   end
 
