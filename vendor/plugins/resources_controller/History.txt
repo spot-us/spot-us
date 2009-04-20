@@ -1,3 +1,5 @@
+* Relaxed RC's pickiness about what route was used to invoke a controller.
+
 * Removed deprecation warning from save_resource, and added cautionary notes to the comments instead
 
 * If you use your own Action modules, you can now define a module method #include_actions to do the :only / :except 

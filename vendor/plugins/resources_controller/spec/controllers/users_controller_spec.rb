@@ -19,12 +19,12 @@ describe UsersController, "#route_for" do
     route_for(:controller => "users", :action => "edit", :id => 'dave').should == "/users/dave/edit"
   end
   
-  it "should map { :controller => 'users', :action => 'update', :id => 'dave'} to /users/dave" do
-    route_for(:controller => "users", :action => "update", :id => 'dave').should == "/users/dave"
+  it "should map { :controller => 'users', :action => 'update', :id => 'dave'} to PUT /users/dave" do
+    route_for(:controller => "users", :action => "update", :id => 'dave').should == {:method => :put, :path => "/users/dave"}
   end
   
-  it "should map { :controller => 'users', :action => 'destroy', :id => 'dave'} to /users/dave" do
-    route_for(:controller => "users", :action => "destroy", :id => 'dave').should == "/users/dave"
+  it "should map { :controller => 'users', :action => 'destroy', :id => 'dave'} to DELETE /users/dave" do
+    route_for(:controller => "users", :action => "destroy", :id => 'dave').should == {:method => :delete, :path => "/users/dave"}
   end
   
 end

@@ -6,9 +6,9 @@ Also see http://blog.ardes.com/resources_controller
 
 See the CHANGLELOG for recent changes.
 
-== works with rails 2.0-stable, 2.1-stable, and edge
+== works with rails 2.x
 
-resources_controller works with rails 2.x and edge.
+resources_controller works with rails 2.x, and is currently tested against 2.0, 2.1, and 2.2 stable branches
 
 == Specs and Coverage
 
@@ -37,6 +37,7 @@ The following people have made contributions to resources_controller.  Please le
 * Rein Henrichs
 * Tom Stuart
 * Joel Chippindale
+* Tim Pope
 
 == License
 
