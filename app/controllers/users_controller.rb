@@ -14,8 +14,10 @@ class UsersController < ApplicationController
       else
         flash[:success] = "Your account will be reviewed prior to approval. We'll get back to you as soon as possible."
       end
+      redirect_to root_path
+    else
+      render :action => 'new'
     end
-    render :action => 'new'
   end
 
   def activate
