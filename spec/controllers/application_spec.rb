@@ -62,7 +62,7 @@ describe ApplicationController do
 
   describe "#store_comment_for_non_logged_in_user" do
     before do
-      controller.stub!(:params).and_return({"action"=>"create", "controller"=>"comments", "pitch_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}})
+      controller.stub!(:params).and_return({"action"=>"create", "controller"=>"comments", "commentable_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}})
     end
     it "saves the comment title and body to session" do
       controller.send(:store_comment_for_non_logged_in_user)
@@ -82,8 +82,8 @@ describe ApplicationController do
 
   describe "#params_for_comment" do
     before do
-      @html_params = {"action"=>"create", "controller"=>"comments", "pitch_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}}
-      @js_params = {:title => "foo", :body => "bar", :news_item_id => "1"}
+      @html_params = {"action"=>"create", "controller"=>"comments", "commentable_id"=>"1", "comment"=>{"body"=>"bar", "title"=>"foo"}}
+      @js_params = {:title => "foo", :body => "bar", :commentable_id => "1"}
     end
 
     it "returns title, body and news_item_id for html params" do
