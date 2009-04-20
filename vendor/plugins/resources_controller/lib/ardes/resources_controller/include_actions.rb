@@ -16,7 +16,7 @@ module Ardes
       def include_actions(controller, options = {})
         options.assert_valid_keys(:only, :except)
         raise ArgumentError, "you can only specify either :except or :only, not both" if options[:only] && options[:except]
-        mixin = self.dup
+        mixin = self.clone
         action_methods_to_remove(options).each {|a| mixin.remove_action_method(a) }
         controller.send :include, mixin
       end
