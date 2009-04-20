@@ -1,5 +1,5 @@
 - if @user && @user.errors.any?
-  - content_for :error do
+  .error
     = error_messages_for :user
 
 %h3
@@ -9,7 +9,7 @@
   .float-right
     = link_to "Resend Activation Email", activation_email_user_path, :class => "forgot_password"
 .double_content_border
-- form_for(:user, @user, :url => user_path) do |f|
+- form_for(:user, @user, :url => user_path, :html => {:class => 'register'}) do |f|
   .register
     %div
       = f.label :first_name, "Your First Name"

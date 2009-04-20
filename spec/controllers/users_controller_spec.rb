@@ -15,7 +15,6 @@ describe UsersController do
     lambda do
       do_create(:email => nil)
       assigns[:user].errors.on(:email).should_not be_nil
-      response.should be_success
     end.should_not change(User, :count)
   end
 
@@ -25,8 +24,8 @@ describe UsersController do
       post :create, :user => {}
     end
 
-    it "should be successful" do
-      response.should be_success
+    it "should render the new template" do
+      response.should render_template('users/new.html.haml')
     end
 
     it "should have errors on the user" do

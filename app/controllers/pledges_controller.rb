@@ -5,10 +5,9 @@ class PledgesController < ApplicationController
 
   response_for :create do |format|
     if resource_saved?
-      format.js { render :text => "document.location = '#{search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc')}';" }
       format.html { redirect_to search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc') }
     else
-      format.js { render :action => "new"}
+      format.html { render :text => resource.errors[:base] }
     end
   end
 

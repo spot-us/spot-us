@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  before_filter :login_required, :except => :create
+  before_filter :login_required
 
   resources_controller_for :comments, :only => [:create, :index]
 

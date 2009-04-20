@@ -10,7 +10,7 @@ Given /^I have created a "(.*)"$/ do |model_name|
   instance_variable_set("@#{model_name}", Factory(model_name.to_sym, :user => @current_user))
 end
 
-Given /^A (\w+) exists$/ do |model_name| 
+Given /^[Aa] (\w+)(?: exists)?$/ do |model_name|
   instance = Factory(model_name.to_sym)
   instance_variable_set("@#{model_name}", instance)
 end
