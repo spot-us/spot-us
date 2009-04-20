@@ -27,4 +27,4 @@ config.after_initialize do
 end
 
 PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
-PAYPAL_EMAIL = "dev+pa_1239041752_biz@hashrocket.com"
+PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
