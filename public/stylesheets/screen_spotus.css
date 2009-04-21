@@ -266,6 +266,14 @@ body {
 .login-boxer h3 div.float-left, .login-boxer h3 div.float-right {
   padding-top: 10px;
 }
+.donate-login .row label {
+  float: left;
+  width: 150px;
+  margin-top: 9px;
+}
+.donate-login .row input {
+  width: 200px;
+}
 .register input.text, .or_login input.text {
   width: 190px!important;
 }

@@ -1,0 +1,60 @@
+- if @donations && @donations.any?(&:errors)
+  - content_for :error do
+    = error_messages_for :donations, :object => @donation
+
+#equalize
+
+  - # first column content 
+  .span-715.box_white
+
+    %h2{:style => "color: #800000; text-align: center;"} Almost done! One more step:
+    .block-spacer-negative
+    - if logged_in? && current_user.total_credits > 0
+      .float-right
+        == You have #{number_to_currency(current_user.total_credits)} in credits
+    %h3 Login or Register
+    .double_content_border
+
+    - form_for @donation, :url => myspot_donations_path do |f|
+      - unless logged_in?
+        .donate-login
+          .row
+            %label Your E-mail Address
+            %div{:class => session_field_class_name }
+              = text_field_tag "email", nil, :class=>"text"
+          .row
+            %label Your Password
+            %div{:class => session_field_class_name }
+              = password_field_tag "password", nil, :class=>"text"
+      .block-padding
+      %h3 Fund Your Donations
+      .double_content_border
+      %ul.unpaid_donations
+        - content_tag_for :li, @donation, :class => 'unpaid' do
+          .column.span-70
+            = link_to image_tag(@donation.pitch.featured_image.url(:thumb)), @donation.pitch
+          .column.span-550
+            %h3 
+              PITCH:
+              = link_to @donation.pitch.headline, @donation.pitch
+            - if Group.all.any?
+              %p
+                Donate on behalf of:
+                = select_tag "donation_amounts[#{@donation.id}][group_id]", '<option value=''>Giving for a group?</option>' + options_from_collection_for_select(Group.all, :id, :name), :include_blank => true
+            %p
+              = truncate_words(@donation.pitch.short_description)
+              = link_to 'Read More &raquo;', @donation.pitch
+          .column.span-95
+            $
+            = f.text_field :amount, :size => 4
+          %hr
+      .float-right
+        = image_submit_tag 'purchase.png', :alt => 'Purchase'
+
+  - # second column content   
+  .span-160.box_white
+    = render :partial => 'layouts/common_questions'
+
+.clear
+.block-spacer
+

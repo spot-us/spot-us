@@ -2,12 +2,16 @@ class Myspot::DonationsController < ApplicationController
   before_filter :login_required, :except => :create
   resources_controller_for :donations, :only => [:index, :create, :destroy]
 
-  response_for :create do |format|
-    if resource_saved?
+  def create
+    unless params[:email].blank?
+      self.current_user = User.authenticate(params[:email], params[:password])
+    end
+    self.resource = new_resource
+    if resource.save
       update_balance_cookie
-      format.html { redirect_to edit_myspot_donations_amounts_path }
+      redirect_to edit_myspot_donations_amounts_path
     else
-      format.html { render :text => "TODO" }
+      render "new"
     end
   end
 
@@ -18,19 +22,10 @@ class Myspot::DonationsController < ApplicationController
 
   protected
 
-  def can_create?
-    if current_user.nil?
-      session[:return_to] = edit_myspot_donations_amounts_path
-      session[:news_item_id] = params[:pitch_id]
-      session[:donation_amount] = params[:amount]
-      render :partial => "sessions/header_form" and return false
-    end
-
-    access_denied unless Donation.createable_by?(current_user)
-  end
-
   def new_resource
-    current_user.donations.new(params[:donation])
+    Donation.new(params[:donation]) do |d|
+      d.user = current_user
+    end
   end
 
   def find_resources
