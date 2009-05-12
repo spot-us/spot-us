@@ -19,6 +19,10 @@ describe Pledge do
     duplicate.should have(1).error_on(:tip_id)
   end
 
+  it "requires an amount greater than 0" do
+    Pledge.new(:amount => 0).should have(1).error_on(:amount)
+  end
+
   describe "creating" do
     it "is creatable by user" do
       Pledge.createable_by?(Factory(:user)).should be
