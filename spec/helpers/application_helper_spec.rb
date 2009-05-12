@@ -155,7 +155,7 @@ describe ApplicationHelper do
     end
     it "returns a link to login with facebox if user is not logged in" do
       stub!(:current_user).and_return(nil)
-      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[rel='facebox'][href*=?]", new_session_path)
+      facebox_login_link_to("some text", apply_to_contribute_pitch_path(@pitch), :title => 'Join the team').should have_tag("a[class='authbox'][href*=?]", new_session_path)
     end
   end
 end
