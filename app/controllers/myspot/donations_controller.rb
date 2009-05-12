@@ -7,7 +7,10 @@ class Myspot::DonationsController < ApplicationController
       update_balance_cookie
       format.html { redirect_to edit_myspot_donations_amounts_path }
     else
-      format.html { render :text => "TODO" }
+      format.html {
+        flash[:error] = 'There was a problem with your donation. Please try again'
+        redirect_to :back
+      }
     end
   end
 
