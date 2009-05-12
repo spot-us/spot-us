@@ -78,6 +78,9 @@
       = render :partial => "donations/button", :locals => { :news_item => @pitch }
       = render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }
       = render :partial => "donations/half_fund", :locals => { :news_item => @pitch }
+      .block-spacer-negative
+      .why_this_amount
+        = link_to 'why this amount?', page_path(:reporter_agreement)
       - if current_user
         - if current_user.organization? && (!@pitch.half_funded? || !@pitch.fully_funded?)
           .small.quiet.align_right.no_margin
