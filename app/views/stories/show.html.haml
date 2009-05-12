@@ -47,6 +47,12 @@
       = truncate_words(@story.pitch.short_description, 30)
       = link_to 'Read More &raquo;', @story.pitch
 
+    - unless @story.license.blank?
+      .block-spacer-negative
+      %h3 License
+      .double_content_border
+      = @story.license
+
     - unless @story.external_links.blank?
       .block-spacer-negative
       %h3 External Links
