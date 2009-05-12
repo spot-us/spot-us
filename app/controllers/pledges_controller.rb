@@ -7,7 +7,10 @@ class PledgesController < ApplicationController
     if resource_saved?
       format.html { redirect_to search_news_items_path(:news_item_type=>'tips', :sort_by=>'desc') }
     else
-      format.html { render :text => resource.errors[:base] }
+      format.html {
+        flash[:error] = resource.errors.full_messages
+        redirect_to :back
+      }
     end
   end
 
