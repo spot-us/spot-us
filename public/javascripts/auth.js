@@ -51,6 +51,7 @@ jQuery(document).ready(function($){
             jump_to.click();
           else
             $(document).trigger('close.facebox');
+          renderUserHeader();
         }
       }
     });
