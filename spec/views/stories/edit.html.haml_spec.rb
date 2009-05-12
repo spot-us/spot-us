@@ -17,14 +17,23 @@ describe "/stories/edit.html.haml" do
     do_render
     response.should have_tag('textarea[name=?]', 'story[headline]')
   end
+
   it 'includes a textarea for extended description' do
     do_render
     response.should have_tag('textarea[name=?]', 'story[extended_description]')
   end
-  it 'includes a textarea for external links' do
+
+  it 'includes a textarea for external links if the user is an admin' do
+    template.stubs(:current_user).returns(Factory.build(:admin))
     do_render
     response.should have_tag('textarea[name=?]', 'story[external_links]')
   end
+
+  it "doesn't include the textarea for external links if the user is not an admin" do
+    do_render
+    response.should_not have_tag('textarea[name=?]', 'story[external_links]')
+  end
+
   it 'includes a license text area if user.admin?' do
     current_user = Factory(:admin)
     current_user.stub!(:admin?).and_return(true)
