@@ -40,6 +40,18 @@ describe "/stories/show.html.haml" do
     template.should_not have_tag('a[href$=?]', edit_story_path(@story))
   end
 
+  it "lists the license if one is available" do
+    @story.license = 'the license'
+    do_render
+    response.should have_text(/the license/)
+  end
+
+  it "doesn't list the license header if no license is available" do
+    @story.license = nil
+    do_render
+    response.should_not have_tag("h3", "License")
+  end
+
   it "should have an external links box if there are external links" do
     @story.external_links = "some links"
     do_render
