@@ -22,6 +22,7 @@ class Pledge < ActiveRecord::Base
   validates_presence_of :tip_id
   validates_presence_of :user_id
   validates_presence_of :amount
+  validates_numericality_of :amount, :greater_than => 0, :allow_blank => true
   validates_uniqueness_of :tip_id, :scope => [:user_id, :deleted_at]
 
   def self.createable_by?(user)
