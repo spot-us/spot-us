@@ -4,7 +4,7 @@ module ApplicationHelper
     return link_to(*args, &block) if current_user
     url = url_for(args.second)
     options = args.third || {}
-    options.merge!({:rel => 'facebox'})
+    options.merge!({:class => 'authbox', :return_to => url})
     link_to args.first, new_session_path(:return_to => url), options
   end
 

@@ -266,7 +266,7 @@ class Pitch < NewsItem
   end
 
   def default_donation_amount
-    [donation_limit_per_user, funding_needed].min
+    [Donation::DEFAULT_AMOUNT, donation_limit_per_user, funding_needed].min
   end
 
   def user_can_donate_more?(user, attempted_donation_amount)

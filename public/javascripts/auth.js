@@ -43,12 +43,15 @@ jQuery(document).ready(function($){
           $("#not_logged_in").hide();
           $("#logged_in").show();
           $("#sign_in_section").empty().append(request.responseText);
-          if (jump_to && jump_to.attr("action"))
+          if (jump_to && jump_to.attr("return_to"))
+            window.location = jump_to.attr("return_to");
+          else if (jump_to && jump_to.attr("action"))
             jump_to.submit();
           else if (jump_to && jump_to.attr("href"))
             jump_to.click();
           else
             $(document).trigger('close.facebox');
+          renderUserHeader();
         }
       }
     });
