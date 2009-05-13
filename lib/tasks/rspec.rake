@@ -15,7 +15,11 @@ elsif File.exist?(rspec_plugin_dir)
 end
 
 begin
-  require 'spec/rake/spectask'
+  begin
+    gem 'rspec', '1.2.2'
+    require 'spec/rake/spectask'
+  rescue Gem::LoadError, MissingSourceFile
+  end
 
   spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db:test:prepare" : []
   spec_opts = ["--options", "\"#{RAILS_ROOT}/spec/spec.opts\""]

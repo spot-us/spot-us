@@ -1,5 +1,9 @@
 $:.unshift(RAILS_ROOT + '/vendor/plugins/cucumber/lib')
-require 'cucumber/rake/task'
+begin
+  gem 'cucumber', '0.1.16'
+  require 'cucumber/rake/task'
+rescue Gem::LoadError, MissingSourceFile
+end
 
 desc "Run all features" 
 task :features => 'db:test:prepare'

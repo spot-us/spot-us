@@ -59,6 +59,23 @@ describe Myspot::DonationsController do
     end
   end
 
+  describe "on POST to create with invalid input" do
+    before do
+      request.env["HTTP_REFERER"] = '/'
+      controller.stubs(:resource_saved?).returns(false)
+    end
+
+    it "sets a flash error message" do
+      post :create, :donation => {}
+      flash[:error].should_not be_nil
+    end
+
+    it "redirects to back" do
+      post :create, :donation => {}
+      response.should redirect_to('/')
+    end
+  end
+
 
   describe "on GET to index" do
     before do
