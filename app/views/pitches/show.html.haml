@@ -10,6 +10,12 @@
       %strong= h @pitch.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
+    - unless @pitch.video_embed.blank?
+      .block-spacer-negative
+      %p
+        %h3 Video
+        .double_content_border
+        = @pitch.video_embed
     .block-spacer-negative
     %h3.description
       Short Description
@@ -18,12 +24,6 @@
       = render :partial => 'news_items/featured_image', :locals => {:news_item => @pitch}
       .alt-spotus= @pitch.short_description
     .clear
-    - unless @pitch.video_embed.blank?
-      .block-spacer-negative
-      %p
-        %h3 Video
-        .double_content_border
-        = @pitch.video_embed
     - unless @pitch.widget_embed.blank?
       .block-spacer-negative
       %p
@@ -78,6 +78,8 @@
       = render :partial => "donations/button", :locals => { :news_item => @pitch }
       = render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }
       = render :partial => "donations/half_fund", :locals => { :news_item => @pitch }
+      .why_this_amount
+        = link_to 'why this amount?', page_path(:reporter_agreement)
       - if current_user
         - if current_user.organization? && (!@pitch.half_funded? || !@pitch.fully_funded?)
           .small.quiet.align_right.no_margin
@@ -93,6 +95,7 @@
             = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
           - else
             = facebox_login_link_to(image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team')
+          = link_to "what's this?", page_path('about') + '#join_the_team'
     .block-spacer-negative
     %h3 Related Tips
     .double_content_border
