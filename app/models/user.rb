@@ -106,7 +106,6 @@ class User < ActiveRecord::Base
 
   before_validation_on_create :generate_activation_code
   before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
-  after_create :deliver_activation_email, :unless => lambda {|user| user.organization? }
 
   has_attached_file :photo,
                     :styles      => { :thumb => '50x50#' },
