@@ -2,7 +2,10 @@ class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
   before_filter :login_required, :only => [:apply_to_contribute]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
+
   resources_controller_for :pitch
+
+  bounce_bots(:send_bots, :pitch, :blog_url)
 
   def index
     redirect_to(news_items_path)
@@ -66,6 +69,11 @@ class PitchesController < ApplicationController
   end
 
   protected
+
+  def send_bots
+    self.resource = new_resource
+    render :action => :new
+  end
 
   def can_create?
     access_denied unless Pitch.createable_by?(current_user)
