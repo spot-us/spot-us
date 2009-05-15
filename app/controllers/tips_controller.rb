@@ -1,6 +1,9 @@
 class TipsController < ApplicationController
   resources_controller_for :tip, :except => :destroy
+
   before_filter :block_if_donated_to, :only => :edit
+
+  bounce_bots(:send_bots, :tip, :blog_url)
 
   def block_if_donated_to
     t = find_resource(params[:id])
@@ -15,6 +18,11 @@ class TipsController < ApplicationController
   end
 
   private
+
+  def send_bots
+    self.resource = new_resource
+    render :action => :new
+  end
 
   def can_edit?
     access_denied unless find_resource.editable_by?(current_user)
