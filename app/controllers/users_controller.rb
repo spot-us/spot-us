@@ -10,10 +10,11 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       unless @user.organization?
+        @user.activate!
         self.current_user = @user
         create_current_login_cookie
         update_balance_cookie
-        flash_and_redirect(:success, 'Click the link in the email we just sent to you to finish creating your account!', root_path)
+        flash_and_redirect(:success, 'Welcome to Spot.Us!', root_path)
       else
         flash_and_redirect(:success, "Your account will be reviewed prior to approval. We'll get back to you as soon as possible.", root_path)
       end

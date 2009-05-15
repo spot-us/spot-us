@@ -44,6 +44,17 @@ describe UsersController do
     end
   end
 
+  describe "when creating a non news org user" do
+    it "should automatically activate the user" do
+      user = Factory(:citizen)
+      user.stub!(:save).and_return(true)
+      user.should_receive(:activate!)
+      User.stub!(:new).and_return(user)
+      do_create(:type => 'Citizen')
+      flash[:success].should =~ /Welcome/
+    end
+  end
+
   def do_create(options = {})
     Factory(:network)
     post :create, :user => { :email      => 'quire@example.com',
