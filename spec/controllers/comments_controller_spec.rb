@@ -47,7 +47,7 @@ describe CommentsController do
         response.should redirect_to(pitch_path(@pitch))
       end
     end
-    
+
     describe "without a logged in user" do
       before do
         controller.stubs(:current_user).returns(nil)
