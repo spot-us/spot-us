@@ -4,23 +4,23 @@ module BounceBots
   end
 
   module ClassMethods
-    def bounce_bots(*field_path, &block)
+    def bounce_bots(to, *field_path)
       before_filter :bounce_bot
 
-      cattr_accessor :bounce_field_path
-      cattr_accessor :bounce_block
-      self.bounce_field_path = field_path
-      self.bounce_block = block if block_given?
+      cattr_accessor :bounce_to
+      cattr_accessor :bounce_field
+      cattr_accessor :bounce_field_parents
+      self.bounce_to = to
+      self.bounce_field = field_path.last
+      self.bounce_field_parents = field_path[0..-2]
     end
   end
 
   protected
 
   def bounce_bot
-    parents = bounce_field_path[0..-2]
-    field = bounce_field_path.last
-    bot_check = parents.inject(params) {|p, parent| p[parent] || {}}.delete(field)
-    bounce_block and return false if bot_check.blank?
+    bot_check = bounce_field_parents.inject(params) {|p, parent| p[parent] || {}}.delete(bounce_field)
+    send(bounce_to) and return false unless bot_check.blank?
     true
   end
 end

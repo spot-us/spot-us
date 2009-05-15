@@ -2,8 +2,7 @@ class CommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :login_required
 
-  include BounceBots
-  bounce_bots(:comment, :blog_url) { redirect_to :back }
+  bounce_bots :send_bots, :comment, :blog_url
 
   resources_controller_for :comments, :only => [:create, :index]
 
@@ -26,6 +25,10 @@ class CommentsController < ApplicationController
   end
 
   protected
+
+  def send_bots
+    redirect_to root_path
+  end
 
   def can_create?
     if current_user.nil?
