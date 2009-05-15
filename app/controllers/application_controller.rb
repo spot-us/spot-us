@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   include SslRequirement
 
+  include BounceBots
+
   # cache_sweeper :home_sweeper, :except => [:index, :show]
 
   before_filter :can_create?, :only => [:new, :create]
