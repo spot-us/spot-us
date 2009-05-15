@@ -53,6 +53,9 @@ input.mini-text {
 input.header-checkbox {
   vertical-align: middle;
 }
+input.highlight_required {
+  display:none;
+}
 span#login_close {
   position: relative;
   bottom: -3px;
