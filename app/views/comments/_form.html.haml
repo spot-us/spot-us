@@ -1,6 +1,7 @@
 .row
   = f.label :title
   = f.text_field :title
+  = text_field_tag 'comment[blog_url]', '', :class => :highlight_required, :id => 'comment_blog_url'
 .row
   = f.label :body
   = fckeditor_textarea('comment', 'body', :toolbarSet => 'Spotus', :height => '200px')

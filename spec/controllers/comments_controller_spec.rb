@@ -36,6 +36,18 @@ describe CommentsController do
     end
 
     describe "with a logged in user" do
+      describe "bot negative captcha" do
+        it "remove the blog_url from the params" do
+          post :create, :comment => {:title => 'foo', :body => 'bar', :blog_url => 'anything'}, :pitch_id => @pitch.id
+          params[:comment].should_not have_key(:blog_url)
+        end
+
+        it "redirects to back when there is a bot who filled in the blog url" do
+          post :create, :comment => {:title => 'foo', :body => 'bar', :blog_url => 'anything'}, :pitch_id => @pitch.id
+          response.should redirect_to(root_path)
+        end
+      end
+
       it "success" do
         post :create, :comment => {:title => 'foo', :body => 'bar'}, :pitch_id => @pitch.id
         flash[:notice].should be
