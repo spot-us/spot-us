@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :login_required
+  before_filter :bounce_bot
 
   resources_controller_for :comments, :only => [:create, :index]
 
@@ -23,6 +24,13 @@ class CommentsController < ApplicationController
   end
 
   protected
+
+  def bounce_bot
+    bot_check = params[:comment].delete(:blog_url) if params[:comment]
+    redirect_to :back and return false unless bot_check.blank?
+    true
+  end
+
   def can_create?
     if current_user.nil?
       store_comment_for_non_logged_in_user
