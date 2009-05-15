@@ -24,6 +24,18 @@ describe User do
     Network.create!(:name => 'sfbay', :display_name => 'Bay Area')
   end
 
+  describe ".authenticate" do
+    before do
+      @email = 'user@example.com'
+      @password = 'password'
+    end
+    subject { User.authenticate(@email, @password) }
+    it "returns nil if the email isn't correct" do
+    end
+    it "returns nil if the if the email is correct and the password isn't"
+    it "returns a user with correct email and password"
+  end
+
   describe "creating" do
     it "is creatable by guest" do
       User.createable_by?(nil).should be
@@ -311,13 +323,13 @@ describe User do
 
   describe "activation" do
     before do
-      Mailer.stub!(:deliver_activation_email)
-      @user = Citizen.new(Factory.attributes_for(:citizen))
+      Mailer.stub!(:deliver_signup_notification)
+      @user = Factory(:citizen)
     end
 
-    it "should send an activation email" do
-      @user.should_receive(:deliver_activation_email)
-      @user.save
+    it "should send an signup notification email" do
+      @user.should_receive(:deliver_signup_notification)
+      @user.activate!
     end
 
     it "should clear the activation code on activate!" do
