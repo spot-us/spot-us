@@ -8,7 +8,7 @@
     == #{link_to "Center for Media Change", "http://www.CenterforMediaChange.com/"} 
     and funded by various groups like like the 
     == #{link_to "Knight Foundation", "http://www.knightfoundation.org/"}. 
-  %p  
+  %p
     We are an open source project, to pioneer &ldquo;community funded reporting.&rdquo; Through
     Spot.Us the public can commission journalists to do investigations on important and perhaps
     overlooked stories. All donations are tax deductible and if a news organization buys exclusive
@@ -19,10 +19,9 @@
     You can learn more about us at our 
     == #{link_to "Press Page", "http://www.spot.us/pages/press/"}, 
     the FAQ's below or watch this quick video.
-    <embed src="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=00ADEF&amp;fullscreen=1"
-    type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always"
-    width="450" height="254" wmode="transparent"><param name="wmode" value="transparent" /></embed><br />
-    
+  %object{:width => "450", :height => "254"}
+    %param{:value => 'transparent', :name => 'wmode'}
+    %embed{:src => "http://vimeo.com/moogaloop.swf?clip_id=2041615&server=vimeo.com&show_title=0&show_byline=0&show_portrait=0&color=00ADEF&fullscreen=1", :type => "application/x-shockwave-flash", :allowfullscreen => "true", :allowscriptaccess => "always", :width => "450", :height => "254", :wmode => "transparent"}
 
   %h2 Contact
   %hr/
