@@ -1,7 +1,8 @@
 - @title = "Spot.us - Read A Story"
 
-- if @stories.size > 0
+- unless @stories.blank?
   = render :partial => @stories
+  = will_paginate @stories
 - else
   .box_white
     %p
@@ -9,6 +10,5 @@
       pitches you care about. Check out what we have by going to
       = link_to "Fund A Story.", news_items_path
       = link_to "Fund A Story.", page_path("news_items_path")
-
 
 .block-spacer
