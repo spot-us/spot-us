@@ -56,6 +56,6 @@ class StoriesController < ApplicationController
     end
 
     def find_resources
-      @stories = Story.by_network(current_network).published
+      @stories = Story.by_network(current_network).published.paginate(:page => params[:page], :per_page => 10)
     end
 end
