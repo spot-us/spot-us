@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  ssl_required :create, :new
+  ssl_required :create
 
   def new
     @user = User.new
