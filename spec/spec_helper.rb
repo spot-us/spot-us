@@ -132,3 +132,12 @@ def has_dollar_field(clazz, field_name)
     rec.send(cents_field).should == 1234
   end
 end
+
+class Object
+  def stub_chain(*methods)
+    while methods.length > 1 do
+      stub!(methods.shift).and_return(self)
+    end
+    stub!(methods.shift)
+  end
+end
