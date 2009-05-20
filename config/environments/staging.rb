@@ -5,7 +5,7 @@ config.action_view.debug_rjs = true
 config.cache_classes = false
 config.whiny_nils = true
 config.action_mailer.perform_deliveries = false
-SslRequirement.disable_ssl_check = true
+SslRequirement.disable_ssl_check = false
 
 ActiveMerchant::Billing::Base.mode = :test
 config.to_prepare do
