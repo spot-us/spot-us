@@ -94,16 +94,20 @@ describe StoriesController do
   describe "#find_resources" do
     before do
       controller.stubs(:current_network).returns(Factory(:network))
-      @published = []
-      @by_network = stub('by_network', :published => @published)
     end
     it "should load stories for the current network" do
-      Story.should_receive(:by_network).and_return(@by_network)
+      Story.stub_chain(:published, :paginate).and_return([])
+      Story.should_receive(:by_network).and_return(Story)
       controller.send(:find_resources)
     end
     it "should load published stories" do
-      Story.stub!(:by_network).and_return(@by_network)
-      @by_network.should_receive(:published).and_return(@published)
+      Story.stub_chain(:by_network, :paginate).and_return([])
+      Story.should_receive(:published).and_return(Story)
+      controller.send(:find_resources)
+    end
+    it "paginates" do
+      Story.stub_chain(:published, :by_network).and_return(Story)
+      Story.should_receive(:paginate).and_return([])
       controller.send(:find_resources)
     end
   end
