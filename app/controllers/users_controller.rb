@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   include AuthenticatedSystem
 
+  ssl_required :create, :new, :password, :reset_password
+
   def new
     @user = User.new
   end
