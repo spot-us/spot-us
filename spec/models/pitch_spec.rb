@@ -878,5 +878,15 @@ describe Pitch do
       @pitch.donating_groups.should_not include(nil)
     end
   end
+
+  describe "Remove blog posts with pitches" do
+    it "posts are dependent destroy" do
+      pitch = active_pitch
+      post = stub('post')
+      pitch.stub!(:posts).and_return([post])
+      post.should_receive(:destroy)
+      pitch.destroy
+    end
+  end
 end
 
