@@ -91,7 +91,7 @@ class Pitch < NewsItem
     end
   end
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
-  has_many :posts do
+  has_many :posts, :dependent => :destroy do
     def first(number)
       find(:all, :limit => number, :order => 'created_at DESC')
     end
