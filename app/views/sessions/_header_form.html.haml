@@ -1,12 +1,12 @@
 .login-boxer.span-13
   .span-12.login
-    - form_tag session_url(:protocol => 'https') do
+    - form_tag session_url(:protocol => 'http') do
       %h3 Thanks for joining us!
       .double_content_border
       = render :partial => 'sessions/popup_form'
       .block-padding.clear 
       .double_content_border
-      %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :class => "float-right"}
+      %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :class => "float-right", :onclick=>"processLoginForm();"}
 
   .span-12.register
     = render :partial => "users/form"
