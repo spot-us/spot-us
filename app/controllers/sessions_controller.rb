@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    self.current_user = User.authenticate(params[:email], Base64.decode64(params[:password]))
+    self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
     if logged_in?
       handle_remember_me
       create_current_login_cookie
