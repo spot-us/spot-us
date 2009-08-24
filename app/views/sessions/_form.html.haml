@@ -7,6 +7,7 @@
   %label Your Password
   %div{:class => session_field_class_name }
     = password_field_tag "password", nil, :class=>"text", :id=>"passwordField"
+    = hidden_field_tag "encoded_password", nil, :class=>"text", :id=>"passwordHiddenField"
 .row
   = check_box_tag 'remember_me', '1'
   %label{:for => 'remember_me'} Remember Me
