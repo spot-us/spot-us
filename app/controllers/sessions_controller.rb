@@ -1,5 +1,7 @@
+require "digest/sha1"
+
 class SessionsController < ApplicationController
-  ssl_required :create
+  #ssl_required :create
 
   def new
     @user = User.new
@@ -12,7 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    self.current_user = User.authenticate(params[:email], params[:password])
+    self.current_user = User.authenticate(params[:email], Base64.decode64(params[:password]))
     if logged_in?
       handle_remember_me
       create_current_login_cookie
