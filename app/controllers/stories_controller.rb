@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
     story = find_resource
     story.publish!
     flash[:notice] = "Your story has been published"
-    redirect_back_or_default("/")
+    redirect_back_or_default("/") 
   end
 
   protected
@@ -56,6 +56,6 @@ class StoriesController < ApplicationController
     end
 
     def find_resources
-      @stories = Story.by_network(current_network).published.paginate(:page => params[:page], :per_page => 10)
+      @stories = Story.by_network(current_network).published.paginate(:page => params[:page], :per_page => 10, :order=>"created_at desc")
     end
 end
