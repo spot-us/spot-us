@@ -25,7 +25,7 @@
       = link_to image_tag('rss_16.png'), news_items_path(:format => :rss)
     %h3 Newest Items
     .double_footer_border
-    - for news_item in NewsItem.newest.unfunded.pitch_or_tip.top_four
+    - for news_item in NewsItem.newest.accepted.pitch_or_tip.top_four
       %p.clear
         = link_to image_tag(news_item.featured_image.url(:thumb)), news_item
         = news_item.class.name.upcase + ':'
