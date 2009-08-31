@@ -82,7 +82,7 @@ class NewsItem < ActiveRecord::Base
 
   named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
   named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded')"
-  named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved' 'draft')"
+  named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved' 'draft','',NULL)"
   named_scope :pitch_or_tip, :conditions => 'news_items.type IN("Pitch","Tip")'
   named_scope :top_four, :limit => 4
   named_scope :desc, :order => 'news_items.created_at DESC'
