@@ -6,8 +6,8 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-
 require 'tasks/rails'
+
 
 desc "Copy application sample config for dev/test purposes"
 task :copy_sample_config do
