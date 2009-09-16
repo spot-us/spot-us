@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
 
-  protect_from_forgery
+  #protect_from_forgery
 
   def current_network
     subdomain = current_subdomain.downcase if current_subdomain
