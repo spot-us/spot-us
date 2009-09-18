@@ -508,6 +508,10 @@ describe Pitch do
     it "is creatable by reporter" do
       Pitch.createable_by?(Factory(:reporter)).should be
     end
+    
+    it "is creatable by organization" do
+      Pitch.createable_by?(Factory(:organization)).should be
+    end
 
     it "is not creatable by user" do
       Pitch.createable_by?(Factory(:user)).should_not be_true
