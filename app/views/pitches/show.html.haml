@@ -10,6 +10,7 @@
       %strong= h @pitch.headline
     .double_content_border
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
+    %h3= link_to "Comments (" + @pitch.comments.size.to_s + ")", "#comments"
     - unless @pitch.video_embed.blank?
       .block-spacer-negative
       %p
@@ -45,6 +46,7 @@
       %h3 Qualifications <br /><span class='small quieter'>Also view reporter's profile</span>
       .double_content_border
       .alt-spotus= h @pitch.skills
+    %a{:name => "comments"}
     .block-spacer-negative
     %h3 Comments
     .double_content_border
