@@ -16,12 +16,13 @@ class SessionsController < ApplicationController
   def create
     self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
     if logged_in?
+       
       handle_remember_me
       create_current_login_cookie
       update_balance_cookie
       handle_first_donation_for_non_logged_in_user
       handle_first_pledge_for_non_logged_in_user
-      puts "whooooooo"
+     
       if request.xhr?
         render :nothing => true
       else
