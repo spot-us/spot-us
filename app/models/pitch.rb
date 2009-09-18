@@ -170,7 +170,7 @@ class Pitch < NewsItem
   end
 
   def self.createable_by?(user)
-    user && user.reporter?
+    user && user.reporter? || user.organization?
   end
 
   def featured?
