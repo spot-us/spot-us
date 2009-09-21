@@ -17,14 +17,12 @@ DEFAULT_HOST = APP_CONFIG[:default_host] || "spotus.local"
 Rails::Initializer.run do |config|
   config.gem "haml", :version => '>=2.0.6'
   config.gem "fastercsv"
-  #config.gem "mysql", :version => '2.7'
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
   config.gem "rubyist-aasm", :lib => "aasm", :version => '>=2.0.5', :source => 'http://gems.github.com'
   config.gem 'mislav-will_paginate', :lib => 'will_paginate', :version => '>=2.3.7', :source => 'http://gems.github.com/'
   config.gem "rspec-rails", :lib => false, :version => "= 1.2.2"
-  config.gem "rspec", :lib => false, :version => "= 1.2.2"
   config.gem "cucumber", :lib => false, :version => "= 0.1.16"
-  config.gem "webrat", :lib => false, :version => ">= 0.4.4"
+  config.gem "webrat", :lib => false, :version => "= 0.4.4"
   config.gem "money", :version => ">=2.1.3"
 
   config.time_zone = 'UTC'
