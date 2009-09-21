@@ -11,4 +11,7 @@
   .clear
   = check_box_tag 'remember_me', '1', false, :class => "float-left"
   %label{:for => 'remember_me', :class => "unpadded"} Remember Me
-  .clear
+  = link_to "Forgot Password?", password_user_path, :class => "forgot_password"
+
+    
+  
