@@ -16,7 +16,7 @@
           - Network.all.each do |network|
             |
             - if @current_network != network
-              = link_to network.display_name, root_url(:subdomain => network.name)
+              = link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase
             - else
               = network.display_name
         - if yield(:error)
