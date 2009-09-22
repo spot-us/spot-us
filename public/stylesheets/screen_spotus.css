@@ -211,8 +211,20 @@ body {
   overflow: hidden;
   float: left;
 }
+#header .la.logo {
+  background: url(/images/spotus_header_logo_la.jpg) no-repeat;
+  width: 382px;
+  height: 31px;
+  overflow: hidden;
+  float: left;
+}
 #header .logo-link {
   width: 222px;
+  height: 31px;
+  display: block;
+}
+#header .logo-link-la {
+  width: 382px;
   height: 31px;
   display: block;
 }
