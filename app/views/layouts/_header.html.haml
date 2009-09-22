@@ -1,5 +1,5 @@
 #header
-  .logo{ :class => "#{(@current_network && @current_network.name ? @current_network.name : '')}" }
+  .logo{ :class => "#{(@current_network && @current_network.name ? @current_network.name.to_s.downcase : '')}" }
     %p
       = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Funded Reporting"
   .nav-container
