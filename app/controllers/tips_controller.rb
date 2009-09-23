@@ -2,8 +2,8 @@ class TipsController < ApplicationController
   resources_controller_for :tip, :except => :destroy
 
   before_filter :block_if_donated_to, :only => :edit
-
   bounce_bots(:send_bots, :tip, :blog_url)
+  before_filter :select_tab, :only => [:new]
 
   def block_if_donated_to
     t = find_resource(params[:id])
@@ -37,4 +37,11 @@ class TipsController < ApplicationController
     params[:tip][:headline] = params[:headline] if params[:headline]
     current_user.tips.new(params[:tip])
   end
+  
+  protected
+
+   def select_tab
+       @selected_tab = "start_story"
+   end
+
 end
