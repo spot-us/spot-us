@@ -80,5 +80,10 @@ module ApplicationHelper
     output += content_tag('optgroup', options_for_select(User.all.map{|u| [u.full_name, u.id]}), :label => 'All Users')
     output
   end
+  
+  # inserts 'active' css class if true
+  def check_if_tab(tab, selected_tab)
+      " active" if tab == selected_tab
+  end
 
 end

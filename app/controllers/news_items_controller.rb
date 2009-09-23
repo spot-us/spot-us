@@ -2,8 +2,10 @@ class NewsItemsController < ApplicationController
   include NewsItemsHelper
 
   before_filter :load_networks, :only => [:index, :search]
+  before_filter :select_tab, :only => [:index, :search]
 
   def index
+    
     respond_to do |format|
       format.rss do
         @news_items = NewsItem.newest.first(10)
@@ -38,5 +40,9 @@ class NewsItemsController < ApplicationController
 
   def load_networks
     @networks = Network.all
+  end
+  
+  def select_tab
+      @selected_tab = "pitches"
   end
 end
