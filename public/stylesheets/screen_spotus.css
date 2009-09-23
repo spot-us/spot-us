@@ -243,6 +243,9 @@ body {
   float: left;
   list-style: none;
 }
+.nav-container #main-nav li.active a{
+	color:#B04264;
+}
 .nav-container #main-nav li a {
   text-decoration: none;
   display: block;
