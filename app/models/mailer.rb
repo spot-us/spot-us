@@ -65,6 +65,14 @@ class Mailer < ActionMailer::Base
     subject    "Spot.Us: Success!! Your Story is Funded!"
     body       :pitch => pitch
   end
+  
+  def blog_posted_notification(post)
+    recipients '"David Cohn" <david@spot.us>'
+    bcc post.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Blog Update: '#{post.pitch.headline}'"
+    body       :post => post
+  end
 
   def admin_reporting_team_notification(pitch)
     recipients '"David Cohn" <david@spot.us>'
