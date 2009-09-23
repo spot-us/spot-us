@@ -40,9 +40,9 @@ jQuery(document).ready(function($){
           if (request.responseText == ' ')
             $(document).trigger('close.facebox');
         } else {
-          $("#not_logged_in").hide();
-          $("#logged_in").show();
-          $("#sign_in_section").empty().append(request.responseText);
+          // $("#not_logged_in").hide();
+          // $("#logged_in").show();
+          // $("#sign_in_section").empty().append(request.responseText);
           if (jump_to && jump_to.attr("return_to"))
             window.location = jump_to.attr("return_to");
           else if (jump_to && jump_to.attr("action"))
@@ -50,8 +50,9 @@ jQuery(document).ready(function($){
           else if (jump_to && jump_to.attr("href"))
             jump_to.click();
           else
-            $(document).trigger('close.facebox');
-          renderUserHeader();
+			window.location.reload(true);
+          // $(document).trigger('close.facebox');
+          //           renderUserHeader();
         }
       }
     });
