@@ -113,7 +113,7 @@ jQuery(document).ajaxComplete(function(options, r) {
     var dismiss = "<span class=\"dismiss\"><a href=\"\"><img src=\"/images/close_square.png\" alt=\"Dismiss\" /></span>";
     jQuery.each(["Success", "Notice", "Error"], function() {
       if(notice = r.getResponseHeader("X-Flash-" + this)) {
-        jQuery("#flash").append(jQuery("<div/>").addClass(this.toLowerCase()).html(dismiss + "<p>" + notice + "</p>"));
+        jQuery("#flash").html(jQuery("<div/>").addClass(this.toLowerCase()).html(dismiss + "<p>" + notice + "</p>"));
       }
     });
 });
