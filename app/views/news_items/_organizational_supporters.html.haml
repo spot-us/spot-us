@@ -3,7 +3,7 @@
     %h2.supporters Organizational Support
     .double_content_border
     .supporters
-      - news_item.donations.from_organizations.map(&:user).each do |supporter|
+      - news_item.organizational_donors.each do |supporter|
         = render :partial => 'news_items/organizational_donor', :locals => {:news_item => news_item, :supporter => supporter}
       - news_item.supporting_organizations.each do |supporter|
         = render :partial => 'news_items/organizational_supporter', :locals => {:news_item => news_item, :supporter => supporter}
