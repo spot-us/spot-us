@@ -90,7 +90,11 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
-  has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
+  has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
+            :conditions => "users.type = 'organization'",
+            :uniq => true
+            
+  has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true 
   has_many :posts, :order => "created_at desc", :dependent => :destroy do
     def first(number)
       find(:all, :limit => number, :order => 'created_at DESC')
