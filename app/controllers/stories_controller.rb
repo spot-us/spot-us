@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_filter :can_view?, :only => [:show]
   before_filter :can_edit?, :only => :edit
   before_filter :select_tab
-  before_filter :set_meta_tags
+  before_filter :set_meta_tags, :only => [:show]
   resources_controller_for :stories
 
   def accept
@@ -68,6 +68,6 @@ class StoriesController < ApplicationController
     
     def set_meta_tags
       story = find_resource
-      html_meta_tags(story.short_description,story.keywords)
+      html_meta_tags(story.short_description,story.keywords) if story
     end
 end
