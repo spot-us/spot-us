@@ -1,4 +1,4 @@
-table.admin_pitches {
+table.admin_pitches, table.admin_comments {
   font-size:0.9em;
   line-height: 1.4em;
   border: 0 solid;
@@ -7,11 +7,11 @@ table.admin_pitches {
 table.admin_pitches tr th {
   font-size: 1.3em;
 }
-table.admin_pitches tr {
+table.admin_pitches tr, table.admin_comments tr {
   border: 1px solid #999;
   border-collapse: collapse;
 }
-table.admin_pitches tr td {
+table.admin_pitches tr td, table.admin_comments tr td {
   vertical-align: top;
   border: 1px solid #999;
   border-collapse: collapse;
