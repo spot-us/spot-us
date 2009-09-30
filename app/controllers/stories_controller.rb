@@ -2,6 +2,7 @@ class StoriesController < ApplicationController
   before_filter :can_view?, :only => [:show]
   before_filter :can_edit?, :only => :edit
   before_filter :select_tab
+  before_filter :set_meta_tags
   resources_controller_for :stories
 
   def accept
@@ -33,6 +34,7 @@ class StoriesController < ApplicationController
   end
 
   protected
+  
     def can_view?
       story = find_resource
       unless story.viewable_by?(current_user)
@@ -62,5 +64,10 @@ class StoriesController < ApplicationController
     
     def select_tab
         @selected_tab = "stories"
+    end
+    
+    def set_meta_tags
+      story = find_resource
+      html_meta_tags(story.short_description,story.keywords)
     end
 end
