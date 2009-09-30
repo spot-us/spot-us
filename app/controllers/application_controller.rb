@@ -13,18 +13,36 @@ class ApplicationController < ActionController::Base
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
   before_filter :current_network
+  before_filter :set_default_html_meta_tags
 
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
-
+  
+  META_DESCRIPTION = "Spot.Us enables the public to commission journalists to do investigations on important and perhaps overlooked stories. " + 
+                  "We are an open source project, to pioneer \"community funded reporting.\""
+  META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
   #protect_from_forgery
 
   def current_network
     subdomain = current_subdomain.downcase if current_subdomain
     @current_network ||= Network.find_by_name(subdomain)
   end
+  
+  def set_default_html_meta_tags
+     @meta_description = META_DESCRIPTION
+     @meta_keywords = META_KEYWORDS
+  end
+  
+  def html_meta_tags(meta_description = META_DESCRIPTION, meta_keywords = META_KEYWORDS)
+     @meta_description = "Spot.Us Community Report: " + strip_html(meta_description)[0..180] if meta_description and !meta_description.blank?
+     @meta_keywords = META_KEYWORDS + ", " + meta_keywords if meta_keywords and !meta_keywords.blank?   
+  end
+  
+  def strip_html(text)
+     text.gsub(/<\/?[^>]*>/, "")
+  end
 
   protected
-
+ 
   def login_cookies
     create_current_login_cookie
     update_balance_cookie
