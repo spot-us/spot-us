@@ -35,6 +35,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :credits
     admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put, :approve_blogger => :put, :unapprove_blogger => :put }
     admin.resources :tips
+    admin.resources :comments
     admin.resources :site_options
     admin.resources :networks
     admin.resources :groups
