@@ -4,7 +4,7 @@ class TipsController < ApplicationController
   before_filter :block_if_donated_to, :only => :edit
   bounce_bots(:send_bots, :tip, :blog_url)
   before_filter :select_tab, :only => [:new]
-  before_filter :set_meta_tags
+  before_filter :set_meta_tags, :only => [:show]
 
   def block_if_donated_to
     t = find_resource(params[:id])
@@ -47,7 +47,7 @@ class TipsController < ApplicationController
     
     def set_meta_tags
        tip = find_resource
-       html_meta_tags(tip.short_description,tip.keywords)
+       html_meta_tags(tip.short_description,tip.keywords) if tip
     end
 
 end
