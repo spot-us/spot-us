@@ -54,7 +54,6 @@ class User < ActiveRecord::Base
   aasm_state :inactive
   aasm_state :active
   aasm_initial_state  :inactive
-
   aasm_event :activate do
     transitions :from => :inactive, :to => :active,
       :on_transition => lambda{ |user|
@@ -318,6 +317,18 @@ class User < ActiveRecord::Base
   def has_pledge_for?(tip)
     pledges.exists?(:tip_id => tip.id )
   end
+  
+  def to_s
+    self.full_name
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
 
   protected
 
@@ -348,6 +359,9 @@ class User < ActiveRecord::Base
   def clear_activation_code
     self.update_attribute(:activation_code, nil)
   end
+  
+
+
 
 end
 
