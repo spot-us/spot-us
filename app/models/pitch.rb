@@ -294,6 +294,14 @@ class Pitch < NewsItem
   def donating_groups
     Donation.paid.for_pitch(self).map(&:group).uniq.compact
   end
+  
+  def to_s
+    headline
+  end
+  
+  def to_param
+    "#{id}-#{to_s.parameterize}"
+  end
 
   protected
 
