@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :about_you, :address1, :address2, :city, :country,
     :email, :fact_check_interest, :first_name, :last_name,
-    :location, :notify_pitches, :notify_spotus_news, :notify_stories,
+    :location, :notify_blog_posts, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip, :organization_name,
     :established_year, :network_id, :category_id
@@ -128,7 +128,8 @@ class User < ActiveRecord::Base
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
 
   def self.opt_in_defaults
-    { :notify_tips => true,
+    { :notify_blog_updates => true,
+      :notify_tips => true,
       :notify_pitches => true,
       :notify_stories => true,
       :notify_spotus_news => true }
@@ -202,7 +203,7 @@ class User < ActiveRecord::Base
       # data rows
       User.all.each do |user|
         csv << [user.type, user.email, user.first_name, user.last_name,
-                user.network.name, user.notify_tips, user.notify_pitches,
+                user.network.name, user.notify_blog_posts, user.notify_tips, user.notify_pitches,
                 user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
       end
     end
