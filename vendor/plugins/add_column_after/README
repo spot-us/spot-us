@@ -1,0 +1,17 @@
+add_column_after Plugin
+=======================
+
+*** Currently MySQL Only ***
+
+Allows specification of :after to add_column and change column 
+in accordance with http://dev.mysql.com/doc/refman/5.0/en/alter-table.html
+
+Examples:
+	add_column :table_name, :column_name, :type, :after => 'other_column_name'
+	change_column :table_name, :column_name, :type, :after => 'other_column_name'
+	
+Install:
+	./script/plugin install http://add-column-after.googlecode.com/svn/trunk/add_column_after
+	
+Project Site:
+	http://code.google.com/p/add-column-after/

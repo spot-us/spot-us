@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
 
   def self.opt_in_defaults
-    { :notify_blog_updates => true,
+    { :notify_blog_posts => true,
       :notify_tips => true,
       :notify_pitches => true,
       :notify_stories => true,
