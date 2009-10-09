@@ -877,7 +877,7 @@ ul.dashboard_navigation {
 }
 ul.dashboard_navigation li {
   float: left;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 ul.dashboard_navigation a {
   padding: 5px 0 0 8px;
