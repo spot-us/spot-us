@@ -12,6 +12,7 @@ class Admin::UsersController < ApplicationController
   def approve
     org = Organization.find(params[:id])
     org.approve!
+    org.activate!
     redirect_to(admin_user_path(org))
   end
 
