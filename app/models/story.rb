@@ -73,10 +73,12 @@ class Story < NewsItem
 
   def editable_by?(user)
     return false if user.nil?
-    return false if self.fact_checker == user
-    if user.is_a?(Reporter)
-      return (user == self.user) if self.draft?
-    end
+    #return false if self.fact_checker == user
+    return true if self.user == user and self.status == "draft"
+    return true if self.fact_checker == user and self.status == "fact_check"
+    # if user.is_a?(Reporter)
+    #   return (user == self.user) if self.draft?
+    # end
     return false if user.is_a?(Citizen)
     return true if user.is_a?(Admin)
     false
@@ -85,9 +87,11 @@ class Story < NewsItem
   def viewable_by?(user)
     return true if user.is_a?(Admin)
     return true if self.published?
-    if user.is_a?(Reporter)
-      return reporter_view_permissions(user)
-    end
+    return true if self.fact_checker == user
+    return true if self.user == user
+    # if user.is_a?(Reporter)
+    #   return reporter_view_permissions(user)
+    # end
     false
   end
 
