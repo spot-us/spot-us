@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     contact
     dmc_agreement
     license
-    news_org_partners
+    media_partners
     press
     privacy
     quick_donate
