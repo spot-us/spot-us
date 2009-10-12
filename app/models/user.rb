@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
+  has_many :credit_pitches
   has_many :comments
   has_many :contributor_applications
   has_many :pledges do
@@ -171,6 +172,11 @@ class User < ActiveRecord::Base
 
   def total_credits
     self.credits.map(&:amount).sum.to_f
+  end
+  
+  def remaining_credits
+      # allocated = CreditPitch.sum(:amount, :conditions => "user_id = #{self.id}")
+      total_credits - self.credit_pitches.map(&:amount).sum.to_f
   end
 
   def self.createable_by?(user)
