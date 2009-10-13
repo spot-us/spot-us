@@ -1,6 +1,8 @@
 class StoriesController < ApplicationController
   before_filter :can_view?, :only => [:show]
   before_filter :can_edit?, :only => :edit
+  before_filter :select_tab
+  before_filter :set_meta_tags, :only => [:show]
   resources_controller_for :stories
 
   def accept
@@ -32,6 +34,7 @@ class StoriesController < ApplicationController
   end
 
   protected
+  
     def can_view?
       story = find_resource
       unless story.viewable_by?(current_user)
@@ -57,5 +60,14 @@ class StoriesController < ApplicationController
 
     def find_resources
       @stories = Story.by_network(current_network).published.paginate(:page => params[:page], :per_page => 10, :order=>"created_at desc")
+    end
+    
+    def select_tab
+        @selected_tab = "stories"
+    end
+    
+    def set_meta_tags
+      story = find_resource
+      html_meta_tags(story.short_description,story.keywords) if story
     end
 end

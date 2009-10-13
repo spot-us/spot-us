@@ -1,0 +1,10 @@
+mysql:
+    :adapter: mysql
+    :host: localhost
+    :username: root
+    :password: 
+    :database: add_column_after_test
+    
+badspec:
+    :adapter: sqlite3
+    :dbfile: bad_db.db

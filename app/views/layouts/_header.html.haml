@@ -1,11 +1,12 @@
+
 #header
   .logo{ :class => "#{(@current_network && @current_network.name ? @current_network.name.to_s.downcase : '')}" }
     %p
       = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Funded Reporting"
   .nav-container
     %ul#main-nav
-      %li.start_story= facebox_login_link_to "Start a Story", start_story_path
-      %li.fund_story= link_to "Search Pitches", news_items_path
-      %li.read_story= link_to "Read a Story", stories_path
-      %li.about_spotus= link_to "About", page_path('about')
+      %li{:class=>"start_story#{check_if_tab("start_story",@selected_tab)}"}= facebox_login_link_to "Start a Story", start_story_path
+      %li{:class=>"fund_story#{check_if_tab("pitches",@selected_tab)}"}= link_to "Search Pitches", news_items_path
+      %li{:class=>"read_story#{check_if_tab("stories",@selected_tab)}"}= link_to "Read a Story", stories_path
+      %li{:class=>"about_spotus#{check_if_tab("about",@selected_tab)}"}= link_to "About", page_path('about')
   .clear
