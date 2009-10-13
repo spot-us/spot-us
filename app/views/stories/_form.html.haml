@@ -8,9 +8,6 @@
     .row
       = f.label :extended_description, "This is your story body."
       = fckeditor_textarea("story", "extended_description", :toolbarSet => 'Spotus', :width => '67%', :height => '400px')
-    .row
-      .form_hint.small
-        500 Characters Remain
     - if current_user.admin?
       .row
         = f.label :external_links

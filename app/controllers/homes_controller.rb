@@ -1,6 +1,5 @@
 class HomesController < ApplicationController
   # caches_page :show
-
   def show
     @featured = Pitch.featured_by_network(current_network)
   end
@@ -15,5 +14,4 @@ class HomesController < ApplicationController
       redirect_to new_tip_path
     end
   end
-
 end

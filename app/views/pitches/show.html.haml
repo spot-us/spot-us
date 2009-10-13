@@ -74,7 +74,7 @@
         in
         = @pitch.story.network.name
       %p.short_description.alt-spotus
-        = truncate_words(@pitch.story.extended_description, 30)
+        = truncate_words(@pitch.story.extended_description, 30) if @pitch.story.extended_description
         = link_to 'Read More &raquo;', @pitch.story
     - else
       = render :partial => "donations/button", :locals => { :news_item => @pitch }

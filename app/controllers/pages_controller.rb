@@ -1,10 +1,12 @@
 class PagesController < ApplicationController
+  before_filter :select_tab   
+    
   PAGES = %w(
     about
     contact
     dmc_agreement
     license
-    news_org_partners
+    media_partners
     press
     privacy
     quick_donate
@@ -25,5 +27,11 @@ class PagesController < ApplicationController
 
   def index
     redirect_to root_path
+  end
+  
+  protected
+  
+  def select_tab
+      @selected_tab = "about" if params[:id] == "about"
   end
 end

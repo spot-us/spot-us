@@ -8,6 +8,12 @@
         jQuery('#support_spotus').hide();
         return false;
       });
+      jQuery('select.invisible').val('');
+      jQuery('a.show_group_selector').toggle(function(){
+        jQuery(this).next("select").removeClass("invisible").focus().next("em").removeClass("invisible");        
+      },function(){
+        jQuery(this).blur().next("select").val('').addClass("invisible").next("em").addClass("invisible");
+      });
     });
 
 - if @donations && @donations.any?(&:errors)
@@ -38,8 +44,9 @@
                 = link_to donation.pitch.headline, donation.pitch
               - if Group.all.any?
                 %p
-                  Donate on behalf of:
-                  = select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>Giving for a group?</option>' + options_from_collection_for_select(Group.all, :id, :name), :include_blank => true
+                  %a{:href => "#group_selection", :class=>"show_group_selector"} Donate on behalf of group?
+                  = select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>select a group</option>' + options_from_collection_for_select(Group.all, :id, :name), :class => "invisible"
+                  %em{:class => "invisible quiet small"} optional
               %p
                 = truncate_words(donation.pitch.short_description)
                 = link_to 'Read More &raquo;', donation.pitch
@@ -68,4 +75,5 @@
 
 .clear
 .block-spacer
+-#group_picker{:class => "hide"} group selections!
 

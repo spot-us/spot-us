@@ -90,7 +90,13 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
+  has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
+            :conditions => "users.type = 'organization'",
+            :uniq => true
+            
   has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
+  has_many :blog_subscribers, :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
+            :order => "donations.created_at", :uniq => true
   has_many :posts, :order => "created_at desc", :dependent => :destroy do
     def first(number)
       find(:all, :limit => number, :order => 'created_at DESC')
@@ -289,6 +295,14 @@ class Pitch < NewsItem
 
   def donating_groups
     Donation.paid.for_pitch(self).map(&:group).uniq.compact
+  end
+  
+  def to_s
+    headline
+  end
+  
+  def to_param
+    "#{id}-#{to_s.parameterize}"
   end
 
   protected
