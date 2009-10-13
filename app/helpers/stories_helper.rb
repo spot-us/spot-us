@@ -16,6 +16,7 @@ module StoriesHelper
       end
     when 'fact_check' then
       if @story.fact_checkable_by?(user)
+        out << content_tag(:div, link_to(image_tag('edit_in_gray.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
         out << content_tag(:div, link_to(image_tag('return_to_journalist.png', :class => 'return_to_journalist'), 
                                 reject_story_path(@story), :method => :put), :class => 'centered')
         out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 

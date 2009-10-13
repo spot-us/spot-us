@@ -1,0 +1,22 @@
+%h1 Comments
+.box
+  %table.admin_comments
+    %th Title
+    %th Comment
+    %th Type
+    %th Target
+    %th Created At
+    %th Commenter
+    
+    - for comment in @comments
+      - if comment.commentable
+        %tr
+          %td= comment.title if comment.title?
+          %td= comment.body if comment.body?
+          %td= comment.commentable.type if comment.commentable.type?
+          %td= link_to(comment.commentable.headline, ("/" + comment.commentable.type.pluralize.downcase + "/" + comment.commentable.id.to_s)) if comment.commentable.headline?
+          %td= comment.created_at.to_s(:date)
+          %td= comment.user.email if comment.user
+          %td=link_to 'Destroy', admin_comment_path(comment), :confirm => 'Are you sure?', :method => :delete
+
+  = will_paginate @comments

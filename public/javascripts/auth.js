@@ -50,8 +50,12 @@ jQuery(document).ready(function($){
           else if (jump_to && jump_to.attr("href"))
             jump_to.click();
           else
-            $(document).trigger('close.facebox');
-          renderUserHeader();
+           $(document).trigger('close.facebox');
+           renderUserHeader();
+		   $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+		   if($("#flash").length > 0){
+		   		$("#flash").html("");
+			}
         }
       }
     });
