@@ -23,7 +23,8 @@
     %tr.notice
       %td{:colspan => 3} No records found
   - @credits.each do |credit|
-    %tr
-      %td= credit.user.full_name
-      %td= number_to_currency(credit.amount)
-      %td= credit.description
+    - unless credit.blank? || credit.user.blank?
+      %tr
+        %td= credit.user.full_name
+        %td= number_to_currency(credit.amount)
+        %td= credit.description
