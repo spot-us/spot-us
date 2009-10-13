@@ -2,6 +2,7 @@ class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
   before_filter :login_required, :only => [:apply_to_contribute]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
+  before_filter :set_meta_tags, :only => [:show]
 
   resources_controller_for :pitch
 
@@ -69,7 +70,7 @@ class PitchesController < ApplicationController
   end
 
   protected
-
+    
   def send_bots
     self.resource = new_resource
     render :action => :new
@@ -110,6 +111,11 @@ class PitchesController < ApplicationController
 
   def organization_required
     access_denied unless current_user && current_user.organization?
+  end
+  
+  def set_meta_tags
+      pitch = find_resource
+      html_meta_tags(pitch.short_description,pitch.keywords) if pitch
   end
 
 end

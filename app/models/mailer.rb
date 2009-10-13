@@ -65,6 +65,38 @@ class Mailer < ActionMailer::Base
     subject    "Spot.Us: Success!! Your Story is Funded!"
     body       :pitch => pitch
   end
+  
+  def blog_posted_notification(post)
+    recipients '"David Cohn" <david@spot.us>'
+    #bcc post.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Blog Update: '#{post.pitch.headline}'"
+    body       :post => post
+  end
+  
+  def story_to_editor_notification(story,send_to)
+    recipients send_to
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Story Review: '#{story.headline}'"
+    body       :story => story
+  end
+  
+  def story_rejected_notification(story)
+    recipients story.pitch.user.email
+    bcc        '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Story Requires Further Edits: '#{story.headline}'"
+    body       :story => story
+  end
+  
+  def story_published_notification(story, send_to)
+    recipients send_to
+    bcc story.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Story Published: '#{story.headline}'"
+    body       :story => story
+  end
 
   def admin_reporting_team_notification(pitch)
     recipients '"David Cohn" <david@spot.us>'

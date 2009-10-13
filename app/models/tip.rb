@@ -75,6 +75,18 @@ class Tip < NewsItem
   def total_amount_pledged
     pledges.sum(:amount)
   end
+  
+  def to_s
+    headline
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
 
   private
 

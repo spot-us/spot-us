@@ -8,3 +8,5 @@ db/schema.rb
 public/system
 public/coverage
 public/features_rcov
+public/javascripts/js_all.js
+public/stylesheets/styles_all.css
