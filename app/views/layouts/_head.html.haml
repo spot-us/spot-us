@@ -1,6 +1,6 @@
 %head
-  %meta{ :name => "keywords",    :content => "Keywords" }/
-  %meta{ :name => "description", :content => "Description" }/
+  %meta{ :name => "description", :content => @meta_description }/
+  %meta{ :name => "keywords", :content => @meta_keywords }/
 
   %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }/
 
@@ -9,32 +9,33 @@
   
   /[if IE 6]
     = stylesheet_link_tag 'ie_spotus.css'
-  = stylesheet_link_tag 'screen', :media => "screen"
-  = stylesheet_link_tag 'screen_spotus', :media => "screen"
+  = stylesheet_link_tag 'screen','screen_spotus','ie.css','facebox', :media => "screen", :cache => "styles_all"
+  =# stylesheet_link_tag 'screen_spotus', :media => "screen"
   = stylesheet_link_tag 'print', :media => "print"
-  = stylesheet_link_tag 'ie.css'
+  =# stylesheet_link_tag 'ie.css'
   
-  = javascript_include_tag 'fckeditor/fckeditor.js'
-  = javascript_include_tag 'jquery-1.3.1.min.js'
+  
+  = javascript_include_tag 'jquery-1.3.1.min'
   %script{:type => 'text/javascript'}
     jQuery.noConflict();
-  = javascript_include_tag 'jquery-ui.js'
-  = javascript_include_tag 'jrails.js'
-  = javascript_include_tag 'jquery.pngFix.js'
-  = javascript_include_tag 'jquery.equalHeights.js'
-  = javascript_include_tag 'prototype'
-  / = javascript_include_tag 'scriptaculous'
-  = javascript_include_tag 'effects'
-  = javascript_include_tag 'jsProgressBarHandler.js'
-  = javascript_include_tag 'jquery.livequery.js'
-  = javascript_include_tag 'jquery.cookie.js'
-  = javascript_include_tag 'jcarousellite_1.0.1'
-  = javascript_include_tag 'jquery.form'
-  = javascript_include_tag 'application'
-  = javascript_include_tag 'auth'
+  = javascript_include_tag 'fckeditor/fckeditor','jquery-ui','jrails','jquery.pngFix','jquery.equalHeights','prototype','effects','jsProgressBarHandler','jquery.livequery','jquery.cookie','jcarousellite_1.0.1','jquery.form','application','auth','facebox', :cache => "js_all"
+  =# javascript_include_tag 'jquery-ui'
+  =# javascript_include_tag 'jrails'
+  =# javascript_include_tag 'jquery.pngFix'
+  =# javascript_include_tag 'jquery.equalHeights'
+  =# javascript_include_tag 'prototype'
+  =# javascript_include_tag 'scriptaculous'
+  =# javascript_include_tag 'effects'
+  =# javascript_include_tag 'jsProgressBarHandler'
+  =# javascript_include_tag 'jquery.livequery'
+  =# javascript_include_tag 'jquery.cookie'
+  =# javascript_include_tag 'jcarousellite_1.0.1'
+  =# javascript_include_tag 'jquery.form'
+  =# javascript_include_tag 'application'
+  =# javascript_include_tag 'auth'
 
-  = stylesheet_link_tag 'facebox'
-  = javascript_include_tag 'facebox'
+  =# stylesheet_link_tag 'facebox'
+  =# javascript_include_tag 'facebox'
 
   = iboxify_page
   = yield :head

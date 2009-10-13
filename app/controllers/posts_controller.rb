@@ -2,7 +2,10 @@ class PostsController < ApplicationController
   resources_controller_for :post
   before_filter :login_required, :except => [:show, :index]
 
+
   response_for :create do |format|
+    #new_post = Post.find(params[:id])
+    @post.blog_posted_notification
     format.html do
       if resource_saved?
         flash[:success] = 'Successfully created post'

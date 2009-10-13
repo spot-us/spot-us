@@ -51,11 +51,11 @@ class Story < NewsItem
   aasm_state :published
 
   aasm_event :verify do
-    transitions :from => :draft, :to => :fact_check
+    transitions :from => :draft, :to => :fact_check, :on_transition => :notify_editor
   end
 
   aasm_event :reject do
-    transitions :from => :fact_check, :to => :draft
+    transitions :from => :fact_check, :to => :draft, :on_transition => :notify_reporter
   end
 
   aasm_event :accept do
@@ -63,7 +63,7 @@ class Story < NewsItem
   end
 
   aasm_event :publish do
-    transitions :from => :ready, :to => :published
+    transitions :from => :ready, :to => :published, :on_transition => :notify_donors
   end
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
@@ -73,10 +73,12 @@ class Story < NewsItem
 
   def editable_by?(user)
     return false if user.nil?
-    return false if self.fact_checker == user
-    if user.is_a?(Reporter)
-      return (user == self.user) if self.draft?
-    end
+    #return false if self.fact_checker == user
+    return true if self.user == user and self.status == "draft"
+    return true if self.fact_checker == user and self.status == "fact_check"
+    # if user.is_a?(Reporter)
+    #   return (user == self.user) if self.draft?
+    # end
     return false if user.is_a?(Citizen)
     return true if user.is_a?(Admin)
     false
@@ -85,9 +87,11 @@ class Story < NewsItem
   def viewable_by?(user)
     return true if user.is_a?(Admin)
     return true if self.published?
-    if user.is_a?(Reporter)
-      return reporter_view_permissions(user)
-    end
+    return true if self.fact_checker == user
+    return true if self.user == user
+    # if user.is_a?(Reporter)
+    #   return reporter_view_permissions(user)
+    # end
     false
   end
 
@@ -107,6 +111,42 @@ class Story < NewsItem
 
   def notify_admin
     Mailer.deliver_story_ready_notification(self)
+  end
+  
+  def notify_editor
+    Mailer.deliver_story_to_editor_notification(self,fact_checker_recipients)
+  end
+  
+  def notify_reporter
+    Mailer.deliver_story_rejected_notification(self)
+  end
+  
+  def notify_donors
+    Mailer.deliver_story_published_notification(self,fact_checker_recipients)
+  end
+  
+  def to_s
+    headline
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
+  
+  protected
+  def fact_checker_recipients
+      recipients = '"David Cohn" <david@spot.us>'
+      if self.pitch && self.pitch.fact_checker_id
+          fact_checker = User.find_by_id(self.pitch.fact_checker_id)
+          if fact_checker && fact_checker.email
+              recipients += (", " + fact_checker.email)
+          end
+      end
+      recipients
   end
 end
 
