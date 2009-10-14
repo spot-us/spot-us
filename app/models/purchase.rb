@@ -124,7 +124,7 @@ class Purchase < ActiveRecord::Base
 
   def credit_to_apply
     return 0 if user.nil?
-    [user.total_credits, donations_sum].min
+    [user.allocated_credits, donations_sum].min
   end
 
   # the gateway expects the total amount to be an integer or a money obj

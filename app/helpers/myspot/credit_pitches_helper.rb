@@ -1,0 +1,2 @@
+module Myspot::CreditPitchesHelper
+end

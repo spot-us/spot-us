@@ -175,8 +175,20 @@ class User < ActiveRecord::Base
   end
   
   def remaining_credits
-      # allocated = CreditPitch.sum(:amount, :conditions => "user_id = #{self.id}")
       total_credits - self.credit_pitches.map(&:amount).sum.to_f
+  end
+  
+  def allocated_credits
+      self.credit_pitches.map(&:amount).sum.to_f
+  end
+  
+  def has_enough_credits?(credit_pitch_amounts)
+      credit_total = 0
+      credit_pitch_amounts.values.each do |val|
+        credit_total += val["amount"].to_f
+      end
+      return true if credit_total <= self.total_credits
+      return false
   end
 
   def self.createable_by?(user)
@@ -184,9 +196,13 @@ class User < ActiveRecord::Base
   end
 
   def credits?
-    total_credits > 0
+    remaining_credits > 0
   end
-
+  
+  def current_balance
+      unpaid_donations_sum - allocated_credits + current_spotus_donation.amount
+  end
+  
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
     u = find_by_email(email) # need to get the salt
