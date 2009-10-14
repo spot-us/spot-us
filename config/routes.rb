@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
-  map.resources :donations, :affiliations, :pledges, :profiles, :pages, :groups
+  map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
 
     myspot.resource :settings
     myspot.resources :donations
+    myspot.resources :credit_pitches
     myspot.resources :pitches, :member => {:accept => :put}
     myspot.resources :posts
     myspot.resources :pledges

@@ -1,8 +1,10 @@
 - case
   - when news_item.fully_funded?
     = render :partial => 'donations/fully_funded'
+  - when current_user && current_user.credits?
+    = render :partial => 'credits/credit_pitch', :locals => {:news_item => news_item}
   - when current_user && !current_user.can_donate_to?(news_item)
-    = render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item} 
+    = render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item}
   - when news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT)
     = render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item} 
   - when !current_user || current_user && current_user.can_donate_to?(news_item)
