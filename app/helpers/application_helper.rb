@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def current_balance
     return 0 if current_user.donations.unpaid.blank?
-    current_user.unpaid_donations_sum
+    current_user.current_balance
   end
 
   def topic_check_boxes(resource, model = nil)
@@ -36,7 +36,7 @@ module ApplicationHelper
         text << "You have #{number_to_currency(current_user.total_credits)} in credit. "
       end
       if (current_user.credits? && current_balance > 0)
-        text << "You have #{number_to_currency(current_user.total_credits)} in credits to use toward your donations. "
+        text << "You have #{number_to_currency(current_user.remaining_credits)} in credits to use toward your donations. "
         text << link_to("Apply Them &raquo;", edit_myspot_donations_amounts_path)
       end
       if (!current_user.credits? && current_balance > 0)
