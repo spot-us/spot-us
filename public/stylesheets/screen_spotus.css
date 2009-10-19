@@ -857,12 +857,29 @@ table.pledges th,
 table.tips th {
   background: none;
 }
+table.donations th.pitch_header{
+	width:200px;
+}
+table.donations th.donated_header{
+	width:100px;
+}
+table.donations th.donation_header{
+	width:80px;
+}
+table.donations th.status_header{
+	width:200px;
+}
 table.pledges tr.pledge td.pledge .number {
 	font-size: 200%;
 	padding-top: 0px;
 }
 table.pledges tr.pledge td.pledge {
 	text-align: right;
+}
+table.donations td.header{
+	background:#eee;
+	font-weight:bold;
+	border-bottom:solid 2px #333;
 }
 #dashboard_tab_container {
   width: 625px;

@@ -1,0 +1,12 @@
+%tr
+  %td.pitch
+    = link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), pitch_url(credit_pitch.pitch)
+    PITCH:
+    = link_to h(credit_pitch.pitch.headline), pitch_url(credit_pitch.pitch)
+  %td.donated= credit_pitch.created_at.to_s(:date)
+  %td.donation= number_to_currency(credit_pitch.amount)
+  %td.status
+    = render :partial => "shared/table_progress_bar", :locals => {:pitch => credit_pitch.pitch}
+  %td.actions
+    - unless credit_pitch.pitch.accepted? || credit_pitch.pitch.funded?
+      = link_to "Donate More", pitch_url(credit_pitch.pitch) if current_user.can_donate_to? credit_pitch.pitch
