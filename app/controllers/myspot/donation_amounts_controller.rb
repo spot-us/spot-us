@@ -13,12 +13,16 @@ class Myspot::DonationAmountsController < ApplicationController
   def update
     donation_amounts = params[:donation_amounts]
     credit_pitch_amounts = params[:credit_pitch_amounts]
+    credit_pitch_statuses = params[:credit_pitch_statuses]
     if donation_amounts
       @donations = Donation.update(donation_amounts.keys, donation_amounts.values)
     end
     
     if credit_pitch_amounts && current_user.has_enough_credits?(credit_pitch_amounts)
-          @credit_pitches = CreditPitch.update(credit_pitch_amounts.keys, credit_pitch_amounts.values)
+      @credit_pitches = CreditPitch.update(credit_pitch_amounts.keys, credit_pitch_amounts.values)
+      if credit_pitch_statuses
+        @credit_pitches = CreditPitch.update(credit_pitch_statuses.keys, credit_pitch_statuses.values)
+      end
     end
     
     if donation_amounts.nil? || @donations.all?{|d| d.valid? }
