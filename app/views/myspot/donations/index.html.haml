@@ -6,6 +6,9 @@
   = render :partial => "myspot/dashboard_nav"
   %table.donations
     %tr
+      %td{:colspan => 5,:class=>"header"}
+        My Pitches
+    %tr
       %th.pitch_header Pitch
       %th.donated_header Donated
       %th.donation_header Donation
@@ -15,6 +18,20 @@
       %td{:colspan => 5}
         .double_content_border
     = render :partial => "myspot/donations/donation", :collection => @donations, :spacer_template => "myspot/donations/donation_spacer"
+  %table.donations
+    %tr
+      %td{:colspan => 5,:class=>"header"}
+        My Credits
+    %tr
+      %th.pitch_header Pitch
+      %th.donated_header Credited
+      %th.donation_header Amount
+      %th.status_header Status
+      %th.actions_header Actions
+    %tr
+      %td{:colspan => 5}
+        .double_content_border
+    = render :partial => "myspot/credits/credit_pitch", :collection => @credit_pitches, :spacer_template => "myspot/donations/donation_spacer"
     - if current_user.has_spotus_donation?
       = render :partial => "myspot/donations/donation_spacer"
       %tr
