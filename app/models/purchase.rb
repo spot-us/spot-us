@@ -88,6 +88,9 @@ class Purchase < ActiveRecord::Base
   def apply_credits
     Credit.create(:user => self.user, :description => "Applied to Purchase #{id}",
                   :amount => (0 - credit_to_apply))
+    self.user.credit_pitches.unpaid each do |credit_pitch|
+        credit_pitch.status = "paid"
+    end
   end
 
   def build_credit_card

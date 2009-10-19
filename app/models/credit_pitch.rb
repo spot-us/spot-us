@@ -15,6 +15,8 @@ class CreditPitch < ActiveRecord::Base
     
     validates_presence_of :user_id, :pitch_id, :amount
     validates_numericality_of :amount, :greater_than => 0    
+    named_scope :unpaid, :conditions => "status = 'unpaid'"
+    named_scope :paid, :conditions => "status = 'paid'"
     
     def self.createable_by?(user)
       user

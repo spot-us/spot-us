@@ -3,7 +3,7 @@ class Myspot::DonationsController < ApplicationController
   resources_controller_for :donations, :only => [:index, :create, :destroy]
 
   response_for :index do |format|
-    @credit_pitches = current_user.credit_pitches
+    @credit_pitches = current_user.credit_pitches.paid
     update_balance_cookie
   end
   
