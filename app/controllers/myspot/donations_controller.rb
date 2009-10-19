@@ -2,6 +2,11 @@ class Myspot::DonationsController < ApplicationController
   before_filter :login_required, :except => :create
   resources_controller_for :donations, :only => [:index, :create, :destroy]
 
+  response_for :index do |format|
+    @credit_pitches = current_user.credit_pitches
+    update_balance_cookie
+  end
+  
   response_for :create do |format|
     if resource_saved?
       update_balance_cookie
