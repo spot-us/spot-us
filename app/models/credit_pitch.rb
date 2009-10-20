@@ -22,6 +22,11 @@ class CreditPitch < ActiveRecord::Base
       user
     end
     
+    def update_pitch_funding
+      pitch.current_funding += amount
+      pitch.save
+    end
+    
     def self.has_enough_credits?(credit_pitch_amounts, user)
         credit_total = 0
         credit_pitch_amounts.values.each do |val|

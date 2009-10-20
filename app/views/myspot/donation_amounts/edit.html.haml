@@ -28,9 +28,10 @@
     .block-spacer-negative 
     - if current_user.total_credits > 0
       .float-right
-        == You have #{number_to_currency(current_user.remaining_credits)} in credits
-    %h3 Fund Your Donations
-    .double_content_border
+        == You have #{number_to_currency(current_user.remaining_credits)} unallocated credits.
+    - if unpaid_donations.any?
+      %h3 Fund Your Donations
+      .double_content_border
     - form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix" do
       %ul.unpaid_donations
         - unpaid_donations.each do |donation|
@@ -54,6 +55,27 @@
               = text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 4, :id => "donation_amounts_#{donation.id}_amount"
               .action= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?"
             %hr
+        - if current_user.credit_pitches.unpaid.any?
+          %h3 
+            Apply Credits
+          %ul.unpaid_donations 
+            %hr
+              - current_user.credit_pitches.unpaid.each do |credit_pitch|
+                - content_tag_for :li, credit_pitch, :class => 'unpaid' do
+                  .column.span-70
+                    = link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch
+                  .column.span-550
+                    %h3
+                      PITCH:
+                      = link_to credit_pitch.pitch.headline, credit_pitch.pitch
+                    %p
+                      = truncate_words(credit_pitch.pitch.short_description)
+                      = link_to 'Read More &raquo;', credit_pitch.pitch
+                  .column.span-95
+                    $
+                    = text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 4, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount"
+                    .action= link_to "Remove", myspot_credit_pitch_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?"
+                  %hr  
         %li#support_spotus
           %h3 Support Spot.Us
           %hr
@@ -68,33 +90,10 @@
             = text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation"
             .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
-        = image_submit_tag 'purchase.png', :alt => 'Purchase'
+        = image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update"
+        = image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase"
     .double_content_border
-    - if current_user.credit_pitches.unpaid.any?
-      %h3 Apply Credits
-      - form_tag myspot_donations_amounts_path, :method => :put do
-        %ul.unpaid_donations 
-          %hr
-            - current_user.credit_pitches.unpaid.each do |credit_pitch|
-              - content_tag_for :li, credit_pitch, :class => 'unpaid' do
-                .column.span-70
-                  = link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch
-                .column.span-550
-                  %h3
-                    PITCH:
-                    = link_to credit_pitch.pitch.headline, credit_pitch.pitch
-                  %p
-                    = truncate_words(credit_pitch.pitch.short_description)
-                    = link_to 'Read More &raquo;', credit_pitch.pitch
-                .column.span-95
-                  $
-                  = text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 4, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount"
-                  = hidden_field_tag "credit_pitch_statuses[#{credit_pitch.id}][status]", "paid"
-                  .action= link_to "Remove", myspot_credit_pitch_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?"
-                %hr
-            .float-right
-              = submit_tag 'Apply Credits', :alt => 'Purchase'      
-        %hr
+
 
   - # second column content   
   .span-160.box_white

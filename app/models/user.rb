@@ -190,13 +190,28 @@ class User < ActiveRecord::Base
       return true if credit_total <= self.total_credits
       return false
   end
+  
+  def apply_credit_pitches
+      #refactor - there must be a nicer ruby-like way to do this
+      transaction do 
+          credit_pitch_ids = self.credit_pitches.map{|credit_pitch| [credit_pitch.id]}.join(", ")
+          credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
+                          :amount => (0 - self.allocated_credits))
+          self.credit_pitches.each do |credit_pitch|
+              credit_pitch.status = "paid"
+              credit_pitch.paid_credit_id = credit.id
+              credit_pitch.update_pitch_funding
+              credit_pitch.save
+          end
+      end 
+  end
 
   def self.createable_by?(user)
     true
   end
 
   def credits?
-    remaining_credits > 0
+    total_credits > 0
   end
   
   def current_balance
