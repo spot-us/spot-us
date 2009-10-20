@@ -33,7 +33,8 @@ module ApplicationHelper
   def header_display_message
     returning "" do |text|
       if (current_user.credits? && current_balance == 0)
-        text << "You have #{number_to_currency(current_user.total_credits)} in credit. "
+        text << "You have #{number_to_currency(current_user.total_credits)} in credits. "
+        text << link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
       end
       if (current_user.credits? && current_balance > 0)
         text << "You have #{number_to_currency(current_user.remaining_credits)} in credits to use toward your donations. "
