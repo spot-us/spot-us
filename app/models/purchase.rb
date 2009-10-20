@@ -27,7 +27,7 @@ class Purchase < ActiveRecord::Base
 
   cattr_accessor :gateway
 
-  after_create :associate_donations, :apply_credits, :associate_spotus_donations
+  after_create :associate_donations, :apply_credit_pitches, :associate_spotus_donations
   before_create :bill_credit_card, :unless => lambda {|p| p.paypal_transaction? }
 
   before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :unless => lambda {|p| p.paypal_transaction? }
@@ -85,12 +85,8 @@ class Purchase < ActiveRecord::Base
     self[:total_amount] = total_amount
   end
 
-  def apply_credits
-    Credit.create(:user => self.user, :description => "Applied to Purchase #{id}",
-                  :amount => (0 - credit_to_apply))
-    self.user.credit_pitches.unpaid each do |credit_pitch|
-        credit_pitch.status = "paid"
-    end
+  def apply_credit_pitches
+      self.user.apply_credit_pitches
   end
 
   def build_credit_card
