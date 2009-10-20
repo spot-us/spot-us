@@ -1,4 +1,4 @@
 - form_for CreditPitch.new(:pitch => news_item, :amount => current_user.remaining_credits), :url => myspot_credit_pitches_path, :html => {:id => "new_credit_pitch_#{news_item.id}", :class => "auth"} do |f|
   = f.hidden_field :amount, :id => "credit_pitch_amount"
   = f.hidden_field :pitch_id
-  = submit_tag "Apply Credits", :alt => "Allocate credits", :title => "Allocate credits"
+  = image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
