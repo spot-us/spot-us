@@ -2,6 +2,8 @@
 %html
   = render :partial => 'layouts/head'
   %body{ :class => body_class }
+    = fb_connect_javascript_tag
+    = init_fb_connect "XFBML"
     #user-header
       = render :partial => 'layouts/user_header'
     .body-content
