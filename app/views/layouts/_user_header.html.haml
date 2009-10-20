@@ -1,18 +1,43 @@
-%ul.user-header-nav
-  #logged_in.hide
-    %li.no-pipe
-      Hello,
-      %span.current_user_full_name
-    %li#current_balance_line
-    %li
-      = link_to "My Spot", myspot_profile_path
-    %li.no-pipe
-      = link_to "Logout", destroy_session_path
-  #not_logged_in.hide
-    %li
-      = link_to "Register", new_session_path, :rel => 'facebox'
-    %li.no-pipe
-      = link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in"
+/ %ul.user-header-nav
+/   #logged_in.hide
+/     %li.no-pipe
+/       Hello,
+/       %span.current_user_full_name
+/     %li#current_balance_line
+/     %li
+/       = link_to "My Spot", myspot_profile_path
+/     %li.no-pipe
+/       = link_to "Logout", destroy_session_path
+/   #not_logged_in.hide
+/     %li
+/       = link_to "Register", new_session_path, :rel => 'facebox'
+/     %li.no-pipe
+/       = link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in"
+/       =# fb_login_button('window.location = "/users/link_user_accounts";')
+- if logged_in?
+  %ul.user-header-nav
+    #logged_in
+      %li.no-pipe
+        Hello,
+        %span.current_user_full_name
+      %li#current_balance_line
+      %li
+        = link_to "My Spot", myspot_profile_path
+      %li.no-pipe
+      - if current_user.facebook_user?
+        %a{:href=>"#", :onclick=>'FB.Connect.logoutAndRedirect("/logout")'}
+          Logout
+      - else
+        = fb_login_button('window.location = "/users/link_user_accounts";')
+        = link_to 'Logout', destroy_session_path
+- else
+  %ul.user-header-nav
+    #not_logged_in
+      %li
+        = link_to "Register", new_session_path, :rel => 'facebox'
+      %li.no-pipe
+        = link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in"
+        = fb_login_button('window.location = "/users/link_user_accounts";')
 
 .slogan
   %span.pink Community
