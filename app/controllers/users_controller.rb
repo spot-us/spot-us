@@ -70,9 +70,8 @@ class UsersController < ApplicationController
     end
   end
   
-  # facebook
+  # link spot-us -- facebook accts
   def link_user_accounts
-      puts "flipper"
     if self.current_user.nil?
       #register with fb
       User.create_from_fb_connect(facebook_session.user)
@@ -80,7 +79,9 @@ class UsersController < ApplicationController
       #connect accounts
       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
     end
-    redirect_to '/'
+    create_current_login_cookie
+    update_balance_cookie
+    redirect_back_or_default('/')
   end
   
 end
