@@ -194,11 +194,11 @@ class User < ActiveRecord::Base
   def apply_credit_pitches
       #refactor - there must be a nicer ruby-like way to do this
       transaction do 
-          credit_pitch_ids = self.credit_pitches.map{|credit_pitch| [credit_pitch.id]}.join(", ")
+          credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.id]}.join(", ")
           credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
                           :amount => (0 - self.allocated_credits))
-          self.credit_pitches.each do |credit_pitch|
-              credit_pitch.status = "paid"
+          self.credit_pitches.unpaid.each do |credit_pitch|
+              credit_pitch.pay!
               credit_pitch.paid_credit_id = credit.id
               credit_pitch.update_pitch_funding
               credit_pitch.save
