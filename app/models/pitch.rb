@@ -90,6 +90,15 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
+  has_many :credit_pitches, :dependent => :destroy do
+    def for_user(user)
+      find_all_by_user_id(user.id)
+    end
+
+    def total_amount_for_user(user)
+      for_user(user).map(&:amount).sum
+    end
+  end
   has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
@@ -252,7 +261,7 @@ class Pitch < NewsItem
   end
 
   def total_amount_donated
-    donations.paid.map(&:amount).sum
+    donations.paid.map(&:amount).sum + credit_pitches.paid.map(&:amount).sum
   end
 
   def donated_to?
