@@ -2,3 +2,5 @@
   = f.hidden_field :amount, :id => "credit_pitch_amount"
   = f.hidden_field :pitch_id
   = image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
+.double_content_border
+= render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
