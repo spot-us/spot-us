@@ -81,7 +81,7 @@ class Pitch < NewsItem
   has_many :tips, :through => :affiliations
   has_many :organization_pitches, :foreign_key => :pitch_id
   has_many :supporting_organizations, :through => :organization_pitches, :source => :organization
-  has_many :donations, :dependent => :destroy do
+  has_many :donations, :conditions => {:donation_type => "payment"}, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
     end
@@ -90,15 +90,17 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
-  has_many :credit_pitches, :dependent => :destroy do
-    def for_user(user)
-      find_all_by_user_id(user.id)
-    end
+  
+  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}, :dependent => :destroy do
+      def for_user(user)
+        find_all_by_user_id(user.id)
+      end
 
-    def total_amount_for_user(user)
-      for_user(user).map(&:amount).sum
+      def total_amount_for_user(user)
+        for_user(user).map(&:amount).sum
+      end
     end
-  end
+  
   has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
@@ -248,6 +250,7 @@ class Pitch < NewsItem
 
   def fully_funded?
     return true if accepted? || funded?
+    puts total_amount_donated
     total_amount_donated >= requested_amount
   end
 
