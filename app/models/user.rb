@@ -68,11 +68,13 @@ class User < ActiveRecord::Base
 
   belongs_to :category
 
-  has_many :donations do
+  has_many :donations, :conditions => {:donation_type => "payment"} do
     def pitch_sum(pitch)
       self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
     end
   end
+  
+  has_many :all_donations, :class_name => "Donation"
 
   has_many :spotus_donations
   has_many :tips
@@ -82,7 +84,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
-  has_many :credit_pitches
+  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}
   has_many :comments
   has_many :contributor_applications
   has_many :pledges do
@@ -194,14 +196,13 @@ class User < ActiveRecord::Base
   def apply_credit_pitches
       #refactor - there must be a nicer ruby-like way to do this
       transaction do 
-          credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.id]}.join(", ")
+          credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
           credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
                           :amount => (0 - self.allocated_credits))
+                          puts ' whop'
           self.credit_pitches.unpaid.each do |credit_pitch|
+              credit_pitch.credit_id = credit.id
               credit_pitch.pay!
-              credit_pitch.paid_credit_id = credit.id
-              credit_pitch.update_pitch_funding
-              credit_pitch.save
           end
       end 
   end

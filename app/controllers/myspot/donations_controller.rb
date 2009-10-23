@@ -38,7 +38,11 @@ class Myspot::DonationsController < ApplicationController
   end
 
   def new_resource
-    current_user.donations.new(params[:donation])
+     current_user.donations.new(params[:donation])
+     # TODO: figure out why donation_type does not get properly assigned with params / should not need to assign after new
+     # d = Donation.new(params[:donation])
+     # d.donation_type = params[:donation][:donation_type]
+     # d
   end
 
   def find_resources
