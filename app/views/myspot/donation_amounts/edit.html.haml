@@ -90,7 +90,7 @@
             = text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation"
             .action= link_to "Remove", '#', :id => 'remove_spotus_donation'
       .float-right
-        = image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update"
+        =# image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update"
         = image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase"
     .double_content_border
 
