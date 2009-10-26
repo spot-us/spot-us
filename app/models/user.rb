@@ -199,7 +199,6 @@ class User < ActiveRecord::Base
           credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
           credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
                           :amount => (0 - self.allocated_credits))
-                          puts ' whop'
           self.credit_pitches.unpaid.each do |credit_pitch|
               credit_pitch.credit_id = credit.id
               credit_pitch.pay!
