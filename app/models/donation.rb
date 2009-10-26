@@ -120,7 +120,8 @@ class Donation < ActiveRecord::Base
     # if we want this ...then make this happen for both credit and donation
     if donation_type == "credit"
       check_credit
-    elsif pitch.user_can_donate_more?(user, amount)
+    end
+    if !pitch.user_can_donate_more?(user, self.amount)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
       return
     end
