@@ -46,6 +46,7 @@ class Donation < ActiveRecord::Base
   belongs_to :user
   belongs_to :pitch
   belongs_to :purchase
+  belongs_to :credit
   belongs_to :group
   validates_presence_of :pitch_id
   validates_presence_of :user_id
@@ -53,13 +54,15 @@ class Donation < ActiveRecord::Base
   validates_numericality_of :amount, :greater_than => 0
   validate_on_update :disable_updating_paid_donations, :check_donation, :if => lambda { |me| me.pitch }
   validate_on_create :check_donation, :if => lambda { |me| me.pitch }
-
+  
+  #default_scope :conditions => {:donation_type => "payment"}
   named_scope :unpaid, :conditions => "status = 'unpaid'"
   named_scope :paid, :conditions => "status = 'paid'"
   named_scope :from_organizations, :include => :user, :conditions => "users.type = 'organization'"
   named_scope :for_pitch, lambda {|pitch| { :conditions => {:pitch_id => pitch.id} } }
   named_scope :by_user, lambda {|user| { :conditions => {:user_id => user.id} } }
-
+  named_scope :other_than, lambda {|donation| { :conditions => "id != #{donation.id}" } }
+  
   after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
   def self.createable_by?(user)
@@ -88,7 +91,7 @@ class Donation < ActiveRecord::Base
   end
 
   def update_pitch_funding
-    pitch.current_funding += amount
+    pitch.current_funding += amount.to_f
     pitch.save
   end
 
@@ -101,6 +104,42 @@ class Donation < ActiveRecord::Base
   def being_marked_as_paid?
     status_changed? && status_was == 'unpaid'
   end
+  
+  def keep_under_user_limit
+    #max_donation_amount(user) - 
+    #debugger
+    if self.amount > self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
+      if self.id # updating 
+        self.amount = pitch.max_donation_amount(user) - pitch.donations.by_user(user).other_than(self).map(&:amount).sum + 
+          pitch.credit_pitches.by_user(user).other_than(self).map(&:amount).sum
+      else # creating
+        self.amount = pitch.max_donation_amount(user) - pitch.donations.by_user(user).map(&:amount).sum + 
+          pitch.credit_pitches.by_user(user).map(&:amount).sum
+      end
+    end
+  end
+  
+  def limit_to_existing_donation
+    #debugger
+    existing_donation = pitch.donations.unpaid.by_user(user).map(&:amount).sum #Donation.unpaid.find(:all, :conditions => "pitch_id = #{pitch.id} and user_id = #{user.id}").map(&:amount).sum
+    if existing_donation > 0
+      self.amount = existing_donation
+    end
+  end
+  
+  def check_credit
+    #debugger
+    # limit if not an org and the amount is greater than the pitch/user's remaining limit (under 20% of pitch total)
+    if !user.organization? 
+      keep_under_user_limit #self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
+    end
+    
+    limit_to_existing_donation
+    # limit if amount is greater than the remaining funding sought for pitch
+    if self.amount > pitch.requested_amount - pitch.current_funding
+      self.amount = pitch.requested_amount - pitch.current_funding
+    end 
+  end
 
   def check_donation
     if pitch.fully_funded?
@@ -108,9 +147,12 @@ class Donation < ActiveRecord::Base
       return
     end
 
-    #TODO: convert user_can_donate_more? to use BigDecimal and pass in amount
-    unless pitch.user_can_donate_more?(user, amount)
+    if donation_type == "credit"
+        check_credit
+    end
+    unless pitch.user_can_donate_more?(user, self.amount)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
+      return
     end
   end
 
@@ -128,6 +170,15 @@ class Donation < ActiveRecord::Base
       paypal_params.delete(spotus_keys.first.gsub(/name/, 'number'))
       paypal_params.delete(spotus_keys.first)
     end
+  end
+  
+  def self.has_enough_credits?(credit_pitch_amounts, user)
+      credit_total = 0
+      credit_pitch_amounts.values.each do |val|
+        credit_total += val["amount"].to_f
+      end
+      return true if credit_total <= user.total_credits
+      return false
   end
 end
 
