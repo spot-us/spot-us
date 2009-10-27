@@ -69,6 +69,7 @@ $(function() {
 
 function renderUserHeader() {
   if (jQuery.cookie('current_user_full_name')) {
+	//alert(jQuery('#current_user_full_name').html());
     // we are logged in
     jQuery('#logged_in span').html(decodeURI(jQuery.cookie('current_user_full_name').replace(/\+/g," ")));
     if (jQuery.cookie('balance_text')) {
