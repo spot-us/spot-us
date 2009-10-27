@@ -74,6 +74,12 @@ class User < ActiveRecord::Base
     end
   end
   
+  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"} do
+    def pitch_sum(pitch)
+      self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
+    end
+  end
+
   has_many :all_donations, :class_name => "Donation"
 
   has_many :spotus_donations
@@ -84,7 +90,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
-  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}
+
   has_many :comments
   has_many :contributor_applications
   has_many :pledges do
@@ -195,14 +201,15 @@ class User < ActiveRecord::Base
   
   def apply_credit_pitches
       #refactor - there must be a nicer ruby-like way to do this
+      
       transaction do 
-          credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
-          credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
-                          :amount => (0 - self.allocated_credits))
-          self.credit_pitches.unpaid.each do |credit_pitch|
-              credit_pitch.credit_id = credit.id
-              credit_pitch.pay!
-          end
+        credit_pitch_ids = self.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
+        credit = Credit.create(:user => self, :description => "Applied to Pitches (#{credit_pitch_ids})",
+                        :amount => (0 - self.allocated_credits))
+        self.credit_pitches.unpaid.each do |credit_pitch|
+          credit_pitch.credit_id = credit.id
+          credit_pitch.pay!
+        end
       end 
   end
 
@@ -255,7 +262,7 @@ class User < ActiveRecord::Base
   end
 
   def amount_donated_to(pitch)
-    self.donations.pitch_sum(pitch)
+    self.donations.pitch_sum(pitch) + self.credit_pitches.pitch_sum(pitch)
   end
 
   # Encrypts the password with the user salt
