@@ -33,6 +33,7 @@
         = link_to 'Logout', destroy_session_path
       %li
         = fb_login_button('window.location = "/users/link_user_accounts";', :size => "small")
+        %em.small facebook connect
 %ul.user-header-nav
   #not_logged_in.hide
     %li
