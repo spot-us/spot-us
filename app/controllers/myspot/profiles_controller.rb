@@ -8,4 +8,22 @@ class Myspot::ProfilesController < ApplicationController
                            :only      => [:edit, :update, :show] do
     current_user
   end
+  
+  # response_for :edit do |format|
+  #   if request.xhr?
+  #     #render :partial => 'users/popup_form', :status => :unprocessable_entity and return false
+  #   else
+  #     render :partial => 'users/popup_form', :status => :unprocessable_entity and return false
+  #   end
+  # end
+  
+  def edit
+    @profile = find_resource
+     if request.xhr?
+       render :partial => 'users/popup_form', :status => :unprocessable_entity
+     else
+       #render :partial => 'users/popup_form', :status => :unprocessable_entity
+     end
+  end
+  
 end
