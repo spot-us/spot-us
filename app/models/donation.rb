@@ -61,7 +61,8 @@ class Donation < ActiveRecord::Base
   named_scope :from_organizations, :include => :user, :conditions => "users.type = 'organization'"
   named_scope :for_pitch, lambda {|pitch| { :conditions => {:pitch_id => pitch.id} } }
   named_scope :by_user, lambda {|user| { :conditions => {:user_id => user.id} } }
-
+  named_scope :other_than, lambda {|donation| { :conditions => "id != #{donation.id}" } }
+  
   after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
   def self.createable_by?(user)
@@ -104,11 +105,40 @@ class Donation < ActiveRecord::Base
     status_changed? && status_was == 'unpaid'
   end
   
+  def keep_under_user_limit
+    #max_donation_amount(user) - 
+    #debugger
+    if self.amount > self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
+      if self.id # updating 
+        self.amount = pitch.max_donation_amount(user) - pitch.donations.by_user(user).other_than(self).map(&:amount).sum + 
+          pitch.credit_pitches.by_user(user).other_than(self).map(&:amount).sum
+      else # creating
+        self.amount = pitch.max_donation_amount(user) - pitch.donations.by_user(user).map(&:amount).sum + 
+          pitch.credit_pitches.by_user(user).map(&:amount).sum
+      end
+    end
+  end
+  
+  def limit_to_existing_donation
+    #debugger
+    existing_donation = pitch.donations.unpaid.by_user(user).map(&:amount).sum #Donation.unpaid.find(:all, :conditions => "pitch_id = #{pitch.id} and user_id = #{user.id}").map(&:amount).sum
+    if existing_donation > 0
+      self.amount = existing_donation
+    end
+  end
+  
   def check_credit
-    # self.amount = 100 if self.amount > 100
+    #debugger
+    # limit if not an org and the amount is greater than the pitch/user's remaining limit (under 20% of pitch total)
+    if !user.organization? 
+      keep_under_user_limit #self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
+    end
+    
+    limit_to_existing_donation
+    # limit if amount is greater than the remaining funding sought for pitch
     if self.amount > pitch.requested_amount - pitch.current_funding
       self.amount = pitch.requested_amount - pitch.current_funding
-    end     
+    end 
   end
 
   def check_donation
@@ -116,16 +146,14 @@ class Donation < ActiveRecord::Base
       errors.add_to_base("Great news! This pitch is already fully funded therefore it can't be donated to any longer.")
       return
     end
-    # question for david - does this funcionality happen for donations currently...automatically limiting the total to the amount remaining?
-    # if we want this ...then make this happen for both credit and donation
+
     if donation_type == "credit"
-      check_credit
+        check_credit
     end
     unless pitch.user_can_donate_more?(user, self.amount)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
       return
     end
-    
   end
 
   def self.find_all_from_paypal(paypal_params)
