@@ -81,7 +81,7 @@ class Pitch < NewsItem
   has_many :tips, :through => :affiliations
   has_many :organization_pitches, :foreign_key => :pitch_id
   has_many :supporting_organizations, :through => :organization_pitches, :source => :organization
-  has_many :donations, :dependent => :destroy do
+  has_many :donations, :conditions => {:donation_type => "payment"}, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
     end
@@ -90,11 +90,22 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
+  
+  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}, :dependent => :destroy do
+    def for_user(user)
+      find_all_by_user_id(user.id)
+    end
+
+    def total_amount_for_user(user)
+      for_user(user).map(&:amount).sum
+    end
+  end
+  has_many :donations_and_credits, :class_name => "Donation"
   has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
             
-  has_many :supporters, :through => :donations, :source => :user, :order => "donations.created_at", :uniq => true
+  has_many :supporters, :through => :donations_and_credits, :source => :user, :order => "donations.created_at", :uniq => true
   has_many :blog_subscribers, :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
             :order => "donations.created_at", :uniq => true
   has_many :posts, :order => "created_at desc", :dependent => :destroy do
@@ -252,7 +263,11 @@ class Pitch < NewsItem
   end
 
   def total_amount_donated
-    donations.paid.map(&:amount).sum
+    donations.paid.map(&:amount).sum + credit_pitches.paid.map(&:amount).sum
+  end
+  
+  def total_amount_allocated_by_user(user)
+    donations.by_user(user).map(&:amount).sum + credit_pitches.by_user(user).map(&:amount).sum
   end
 
   def donated_to?
@@ -279,8 +294,10 @@ class Pitch < NewsItem
     return false if attempted_donation_amount.nil?
     return true if user.organization? && attempted_donation_amount <= requested_amount
     return false if attempted_donation_amount > funding_needed
-    user_donations = donations.paid.total_amount_for_user(user)
+    user_donations = donations.paid.total_amount_for_user(user) + credit_pitches.paid.total_amount_for_user(user)
+    #user_donations = donations.total_amount_for_user(user) + credit_pitches.total_amount_for_user(user)
     (user_donations + attempted_donation_amount) <= max_donation_amount(user)
+    #user_donations <= max_donation_amount(user)
   end
 
   def dispatch_fact_checker

@@ -54,7 +54,6 @@ class Tip < NewsItem
 
   named_scope :most_pledged, :order => "(select sum(amount) from pledges where pledges.tip_id = #{table_name}.id) DESC"
 
-
   def self.createable_by?(user)
     !user.nil?
   end
