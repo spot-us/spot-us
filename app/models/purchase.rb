@@ -27,7 +27,7 @@ class Purchase < ActiveRecord::Base
 
   cattr_accessor :gateway
 
-  after_create :associate_donations, :apply_credit_pitches, :associate_spotus_donations
+  after_create :associate_donations, :associate_spotus_donations, :associate_credits
   before_create :bill_credit_card, :unless => lambda {|p| p.paypal_transaction? }
 
   before_validation_on_create :build_credit_card, :set_credit_card_number_ending, :unless => lambda {|p| p.paypal_transaction? }
@@ -42,7 +42,8 @@ class Purchase < ActiveRecord::Base
   validate :validate_credit_card, :on => :create, :unless => lambda {|p| p.credit_covers_total? || p.paypal_transaction? }
 
   belongs_to :user
-  has_many   :donations
+  has_many   :donations, :conditions => {:donation_type => "payment"}
+  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}
   has_one    :spotus_donation
 
   def credit_covers_total?
@@ -59,6 +60,10 @@ class Purchase < ActiveRecord::Base
 
   def donations=(donations)
     @new_donations = donations
+  end
+  
+  def credit_pitches=(credit_pitches)
+    @new_credit_pitches = credit_pitches
   end
 
   def total_amount
@@ -85,10 +90,6 @@ class Purchase < ActiveRecord::Base
     self[:total_amount] = total_amount
   end
 
-  def apply_credit_pitches
-      self.user.apply_credit_pitches
-  end
-
   def build_credit_card
     @credit_card = ActiveMerchant::Billing::CreditCard.new(credit_card_hash)
   end
@@ -107,6 +108,20 @@ class Purchase < ActiveRecord::Base
     (@new_donations || []).each do |donation|
       donation.purchase = self
       donation.pay!
+      
+    end
+  end
+  
+  def associate_credits
+    transaction do 
+      credit_pitch_ids = user.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
+      credit = Credit.create(:user => user, :description => "Applied to Pitches (#{credit_pitch_ids})",
+                      :amount => (0 - user.allocated_credits))
+      user.credit_pitches.unpaid.each do |credit_pitch|
+        credit_pitch.credit_id = credit.id
+        credit_pitch.status = "deducted"
+        credit_pitch.save(false)
+      end
     end
   end
 
