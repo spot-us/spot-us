@@ -103,9 +103,9 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   validates_presence_of     :email, :first_name, :last_name
-  validates_presence_of     :password, :password_confirmation, :if => :password_required?
-  validates_length_of       :password, :within => 4..40,       :if => :password_required?
-  validates_confirmation_of :password,                         :if => :password_required?
+  validates_presence_of     :password, :password_confirmation, :if => :should_validate_password?
+  validates_length_of       :password, :within => 4..40,       :if => :should_validate_password?
+  validates_confirmation_of :password,                         :if => :should_validate_password?
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email, :case_sensitive => false, :scope => :deleted_at
   validates_inclusion_of    :type, :in => User::TYPES
@@ -168,7 +168,8 @@ class User < ActiveRecord::Base
   #We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
   #If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
   def self.create_from_fb_connect(fb_user)
-    new_facebooker = User.new(:name => fb_user.name, :login => "facebooker_#{fb_user.uid}", :password => "", :email => "")
+    new_facebooker = User.new(:name => fb_user.name, :login => "facebooker_#{fb_user.uid}", :password => "", :email => "", 
+      :network_id => Network.first, :status => "active", :type => "Citizen")
     new_facebooker.fb_user_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
@@ -200,6 +201,7 @@ class User < ActiveRecord::Base
     self.email_hash = Facebooker::User.hash_email(email)
     save(false)
   end
+  
   def facebook_user?
     return !fb_user_id.nil? && fb_user_id > 0
   end
@@ -424,14 +426,15 @@ class User < ActiveRecord::Base
   end
 
   protected
-
+  
   def encrypt_password
     self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
     self.crypted_password = encrypt(password)
   end
 
-  def password_required?
-    crypted_password.blank? || !password.blank?
+  def should_validate_password?
+    #debugger
+    (crypted_password.blank? || !password.blank?) && !facebook_user?
   end
 
   def deliver_signup_notification
