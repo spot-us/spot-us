@@ -38,26 +38,46 @@ jQuery(document).ready(function($){
         if(message == "error") {
           $("#facebox .content .login-boxer").replaceWith(request.responseText);
           if (request.responseText == ' ')
-            $(document).trigger('close.facebox');
-        } else {
-          $("#not_logged_in").hide();
-          $("#logged_in").show();
-          $("#sign_in_section").empty().append(request.responseText);
-          if (jump_to && jump_to.attr("return_to"))
-            window.location = jump_to.attr("return_to");
-          else if (jump_to && jump_to.attr("action"))
-            jump_to.submit();
-          else if (jump_to && jump_to.attr("href"))
-            jump_to.click();
-          else
-           $(document).trigger('close.facebox');
-           renderUserHeader();
-		   $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
-		   if($("#flash").length > 0){
-		   		$("#flash").html("");
+             $(document).trigger('close.facebox');
+          } else {
+          	$("#not_logged_in").hide();
+	          $("#logged_in").show();
+	          $("#sign_in_section").empty().append(request.responseText);
+	          if (jump_to && jump_to.attr("return_to"))
+	             window.location = jump_to.attr("return_to");
+	          else if (jump_to && jump_to.attr("action"))
+	             jump_to.submit();
+	          else if (jump_to && jump_to.attr("href"))
+	             jump_to.click();
+	          else
+		           $(document).trigger('close.facebox');
+		           renderUserHeader();
+				   		 $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+				   		 if($("#flash").length > 0){
+				   		 		$("#flash").html("");
+							 }
+	        	}
+       	  }
+    }); // end ajax form
+  }); // end livequery
+
+  $("#facebox .content #fb_profile form").livequery(function() {
+		var form = $(this);
+    $(this).ajaxForm({
+			complete: function(request,message) {
+				 if(message == "error") {
+						$("#facebox .content #fb_profile").replaceWith(request.responseText);
+					} else {
+						$(document).trigger('close.facebox');
+	          renderUserHeader();
+						$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+					}
 			}
-        }
-      }
-    });
-  });
+		});
+	});
+					
 });
+function showProfileForm(){
+	 jQuery.facebox.settings.modal = true;
+   jQuery.facebox({ajax:"/myspot/profile/edit"});
+}
