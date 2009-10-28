@@ -40,3 +40,9 @@
   = iboxify_page
   = yield :head
   
+  - if current_user && !current_user.valid?
+    :javascript
+      jQuery(document).ready(function(){
+           showProfileForm();
+      });
+  
