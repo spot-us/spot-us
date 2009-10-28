@@ -1,20 +1,3 @@
-/ %ul.user-header-nav
-/   #logged_in.hide
-/     %li.no-pipe
-/       Hello,
-/       %span.current_user_full_name
-/     %li#current_balance_line
-/     %li
-/       = link_to "My Spot", myspot_profile_path
-/     %li.no-pipe
-/       = link_to "Logout", destroy_session_path
-/   #not_logged_in.hide
-/     %li
-/       = link_to "Register", new_session_path, :rel => 'facebox'
-/     %li.no-pipe
-/       = link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in"
-/       =# fb_login_button('window.location = "/users/link_user_accounts";')
-
 %ul.user-header-nav
   #logged_in.hide
     %li.no-pipe
@@ -24,7 +7,7 @@
     %li
       = link_to "My Spot", myspot_profile_path
     - if logged_in? && current_user.facebook_user? && facebook_session
-      %li
+      %li.no-pipe
         %a{:href=>"#", :onclick=>'FB.Connect.logoutAndRedirect("' + destroy_session_path + '")'}
           Logout
         %em.small facebook connected
@@ -41,8 +24,10 @@
       = link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in"
     %li.no-pipe
       = fb_login_button('window.location = "/users/link_user_accounts";', :size => "small")
+      %em.small connect
 .slogan
   %span.pink Community
   %span.moss-green Funded Reporting
 .clear
+
 

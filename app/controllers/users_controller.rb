@@ -26,11 +26,6 @@ class UsersController < ApplicationController
       end
     end
   end
-  
-  def missing_name_or_email
-    @user = current_user
-    render :partial => 'users/popup_form', :status => :unprocessable_entity
-  end
 
   def activate
     self.current_user = User.find_by_activation_code(params[:activation_code])

@@ -14,7 +14,6 @@ ActionController::Routing::Routes.draw do |map|
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
   map.connect "users/link_user_accounts", :controller => "users", :action => "link_user_accounts"
-  map.connect "users/missing_name_or_email", :controller => "users", :action => "missing_name_or_email"
   
   # TODO: remove when done
   map.resources :ui

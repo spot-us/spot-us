@@ -169,7 +169,9 @@ class User < ActiveRecord::Base
   #If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
   def self.create_from_fb_connect(fb_user)
     new_facebooker = User.new(:name => fb_user.name, :login => "facebooker_#{fb_user.uid}", :password => "", :email => "", 
-      :network_id => Network.first, :status => "active", :type => "Citizen")
+      :network_id => Network.first)
+    new_facebooker.type = "Citizen"
+    new_facebooker.status = "active"
     new_facebooker.fb_user_id = fb_user.uid.to_i
     #We need to save without validations
     new_facebooker.save(false)
