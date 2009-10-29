@@ -196,7 +196,7 @@ class User < ActiveRecord::Base
 
   #The Facebook registers user method is going to send the users email hash and our account id to Facebook
   #We need this so Facebook can find friends on our local application even if they have not connect through connect
-  #We hen use the email hash in the database to later identify a user from Facebook with a local user
+  #We then use the email hash in the database to later identify a user from Facebook with a local user
   def register_user_to_fb
     users = {:email => email, :account_id => id}
     Facebooker::User.register([users])
