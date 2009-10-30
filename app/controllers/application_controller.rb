@@ -20,7 +20,10 @@ class ApplicationController < ActionController::Base
   META_DESCRIPTION = "Spot.Us enables the public to commission journalists to do investigations on important and perhaps overlooked stories. " + 
                   "We are an open source project, to pioneer \"community funded reporting.\""
   META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
-  #protect_from_forgery
+  
+  before_filter :set_facebook_session
+  helper_method :facebook_session
+  
 
   def current_network
     subdomain = current_subdomain.downcase if current_subdomain
