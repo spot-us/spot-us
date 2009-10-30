@@ -139,9 +139,10 @@ class Pitch < NewsItem
 
   def self.featured_by_network(network=nil)
     return network.featured_pitches if network
-    Network.with_pitches.map do |network|
-      network.featured_pitches
-    end.flatten
+    featured
+    # Network.with_pitches.map do |network|
+    #   network.featured_pitches
+    # end.flatten
   end
 
   def can_be_accepted?
