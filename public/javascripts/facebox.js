@@ -79,6 +79,7 @@
     settings: {
       opacity      : 0,
       overlay      : true,
+			modal        : false,
       loadingImage : '/facebox/loading.gif',
       closeImage   : '/facebox/closelabel.gif',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
@@ -198,7 +199,7 @@
       preload.slice(-1).src = $(this).css('background-image').replace(/url\((.+)\)/, '$1')
     })
 
-    $('#facebox .close').click($.facebox.close)
+   	$('#facebox .close').click($.facebox.close)
     $('#facebox .close_image').attr('src', $.facebox.settings.closeImage)
   }
   
@@ -283,10 +284,15 @@
 
     if ($('facebox_overlay').length == 0) 
       $("body").append('<div id="facebox_overlay" class="facebox_hide"></div>')
-
+		if($.facebox.settings.modal == true)
+			$('#facebox .close').remove()
     $('#facebox_overlay').hide().addClass("facebox_overlayBG")
       .css('opacity', $.facebox.settings.opacity)
-      .click(function() { $(document).trigger('close.facebox') })
+      //.click(function() { $(document).trigger('close.facebox') })
+			.click(function() {
+			                if ($.facebox.settings.modal != true)
+			                       $(document).trigger('close.facebox')
+			                })
       .fadeIn(200)
     return false
   }

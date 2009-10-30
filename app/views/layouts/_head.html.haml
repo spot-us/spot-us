@@ -1,4 +1,4 @@
-%head
+%head{:xmlns => "http://www.w3.org/1999/xhtml","xmlns:fb"=>"http://www.facebook.com/2008/fbml"}
   %meta{ :name => "description", :content => @meta_description }/
   %meta{ :name => "keywords", :content => @meta_keywords }/
 
@@ -39,4 +39,10 @@
 
   = iboxify_page
   = yield :head
+  
+  - if current_user && !current_user.valid?
+    :javascript
+      jQuery(document).ready(function(){
+           showProfileForm();
+      });
   

@@ -69,6 +69,21 @@ class UsersController < ApplicationController
       render :action => 'password'
     end
   end
+  
+  # link spot-us -- facebook accts
+  def link_user_accounts
+    if self.current_user.nil?
+      #register with fb
+      User.create_from_fb_connect(facebook_session.user)
+    else
+      #connect accounts
+      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+    end
+    create_current_login_cookie
+    update_balance_cookie
+    redirect_back_or_default('/')
+  end
+  
 end
 
 
