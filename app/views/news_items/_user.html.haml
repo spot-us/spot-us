@@ -15,15 +15,15 @@
         %span.quiet Filed under
         = show_topics(news_item)
         == in the #{news_item.network.display_name} network.
-  - if news_item.fact_checker
+  - if news_item.peer_reviewer
     %br/
     %hr/
     .fact_checker
       .person_avatar
-        = link_to((image_tag news_item.fact_checker.photo.url(:thumb)), profile_path(news_item.fact_checker))
+        = link_to((image_tag news_item.peer_reviewer.photo.url(:thumb)), profile_path(news_item.peer_reviewer))
       %h5.reg-line-height
         Peer Review Editor
-      = link_to(h(news_item.fact_checker.full_name), profile_path(news_item.fact_checker))
+      = link_to(h(news_item.peer_reviewer.full_name), profile_path(news_item.peer_reviewer))
       .reg-line-height.small
         %span.quiet Located in
         = h news_item.user.network_and_category
