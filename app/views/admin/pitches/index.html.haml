@@ -12,9 +12,10 @@
         %td
           = render :partial => 'pitch', :locals => { :pitch => pitch }
         %td
-          %strong= number_to_currency(pitch.current_funding)
+          %strong= number_to_currency(pitch.current_funding) if pitch.current_funding
           of
-          == #{number_to_currency(pitch.requested_amount)} Raised
+          - if pitch.requested_amount
+            == #{number_to_currency(pitch.requested_amount)} Raised
         %td
           = pitch.supporters.map(&:email).join(',<br/>')
         %td.fact_checker
