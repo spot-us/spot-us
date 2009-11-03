@@ -76,8 +76,8 @@
       = f.text_area :widget_embed, :rows => 4
     .yellow-spacer-negative
     .row
-      = f.label :expiration_date, "Expiration Date <br /><span class='quieter small'>(Optional)</span>"
-      = f.date_select :expiration_date
+      = f.label :expiration_date, "Expiration Date <br /><span class='small quieter'>Required</span>"
+      = f.date_select :expiration_date, :include_blank => true, :default => nil, :start_year => Time.now.year
     .yellow-spacer-negative
     .free
       .float_left
