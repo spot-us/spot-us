@@ -106,7 +106,6 @@ class Donation < ActiveRecord::Base
   end
   
   def keep_under_user_limit
-    #max_donation_amount(user) - 
     #debugger
     if self.amount > self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
       if self.id # updating 
