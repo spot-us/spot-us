@@ -70,6 +70,26 @@ class Story < NewsItem
   validate_on_update :extended_description
 
   named_scope :published, :conditions => {:status => 'published'}
+  
+  def supporting_organizations
+    pitch.supporting_organizations
+  end
+  
+  def donations
+    pitch.donations
+  end
+  
+  def donating_groups
+    pitch.donating_groups
+  end
+  
+  def supporters
+    pitch.supporters
+  end
+  
+  def total_amount_donated
+    pitch.total_amount_donated
+  end
 
   def editable_by?(user)
     return false if user.nil?
