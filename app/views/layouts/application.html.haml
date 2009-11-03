@@ -21,6 +21,8 @@
               = link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase
             - else
               = network.display_name
+          .span-360
+            = render :partial => "shared/google_search"
         - if yield(:error)
           .error
             %span.dismiss= link_to image_tag('close_square.png'), @close_flash_link || '' # empty string means self
