@@ -68,6 +68,8 @@ class Pitch < NewsItem
   validates_presence_of :delivery_description
   validates_presence_of :skills
   validates_presence_of :featured_image_caption
+  validates_presence_of :expiration_date
+  validate :expiration_date_cannot_be_in_the_past
 
   if Rails.env.production?
     validates_presence_of :featured_image_file_name
@@ -345,5 +347,9 @@ class Pitch < NewsItem
   def send_approved_notification
     Mailer.deliver_pitch_approved_notification(self)
   end
+  
+   def expiration_date_cannot_be_in_the_past 
+     errors.add(:expiration_date, "can't be in the past") if  !expiration_date.blank? and expiration_date < Date.today 
+   end 
 end
 
