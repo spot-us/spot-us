@@ -14,8 +14,9 @@
     - else
       %li
         = link_to 'Logout', destroy_session_path
-      %li
+      %li.no-pipe
         = fb_login_button('window.location = "/users/link_user_accounts";', :size => "small")
+        %em.small connect
 %ul.user-header-nav
   #not_logged_in.hide
     %li

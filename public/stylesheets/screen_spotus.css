@@ -669,7 +669,7 @@ ol.create_a_tip_steps li.pitcher, ol.create_a_pitch_steps li.pitcher {
 /* ---------------------------------------------------------------------------------
  General Column specs part 3 - this achieves the float right and size for the columns
 ------------------------------------------------------------------------------------ */
-.span-145, .span-160, .span-225, .span-270, .span-530 {float: right;}
+.span-145, .span-160, .span-225, .span-270, .span-360, .span-530 {float: right;}
 .span-145 {width:145px;}
 .span-160 {width:160px;}
 .span-225 {width:225px;}
