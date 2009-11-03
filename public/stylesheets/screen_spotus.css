@@ -329,6 +329,8 @@ body {
 /* User Header & Footer Styles */
 .pink { color: #ce859d;}
 .moss-green { color: #909a9d;}
+.deep-red { color: #673122;}
+.deep-green { color: #3A6425;}
 #user-header .slogan {
   padding: 5px 0 3px 0;
   text-transform: uppercase;
@@ -1188,3 +1190,4 @@ a.prev{
   color:#990000;
   font-weight: bold;
 }
+.progress_bar_container{width:120px;margin-right:10px;float:left}

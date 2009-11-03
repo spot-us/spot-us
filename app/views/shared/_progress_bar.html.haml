@@ -5,7 +5,7 @@
     - else
       = static_progress_bar("pitch", pitch.current_funding_in_percentage)
   %div
-    %p
+    %p.progress_bar_container
       %strong= number_to_currency(pitch.current_funding)
       raised
       %br/

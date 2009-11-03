@@ -86,5 +86,13 @@ module ApplicationHelper
   def check_if_tab(tab, selected_tab)
       " active" if tab == selected_tab
   end
+  
+  def due_date_in_words(due_date)
+    if due_date > Time.now
+      '<span class="deep-green">due in ' + time_ago_in_words(due_date) + "</span>"
+    else
+      '<span class="deep-red">' + time_ago_in_words(due_date)  + " overdue</span>"
+    end
+  end
 
 end
