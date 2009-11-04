@@ -52,7 +52,8 @@ jQuery(document).ready(function($){
 	          else
 		           $(document).trigger('close.facebox');
 		           renderUserHeader();
-				   		 $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+				   		 $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
+							 $("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
 				   		 if($("#flash").length > 0){
 				   		 		$("#flash").html("");
 							 }
