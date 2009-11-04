@@ -2,6 +2,7 @@ class TipsController < ApplicationController
   resources_controller_for :tip, :except => :destroy
 
   before_filter :block_if_donated_to, :only => :edit
+  before_filter :login_required, :only => [:new, :create, :update]
   bounce_bots(:send_bots, :tip, :blog_url)
   before_filter :select_tab, :only => [:new]
   before_filter :set_meta_tags, :only => [:show]
@@ -30,7 +31,8 @@ class TipsController < ApplicationController
   end
 
   def can_create?
-    access_denied unless Tip.createable_by?(current_user)
+    true
+    #access_denied unless Tip.createable_by?(current_user)
   end
 
   def new_resource
@@ -42,7 +44,7 @@ class TipsController < ApplicationController
   protected
 
     def select_tab
-       @selected_tab = "start_story"
+       @selected_tab = "suggest_story"
     end
     
     def set_meta_tags

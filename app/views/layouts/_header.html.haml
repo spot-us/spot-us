@@ -5,7 +5,8 @@
       = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Funded Reporting"
   .nav-container
     %ul#main-nav
-      %li{:class=>"start_story#{check_if_tab("start_story",@selected_tab)}"}= facebox_login_link_to "Start a Story", start_story_path
+      %li{:class=>"suggest_story#{check_if_tab("suggest_story",@selected_tab)}"}= facebox_login_link_to "Suggest a Story", new_tip_path
+      %li{:class=>"start_story#{check_if_tab("start_story",@selected_tab)}"}= facebox_login_link_to "Start a Story", new_pitch_path
       %li{:class=>"fund_story#{check_if_tab("pitches",@selected_tab)}"}= link_to "Search Pitches", news_items_path
       %li{:class=>"read_story#{check_if_tab("stories",@selected_tab)}"}= link_to "Read a Story", stories_path
       %li{:class=>"about_spotus#{check_if_tab("about",@selected_tab)}"}= link_to "About", page_path('about')
