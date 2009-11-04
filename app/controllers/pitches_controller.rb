@@ -1,8 +1,9 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  before_filter :login_required, :only => [:apply_to_contribute]
+  before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
+  before_filter :select_tab, :only => [:new]
 
   resources_controller_for :pitch
 
@@ -116,6 +117,10 @@ class PitchesController < ApplicationController
   def set_meta_tags
       pitch = find_resource
       html_meta_tags(pitch.short_description,pitch.keywords) if pitch
+  end
+  
+  def select_tab
+     @selected_tab = "start_story"
   end
 
 end

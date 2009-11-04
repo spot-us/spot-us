@@ -230,10 +230,10 @@ body {
 }
 #header .nav-container {
   float: right;
-  background: url(/images/spotus_nav_bg.gif) no-repeat 0 bottom;
+  background: url(/images/spotus_wide_nav_bg.gif) no-repeat 0 bottom;
   padding: 6px 0 0 0;
   height: 26px;
-  width: 506px;
+  width: 659px;
 }
 #header .nav-container ul {
   margin: 0;
@@ -255,6 +255,10 @@ body {
 }
 #main-nav li.start_story, #main-nav li.fund_story, #main-nav li.read_story, #main-nav li.about_spotus  {
   text-align: center;
+}
+#main-nav li.suggest_story {
+  width: 132px;
+	margin-left:21px;
 }
 #main-nav li.start_story {
   width: 118px;
