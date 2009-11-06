@@ -1,0 +1,1 @@
+run "ln -nfs #{shared_path}/email.yml #{release_path}/config/email.yml"
