@@ -153,4 +153,5 @@ class ApplicationController < ActionController::Base
       redirect_to url
     end
   end
+  
 end
