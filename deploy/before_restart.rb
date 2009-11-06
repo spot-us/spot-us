@@ -1,1 +1,1 @@
-run "ln -nfs #{shared_path}/email.yml #{release_path}/config/email.yml"
+run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
