@@ -67,6 +67,10 @@ class Story < NewsItem
   end
 
   belongs_to :pitch, :foreign_key => 'news_item_id'
+  
+  has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
+            :conditions => "users.type = 'organization'",
+            :uniq => true
   validate_on_update :extended_description
 
   named_scope :published, :conditions => {:status => 'published'}

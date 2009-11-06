@@ -62,12 +62,27 @@ jQuery(document).ready(function($){
     }); // end ajax form
   }); // end livequery
 
-  $("#facebox .content #fb_profile form").livequery(function() {
+  $("#facebox .content #fb_updater #fb_profile form").livequery(function() {
 		var form = $(this);
     $(this).ajaxForm({
 			complete: function(request,message) {
 				 if(message == "error") {
 						$("#facebox .content #fb_profile").replaceWith(request.responseText);
+					} else {
+						$(document).trigger('close.facebox');
+	          renderUserHeader();
+						$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+					}
+			}
+		});
+	});
+	
+	$("#facebox .content #fb_updater #spotus_login form").livequery(function() {
+		var form = $(this);
+    $(this).ajaxForm({
+			complete: function(request,message) {
+				 if(message == "error") {
+						$("#facebox .content #spotus_login").replaceWith(request.responseText);
 					} else {
 						$(document).trigger('close.facebox');
 	          renderUserHeader();
