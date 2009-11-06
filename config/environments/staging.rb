@@ -22,6 +22,3 @@ end
 
 PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
-
-email_settings = YAML::load(File.open("#{RAILS_ROOT}/config/email.yml"))
-ActionMailer::Base.smtp_settings = email_settings[RAILS_ENV] unless email_settings[RAILS_ENV].nil?

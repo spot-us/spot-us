@@ -15,4 +15,4 @@ production:
     :port: 25
     :authentication: plain
     :user_name: user@domain.com
-    :password: password
+    :password: password   
