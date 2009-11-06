@@ -14,7 +14,7 @@ development:
   canvas_page_name:
   callback_url: http://localhost:3000/
   pretty_errors: true
-  set_asset_host_to_callback_url: true
+  set_asset_host_to_callback_url: false
   tunnel:
     public_host_username: 
     public_host: 
@@ -27,7 +27,7 @@ test:
   secret_key: 
   canvas_page_name: 
   callback_url:
-  set_asset_host_to_callback_url: true
+  set_asset_host_to_callback_url: false
   tunnel:
     public_host_username: 
     public_host: 
@@ -40,7 +40,7 @@ staging:
   secret_key: c5fb41d223c153e2347560827d6bc82d
   canvas_page_name: 
   callback_url: http://spotus.hrvab.com/
-  set_asset_host_to_callback_url: true   
+  set_asset_host_to_callback_url: false   
   tunnel:
     public_host_username: 
     public_host: 
@@ -53,7 +53,7 @@ production:
   secret_key: 4bcf802601b9a428b96654ebfd631aba
   canvas_page_name: 
   callback_url: http://spot.us/
-  set_asset_host_to_callback_url: true   
+  set_asset_host_to_callback_url: false   
   tunnel:
     public_host_username: 
     public_host: 
