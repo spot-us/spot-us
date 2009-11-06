@@ -1,35 +1,74 @@
-%div#fb_profile
-  %h4 
-    Welcome from facebook. To finish registraton:
-  - if @profile && @profile.errors.any?
-    .error
-      = error_messages_for :profile
-  %h3
-    Fill out your name and email.
-  - form_for :profile, :url => myspot_profile_path, :html => { :method => :put } do |f|
-    .register
-      %div
-        = f.label :first_name, "Your First Name"
-        = f.text_field :first_name, :class => "text", :tabindex => 1
-      %div
-        = f.label :last_name, "Your Last Name"
-        = f.text_field :last_name, :class => "text", :tabindex => 2
-      %div
-        = f.label :email, "Your E-mail Address"
-        = f.text_field :email, :class => "text", :tabindex => 5
-      %div
-        = f.label :type, "I am a"
-        = f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]]
-      .block-padding.clear
-      .row
-        .float_left= f.check_box :terms_of_service, {}, '1', '0'
-        %label{:for => 'user_terms_of_service', :class => "unpadded", :style => "width: auto;"}
-          Accept the
-          = link_to 'Terms of Service', page_path('terms')
+%div#fb_updater
+  %div#fb_profile
+    %h4 
+      Welcome from facebook. To finish registraton:
+    - if @profile && @profile.errors.any?
+      .error
+        = error_messages_for :profile
+    %h3
+      Fill out your name and email. Or <a href="" class="login_link">Login</a> with existing Spot.Us Account.
+    - form_for :profile, :url => myspot_profile_path, :html => { :method => :put } do |f|
+      .register
+        %div
+          = f.label :first_name, "Your First Name"
+          = f.text_field :first_name, :class => "text", :tabindex => 1
+        %div
+          = f.label :last_name, "Your Last Name"
+          = f.text_field :last_name, :class => "text", :tabindex => 2
+        %div
+          = f.label :email, "Your E-mail Address"
+          = f.text_field :email, :class => "text", :tabindex => 5
+        %div
+          = f.label :type, "I am a"
+          = f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]]
+        .block-padding.clear
+        .row
+          .float_left= f.check_box :terms_of_service, {}, '1', '0'
+          %label{:for => 'user_terms_of_service', :class => "unpadded", :style => "width: auto;"}
+            Accept the
+            = link_to 'Terms of Service', page_path('terms')
+          .block-padding.clear
+          %div{:style => "padding: 0pt 0pt 8px 5px;"}
+            %input{:type => "image", :src => "/images/save.png", :value => "Update", :class => "float-right"}
+          .block-padding.clear
+          %a{:href=>"#", :onclick=>'FB.Connect.logoutAndRedirect("' + destroy_session_path + '")'}
+            No Thanks
+  %div#spotus_login.hide
+    %h4 
+      Connect your facebook login to an existing Spot.Us Account:
+    - if @profile && @profile.errors.any?
+      .error
+        = error_messages_for :profile
+    %h3
+      Login or  <a href="" class="profile_link">&laquo; go back</a>
+    - form_tag session_url(:protocol => 'http') do
+      .register
+        %div
+          %label Your E-mail Address
+          = text_field_tag "email", nil, :class=>"text"
+        %div
+          %label Your Password
+          = password_field_tag "password", nil, :class=>"text", :id=>"passwordField"
+          = hidden_field_tag "encoded_password", nil, :class=>"text", :id=>"passwordHiddenField"
+          = hidden_field_tag "link_facebook", "true"
         .block-padding.clear
         %div{:style => "padding: 0pt 0pt 8px 5px;"}
-          %input{:type => "image", :src => "/images/save.png", :value => "Update", :class => "float-right"}
+          %input{:type => "image", :src => "/images/login.png", :value => "Login", :class => "float-right", :onclick=>"processLoginForm();"}
         .block-padding.clear
         %a{:href=>"#", :onclick=>'FB.Connect.logoutAndRedirect("' + destroy_session_path + '")'}
           No Thanks
+          
+:javascript
+  jQuery(document).ready(function(){
+    jQuery('.login_link').click(function(){
+      jQuery('#fb_profile').hide();
+      jQuery('#spotus_login').show();
+      return false;
+    });
+    jQuery('.profile_link').click(function(){
+      jQuery('#fb_profile').show();
+      jQuery('#spotus_login').hide();
+      return false;
+    });
+  });
 

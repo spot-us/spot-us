@@ -15,6 +15,9 @@ class SessionsController < ApplicationController
 
   def create
     self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
+    if params[:link_facebook] == "true"
+      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+    end
     if logged_in?
        
       handle_remember_me
