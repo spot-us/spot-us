@@ -103,7 +103,7 @@ class Pitch < NewsItem
     end
   end
   has_many :donations_and_credits, :class_name => "Donation"
-  has_many :organizational_donors, :through => :donations, :source => :user, :order => "donations.created_at", 
+  has_many :organizational_donors, :through => :donations_and_credits, :source => :user, :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
             
