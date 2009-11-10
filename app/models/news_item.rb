@@ -60,13 +60,16 @@ class NewsItem < ActiveRecord::Base
   belongs_to :parent, :class_name => 'NewsItem', :foreign_key => "news_item_id"
   belongs_to :fact_checker, :class_name => 'User'
   has_many :comments, :as => :commentable, :dependent => :destroy
-
+  
   has_attached_file :featured_image,
                     :styles => { :thumb => '50x50#', :medium => "200x150#" },
-                    :path => ":rails_root/public/system/news_items/" <<
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :bucket =>   S3_BUCKET,
+                    :path => "news_items/" <<
                              ":attachment/:id_partition/" <<
                              ":basename_:style.:extension",
-                    :url =>  "/system/news_items/:attachment/:id_partition/" <<
+                    :url =>  "news_items/:attachment/:id_partition/" <<
                              ":basename_:style.:extension",
                     :default_url => "/images/featured_images/missing_:style.png"
 

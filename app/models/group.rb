@@ -4,9 +4,13 @@ class Group < ActiveRecord::Base
 
   has_attached_file :image,
                     :styles => { :thumb => '50x50#', :medium => "200x150#" },
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :bucket =>   S3_BUCKET,
+                    :path => "news_items/" <<
                     :default_url => "/images/default_avatar.png",
-                    :path        => ":rails_root/public/system/groups/:attachment/:id_partition/:basename_:style.:extension",
-                    :url         => "/system/groups/:attachment/:id_partition/:basename_:style.:extension"
+                    :path        => "groups/:attachment/:id_partition/:basename_:style.:extension",
+                    :url         => "groups/:attachment/:id_partition/:basename_:style.:extension"
 
   def donations_for_pitch(pitch)
     donations.for_pitch(pitch).map(&:amount).sum
