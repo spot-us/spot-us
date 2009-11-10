@@ -115,13 +115,16 @@ class User < ActiveRecord::Base
   before_validation_on_create :generate_activation_code
   before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
   after_create :register_user_to_fb
-
+  
   has_attached_file :photo,
                     :styles      => { :thumb => '50x50#' },
-                    :path        => ":rails_root/public/system/profiles/" <<
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :bucket =>   S3_BUCKET,
+                    :path        => "profiles/" <<
                                     ":attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
-                    :url         => "/system/profiles/:attachment/:id_partition/" <<
+                    :url         => "profiles/:attachment/:id_partition/" <<
                                     ":basename_:style.:extension",
                     :default_url => "/images/default_avatar.png"
 
