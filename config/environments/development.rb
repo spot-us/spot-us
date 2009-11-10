@@ -36,3 +36,4 @@ end
 PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
 S3_BUCKET = "spotus-development-storage"
+
