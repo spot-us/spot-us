@@ -19,3 +19,4 @@ config.after_initialize do
 end
 PAYPAL_POST_URL = "https://www.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info@spot.us"
+S3_BUCKET = "spotus-production-storage"
