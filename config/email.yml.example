@@ -1,0 +1,18 @@
+development:
+    :address: mail.domain.com
+    :port: 25
+    :authentication: plain
+    :user_name: user@domain.com
+    :password: password
+production:
+    :address: mail.domain.com
+    :port: 25
+    :authentication: plain
+    :user_name: user@domain.com
+    :password: password
+production:
+    :address: mail.domain.com
+    :port: 25
+    :authentication: plain
+    :user_name: user@domain.com
+    :password: password   
