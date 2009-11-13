@@ -7,7 +7,6 @@ class Group < ActiveRecord::Base
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,
-                    :path => "news_items/" <<
                     :default_url => "/images/default_avatar.png",
                     :path        => "groups/:attachment/:id_partition/:basename_:style.:extension",
                     :url         => "groups/:attachment/:id_partition/:basename_:style.:extension"
