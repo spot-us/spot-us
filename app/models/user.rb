@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :about_you, :address1, :address2, :city, :country,
     :email, :fact_check_interest, :first_name, :last_name,
-    :location, :notify_blog_posts, :notify_pitches, :notify_spotus_news, :notify_stories,
+    :location, :notify_blog_posts, :notify_comments, :notify_pitches, :notify_spotus_news, :notify_stories,
     :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip, :organization_name,
     :established_year, :network_id, :category_id
@@ -142,6 +142,7 @@ class User < ActiveRecord::Base
 
   def self.opt_in_defaults
     { :notify_blog_posts => true,
+      :notify_comments => true,
       :notify_tips => true,
       :notify_pitches => true,
       :notify_stories => true,
@@ -295,14 +296,14 @@ class User < ActiveRecord::Base
   def self.generate_csv
     FasterCSV.generate do |csv|
       # header row
-      csv << ["type", "email", "first_name", "last_name", "network",
+      csv << ["type", "email", "first_name", "last_name", "network", "notify_blog_posts", "notify_comments",
               "notify_tips", "notify_pitches",  "notify_pitches",
               "notify_stories", "notify_spotus_news", "fact_check_interest"]
 
       # data rows
       User.all.each do |user|
         csv << [user.type, user.email, user.first_name, user.last_name,
-                user.network.name, user.notify_blog_posts, user.notify_tips, user.notify_pitches,
+                user.network.name, user.notify_blog_posts, user.notify_comments, user.notify_tips, user.notify_pitches,
                 user.notify_stories, user.notify_spotus_news, user.fact_check_interest]
       end
     end
