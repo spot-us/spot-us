@@ -60,7 +60,8 @@ class NewsItem < ActiveRecord::Base
   belongs_to :parent, :class_name => 'NewsItem', :foreign_key => "news_item_id"
   belongs_to :fact_checker, :class_name => 'User'
   has_many :comments, :as => :commentable, :dependent => :destroy
-  
+  # has_many :comment_subscribers, :through => :comments, :conditions => "users.notify_comments = 1"
+            
   has_attached_file :featured_image,
                     :styles => { :thumb => '50x50#', :medium => "200x150#" },
                     :storage => :s3,
@@ -100,7 +101,6 @@ class NewsItem < ActiveRecord::Base
   named_scope :all_news_items
   named_scope :exclude_type, lambda {|type| { :conditions => ['news_items.type != ?', type] } }
 
-
   cattr_reader :per_page
   @@per_page = 10
 
@@ -132,6 +132,12 @@ class NewsItem < ActiveRecord::Base
 
   def pitch?
     is_a?(Pitch)
+  end
+  
+  def comment_subscribers
+    author = user.notify_comments ? [user] : nil
+    comment_subscribers = comments.map(&:user).find_all{|user| user.notify_comments}.uniq
+    (author + comment_subscribers).uniq
   end
 
 end

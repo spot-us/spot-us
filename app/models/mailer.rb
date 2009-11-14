@@ -68,11 +68,18 @@ class Mailer < ActionMailer::Base
   
   def blog_posted_notification(post)
     recipients '"David Cohn" <david@spot.us>'
-    #bcc post.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
     bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).join(', ')
     from       MAIL_FROM_INFO
     subject    "Spot.Us Blog Update: '#{post.pitch.headline}'"
     body       :post => post
+  end
+  
+  def comment_notification(comment)
+    recipients '"David Cohn" <david@spot.us>'
+    bcc (comment.commentable.comment_subscribers - [comment.user]).map(&:email).join(", ")
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us Blog Update: '#{comment.commentable.headline}'"
+    body       :comment => comment
   end
   
   def story_to_editor_notification(story,send_to)

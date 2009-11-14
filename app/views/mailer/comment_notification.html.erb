@@ -1,0 +1,12 @@
+Hello,
+
+There is a new comment by <%= @comment.user.full_name %> on the <%= @comment.commentable.type.to_s.downcase %> "<%=h @comment.commentable.headline %>" on Spot.Us.
+
+Check it out at <%= news_item_url(@comment.commentable) %>
+
+You can opt to stop receiving comment notifications by visiting your settings page <%= root_url + "myspot/settings/edit" %>
+
+If you have questions or concerns - please contact: David@spot.us
+
+Sincerely,
+Spot.Us Team
