@@ -4,6 +4,11 @@ class Comment < ActiveRecord::Base
 
   validates_presence_of :title, :body
   validates_length_of :body, :maximum => 2000
+  after_create :send_notification
+  
+  def send_notification
+    Mailer.deliver_comment_notification(self)
+  end
 end
 
 # == Schema Information
