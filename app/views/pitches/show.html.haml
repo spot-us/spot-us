@@ -1,5 +1,11 @@
 - content_for :head do
   = auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'blog_posts', :id => @pitch.id, :format => 'rss'})
+  - javascript_tag do
+    jQuery(document).ready(function($){
+    jQuery("#show_action_items").click(function(){
+    jQuery.facebox(jQuery("#action_buttons").html());
+    });
+    });
 - @title = "Spot.us - Pitch: #{h @pitch.headline}"
 
 .block-spacer

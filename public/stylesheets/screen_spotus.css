@@ -1195,3 +1195,6 @@ a.prev{
   font-weight: bold;
 }
 .progress_bar_container{width:120px;margin-right:10px;float:left}
+#action_buttons_container{
+	padding:5px;
+}
