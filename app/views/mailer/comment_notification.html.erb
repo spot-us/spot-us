@@ -1,6 +1,6 @@
 Hello,
 
-There is a new comment by <%= @comment.user.full_name %> on the <%= @comment.commentable.type.to_s.downcase %> "<%=h @comment.commentable.headline %>" on Spot.Us.
+There is a new comment by <%= @comment.user.full_name %> on the <%= @comment.commentable.type.to_s.downcase %> "<%=h @comment.commentable.headline %>" at Spot.Us.
 
 Check it out at <%= news_item_url(@comment.commentable) %>
 
