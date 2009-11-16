@@ -1,23 +1,26 @@
 - if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)
-  .block-spacer-negative
-- if pitch.approvable_by?(current_user)
-  - if pitch.unapproved?
-    .centered= link_to image_tag("approve.gif"), approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"
-  - elsif pitch.active?
-    .centered= link_to image_tag("unapprove.gif"), unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"
+  .centered= link_to image_tag("action_items.png"), "#", :title => "Action Items", :id => "show_action_items"
+#action_buttons.hide
+  #action_buttons_container.clearfix
+    %h3 Action Items
+    - if pitch.approvable_by?(current_user)
+      - if pitch.unapproved?
+        .centered= link_to image_tag("approve.gif"), approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"
+      - elsif pitch.active?
+        .centered= link_to image_tag("unapprove.gif"), unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"
 
-- if pitch.editable_by?(current_user)
-  .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch), :title => "Edit This Pitch"
-- if pitch.featureable_by?(current_user)
-  - if pitch.featured?
-    .centered= link_to image_tag('un-feature.gif'), unfeature_pitch_path(pitch), :method => :put, :title => "Un-Feature"
-  - else
-    .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :put, :title => "Feature This Pitch"
-- if pitch.postable_by?(current_user)
-  = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"
-- if pitch.story && pitch.fact_checker == current_user
-  = link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"
-- if pitch.fully_funded? && current_user == pitch.user
-  = link_to image_tag('report.gif'), edit_story_path(pitch.story), :title => "Report"
-- if !pitch.fully_funded? && current_user == pitch.user
-  = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"
+    - if pitch.editable_by?(current_user)
+      .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch), :title => "Edit This Pitch"
+    - if pitch.featureable_by?(current_user)
+      - if pitch.featured?
+        .centered= link_to image_tag('un-feature.gif'), unfeature_pitch_path(pitch), :method => :put, :title => "Un-Feature"
+      - else
+        .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :put, :title => "Feature This Pitch"
+    - if pitch.postable_by?(current_user)
+      = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"
+    - if pitch.story && pitch.fact_checker == current_user
+      = link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"
+    - if pitch.fully_funded? && current_user == pitch.user
+      = link_to image_tag('report.gif'), edit_story_path(pitch.story), :title => "Report"
+    - if !pitch.fully_funded? && current_user == pitch.user
+      = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"
