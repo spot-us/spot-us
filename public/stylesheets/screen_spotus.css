@@ -212,11 +212,15 @@ body {
   float: left;
 }
 #header .la.logo {
-  background: url(/images/spotus_header_logo_la.jpg) no-repeat;
+  background: url(/images/spotus_header_logo.jpg) no-repeat;
   width: 382px;
   height: 31px;
   overflow: hidden;
   float: left;
+}
+img.usc_logo{
+	vertical-align:top;
+	margin-left:20px;
 }
 #header .logo-link {
   width: 222px;
@@ -1198,3 +1202,11 @@ a.prev{
 #action_buttons_container{
 	padding:5px;
 }
+input#watcher_email{
+	width:213px;
+	color:#aaa;
+}
+.margin_bottom_0{margin-bottom:0;}
+.margin_bottom_5{margin-bottom:5px;}
+.input_default_text{color:#aaa;}
+.padding_60{padding:60px;}

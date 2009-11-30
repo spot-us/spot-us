@@ -60,7 +60,7 @@ class Mailer < ActionMailer::Base
 
   def pitch_accepted_notification(pitch)
     recipients '"David Cohn" <david@spot.us>'
-    bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(pitch.subscribers.map(&:email)).uniq.join(', ')
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Success!! Your Story is Funded!"
     body       :pitch => pitch
@@ -68,7 +68,7 @@ class Mailer < ActionMailer::Base
   
   def blog_posted_notification(post)
     recipients '"David Cohn" <david@spot.us>'
-    bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).concat(post.pitch.subscribers.map(&:email)).uniq.join(', ')
     from       MAIL_FROM_INFO
     subject    "Spot.Us Blog Update: '#{post.pitch.headline}'"
     body       :post => post
@@ -99,7 +99,7 @@ class Mailer < ActionMailer::Base
   
   def story_published_notification(story, send_to)
     recipients send_to
-    bcc story.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).join(', ')
+    bcc story.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(story.pitch.subscribers.map(&:email)).uniq.join(', ')
     from       MAIL_FROM_INFO
     subject    "Spot.Us Story Published: '#{story.headline}'"
     body       :story => story
@@ -152,5 +152,12 @@ class Mailer < ActionMailer::Base
     from        MAIL_FROM_INFO
     subject     "Spot.Us: Thank You for Donating!"
     body        :donation => donation
+  end
+  
+  def confirm_subscription(subscriber)
+    recipients  subscriber.email
+    from        MAIL_FROM_INFO
+    subject     "Spot.Us: Subscription to '#{subscriber.pitch.headline}' confirmation required"
+    body        :subscriber => subscriber
   end
 end
