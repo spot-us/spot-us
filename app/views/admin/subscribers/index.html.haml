@@ -1,0 +1,21 @@
+%h1 Subscribers
+.box
+  %table.admin_subcribers
+    %th Email
+    %th Pitch
+    %th Status
+    %th Action
+    
+    - for subscriber in @subscribers
+      %tr
+        %td= subscriber.email
+        %td= subscriber.pitch.headline
+        %td= subscriber.status
+        %td
+          =link_to 'Delete', admin_subscriber_path(subscriber), :confirm => 'Are you sure?', :method => :delete
+          |
+          =link_to 'Confirm', root_url + "subscription/confirm/" + subscriber.invite_token
+          |
+          =link_to 'Cancel', root_url + "subscription/cancel/" + subscriber.invite_token
+
+  = will_paginate @comments

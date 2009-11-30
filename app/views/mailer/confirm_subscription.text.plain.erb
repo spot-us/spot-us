@@ -1,0 +1,21 @@
+Hello,
+
+Please click the link below to complete your subscription to receive email updates to the Spot.Us story:
+
+"<%= @subscriber.pitch.headline %>"
+
+Subscription confirmation link:
+
+<%= root_url + "subscription/confirm/" + @subscriber.invite_token %>
+
+If you ever want to unsubscribe from receiving email updates click this link:
+
+Subscription cancelation link:
+
+<%= root_url + "subscription/cancel/" + @subscriber.invite_token %>
+
+Thanks for your interest in Spot.Us.
+
+Sincerely,
+David Cohn
+Spot.Us
