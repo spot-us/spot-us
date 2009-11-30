@@ -108,8 +108,9 @@ class Pitch < NewsItem
             :uniq => true
             
   has_many :supporters, :through => :donations_and_credits, :source => :user, :order => "donations.created_at", :uniq => true
-  has_many :blog_subscribers, :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
-            :order => "donations.created_at", :uniq => true
+  has_many :blog_subscribers, :select => "users.email", :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
+           :order => "donations.created_at", :uniq => true
+  has_many :subscribers, :conditions => "subscribers.status = 'subscribed'"
   has_many :posts, :order => "created_at desc", :dependent => :destroy do
     def first(number)
       find(:all, :limit => number, :order => 'created_at DESC')
@@ -122,7 +123,6 @@ class Pitch < NewsItem
   end
   has_many :contributors, :through => :contributor_applications, :source => :user, :conditions => ['contributor_applications.approved = ?', true]
   has_many :contributor_applicants, :through => :contributor_applications, :source => :user
-
   has_one :story, :foreign_key => 'news_item_id', :dependent => :destroy
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
