@@ -1,0 +1,34 @@
+- @title = "Spot.us - #{h @assignment.title} - Pitch: #{h @assignment.pitch.headline}"
+
+.block-spacer
+#equalize
+  .span-455.box_white
+    %h2.headline
+      %strong= h @assignment.title
+    .double_content_border
+    = render :partial => 'shared/user', :locals => { :user => @assignment.user }
+    .double_content_border.clear
+    %h2.headline
+      Related pitch
+    .pitch_summary
+      .float-left
+        = link_to image_tag(@assignment.pitch.featured_image.url(:thumb)), pitch_url(@assignment.pitch)
+      %h2
+        = link_to @assignment.pitch.headline, pitch_url(@assignment.pitch)
+    .block-spacer-negative
+    .double_content_border
+    = @assignment.body
+    .double_content_border
+    = @assignment.media_embed
+  .span-220.column_v.box_white
+    = render :partial => "donations/button", :locals => { :news_item => @assignment.pitch }
+    .block-spacer-negative
+    - if @assignment.pitch.assignable_by?(current_user)
+      = link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@assignment.pitch, @assignment)
+    = render :partial => 'pitches/assignments', :locals => {:pitch => @assignment.pitch}
+    .block-spacer-negative
+    = render :partial => 'pitches/keywords', :locals => {:pitch => @assignment.pitch}
+  .span-160.box_white
+    = render :partial => "news_items/organizational_supporters", :locals => {:news_item => @assignment.pitch}
+    = render :partial => "pitches/group_supporters", :locals => {:news_item => @assignment.pitch}
+    = render :partial => "pitches/supporters", :locals => {:news_item => @assignment.pitch}
