@@ -116,6 +116,8 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
+  has_many :assignments, :order => "created_at desc", :dependent => :delete_all\
+  
   has_many :contributor_applications do
     def unapproved
       find_all_by_approved(false)
@@ -162,6 +164,11 @@ class Pitch < NewsItem
   def postable_by?(other_user)
     return false if other_user.nil?
     user == other_user || other_user.admin? || other_user == fact_checker || contributors.include?(other_user)
+  end
+  
+  def assignable_by?(other_user)
+    return false if other_user.nil?
+    user == other_user || other_user.admin?
   end
 
   def approvable_by?(current_user)
@@ -312,6 +319,10 @@ class Pitch < NewsItem
 
   def has_more_posts_than(number)
     posts.size > number
+  end
+  
+  def has_more_assignments_than(number)
+    assignments.size > number
   end
 
   def donating_groups

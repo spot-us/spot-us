@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
     pitch.resources :posts
+    pitch.resources :assignments
   end
   
   # facebook acct link

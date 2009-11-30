@@ -1,0 +1,5 @@
+.block-spacer
+%h3== Edit this assignment for #{@pitch.headline}
+.span-715.box_white
+  - form_for([@pitch, @assignment]) do |f|
+    = render :partial => 'form', :locals => {:f => f}

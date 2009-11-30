@@ -1,0 +1,9 @@
+%h3
+  = assignment.title
+.reg-line-height.date.quiet= assignment.created_at
+.double_content_border
+.post_body
+  = truncate_words(assignment.body, 50)
+.read_more
+  = link_to "Read More", pitch_assignment_path(assignment.pitch, assignment)
+.block-spacer-negative
