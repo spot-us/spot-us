@@ -1,0 +1,11 @@
+- if pitch.assignments.any?
+  .block-spacer-negative
+  %h3 Assignments
+  .double_content_border
+  - pitch.assignments.first(5).each do |assignment|
+    %h4.reg-line-height
+      = link_to h(assignment.title), pitch_assignment_path(pitch, assignment)
+    .reg-line-height.small.quiet= assignment.created_at.to_s(:date)
+    .body= truncate_words(strip_tags(assignment.body), 20)
+  - if pitch.has_more_assignments_than(5)
+    = link_to "View all", pitch_assignments_path(pitch)
