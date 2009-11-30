@@ -8,6 +8,9 @@
     });
 - @title = "Spot.us - Pitch: #{h @pitch.headline}"
 
+- if @subscriber && @subscriber.errors.any?
+  .error
+    = error_messages_for :subscriber
 .block-spacer
 #equalize
   .span-455.box_white
@@ -107,6 +110,8 @@
           - else
             = facebox_login_link_to(image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team')
           = link_to "what's this?", page_path('about') + '#join_the_team'
+    .block-spacer-negative
+    = render :partial => 'subscriber_form', :locals => {:pitch => @pitch}
     .block-spacer-negative
     %h3 Related Tips
     .double_content_border

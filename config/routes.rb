@@ -7,6 +7,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
+  map.resources :subscribers
+  
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
     pitch.resources :posts
   end
@@ -15,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   #map.resources :users, :collection => {:link_user_accounts => :get}
   map.connect "users/link_user_accounts", :controller => "users", :action => "link_user_accounts"
   map.connect "search", :controller => "pages", :action => "search_results"
+  map.connect "subscription/confirm/:id", :controller => "subscribers", :action => "confirm"
+  map.connect "subscription/cancel/:id", :controller => "subscribers", :action => "cancel"
   
   # TODO: remove when done
   map.resources :ui
@@ -41,6 +45,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put, :approve_blogger => :put, :unapprove_blogger => :put }
     admin.resources :tips
     admin.resources :comments
+    admin.resources :subscribers
     admin.resources :site_options
     admin.resources :networks
     admin.resources :groups
