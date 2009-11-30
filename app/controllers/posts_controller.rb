@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
 
   response_for :create do |format|
-    #new_post = Post.find(params[:id])
     @post.blog_posted_notification
     format.html do
       if resource_saved?
