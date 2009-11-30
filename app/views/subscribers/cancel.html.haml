@@ -1,0 +1,15 @@
+- @title = "Spot.us - Subscription Canceled"
+.block-spacer
+.home-boxer
+  .box_white.padding_60
+    - if @subscriber
+      %h3 You're subscription has been canceled.
+      %h3 You will no longer receive updates to the Spot.Us pitch:
+      %h2
+        = link_to '"' + @subscriber.pitch.headline + '"', pitch_path(@subscriber.pitch)
+      To subscribe again click
+      = link_to "subscribe", root_url + "subscription/confirm/" + @subscriber.invite_token
+    - else
+      %h3
+        Sorry, we can't find this subscription. Please check the subscription link in your email.
+.block-spacer

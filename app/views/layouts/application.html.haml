@@ -10,7 +10,7 @@
       .container
         = render :partial => 'layouts/header'
         .block-spacer-negative.no_margin
-        .box_white
+        .box_white.clearfix
           - if @current_network.nil?
             All Networks
           - else
@@ -21,6 +21,8 @@
               = link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase
             - else
               = network.display_name
+          - if @current_network && @current_network.name == "sfbay"
+            = image_tag("/images/usc_logo.png", :class => "usc_logo")
           .span-360
             = render :partial => "shared/google_search"
         - if yield(:error)

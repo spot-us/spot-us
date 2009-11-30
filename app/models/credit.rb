@@ -13,16 +13,6 @@
 
 class Credit < ActiveRecord::Base
   belongs_to :user
-
   validates_presence_of :user_id, :description, :amount
-  
-  # def self.total_credit(user)
-  #     sum(:amount, :conditions => "user_id = #{user.id}")
-  # end
-  
-  # def self.remaining_credit(user)
-  #     allocated = CreditPitch.sum(:amount, :conditions => "user_id = #{user.id}")
-  #     total_credit(user) - allocated
-  # end
 end
 

@@ -1,0 +1,16 @@
+- content_for :head do
+  - javascript_tag do
+    jQuery(document).ready(function($){
+    jQuery("#subscriber_email").attr("value", "email address");
+    jQuery("#subscriber_email").focus(function(){
+    if($(this).attr("value") == "email address"){
+    $(this).attr("value","").css({"color":"#333"});
+    }
+    });
+    });
+.clearfix
+  %h5.margin_bottom_0 Watch this story
+  - form_for Subscriber.new(:pitch => pitch), :url => subscribers_path do |f|
+    = f.text_field :email, :value => "email address", :id => "subscriber_email", :class => "margin_bottom_5 input_default_text"
+    = f.hidden_field :pitch_id
+    = f.submit "send me updates", :class=>"float-right"
