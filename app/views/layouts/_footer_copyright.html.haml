@@ -5,10 +5,10 @@
     %li= link_to "About", page_path('about')
     %li= link_to "Blog", 'http://blog.spot.us'
     %li= link_to "Press", page_path('press')
+    %li= link_to "Media Partners", page_path('media_partners')
     %li= link_to "Contact", page_path('contact')
-    %li.no-pipe= link_to "Terms of Use", page_path('terms')
-    %li.no-pipe and
-    %li.no-pipe= link_to "Privacy Policy", page_path('privacy')
+    %li= link_to "Terms of Use", page_path('terms')
+    %li.no-pipe= link_to "Privacy", page_path('privacy')
   %p== Copyright &copy; #{Time.now.year} Spot.us
   = render :partial => 'layouts/partners'
   .clear
