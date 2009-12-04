@@ -132,6 +132,28 @@ class Mailer < ActionMailer::Base
     subject    "Spot.Us: We received your application!"
     body       :pitch => pitch
   end
+  
+  def assignment_application_notification(mail)
+    recipients [mail[:assignment].user.email,mail[:contributor].email].join(",")
+    bcc        '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Assignment assignment application: " + mail[:assignment].pitch.headline
+    body       mail
+  end
+  
+  def assignment_application_accepted_notification(assignment, user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Assignment application accepted!"
+    body       :assignment => assignment
+  end
+  
+  def assignment_application_rejected_notification(assignment, user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Assignment application rejected!"
+    body       :assignment => assignment
+  end
 
   def story_ready_notification(story)
     recipients '"David Cohn" <david@spot.us>'
