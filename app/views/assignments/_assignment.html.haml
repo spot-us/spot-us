@@ -1,9 +1,16 @@
-%h3
-  = assignment.title
-.reg-line-height.date.quiet= assignment.created_at
-.double_content_border
-.post_body
-  = truncate_words(assignment.body, 50)
-.read_more
-  = link_to "Read More", pitch_assignment_path(assignment.pitch, assignment)
-.block-spacer-negative
+.assignment
+  %h3
+    = assignment.title
+  .reg-line-height.date.quiet= assignment.created_at
+  .double_content_border
+  .post_body
+    = truncate_words(assignment.body, 50)
+  .read_more
+    = link_to "Read More", pitch_assignment_path(assignment.pitch, assignment)
+  .apply
+    - if current_user != assignment.user
+      - if current_user && assignment.contributors.include?(current_user)
+        %em applied to
+      - else
+        = link_to("Apply to contribute", process_application_pitch_assignment_path(assignment.pitch, assignment), :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
+  .double_content_border

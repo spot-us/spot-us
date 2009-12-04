@@ -4,6 +4,7 @@
 #equalize
   .span-455.box_white
     %h2.headline
+      Assignment:
       %strong= h @assignment.title
     .double_content_border
     = render :partial => 'shared/user', :locals => { :user => @assignment.user }
@@ -18,8 +19,60 @@
     .block-spacer-negative
     .double_content_border
     = @assignment.body
-    .double_content_border
-    = @assignment.media_embed
+    - if !@assignment.media_embed.blank?
+      .double_content_border
+      = @assignment.media_embed
+    - if @assignment.accepted_contributors.any?
+      .double_content_border
+      %h4 Contributors:
+      .contributor
+        - @assignment.accepted_contributors.each do |contributor|
+          = image_tag contributor.photo.url(:thumb), :width => "28"
+          = contributor.full_name
+    - if current_user != @assignment.user
+      .double_content_border
+      .apply
+        - if current_user && @assignment.accepted_contributors.include?(current_user)
+          %em You have been accepted as a contributor to this assignment.
+        - elsif current_user && @assignment.rejected_contributors.include?(current_user)
+          %em You have been rejected as a contributor to this assignment.
+        - elsif current_user &&  @assignment.contributors.include?(current_user)
+          %em You have applied to contribute to this assignment.
+        - else
+          = link_to("Apply to contribute", process_application_pitch_assignment_path(@assignment.pitch, @assignment), :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
+    - if @assignment.user == current_user
+      .double_content_border
+      #assignments_admin
+        %h5 Assignment Admin
+        %em 
+          status
+          = @assignment.status
+        - if @assignment.status == "open"
+          %p= link_to "close assignment", close_assignment_pitch_assignment_path(@assignment.pitch, @assignment), :confirm => "Close assignment?"
+        - elsif @assignment.status == "closed"
+          %p= link_to "re-open assignment", open_assignment_pitch_assignment_path(@assignment.pitch, @assignment), :confirm => "Re-open assignment?"
+        - if @assignment.contributors.any? and @assignment.status == "open"
+          %h5 Contribuor Applications
+          %table.assignment_admin{:width => "100%"}
+            %tr
+              %th name
+              %th status
+              %th.actions actions
+            - @assignment.applications.each do |application|
+              %tr
+                %td.name
+                  = application.contributor.full_name
+                %td.status
+                  %em= application.status
+                %td.actions
+                  - if application.status == "pending"
+                    = link_to "accept", "/assignment/#{@assignment.id}/application/accept/#{application.id}", :confirm => "Accept contributor?"
+                    |
+                    = link_to "reject", "/assignment/#{@assignment.id}/application/reject/#{application.id}", :confirm => "Reject contributor?"
+                  - elsif application.status == "accepted"
+                    = link_to "reject", "/assignment/#{@assignment.id}/application/reject/#{application.id}", :confirm => "Reject contributor?"
+                  - elsif application.status == "rejected"
+                    = link_to "accept", "/assignment/#{@assignment.id}/application/accept/#{application.id}", :confirm => "Accept contributor?"       
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @assignment.pitch }
     .block-spacer-negative
