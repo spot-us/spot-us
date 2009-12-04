@@ -1210,3 +1210,11 @@ input#watcher_email{
 .margin_bottom_5{margin-bottom:5px;}
 .input_default_text{color:#aaa;}
 .padding_60{padding:60px;}
+#assignments .assignment{
+	padding:10px;background:#eee;
+	margin-bottom:5px;
+}
+#assignments_admin{ background:#eee;padding:10px;}
+#assignments_admin h5{margin-bottom:5px;}
+table.assignment_admin td.name{width:200px;}
+table.assignment_admin td.actions, table.assignment_admin th.actions{text-align:right;}
