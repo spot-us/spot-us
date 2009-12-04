@@ -116,8 +116,7 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
-  has_many :assignments, :order => "created_at desc", :dependent => :delete_all\
-  
+  has_many :assignments, :order => "created_at desc", :dependent => :delete_all
   has_many :contributor_applications do
     def unapproved
       find_all_by_approved(false)
@@ -129,7 +128,7 @@ class Pitch < NewsItem
 
   belongs_to :fact_checker, :class_name => 'User', :foreign_key => 'fact_checker_id'
 
-  after_create :send_admin_notification
+  after_create :send_admin_notification, :create_peer_editor_assignment
   after_save :check_if_funded_state, :dispatch_fact_checker
 
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
@@ -163,7 +162,7 @@ class Pitch < NewsItem
 
   def postable_by?(other_user)
     return false if other_user.nil?
-    user == other_user || other_user.admin? || other_user == fact_checker || contributors.include?(other_user)
+    user == other_user || other_user.admin? || other_user == fact_checker || assignments.map{|a| a.accepted_contributors}.flatten.include?(other_user)
   end
   
   def assignable_by?(other_user)
@@ -346,6 +345,13 @@ class Pitch < NewsItem
 
   def create_associated_story
     self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
+  end
+  
+  def create_peer_editor_assignment
+    Assignment.create(:pitch_id => self.id, :user_id => self.user.id, :title =>"Apply to be Peer Review Editor ", 
+                      :body => ["The Peer-Review editor has three main responsibilities – to ensure fair and accurate reporting, ",
+                      "to be a second pair of eyes before a story is published and to be a sounding board as the reporter develops a story.",
+                      " At any time the Peer-Review editor can also report suspicious activities to Spot.Us."].join(""))
   end
 
   def send_fund_notification

@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
     pitch.resources :posts
-    pitch.resources :assignments
+    pitch.resources :assignments, :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
   end
   
   # facebook acct link
@@ -20,7 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "search", :controller => "pages", :action => "search_results"
   map.connect "subscription/confirm/:id", :controller => "subscribers", :action => "confirm"
   map.connect "subscription/cancel/:id", :controller => "subscribers", :action => "cancel"
-  
+  map.connect "/assignment/:assignment_id/application/accept/:id", :controller => "assignments", :action => "accept_application"
+  map.connect "/assignment/:assignment_id/application/reject/:id", :controller => "assignments", :action => "reject_application"
   # TODO: remove when done
   map.resources :ui
 

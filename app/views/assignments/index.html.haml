@@ -13,8 +13,14 @@
         = link_to image_tag(@pitch.featured_image.url(:thumb)), pitch_url(@pitch)
       %h2
         = link_to @pitch.headline, pitch_url(@pitch)
-    .block-spacer-negative
-    = render :partial => @pitch.assignments
+    .block-spacer-negative    
+    %h2 Assignments
+    .double_content_border
+    #assignments
+      - if current_user && current_user == @pitch.user
+        = render :partial => @pitch.assignments 
+      - else
+        = render :partial => @pitch.assignments.open
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     .block-spacer-negative
