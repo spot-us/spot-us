@@ -7,7 +7,8 @@
     Spot.Us is a nonprofit project of the 
     == #{link_to "Center for Media Change", "http://www.CenterforMediaChange.com/"} 
     and funded by various groups like the 
-    == #{link_to "Knight Foundation", "http://www.knightfoundation.org/"}. 
+    == #{link_to "Knight Foundation", "http://www.knightfoundation.org/"}.
+    We partner with various organizations including the Annenberg School of Communications in Los Angeles.
   %p
     We are an open source project, to pioneer &ldquo;community funded reporting.&rdquo; Through
     Spot.Us the public can commission journalists to do reporting on important and perhaps
@@ -47,7 +48,9 @@
   %strong
     %ul
       %li
-        = link_to "Our Community Advisory Board", page_path("who", :anchor => "community_advisory_board")
+        = link_to "Our Bay Area Community Advisory Board", page_path("who", :anchor => "bay_community_advisory_board")
+      %li
+        = link_to "Our Los Angeles Community Advisory Board", page_path("who", :anchor => "la_community_advisory_board")
       %li
         = link_to "Board of journalism/media advisors", page_path("who", :anchor => "media_advisory_board")
       %li
@@ -283,8 +286,9 @@
   %a{:name => "mandatory"}
   %h3 Agreement to Work with Spot.Us and Pricing Guidlines.
   %p
-    We've created a picing guidline based on competitive rates for freelancers. This also includes the "reporters agreement" that explains the working relationship between 
-    Spot.Us and the reporter.
+    We've created a pricing guidline based on competitive rates for freelancers. This also includes
+    the "reporters agreement" that explains the working relationship between Spot.Us and the
+    reporter.
   %p 
     == #{link_to "Required Reading", page_path("reporter_agreement"),:style => "color: red;"}   
   %p
