@@ -379,13 +379,21 @@ class User < ActiveRecord::Base
   end
 
   def max_donation_for(pitch)
+    @max_dontation_for ||= calculate_max_donation(pitch)
+  end
+  
+  def calculate_max_donation(pitch)
     pitch.max_donation_amount(self) - pitch.donations.total_amount_for_user(self)
   end
 
   def can_donate_to?(pitch)
+    @can_donate_to ||= check_can_donate_to(pitch)
+  end
+  
+  def check_can_donate_to(pitch)
     pitch.donations.total_amount_for_user(self) < pitch.max_donation_amount(self)
   end
-
+  
   # TODO: remove after updating all models with amount
   def unpaid_donations_sum_in_cents
     donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
