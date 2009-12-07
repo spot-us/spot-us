@@ -39,6 +39,7 @@
 #
 
 class Pitch < NewsItem
+  # extend ActiveSupport::Memoizable
   aasm_initial_state  :unapproved
 
   aasm_state :unapproved
@@ -273,10 +274,18 @@ class Pitch < NewsItem
   end
 
   def total_amount_donated
+    @total_amount_donated ||= calculate_total_amount_donated
+  end
+  
+  def calculate_total_amount_donated
     donations.paid.map(&:amount).sum + credit_pitches.paid.map(&:amount).sum
   end
   
   def total_amount_allocated_by_user(user)
+    @total_ammount_allocated ||= calculate_total_amount_allocated_by_user(user)
+  end
+  
+  def calculate_total_amount_allocated_by_user(us)
     donations.by_user(user).map(&:amount).sum + credit_pitches.by_user(user).map(&:amount).sum
   end
 
