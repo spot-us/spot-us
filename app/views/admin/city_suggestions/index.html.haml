@@ -1,0 +1,17 @@
+%h1 City Suggestions
+.box
+  %table#city_suggestions
+    %th City
+    %th Email
+    %th Created
+    %th Action
+    
+    - for suggestion in @city_suggestions
+      %tr
+        %td= suggestion.city
+        %td= suggestion.email
+        %td= suggestion.created_at.to_s(:date)
+        %td
+          =link_to 'Delete', admin_city_suggestion_path(suggestion), :confirm => 'Are you sure?', :method => :delete
+
+  = will_paginate @city_suggestions
