@@ -1,3 +1,13 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#networks_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 Networks
 .networks
   - @networks.each do |network|
     .network
@@ -6,4 +16,5 @@
         = network.name
       == (#{network.display_name})
 %p
+%hr
   = link_to 'New network', new_admin_network_path

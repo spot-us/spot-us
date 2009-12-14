@@ -1,3 +1,12 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#pitches_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
 %h1 Pitches
 .box
   %table.admin_pitches
