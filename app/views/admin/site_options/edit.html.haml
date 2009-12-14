@@ -1,3 +1,12 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#site_options_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
 - form_for([:admin, @site_option]) do |f|
   = f.label :value
   = fckeditor_textarea("site_option", "value", :toolbarSet => 'Spotus', :width => '500')

@@ -1,3 +1,14 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#users_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 View user
+
 %p
   %b
     Email:
