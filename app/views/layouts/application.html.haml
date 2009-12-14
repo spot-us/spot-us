@@ -22,7 +22,9 @@
             - else
               = network.display_name
           - if @current_network && @current_network.name == "la"
-            = image_tag("/images/usc_logo.png", :class => "usc_logo")
+            = image_tag("/images/usc_logo.png", :class => "usc_logo")       
+          = link_to "suggest a city ...", "", :id => "show_suggest_city"
+          = render :partial => "shared/suggest_city"
           .span-360
             = render :partial => "shared/google_search"
         - if yield(:error)
