@@ -1,3 +1,12 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#tips_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
 %h1 Tips
 .box
   %table
@@ -10,9 +19,7 @@
     
     - for tip in @tips
       %tr
-        %td
-          Tip:
-          = link_to h(tip.headline), tip_url(tip)
+        %td= link_to h(tip.headline), tip_url(tip)
         %td= tip.created_at.to_s(:date)
         %td= tip.network_and_category
         %td= number_to_currency(tip.total_amount_pledged)
