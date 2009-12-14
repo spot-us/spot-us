@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function($){	
   $('#equalize').equalHeights();
   $(document).pngFix();
   $("select[name=news_item_type]").change(refreshSortOrder);
@@ -16,6 +16,13 @@ jQuery(document).ready(function($){
     btnPrev: ".prev",
     visible: 1
   });
+
+
+  $("#show_suggest_city").click(function(){
+  	$.facebox($("#suggest_city").html());
+		return false;
+  });
+ 
 
 });
 

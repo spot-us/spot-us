@@ -1208,7 +1208,9 @@ input#watcher_email{
 }
 .margin_bottom_0{margin-bottom:0;}
 .margin_bottom_5{margin-bottom:5px;}
+a#show_suggest_city{margin-left:40px;color:#C6004A;font-size:.9em;font-style:italic;}
 .input_default_text{color:#aaa;}
+.padding_40{padding:40px;}
 .padding_60{padding:60px;}
 #assignments .assignment{
 	padding:10px;background:#eee;
@@ -1216,5 +1218,6 @@ input#watcher_email{
 }
 #assignments_admin{ background:#eee;padding:10px;}
 #assignments_admin h5{margin-bottom:5px;}
+
 table.assignment_admin td.name{width:200px;}
 table.assignment_admin td.actions, table.assignment_admin th.actions{text-align:right;}
