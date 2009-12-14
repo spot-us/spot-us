@@ -38,3 +38,13 @@ table.admin_pitches tr td form input.delete_button {
   border: 1px solid #990000;
   text-transform: uppercase;
 }
+#admin_header{
+	border-bottom:solid 1px #ddd;
+	margin: 20px 0;
+}
+.widen{margin:0 10px;color:#999;}
+.tab{padding:4px 8px 2px;background:#f3f3f3;}
+a.tab{text-decoration:none;color:darkred;}
+.hilited{background:#ddd;}
+label{display:block;margin-bottom:20px;}
+input[type="text"]{margin:3px 0 15px;}

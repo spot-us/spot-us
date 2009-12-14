@@ -1,5 +1,14 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#users_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
 %h1
-  Editing user
+  Edit user
 - form_for(:user, :url => admin_user_path(@user), :html => {:method => :put}) do |f|
   = f.error_messages
   %p
