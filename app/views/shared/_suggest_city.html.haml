@@ -1,0 +1,13 @@
+#suggest_city.hide
+  - form_for CitySuggestion.new, :html => {:class => "padding_40"} do |f|
+    %h2 Suggest a City, State
+    .row
+      %label suggest a city
+    .row
+      = f.text_field :city
+    .row
+      %label enter your email address
+    .row
+      = f.text_field :email
+    = image_submit_tag "submit.png", :alt => "Submit suggestion", :title => "Submit suggestion"
+    
