@@ -86,6 +86,10 @@ h4.title {
   margin: 0px;
   font-weight: bold;
 }
+h2.headline{
+	width:370px;
+	min-height:55px;
+}
 .float_left {
   float: left;
 }
@@ -95,6 +99,7 @@ h4.title {
 .box_white {
   background: #fff;
   padding: 10px;
+	position:relative;
 }
 .container h3, .container h2 {
   margin: 0 0 10px 0;
@@ -818,6 +823,22 @@ div.featured_image .caption {
 }
 div.users {
   position:relative;
+	min-height:70px;
+}
+div.users div.creator{
+  width:390px;
+}
+div.users div.tweet_meme{
+	position:absolute;
+	right:0;
+	top:0;
+	width:50px;
+}
+.box_white div.tweet_meme{
+	position:absolute;
+	right:10px;
+	top:10px;
+	width:50px;
 }
 div.user_news_item_info {
   margin: 0 0 0 60px;
