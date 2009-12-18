@@ -5,12 +5,15 @@
   .span-455.box_white
     %h2.headline
       %strong= h @post.title
+    .tweet_meme
+      = javascript_tag "tweetmeme_source = 'spot-us';"
+      = javascript_include_tag "http://tweetmeme.com/i/scripts/button.js"
     .double_content_border
     = render :partial => 'shared/user', :locals => { :user => @post.user }
     .double_content_border.clear
     %h2.headline
       Related pitch
-    .pitch_summary
+    .pitch_summary.clearfix
       .float-left
         = link_to image_tag(@post.pitch.featured_image.url(:thumb)), pitch_url(@post.pitch)
       %h2
