@@ -15,6 +15,9 @@
         %span.quiet Filed under
         = show_topics(news_item)
         == in the #{news_item.network.display_name} network.
+  .tweet_meme
+    = javascript_tag "tweetmeme_source = 'spot-us';"
+    = javascript_include_tag "http://tweetmeme.com/i/scripts/button.js"
   - if news_item.peer_reviewer
     %br/
     %hr/
