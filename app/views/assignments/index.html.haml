@@ -8,7 +8,7 @@
     = render :partial => 'news_items/user', :locals => { :news_item => @pitch }
     %h2.headline
       Related pitch
-    .pitch_summary
+    .pitch_summary.clearfix
       .float-left
         = link_to image_tag(@pitch.featured_image.url(:thumb)), pitch_url(@pitch)
       %h2
@@ -19,8 +19,11 @@
     #assignments
       - if current_user && current_user == @pitch.user
         = render :partial => @pitch.assignments 
-      - else
+      - elsif @pitch.assignments.open.any?
         = render :partial => @pitch.assignments.open
+      - else
+        This pitch has no assignments.
+    %br  
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }
     .block-spacer-negative
