@@ -6,7 +6,7 @@
     %h2.headline
       %strong= h @post.title
     .tweet_meme
-      = javascript_tag "tweetmeme_source = 'spot-us';"
+      = javascript_tag "tweetmeme_source = 'spotus';"
       = javascript_include_tag "http://tweetmeme.com/i/scripts/button.js"
     .double_content_border
     = render :partial => 'shared/user', :locals => { :user => @post.user }
