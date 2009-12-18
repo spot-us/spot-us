@@ -102,16 +102,15 @@
           .block-spacer-negative
           .show_support
             = link_to image_tag('show_support.gif', :alt => 'Show Support'), show_support_pitch_path(@pitch), :method => :put, :title => 'Show Support'
-      - if current_user != @pitch.user or !current_user
-        .block-spacer-negative
-        .apply_to_contribute
-          - if @pitch.contributor_applicants.include?(current_user)
-            = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
-          - else
-            =# facebox_login_link_to(image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team')
-            = link_to(image_tag('apply_to_contribute.gif'), pitch_assignments_path(@pitch), :title => 'Join Reporting Team')
-          .whats_this= link_to "what's this?", page_path('about') + '#join_the_team'
-          = link_to(pluralize(@pitch.assignments.size, "assignments"), pitch_assignments_path(@pitch)) if @pitch.assignments.any?
+      .block-spacer-negative
+      .apply_to_contribute
+        - if @pitch.contributor_applicants.include?(current_user)
+          = image_tag 'applied_to_contribute.gif', :class => 'applied_to_fact_check', :title => 'Applied to Join'
+        - else
+          =# facebox_login_link_to(image_tag('apply_to_contribute.gif'), apply_to_contribute_pitch_path(@pitch), :title => 'Join Reporting Team')
+          = link_to(image_tag('apply_to_contribute.gif'), pitch_assignments_path(@pitch), :title => 'Join Reporting Team')
+        .whats_this= link_to "what's this?", page_path('about') + '#join_the_team'
+        = link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch))
     .block-spacer-negative
     = render :partial => 'subscriber_form', :locals => {:pitch => @pitch}
     .block-spacer-negative
@@ -130,7 +129,6 @@
       .double_content_border
       = @pitch.license
     = render :partial => 'posts', :locals => {:pitch => @pitch}
-    .block-spacer-negative
     = render :partial => 'assignments', :locals => {:pitch => @pitch}
     .block-spacer-negative
     = render :partial => 'keywords', :locals => {:pitch => @pitch}
