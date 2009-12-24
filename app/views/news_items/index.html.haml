@@ -29,7 +29,17 @@
         = image_submit_tag image_path('search_button.png')
     %hr.space
     .double_content_border.clear
-
+    - if @channels.any?
+      #channels.clearfix
+        - @channels.each do |channel|
+          - if channel == @channel
+            .channel.selected
+              =link_to image_tag(channel.channel_image(:thumb)), channel_path(channel)
+              =channel.description
+          - else
+            .channel
+              =link_to image_tag(channel.channel_image(:thumb)), channel_path(channel)
+              =channel.description
     - if @news_items.blank?
       .box_white
         %p
