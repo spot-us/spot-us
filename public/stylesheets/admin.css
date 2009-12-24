@@ -46,5 +46,6 @@ table.admin_pitches tr td form input.delete_button {
 .tab{padding:4px 8px 2px;background:#f3f3f3;}
 a.tab{text-decoration:none;color:darkred;}
 .hilited{background:#ddd;}
+.inline{display:inline;}
 label{display:block;margin-bottom:20px;}
 input[type="text"]{margin:3px 0 15px;}
