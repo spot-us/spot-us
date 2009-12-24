@@ -5,7 +5,7 @@ class NewsItemsController < ApplicationController
   before_filter :select_tab, :only => [:index, :search]
 
   def index
-    
+    @channels = Channel.by_network(current_network)
     respond_to do |format|
       format.rss do
         @news_items = NewsItem.newest.first(10)

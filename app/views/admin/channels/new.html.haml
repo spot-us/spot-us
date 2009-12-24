@@ -2,14 +2,13 @@
   :javascript
     $(function(){
       $(".tab").removeClass("hilited");
-      $("#groups_tab").addClass("hilited");
+      $("#channels_tab").addClass("hilited");
     });
 
 = render :partial => "/admin/admin_header"
 
-%h1 Edit Group
+%h1 New Channel
 .flash.error
-  = error_messages_for :group
-- form_for [:admin, @group], :html => { :multipart => true } do |f|
+  = error_messages_for :channel
+- form_for [:admin, @channel], :html => { :multipart => true } do |f|
   = render :partial => 'form', :locals => {:f => f}
-

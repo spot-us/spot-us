@@ -1219,6 +1219,11 @@ a.prev{
   color:#990000;
   font-weight: bold;
 }
+#channels .channel{width:100px;height:80px;float:left;font-size:10px;padding:5px;border:solid 1px #999;-moz-border-radius:5px;-webkit-border-radius:5px;
+									 text-align:center;margin-right:10px;}
+#channels .channel img{display:block;margin: 0 auto;}
+#channels .channel.selected{background:#eee;}
+
 .progress_bar_container{width:120px;margin-right:10px;float:left}
 #action_buttons_container{
 	padding:5px;

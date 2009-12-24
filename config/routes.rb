@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :subscribers
+  map.resources :channels
   map.resources :city_suggestions
   
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
@@ -23,6 +24,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "subscription/cancel/:id", :controller => "subscribers", :action => "cancel"
   map.connect "/assignment/:assignment_id/application/accept/:id", :controller => "assignments", :action => "accept_application"
   map.connect "/assignment/:assignment_id/application/reject/:id", :controller => "assignments", :action => "reject_application"
+  map.connect "/admin/channels/:id/add_pitch/:pitch_id", :controller => "admin/channels", :action => "add_pitch"
+  map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
   # TODO: remove when done
   map.resources :ui
 
@@ -53,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :site_options
     admin.resources :networks
     admin.resources :groups
+    admin.resources :channels
   end
 
   map.namespace :myspot do |myspot|
