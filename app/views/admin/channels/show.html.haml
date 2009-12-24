@@ -1,0 +1,35 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#channels_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1.inline
+  %em= @channel.title
+= image_tag(@channel.channel_image(:thumb))
+
+%hr
+%h3 Channel Pitches
+%hr
+- if !@channel.pitches.any?
+  there are no pitches in this channel yet
+%table{:style=>"width:500px"}
+  - @channel.pitches.each do |pitch|
+    %tr
+      %td= pitch.headline
+      %td= pitch.network.name
+      %td{:style=>"text-align:right"}= link_to "Remove", "/admin/channels/" + @channel.id.to_s + "/remove_pitch/" + pitch.id.to_s
+%br
+%hr
+%h3 Add Pitch To Channel
+%hr
+%table{:style=>"width:500px"}
+  - @selectable_pitches.each do |pitch|
+    %tr
+      %td= pitch.headline
+      %td= pitch.network.name
+      %td{:style=>"text-align:right"}= link_to "Add", "/admin/channels/" + @channel.id.to_s + "/add_pitch/" + pitch.id.to_s
+  

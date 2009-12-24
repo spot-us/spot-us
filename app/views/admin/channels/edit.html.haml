@@ -1,0 +1,14 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#channels_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 Edit Channel
+.flash.error
+  = error_messages_for :channel
+- form_for [:admin, @channel], :html => { :multipart => true } do |f|
+  = render :partial => 'form', :locals => {:f => f}
