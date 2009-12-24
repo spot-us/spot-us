@@ -1,0 +1,21 @@
+.field
+  = f.label :title
+.field
+  = f.text_field :title
+.field
+  = f.label :Hilited?
+.field
+  = check_box("channel", "status", {}, "hilited", "")
+  
+%br/
+.field
+  = f.label :description
+.field
+  = f.text_field :description
+.field
+  = f.label :channel_image
+.field
+  = image_tag @channel.channel_image.url(:thumb) if params[:action] = "edit"
+  = f.file_field :channel_image
+%br/
+= f.submit

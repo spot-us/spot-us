@@ -1,0 +1,33 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".tab").removeClass("hilited");
+      $("#channels_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 channels
+
+.box
+  %table
+    %tr
+      %th Icon
+      %th Title
+      %th Description
+      %th Status
+      %th Pitches
+      %th Action
+    - @channels.each do |channel|
+      %tr
+        %td=image_tag channel.channel_image.url(:thumb)
+        %td=h channel.title
+        %td=truncate_words(channel.description, 30)
+        %td=channel.status
+        %td=link_to "Manage Pitches", admin_channel_path(channel)
+        %td
+          =link_to 'Edit', edit_admin_channel_path(channel)
+          |
+          =link_to 'Destroy', admin_channel_path(channel), :confirm => 'Are you sure?', :method => :delete
+
+= link_to "New", new_admin_channel_path
