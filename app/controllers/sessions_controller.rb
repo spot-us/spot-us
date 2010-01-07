@@ -15,23 +15,16 @@ class SessionsController < ApplicationController
 
   def create
     self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
-    logger.info("User: #{self.current_user}")
     if params[:link_facebook] == "true"
       self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
     end
     if logged_in?
        
-      logger.info('1')
       handle_remember_me
-      logger.info('2')
       create_current_login_cookie
-      logger.info('3')
       update_balance_cookie
-      logger.info('4')
       handle_first_donation_for_non_logged_in_user
-      logger.info('5')
       handle_first_pledge_for_non_logged_in_user
-      logger.info('6')
      
       if request.xhr?
         render :nothing => true
@@ -39,7 +32,6 @@ class SessionsController < ApplicationController
         redirect_back_or_default('/')
       end
     else
-      logger.info('Not logged in! Weird!')
       @user = User.new
       if request.xhr?
         set_ajax_flash(:error, 'Invalid email or password.')
