@@ -345,6 +345,10 @@ class Pitch < NewsItem
     "#{id}-#{to_s.parameterize}"
   end
 
+  def send_edited_notification
+    Mailer.deliver_pitch_edited_notification(self) if self.approved?
+  end
+  
   protected
 
   def do_fund_events
@@ -375,10 +379,6 @@ class Pitch < NewsItem
     Mailer.deliver_pitch_approved_notification(self)
   end
 
-  def send_edited_notification
-    Mailer.deliver_pitch_edited_notification(self) if self.approved?
-  end
-  
   def expiration_date_cannot_be_in_the_past 
    errors.add(:expiration_date, "can't be in the past") if  !expiration_date.blank? and expiration_date < Date.today 
   end 
