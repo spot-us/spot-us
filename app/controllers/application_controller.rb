@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_facebook_session
   helper_method :facebook_session
-  after_filter :minify_html
+  after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
   # minify the html
   def minify_html
