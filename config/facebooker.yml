@@ -39,7 +39,7 @@ staging:
   api_key: fa0a51420700dc645f6acde214395ddc
   secret_key: c5fb41d223c153e2347560827d6bc82d
   canvas_page_name: 
-  callback_url: http://spotus.hrvab.com/
+  callback_url: http://www.spotreporting.com/
   set_asset_host_to_callback_url: false   
   tunnel:
     public_host_username: 
