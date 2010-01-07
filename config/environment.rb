@@ -46,7 +46,7 @@ SubdomainFu.tld_sizes = { :development => 1,
                           :production => 1 }
 
 # These are the subdomains that will be equivalent to no subdomain
-SubdomainFu.mirrors = %w(www spotus)
+SubdomainFu.mirrors = %w(www spotus spotreporting)
 
 # This is the "preferred mirror" if you would rather show this subdomain
 # in the URL than no subdomain at all.
