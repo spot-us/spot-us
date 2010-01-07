@@ -346,7 +346,7 @@ class Pitch < NewsItem
   end
 
   def send_edited_notification
-    Mailer.deliver_pitch_edited_notification(self) if self.approved?
+    Mailer.deliver_pitch_edited_notification(self) if active?
   end
   
   protected
