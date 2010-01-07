@@ -62,7 +62,7 @@ class Pitch < NewsItem
   aasm_event :accept do
     transitions :from => [:unapproved, :active], :to => :accepted, :on_transition => :do_fund_events
   end
-
+  
   validates_presence_of :requested_amount
   validates_presence_of :short_description
   validates_presence_of :extended_description
@@ -157,7 +157,7 @@ class Pitch < NewsItem
     if user.nil?
       false
     else
-      ((self.user == user) && (donations.paid.blank? && (unapproved? || active?))) || user.admin?
+      ((self.user == user) && ((unapproved? || active?))) || user.admin? #&& (donations.paid.blank? 
     end
   end
 
@@ -374,9 +374,13 @@ class Pitch < NewsItem
   def send_approved_notification
     Mailer.deliver_pitch_approved_notification(self)
   end
+
+  def send_edited_notification
+    Mailer.deliver_pitch_edited_notification(self) if self.approved?
+  end
   
-   def expiration_date_cannot_be_in_the_past 
-     errors.add(:expiration_date, "can't be in the past") if  !expiration_date.blank? and expiration_date < Date.today 
-   end 
+  def expiration_date_cannot_be_in_the_past 
+   errors.add(:expiration_date, "can't be in the past") if  !expiration_date.blank? and expiration_date < Date.today 
+  end 
 end
 
