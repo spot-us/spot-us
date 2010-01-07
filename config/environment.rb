@@ -42,7 +42,7 @@ ActionController::Base.session_options[:domain] = DEFAULT_HOST
 # for each of your environments  
 SubdomainFu.tld_sizes = { :development => 1,
                           :test => 1,
-                          :staging => 2,
+                          :staging => 1,
                           :production => 1 }
 
 # These are the subdomains that will be equivalent to no subdomain
