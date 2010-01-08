@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="logo">
+    <p>
+      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Funded Reporting</span><br /><img src="/images/new_design/usc.png" /></a>
+    </p>
+  </div>
+  <ul id="main-nav">
+     <li class="suggest_story<%=check_if_tab("suggest_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/suggest-a-story.jpg", 
+                     :width=>"111", :height=>"98", :alt=>"suggest"), new_tip_path %></li>
+     <li class="start_story<%=check_if_tab("start_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", 
+                     :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %></li>
+     <li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>"><%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), news_items_path %></li>
+     <li class="read_story<%=check_if_tab("stories",@selected_tab)%>"><%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), stories_path %></li>
+   </ul>
+   <!-- REFACTOR how to use -->
+   <div class="howtouse">
+	   <span class="header">How to Use Spot.Us</span><br />
+      <span>&bull; To fund a pitch<br />
+         &bull; To create a pitch<br />
+         &bull; As a news publisher</span><br /><br />
+      <div style="margin-top:-12px;"> <div class="roundedcornr_box_807323">
+         <div class="roundedcornr_top_807323"><div></div></div>
+         <div class="roundedcornr_content_807323">
+            Media Partners
+         </div>
+         <div class="roundedcornr_bottom_807323"><div></div></div>
+      </div></div>
+      <div style="margin-top:2px;">
+         <div class="roundedcornr_box_807323">
+            <div class="roundedcornr_top_807323"><div></div></div>
+            <div class="roundedcornr_content_807323">
+               About Spot.Us
+            </div>
+            <div class="roundedcornr_bottom_807323"><div></div></div>
+         </div>
+      </div>
+      <br />
+      </p>
+   </div>
+  </div>
+</div>

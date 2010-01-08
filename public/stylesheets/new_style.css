@@ -1,0 +1,53 @@
+body{margin:0;}
+a{text-decoration:none;}
+ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
+
+/*rounded courners*/
+.roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
+.roundedcornr_top_807323 div {background: url(/images/new_design/roundedcornr_807323_tl.png) no-repeat top left;   
+			margin:0px;padding:0px;}
+.roundedcornr_top_807323 {background: url(/images/new_design/roundedcornr_807323_tr.png) no-repeat top right;   
+			margin:0px;padding:0px;}
+.roundedcornr_bottom_807323 div {background: url(/images/new_design/roundedcornr_807323_bl.png) no-repeat bottom left;
+			margin:0px;padding:0px;}
+.roundedcornr_bottom_807323 {background: url(/images/new_design/roundedcornr_807323_br.png) no-repeat bottom right;
+			margin:0px;padding:0px;}
+.roundedcornr_top_807323 div,.roundedcornr_top_807323,.roundedcornr_bottom_807323 div,.roundedcornr_bottom_807323 
+			{width: 100%;height: 5px;font-size: 1px;}
+.roundedcornr_content_807323 { margin: 0 5px; }
+
+#header {background-color:#E3EEEF;height:170px;}
+.container {text-align:left;margin:auto;padding:0 15px;width:1020px;}
+#header .logo {background:transparent url(/images/new_design/spotus-logo.jpg) no-repeat scroll 0 0;float:left;
+			margin-left:-10px;margin-top:52px;width:285px;}
+#header .logo-link {display:block;height:31px;width:222px;}
+#header .nav-container {background:transparent url(/images/new_design/spotus_nav_bg.gif) no-repeat scroll 0 bottom;float:right;
+			height:26px;width:506px;}
+#header ul#main-nav {margin: 25px 0 0 50px;float:left;width:540px;}
+#header ul#main-nav li {display:inline;}
+#header div.howtouse {width:150px;height:100px;font: bold 11px verdana, arial, sans-serif;letter-spacing:-1px;color: #11363e;float:left;
+			margin-top:40px;font-family:Arial, Helvetica, sans-serif;font-size:11pt;vertical-align:text-top;}
+#header .howtouse .header{font-family:Arial, Helvetica, sans-serif;font-size:12pt;font-weight:bolder;color: #398c9f;line-height:10pt;}
+#header div.howtouse span{line-height:13pt;}
+#header-bar {background-color:#11363E;height:5px;width:100%;}
+#networks-nav{background-color:#E3EEEF;}
+#networks-nav div.inner{width:1074px;margin:0 auto;height:20px;}
+#networks-nav ul{display:inline;font-family:verdana;margin:0;font-size:11px;font-weight:bolder;text-transform:uppercase;}
+#networks-nav ul li{display:inline;}
+#networks-nav ul li a{color:#567680;background-color:#A2BBC3;padding:3px 4px;}
+#networks-nav ul li a.selected, #networks-nav ul li a.selected:hover{color:#fff;background-color:#11363E;}
+#networks-nav ul li a:hover{background-color:#fff;}
+#networks-nav form, #networks-nav form div {display:inline;margin:0;}
+
+#footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
+	display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
+}
+
+#user-header {background-color:#11363e;color: #fff;padding:0 10px;height:26px;}
+#user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
+#user-header .newsletter {padding: 3px;padding-right:15px;font-size:10px;float:right;}
+#user-header ul.user-header-nav {margin:0;color:#ccc;float:left;}
+#user-header ul.user-header-nav li {line-height: 24px;height: 24px;}
+#user-header ul.user-header-nav li a {vertical-align: middle;}
+
+#footer a, #user-header a {color:#FFFFFF;text-decoration:none;}
