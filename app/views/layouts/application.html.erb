@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0015)http://spot.us/ -->
+<html>
+<%= render :partial => 'layouts/head' %>
+ <body class="<%= body_class %>">
+    <%= fb_connect_javascript_tag %>
+    <%= init_fb_connect "XFBML" %>
+    <div id="user-header">
+       <%= render :partial => 'layouts/user_header' %>
+    </div>
+    <div id="header" class="clearfix">
+       <%= render :partial => "layouts/header" %>
+    </div>
+   <div id="networks-nav">
+      <div class="inner">
+         <ul id="tabnav">
+            <% if @current_network.nil? %>
+               <li><%= link_to "All Networks", root_url(:subdomain => false), :class => "selected" %></li>
+            <% else %>
+               <li><%= link_to "All Networks", root_url(:subdomain => false) %></li>
+            <% end %>
+            <% Network.all.each do |network| %>
+               <li><%= link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase %></li>
+            <% end %>
+            <li><%= link_to "suggest a city ...", "", :id => "show_suggest_city"%></li>
+            <%= render :partial => "shared/suggest_city"%>
+         </ul>
+         <%= render :partial => "shared/google_search" %>
+      </div>
+    </div>
+    <div id="header-bar"> </div>
+    <% if yield(:error) %>
+      <div class="error">
+         <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
+         <p><%= yield(:error)%></p>
+      </div>
+    <% end %>
+    <div id="flash">
+       <% flash.each do |key, value| %>
+         <div class="<%=key%>">
+            <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
+            <p><%= value%></p>
+         </div>
+       <% end %>
+    </div>
+    <%= yield %>
+    <div class="clear"/>
+    <div id="footer">
+      <%= render :partial => 'layouts/footer' %>
+    </div>
+    <%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
+ </body>
+</html>
