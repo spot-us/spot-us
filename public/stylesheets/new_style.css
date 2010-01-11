@@ -1,7 +1,26 @@
+/*html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+border:0 none;
+font-family:inherit;
+font-size:100%;
+font-style:inherit;
+font-weight:inherit;
+margin:0;
+padding:0;
+vertical-align:baseline;
+}*/
 body{margin:0;}
-a{text-decoration:none;}
+p + p {margin:0;text-indent:0;}
+a{text-decoration:none;color:#11363E;}
+a:focus, a:hover {color:#748F98;}
 ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
-
+h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;}
+h2 {font-size:2em;margin-bottom:0.75em;}
+h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
+a.arrow {display:block;height:80px;line-height:80px;}
+.float-left{float:left;}
+.float-right{float:right;}
+.quiet{color:#11363E;}
+.small{font-size:0.8em;line-height:1.875em;margin-bottom:1.875em;}
 /*rounded courners*/
 .roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
 .roundedcornr_top_807323 div {background: url(/images/new_design/roundedcornr_807323_tl.png) no-repeat top left;   
@@ -23,7 +42,7 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 #header .logo-link {display:block;height:31px;width:222px;}
 #header .nav-container {background:transparent url(/images/new_design/spotus_nav_bg.gif) no-repeat scroll 0 bottom;float:right;
 			height:26px;width:506px;}
-#header ul#main-nav {margin: 25px 0 0 50px;float:left;width:540px;}
+#header ul#main-nav {margin: 25px 0 0 50px;float:left;width:545px;}
 #header ul#main-nav li {display:inline;}
 #header div.howtouse {width:150px;height:100px;font: bold 11px verdana, arial, sans-serif;letter-spacing:-1px;color: #11363e;float:left;
 			margin-top:40px;font-family:Arial, Helvetica, sans-serif;font-size:11pt;vertical-align:text-top;}
@@ -31,7 +50,7 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 #header div.howtouse span{line-height:13pt;}
 #header-bar {background-color:#11363E;height:5px;width:100%;}
 #networks-nav{background-color:#E3EEEF;}
-#networks-nav div.inner{width:1074px;margin:0 auto;height:20px;}
+#networks-nav div.inner{width:1063px;margin:0 auto;height:20px;}
 #networks-nav ul{display:inline;font-family:verdana;margin:0;font-size:11px;font-weight:bolder;text-transform:uppercase;}
 #networks-nav ul li{display:inline;}
 #networks-nav ul li a{color:#567680;background-color:#A2BBC3;padding:3px 4px;}
@@ -39,6 +58,36 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 #networks-nav ul li a:hover{background-color:#fff;}
 #networks-nav form, #networks-nav form div {display:inline;margin:0;}
 
+.body-content {background:transparent url(/images/new_design/main-content-bg.jpg) repeat-y scroll 0 0;margin:0 auto;padding:0 10px;width:1066px;min-height:500px;}
+.home-boxer{margin-left:20px;}
+.home-boxer h1 {color:#617D86;float:left;font-family:Arial,Helvetica,sans-serif;font-size:23pt;font-weight:bold;letter-spacing:-1pt;margin-bottom:10px;}
+.home-boxer #main-area.home-floater{width:595px;float:left;}
+.home-floater {padding:20px 15px 15px;margin-right:23px;}
+.stories-in-progress{float:right;width:338px;background:#eee;}
+.stories-in-progress ul{margin:0;padding:0 15px 0 3px;}
+.stories-in-progress ul li.post img{display:block;width:300px;height:163px;}
+p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;letter-spacing:0;line-height:13px;text-transform:uppercase;
+				margin-bottom:1.5em;}
+#folded-headers-short {background-image:url(/images/new_design/banner-small.png);background-repeat:no-repeat;color:#FFFFFF;float:right;
+			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-right:-56px;margin-top:10px;padding:5px;
+			text-transform:uppercase;width:412px;}
+#folded-headers {
+			background-image:url(/images/new_design/banner.png);background-repeat:no-repeat;clear:both;color:#FFFFFF;float:left;
+			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-left:-65px;margin-top:30px;
+			padding:5px;text-transform:uppercase;width:652px;}
+#header-container {margin-left:60px;}
+#header-container-short {margin-left:40px;}			
+#help-images{margin-bottom:15px;}
+
+div#pitches_carousel{background-color:#E3EEEF;border:6px solid #11363E;height:383px;margin-left:0;padding:5px;vertical-align:text-top;}
+div#pitches_carousel li{width:515px;padding:10px;}
+div#pitches_carousel li .left-column {float:left;width:220px;}
+div#pitches_carousel li .left-column img{margin-bottom:20px;}
+div#pitches_carousel li .right-column {float:right;width:280px;}
+div#pitches_carousel h3{margin-bottom:10px;}
+.dateline{font-size:.8em;margin-bottom:5px;}
+#next {float:right;vertical-align:top;width:19px;}
+#prev {float:left;vertical-align:top;width:19px;}
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 	display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
@@ -51,3 +100,5 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 #user-header ul.user-header-nav li a {vertical-align: middle;}
 
 #footer a, #user-header a {color:#FFFFFF;text-decoration:none;}
+
+
