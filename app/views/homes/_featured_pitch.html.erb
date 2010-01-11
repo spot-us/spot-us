@@ -1,0 +1,18 @@
+<li class="pitch_carousel">
+  <div class="left-column">
+    <%= link_to image_tag(featured_pitch.featured_image.url(:medium), :class => "featured_image"), featured_pitch %>
+    <%= render :partial => 'donations/button', :locals => { :news_item => featured_pitch } %>
+  </div>
+ 
+  <div class="right-column">
+    <h3><%= link_to h(featured_pitch.headline), featured_pitch %></h3>
+    <div class="dateline quiet">
+      <%= short_date(featured_pitch.created_at) %> by <%= link_to h(featured_pitch.user.full_name), profile_path(featured_pitch.user) %>
+      in <%= featured_pitch.network_and_category %>
+    </div>
+    <p>
+      <%= truncate_words(strip_html(featured_pitch.short_description), 50) %>
+      <%= link_to 'Read More &raquo;', featured_pitch %>
+    </p>
+  </div>
+</li>
