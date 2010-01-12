@@ -17,6 +17,12 @@ jQuery(document).ready(function($){
     visible: 1
   });
 
+	$("#stories_carousel").jCarouselLite({
+    btnNext: ".next_story",
+    btnPrev: ".prev_story",
+    visible: 2
+  });
+
 
   $("#show_suggest_city").click(function(){
   	$.facebox($("#suggest_city").html());
