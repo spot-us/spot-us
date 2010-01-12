@@ -16,7 +16,7 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;}
 h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
-a.arrow {display:block;height:80px;line-height:80px;}
+a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .float-left{float:left;}
 .float-right{float:right;}
 .quiet{color:#11363E;}
@@ -85,6 +85,9 @@ div#pitches_carousel li .left-column {float:left;width:220px;}
 div#pitches_carousel li .left-column img{margin-bottom:20px;}
 div#pitches_carousel li .right-column {float:right;width:280px;}
 div#pitches_carousel h3{margin-bottom:10px;}
+div#stories_carousel li {width:258px;padding:0 5px;}
+.story_carousel h2{color:#617D86;font-family:Arial,Helvetica,sans-serif;font-size:18pt;font-weight:bold;letter-spacing:-1pt;line-height:19pt;}
+.story_carousel img.featured_image{width:268px;height:210px;}
 .dateline{font-size:.8em;margin-bottom:5px;}
 #next {float:right;vertical-align:top;width:19px;}
 #prev {float:left;vertical-align:top;width:19px;}

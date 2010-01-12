@@ -19,7 +19,6 @@
          <% end %>
          </ul>
       </div>
-      
       <div id="main-area" class="home-floater">
          <h1>Community Funded Journalism</h1>
          <div id="help-images">
@@ -37,7 +36,22 @@
          </div>
          <div id="pitches_carousel">
             <ul>
-                <%= render :collection => @featured, :partial => 'featured_pitch' %>
+                <%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
+            </ul>
+         </div>
+         <div id="folded-headers">
+            <div id="header-container">Recently Published</div>
+         </div>
+         <div style="clear: both;"/>
+         <div id="next_story">
+            <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next_story arrow float-right" %>
+         </div>
+         <div id="prev_story">
+            <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev_story arrow float-left" %>
+         </div>
+         <div id="stories_carousel">
+            <ul>
+                <%= render :collection => @featured_stories, :partial => 'featured_story' %>
             </ul>
          </div>
       </div>
