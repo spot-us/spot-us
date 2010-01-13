@@ -1,0 +1,19 @@
+%h2 My Spot
+
+= render :partial => "myspot/nav"
+
+.span-715.box_white
+  = render :partial => "myspot/dashboard_nav"
+  %table.tips
+    %tr
+      %th.tip_header Comment
+      %th.created_header Created
+    %tr
+      %td{:colspan => 4}
+        .double_content_border
+    = render :partial => "myspot/comments/comment", :collection => @comments, :spacer_template => "myspot/comments/comment_spacer"
+  .double_content_border
+
+
+.span-160.box_white
+  = render :partial => "layouts/common_questions"
