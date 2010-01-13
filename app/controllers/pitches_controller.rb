@@ -13,7 +13,7 @@ class PitchesController < ApplicationController
   def index
     redirect_to(news_items_path)
   end
-
+  
   def apply_to_contribute
     pitch = find_resource
     pitch.apply_to_contribute(current_user)
@@ -25,6 +25,10 @@ class PitchesController < ApplicationController
     pitch = find_resource
     pitch.feature!
     redirect_to pitch_path(pitch)
+  end
+
+  def feature
+    pitch = find_resource
   end
 
   def unfeature
