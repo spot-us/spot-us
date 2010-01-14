@@ -59,7 +59,8 @@ class Organization < User
   end
 
   def full_name
-    organization_name || [first_name, last_name].join(' ')
+    return organization_name if organization_name
+    [first_name, last_name].join(' ')
   end
   
   def deliver_signup_notification
