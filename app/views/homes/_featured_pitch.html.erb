@@ -11,12 +11,12 @@
       in <%= featured_pitch.network_and_category %>
     </div>
     <p>
-      <%= truncate_words(strip_html(featured_pitch.short_description), 50) %>
+      <%= truncate_words(strip_html(featured_pitch.short_description), 40) %>
       <%= link_to 'Read More &raquo;', featured_pitch %>
     </p>
     <% if featured_pitch.supporters.any? %>
        <h6>SUPPORTERS</h6>
-       <% featured_pitch.supporters.each do |supporter| %>
+       <% featured_pitch.supporters[0..9].each do |supporter| %>
          <%= link_to image_tag(supporter.photo(:thumb), :class => "supporter"), profile_path(supporter) %>
        <% end %>
     <% end %>
