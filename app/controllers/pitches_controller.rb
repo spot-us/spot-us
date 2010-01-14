@@ -6,6 +6,7 @@ class PitchesController < ApplicationController
   before_filter :select_tab, :only => [:new]
   after_filter :send_edited_notification, :only => [:update]
 
+  layout "widget", :only=>:widget
   resources_controller_for :pitch
 
   bounce_bots(:send_bots, :pitch, :blog_url)
@@ -35,6 +36,10 @@ class PitchesController < ApplicationController
     pitch = find_resource
     pitch.unfeature!
     redirect_to pitch_path(pitch)
+  end
+
+  def widget
+    @pitch = find_resource
   end
 
   def show_support
