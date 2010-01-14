@@ -1,0 +1,117 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'blog_posts', :id => @pitch.id, :format => 'rss'}) %>
+  <script>
+    jQuery(document).ready(function($){
+       jQuery("#show_action_items").click(function(){
+          jQuery.facebox(jQuery("#action_buttons").html());
+       });
+       jQuery(".tab").click(function(){
+          //alert();
+          $(this).parent().parent().parent().find(".tab_panel").hide();
+          $("." + $(this).attr("id")).show();
+          $(this).parent().parent().find(".tab").removeClass("active");
+          $(this).addClass("active");
+          return false;
+       });
+    });
+  </script>
+<% end %>
+<% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
+
+<% if @subscriber && @subscriber.errors.any? %>
+  <div class="error">
+    <%= error_messages_for :subscriber %>
+  </div>
+<% end %>
+
+<div id="pitch">
+   <div id="pitch_header">
+      <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
+      <h2 class="headline"><%= h @pitch.headline %></h2>
+   </div>
+   <div class="right-column">
+      <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
+   </div>
+   <div class="main-column">
+      <div class="folded-headers-big">
+         <div id="pitch_author">
+            <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
+            <h4>Author</h4>
+            <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
+         </div>
+      </div>
+      <% unless @pitch.video_embed.blank? %>
+         <div class="media-box">
+            <h3>Multimedia</h3>
+            <div class="align-center">
+               <%= @pitch.video_embed %>
+            </div>
+         </div>
+      <% end %>
+      <div id="pitch_info">
+         <div>
+            <ul class="tabs">
+               <li><a id="description_tab" href="" class="tab active">Description</a></li>
+               <li><a id="how_tab" href="" class="tab">How will it help?</a></li>
+               <li><a id="story_tab" href="" class="tab">Story updates</a></li>
+               <li><a id="comments_tab" href="" class="tab">Comments (<%=@pitch.comments.size%>)</a></li>
+            </ul>
+            <div class="description_tab tab_panel clearfix">
+               <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
+               <%= @pitch.short_description %>
+            </div>
+            <div class="how_tab tab_panel hide">
+               <%= @pitch.extended_description %>
+            </div>
+            <div class="story_tab tab_panel hide">
+               <h2>Story Updates</h2>
+               <% if @pitch.posts.any? %>
+                  <ul>
+                  <% @pitch.posts.each do |post| %>
+                     <li>
+                        <h4 class="title"><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h4>
+                        <div class="date"><%= medium_date(post.created_at) %></div>
+                        <%= truncate_words(strip_html(post.body), 20) %>
+                     </li>
+                  <% end %>
+                  </ul>
+               <% else %>
+                  <p>
+                     <em>This story has no blog posts.</em>
+                  </p>
+               <% end %>
+            </div>
+            <div class="comments_tab tab_panel hide">
+               <ul>
+               <% @pitch.comments.each do |comment| %>
+                  <li>
+                     <h5><%= comment.title %></h5>
+                     <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
+                     <div class="comment"><%= comment.body %>
+                        by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
+                     </div>
+                  </li>
+               <% end %>
+               </ul>
+            </div>
+         </div>
+         <br/><br/>
+         <div>
+            <ul class="tabs">
+               <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
+               <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
+               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
+            </ul>
+            <div class="qualifications_tab tab_panel">
+               <%= h @pitch.skills %>
+            </div>
+            <div class="deliverables_tab tab_panel hide">
+               <%= h @pitch.delivery_description %>
+            </div>
+            <div class="assignments_tab tab_panel hide">
+               <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

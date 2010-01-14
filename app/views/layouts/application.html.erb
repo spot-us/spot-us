@@ -43,10 +43,12 @@
          </div>
        <% end %>
     </div>
-    <%= yield %>
-    <div class="clear"/>
-    <div id="footer">
-      <%= render :partial => 'layouts/footer' %>
+    <div class="body-content">
+      <%= yield %>
+       <div class="clear"></div>
+       <div id="footer">
+         <%= render :partial => 'layouts/footer' %>
+      </div>
     </div>
     <%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
  </body>
