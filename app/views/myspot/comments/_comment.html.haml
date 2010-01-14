@@ -3,4 +3,6 @@
     Comment:
     = comment.title
     = comment.body
+    Commented on:
+    = link_to h(comment.commentable.headline), pitch_url(comment.commentable)
   %td.created= comment.created_at.to_s(:date)
