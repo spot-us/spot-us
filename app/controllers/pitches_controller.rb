@@ -6,6 +6,7 @@ class PitchesController < ApplicationController
   before_filter :select_tab, :only => [:new]
   after_filter :send_edited_notification, :only => [:update]
 
+  layout "application", :except=>:widget
   layout "widget", :only=>:widget
   resources_controller_for :pitch
 
