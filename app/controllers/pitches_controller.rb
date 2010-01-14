@@ -6,8 +6,6 @@ class PitchesController < ApplicationController
   before_filter :select_tab, :only => [:new]
   after_filter :send_edited_notification, :only => [:update]
 
-  layout "application", :except=>:widget
-  layout "widget", :only=>:widget
   resources_controller_for :pitch
 
   bounce_bots(:send_bots, :pitch, :blog_url)
@@ -41,6 +39,7 @@ class PitchesController < ApplicationController
 
   def widget
     @pitch = find_resource
+    render :layout => "widget"
   end
 
   def show_support
