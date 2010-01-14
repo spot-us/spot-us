@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
     pitch.resources :posts
     pitch.resources :assignments, :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
   end
+  map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
