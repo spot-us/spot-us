@@ -8,7 +8,8 @@ class NewsItemsController < ApplicationController
     @channels = Channel.by_network(current_network)
     respond_to do |format|
       format.rss do
-        @news_items = NewsItem.newest.first(10)
+        #@news_items = NewsItem.newest.first(10)
+        get_news_items(10)
         render :layout => false
       end
       format.html do
@@ -31,11 +32,15 @@ class NewsItemsController < ApplicationController
 
   protected
 
-  def get_news_items
+  def get_news_items(limit=nil)
     model_name = params[:news_item_type]
     model_name = 'pitches' unless %w(tips pitches news_items).include?(model_name)
     model = model_name.classify.constantize
-    @news_items = model.approved.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).paginate(:page => params[:page])
+    unless limit
+      @news_items = model.approved.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).paginate(:page => params[:page])
+    else
+      @news_items = model.approved.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).find(:all,:limit=>limit)
+    end
   end
 
   def load_networks
