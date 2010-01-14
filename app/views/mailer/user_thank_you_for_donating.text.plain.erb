@@ -1,6 +1,6 @@
 <%= @donation.user.full_name %>,
 
-Thank you for donating to <%= @donation.pitch.headline %> 
+Thank you for donating <strong>$<%= @donation.amount.to_i%></strong> to <%= @donation.pitch.headline %> 
 at <%= pitch_url(@donation.pitch) %>!
 
 Your contribution is a powerful gesture and will help us fund this 
