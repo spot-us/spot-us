@@ -107,5 +107,9 @@ module ApplicationHelper
       #    dt.strftime("%l:%M %p").downcase
       # end
   end
+  
+  def medium_date(dt)
+    dt.strftime("%B %d, %Y")
+  end
 
 end
