@@ -75,6 +75,7 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :purchases, :collection => {:paypal_return => :get, :paypal_ipn => :post}
     myspot.resources :tips
     myspot.resources :comments
+    myspot.resources :assignments
   end
 
   map.connect '*path', :controller => 'homes', :action => 'show'
