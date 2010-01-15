@@ -7,4 +7,5 @@
     %li= link_to "Blog Posts (#{current_user.posts.count})", myspot_posts_path, :id => "dashboard_posts_tab"
     %li= link_to "Tips (#{current_user.tips.count})",      myspot_tips_path,      :id => "dashboard_tips_tab"
     %li= link_to "Comments (#{current_user.comments.count})",     	myspot_comments_path,      :id => "dashboard_comments_tab"
+    %li= link_to "Assignments (#{current_user.assignments.count})",     	myspot_assignments_path,      :id => "dashboard_assignments_tab"
 .clear

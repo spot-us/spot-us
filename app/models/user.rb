@@ -90,6 +90,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :samples
   has_many :credits
+  has_many :assignments
 
   has_many :comments
   has_many :contributor_applications
