@@ -1,0 +1,9 @@
+%tr
+  %td.tip
+    %p
+      Assignment:
+      = assignment.title
+      = assignment.body
+    Assignment associated with:
+    = link_to h(assignment.pitch.headline), pitch_url(assignment.pitch)
+  %td.created= assignment.created_at.to_s(:date)
