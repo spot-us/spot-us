@@ -1,0 +1,38 @@
+<% content_for :head do %>
+  <%= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss'}) %>
+ <% end %>
+
+<% @title = "Spot.us - Fund A Story" %>
+
+<div id="fund_a_story">
+   <div id="navigation">
+      <h5>Browse Spot.Us</h5>
+      <ul class="filter">
+         <li class="active"><a href="#"><strong><br/>Newest Stories</strong></a><strong/></li>
+         <li><a href="#">Oldest Stories</a></li>
+         <li><a href="#">Almost Funded</a></li>
+         <li><a href="#">Most Pledged</a></li>
+      </ul>
+      <h5>Filter by Channel</h5>
+        <% if @channels.any? %>
+         <ul class="filter">
+            <% @channels.each do |channel| %>
+               <% if channel == @channel %>
+                  <li class="active">
+                   <%= link_to image_tag(channel.channel_image(:thumb)), channel_path(channel) %>
+                   <%= channel.description %>
+                  </li>
+                <% else %>
+                  <li>
+                   <%= link_to image_tag(channel.channel_image(:thumb)), channel_path(channel) %>
+                   <%= channel.description %>
+                  </li>
+                <% end %>
+            <% end %>  
+         </ul>
+      <% end %>   
+   </div>
+   <div id="stories">
+      stories
+   </div>
+</div>
