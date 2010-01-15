@@ -1,0 +1,43 @@
+<div id="footer-notes" class="clearfix">
+   <div class="left-column">
+      <h3>Almost Funded!</h3>
+      <ul>
+         <% Pitch.almost_funded.unfunded.top_four.each do |pitch| %>
+            <li class="clear">
+               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+               <%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
+            </li>
+         <% end %>
+      </ul>
+               
+   </div>
+   <div class="middle-column">
+      <div class="float-right">
+         <a href="http://spot.us/news_items.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
+      </div>
+      <h3>Newest Items</h3>
+      <ul>
+         <% NewsItem.newest.approved.pitch_or_tip.top_four.each do |pitch| %>
+            <li class="clear">
+               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+               <%= link_to pitch.headline, pitch %>
+            </li>
+         <% end %>
+      </ul>
+   </div>   
+   <div class="right-column">
+      <h3>What is Spot.Us</h3>
+      <p>
+         Spot.Us is a nonprofit project to pioneer “community funded reporting.” Through Spot.Us the public can commission investigations with tax deductible donations for important and perhaps overlooked stories. If a news organization buys exclusive rights to the content, donations are reimbursed. Otherwise content is made available through a Creative Commons license.
+         <%= link_to 'More', page_path("about")%>
+      </p>
+      <hr/>
+      <strong>Connect with Spot.us</strong>
+      <p>
+      <img width="61" height="57" alt="Facebook" src="/images/new_design/facebookicon.png"/>
+      <img width="61" height="57" alt="Twitter" src="/images/new_design/twittericon.png"/>
+      <img width="61" height="57" alt="Flickr" src="/images/new_design/flickrlogo.png"/>
+      <img width="61" height="57" alt="rss" src="/images/new_design/rssicon.png"/>
+      </p>
+   </div>
+</div>
