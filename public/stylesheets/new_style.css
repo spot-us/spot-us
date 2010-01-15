@@ -137,7 +137,7 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #pitch .right-column #supporters .supporters {font-size:.9em;}
 #pitch .right-column #supporters .supporters .supporter_avatar {float:left;width:60px;margin:0 40px 25px 17px;}
 #pitch .right-column #supporters .supporters a{font-size:1.1em;}
-		
+
 ul.tabs{margin:0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
@@ -154,6 +154,19 @@ ul.tabs li a.tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2
 .tab_panel li{margin-bottom:15px;}
 #pitch #pitch_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #pitch #pitch_info .tab_panel li .comment{margin-left:60px;width:400px;}
+
+#fund_a_story{padding: 0 0 0 10px;}
+#fund_a_story #navigation{width:220px;float:left;}
+#fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
+#fund_a_story #stories{width:780px;float:right;}
+
+ul.filter{margin:0;}
+ul.filter li.active, .filter ul li.active a {background-image:url(/images/new_design/filter-bg1.jpg);background-repeat:no-repeat;
+			color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
+ul.filter li, .filter ul li a {background-image:url(/images/new_design/filter-bg.jpg);background-repeat:no-repeat;color:#FFFFFF;
+			font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
+ul.filter > li {margin:0;padding:2px 6px;}
+.filter a, .filter a:link {color:#FFFFFF;}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
