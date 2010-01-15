@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head xmlns:fb='http://www.facebook.com/2008/fbml' xmlns='http://www.w3.org/1999/xhtml'>
+    <meta content='Spot.Us enables the public to commission journalists to do investigations on important and perhaps overlooked stories. We are an open source project, to pioneer "community funded reporting."' name='description' />
+    <meta content='journalism, reporting, community, local, news, open source, media, donation, creative commons' name='keywords' />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-type' />
+    <title>
+      Spot.us - Home
+    </title>
+    <!--[if IE 6]> 
+      <link href="/stylesheets/ie_spotus.css?1252356385" media="screen" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <link href="/stylesheets/screen.css?1254169659" media="screen" rel="stylesheet" type="text/css" />
+
+    <link href="/stylesheets/screen_spotus.css?1261607126" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/ie.css?1252356385" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/facebox.css?1258399816" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/print.css?1252356385" media="print" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/jquery-1.3.1.min.js?1252356384" type="text/javascript"></script>
+    <script type='text/javascript'>
+      jQuery.noConflict();
+    </script>
+    <script src="/javascripts/fckeditor/fckeditor.js?1252356384" type="text/javascript"></script>
+
+    <script src="/javascripts/jquery-ui.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jrails.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jquery.pngFix.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jquery.equalHeights.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/prototype.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/effects.js?1252356383" type="text/javascript"></script>
+
+    <script src="/javascripts/jsProgressBarHandler.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jquery.livequery.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jquery.cookie.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/jcarousellite_1.0.1.js?1256869644" type="text/javascript"></script>
+    <script src="/javascripts/jquery.form.js?1252356384" type="text/javascript"></script>
+    <script src="/javascripts/application.js?1260827822" type="text/javascript"></script>
+
+    <script src="/javascripts/auth.js?1257467949" type="text/javascript"></script>
+    <script src="/javascripts/facebox.js?1256932705" type="text/javascript"></script>
+    <link href="/stylesheets/ibox/ibox.css?1252356384" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/ibox/ibox.js?1252356384" type="text/javascript"></script>
+    
+  </head>
+  <body class='homes'>
+    <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+                 Element.observe(window,'load', function() {
+                    FB_RequireFeatures(["XFBML"], function() {
+                      FB.init('2fcb4aee61a85a43662109224c03998e','/xd_receiver.html', {});
+                      
+                    });
+                  });
+    
+    //]]>
+    </script>
+    <div id='user-header'>
+      <ul class='user-header-nav'>
+        <div class='hide' id='logged_in'>
+          <li class='no-pipe'>
+            Hello,
+            <span class='current_user_full_name'></span>
+          </li>
+          <li id='current_balance_line'></li>
+
+          <li>
+            <a href="/myspot/profile">My Spot</a>
+          </li>
+          <li class='no-pipe'>
+            <a href='#' onclick='FB.Connect.logoutAndRedirect("/logout")'>
+              Logout
+            </a>
+            <em class='small'>facebook connected</em>
+
+          </li>
+        </div>
+      </ul>
+      <ul class='user-header-nav'>
+        <div class='hide' id='not_logged_in'>
+          <li>
+            <a href="/session/new" rel="facebox">Register</a>
+          </li>
+
+          <li>
+            <a href="/session/new" id="sign_in" rel="facebox">Login</a>
+          </li>
+          <li class='no-pipe'>
+            <fb:login-button onlogin="window.location = &quot;/users/link_user_accounts&quot;;" size="small"></fb:login-button>
+            <em class='small'>connect</em>
+          </li>
+        </div>
+
+      </ul>
+      <div class='slogan'>
+        <span class='pink'>Community</span>
+        <span class='moss-green'>Funded Reporting</span>
+      </div>
+      <div class='clear'></div>
+    </div>
+    <div class='body-content'>
+      <div class='container'>
+        <div id='header'>
+          <div class='logo'>
+            <p>
+              <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class='hide'>Spot.us - Community Funded Reporting</span></a>
+            </p>
+          </div>
+          <div class='nav-container'>
+
+            <ul id='main-nav'>
+              <li class='suggest_story'><a href="/tips/new">Suggest a Story</a></li>
+              <li class='start_story'><a href="/pitches/new">Start a Story</a></li>
+              <li class='fund_story'><a href="/news_items">Search Pitches</a></li>
+              <li class='read_story'><a href="/stories">Read a Story</a></li>
+              <li class='about_spotus'><a href="/pages/about">About</a></li>
+
+            </ul>
+          </div>
+          <div class='clear'></div>
+        </div>
+        <div class='block-spacer-negative no_margin'></div>
+        <div class='box_white clearfix'>
+          All Networks
+          |
+          <a href="http://sfbay.spotus.local:3000/">San Fran</a>
+          |
+          <a href="http://bayarea.spotus.local:3000/">Bay Area</a>
+
+          <a href="" id="show_suggest_city">suggest a city ...</a>
+          <div class='hide' id='suggest_city'>
+            <form action="/city_suggestions" class="padding_40" id="new_city_suggestion" method="post">
+              <h2>Suggest a City, State</h2>
+              <div class='row'>
+                <label>suggest a city</label>
+              </div>
+
+              <div class='row'>
+                <input id="city_suggestion_city" name="city_suggestion[city]" size="30" type="text" />
+              </div>
+              <div class='row'>
+                <label>enter your email address</label>
+              </div>
+              <div class='row'>
+                <input id="city_suggestion_email" name="city_suggestion[email]" size="30" type="text" />
+
+              </div>
+              <input alt="Submit suggestion" src="/images/submit.png?1252356383" title="Submit suggestion" type="image" />
+            </form>
+          </div>
+          <div class='span-360'>
+            <form action="http://spotus.local:3000/search" id="cse-search-box">
+              <div>
+                <input type="hidden" name="cx" value="006826476315610682904:j3b-o1yzia8" />
+                <input type="hidden" name="cof" value="FORID:9" />
+
+                <input type="hidden" name="ie" value="UTF-8" />
+                <input type="text" name="q" size="24" />
+                <input type="submit" name="sa" value="Search" />
+              </div>
+            </form>
+            <script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&lang=en"></script>
+          </div>
+        </div>
+
+        <div id='flash'>
+        </div>
+        <div class='block-spacer'></div>
+        <div class='home-boxer'>
+          <div class='home-floater home-image-box' style='width:425px;float:left;background: #fff;'>
+            <div class='home-floater'>
+              <h3 style='color: red;'>
+                <strong>Spot.Us' Video Spot</strong>
+
+              </h3>
+              <div class='double_content_border'></div>
+              <object width="400" height="225"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="225"></embed></object>
+              
+            </div>
+          </div>
+          <div class='home-floater' style='width:460px;float:right;background: #fff;'>
+            <div id='pitches_carousel'>
+              <h3 class='float-left' style='color: red;'>
+                <strong>Help Fund this Story</strong>
+
+              </h3>
+              <div class='float-right'>
+                <span><a href="/news_items">View more Pitches &raquo;</a></span>
+              </div>
+              <div class='double_content_border clear'></div>
+              <ul>
+                <li class='pitch_carousel'>
+                  <div class='featured_image span-220'>
+
+                    <a href="/pitches/10-hey-i-know-what-s-up"><img alt="Missing_medium" src="/images/featured_images/missing_medium.png?1252356383" /></a>
+                    <div class='double_content_border'></div>
+                    <img alt="This News Item is Fully Funded!" src="/images/fully_funded.png?1252356383" />
+                  </div>
+                  <div class='summary span-200'>
+                    <h3>
+                      PITCH:
+                      <strong><a href="/pitches/10-hey-i-know-what-s-up">hey i know what's up!</a></strong>
+                    </h3>
+
+                    <div class='dateline small quiet'>
+                      Posted
+                      Wednesday, September 30, 2009
+                      by
+                      <a href="/profiles/4-herb-caen">Herb Caen</a>
+                      in
+                      San Fran
+                    </div>
+                    <p class='short_description alt-spotus'>
+                      <p>so i do yo.</p>
+                      
+                      <a href="/pitches/10-hey-i-know-what-s-up">Read More &raquo;</a>
+
+                    </p>
+                  </div>
+                </li>
+                <li class='pitch_carousel'>
+                  <div class='featured_image span-220'>
+                    <a href="/pitches/6-cheese-is-over-rated"><img alt="260-puxc0119_sibtiger_01_medium" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/006/260-PUXC0119_SibTiger_01_medium.jpg?1253797924" /></a>
+                    <div class='double_content_border'></div>
+                    <img alt="This News Item is Fully Funded!" src="/images/fully_funded.png?1252356383" />
+                  </div>
+
+                  <div class='summary span-200'>
+                    <h3>
+                      PITCH:
+                      <strong><a href="/pitches/6-cheese-is-over-rated">Cheese is over rated</a></strong>
+                    </h3>
+                    <div class='dateline small quiet'>
+                      Posted
+                      Thursday, September 24, 2009
+                      by
+                      <a href="/profiles/4-herb-caen">Herb Caen</a>
+                      in
+                      San Fran
+                    </div>
+
+                    <p class='short_description alt-spotus'>
+                      <p>lonely cheese is everywhere.</p>
+                      
+                      <a href="/pitches/6-cheese-is-over-rated">Read More &raquo;</a>
+                    </p>
+                  </div>
+                </li>
+                <li class='pitch_carousel'>
+                  <div class='featured_image span-220'>
+
+                    <a href="/pitches/11-willing-to-read"><img alt="Soil_in_hand_photo_medium" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/011/soil_in_hand_photo_medium.jpg?1254915376" /></a>
+                    <div class='double_content_border'></div>
+                    <div id='inline_donation_form_11'>
+                      <div id='donation_button_11'>
+                        <form action="/myspot/donations" class="auth" id="new_donation_11" method="post">
+                          <input id="donation_default_amount" name="donation[amount]" type="hidden" value="20" />
+                          <input id="donation_pitch_id" name="donation[pitch_id]" type="hidden" value="11" />
+                          <input alt="Donate 20" src="/images/donate_default.png?1252356383" title="Donate 20" type="image" />
+                        </form>
+
+                      </div>
+                      <div class='hide inline_donate' id='donation_custom_11'>
+                        <form action="/myspot/donations" class="auth" id="custom_donation_11" method="post">
+                          <div class='float_left'>
+                            <label class="hide" for="donation_amount">Donate other amount</label>
+                            <input id="donation_amount" name="donation[amount]" size="30" type="text" value="20.00" />
+                          </div>
+                          <input id="donation_pitch_id" name="donation[pitch_id]" type="hidden" value="11" />
+
+                          <div class='float_right'>
+                            <input alt="Donate another amount" src="/images/donate.png?1252356383" title="Donate another amount" type="image" />
+                          </div>
+                          <div class='clear'></div>
+                        </form>
+                      </div>
+                      <div class='small uppcased_button_text'>
+                        <a href="#" onclick="jQuery(&quot;#donation_button_11, #donation_custom_11&quot;).toggle(); return false;">OR DONATE ANOTHER AMOUNT &raquo;</a>
+
+                      </div>
+                    </div>
+                    <div class='double_content_border'></div>
+                    <div class='progress_bar clearfix'>
+                      <div>
+                        <span id="pitch_progress_bar" ><img alt="10.0%" id="pitch_percentImage" src="/images/progress_bar/percentImage.png?1252356383" style="margin: 0pt; padding: 0pt; width: 120px; height: 12px;
+                                                  background-position: -108.0px 50%;
+                                                  background-image: url(/images/progress_bar/percentImage_back1.png);" title="80%" /></span>
+                      </div>
+                      <div>
+                        <p class='progress_bar_container'>
+
+                          <strong>$200.00</strong>
+                          raised
+                          <br />
+                          $2,036.00 to go
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='summary span-200'>
+
+                    <h3>
+                      PITCH:
+                      <strong><a href="/pitches/11-willing-to-read">Willing to read</a></strong>
+                    </h3>
+                    <div class='dateline small quiet'>
+                      Posted
+                      Wednesday, October  7, 2009
+                      by
+                      <a href="/profiles/9-cnn-news">CNN News</a>
+                      in
+                      Bay Area
+                    </div>
+
+                    <p class='short_description alt-spotus'>
+                      <p>chaucer</p>
+                      
+                      <a href="/pitches/11-willing-to-read">Read More &raquo;</a>
+                    </p>
+                  </div>
+                </li>
+                <li class='pitch_carousel'>
+                  <div class='featured_image span-220'>
+
+                    <a href="/pitches/2-skyline-is-lame"><img alt="Img_banner_amenities_3_medium" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/002/img_banner_amenities_3_medium.jpg?1253209948" /></a>
+                    <div class='double_content_border'></div>
+                    <img alt="This News Item is Fully Funded!" src="/images/fully_funded.png?1252356383" />
+                  </div>
+                  <div class='summary span-200'>
+                    <h3>
+                      PITCH:
+                      <strong><a href="/pitches/2-skyline-is-lame">Skyline is lame</a></strong>
+                    </h3>
+
+                    <div class='dateline small quiet'>
+                      Posted
+                      Friday, September 18, 2009
+                      by
+                      <a href="/profiles/4-herb-caen">Herb Caen</a>
+                      in
+                      Bay Area
+                    </div>
+                    <p class='short_description alt-spotus'>
+                      <p>What da fuck wid da sky line! What da fuck wid da sky line! What da fuck wid da sky line! What da fuck wid da sky line! What da fuck wid da sky line! What da fuck wid da sky line! v What da fuck wid da sky line!&hellip;
+                      
+                      <a href="/pitches/2-skyline-is-lame">Read More &raquo;</a>
+
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class='float-right'>
+              <a class='prev arrow float-left'>Prev</a>
+              <a class='next arrow float-right'>Next</a>
+
+            </div>
+            <h5 class='quiet' style='margin:0;'>
+              If you want to see this story researched, written, and published,
+              click donate to help fund it!
+            </h5>
+          </div>
+        </div>
+        <div class='clear'></div>
+        <img src='../images/spotus_ie_pixel.gif' />
+        <div class='block-spacer'></div>
+
+        <div class='home-boxer'>
+          <div class='home-floater home-image-box' style='width:885px;float:left;background: #fff;'>
+            <h5 style="margin: 0pt;">See our FAQ's for <a href="/pages/about#faq"> Concerned Citizens, Reporters and News Organizations</a>. Spot.Us is a marketplace where all three come to collaborate.<p></p><p></p>Check out our <a href="http://blog.spot.us">blog</a> join our <a href="http://www.facebook.com/home.php#/group.php?sid=b04b3406bd9281f4fe4df6c39efef5d5&amp;refurl=http%3A%2F%2Fwww.facebook.com%2Fs.php%3Fref%3Dsearch%26init%3Dq%26q%3Dspot.us%26sid%3Db04b3406bd9281f4fe4df6c39efef5d5&amp;gid=29554944739">Facebook</a> or follow us on <a href="http://twitter.com/spotus">Twitter</a>.</h5>
+
+            
+          </div>
+        </div>
+        <div class='clear'></div>
+        <img src='../images/spotus_ie_pixel.gif' />
+        <div class='block-spacer'></div>
+        <div class='clear'></div>
+      </div>
+    </div>
+    <div id='footer'>
+
+      <div id='footer-notes'>
+        <div class='span-6'>
+          <h3>Quick Donate</h3>
+          <div class='double_footer_border'></div>
+          <div class='centered'>
+            <p>
+              <strong>You pick the topic to fund.</strong>
+            </p>
+
+            <p>We'll pick the pitch</p>
+          </div>
+          <div class='double_footer_border'></div>
+          <div class='centered'>
+            <a href="/pages/quick_donate"><img alt="Pledge_default" src="/images/pledge_default.png?1252356383" /></a>
+          </div>
+        </div>
+        <div class='span-6'>
+
+          <h3>Almost Funded!</h3>
+          <div class='double_footer_border'></div>
+          <p class='clear'>
+            <a href="/pitches/11-willing-to-read"><img alt="Soil_in_hand_photo_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/011/soil_in_hand_photo_thumb.jpg?1254915376" /></a>
+            PITCH:
+            <a href="/pitches/11-willing-to-read">Willing to read</a>
+          </p>
+          <p class='clear'>
+
+            <a href="/pitches/19-howdy-folks"><img alt="Full_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/019/full_thumb.jpg?1257788466" /></a>
+            PITCH:
+            <a href="/pitches/19-howdy-folks">Howdy folks</a>
+          </p>
+          <p class='clear'>
+            <a href="/pitches/20-dasghjdashjgadsghj"><img alt="Picture_3_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/020/Picture_3_thumb.png?1258467602" /></a>
+            PITCH:
+            <a href="/pitches/20-dasghjdashjgadsghj">dasghjdashjgadsghj</a>
+          </p>
+
+          <p class='clear'>
+            <a href="/pitches/21-granular-pumice"><img alt="Concept1a_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/021/concept1a_thumb.png?1259576770" /></a>
+            PITCH:
+            <a href="/pitches/21-granular-pumice">Granular Pumice</a>
+          </p>
+        </div>
+        <div class='span-6'>
+          <div class='float_right' style='padding-top:3px;'>
+            <a href="/news_items.rss"><img alt="Rss_16" src="/images/rss_16.png?1252356383" /></a>
+
+          </div>
+          <h3>Newest Items</h3>
+          <div class='double_footer_border'></div>
+          <p class='clear'>
+            <a href="/pitches/14-frog-serpent"><img alt="Help_guide_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/014/help_guide_thumb.jpg?1257249196" /></a>
+            PITCH:
+            <a href="/pitches/14-frog-serpent">Frog serpent</a>
+          </p>
+
+          <p class='clear'>
+            <a href="/tips/13-why-is-everything-nice"><img alt="Photo_thumb" src="http://s3.amazonaws.com/spotus-development-storage/news_items/featured_images/000/000/013/photo_thumb.jpg?1256846396" /></a>
+            TIP:
+            <a href="/tips/13-why-is-everything-nice">Why is everything nice?</a>
+          </p>
+          <p class='clear'>
+            <a href="/pitches/10-hey-i-know-what-s-up"><img alt="Missing_thumb" src="/images/featured_images/missing_thumb.png?1252356383" /></a>
+            PITCH:
+            <a href="/pitches/10-hey-i-know-what-s-up">hey i know what's up!</a>
+
+          </p>
+          <p class='clear'>
+            <a href="/tips/9-it-s-cool-to-tip"><img alt="Missing_thumb" src="/images/featured_images/missing_thumb.png?1252356383" /></a>
+            TIP:
+            <a href="/tips/9-it-s-cool-to-tip">It's cool to tip</a>
+          </p>
+        </div>
+        <div class='span-4'>
+          <h3>Elevator Pitch</h3>
+
+          <div class='double_footer_border'></div>
+          <p>
+            Spot.Us is a nonprofit project to pioneer &ldquo;community funded reporting.&rdquo; Through
+            Spot.Us the public can commission investigations with tax deductible donations for important and perhaps overlooked stories.
+            If a news organization buys exclusive rights to the content, donations are reimbursed. Otherwise content is made available through a Creative
+            Commons license.
+            <br />
+            <a href="/pages/about">Read More</a>
+          </p>
+        </div>
+
+        <div class='clear'></div>
+      </div>
+      <div id='footer-copyright'>
+        <div class='double_footer_border'></div>
+        <div class='logo-footer'><a href="/" class="logo-footer-link" title="Spot.us - Community Funded Reporting"><span class='hide'>Spot.us - Community Funded Reporting</span></a></div>
+        <ul class='footer-nav'>
+          <li><a href="/pages/about">About</a></li>
+          <li><a href="http://blog.spot.us">Blog</a></li>
+
+          <li><a href="/pages/press">Press</a></li>
+          <li><a href="/pages/media_partners">Media Partners</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/pages/terms">Terms of Use</a></li>
+          <li class='no-pipe'><a href="/pages/privacy">Privacy</a></li>
+        </ul>
+
+        <p>Copyright &copy; 2010 Spot.us</p>
+        <div class='partners'>
+          <div class='engine_yard'>
+            <span class='small'>
+              <a href="http://www.engineyard.com/">Rails Hosting by Engine Yard.</a>
+            </span>
+          </div>
+
+          <div class='hashrocket'>
+            <span class='small'>
+              <a href="http://www.hashrocket.com">Hashrocket 3-2-1 Launch.</a>
+            </span>
+          </div>
+        </div>
+        <div class='clear'></div>
+      </div>
+
+    </div>
+    
+  </body>
+</html>
