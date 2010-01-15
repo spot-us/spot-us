@@ -24,6 +24,10 @@ module ApplicationHelper
   def show_topics(resource)
     render :inline => resource.topics.map(&:name).join(', ')
   end
+  
+  def strip_html(text)
+    text.gsub(/<\/?[^>]*>/, "")
+  end
 
   def truncate_words(text, length = 30, end_string = '&hellip; ')
     words = text.split()
@@ -93,6 +97,19 @@ module ApplicationHelper
     else
       '<span class="deep-red">' + time_ago_in_words(due_date)  + " overdue</span>"
     end
+  end
+  
+  def short_date(dt)
+      # tn = Time.now
+      # if dt.day < tn.day or dt.month < tn.month or dt.year < tn.year #diff > 60  * 60 * (24 / 1.02)
+           dt.strftime("%m.%d.%y")
+      # else
+      #    dt.strftime("%l:%M %p").downcase
+      # end
+  end
+  
+  def medium_date(dt)
+    dt.strftime("%B %d, %Y")
   end
 
 end
