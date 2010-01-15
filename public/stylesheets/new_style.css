@@ -22,8 +22,12 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .quiet{color:#11363E;}
 .small{font-size:0.8em;line-height:1.875em;margin-bottom:1.875em;}
 .headline {font-size:2.5em;font-weight:bold;letter-spacing:-1pt;}
-.media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:10px;width:580px;}
+.media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:10px;width:572px;}
 .align-center{text-align:center;}
+.margin_bottom_10{margin-bottom:10px;}
+.display_block{display:block;}
+.display_inline{display:inline;}
+
 /*rounded courners*/
 .roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
 .roundedcornr_top_807323 div {background: url(/images/new_design/roundedcornr_807323_tl.png) no-repeat top left;   
@@ -104,18 +108,36 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 .dateline{font-size:.8em;margin-bottom:5px;}
 #next {float:right;vertical-align:top;width:19px;}
 #prev {float:left;vertical-align:top;width:19px;}
-
+#show_action_items img{margin-bottom:10px;}
 #pitch{}
 #pitch #pitch_header{padding:20px 15px;}
 #pitch .main-column{float:left;width:605px;}
-#pitch .right-column{float:right;width:338px;}
-#pitch #pitch_author{margin:5px 0px 0 68px;}
-#pitch #pitch_author img.avatar{float:left;margin:0 16px 0 0}
-#pitch #pitch_author h4{margin-bottom:0px;padding-top:11px;}
-#pitch #pitch_author a.username {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:1.3em;line-height:1.25;}
+#pitch .right-column{float:right;width:420px;}
+#pitch .pitch_author{margin:5px 0px 0 68px;width:170px;float:left;}
+#pitch .pitch_author img.avatar{float:left;margin:0 10px 0 0}
+#pitch .pitch_author h5{margin-bottom:0px;}
+#pitch .pitch_author a.username {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;}
 #pitch .media-box {margin:0 0 30px 12px;}
 #pitch #pitch_info {margin-left:12px;margin-bottom:20px;}
-
+#pitch .right-panel-box{background-color:#11363E;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:12pt;font-weight:normal;
+			padding:15px;width:356px;margin-bottom:10px;}
+#pitch .right-column .right-panel-box h2 {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bolder;letter-spacing:-1pt;text-transform:uppercase;}
+#pitch .right-column .right-panel-box h3 {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:23px;font-weight:bolder;letter-spacing:-1pt;margin-bottom:8px;}
+#pitch .right-column .right-panel-box a{color:#fff;}
+#pitch .right-column .right-panel-box form{width:206px;float:left;}
+#pitch .right-column .right-panel-box .progress_bar{width:140px;float:right;font-size:.9em;color:#ddd;font-weight:normal;}
+#pitch .right-column .right-panel-box .progress_bar .progress_bar_container{margin-top:5px;}
+#pitch .right-column .right-panel-box .donate_option{margin-bottom:40px;}
+#pitch .right-column .right-panel-box form img{margin-bottom:5px;}
+#pitch .right-column .right-panel-box .share{float:left;width:100px;}
+#pitch .right-column .right-panel-box .subscribe{float:right;width:230px;}
+#pitch .right-column #supporters {padding:0 15px;font-weight:bold;}
+#pitch .right-column #supporters h2 {color:#11363E;font-family:Arial,Helvetica,sans-serif;letter-spacing:-1px;font-size:26px;margin-bottom:10px;
+			text-transform:uppercase;}
+#pitch .right-column #supporters .supporters {font-size:.9em;}
+#pitch .right-column #supporters .supporters .supporter_avatar {float:left;width:60px;margin:0 40px 25px 17px;}
+#pitch .right-column #supporters .supporters a{font-size:1.1em;}
+		
 ul.tabs{margin:0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
@@ -125,7 +147,9 @@ ul.tabs li a.tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
 .tab_panel h5{margin-bottom:5px;}
+
 .tab_panel .date{color:#11363E;font-size:.8em;}
+.tab_panel .body{margin-bottom:10px;}
 .tab_panel ul{margin:0;}
 .tab_panel li{margin-bottom:15px;}
 #pitch #pitch_info .tab_panel li img.avatar{float:left;margin-right:10px;}

@@ -31,14 +31,50 @@
    </div>
    <div class="right-column">
       <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
+      <div class="right-panel-box">
+         <div class="donate_option">
+         <h2>MAKE A DIFFERENCE</h2>
+         <%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
+         <%= due_date_in_words(@pitch.expiration_date) %>
+         </div>
+         <div class="donate_option">
+         <%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
+         <%= link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch)) %>
+         </div>
+      </div>
+   
+      <div class="right-panel-box clearfix">
+         <div class="share">
+         <h3>Share</h3>
+         <%= image_tag("/images/new_design/twitter.png") %>
+         <%= image_tag("/images/new_design/facebook.png") %>
+         </div>
+         <div class="subscribe">
+         <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
+         <img align="right" src="update-button.png"/>
+         </div>
+      </div>
+      
+      <div id="supporters">
+          <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+      </div>
    </div>
    <div class="main-column">
       <div class="folded-headers-big">
-         <div id="pitch_author">
+         <div class="pitch_author">
             <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
-            <h4>Author</h4>
+            <h5>Author</h5>
             <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
          </div>
+         <% if @pitch.peer_reviewer %>
+         <div class="pitch_author">
+            <%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
+            <h5>Peer Review Editor</h5>
+            <%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
+         </div>
+         <% end %>
       </div>
       <% unless @pitch.video_embed.blank? %>
          <div class="media-box">
