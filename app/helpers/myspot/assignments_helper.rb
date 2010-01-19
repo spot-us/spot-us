@@ -1,0 +1,2 @@
+module Myspot::AssignmentsHelper
+end

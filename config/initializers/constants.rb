@@ -8,3 +8,4 @@ LOCATIONS = [
 ].freeze
 
 MAIL_FROM_INFO = %("Spot.Us" <info@spot.us>)
+MAIL_WEBMASTER = %("Webmaster Spot.Us" <webmaster@spot.us>)
