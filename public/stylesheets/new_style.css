@@ -158,15 +158,36 @@ ul.tabs li a.tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2
 #fund_a_story{padding: 0 0 0 10px;}
 #fund_a_story #navigation{width:220px;float:left;}
 #fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
-#fund_a_story #stories{width:780px;float:right;}
 
-ul.filter{margin:0;}
+#stories{width:776px;float:right;padding:13px 20px 20px 0;margin-right:28px;}
+#stories h3{font-family: Arial,Helvetica,sans-serif; text-transform: uppercase; font-weight: bold; font-size: 16pt; color: rgb(17, 54, 62);letter-spacing:0;}
+#stories h4{font-family: Arial,Helvetica,sans-serif; font-size: 16pt; font-weight: bold; color: rgb(77, 107, 113); letter-spacing: -0.05em;}
+
+#stories .pitch {border-bottom:solid 1px #ccc;margin-bottom:10px;position:relative;}
+#stories .pitch .news_item {width:530px;padding-right:40px;padding-bottom:10px;float:left;}
+#stories .pitch .news_item img.featured_image {width:215px;height:180px;float:left;margin-right:10px;}
+#stories .pitch .news_item h5 {font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 1.5em; 
+			letter-spacing: -0.05em; color: rgb(17, 54, 62);margin-bottom:5px;}
+#stories .pitch .news_item p {margin-bottom:5px;margin-top:5px;}
+#stories .pitch .donater {float:left;position:relative;}
+#stories .pitch .donater .progress_bar {margin-top:18px;}
+#stories .pitch .author {background:#eee;position:absolute;bottom:0;right:0;width:196px;padding:5px;}
+#stories .pitch .author img.avatar{vertical-align:top; float:left;margin-right:10px;}
+#stories .pitch .author a {color:#17577B;font-family:Arial,Helvetica,sans-serif;font-size:1em;font-weight:bolder;letter-spacing:-1pt;
+			vertical-align:middle;}
+
+ul#filters li div {margin-top:24px;}
+ul.filter{margin:0 0 10px 0;}
 ul.filter li.active, .filter ul li.active a {background-image:url(/images/new_design/filter-bg1.jpg);background-repeat:no-repeat;
 			color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
 ul.filter li, .filter ul li a {background-image:url(/images/new_design/filter-bg.jpg);background-repeat:no-repeat;color:#FFFFFF;
 			font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
 ul.filter > li {margin:0;padding:2px 6px;}
 .filter a, .filter a:link {color:#FFFFFF;}
+ul.filter li img{width:44px;height:44px;float:left;margin-right:10px;margin-top:3px;} 
+ul.filter li div {width:180px;}
+ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.laurenmichell.com/spotus/images/filter-bg2.jpg);height:54px;background-repeat:no-repeat;
+			color: #ffffff;margin-bottom:0px;}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
