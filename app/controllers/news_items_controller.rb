@@ -25,6 +25,19 @@ class NewsItemsController < ApplicationController
   end
 
   def search
+    @channels = Channel.by_network(current_network)
+    @filter = "newest_stories"
+    case params[:sort_by]
+    when "asc"
+      @filter = "newest_stories"
+    when "desc"
+      @filter = "oldest_stories"
+    when "almost_funded"
+      @filter = "almost_funded"
+    when "most_funded"
+      @filter = "most_pledged" 
+    end
+      
     get_news_items
     render :action => 'index'
   end
