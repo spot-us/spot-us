@@ -1,0 +1,12 @@
+<% div_for(pitch, :class => "clearfix") do %>
+      <%= render :partial => 'news_items/news_item', :object => pitch %>
+      <div class="donater">
+        <%= render :partial => "donations/button", :locals => { :news_item => pitch } %>
+      </div>
+      <div class="author clearfix">
+        <%= link_to image_tag(pitch.user.photo(:thumb), :class => "avatar", :alt => ""), profile_path(pitch.user) %>
+        <%= link_to "By " + truncate(pitch.user.full_name.upcase, :length => 28), profile_path(pitch.user), {:title => pitch.user.full_name.upcase} %>
+      </div>
+<% end %>
+
+
