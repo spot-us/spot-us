@@ -4,6 +4,7 @@ class PitchesController < ApplicationController
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
   before_filter :select_tab, :only => [:new]
+  after_filter :send_edited_notification, :only => [:update]
 
   resources_controller_for :pitch
 
@@ -12,7 +13,7 @@ class PitchesController < ApplicationController
   def index
     redirect_to(news_items_path)
   end
-
+  
   def apply_to_contribute
     pitch = find_resource
     pitch.apply_to_contribute(current_user)
@@ -26,10 +27,19 @@ class PitchesController < ApplicationController
     redirect_to pitch_path(pitch)
   end
 
+  def feature
+    pitch = find_resource
+  end
+
   def unfeature
     pitch = find_resource
     pitch.unfeature!
     redirect_to pitch_path(pitch)
+  end
+
+  def widget
+    @pitch = find_resource
+    render :layout => "widget"
   end
 
   def show_support
@@ -86,17 +96,17 @@ class PitchesController < ApplicationController
     pitch = find_resource
 
     if not pitch.editable_by?(current_user)
-      if pitch.user == current_user
-        if pitch.donated_to?
-          access_denied( \
-            :flash => "You cannot edit a pitch that has donations.  For minor changes, contact info@spot.us",
-            :redirect => pitch_url(pitch))
-        else
-          access_denied( \
-            :flash => "You cannot edit this pitch.  For minor changes, contact info@spot.us",
-            :redirect => pitch_url(pitch))
-        end
-      else
+      #if pitch.user == current_user
+        #if pitch.donated_to?
+        #  access_denied( \
+        #    :flash => "You cannot edit a pitch that has donations.  For minor changes, contact info@spot.us",
+        #    :redirect => pitch_url(pitch))
+        #else
+        #  access_denied( \
+        #    :flash => "You cannot edit this pitch.  For minor changes, contact info@spot.us",
+        #    :redirect => pitch_url(pitch))
+        #end
+      unless pitch.user == current_user
         access_denied( \
           :flash => "You cannot edit this pitch, since you didn't create it.",
           :redirect => pitch_url(pitch))
@@ -121,6 +131,11 @@ class PitchesController < ApplicationController
   
   def select_tab
      @selected_tab = "start_story"
+  end
+  
+  def send_edited_notification
+    pitch = find_resource
+    pitch.send_edited_notification unless current_user.admin?
   end
 
 end

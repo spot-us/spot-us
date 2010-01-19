@@ -1,0 +1,29 @@
+<%if @pitch.story && @pitch.story.published?%>
+	<h3 class="description">= link_to h(@pitch.story.headline), @pitch.story</h3>
+	  <span class="dateline small quiet">Posted<%= @pitch.story.created_at.to_s(:long_date)%>
+	    by <%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user)%> in <%= @pitch.story.network.name%></span>
+	  <p class="short_description alt-spotus">
+	    <%= truncate_words(@pitch.story.extended_description, 30) if @pitch.story.extended_description%>
+	    <%= link_to 'Read More &raquo;', @pitch.story%>
+	  </p>
+<%else%>
+	<%#= render :partial => "donations/fully_fund", :locals => { :news_item => @pitch }%>
+	<%#= render :partial => "donations/half_fund", :locals => { :news_item => @pitch }%>
+	<%#= render :partial => "donations/button", :locals => { :news_item => @pitch }%>
+	<p>
+		<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch%>
+		<h3><%=link_to h(@pitch.headline), pitch_url(@pitch)%></h3>
+		<%= due_date_in_words(@pitch.expiration_date)%><br/>
+		<span class="dateline small quiet">Posted <%= @pitch.created_at.to_s(:long_date)%></span><br/>
+		<span class="dateline small quiet">by <%= link_to h(@pitch.user.full_name), profile_path(@pitch.user)%> in <%= @pitch.network.name%></span><br/>
+		
+		<%if @pitch.fully_funded?%>
+			<%= image_tag('fully_funded.png', :alt => 'This News Item is Fully Funded!')%>
+		<%else%>
+			<p style="margin-top:-5px;">
+				<%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch}%>
+				<%=link_to image_submit_tag("donate_default.png", :alt => "Donate", :title => "Donate"), pitch_url(@pitch)%>
+			</p>
+		<%end%>
+	</p>
+<%end%>
