@@ -2,7 +2,7 @@ class Channel < ActiveRecord::Base
   validates_presence_of   :title, :channel_image_file_name, :description
   validates_uniqueness_of :title
   has_attached_file :channel_image,
-                    :styles => { :thumb => '50x50#', :medium => "200x150#" },
+                    :styles => { :thumb => '44x44#', :medium => "200x150#" },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,
