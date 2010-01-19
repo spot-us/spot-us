@@ -20,7 +20,7 @@
                <li><%= link_to "All Networks", root_url(:subdomain => false) %></li>
             <% end %>
             <% Network.all.each do |network| %>
-               <li><%= link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase %></li>
+               <li><%= link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase, :class => (@current_network==network ? "selected" : "") %></li>
             <% end %>
             <li><%= link_to "suggest a city ...", "", :id => "show_suggest_city"%></li>
             <%= render :partial => "shared/suggest_city"%>
