@@ -58,6 +58,13 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
+  def pitch_edited_notification(pitch)
+    recipients MAIL_WEBMASTER
+    from       MAIL_WEBMASTER
+    subject    "Spot.Us: A pitch has been edited!"
+    body       :pitch => pitch
+  end
+
   def pitch_accepted_notification(pitch)
     recipients '"David Cohn" <david@spot.us>'
     bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(pitch.subscribers.map(&:email)).uniq.join(', ')

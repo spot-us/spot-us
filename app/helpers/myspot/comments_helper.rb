@@ -1,0 +1,2 @@
+module Myspot::CommentsHelper
+end
