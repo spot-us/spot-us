@@ -23,7 +23,15 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_facebook_session
   helper_method :facebook_session
+  after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
+  # minify the html
+  def minify_html
+    response.body.gsub!(/[ \t\v]+/, ' ')
+    response.body.gsub!(/\s*[\n\r]+\s*/, "\n")
+    response.body.gsub!(/>\s+</, '> <')
+    response.body.gsub!(/<\!\-\-([^>\n\r]*?)\-\->/, '')
+  end
 
   def current_network
     subdomain = current_subdomain.downcase if current_subdomain
