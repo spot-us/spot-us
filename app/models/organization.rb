@@ -58,6 +58,11 @@ class Organization < User
                 :on_transition => :do_after_approved_actions
   end
 
+  def full_name
+    return organization_name if organization_name && !organization_name.empty?
+    [first_name, last_name].join(' ')
+  end
+  
   def deliver_signup_notification
     Mailer.deliver_organization_signup_notification(self)
     Mailer.deliver_news_org_signup_request(self)
