@@ -24,4 +24,8 @@ module NewsItemsHelper
         
     out.to_s
   end
+  
+  def check_active(filter, item)
+    ' class="active"' if filter == item
+  end
 end
