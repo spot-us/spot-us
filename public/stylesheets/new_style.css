@@ -197,19 +197,19 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #story_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
 #story_form .row {clear:both;margin-bottom: 20px;}
 #story_form .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
-#story_form .row.tip_topics {margin:0 0 20px 236px;width:440px;}
-#story_form .row.pitch_topics {width: 700px;margin:0 0 20px 236px}
+#story_form .row .tip_topics {margin-left:235px;width:440px;}
+#story_form .row .pitch_topics {width: 700px;margin-left:235px;}
 #story_form select {width:200px;}
 #story_form input, #story_form select, #story_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
 #story_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
 #story_form textarea#tip_video_embed, #story_form textarea#tip_widget_embed 
 			{font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
-#story_form input#tip_pledge_amount, #story_form input#pitch_requested_amount {font-size:20px;padding:6px;width:70px;border:1px solid #777;}
+#story_form input#tip_pledge_amount, #story_form input#pitch_requested_amount {font-size:20px;padding:6px;width:90px;border:1px solid #777;}
 #story_form iframe {border:solid 1px #bbb;}
-#story_form input#tip_pledge_amount {font-size:20px;padding:6px;width:70px;border:1px solid #777;}
+#story_form input#tip_pledge_amount {font-size:20px;padding:6px;width:90px;border:1px solid #777;}
 #story_form .deliver input[type="checkbox"] {margin-right:20px;}
 #story_form .row.contract {padding-left:233px;}
-#story_form .row.add_media label{padding:0;}
+#story_form .row.add_media label{padding:0;width:210px;}
 #story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
