@@ -91,11 +91,6 @@ module ApplicationHelper
       " active" if tab == selected_tab
   end
   
-  def check_if_selected(tab, selected_tab)
-      return "selected" if tab == selected_tab
-      ""
-  end
-  
   def due_date_in_words(due_date)
     if due_date > Time.now
       '<span class="deep-green">due in ' + time_ago_in_words(due_date) + "</span>"
