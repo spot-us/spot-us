@@ -1,0 +1,57 @@
+<% form_for(@tip, :html => { :multipart => true }) do |f| %>
+
+   <div class="row">
+        <%= f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>" %>
+        <%= f.text_area :headline, :rows => 2 %>
+        <%#= text_field_tag 'tip[blog_url]', '', :class => 'highlight_required', :id => 'tip_blog_url' %>
+   </div>
+    <div class="row">
+       <%= f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you!</span>" %>
+       <%= fckeditor_textarea("tip", "short_description", :toolbarSet => 'Spotus', :width => '680px', :height => '200px') %>
+    </div>
+   <div class="row">
+      <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
+   </div>
+   <div class="row">
+      <label>Topics</label>
+   </div>
+   <div class="row tip_topics clearfix">
+      <%= topic_check_boxes(@tip) %>
+   </div>
+    <div class="row">
+      <%= f.label :pledge_amount, "I would like to pledge $<br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a></span>" %>
+      <%= f.text_field :pledge_amount %>
+   </div>
+   <div class="row">
+      <%= f.label :keyword, "Keywords<br /><span class='small quieter'>Optional.<br />Keywords, or tags, should be separate by commas, for example: &quot;car, automobile&quot;</span>" %>
+   
+      <%= f.text_area :keywords, :rows => 3 %>
+   </div>
+   <div class="row">
+      <label>Add Media<br/>
+      Upload A Featured Image</label><%= f.file_field :featured_image %><br>
+        <span class="small"> Optional, but highly recomended <br />JPEG, PNG and GIF's less than 5 MB.</span>
+      
+   </div>
+   <!-- <div class="row media">
+      <%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>
+      <%#= f.text_area :featured_image_caption, :rows => 2 %>
+   </div> -->
+   <div class="row"> 
+      <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here.</span>" %>
+      <%= f.text_area :video_embed, :rows => 4 %>
+   </div>
+   <div class="row">
+      <%= f.label :widget_embed, "Embed a Widget" + "<br/><span class='quieter small'>Paste your third-party widget embeded code (e.g. Sprout) here.</span>" %>
+      <%= f.text_area :widget_embed, :rows => 4 %>
+   </div>
+   <div class="row">
+       <label> </label>
+       <% if @tip.new_record? %>
+         <%= image_submit_tag image_path('post_this_tip.png') %>
+       <% else %>
+         <%= image_submit_tag image_path('save.png') %>
+         <%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+       <% end %>
+    </div>
+<% end %>
