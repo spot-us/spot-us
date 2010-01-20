@@ -1,8 +1,5 @@
 <%form_for(@pitch, :html => { :multipart => true }) do |f| %>
     <div class="row">
-       <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch} %>
-    </div>
-    <div class="row">
         <%= f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required</span>" %>
         <%= f.text_area :headline, :rows => 2 %>
         <%#= text_field_tag 'pitch[blog_url]', '', :class => 'highlight_required', :id => 'pitch_blog_url' %>
@@ -12,10 +9,13 @@
       <%= fckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
     <div class="row">
-       <label>Topics</label>
+       <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch} %>
     </div>
-    <div class="row pitch_topics clearfix">
-         <%= topic_check_boxes(@pitch) %>
+    <div class="row clearfix">
+       <label>Topics</label>
+       <div class="pitch_topics">
+          <%= topic_check_boxes(@pitch) %>
+       </div>    
     </div>
     <div class="row">
       <%= f.label :extended_description, "How can your reporting help?" %>
