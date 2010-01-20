@@ -12,11 +12,11 @@
    <div class="row">
       <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
    </div>
-   <div class="row">
+   <div class="row  clearfix">
       <label>Topics</label>
-   </div>
-   <div class="row tip_topics clearfix">
-      <%= topic_check_boxes(@tip) %>
+      <div class="tip_topics">
+         <%= topic_check_boxes(@tip) %>
+      </div>
    </div>
     <div class="row">
       <%= f.label :pledge_amount, "I would like to pledge $<br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a></span>" %>
