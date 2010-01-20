@@ -1,0 +1,12 @@
+<div id="story_form">
+   <% unless @pitch.errors.empty? %>
+     <% content_for :error do %>
+       <%= error_messages_for :pitch %>
+     <% end %>
+   <% end %>
+
+   <% @title = "Spot.us - Create a Story" %>
+
+   <h2>Create a Pitch</h2>
+   <%= render :partial => 'form' %>
+</div>
