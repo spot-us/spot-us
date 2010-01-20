@@ -16,11 +16,14 @@ ul{list-style-image: none;list-style-position: outside;list-style-type: none;}
 h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;}
 h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
+
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .float-left{float:left;}
 .float-right{float:right;}
 .quiet{color:#11363E;}
+.quieter{color:#768A93;}
 .small{font-size:0.8em;line-height:1.875em;margin-bottom:1.875em;}
+.strong{font-weight:bold;}
 .headline {font-size:2.5em;font-weight:bold;letter-spacing:-1pt;}
 .media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:10px;width:572px;}
 .align-center{text-align:center;}
@@ -135,7 +138,7 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #pitch .right-column #supporters h2 {color:#11363E;font-family:Arial,Helvetica,sans-serif;letter-spacing:-1px;font-size:26px;margin-bottom:10px;
 			text-transform:uppercase;}
 #pitch .right-column #supporters .supporters {font-size:.9em;}
-#pitch .right-column #supporters .supporters .supporter_avatar {float:left;width:60px;margin:0 40px 25px 17px;}
+#pitch .right-column #supporters .supporters .supporter_avatar {float:left;width:60px;margin:0 40px 0px 17px;height:130px;}
 #pitch .right-column #supporters .supporters a{font-size:1.1em;}
 
 ul.tabs{margin:0;}
@@ -164,12 +167,12 @@ ul.tabs li a.tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2
 #stories h4{font-family: Arial,Helvetica,sans-serif; font-size: 16pt; font-weight: bold; color: rgb(77, 107, 113); letter-spacing: -0.05em;}
 
 #stories .pitch {border-bottom:solid 1px #ccc;margin-bottom:10px;position:relative;}
-#stories .pitch .news_item {width:530px;padding-right:40px;padding-bottom:10px;float:left;}
+#stories .pitch .news_item {width:520px;padding-right:40px;padding-bottom:10px;float:left;}
 #stories .pitch .news_item img.featured_image {width:215px;height:180px;float:left;margin-right:10px;}
 #stories .pitch .news_item h5 {font-family: Arial,Helvetica,sans-serif; font-weight: bold; font-size: 1.5em; 
 			letter-spacing: -0.05em; color: rgb(17, 54, 62);margin-bottom:5px;}
 #stories .pitch .news_item p {margin-bottom:5px;margin-top:5px;}
-#stories .pitch .donater {float:left;position:relative;}
+#stories .pitch .donater {float:right;position:relative;}
 #stories .pitch .donater .progress_bar {margin-top:18px;}
 #stories .pitch .author {background:#eee;position:absolute;bottom:0;right:0;width:196px;padding:5px;}
 #stories .pitch .author img.avatar{vertical-align:top; float:left;margin-right:10px;}
@@ -189,12 +192,31 @@ ul.filter li div {width:180px;}
 ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.laurenmichell.com/spotus/images/filter-bg2.jpg);height:54px;background-repeat:no-repeat;
 			color: #ffffff;margin-bottom:0px;}
 
+#story_form {padding:20px;}
+#story_form select {font-size:20px;padding:5px;}
+#story_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
+#story_form .row {clear:both;margin-bottom: 20px;}
+#story_form .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
+#story_form .row.tip_topics {margin:0 0 20px 236px;width:440px;}
+#story_form .row.pitch_topics {width: 700px;margin:0 0 20px 236px}
+#story_form select {width:200px;}
+#story_form input, #story_form select, #story_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
+#story_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
+#story_form textarea#tip_video_embed, #story_form textarea#tip_widget_embed 
+			{font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
+#story_form input#tip_pledge_amount, #story_form input#pitch_requested_amount {font-size:20px;padding:6px;width:70px;border:1px solid #777;}
+#story_form iframe {border:solid 1px #bbb;}
+#story_form input#tip_pledge_amount {font-size:20px;padding:6px;width:70px;border:1px solid #777;}
+#story_form .deliver input[type="checkbox"] {margin-right:20px;}
+#story_form .row.contract {padding-left:233px;}
+#story_form .row.add_media label{padding:0;}
+#story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
 #footer {background-color:#11363E;padding:0;width:1024px;}
 
-#footer div#footer-copyright, #footer div#footer-notes {background:#11363E;color:#CCCCCC;margin:auto;padding:10px;text-align:left;width:1024px;}
+#footer div#footer-copyright, #footer div#footer-notes {background:#11363E;color:#CCCCCC;margin:auto;padding:10px;text-align:left;width:1023px;}
 #footer .fund {color:#33CC00;}
 #footer-notes .left-column{width:310px;padding-right:20px;float:left;}
 #footer-notes .middle-column{width:315px;float:left;}

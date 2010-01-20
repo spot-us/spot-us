@@ -1,0 +1,12 @@
+<div id="story_form">
+   <% unless @tip.errors.empty? %>
+     <% content_for :error do %>
+       <%= error_messages_for :tip %>
+     <% end %>
+   <% end %>
+
+   <% @title = "Spot.us - Create a Tip" %>
+
+   <h2>Suggest a Story</h2>
+   <%= render :partial => 'form' %>
+</div>
