@@ -23,8 +23,8 @@
   </div>
 <% end %>
 
-<div id="news_item">
-   <div id="news_item_header">
+<div id="pitch">
+   <div id="pitch_header">
       <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
       <h2 class="headline"><%= h @pitch.headline %></h2>
    </div>
@@ -62,13 +62,13 @@
    </div>
    <div class="main-column">
       <div class="folded-headers-big">
-         <div class="news_item_author">
+         <div class="pitch_author">
             <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
             <h5>Author</h5>
             <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
          </div>
          <% if @pitch.peer_reviewer %>
-         <div class="news_item_author">
+         <div class="pitch_author">
             <%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
             <h5>Peer Review Editor</h5>
             <%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
@@ -83,7 +83,7 @@
             </div>
          </div>
       <% end %>
-      <div id="news_item_info">
+      <div id="pitch_info">
          <div>
             <ul class="tabs">
                <li><a id="description_tab" href="" class="tab active">Description</a></li>
@@ -127,14 +127,7 @@
                      </div>
                   </li>
                <% end %>
-               <% if !@pitch.comments.any? %>
-                  <li>There are no comments yet, be the first!</li>
-               <% end %>
                </ul>
-               <h3>Post A Comment</h3>
-               <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
-                  <%= render :partial => 'comments/form', :locals => {:f => f} %>
-               <% end %>
             </div>
          </div>
          <br/><br/>
