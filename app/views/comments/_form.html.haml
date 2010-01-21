@@ -1,11 +1,13 @@
 .row
   = f.label :title
   = f.text_field :title
-  = text_field_tag 'comment[blog_url]', '', :class => :highlight_required, :id => 'comment_blog_url'
+  =# text_field_tag 'comment[blog_url]', '', :class => :highlight_required, :id => 'comment_blog_url'
 .row
   = f.label :body
-  = fckeditor_textarea('comment', 'body', :toolbarSet => 'Spotus', :height => '200px')
+  =# fckeditor_textarea('comment', 'body', :toolbarSet => 'Spotus', :height => '200px')
+  = f.text_area :body
 .row
+  %label &nbsp;
   = f.hidden_field :commentable_id
   = f.hidden_field :commentable_type
   = f.submit 'Post Comment'
