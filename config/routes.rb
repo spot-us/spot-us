@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :subscribers
+  map.resources :blogs
   map.resources :channels
   map.resources :city_suggestions
   
