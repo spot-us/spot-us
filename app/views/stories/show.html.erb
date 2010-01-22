@@ -1,10 +1,7 @@
+<!-- SHOW STORY -->
 <% content_for :head do %>
-  <%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'blog_posts', :id => @pitch.id, :format => 'rss'}) %>
   <script>
     jQuery(document).ready(function($){
-       jQuery("#show_action_items").click(function(){
-          jQuery.facebox(jQuery("#action_buttons").html());
-       });
        jQuery(".tab").click(function(){
           $(this).parent().parent().parent().find(".tab_panel").hide();
           $("." + $(this).attr("id")).show();
@@ -15,31 +12,30 @@
     });
   </script>
 <% end %>
-<% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
+<% @title = "Spot.us - Story: #{h @story.headline}" %>
 
-<% if @subscriber && @subscriber.errors.any? %>
-  <div class="error">
-    <%= error_messages_for :subscriber %>
-  </div>
-<% end %>
-
-<div id="pitch">
-   <div id="pitch_header">
+<div id="news_item">
+   <div id="news_item_header">
       <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-      <h2 class="headline"><%= h @pitch.headline %></h2>
+      <h2 class="headline"><%= h @story.headline %></h2>
    </div>
    <div class="right-column">
-      <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
       <div class="right-panel-box">
-         <div class="donate_option">
-         <h2>MAKE A DIFFERENCE</h2>
-         <%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
-         <%= due_date_in_words(@pitch.expiration_date) %>
+         <h3>History of this story</h3>
+         PITCH:
+         <strong><%= link_to h(@story.pitch.headline), @story.pitch %></strong>
+         <div class="dateline small">
+            Posted
+            <%= @story.pitch.created_at.to_s(:long_date) %>
+            by
+            <%= link_to h(@story.pitch.user.full_name), profile_path(@story.pitch.user) %>
+            in
+            <%= @story.pitch.network.name %>
          </div>
-         <div class="donate_option">
-         <%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
-         <%= link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch)) %>
-         </div>
+         <p>
+            <%= truncate_words(@story.pitch.short_description, 30) %>
+            <%= link_to 'Read Pitch &raquo;', @story.pitch %>
+         </p>
       </div>
    
       <div class="right-panel-box clearfix">
@@ -48,77 +44,65 @@
          <%= image_tag("/images/new_design/twitter.png") %>
          <%= image_tag("/images/new_design/facebook.png") %>
          </div>
-         <div class="subscribe">
-         <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
-         <img align="right" src="update-button.png"/>
-         </div>
       </div>
       
       <div id="supporters">
-          <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
-          <%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-          <%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @story.pitch} %>
+          <%= render :partial => "pitches/group_supporters", :locals => {:news_item => @story.pitch} %>
+          <%= render :partial => "pitches/supporters", :locals => {:news_item => @story.pitch} %>
       </div>
    </div>
    <div class="main-column">
       <div class="folded-headers-big">
-         <div class="pitch_author">
-            <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
+         <div class="news_item_author">
+            <%= link_to image_tag(@story.user.photo(:thumb), :class => "avatar"), profile_path(@story.user) %>
             <h5>Author</h5>
-            <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
+            <%= link_to @story.user.full_name, profile_path(@story.user), :class => "username" %>
          </div>
-         <% if @pitch.peer_reviewer %>
-         <div class="pitch_author">
-            <%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
+         <% if @story.peer_reviewer %>
+         <div class="news_item_author">
+            <%= link_to(image_tag(@story.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@story.peer_reviewer)) %>
             <h5>Peer Review Editor</h5>
-            <%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
+            <%= link_to(h(@story.peer_reviewer.full_name), profile_path(@story.peer_reviewer), :class => "username") %>
          </div>
          <% end %>
       </div>
-      <% unless @pitch.video_embed.blank? %>
+      <% unless @story.video_embed.blank? %>
          <div class="media-box">
             <h3>Multimedia</h3>
             <div class="align-center">
-               <%= @pitch.video_embed %>
+               <%= @story.video_embed %>
             </div>
          </div>
       <% end %>
-      <div id="pitch_info">
+      <div class="story-block">
+         <%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
+         <div class="story_content">
+            <%= @story.extended_description %>
+         </div>
+      </div>
+      <br/><br/>
+      <div id="news_item_info">
          <div>
             <ul class="tabs">
-               <li><a id="description_tab" href="" class="tab active">Description</a></li>
-               <li><a id="how_tab" href="" class="tab">How will it help?</a></li>
-               <li><a id="story_tab" href="" class="tab">Story updates</a></li>
-               <li><a id="comments_tab" href="" class="tab">Comments (<%=@pitch.comments.size%>)</a></li>
-            </ul>
-            <div class="description_tab tab_panel clearfix">
-               <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
-               <%= @pitch.short_description %>
-            </div>
-            <div class="how_tab tab_panel hide">
-               <%= @pitch.extended_description %>
-            </div>
-            <div class="story_tab tab_panel hide">
-               <h2>Story Updates</h2>
-               <% if @pitch.posts.any? %>
-                  <ul>
-                  <% @pitch.posts.each do |post| %>
-                     <li>
-                        <h4 class="title"><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h4>
-                        <div class="date"><%= medium_date(post.created_at) %></div>
-                        <%= truncate_words(strip_html(post.body), 20) %>
-                     </li>
-                  <% end %>
-                  </ul>
-               <% else %>
-                  <p>
-                     <em>This story has no blog posts.</em>
-                  </p>
+               <!-- <li><a id="description_tab" href="" class="tab active">Story</a></li> -->
+               <li><a id="comments_tab" href="" class="tab active">Comments (<%=@story.comments.size%>)</a></li>
+               <% unless @story.external_links.blank? %>
+                  <li><a id="external_links_tab" href="" class="tab">External Links</a></li>
                <% end %>
-            </div>
-            <div class="comments_tab tab_panel hide">
+               <% unless @story.pitch.keywords.blank? %>
+                  <li><a id="keywords_tab" href="" class="tab">Keywords</a></li>
+               <% end %>
+               <% unless @story.license.blank? %>
+                  <li><a id="license_tab" href="" class="tab">License</a></li>
+               <% end %>
+            </ul>
+            <!-- <div class="description_tab tab_panel">
+                 <%#= @story.extended_description %>
+              </div> -->
+            <div class="comments_tab tab_panel">
                <ul>
-               <% @pitch.comments.each do |comment| %>
+               <% @story.comments.each do |comment| %>
                   <li>
                      <h5><%= comment.title %></h5>
                      <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
@@ -127,26 +111,34 @@
                      </div>
                   </li>
                <% end %>
+               <% if !@story.comments.any? %>
+                  <li>There are no comments yet, be the first!</li>
+               <% end %>
                </ul>
+               <h3>Post A Comment</h3>
+               <% form_for [@story, Comment.new(:commentable => @story)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+                  <%= render :partial => 'comments/form', :locals => {:f => f} %>
+               <% end %>
             </div>
-         </div>
-         <br/><br/>
-         <div>
-            <ul class="tabs">
-               <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
-               <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
-               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
-            </ul>
-            <div class="qualifications_tab tab_panel">
-               <%= h @pitch.skills %>
-            </div>
-            <div class="deliverables_tab tab_panel hide">
-               <%= h @pitch.delivery_description %>
-            </div>
-            <div class="assignments_tab tab_panel hide">
-               <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
-            </div>
+            <% unless @story.external_links.blank? %>
+               <div class="external_links_tab tab_panel hide">
+                   <%= @story.external_links %>
+               </div>
+            <% end %>
+            <% unless @story.pitch.keywords.blank? %>
+               <div class="keywords_tab tab_panel hide">
+                  <%= h @story.pitch.keywords %>
+               </div>
+            <% end %>
+            <% unless @story.license.blank? %>
+               <div class="license_tab tab_panel hide">
+                  <%= @story.license %>
+               </div>
+            <% end %>
          </div>
       </div>
+      <% if logged_in? %>
+         <%= publishing_workflow_buttons_for(current_user) %>
+      <% end %>
    </div>
 </div>
