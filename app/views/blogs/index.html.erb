@@ -6,7 +6,7 @@
 <%@filter = ""%>
 <div id="fund_a_story">
    <div id="navigation">
-      <h5>Blog posts: <%=@current_network.display_name%> </h5>
+      <h5>Blog posts:</h5>
       <ul id="filters" class="filter" style="display:none;">
          <li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=asc">Newest Stories</a></div></li>
          <li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=desc">Oldest Stories</a></div></li>
@@ -53,8 +53,8 @@
                </p>
             </li>
          <% end %>
-         </ul>
-		<%=will_paginate @posts%>
+        <li class="post" style="border-top:1px solid #ccc;text-align:right;padding-top:4px;margin-top:4px;"><%=will_paginate @posts%></li> 
+		</ul>
 	<%end%>
    </div>
 </div>
