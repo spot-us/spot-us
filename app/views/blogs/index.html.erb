@@ -1,0 +1,60 @@
+<% content_for :head do %>
+  <%#= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss'}) %>
+ <% end %>
+
+<% @title = "Spot.us - Fund A Story" %>
+<%@filter = ""%>
+<div id="fund_a_story">
+   <div id="navigation">
+      <h5>Blog posts: <%=@current_network.display_name%> </h5>
+      <ul id="filters" class="filter" style="display:none;">
+         <li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=asc">Newest Stories</a></div></li>
+         <li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=desc">Oldest Stories</a></div></li>
+         <li<%=check_active(@filter,"almost_funded") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=almost_funded">Almost Funded</a></div></li>
+         <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=most_funded">Most Pledged</a></div></li>
+      </ul>
+      <h5 style="display:none;">Filter by Channel</h5>
+	<%@channels = []%>
+      <% if @channels.any? %>
+         <ul id="channels" class="filter">
+         <% @channels.each do |channel| %>
+            <% if channel == @channel %>
+               <li class="active">
+                <%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
+                <div><%= link_to channel.title, channel_path(channel) %></div>
+               </li>
+             <% else %>
+               <li>
+                <%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
+                <div><%= link_to channel.title, channel_path(channel) %></div>
+               </li>
+             <% end %>
+         <% end %>  
+      </ul>
+   <% end %>   
+   </div>
+   <div id="stories">
+      <h3 class="display_inline">NOW VIEWING:</h3> 
+      <h4 class="display_inline"><%= @filter.sub("_", " ").titleize %></h4>
+      <div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
+      <% if @posts.blank? %>
+         <div>
+          There were no results for your search.  Try different search terms.
+         </div>
+	 <%else%>
+		<ul>
+         <% @posts.each do |post| %>
+            <li class="post" style="clear:both;">
+               <h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
+               <p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
+               <%= image_tag(post.pitch.featured_image.url, :width=>"100", :style=>"float:left;padding:4px;") %>
+			   <p class="post_body">
+   					<%= truncate_words(strip_html(post.body), 35)%> <%= link_to "Read more &raquo", pitch_post_path(post.pitch, post) %>
+               </p>
+            </li>
+         <% end %>
+         </ul>
+		<%=will_paginate @posts%>
+	<%end%>
+   </div>
+</div>
