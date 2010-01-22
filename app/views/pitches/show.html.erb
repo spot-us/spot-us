@@ -151,7 +151,11 @@
                <%= h @pitch.delivery_description %>
             </div>
             <div class="assignments_tab tab_panel hide">
-               <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
+               <% if @pitch.assignments.any? %>
+                  <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
+               <% else %>
+                  no assignments
+               <% end %>
             </div>
          </div>
       </div>
