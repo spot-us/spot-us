@@ -1,7 +1,11 @@
 <div class="container">
   <div class="logo">
     <p>
-      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Funded Reporting</span><br /><img src="/images/new_design/usc.png" /></a>
+      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Funded Reporting</span>
+	  <%if @current_network && @current_network.name=="la"%>
+	  	<br /><img src="/images/new_design/usc.png" />
+	  <%end%>
+		</a>
     </p>
   </div>
   <ul id="main-nav">
