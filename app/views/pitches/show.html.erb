@@ -5,13 +5,6 @@
        jQuery("#show_action_items").click(function(){
           jQuery.facebox(jQuery("#action_buttons").html());
        });
-       jQuery(".tab").click(function(){
-          $(this).parent().parent().parent().find(".tab_panel").hide();
-          $("." + $(this).attr("id")).show();
-          $(this).parent().parent().find(".tab").removeClass("active");
-          $(this).addClass("active");
-          return false;
-       });
     });
   </script>
 <% end %>

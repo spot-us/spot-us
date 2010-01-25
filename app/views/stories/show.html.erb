@@ -1,17 +1,5 @@
 <!-- SHOW STORY -->
-<% content_for :head do %>
-  <script>
-    jQuery(document).ready(function($){
-       jQuery(".tab").click(function(){
-          $(this).parent().parent().parent().find(".tab_panel").hide();
-          $("." + $(this).attr("id")).show();
-          $(this).parent().parent().find(".tab").removeClass("active");
-          $(this).addClass("active");
-          return false;
-       });
-    });
-  </script>
-<% end %>
+
 <% @title = "Spot.us - Story: #{h @story.headline}" %>
 
 <div id="news_item">
