@@ -13,9 +13,10 @@ p + p {margin:0;text-indent:0;}
 a{text-decoration:none;color:#11363E;}
 a:focus, a:hover {color:#748F98;}
 ul#main-nav, ul#tabnav, ul.tabs{list-style-image: none;list-style-position: outside;list-style-type: none;}
-h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;}
+h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;margin-bottom:0;}
 h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
+
 
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .float-left{float:left;}
@@ -27,6 +28,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .headline {font-size:2.5em;font-weight:bold;letter-spacing:-1pt;}
 .media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:15px 15px 20px;width:563px;}
 .align-center{text-align:center;}
+.align-right{text-align:right;}
 .margin_bottom_10{margin-bottom:10px;}
 .display_block{display:block;}
 .display_inline{display:inline;}
@@ -151,9 +153,9 @@ div.featured_image {float:left;padding:0 15px 0 0;width:220px;}
 #news_item .story-block .story_content img{display:block;float:none;}
 ul.tabs{margin:0;}
 ul.tabs li {display:inline;}
-ul.tabs li a.tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
+ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
 			font-weight:bold;letter-spacing:0.03em;padding:4px 4px 2px;}
-ul.tabs li a.tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2px}
+ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2px}
 .tab_panel {background-color:#C7D9DB;font-family:Arial,Helvetica,sans-serif;padding:20px;min-height:120px;}
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
@@ -227,6 +229,9 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #story_form .row.add_media label{padding:0;width:210px;}
 #story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 
+#myspot_dashboard, #myspot_profile, #myspot_settings {padding:20px;width:720px;}
+ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
+#profile_user img {float:left;margin:0 20px 40px 0;}
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
