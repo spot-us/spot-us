@@ -1,0 +1,6 @@
+
+<ul id="profile_tabs" class="tabs">
+   <li><%= link_to 'Dashboard', myspot_donations_path, :id => 'dashboard_tab', :class => params[:controller]=="myspot/donations" ? "myspot_tab active" : "myspot_tab" %></li>
+   <li><%= link_to 'Profile', myspot_profile_path, :id => 'profile_tab', :class => params[:controller]=="myspot/profiles" ? "myspot_tab active" : "myspot_tab" %></li>
+   <li><%= link_to 'Settings', edit_myspot_settings_path, :id => 'settings_tab', :class => "myspot_tab" %></li>               
+</ul>
