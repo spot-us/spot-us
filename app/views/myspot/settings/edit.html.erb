@@ -1,0 +1,75 @@
+<% @title = "Spot.us - Settings" %>
+<%= render :partial => 'layouts/common_questions' %>
+<div id="myspot_dashboard">
+   <h3>My Spot</h3>
+   <%= render :partial => "myspot/nav", :locals => {:selected_tab => "settings"} %>
+   <% unless @settings.errors.empty? %>
+     <% content_for :error do %>
+       <%= error_messages_for_resource %>
+     <% end %>
+   <% end %>
+  <% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
+      <h4>Contact Info</h4>
+         <div class="row clearfix">
+             <%= f.label :email, 'Email Address' %>
+             <%= f.text_field :email %>
+         </div>
+        <% if @settings.is_a?(Reporter) || @settings.is_a?(Organization) %>
+           <div class="row">
+              <%= f.label :phone, 'Phone Number' %>
+              <%= f.text_field :phone %>
+              <br /><span class='small quieter'>Private</span>
+           </div>
+          <div class="row">
+            <%= f.label :address1, 'Address (1)' %>
+            <%=  f.text_field :address1 %>
+            <br /><span class='small quieter'>Private. </span>
+            <br />This is so we can send you a check.
+          </div>
+          <div class="row">
+            <%= f.label :address2, 'Address (2)' %>
+            <%= f.text_field :address2 %>
+          </div>
+          <div class="row">
+            <%= f.label :city %>
+            <%= f.text_field :city %>
+          </div>
+          <div class="row">
+            <%= f.label :state %>
+            <%= f.text_field :state, :size => 2 %>
+          </div>
+          <div class="row">
+            <%= f.label :zip %>
+            <%= f.text_field :zip, :size => 5 %>
+          </div>
+          <div class="row">
+            <%= f.label :country %>
+            <%= f.country_select :country, ['United States'], :include_blank => true %>
+          </div>
+      <hr>
+      <% end %>
+      <h4>Change Your Password</h4>
+        <div class="row">
+          <%= f.label :password, 'New Password' %>
+          <%= f.password_field :password %>
+          <br clear="all">
+          <%= f.label :password_confirmation, 'Confirm New Password' %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      <hr>
+      
+      <h4>Email Notifications</h4>
+        <div class="row">
+          <%= f.check_box :notify_blog_posts %>
+          <%= f.label     :notify_blog_posts,  "Blog Posts" %>
+          <br/>
+          <%= f.check_box :notify_comments %>
+          <%= f.label     :notify_comments,  "Comments" %>
+        </div>
+      <div class="">
+        <input type="image" src="/images/save.png">
+      </div>
+    <% end %>
+</div>
+
+
