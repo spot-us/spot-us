@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <h4>
+      <%= link_to assignment.title, pitch_assignment_path(assignment.pitch, assignment) %>
+    </h4>
+    <%= assignment.body %>
+    <div class="margin_top_10">
+       For pitch:
+       <strong><%= link_to h(assignment.pitch.headline), pitch_url(assignment.pitch) %></strong>
+    </div>
+  </td>
+  <td class="created"><%= assignment.created_at.to_s(:date) %></td>
+</tr>
