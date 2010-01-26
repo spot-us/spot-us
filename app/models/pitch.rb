@@ -38,6 +38,8 @@
 #  current_funding             :decimal(15, 2)
 #
 
+require "url_shortener"
+
 class Pitch < NewsItem
   # extend ActiveSupport::Memoizable
   aasm_initial_state  :unapproved
@@ -339,6 +341,23 @@ class Pitch < NewsItem
   
   def to_s
     headline
+  end
+  
+  def short_url(base_url=nil)
+    base_url = "http://spot.us/" unless base_url
+    authorize = UrlShortener::Authorize.new 'spotus', APP_CONFIG[:bitly]
+    client = UrlShortener::Client.new(authorize)
+    shorten = client.shorten("#{base_url}#{to_param}")
+    shorten.urls
+  end
+  
+  def status_update(show_url=true)
+    url_length = show_url ? 22 : 0
+    max_length = PREPEND_STATUS_UPDATE.length + url_length + 13
+    msg  = "#{PREPEND_STATUS_UPDATE} "
+    msg += headline.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : headline
+    msg += " - #{short_url}" if show_url
+    msg
   end
   
   def to_param
