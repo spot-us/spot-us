@@ -45,8 +45,10 @@
       <div class="right-panel-box clearfix">
          <div class="share">
          <h3>Share</h3>
-         <%= image_tag("/images/new_design/twitter.png") %>
-         <%= image_tag("/images/new_design/facebook.png") %>
+				<a title="Post this to Facebook" target="_blank" rel="nofollow"	href="http://www.facebook.com/share.php?u=<%=@pitch.short_url(request.url)%>&amp;t=<%= h @pitch.status_update(false) %>">
+		 		<%= image_tag("/images/new_design/facebook.png") %>
+			</a>
+			<a href="http://twitter.com/home?status=<%=h @pitch.status_update %>%>" title="Click to share this post on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
          </div>
          <div class="subscribe">
          <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
