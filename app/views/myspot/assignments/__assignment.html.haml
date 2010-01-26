@@ -1,8 +1,7 @@
 %tr
   %td.tip
     %p
-      Assignment:
-      = assignment.title
+      = link_to assignment.title, pitch_assignment_path(assignment.pitch, assignment)
       = assignment.body
     Assignment associated with:
     = link_to h(assignment.pitch.headline), pitch_url(assignment.pitch)
