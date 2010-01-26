@@ -10,13 +10,13 @@ vertical-align:baseline;
 }*/
 body{margin:0;}
 p + p {margin:0;text-indent:0;}
-a{text-decoration:none;color:#11363E;}
+a{text-decoration:none;color:#398C9F;}  /*#11363E;}*/
 a:focus, a:hover {color:#748F98;}
 ul#main-nav, ul#tabnav, ul.tabs{list-style-image: none;list-style-position: outside;list-style-type: none;}
 h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;margin-bottom:0;}
 h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
-
+tr, th, td {vertical-align:top;}
 
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .float-left{float:left;}
@@ -29,7 +29,9 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:15px 15px 20px;width:563px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
+.margin_top_10{margin-top:10px;}
 .margin_bottom_10{margin-bottom:10px;}
+.border_top {border-top:solid 1px #aaa;}
 .display_block{display:block;}
 .display_inline{display:inline;}
 
@@ -169,6 +171,10 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB
 .tab_panel .row label {display:block;}
 .tab_panel .row input, .tab_panel .row textarea {}
 .comments_tab ul {list-style-type:none;}
+ul.dashboard_tabs.tabs li a{font-size:11px;background:#ccc;font-weight:normal;color:#111;}
+ul.dashboard_tabs li a.myspot_tab.active{background-color:#A2BBC3;color:#111;padding:4px 4px 2px}
+#dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
+#dashboard_tab_container{margin-left:20px;}
 #fund_a_story{padding: 0 0 0 10px;}
 #fund_a_story #navigation{width:220px;float:left;}
 #fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
@@ -212,7 +218,9 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #story_form {padding:20px;}
 #story_form select {font-size:20px;padding:5px;}
 #story_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
-#story_form .row {clear:both;margin-bottom: 20px;}
+.form label {float:left;width:160px;margin-right:25px;text-align:right;padding:0px;color:#555;font-size:.9em;}
+#story_form .row, .form .row {clear:both;margin-bottom: 20px;}
+.form .row {margin-top:5px;}
 #story_form .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
 #story_form .row .tip_topics {margin-left:235px;width:440px;}
 #story_form .row .pitch_topics {width: 700px;margin-left:235px;}
@@ -229,9 +237,12 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #story_form .row.add_media label{padding:0;width:210px;}
 #story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 
-#myspot_dashboard, #myspot_profile, #myspot_settings {padding:20px;width:720px;}
+#myspot_dashboard, #myspot_profile, #myspot_settings {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
+#dashboard_content td img {float:left;margin:0 10px 10px 0;}
+#myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
+
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
