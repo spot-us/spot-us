@@ -139,6 +139,7 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #news_item .right-column .right-panel-box .progress_bar{width:140px;float:right;font-size:.9em;color:#ddd;font-weight:normal;}
 #news_item .right-column .right-panel-box .progress_bar .progress_bar_container{margin-top:5px;}
 #news_item .right-column .right-panel-box .donate_option{margin-bottom:40px;}
+#news_item .right-column .right-panel-box .donate_option img{display:block;}
 #news_item .right-column .right-panel-box form img{margin-bottom:5px;}
 #news_item .right-column .right-panel-box .share{float:left;width:100px;}
 #news_item .right-column .right-panel-box .subscribe{float:right;width:230px;}
