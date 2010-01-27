@@ -13,8 +13,9 @@
                <p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %></p>
                <p class="post_body">
                   <%= truncate_words(strip_html(post.body), 35)%>
+                  <%= link_to "Read More &raquo", pitch_post_path(post.pitch, post) %>
                </p>
-               <%= link_to "&raquo", pitch_post_path(post.pitch, post) %>
+               
             </li>
          <% end %>
          </ul>
