@@ -86,7 +86,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .home-boxer #main-area.home-floater{width:595px;float:left;margin-left:20px;}
 .home-floater {padding:20px 15px 15px;margin-right:23px;}
 .stories-in-progress{float:right;width:338px;background:#eee;}
-.stories-in-progress ul{margin:0;padding:0 15px 0 3px;}
+.stories-in-progress ul{margin:0;padding:0 15px 0 3px;list-style-type:none;}
 .stories-in-progress ul li.post img{display:block;width:300px;height:163px;}
 p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;letter-spacing:0;line-height:13px;text-transform:uppercase;
 				margin-bottom:1.5em;}
