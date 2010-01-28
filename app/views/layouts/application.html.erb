@@ -29,21 +29,21 @@
       </div>
     </div>
     <div id="header-bar"> </div>
-    <% if yield(:error) %>
-      <div class="error">
-         <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
-         <p><%= yield(:error)%></p>
-      </div>
-    <% end %>
-    <div id="flash">
-       <% flash.each do |key, value| %>
-         <div class="<%=key%>">
+    <div class="body-content">
+       <% if yield(:error) %>
+         <div class="error">
             <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
-            <p><%= value%></p>
+            <p><%= yield(:error)%></p>
          </div>
        <% end %>
-    </div>
-    <div class="body-content">
+       <div id="flash">
+          <% flash.each do |key, value| %>
+            <div class="<%=key%>">
+               <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
+               <p><%= value%></p>
+            </div>
+          <% end %>
+       </div>
       <%= yield %>
        <div class="clear"></div>
        <div id="footer">

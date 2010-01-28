@@ -1,5 +1,3 @@
-/ = fb_connect_javascript_tag
-/ = init_fb_connect "XFBML"
 .login-boxer.span-13
   .span-12.login
     - form_tag session_url(:protocol => 'http') do
@@ -14,4 +12,3 @@
   .span-12.register
     = render :partial => "users/form"
 .clear
-=# fb_login_button('window.location = "/users/link_user_accounts";', :size => "small")

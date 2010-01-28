@@ -244,6 +244,18 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
+#login_modal {padding:20px;}
+#login_modal label {font-size:11px;}
+#login_modal a {color:#398C9F;}
+#login_modal input {margin-top:0;margin-left:0;}
+#login_modal #login_form {margin-bottom:15px;}
+#login_modal .forgot_password {margin: 0 10px;}
+#login_modal .row {clear:both;}
+#login_modal h3 {margin-bottom:15px;}
+#login_modal #register_form label {float:left; width:120px; display:block;}
+#login_modal input[type="image"] {margin-top:15px;}
+#login_modal input[type="checkbox"] {margin-bottom:0;}
+
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
@@ -259,4 +271,64 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #footer-notes li img, #footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
 #footer a, #user-header a {color:#FFFFFF;text-decoration:none;}
 #footer .engine_yard {background:transparent url(/images/logo_ey.png) no-repeat scroll left bottom;float:right;margin:0 0 10px;padding:10px 0 10px 30px;}
+
+/* Flash Error Styling */
+.error, .success, .notice {
+  border-color:#FFD324;
+  width: 952px;
+  padding: 10px 15px 15px 65px;
+  margin-bottom:1em;
+  border-bottom: 1px #c9c9c9 solid;
+  min-height: 80px;
+}
+
+#flash p {
+  padding: 20px 0 0 0;
+}
+.success, .notice {
+  background: #fff url(/images/flash_success_bg.jpg) no-repeat;
+  color:#514721;
+}
+.success h2 {
+  color: #3a9300;
+}
+.error {
+  background: #fff url(/images/flash_error_bg.jpg) no-repeat;
+  color: #a70000;
+}
+.error h2 {
+  color: #a70000;
+}
+.error h2, .error p, .error li, .success h2, .success p, .success li {
+  margin: 0;
+  padding: 0;
+}
+.error li, .success li {
+  list-style: square;
+}
+.error a, .success a {
+  text-decoration: none;
+  color: #999999;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+.fieldWithErrors input {
+  border: 1px #a70000 solid;
+}
+.fieldWithErrors input, .fieldWithErrors label {
+  color: #a70000;
+  font-weight: bold;
+}
+.dismiss {
+  float: right;
+}
+.dismiss a {
+  text-decoration: none;
+  height: 22px;
+  width: 22px;
+  background: url('/images/close_square.png') no-repeat;
+  display: block;
+}
 
