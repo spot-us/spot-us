@@ -31,7 +31,7 @@ jQuery(document).ready(function($){
     });
   });
 
-  $("#facebox .content .login-boxer form").livequery(function() {
+  $("#login_modal form.login").livequery(function() {
     var form = $(this);
     $(this).ajaxForm({
       complete: function(request,message) {
