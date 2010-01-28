@@ -222,9 +222,10 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 .form label {float:left;width:160px;margin-right:25px;text-align:right;padding:0px;color:#555;font-size:.9em;}
 #story_form .row, .form .row {clear:both;margin-bottom: 20px;}
 .form .row {margin-top:5px;}
-#story_form .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
-#story_form .row .tip_topics {margin-left:235px;width:440px;}
-#story_form .row .pitch_topics {width: 700px;margin-left:235px;}
+.row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
+.row .tip_topics {margin-left:235px;width:440px;}
+.row .profile_topics {margin-left:185px;width:440px;}
+.row .pitch_topics {width: 700px;margin-left:235px;}
 #story_form select {width:200px;}
 #story_form input, #story_form select, #story_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
 #story_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
@@ -240,7 +241,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 
 #myspot_dashboard, #myspot_profile, #myspot_settings {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
-#dashboard_content td img {float:left;margin:0 10px 10px 0;}
+#dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
 #myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
