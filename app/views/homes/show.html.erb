@@ -1,11 +1,10 @@
 <% @title = "Spot.us - Home" %>
-
-   <div class="home-boxer">
-      <div class="home-floater stories-in-progress">
-         <div class="folded-headers-short">
-            <div id="header-container-short"> Stories in Progress</div>
-         </div>
-         <ul>
+<div class="home-boxer">
+   <div class="home-floater stories-in-progress">
+      <div class="folded-headers-short">
+         <div id="header-container-short"> Stories in Progress</div>
+      </div>
+      <ul>
          <% Post.by_network(@current_network).latest.each do |post| %>
             <li class="post">
                <h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
@@ -15,46 +14,44 @@
                   <%= truncate_words(strip_html(post.body), 35)%>
                   <%= link_to "Read More &raquo", pitch_post_path(post.pitch, post) %>
                </p>
-               
             </li>
          <% end %>
+      </ul>
+   </div>
+   <div id="main-area" class="home-floater">
+      <h1>Community Funded Journalism</h1>
+      <div id="help-images">
+         <%= link_to image_tag("/images/new_design/people-submit.jpg"), "#" %><%= link_to image_tag("/images/new_design/journalists-pitch.jpg"), "#" %><%= link_to image_tag("/images/new_design/people-fund.jpg"), "#" %>
+      </div>
+      <div class="folded-headers">
+         <div id="header-container">Fund a story</div>
+      </div>
+      <div style="clear: both;"></div>
+      <div id="next">
+         <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next arrow float-right" %>
+      </div>
+      <div id="prev">
+         <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev arrow float-left" %>
+      </div>
+      <div id="pitches_carousel">
+         <ul>
+             <%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
          </ul>
       </div>
-      <div id="main-area" class="home-floater">
-         <h1>Community Funded Journalism</h1>
-         <div id="help-images">
-            <%= link_to image_tag("/images/new_design/people-submit.jpg"), "#" %><%= link_to image_tag("/images/new_design/journalists-pitch.jpg"), "#" %><%= link_to image_tag("/images/new_design/people-fund.jpg"), "#" %>
-         </div>
-         <div class="folded-headers">
-            <div id="header-container">Fund a story</div>
-         </div>
-         <div style="clear: both;"></div>
-         <div id="next">
-            <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next arrow float-right" %>
-         </div>
-         <div id="prev">
-            <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev arrow float-left" %>
-         </div>
-         <div id="pitches_carousel">
-            <ul>
-                <%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
-            </ul>
-         </div>
-         <div class="folded-headers">
-            <div id="header-container">Recently Published</div>
-         </div>
-         <div style="clear: both;"></div>
-         <div id="next_story">
-            <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next_story arrow float-right" %>
-         </div>
-         <div id="prev_story">
-            <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev_story arrow float-left" %>
-         </div>
-         <div id="stories_carousel">
-            <ul>
-                <%= render :collection => @featured_stories, :partial => 'featured_story' %>
-            </ul>
-         </div>
+      <div class="folded-headers">
+         <div id="header-container">Recently Published</div>
       </div>
-      
+      <div style="clear: both;"></div>
+      <div id="next_story">
+         <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next_story arrow float-right" %>
+      </div>
+      <div id="prev_story">
+         <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev_story arrow float-left" %>
+      </div>
+      <div id="stories_carousel">
+         <ul>
+             <%= render :collection => @featured_stories, :partial => 'featured_story' %>
+         </ul>
+      </div>
    </div>
+</div>
