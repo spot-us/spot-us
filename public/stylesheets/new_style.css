@@ -66,7 +66,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 #header ul#main-nav {margin: 25px 0 0 50px;float:left;width:545px;}
 #header ul#main-nav li {display:inline;}
 #header div.howtouse {width:150px;height:100px;font: bold 11px verdana, arial, sans-serif;letter-spacing:-1px;color: #11363e;float:left;
-			margin-top:40px;font-family:Arial, Helvetica, sans-serif;font-size:11pt;vertical-align:text-top;}
+			margin-top:23px;font-family:Arial, Helvetica, sans-serif;font-size:11pt;vertical-align:text-top;}
 #header .howtouse .header{font-family:Arial, Helvetica, sans-serif;font-size:12pt;font-weight:bolder;color: #398c9f;line-height:10pt;}
 #header div.howtouse span{line-height:13pt;}
 #header-bar {background-color:#11363E;height:5px;width:100%;}
@@ -82,7 +82,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .body-content {background:transparent url(/images/new_design/main-content-bg.jpg) repeat-y scroll 0 0;margin:0 auto;padding:0 12px;width:1066px;
 				min-height:500px;}
 .home-boxer{}
-.home-boxer h1 {color:#617D86;float:left;font-family:Arial,Helvetica,sans-serif;font-size:23pt;font-weight:bold;letter-spacing:-1pt;margin-bottom:10px;}
+.home-boxer h1 {color:#617D86;font-family:Arial,Helvetica,sans-serif;font-size:23pt;font-weight:bold;letter-spacing:-1pt;margin-bottom:10px;}
 .home-boxer #main-area.home-floater{width:595px;float:left;margin-left:20px;}
 .home-floater {padding:20px 15px 15px;margin-right:23px;}
 .stories-in-progress{float:right;width:338px;background:#eee;}
