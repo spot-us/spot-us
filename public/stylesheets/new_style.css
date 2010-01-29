@@ -247,7 +247,8 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #spotus_form .row.contract {padding-left:233px;}
 #spotus_form .row.add_media label{padding:0;width:210px;}
 #spotus_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
-#spotus_form.blog_post .row.submit {text-align:right;margin-right:105px;}
+#spotus_form.blog_post .row.submit, #spotus_form.assignment .row.submit {text-align:right;margin-right:105px;}
+
 #myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
