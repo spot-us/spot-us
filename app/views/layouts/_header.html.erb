@@ -1,7 +1,11 @@
 <div class="container">
   <div class="logo">
     <p>
-      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Funded Reporting</span><br /><img src="/images/new_design/usc.png" /></a>
+      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Funded Reporting</span>
+	  <%if @current_network && @current_network.name=="la"%>
+	  	<br /><img src="/images/new_design/usc.png" />
+	  <%end%>
+		</a>
     </p>
   </div>
   <ul id="main-nav">
@@ -14,17 +18,34 @@
    </ul>
    <!-- REFACTOR how to use -->
    <div class="howtouse">
-	   <span class="header">How to Use Spot.Us</span><br />
-      <span>&bull; To fund a pitch<br />
-         &bull; To create a pitch<br />
-         &bull; As a news publisher</span><br /><br />
-      <div style="margin-top:-12px;"> <div class="roundedcornr_box_807323">
-         <div class="roundedcornr_top_807323"><div></div></div>
-         <div class="roundedcornr_content_807323">
-            Media Partners
+      <div style="margin-top:2px;">
+         <div class="roundedcornr_box_807323">
+            <div class="roundedcornr_top_807323"><div></div></div>
+            <div class="roundedcornr_content_807323">
+               Newsletter
+            </div>
+            <div class="roundedcornr_bottom_807323"><div></div></div>
          </div>
-         <div class="roundedcornr_bottom_807323"><div></div></div>
-      </div></div>
+      </div>
+      <div style="margin-top:2px;">
+         <div class="roundedcornr_box_807323">
+            <div class="roundedcornr_top_807323"><div></div></div>
+            <div class="roundedcornr_content_807323">
+               Blog
+            </div>
+            <div class="roundedcornr_bottom_807323"><div></div></div>
+         </div>
+      </div>
+      <div style="margin-top:2px;">
+         <div class="roundedcornr_box_807323">
+            <div class="roundedcornr_top_807323"><div></div></div>
+            <div class="roundedcornr_content_807323">
+               Media Partners
+            </div>
+            <div class="roundedcornr_bottom_807323"><div></div></div>
+         </div>
+      </div>
+      
       <div style="margin-top:2px;">
          <div class="roundedcornr_box_807323">
             <div class="roundedcornr_top_807323"><div></div></div>
@@ -34,8 +55,6 @@
             <div class="roundedcornr_bottom_807323"><div></div></div>
          </div>
       </div>
-      <br />
-      </p>
    </div>
   </div>
 </div>

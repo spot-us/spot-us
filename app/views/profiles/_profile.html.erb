@@ -1,0 +1,44 @@
+<% if @profile.editable_by?(current_user) %>
+   <div class="float-right">
+      <%= link_to image_tag("edit_your_profile.png"), edit_myspot_profile_path %>
+   </div>
+<% end %>
+<div id="profile_user">
+   <%= render :partial => 'shared/user', :locals => { :user => @profile } %>
+</div>
+<% if @profile.topics.any? %>
+   <%= h @profile.first_name %>
+      has shown interest in 
+    <%= show_topics(@profile) %>
+  <br/>
+<% end %>
+<hr>
+
+<% unless @profile.about_you.blank? %>
+  <h3>About <%= @profile.first_name %></h3>
+  <%= sanitize @profile.about_you %>
+<% end %>
+<% if @profile.is_a?(Reporter) && @profile.samples.any? %>
+  <h3>Work Samples</h3>
+  <hr>
+  <% for sample in @profile.samples %>
+      <% if !sample.url.blank? %>
+        <%= link_to h(sample.title), sample.url %>
+      <% else %>
+         <%= h sample.title %>
+      <% end %>
+      <%= sanitize(sample.description) %>
+   <% end %>
+<% end %>
+<% if @profile.is_a?(Reporter) && @profile.jobs.any? %>
+  <h3>Work History</h3>
+  <hr>
+  <% for job in @profile.jobs %>
+      <% if !job.url.blank? %>
+         <%= link_to h(job.title), job.url %>
+      <% else %>
+         <%= h job.title %>
+      <% end %>
+      <%= sanitize(job.description) %>
+   <% end %>
+<% end %>

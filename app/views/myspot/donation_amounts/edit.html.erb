@@ -1,0 +1,114 @@
+<% @title = "Spot.us - Fund Your Donations" %>
+
+<% content_for :head do %>
+   <% javascript_tag do %>
+    jQuery(document).ready(function(){
+      jQuery('#remove_spotus_donation').click(function(){
+        jQuery('input#spotus_donation').val('');
+        jQuery('#support_spotus').hide();
+        return false;
+      });
+      jQuery('select.invisible').val('');
+      jQuery('a.show_group_selector').toggle(function(){
+        jQuery(this).next("select").removeClass("invisible").focus().next("em").removeClass("invisible");        
+      },function(){
+        jQuery(this).blur().next("select").val('').addClass("invisible").next("em").addClass("invisible");
+      });
+    });
+    <% end %>
+<% end %>
+
+<% if @donations && @donations.any?(&:errors) %>
+  <% content_for :error do %>
+    <%= error_messages_for :donations, :object => @donations %>
+  <% end %>
+<% end %>
+<%= render :partial => "layouts/common_questions" %>
+<div id="donation_amounts">
+    <h2 class="heading"> Almost done! One more step:</h2>
+    
+    <% if current_user.total_credits > 0 %>
+      <div class="float-right">
+        <%= "You have #{number_to_currency(current_user.remaining_credits)} unallocated credits." %>
+      </div>
+    <% end %>   
+    <% if unpaid_donations.any? %>
+         <h3 class="heading">Fund Your Donations</h3>
+    <% end %>   
+      <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix" do %>
+       <ul class="unpaid_donations">
+         <% unpaid_donations.each do |donation| %>
+            <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
+               <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
+               <div class="donation_item">
+                  <h4>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h4>
+                  <% if Group.all.any? %>
+                      <p>
+                        <a href="#group_selection" class="show_group_selector">Donate on behalf of group?</a>
+                        <%= select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>select a group</option>' +  options_from_collection_for_select(Group.all, :id, :name), :class => "invisible" %>
+                        <em class="invisible quiet small">optional</em>
+                      </p>
+                  <% end %>
+                  <p>
+                     <%= truncate_words(donation.pitch.short_description) %>
+                     <%= link_to 'Read More &raquo;', donation.pitch %>
+                  </p>
+               </div>
+               <div class="donater">
+                   $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 4, :id => "donation_amounts_#{donation.id}_amount" %>
+                  <div class="action">
+                     <%= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
+                  </div> 
+               </div>
+            <% end %>
+         <% end %>
+         </ul>
+      <% end %>
+        <% if unpaid_credits.any? %>
+          <h3 class="heading">Apply Credits</h3>
+          <ul class="unpaid_donations">
+              <% unpaid_credits.each do |credit_pitch| %>
+                <% content_tag_for :li, credit_pitch, :class => 'unpaid clearfix' do %>
+                    <%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
+                    <div class="donation_item">
+                       <h4>PITCH:
+                           <%= link_to credit_pitch.pitch.headline, credit_pitch.pitch %>
+                        </h4>
+                        <p>
+                           <%= truncate_words(credit_pitch.pitch.short_description) %>
+                           <%= link_to 'Read More &raquo;', credit_pitch.pitch %>
+                        </p>
+                    </div>
+                    <div class="donater">
+                        $ <%= text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 4, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount" %>
+                        <div class="action">
+                           <%= link_to "Remove", myspot_donation_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?" %>
+                        </div>
+                    </div>
+               <% end %> 
+            <% end %>
+            </ul>
+         <% end %>
+         <h3 class="heading">Support Spot.Us</h3>
+         <ul>
+            <li id="support_spotus" class="donation clearfix">
+               <%= image_tag('support_spotus.png') %>
+               <div class="donation_item">
+                  <h3>Support Spot.Us</h3>
+                  <p>Spot.Us is a nonprofit project to pioneer "community funded reporting." Through Spot.Us the public can commission journalists to do investigations into important and perhaps overlooked stories.
+                  </p>
+               </div>
+               <div class="donater">
+                  $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation" %>
+                  <div class="action">
+                     <%= link_to "Remove", '#', :id => 'remove_spotus_donation' %>
+                  </div>
+               </div>
+            </li>
+         </ul>
+      <div class="float-right">
+         <%#= image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update" %>
+         <%= image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase" %>
+      </div>
+
+</div>

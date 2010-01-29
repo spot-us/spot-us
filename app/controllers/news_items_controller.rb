@@ -6,6 +6,7 @@ class NewsItemsController < ApplicationController
 
   def index
     @channels = Channel.by_network(current_network)
+    @filter = "Newest Stories"
     respond_to do |format|
       format.rss do
         #@news_items = NewsItem.newest.first(10)
@@ -26,6 +27,19 @@ class NewsItemsController < ApplicationController
   end
 
   def search
+    @channels = Channel.by_network(current_network)
+    @filter = "newest_stories"
+    case params[:sort_by]
+    when "asc"
+      @filter = "newest_stories"
+    when "desc"
+      @filter = "oldest_stories"
+    when "almost_funded"
+      @filter = "almost_funded"
+    when "most_funded"
+      @filter = "most_pledged" 
+    end
+      
     get_news_items
     render :action => 'index'
   end
