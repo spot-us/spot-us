@@ -18,6 +18,7 @@ h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
 tr, th, td {vertical-align:top;}
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
+
 .float-left{float:left;}
 .float-right{float:right;}
 .quiet{color:#11363E;}
@@ -239,11 +240,23 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #story_form .row.add_media label{padding:0;width:210px;}
 #story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 
-#myspot_dashboard, #myspot_profile, #myspot_settings {padding:20px 20px 50px;width:770px;float:left;}
+#myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
 #myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
+
+#donation_amounts p {margin-bottom:.5em;}
+#donation_amounts a {color:#398C9F;}
+#donation_amounts h4 a {color:#11363E;}
+#donation_amounts ul {list-style-type:none;margin:0 30px;}
+#donation_amounts ul li img {float:left;margin: 0 35px 10px 0;}
+#donation_amounts h2.heading {border-bottom:5px solid #eee;color: #800000; text-align: center;margin-bottom:25px;}
+#donation_amounts h3.heading {border-bottom:5px solid #eee;margin-bottom:20px;padding-bottom:5px;}
+#donation_amounts .donation {margin-bottom:15px;border-bottom: 1px solid #eee;padding-bottom:10px;}
+#donation_amounts .donation_item {float:left;width:500px;margin-right:30px;}
+#donation_amounts .donater {float:left;width:75px;}
+
 
 #login_modal {padding:20px;}
 #login_modal label {font-size:11px;}
@@ -272,6 +285,9 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #footer-notes li img, #footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
 #footer a, #user-header a {color:#FFFFFF;text-decoration:none;}
 #footer .engine_yard {background:transparent url(/images/logo_ey.png) no-repeat scroll left bottom;float:right;margin:0 0 10px;padding:10px 0 10px 30px;}
+
+
+
 
 /* Flash Error Styling */
 .error, .success, .notice {
