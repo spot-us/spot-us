@@ -1,0 +1,24 @@
+<div id="myspot_side_panel">
+  <h3>Common Questions</h3>
+  <p>
+    Perhaps you have some questions. That's great. We love them. Don't hesitate to contact us
+    <%= mail_to "david@spot.us", nil, :encode => "hex" %>
+    Or check out our....
+  </p>
+  <h3><%= link_to "FAQ", page_path('about') %></h3>
+     <p>
+        In the FAQ you'll find answers to common questions from 
+     <%= link_to "citizens", page_path("about") + "#faq_citizen" %>
+     <%= link_to "reporters", page_path("about") + "#faq_reporter" %>
+     <%= link_to "news organizations", page_path("about") + "#faq_news_organization" %>.
+    and
+    <%= link_to "general FAQ's", page_path("about") + "#faq_general" %>
+    
+    and how Spot.Us works.
+    </p
+  <p>
+    It's a good way to get a feel for our site and our mission - to support meaningful journalism.
+  </p>
+</div>
+
+  

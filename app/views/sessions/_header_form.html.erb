@@ -1,0 +1,25 @@
+<div id="login_modal">
+   <% form_tag session_url(:protocol => 'http'), :class => "login" do %>
+      <div id="login_form">
+         <div class="float-right"><strong><a id="show_register_form" href="">&raquo; Register For Spot.Us</a></strong></div>
+         <h3>Thanks for joining us!</h3> 
+         <%= render :partial => 'sessions/popup_form' %>
+         <input type='image' src='/images/login.png' alt="Login" onclick="processLoginForm();"> 
+      </div>
+   <% end %>
+   <%= render :partial => "users/form" %>
+</div>
+<% javascript_tag do %>
+   jQuery(function(){
+      jQuery("#show_register_form").click(function(){
+         jQuery("#register_form").show();
+         jQuery("#login_form").hide();
+         return false;
+      });
+      jQuery("#show_login_form").click(function(){
+         jQuery("#register_form").hide();
+         jQuery("#login_form").show();
+         return false;
+      });
+   });
+<% end %>

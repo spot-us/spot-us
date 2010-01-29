@@ -1,0 +1,12 @@
+<div id="spotus_form">
+   <% unless @pitch.errors.empty? %>
+     <% content_for :error do %>
+       <%= error_messages_for :pitch %>
+     <% end %>
+   <% end %>
+
+   <% @title = "Spot.us - Edit your pitch" %>
+
+   <h2>Edit Your Pitch</h2>
+   <%= render :partial => 'form' %>
+</div>

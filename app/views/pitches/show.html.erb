@@ -6,7 +6,6 @@
           jQuery.facebox(jQuery("#action_buttons").html());
        });
        jQuery(".tab").click(function(){
-          //alert();
           $(this).parent().parent().parent().find(".tab_panel").hide();
           $("." + $(this).attr("id")).show();
           $(this).parent().parent().find(".tab").removeClass("active");
@@ -24,8 +23,8 @@
   </div>
 <% end %>
 
-<div id="pitch">
-   <div id="pitch_header">
+<div id="news_item">
+   <div id="news_item_header">
       <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
       <h2 class="headline"><%= h @pitch.headline %></h2>
    </div>
@@ -46,8 +45,10 @@
       <div class="right-panel-box clearfix">
          <div class="share">
          <h3>Share</h3>
-         <%= image_tag("/images/new_design/twitter.png") %>
-         <%= image_tag("/images/new_design/facebook.png") %>
+			<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%=@pitch.short_url(request.url)%>&amp;t=<%= h @pitch.status_update(false) %>">
+		 		<%= image_tag("/images/new_design/facebook.png") %>
+			</a>
+			<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=h @pitch.status_update %>%>" title="Share this Pitch on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
          </div>
          <div class="subscribe">
          <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
@@ -63,13 +64,13 @@
    </div>
    <div class="main-column">
       <div class="folded-headers-big">
-         <div class="pitch_author">
+         <div class="news_item_author">
             <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
             <h5>Author</h5>
             <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
          </div>
          <% if @pitch.peer_reviewer %>
-         <div class="pitch_author">
+         <div class="news_item_author">
             <%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
             <h5>Peer Review Editor</h5>
             <%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
@@ -84,13 +85,14 @@
             </div>
          </div>
       <% end %>
-      <div id="pitch_info">
+      <div id="news_item_info">
          <div>
             <ul class="tabs">
                <li><a id="description_tab" href="" class="tab active">Description</a></li>
-               <li><a id="how_tab" href="" class="tab">How will it help?</a></li>
                <li><a id="story_tab" href="" class="tab">Story updates</a></li>
                <li><a id="comments_tab" href="" class="tab">Comments (<%=@pitch.comments.size%>)</a></li>
+			   <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
+               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
             </ul>
             <div class="description_tab tab_panel clearfix">
                <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
@@ -118,34 +120,44 @@
                <% end %>
             </div>
             <div class="comments_tab tab_panel hide">
-               <ul>
-               <% @pitch.comments.each do |comment| %>
-                  <li>
-                     <h5><%= comment.title %></h5>
-                     <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
-                     <div class="comment"><%= comment.body %>
-                        by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
-                     </div>
-                  </li>
+               <% if !@pitch.comments.any? %>
+                  <p>There are no comments yet, be the first!</p>
+               <% else %>
+                  <ul>
+                     <% @pitch.comments.each do |comment| %>
+                        <li>
+                           <h5><%= comment.title %></h5>
+                           <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
+                           <div class="comment"><%= comment.body %>
+                              by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
+                           </div>
+                        </li>
+                     <% end %>
+                  </ul>
                <% end %>
-               </ul>
+               <h3>Post A Comment</h3>
+               <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+                  <%= render :partial => 'comments/form', :locals => {:f => f} %>
+               <% end %>
+            </div>
+			<div class="deliverables_tab tab_panel hide">
+               <%= h @pitch.delivery_description %>
+            </div>
+            <div class="assignments_tab tab_panel hide">
+               <% if @pitch.assignments.any? %>
+                  <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
+               <% else %>
+                  no assignments
+               <% end %>
             </div>
          </div>
          <br/><br/>
          <div>
             <ul class="tabs">
                <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
-               <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
-               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
             </ul>
             <div class="qualifications_tab tab_panel">
                <%= h @pitch.skills %>
-            </div>
-            <div class="deliverables_tab tab_panel hide">
-               <%= h @pitch.delivery_description %>
-            </div>
-            <div class="assignments_tab tab_panel hide">
-               <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
             </div>
          </div>
       </div>

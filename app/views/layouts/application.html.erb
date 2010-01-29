@@ -20,7 +20,7 @@
                <li><%= link_to "All Networks", root_url(:subdomain => false) %></li>
             <% end %>
             <% Network.all.each do |network| %>
-               <li><%= link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase %></li>
+               <li><%= link_to network.display_name, root_url(:subdomain => network.name).to_s.downcase, :class => (@current_network==network ? "selected" : "") %></li>
             <% end %>
             <li><%= link_to "suggest a city ...", "", :id => "show_suggest_city"%></li>
             <%= render :partial => "shared/suggest_city"%>
@@ -29,21 +29,21 @@
       </div>
     </div>
     <div id="header-bar"> </div>
-    <% if yield(:error) %>
-      <div class="error">
-         <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
-         <p><%= yield(:error)%></p>
-      </div>
-    <% end %>
-    <div id="flash">
-       <% flash.each do |key, value| %>
-         <div class="<%=key%>">
+    <div class="body-content">
+       <% if yield(:error) %>
+         <div class="error">
             <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
-            <p><%= value%></p>
+            <p><%= yield(:error)%></p>
          </div>
        <% end %>
-    </div>
-    <div class="body-content">
+       <div id="flash">
+          <% flash.each do |key, value| %>
+            <div class="<%=key%>">
+               <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
+               <p><%= value%></p>
+            </div>
+          <% end %>
+       </div>
       <%= yield %>
        <div class="clear"></div>
        <div id="footer">
