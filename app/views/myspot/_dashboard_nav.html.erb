@@ -1,0 +1,11 @@
+<div id="dashboard_tab_container">
+  <ul class="dashboard_tabs tabs">
+    <li><%= link_to "Donations (#{current_user.all_donations.paid.count})", myspot_donations_path, :class => selected_tab=="donations" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_donations_tab" %></li>
+    <li><%= link_to "Pledges (#{current_user.pledges.count})", myspot_pledges_path, :class => selected_tab=="pledges" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_pledges_tab" %></li>
+    <li><%= link_to "Pitches (#{current_user.pitches.count})", myspot_pitches_path, :class => selected_tab=="pitches" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_pitches_tab" %></li>
+    <li><%= link_to "Blog Posts (#{current_user.posts.count})", myspot_posts_path, :class => selected_tab=="posts" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_posts_tab" %></li>
+    <li><%= link_to "Tips (#{current_user.tips.count})", myspot_tips_path, :class => selected_tab=="tips" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_tips_tab" %></li>
+    <li><%= link_to "Comments (#{current_user.comments.count})", myspot_comments_path, :class => selected_tab=="comments" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_comments_tab" %></li>
+    <li><%= link_to "Assignments (#{current_user.assignments.count})", myspot_assignments_path, :class => selected_tab=="assignments" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_assignments_tab" %></li>
+  </ul>
+</div>

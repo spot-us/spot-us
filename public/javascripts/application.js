@@ -22,7 +22,14 @@ jQuery(document).ready(function($){
     btnPrev: ".prev_story",
     visible: 2
   });
-
+	
+	$(".tab").click(function(){
+     $(this).parent().parent().parent().find(".tab_panel").hide();
+     $("." + $(this).attr("id")).show();
+     $(this).parent().parent().find(".tab").removeClass("active");
+     $(this).addClass("active");
+     return false;
+  });
 
   $("#show_suggest_city").click(function(){
   	$.facebox($("#suggest_city").html());
