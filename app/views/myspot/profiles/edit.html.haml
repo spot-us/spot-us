@@ -2,7 +2,7 @@
 .block-spacer
 %h3 My Spot
 
-= render :partial => 'myspot/nav'
+= render :partial => 'myspot/nav', :locals => {:selected_tab => "profile"}
 
 - unless @profile.errors.empty?
   - content_for :error do

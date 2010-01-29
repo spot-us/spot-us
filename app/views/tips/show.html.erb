@@ -1,0 +1,97 @@
+<!-- SHOW TIP -->
+
+<% @title = "Spot.us - Tip: #{h @tip.headline}" %>
+
+<div id="news_item">
+   <div id="news_item_header">
+      <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
+      <h2 class="headline"><%= h @tip.headline %></h2>
+   </div>
+   <div class="right-column">
+      <div class="right-panel-box clearfix">
+        <%= render :partial => "pledges/button", :locals => { :news_item => @tip } %>
+      </div>
+   
+      <div class="right-panel-box clearfix">
+         <div class="share">
+         <h3>Share</h3>
+         <%= image_tag("/images/new_design/twitter.png") %>
+         <%= image_tag("/images/new_design/facebook.png") %>
+         </div>
+      </div>
+      
+      <div id="supporters">
+          <%= render :partial => "supporters", :locals => {:news_item => @tip} %>
+      </div>
+   </div>
+   <div class="main-column">
+      <div class="folded-headers-big">
+         <div class="news_item_author">
+            <%= link_to image_tag(@tip.user.photo(:thumb), :class => "avatar"), profile_path(@tip.user) %>
+            <h5>Author</h5>
+            <%= link_to @tip.user.full_name, profile_path(@tip.user), :class => "username" %>
+         </div>
+      </div>
+      <% unless @tip.video_embed.blank? %>
+         <div class="media-box">
+            <h3>Multimedia</h3>
+            <div class="align-center">
+               <%= @tip.video_embed %>
+            </div>
+         </div>
+      <% end %>
+      <div class="story-block clearfix">
+         <%= render :partial => 'news_items/featured_image', :locals => {:news_item => @tip} %>
+         <div class="story_content">
+            <%= @tip.short_description %>
+         </div>
+      </div>
+      <br/><br/>
+      <div id="news_item_info">
+         <div>
+            <ul class="tabs">
+               <li><a id="comments_tab" href="" class="tab active">Comments (<%=@tip.comments.size%>)</a></li>
+               <li><a id="related_pitches_tab" href="" class="tab">Related Pitches</a></li>
+               <li><a id="keywords_tab" href="" class="tab">Keywords</a></li>               
+            </ul>
+            <div class="comments_tab tab_panel">
+               <ul>
+               <% @tip.comments.each do |comment| %>
+                  <li>
+                     <h5><%= comment.title %></h5>
+                     <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
+                     <div class="comment"><%= comment.body %>
+                        by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
+                     </div>
+                  </li>
+               <% end %>
+               <% if !@tip.comments.any? %>
+                  <li>There are no comments yet, be the first!</li>
+               <% end %>
+               </ul>
+               <h3>Post A Comment</h3>
+               <% form_for [@tip, Comment.new(:commentable => @tip)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+                  <%= render :partial => 'comments/form', :locals => {:f => f} %>
+               <% end %>
+            </div>
+            <div class="related_pitches_tab tab_panel hide">
+                <%= render :partial => "related_pitches", :object => @tip.pitches %>
+                <% if current_user && current_user.reporter? && current_user.pitches.any? %> 
+                   Add this tip to your pitch
+                   <br/>
+                   <% form_for Affiliation.new do |f| %>
+                     <%= f.hidden_field :tip_id, :value => @tip.id %>
+                     <%= f.select :pitch_id, available_pitches_for(@tip) %>
+                     <%= f.submit "Attach" %>
+                   <% end %>
+                <% end %>
+            </div>
+            <% unless @tip.keywords.blank? %>
+               <div class="keywords_tab tab_panel hide">
+                  <%= h @tip.keywords %>
+               </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+</div>
