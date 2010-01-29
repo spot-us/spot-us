@@ -5,6 +5,13 @@
        jQuery("#show_action_items").click(function(){
           jQuery.facebox(jQuery("#action_buttons").html());
        });
+       jQuery(".tab").click(function(){
+          $(this).parent().parent().parent().find(".tab_panel").hide();
+          $("." + $(this).attr("id")).show();
+          $(this).parent().parent().find(".tab").removeClass("active");
+          $(this).addClass("active");
+          return false;
+       });
     });
   </script>
 <% end %>
@@ -45,7 +52,7 @@
          </div>
          <div class="subscribe">
          <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
-         <!-- <img align="right" src="/images/new_design/update-button.png"/> -->
+         <img align="right" src="update-button.png"/>
          </div>
       </div>
       
@@ -82,9 +89,10 @@
          <div>
             <ul class="tabs">
                <li><a id="description_tab" href="" class="tab active">Description</a></li>
-               <li><a id="how_tab" href="" class="tab">How will it help?</a></li>
                <li><a id="story_tab" href="" class="tab">Story updates</a></li>
                <li><a id="comments_tab" href="" class="tab">Comments (<%=@pitch.comments.size%>)</a></li>
+			   <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
+               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
             </ul>
             <div class="description_tab tab_panel clearfix">
                <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
@@ -131,18 +139,7 @@
                   <%= render :partial => 'comments/form', :locals => {:f => f} %>
                <% end %>
             </div>
-         </div>
-         <br/><br/>
-         <div>
-            <ul class="tabs">
-               <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
-               <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
-               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
-            </ul>
-            <div class="qualifications_tab tab_panel">
-               <%= h @pitch.skills %>
-            </div>
-            <div class="deliverables_tab tab_panel hide">
+			<div class="deliverables_tab tab_panel hide">
                <%= h @pitch.delivery_description %>
             </div>
             <div class="assignments_tab tab_panel hide">
@@ -151,6 +148,15 @@
                <% else %>
                   no assignments
                <% end %>
+            </div>
+         </div>
+         <br/><br/>
+         <div>
+            <ul class="tabs">
+               <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
+            </ul>
+            <div class="qualifications_tab tab_panel">
+               <%= h @pitch.skills %>
             </div>
          </div>
       </div>
