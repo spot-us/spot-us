@@ -1,0 +1,23 @@
+<% @title = "Spot.us - Member Dashboard" %>
+<%= render :partial => "layouts/common_questions" %>
+<div id="myspot_dashboard">
+   <h3>My Spot</h3>
+   <%= render :partial => "myspot/nav", :locals => {:selected_tab => "dashboard"} %>
+   <%= render :partial => "myspot/dashboard_nav", :locals => {:selected_tab => "tips"} %>
+   <div id="dashboard_content">
+     <table class="tips">
+       <tr>
+         <th class="tip_header">Tip</th>
+         <th class="created_header">Created</th>
+         <th class="pledges_header">Pledges</th>
+         <th class="actions_header">Actions</th>
+       </tr>
+       <tr>
+         <td colspan="4">
+            <%= render :partial => "myspot/tips/tip", :collection => @tips, :spacer_template => "myspot/tips/tip_spacer" %>
+         </td>
+       </tr>
+     </table>
+  </div>
+</div>
+
