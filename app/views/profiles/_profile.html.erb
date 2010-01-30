@@ -7,7 +7,7 @@
    <%= render :partial => 'shared/user', :locals => { :user => @profile } %>
 </div>
 <% if @profile.topics.any? %>
-   <%= h @profile.first_name %>
+   <strong><%= h @profile.first_name %></strong>
       has shown interest in 
     <%= show_topics(@profile) %>
   <br/>
@@ -15,7 +15,7 @@
 <hr>
 
 <% unless @profile.about_you.blank? %>
-  <h3>About <%= @profile.first_name %></h3>
+  <h3>About '<%= @profile.first_name %>'</h3>
   <%= sanitize @profile.about_you %>
 <% end %>
 <% if @profile.is_a?(Reporter) && @profile.samples.any? %>
