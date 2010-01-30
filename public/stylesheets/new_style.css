@@ -260,6 +260,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
+#public_profile{padding:20px;width:760px;float:left;}
+
 #donation_amounts p {margin-bottom:.5em;}
 #donation_amounts a {color:#398C9F;}
 #donation_amounts h4 a {color:#11363E;}
