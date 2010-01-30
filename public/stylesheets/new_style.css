@@ -234,11 +234,13 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 .row .tip_topics {margin-left:235px;width:440px;}
 .row .profile_topics {margin-left:185px;width:440px;}
 .row .pitch_topics {width: 700px;margin-left:235px;}
+#spotus_form .row.media label {padding-top:0;}
 #spotus_form select {width:200px;}
 #spotus_form input, #spotus_form select, #spotus_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
 #spotus_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
-#spotus_form textarea#tip_video_embed, #spotus_form textarea#tip_widget_embed, #spotus_form textarea#post_media_embed
-			{font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
+#spotus_form textarea#tip_video_embed, #spotus_form textarea#tip_widget_embed, #spotus_form textarea#post_media_embed, 
+		  {font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
+#spotus_form textarea#story_video_embed {font-size:12px;padding:6px;border:1px solid #777;font-family:arial, helvetica;}
 #spotus_form input#tip_pledge_amount, #spotus_form input#pitch_requested_amount, #spotus_form input#post_title
  			{font-size:20px;padding:6px;width:90px;border:1px solid #777;}
 #spotus_form iframe {border:solid 1px #bbb;}
@@ -248,11 +250,14 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #spotus_form .row.add_media label{padding:0;width:210px;}
 #spotus_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
 #spotus_form.blog_post .row.submit, #spotus_form.assignment .row.submit {text-align:right;margin-right:105px;}
+#spotus_form.story_edit {width:895px;}
+/*#spotus_form.story_edit textarea {width:670px;}*/
+#spotus_form.story_edit label {width:175px;}
 
 #myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
-#myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
+#myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
 #donation_amounts p {margin-bottom:.5em;}
