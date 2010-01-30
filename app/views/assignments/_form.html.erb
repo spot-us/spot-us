@@ -1,0 +1,17 @@
+<div class="row">
+    <%= f.label :title %>
+    <%= f.text_area :title, :rows => 2 %>
+</div>
+<div class="row">
+    <%= f.label :body %>
+    <%= fckeditor_textarea("assignment", "body", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+</div>
+<div class="row">
+    <%= f.label :media_embed %>
+    <%= f.text_area :media_embed, :rows => 4 %>
+</div>
+<div class="row submit">
+    <%= link_to '&laquo; Back to my pitches', myspot_pitches_path %>
+    &nbsp;&nbsp;
+    <%= image_submit_tag image_path('save.png') %>
+</div>
