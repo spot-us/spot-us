@@ -22,7 +22,8 @@
       - elsif @pitch.assignments.open.any?
         = render :partial => @pitch.assignments.open
       - else
-        This pitch has no assignments.
+        Not every pitch has assignments. Like large cats, some reporters like to work alone. Check
+        to see if other pitches do have assignments you can help out with!
     %br  
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @pitch }

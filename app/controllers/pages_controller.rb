@@ -5,8 +5,8 @@ class PagesController < ApplicationController
     about
     contact
     dmc_agreement
+    examples
     license
-    media_partners
     press
     privacy
     quick_donate
