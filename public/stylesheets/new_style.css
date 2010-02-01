@@ -49,12 +49,20 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 			{width: 100%;height: 5px;font-size: 1px;}
 .roundedcornr_content_807323 {margin: 0 5px;}
 
+.pink { color: #ce859d;}
+.moss-green { color: #909a9d;}
+.deep-red { color: #673122;}
+.deep-green { color: #3A6425;}
+
+
+
 #user-header {background-color:#11363e;color: #fff;padding:0 10px;height:26px;}
 #user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
 #user-header .newsletter {padding: 3px;padding-right:15px;font-size:10px;float:right;}
 #user-header ul.user-header-nav {margin:0;color:#ccc;float:left;}
 #user-header ul.user-header-nav li {line-height: 24px;height: 24px;}
 #user-header ul.user-header-nav li a {vertical-align: middle;}
+#user-header .slogan {padding: 5px 0 3px 0;text-transform: uppercase;letter-spacing: .15em;float: right;}
 
 #header {background-color:#E3EEEF;height:170px;}
 .container {text-align:left;margin:auto;padding:0 15px;width:1020px;}
@@ -94,6 +102,7 @@ p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;lett
 .folded-headers-short {background-image:url(/images/new_design/banner-small.png);background-repeat:no-repeat;color:#FFFFFF;float:right;
 			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-right:-56px;margin-top:10px;padding:5px;
 			text-transform:uppercase;width:412px;}
+.folded-headers-short #blog_rss {float:right;margin-right:41px;margin-top:7px;}
 .folded-headers {
 			background-image:url(/images/new_design/banner.png);background-repeat:no-repeat;clear:both;color:#FFFFFF;float:left;
 			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-left:-67px;margin-top:30px;
@@ -210,7 +219,7 @@ ul.dashboard_tabs li a.myspot_tab.active{background-color:#A2BBC3;color:#111;pad
 #read_stories .story p {margin:0;}
 
 ul#filters li div {margin-top:24px;}
-ul.filter{margin:0 0 10px 0;}
+ul.filter{margin:0 0 10px 0;list-style-type:none;}
 ul.filter li.active, .filter ul li.active a {background-image:url(/images/new_design/filter-bg1.jpg);background-repeat:no-repeat;
 			color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
 ul.filter li, .filter ul li a {background-image:url(/images/new_design/filter-bg.jpg);background-repeat:no-repeat;color:#FFFFFF;
