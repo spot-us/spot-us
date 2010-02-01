@@ -5,16 +5,16 @@
 		jQuery("#show_action_items").click(function(){
 			jQuery.facebox(jQuery("#action_buttons").html());
 		});
-
-		function selectTab(container, id){
-			header = container.find('ul');
-			header.find('li').removeClass('active');
-			header.find(id+'_tab').addClass('active');
-			$('#'+container).find('div').hide();
-			$('#'+container).find(id+'_content').show();
-			return false;
-		}
     });
+
+	function selectTab(container, id){
+		header = container.find('ul');
+		header.find('li').removeClass('active');
+		header.find(id+'_tab').addClass('active');
+		$('#'+container).find('div').hide();
+		$('#'+container).find(id+'_content').show();
+		return false;
+	}
 	
   	</script>
 <% end %>
@@ -90,7 +90,7 @@
       <% end %>
       <div id="news_item_info">
          <div>
-            <ul class="tabs">
+            <ul class="tabs" id="tabHeaderPitch">
                <li><a href="<%=pitch_path(@pitch)%>" class="tab<%= active_tab_class?(@tab, '')%>">Description</a></li>
                <li><a href="<%=pitch_path(@pitch)%>/posts" class="tab<%= active_tab_class?(@tab, 'posts')%>">Story updates (<%=@pitch.posts.size%>)</a></li>
                <li><a href="<%=pitch_path(@pitch)%>/comments" class="tab<%= active_tab_class?(@tab, 'comments')%>">Comments (<%=@pitch.comments.size%>)</a></li>
