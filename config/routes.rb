@@ -12,11 +12,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :channels
   map.resources :city_suggestions
   
-  map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get}, :has_many => :comments do |pitch|
-    pitch.resources :posts
-    pitch.resources :assignments, :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
+  map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get} do |pitch|
+    pitch.resources :posts, :except => [:index]
+    pitch.resources :comments, :except => [:index]
+    pitch.resources :assignments, :except => [:index], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
   end
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
+  map.connect "pitches/:id/:tab.:format", :controller => "pitches", :action => "show", :requirements => {:tab=>/posts|comments|assignments/}
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
@@ -28,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/assignment/:assignment_id/application/reject/:id", :controller => "assignments", :action => "reject_application"
   map.connect "/admin/channels/:id/add_pitch/:pitch_id", :controller => "admin/channels", :action => "add_pitch"
   map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
+  
   # TODO: remove when done
   map.resources :ui
 
