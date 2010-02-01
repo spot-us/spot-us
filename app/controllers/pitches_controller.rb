@@ -14,6 +14,20 @@ class PitchesController < ApplicationController
     redirect_to(news_items_path)
   end
   
+  def show
+    @pitch = find_resource
+    @tab = params[:tab] || ""
+    respond_to do |format|
+      unless @tab.blank?
+        format.rss do
+          render :layout => false
+        end
+      end
+      format.html do
+      end
+    end
+  end
+  
   def apply_to_contribute
     pitch = find_resource
     pitch.apply_to_contribute(current_user)
@@ -68,15 +82,6 @@ class PitchesController < ApplicationController
     else
       flash[:error] = "An error occurred while trying to fund this pitch"
       redirect_to pitch_path(pitch)
-    end
-  end
-
-  def blog_posts
-    respond_to do |format|
-      format.rss do
-        @posts = find_resource.posts.first(10)
-        render :layout => false
-      end
     end
   end
 
