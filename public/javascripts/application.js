@@ -24,12 +24,14 @@ jQuery(document).ready(function($){
   });
 	
 	$(".tab").click(function(){
-     $(this).parent().parent().parent().find(".tab_panel").hide();
-     $("." + $(this).attr("id")).show();
-     $(this).parent().parent().find(".tab").removeClass("active");
-     $(this).addClass("active");
-     return false;
-  });
+		if ($(this).parent().parent().attr('id')!='tabHeaderPitch'){
+			$(this).parent().parent().parent().find(".tab_panel").hide();
+			$("." + $(this).attr("id")).show();
+			$(this).parent().parent().find(".tab").removeClass("active");
+			$(this).addClass("active");
+			return false;
+		}
+  	});
 
   $("#show_suggest_city").click(function(){
   	$.facebox($("#suggest_city").html());
