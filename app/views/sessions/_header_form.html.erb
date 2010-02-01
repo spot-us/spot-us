@@ -21,5 +21,8 @@
          jQuery("#login_form").show();
          return false;
       });
+      <% if params[:register] %>
+         jQuery("#show_register_form").click();
+      <% end %>
    });
 <% end %>
