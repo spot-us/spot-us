@@ -2,6 +2,7 @@
 <div class="home-boxer">
    <div class="home-floater stories-in-progress">
       <div class="folded-headers-short">
+         <%= link_to image_tag("/images/new_design/rss_16.png"), "/blogs.rss", :id => "blog_rss" %>
          <div id="header-container-short"> Stories in Progress</div>
       </div>
       <ul>
@@ -16,6 +17,7 @@
                </p>
             </li>
          <% end %>
+         <li><%= link_to "See All Blog Posts", "/blogs" %></li>
       </ul>
    </div>
    <div id="main-area" class="home-floater">

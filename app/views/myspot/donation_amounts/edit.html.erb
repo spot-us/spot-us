@@ -35,7 +35,7 @@
     <% if unpaid_donations.any? %>
          <h3 class="heading">Fund Your Donations</h3>
     <% end %>   
-      <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix" do %>
+    <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix" do %>
        <ul class="unpaid_donations">
          <% unpaid_donations.each do |donation| %>
             <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
@@ -63,7 +63,6 @@
             <% end %>
          <% end %>
          </ul>
-      <% end %>
         <% if unpaid_credits.any? %>
           <h3 class="heading">Apply Credits</h3>
           <ul class="unpaid_donations">
@@ -110,5 +109,5 @@
          <%#= image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update" %>
          <%= image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase" %>
       </div>
-
+  <% end %>
 </div>
