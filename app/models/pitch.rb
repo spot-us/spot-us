@@ -70,7 +70,7 @@ class Pitch < NewsItem
   validates_presence_of :extended_description
   validates_presence_of :delivery_description
   validates_presence_of :skills
-  validates_presence_of :featured_image_caption
+  # validates_presence_of :featured_image_caption
   validates_presence_of :expiration_date
   validate_on_create :expiration_date_cannot_be_in_the_past
 
