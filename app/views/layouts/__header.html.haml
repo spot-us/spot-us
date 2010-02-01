@@ -2,7 +2,7 @@
 #header
   .logo{ :class => "#{(@current_network && @current_network.name ? @current_network.name.to_s.downcase : '')}" }
     %p
-      = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Funded Reporting"
+      = link_to "<span class='hide'>Spot.us - Community Funded Reporting</span>", "/", :class => "logo-link", :title => "Spot.us - Community Powered Reporting"
   .nav-container
     %ul#main-nav
       %li{:class=>"suggest_story#{check_if_tab("suggest_story",@selected_tab)}"}= facebox_login_link_to "Suggest a Story", new_tip_path

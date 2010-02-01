@@ -122,20 +122,21 @@
                <% end %>
             </div>
             <div class="comments_tab tab_panel hide">
-               <ul>
-               <% @pitch.comments.each do |comment| %>
-                  <li>
-                     <h5><%= comment.title %></h5>
-                     <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
-                     <div class="comment"><%= comment.body %>
-                        by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
-                     </div>
-                  </li>
-               <% end %>
                <% if !@pitch.comments.any? %>
-                  <li>There are no comments yet, be the first!</li>
+                  <p>There are no comments yet, be the first!</p>
+               <% else %>
+                  <ul>
+                     <% @pitch.comments.each do |comment| %>
+                        <li>
+                           <h5><%= comment.title %></h5>
+                           <%= link_to image_tag(comment.user.photo(:medium), :class => "avatar"), profile_path(comment.user) %>
+                           <div class="comment"><%= comment.body %>
+                              by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
+                           </div>
+                        </li>
+                     <% end %>
+                  </ul>
                <% end %>
-               </ul>
                <h3>Post A Comment</h3>
                <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
                   <%= render :partial => 'comments/form', :locals => {:f => f} %>
@@ -145,7 +146,8 @@
                <% if @pitch.assignments.any? %>
                   <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
                <% else %>
-                  no assignments
+                  Not every pitch has assignments. Like large cats, some reporters like to work
+                  alone. Check to see if other pitches do have assignments you can help out with!
                <% end %>
             </div>
          </div>

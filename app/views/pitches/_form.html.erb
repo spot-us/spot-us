@@ -1,4 +1,4 @@
-<%form_for(@pitch, :html => { :multipart => true }) do |f| %>
+<% form_for(@pitch, :html => { :multipart => true }) do |f| %>
     <div class="row">
         <%= f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required</span>" %>
         <%= f.text_area :headline, :rows => 2 %>
