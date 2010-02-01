@@ -18,10 +18,6 @@
        </div>    
     </div>
     <div class="row">
-      <%= f.label :extended_description, "How can your reporting help?" %>
-      <%= fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
-    </div>
-    <div class="row">
       <%= f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting.</span>" %>
       <%= f.text_area :skills, :rows => 3 %>
     </div>
@@ -71,10 +67,6 @@
       <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small" %>
       <%= f.text_area :video_embed, :rows => 4 %>
    </div>
-   <div class="row">   
-      <%= f.label :widget_embed, "Embed a Widget" + "<br/><span class='quieter small'>Paste your third-party widget embeded code (e.g. Sprout) here.</span>", :class => "small" %>
-      <%= f.text_area :widget_embed, :rows => 4 %>
-    </div>
     <div class="row">
       <%= f.label :expiration_date, "Expiration Date <br /><span class='small quieter'>Required</span>" %>
       <%= f.date_select :expiration_date, :include_blank => true, :default => nil, :start_year => Time.now.year %>
