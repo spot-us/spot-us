@@ -127,11 +127,16 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #news_item .news_item_author a.username {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;line-height:14px;}
 #news_item .media-box {margin:0 0 30px 12px;}
 #news_item #news_item_info {margin-left:40px;margin-bottom:20px;}
+#news_item #news_item_info .description_tab h1 {font-size:1.9em;font-weight:normal;}
+#news_item #news_item_info .description_tab h2 {font-size:1.7em;font-weight:normal;}
+#news_item #news_item_info .description_tab h3 {font-size:1.5em;font-weight:normal;}
+#news_item #news_item_info .description_tab h4 {font-size:1.3em;font-weight:normal;}
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #news_item #news_item_info .tab_panel li .comment{margin-left:60px;width:400px;}
+#news_item #news_item_info .description_tab {padding-right:60px;padding-left:35px;}
 #news_item .right-panel-box{background-color:#11363E;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:12pt;font-weight:normal;
 			padding:15px;width:356px;margin-bottom:10px;}
-
+#news_item #news_item_info .description_tab {font-family:Georgia, Times;}
 #news_item .right-column .right-panel-box h2 {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:bolder;letter-spacing:-1pt;text-transform:uppercase;}
 #news_item .right-column .right-panel-box h3 {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:23px;font-weight:bolder;letter-spacing:-1pt;margin-bottom:8px;}
 #news_item .right-column .right-panel-box a{color:#A2BBC3;}
@@ -167,7 +172,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB
 
 .tab_panel .date{color:#11363E;font-size:.8em;}
 .tab_panel .body{margin-bottom:10px;}
-.tab_panel ul{margin:0;}
+.tab_panel ul{}
 .tab_panel li{margin-bottom:15px;}
 .tab_panel .row {vertical-align:top;}
 .tab_panel .row label {display:block;}
@@ -217,34 +222,45 @@ ul.filter li div {width:180px;}
 ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.laurenmichell.com/spotus/images/filter-bg2.jpg);height:54px;background-repeat:no-repeat;
 			color: #ffffff;margin-bottom:0px;}
 
-#story_form {padding:20px;}
-#story_form select {font-size:20px;padding:5px;}
-#story_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
+#spotus_form {padding:20px;}
+#spotus_form select {font-size:20px;padding:5px;}
+#spotus_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
+#spotus_form .users {margin:0 0 20px 235px;}
+#spotus_form .person_avatar {float:left;margin: 0 20px 10px 0;}
 .form label {float:left;width:160px;margin-right:25px;text-align:right;padding:0px;color:#555;font-size:.9em;}
-#story_form .row, .form .row {clear:both;margin-bottom: 20px;}
+#spotus_form .row, .form .row {clear:both;margin-bottom: 20px;}
 .form .row {margin-top:5px;}
 .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
 .row .tip_topics {margin-left:235px;width:440px;}
 .row .profile_topics {margin-left:185px;width:440px;}
 .row .pitch_topics {width: 700px;margin-left:235px;}
-#story_form select {width:200px;}
-#story_form input, #story_form select, #story_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
-#story_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
-#story_form textarea#tip_video_embed, #story_form textarea#tip_widget_embed 
-			{font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
-#story_form input#tip_pledge_amount, #story_form input#pitch_requested_amount {font-size:20px;padding:6px;width:90px;border:1px solid #777;}
-#story_form iframe {border:solid 1px #bbb;}
-#story_form input#tip_pledge_amount {font-size:20px;padding:6px;width:90px;border:1px solid #777;}
-#story_form .deliver input[type="checkbox"] {margin-right:20px;}
-#story_form .row.contract {padding-left:233px;}
-#story_form .row.add_media label{padding:0;width:210px;}
-#story_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
+#spotus_form .row.media label {padding-top:0;}
+#spotus_form select {width:200px;}
+#spotus_form input, #spotus_form select, #spotus_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
+#spotus_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
+#spotus_form textarea#tip_video_embed, #spotus_form textarea#tip_widget_embed, #spotus_form textarea#post_media_embed, 
+		  {font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}
+#spotus_form textarea#story_video_embed {font-size:12px;padding:6px;border:1px solid #777;font-family:arial, helvetica;}
+#spotus_form input#tip_pledge_amount, #spotus_form input#pitch_requested_amount, #spotus_form input#post_title
+ 			{font-size:20px;padding:6px;width:90px;border:1px solid #777;}
+#spotus_form iframe {border:solid 1px #bbb;}
+#spotus_form input#tip_pledge_amount {font-size:20px;padding:6px;width:90px;border:1px solid #777;}
+#spotus_form .deliver input[type="checkbox"] {margin-right:20px;}
+#spotus_form .row.contract {padding-left:233px;}
+#spotus_form .row.add_media label{padding:0;width:210px;}
+#spotus_form .row.contract label {display:inline;width:600px;padding:0;float:none;}
+#spotus_form.blog_post .row.submit, #spotus_form.assignment .row.submit {text-align:right;margin-right:105px;}
+#spotus_form.story_edit {width:895px;}
+/*#spotus_form.story_edit textarea {width:670px;}*/
+#spotus_form.story_edit label {width:175px;}
 
 #myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
-#myspot_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
+#myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
+
+#public_profile{padding:20px 40px;width:730px;float:left;}
 
 #donation_amounts p {margin-bottom:.5em;}
 #donation_amounts a {color:#398C9F;}

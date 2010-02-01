@@ -1,0 +1,13 @@
+ <div id="spotus_form" class="assignment">
+    <% unless @assignment.errors.empty? %>
+      <% content_for :error do %>
+        <%= error_messages_for :assignment %>
+      <% end %>
+    <% end %>
+
+   <h2>Make an assignment for pitch '<%= @pitch.headline %>'</h2>
+   <%= render :partial => 'news_items/user', :locals => { :news_item => @pitch } %>
+   <% form_for([@pitch, @assignment]) do |f| %>
+     <%= render :partial => 'form', :locals => {:f => f} %>
+   <% end %>
+</div>
