@@ -5,6 +5,17 @@ class StoriesController < ApplicationController
   before_filter :set_meta_tags, :only => [:show]
   resources_controller_for :stories
 
+  def index
+    find_resources
+    respond_to do |format|
+      format.rss do
+        render :layout => false
+      end
+      format.html do
+      end
+    end
+  end
+
   def accept
     story = find_resource
     story.accept!
