@@ -15,7 +15,7 @@ describe 'myspot/pitches/index' do
 
   it "should display a go to story link if the pitch has a story" do
     do_render
-    response.should have_tag("a[href=?]", story_path(@story), "Go to story")
+    response.should have_tag("a[href=?]", story_path(@story), "Go To Draft")
   end
 
   it "should display 'pending' if a pitch is awaiting approval" do
