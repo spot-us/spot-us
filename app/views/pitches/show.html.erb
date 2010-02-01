@@ -1,19 +1,22 @@
 <% content_for :head do %>
-  <%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.id, :tab=>"posts", :format => 'rss'}) %>
-  <script>
+  	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}) %>
+	<script>
     jQuery(document).ready(function($){
-       jQuery("#show_action_items").click(function(){
-          jQuery.facebox(jQuery("#action_buttons").html());
-       });
-       jQuery(".tab").click(function(){
-          $(this).parent().parent().parent().find(".tab_panel").hide();
-          $("." + $(this).attr("id")).show();
-          $(this).parent().parent().find(".tab").removeClass("active");
-          $(this).addClass("active");
-          return false;
-       });
+		jQuery("#show_action_items").click(function(){
+			jQuery.facebox(jQuery("#action_buttons").html());
+		});
+
+		function selectTab(container, id){
+			header = container.find('ul');
+			header.find('li').removeClass('active');
+			header.find(id+'_tab').addClass('active');
+			$('#'+container).find('div').hide();
+			$('#'+container).find(id+'_content').show();
+			return false;
+		}
     });
-  </script>
+	
+  	</script>
 <% end %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 
@@ -57,9 +60,9 @@
       </div>
       
       <div id="supporters">
-          <%# render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
-          <%# render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-          <%#= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+          <%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
       </div>
    </div>
    <div class="main-column">
@@ -161,15 +164,15 @@
 			<%end%>
          </div>
          <br/><br/>
-         <div>
-            <ul class="tabs" id="ajaxTabs">
-               <li><a id="qualifications_tab" href="" class="ajaxTabs tab active">Qualifications</a></li>
-				<li><a id="deliverables_tab" href="" class="ajaxTabs tab">Deliverables</a></li>
+         <div id="tabContainer">
+            <ul class="tabs" id="tabHeader">
+               	<li><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');">Qualifications</a></li>
+				<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');">Deliverables</a></li>
             </ul>
-            <div class="qualifications_tab tab_panel">
+            <div class="qualifications_tab tab_panel" id="qualifications_content">
                <%= h @pitch.skills %>
-            </div>
-			<div class="deliverables_tab tab_panel hide">
+            </div> 
+			<div class="deliverables_tab tab_panel hide" id="deliverables_content">
                <%= h @pitch.delivery_description %>
             </div>
          </div>
