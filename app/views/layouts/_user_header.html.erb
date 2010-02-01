@@ -26,7 +26,7 @@
 <ul class="user-header-nav">
   <div id="not_logged_in" class="hide">
     <li>
-      <%= link_to "Register", new_session_path, :rel => 'facebox' %>
+      <%= link_to "Register", new_session_path + "?register=true", :rel => 'facebox', :id => "sign_up" %>
     </li>
     <li>
       <%= link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in" %>
@@ -37,7 +37,8 @@
     </li>
   </div>
 </ul>
-<div class="newsletter">
-   <%= link_to "Sign up for our Newsletter", "" %> | <%= link_to "Blog", "" %>
+<div class="slogan">
+   <span class="pink">Community</span>
+   <span class="moss-green">Funded Reporting</span>
 </div>
 <div class="clear"></div>

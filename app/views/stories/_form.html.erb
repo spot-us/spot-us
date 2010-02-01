@@ -30,10 +30,10 @@
       <%= f.file_field :featured_image %><br/>
       <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
     </div>
-    <!-- <div class="row media">
-      <%#= f.label :featured_image_caption, "Required: Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>" %>
-      <%#= f.text_area :featured_image_caption, :rows => 2 %>
-    </div> -->
+    <div class="row media">
+      <%= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>" %>
+      <%= f.text_area :featured_image_caption, :rows => 2 %>
+    </div>
     <div class="row media">
       <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>" %>
       <%= f.text_area :video_embed, :rows => 4 %>

@@ -6,7 +6,7 @@ class NewsItemsController < ApplicationController
 
   def index
     @channels = Channel.by_network(current_network)
-    @filter = "Newest Stories"
+    @filter = "newest_stories"
     respond_to do |format|
       format.rss do
         get_news_items(10)
