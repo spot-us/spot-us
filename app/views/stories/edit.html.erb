@@ -1,0 +1,21 @@
+<!-- <div id="story_side_panel">
+   <%#= render :partial => 'sidebar' %>
+</div> -->
+<div id="spotus_form" class="story_edit clearfix">
+   <% unless @story.errors.empty? %>
+     <% content_for :error do %>
+       <%= error_messages_for :story %>
+     <% end %>
+   <% end %>
+
+   <% @title = "Spot.us - Edit Your Story" %>
+   <div class="float-right">
+      Original Pitch:
+      <h4><%= link_to @story.pitch.headline, @story.pitch %></h4>
+   </div>
+   <h2>Edit Your Story</h2>
+
+
+   <%= render :partial => 'form' %>
+</div>
+
