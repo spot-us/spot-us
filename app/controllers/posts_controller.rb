@@ -2,16 +2,6 @@ class PostsController < ApplicationController
   resources_controller_for :post
   before_filter :login_required, :except => [:show, :index]
 
-  def index
-    respond_to do |format|
-      format.rss do
-        render :layout => false
-      end
-      format.html do
-      end
-    end
-  end
-
   response_for :create do |format|
     @post.blog_posted_notification
     format.html do
