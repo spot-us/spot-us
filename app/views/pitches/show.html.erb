@@ -89,18 +89,20 @@
          <div>
             <ul class="tabs">
                <li><a id="description_tab" href="" class="tab active">Description</a></li>
-               <li><a id="story_tab" href="" class="tab">Story updates</a></li>
+               <li><a id="story_tab" href="" class="tab">Story updates (<%=@pitch.posts.size%>)</a></li>
                <li><a id="comments_tab" href="" class="tab">Comments (<%=@pitch.comments.size%>)</a></li>
-			   <li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
-               <li><a id="assignments_tab" href="" class="tab">Assignments</a></li>
+               <li><a id="assignments_tab" href="" class="tab">Assignments (<%=@pitch.assignments.size%>)</a></li>
             </ul>
             <div class="description_tab tab_panel clearfix">
                <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
                <%= @pitch.short_description %>
-            </div>
-            <div class="how_tab tab_panel hide">
-               <%= @pitch.extended_description %>
-            </div>
+				<%unless @pitch.extended_description.blank?%>
+            		<h3>How will it help?</h3>
+					<p>
+						<%= @pitch.extended_description %>
+					</p>
+				<%end%>
+			</div>
             <div class="story_tab tab_panel hide">
                <h2>Story Updates</h2>
                <% if @pitch.posts.any? %>
@@ -109,7 +111,7 @@
                      <li>
                         <h4 class="title"><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h4>
                         <div class="date"><%= medium_date(post.created_at) %></div>
-                        <%= truncate_words(strip_html(post.body), 20) %>
+                        <%= post.body %>
                      </li>
                   <% end %>
                   </ul>
@@ -140,9 +142,6 @@
                   <%= render :partial => 'comments/form', :locals => {:f => f} %>
                <% end %>
             </div>
-			<div class="deliverables_tab tab_panel hide">
-               <%= h @pitch.delivery_description %>
-            </div>
             <div class="assignments_tab tab_panel hide">
                <% if @pitch.assignments.any? %>
                   <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
@@ -156,9 +155,13 @@
          <div>
             <ul class="tabs">
                <li><a id="qualifications_tab" href="" class="tab active">Qualifications</a></li>
+				<li><a id="deliverables_tab" href="" class="tab">Deliverables</a></li>
             </ul>
             <div class="qualifications_tab tab_panel">
                <%= h @pitch.skills %>
+            </div>
+			<div class="deliverables_tab tab_panel hide">
+               <%= h @pitch.delivery_description %>
             </div>
          </div>
       </div>
