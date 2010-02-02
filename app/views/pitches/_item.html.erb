@@ -19,18 +19,17 @@
 	<%if current_user%>
 		<%apply_fragment ['pitch_detail_page_admin_', @tab, @pitch, @item, current_user] do %>
 			<div class="tabpanel">
-				<%case @tab%>
-					<%when 'posts'%>
-						<%if @pitch.postable_by?(current_user)%>
-							<h3>You can:</h3>
-							<%=link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@pitch, @item)%>
-						<%end%>
-					<%when 'assignments'%>
-						<%if @pitch.assignable_by?(current_user)%>
-							<h3>You can:</h3>
-							<%=link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item)%>
-						<%end%>
-						<%=render :partial=>'assignment_admin'%>
+				<%if @tab == 'posts'%>
+					<%if @pitch.postable_by?(current_user)%>
+						<h3>You can:</h3>
+						<%=link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@pitch, @item)%>
+					<%end%>
+				<%elsif @tab == 'assignments'%>
+					<%if @pitch.assignable_by?(current_user)%>
+						<h3>You can:</h3>
+						<%=link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item)%>
+					<%end%>
+					<%=render :partial=>'assignment_admin'%>
 				<%end%>
 			</div>
 		<%end%>
