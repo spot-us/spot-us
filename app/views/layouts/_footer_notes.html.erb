@@ -3,10 +3,12 @@
       <h3>Almost Funded!</h3>
       <ul>
          <% Pitch.almost_funded.unfunded.top_four.each do |pitch| %>
-            <li class="clear">
-               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-               <%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
-            </li>
+			<% apply_fragment ['almost_funded_pitches_footer_', pitch] do %>
+	            <li class="clear">
+	               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+	               <%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
+	            </li>
+			<%end%>
          <% end %>
       </ul>
                
@@ -18,10 +20,12 @@
       <h3>Newest Items</h3>
       <ul>
          <% NewsItem.newest.approved.pitch_or_tip.top_four.each do |pitch| %>
-            <li class="clear">
-               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-               <%= link_to pitch.headline, pitch %>
-            </li>
+            <% apply_fragment ['recently_created_pitches_footer_', pitch] do %>
+				<li class="clear">
+	               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+	               <%= link_to pitch.headline, pitch %>
+	            </li>
+			<%end%>
          <% end %>
       </ul>
    </div>   

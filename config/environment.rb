@@ -15,6 +15,12 @@ end
 DEFAULT_HOST = APP_CONFIG[:default_host] || "spotus.local"
 
 Rails::Initializer.run do |config|
+  
+  MEMCACHE_SERVERS = ['127.0.0.1']
+  config.after_initialize do
+    SpotUs::Cache.initialize!
+  end
+  
   config.gem "haml", :version => '>=2.0.6'
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
