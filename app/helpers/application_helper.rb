@@ -9,15 +9,7 @@ module ApplicationHelper
   end
   
   def get_network_name?
-    display_network_name = "Unknown Network"
-    if @current_network.nil?
-      display_network_name = "All Networks"
-    else
-      Network.all.each do |network|
-        display_network_name = @current_network.display_name if @current_network==network
-      end
-    end
-    " inside #{display_network_name}"
+    " inside #{@current_network.nil? ? "All Networks" : @current_network.display_name}"
   end
 
   def body_class
