@@ -170,10 +170,10 @@
 				<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');">Deliverables</a></li>
             </ul>
             <div class="qualifications_tab tab_panel" id="qualifications_content">
-               <%= h @pitch.skills %>
+               <%= @pitch.skills %>
             </div> 
 			<div class="deliverables_tab tab_panel hide" id="deliverables_content">
-               <%= h @pitch.delivery_description %>
+               <%= @pitch.delivery_description %>
             </div>
          </div>
       </div>
