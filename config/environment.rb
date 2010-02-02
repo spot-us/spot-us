@@ -16,7 +16,7 @@ DEFAULT_HOST = APP_CONFIG[:default_host] || "spotus.local"
 
 Rails::Initializer.run do |config|
   
-  MEMCACHE_SERVERS = ['127.0.0.1']
+  MEMCACHE_SERVERS = ['localhost']
   config.after_initialize do
     SpotUs::Cache.initialize!
   end
