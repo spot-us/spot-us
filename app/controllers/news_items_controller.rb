@@ -9,7 +9,6 @@ class NewsItemsController < ApplicationController
     @filter = "newest_stories"
     respond_to do |format|
       format.rss do
-        #@news_items = NewsItem.newest.first(10)
         get_news_items(10)
         render :layout => false
       end
