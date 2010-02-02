@@ -24,7 +24,7 @@ class PitchesController < ApplicationController
         end
       end
       format.html do
-        if !@tab.blank? && params[:item_id] && params[:item_id].to_i.to_s==params[:item_id]
+        if !@tab.blank? && params[:item_id]
           @item = @pitch.send(@tab).find_by_id(params[:item_id])
         end
       end
