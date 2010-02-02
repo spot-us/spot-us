@@ -5,17 +5,7 @@
 		jQuery("#show_action_items").click(function(){
 			jQuery.facebox(jQuery("#action_buttons").html());
 		});
-    });
-
-	function selectTab(container, id){
-		header = container.find('ul');
-		header.find('li').removeClass('active');
-		header.find(id+'_tab').addClass('active');
-		$('#'+container).find('div').hide();
-		$('#'+container).find(id+'_content').show();
-		return false;
-	}
-	
+    });	
   	</script>
 <% end %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
