@@ -37,8 +37,7 @@ jQuery(document).ready(function($){
   	$.facebox($("#suggest_city").html());
 		return false;
   });
- 
-
+	
 });
 
 jQuery("a").click(function($){

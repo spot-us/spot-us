@@ -5,6 +5,6 @@ class Myspot::AssignmentsController < ApplicationController
   private
 
   def find_resources
-    current_user.assignments
+    current_user.assignments.paginate(:page=>params[:page])
   end
 end
