@@ -30,6 +30,7 @@
 							<h3>You can:</h3>
 							<%=link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item)%>
 						<%end%>
+						<%=render :partial=>'assignment_admin'%>
 				<%end%>
 			</div>
 		<%end%>
