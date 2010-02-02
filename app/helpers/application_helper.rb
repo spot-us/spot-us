@@ -7,6 +7,10 @@ module ApplicationHelper
     options.merge!({:class => 'authbox', :return_to => url})
     link_to args.first, new_session_path(:return_to => url), options
   end
+  
+  def get_network_name?(pre_text=" inside ")
+    "#{pre_text}#{@current_network.nil? ? "All Networks" : @current_network.display_name}"
+  end
 
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
