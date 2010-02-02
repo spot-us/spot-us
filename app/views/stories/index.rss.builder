@@ -3,7 +3,7 @@ xml.rss :version => "2.0" do
   xml.channel do
     xml.title "Spot Us Stories#{get_network_name?}"
     xml.link request.url
-    xml.description "These are the recently published stories from Spot.Us"
+    xml.description "These are the recently published stories from Spot.Us#{get_network_name?}"
     xml.language "en-us"
     xml.pubDate @stories.first.created_at.to_s(:rfc822)
     xml.lastBuildDate @stories.first.created_at.to_s(:rfc822)
