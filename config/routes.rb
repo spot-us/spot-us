@@ -13,12 +13,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :city_suggestions
   
   map.resources :pitches, :member => {:feature => :put, :unfeature => :put, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get} do |pitch|
-    pitch.resources :posts, :except => [:index]
-    pitch.resources :comments, :except => [:index]
-    pitch.resources :assignments, :except => [:index], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
+    pitch.resources :posts, :except => [:index, :show]
+    pitch.resources :comments, :except => [:index, :show]
+    pitch.resources :assignments, :except => [:index, :show], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
   end
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
   map.connect "pitches/:id/:tab.:format", :controller => "pitches", :action => "show", :requirements => {:tab=>/posts|comments|assignments/}
+  map.connect "pitches/:id/:tab/:item_id", :controller => "pitches", :action => "show", :item_id=>nil, :requirements => {:tab=>/posts|comments|assignments/}
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
@@ -53,7 +54,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
     admin.resources :credits
-    admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put, :approve_blogger => :put, :unapprove_blogger => :put }
+    admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
     admin.resources :tips
     admin.resources :comments
     admin.resources :subscribers
