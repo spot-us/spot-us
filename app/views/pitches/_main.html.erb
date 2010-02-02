@@ -1,10 +1,5 @@
 <div>
-   <ul class="tabs" id="tabHeaderPitch">
-      <li><a href="<%=pitch_path(@pitch)%>" class="tab<%= active_tab_class?(@tab, '')%>">Description</a></li>
-      <li><a href="<%=pitch_path(@pitch)%>/posts" class="tab<%= active_tab_class?(@tab, 'posts')%>">Story updates (<%=@pitch.posts.size%>)</a></li>
-      <li><a href="<%=pitch_path(@pitch)%>/comments" class="tab<%= active_tab_class?(@tab, 'comments')%>">Comments (<%=@pitch.comments.size%>)</a></li>
-      <li><a href="<%=pitch_path(@pitch)%>/assignments" class="tab<%= active_tab_class?(@tab, 'assignments')%>">Assignments (<%=@pitch.assignments.size%>)</a></li>
-	</ul>
+	<%=render :partial=>'tabs'%>
    <% if active_tab?(@tab, '')%>
 		<div class="description_tab tab_panel clearfix">
           <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
