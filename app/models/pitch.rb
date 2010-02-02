@@ -215,9 +215,9 @@ class Pitch < NewsItem
     return false unless user
     unless contributors.include?(user)
       contributors << user
-      Mailer.deliver_admin_reporting_team_notification(self)
+      # Mailer.deliver_admin_reporting_team_notification(self)
       Mailer.deliver_reporter_reporting_team_notification(self)
-      Mailer.deliver_applied_reporting_team_notification(self, user)
+      # Mailer.deliver_applied_reporting_team_notification(self, user)
     end
   end
 
@@ -233,18 +233,18 @@ class Pitch < NewsItem
     user.is_a?(Admin)
   end
 
-  def approve_blogger!(user_id)
-    return if user_id.nil?
-    return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
-    application.update_attribute(:approved, true)
-    Mailer.deliver_approved_reporting_team_notification(self, application.user)
-  end
+  # def approve_blogger!(user_id)
+  #   return if user_id.nil?
+  #   return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
+  #   application.update_attribute(:approved, true)
+  #   # Mailer.deliver_approved_reporting_team_notification(self, application.user)
+  # end
 
-  def unapprove_blogger!(user_id)
-    return if user_id.nil?
-    return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
-    application.update_attribute(:approved, false)
-  end
+  # def unapprove_blogger!(user_id)
+  #   return if user_id.nil?
+  #   return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
+  #   application.update_attribute(:approved, false)
+  # end
 
   def funding_needed
     return 0 unless active? || unapproved?
