@@ -11,4 +11,16 @@ module PitchesHelper
     (tab==tab_try)
   end
   
+  def pre_title?(item)
+    if item.is_a?(Post)
+			"Story Update:"
+		elsif item.is_a?(Assignment)
+			"Assignment:" 
+		elsif item.is_a?(Comment)
+			"Comment"
+		else
+		   "Unknown:"
+		end
+  end
+  
 end
