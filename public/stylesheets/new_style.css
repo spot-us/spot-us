@@ -67,7 +67,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 #header {background-color:#E3EEEF;height:170px;}
 .container {text-align:left;margin:auto;padding:0 15px;width:1020px;}
 #header .logo {background:transparent url(/images/new_design/spotus-logo.jpg) no-repeat scroll 0 0;float:left;
-			margin-left:-10px;margin-top:52px;width:285px;}
+			margin-left:-20px;margin-top:52px;width:285px;}
 #header .logo-link {display:block;height:31px;width:222px;}
 #header .nav-container {background:transparent url(/images/new_design/spotus_nav_bg.gif) no-repeat scroll 0 bottom;float:right;
 			height:26px;width:506px;}
@@ -265,7 +265,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 
 
 #spotus_form.purchase {padding:0;}
-#spotus_form.purchase .box {background:#eee;}
+#spotus_form.purchase .box {background:#FEFFD9;}
 #spotus_form.purchase .row {margin-left:40px;margin-bottom:10px;}
 #spotus_form.purchase .row input, #spotus_form.purchase .row select {padding:2px;font-size:1.1em;font-family:arial, helvetica;}
 #spotus_form.purchase label {width:140px;text-align:left;padding:0;}
