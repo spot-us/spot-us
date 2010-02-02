@@ -23,4 +23,8 @@ module PitchesHelper
 		end
   end
   
+  def pre_title_rss_feed?(tab)
+    return tab=='posts' ? 'Story Updates' : tab.capitalize
+  end
+  
 end
