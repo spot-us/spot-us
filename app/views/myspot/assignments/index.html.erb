@@ -14,7 +14,10 @@
             <td colspan="4">
                <%= render :partial => "myspot/assignments/assignment", :collection => @assignments, :spacer_template => "myspot/assignments/assignment_spacer" %>
             </td>
-         </tr>
+         </tr>		
+		 <tr>
+			<td colspan='4'><%=will_paginate @assignments%></td>
+		</tr>
       </table>
    </div>
 </div>
