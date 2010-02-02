@@ -13,13 +13,13 @@ module PitchesHelper
   
   def pre_title?(item)
     if item.is_a?(Post)
-			"Story Update:"
+			"Story Update"
 		elsif item.is_a?(Assignment)
-			"Assignment:" 
+			"Assignment" 
 		elsif item.is_a?(Comment)
 			"Comment"
 		else
-		   "Unknown:"
+		   "Unknown"
 		end
   end
   
