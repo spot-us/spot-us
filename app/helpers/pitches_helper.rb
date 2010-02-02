@@ -11,4 +11,20 @@ module PitchesHelper
     (tab==tab_try)
   end
   
+  def pre_title?(item)
+    if item.is_a?(Post)
+			"Story Update:"
+		elsif item.is_a?(Assignment)
+			"Assignment:" 
+		elsif item.is_a?(Comment)
+			"Comment"
+		else
+		   "Unknown:"
+		end
+  end
+  
+  def pre_title_rss_feed?(tab)
+    return tab=='posts' ? 'Story Updates' : tab.capitalize
+  end
+  
 end
