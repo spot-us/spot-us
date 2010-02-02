@@ -92,6 +92,10 @@
       <%= f.label :extended_description, "How can your reporting help?" %>
       <%= fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
+	<div class="row" id="toggle_div_disclosure" style="display:none;">
+      <%= f.label :disclosure, "Disclosure<br /><span class='small quieter'>Here you may disclose any relationships or similar</span>" %>
+      <%= fckeditor_textarea("pitch", "disclosure", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+    </div>
 	<div class="row" id="toggle_div_caption" style="display:none;">
 		<%= f.label :featured_image_caption, "Required: Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>
 		<%= f.text_area :featured_image_caption, :rows => 2 %>
@@ -104,7 +108,6 @@
 	<div class="row contract">
       <%= f.check_box :contract_agreement %> &nbsp;
       <%= f.label :contract_agreement, %Q(I agree with the #{link_to "Reporter's Contract", page_path('reporter_contract'), :class => "quieter"} (independent contractor agreement, please read).) %>
-      
    </div>
    <div class="row">
       <label> </label>
