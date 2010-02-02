@@ -12,6 +12,19 @@ module ApplicationHelper
     "#{pre_text}#{@current_network.nil? ? "All Networks" : @current_network.display_name}"
   end
 
+  def apply_fragment(key, options = {}, &block)    
+    options[:skip] ? block.call : cache(reduce_cache_key(key), options, &block)
+  rescue Memcached::Error
+    block.call
+  end
+  
+  def reduce_cache_key(key)
+    final_key = ActiveSupport::Cache.expand_cache_key(key)
+    final_key.gsub!(" ","")
+    Digest::SHA1.hexdigest(final_key)
+  end
+  
+  
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
   end
