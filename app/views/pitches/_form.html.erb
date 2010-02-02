@@ -32,8 +32,7 @@
     </div>
     <div class="row">
       <%= f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting.</span>" %>
-      	<%#= f.text_area :skills, :rows => 3 %>
-		<%= fckeditor_textarea("pitch", "skills", :toolbarSet => 'Spotus', :width => '683px', :height => '150px') %>
+      <%= f.text_area :skills, :rows => 3 %>
     </div>
     <div class="row">
        <label>Requested Amount<br/>
@@ -70,6 +69,10 @@
       <%= f.file_field :featured_image %><br/>
       <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
     </div>
+    <!-- <div class="row">
+      <%#= f.label :featured_image_caption, "Required: Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>
+      <%#= f.text_area :featured_image_caption, :rows => 2 %>
+    </div> -->
     <div class="row">
       <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small" %>
       <%= f.text_area :video_embed, :rows => 4 %>
