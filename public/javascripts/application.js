@@ -40,6 +40,16 @@ jQuery(document).ready(function($){
 	
 });
 
+/* Simple tabbing function */
+function selectTab(container, id){
+	header = container.find('ul');
+	header.find('li').removeClass('active');
+	header.find(id+'_tab').addClass('active');
+	$('#'+container).find('div').hide();
+	$('#'+container).find(id+'_content').show();
+	return false;
+}
+
 jQuery("a").click(function($){
   $(".navigation a.selected").removeClass("selected");
   $(this).addClass("selected");
