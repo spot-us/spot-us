@@ -5,6 +5,6 @@ class Myspot::CommentsController < ApplicationController
   private
 
   def find_resources
-    current_user.comments
+    current_user.comments.paginate(:page=>params[:page])
   end
 end

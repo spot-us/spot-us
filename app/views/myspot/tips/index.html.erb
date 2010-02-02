@@ -17,6 +17,9 @@
             <%= render :partial => "myspot/tips/tip", :collection => @tips, :spacer_template => "myspot/tips/tip_spacer" %>
          </td>
        </tr>
+		<tr>
+			<td colspan='4'><%=will_paginate @tips%></td>
+		</tr>
      </table>
   </div>
 </div>
