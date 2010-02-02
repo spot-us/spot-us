@@ -1,6 +1,10 @@
 <div>
-	<h2><%=pre_title?(@item)%> <%= @item.title %></h2>
-	<h3 style="margin:10px 10px 10px 10px;">posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date)%></h3>
+	<h2 style="margin:10px 10px 10px 10px; padding:0px;">
+		<%=pre_title?(@item)%> <%= @item.title %>
+	</h2>
+	<h3 style="margin:10px 10px 20px 10px; padding:0px; font-weight:normal; font-size:14px;">
+		posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date)%>
+	</h3>
 	<div class="description_tab tab_panel clearfix">
 		<div class="body">
 	       <%= @item.body %>
