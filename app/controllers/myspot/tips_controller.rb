@@ -5,6 +5,6 @@ class Myspot::TipsController < ApplicationController
   private
 
   def find_resources
-    current_user.tips
+    current_user.tips.paginate(:page=>params[:page])
   end
 end

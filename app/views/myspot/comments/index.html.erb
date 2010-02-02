@@ -15,6 +15,9 @@
             <%= render :partial => "myspot/comments/comment", :collection => @comments, :spacer_template => "myspot/comments/comment_spacer" %>
          </td>
        </tr>
+		<tr>
+			<td colspan='4'><%=will_paginate @comments%></td>
+		</tr>
       </table>
    </div>
 </div>
