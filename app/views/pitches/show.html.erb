@@ -21,7 +21,7 @@
 <div id="news_item">
    <div id="news_item_header">
       <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-      <h2 class="headline"><%= h @pitch.headline %><%=feature_pitch_path(@pitch)%></h2>
+      <h2 class="headline"><%= h @pitch.headline %></h2>
    </div>
    <div class="right-column">
       <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
