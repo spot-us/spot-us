@@ -46,10 +46,6 @@ class PitchesController < ApplicationController
     redirect_to pitch_path(pitch)
   end
 
-  #def feature
-  #  pitch = find_resource
-  #end
-
   def unfeature
     pitch = find_resource
     if pitch.featureable_by?(current_user)
