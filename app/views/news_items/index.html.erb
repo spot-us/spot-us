@@ -11,7 +11,7 @@
          <li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=asc">Newest Stories</a></div></li>
          <li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=desc">Oldest Stories</a></div></li>
          <li<%=check_active(@filter,"almost_funded") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=almost_funded">Almost Funded</a></div></li>
-         <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=most_funded">Most Pledged</a></div></li>
+         <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=tips&sort_by=desc&x=70&y=14">Recent Tips</a></div></li>
       </ul>
       <h5>Filter by Channel</h5>
       <% if @channels.any? %>
