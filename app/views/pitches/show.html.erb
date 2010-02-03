@@ -1,7 +1,7 @@
 <% content_for :head do %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}) %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}) %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}, {:title => "Story Updates - #{@pitch.headline}"}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
 	<script>
     jQuery(document).ready(function($){
 		jQuery("#show_action_items").click(function(){
@@ -21,7 +21,7 @@
 <div id="news_item">
    <div id="news_item_header">
       <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-      <h2 class="headline"><%= h @pitch.headline %></h2>
+      <h2 class="headline"><%= h @pitch.headline %><%=feature_pitch_path(@pitch)%></h2>
    </div>
    <div class="right-column">
       <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
