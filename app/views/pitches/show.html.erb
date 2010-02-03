@@ -1,7 +1,7 @@
 <% content_for :head do %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}) %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}) %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}, {:title => "Story Updates - #{@pitch.headline}"}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
 	<script>
     jQuery(document).ready(function($){
 		jQuery("#show_action_items").click(function(){
