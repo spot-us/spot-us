@@ -13,9 +13,9 @@
       .centered= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch), :title => "Edit This Pitch"
     - if pitch.featureable_by?(current_user)
       - if pitch.featured?
-        .centered= link_to image_tag('un-feature.gif'), unfeature_pitch_path(pitch), :method => :put, :title => "Un-Feature"
+        .centered= link_to image_tag('un-feature.gif'), unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"
       - else
-        .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :put, :title => "Feature This Pitch"
+        .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"
     - if pitch.postable_by?(current_user)
       = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"
     - if pitch.assignable_by?(current_user)
