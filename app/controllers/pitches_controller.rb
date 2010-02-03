@@ -1,6 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  #before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute]
+  before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute, :feature, :unfeature]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
   before_filter :select_tab, :only => [:new]
@@ -40,17 +40,17 @@ class PitchesController < ApplicationController
 
   def feature
     pitch = find_resource
-    pitch.feature!
+    if pitch.featureable_by?(current_user)
+      pitch.feature!
+    end
     redirect_to pitch_path(pitch)
   end
 
-  #def feature
-  #  pitch = find_resource
-  #end
-
   def unfeature
     pitch = find_resource
-    pitch.unfeature!
+    if pitch.featureable_by?(current_user)
+      pitch.unfeature!
+    end
     redirect_to pitch_path(pitch)
   end
 
