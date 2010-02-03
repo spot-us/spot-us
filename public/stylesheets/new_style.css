@@ -307,6 +307,19 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 #login_modal input[type="image"] {margin-top:15px;}
 #login_modal input[type="checkbox"] {margin-bottom:0;}
 
+
+
+#spotus_page {padding:20px 40px;width:620px;float:left;}
+#spotus_page h2 {margin:0;}
+#spotus_page ul {margin-top:12px;}
+#spotus_page a {color:#567683}
+#spotus_page p {margin-bottom:.8em;}
+#spotus_page hr {margin-bottom:.5em;}
+#spotus_page h2 a, #spotus_page h3 a {color:#11363E;}
+#spotus_page_right_column {float:right;background-color:#567683;width:330px;margin-right:34px;}
+#spotus_page .back_to {clear:both;}
+#spotus_page .back_to h2 {float:left;}
+
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
