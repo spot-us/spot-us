@@ -1,6 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  #before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute]
+  before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
   before_filter :select_tab, :only => [:new]
