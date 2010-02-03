@@ -13,12 +13,12 @@
 <% end %>
 <% form_for(@pitch, :html => { :multipart => true }) do |f| %>
     <div class="row">
-        <%= f.label     :headline, "Your Pitch's Headline <br /><span class='small quieter'>Required</span>" %>
+        <%= f.label     :headline, "Your Pitch's Headline <br />Catch our attention<br /><span class='small quieter'>Required</span>" %>
         <%= f.text_area :headline, :rows => 2 %>
         <%#= text_field_tag 'pitch[blog_url]', '', :class => 'highlight_required', :id => 'pitch_blog_url' %>
     </div>
     <div class="row">
-      <%= f.label :short_description, "Why would someone care? Sell the story! <br /><span class='small quieter'>Required <br /><br /> This is your chance to explain what the pitch is about. Think of it like a nut graph.</span>" %>
+      <%= f.label :short_description, "Why would someone care? What are the details?<br /> Sell the story! <br /><span class='small quieter'>Required</span>" %>
       <%= fckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
     <div class="row">
@@ -31,7 +31,7 @@
        </div>    
     </div>
     <div class="row">
-      <%= f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting.</span>" %>
+      <%= f.label :skills, "Qualifications<br /> Do you have the skills/access to report this story? <br /><span class='small quieter'>Tell us who you are and why we should support you.</span>" %>
       <%= f.text_area :skills, :rows => 3 %>
     </div>
     <div class="row">
@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="row">
-       <label>How long will it take you? <br /> How many hours of work will this take?<br /><span class='small quieter'>Explain in detail what you will produce to justify your pricing</span></label>
+       <label>Provide some details on what you will produce.<br /> Justify your pricing.<br /></label>
        <%#= f.text_area :delivery_description, :style => "width:683px;height:200px" %>
 		<%= fckeditor_textarea("pitch", "delivery_description", :toolbarSet => 'Spotus', :width => '683px', :height => '150px') %>
     </div>
@@ -74,11 +74,11 @@
       <%#= f.text_area :featured_image_caption, :rows => 2 %>
     </div> -->
     <div class="row">
-      <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small" %>
+      <%= f.label :video_embed, "Embed a Video" + "<br/>We support YouTube and Vimeo<br /><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>", :class => "small" %>
       <%= f.text_area :video_embed, :rows => 4 %>
    </div>
     <div class="row">
-      <%= f.label :expiration_date, "Expiration Date <br /><span class='small quieter'>Required</span>" %>
+      <%= f.label :expiration_date, "Editorial Deadline<br /><span class='small quieter'>Required</span>" %>
       <%= f.date_select :expiration_date, :include_blank => true, :default => nil, :start_year => Time.now.year %>
    </div>
 	<div class="row optional">
