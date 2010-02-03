@@ -32,7 +32,8 @@
     </div>
     <div class="row">
       <%= f.label :skills, "Qualifications<br /> Do you have the skills/access to report this story? <br /><span class='small quieter'>Tell us who you are and why we should support you.</span>" %>
-      <%= f.text_area :skills, :rows => 3 %>
+      <%#= f.text_area :skills, :rows => 3 %>
+ 		<%= fckeditor_textarea("pitch", "skills", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
     <div class="row">
        <label>Requested Amount<br/>
