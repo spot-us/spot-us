@@ -1,8 +1,17 @@
-<a name="top"> </a>
-.block-spacer
-.box_white{:style => "width: 66%;"}
+<% content_for :head do %>
+   <script>
+      jQuery(document).ready(function($){
+         $("#spotus_page_right_column").height($("#spotus_page").height() + 40);
+      });
+   </script>
+<% end %>
+<div id="spotus_page_right_column">
+   
+</div>
+<div id="spotus_page">
+  <a name="top"> </a>
   <h2>What is Spot.Us About?</h2>
-  .double_content_border
+  <hr/>
   <p>
     Spot.Us is a nonprofit project of the <a href="http://www.CenterforMediaChange.com/">"Center for
     Media Change"</a> and funded by various groups like the 
@@ -16,20 +25,20 @@
     organizations to distribute content under appropriate licenses. On some occasions we can even
     pay back the original contributors.
   </p>
-  <br>
   <p>
     You can learn more about us at our <a href="/pages/press">Press Page</a>.
     Or <a href="/pages/examples">Suceess story and partners</a>. the FAQ's below or watch this quick video.
   </p>    
-  <object width="600" height="e25"><param name="allowfullscreen" value="true" /><param
-  name="allowscriptaccess" value="always" /><param name="movie"
-  value="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"
-  /><embed
-  src="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"
-  type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="600"
-  height="425"></embed></object><p><a href="http://vimeo.com/2041615">Spot.Us - Community Funded
-  Reporting Intro</a> from <a href="http://vimeo.com/user511977">Digidave</a> on <a
-  href="http://vimeo.com">Vimeo</a>.</p>
+  <object width="600" height="404">
+     <param name="allowfullscreen" value="true" />
+     <param name="allowscriptaccess" value="always" />
+     <param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1"
+  />
+      <embed src="http://vimeo.com/moogaloop.swf?clip_id=2041615&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="600" height="425"></embed>
+  </object>
+  <p>
+     <a href="http://vimeo.com/2041615">Spot.Us - Community Funded  Reporting Intro</a> from <a href="http://vimeo.com/user511977">Digidave</a> on <a href="http://vimeo.com">Vimeo</a>.
+  </p>
   <h2>Contact</h2>
   <hr/>
   <p>
@@ -40,39 +49,36 @@
     Before you send us an email - check our FAQ's below. Perhaps your question has already been
     answered.
   </p>  
-  <br>
+  
   <h2>Who</h2>
   <hr/>
   <p>
-    Spot.Us was founded by <a href="http://"http://www.digidave.org">David Cohn</a> and made
-    possible by a generous grant from the Knight Foundation. Spot.Us has also drawn on support from
-    individual funders like yourself, a fantastic team of advisors, designers and developers from <a
-    href="http://"www.hashrocket.com">Hashrocket</a> to our current staff. We are proudly hosted by
-    <a href="http://engineyard.com">Engineyard</a>. We are an open source project and you can
-    contribute on <a href="http://github.com/spot-us">Git Hub</a>.
+       Spot.Us was founded by <a href="http://www.digidave.org">David Cohn</a> and made
+       possible by a generous grant from the Knight Foundation. Spot.Us has also drawn on support from
+       individual funders like yourself, a fantastic team of advisors, designers and developers from <a
+       href="http://www.hashrocket.com">Hashrocket</a> to our current staff. We are proudly hosted by
+       <a href="http://engineyard.com">Engineyard</a>. We are an open source project and you can
+       contribute on <a href="http://github.com/spot-us">Git Hub</a>.
 
-  <strong>
-    <ul>
-      <li><a href="/pages/who#staff">Our Team.</li>
-      <li><a href="/pages/who#bay_community_advisory_board">Our Bay Area Community Advisory Board.</li>
-      <li><a href="/pages/who#la_community_advisory_board">Our LA Community Advisory Board.</li>
-      <li><a href="/pages/who#media_advisory_board">Our Media Advisory Board.</li>
-      <li><a href="/pages/who#foundation">Foundation Support.</li>
-    </ul>
-  </strong>      
-.block-spacer
-.box_white{:style => "width: 66%;"}
-  .float_left
-    <h2><a name="faq">Frequently Asked Questions</a></h2>
-  .float_right
-    <span>
-      <a href="#top">Back to top</a>
-  .double_content_border.clear
-  <h3> 
+     <strong>
+       <ul>
+         <li><a href="/pages/who#staff">Our Team.</a></li>
+         <li><a href="/pages/who#bay_community_advisory_board">Our Bay Area Community Advisory Board.</a></li>
+         <li><a href="/pages/who#la_community_advisory_board">Our LA Community Advisory Board.</a></li>
+         <li><a href="/pages/who#media_advisory_board">Our Media Advisory Board.</a></li>
+         <li><a href="/pages/who#foundation">Foundation Support.</a></li>
+       </ul>
+     </strong>      
+   </p>
+   <a href="#top" class="float-right">Back to top ^</a>
+   <h2><a name="faq">Frequently Asked Questions</a></h2>
+   <hr/>
+
+   <h3> 
     <strong>
       <a href="#faq_citizen">For Citizens</a>
     </strong>   
-  </h3>    
+   </h3>
   <ul>
   <strong>
     <li><a href="#citizen_explanation">Quick Visual Introduction</a></li>
@@ -108,56 +114,43 @@
     </strong>  
   </h3>
   <ul>
-    <li>
-      <strong>
-        <a href="#news_org_explanation">Quick Visual Introduction</a></li>
+    <li><a href="#news_org_explanation">Quick Visual Introduction</a></li>
     <li><a href="#approval">Why Do We Need Approval To Get Started?</a></li>
     <li><a href="#work_with">Advice On Working With Spot.Us. How To Bolster Your Freelance Budget.</a></li>
-      </strong>
   </ul>
   <h3>
     <strong> 
-      <a href="#faq_general">General FAQ</a></li>
+      <a href="#faq_general">General FAQ</a>
     </strong> 
   </h3>   
   <ul>
     <li><a href="#future">What Can We Expect In The Future?</a></li>
     <li><a href="#why_sf">Why Are You Focused On Just The Bay Area And Los Angeles?</a></li>
   </ul>  
-    <object width="425" height="344"><param name="movie"
-    value="http://www.youtube.com/v/wxUqHlZYrRs&hl=en&fs=1"></param><param name="allowFullScreen"
-    value="true"></param><param name="allowscriptaccess" value="always"></param><embed
-    src="http://www.youtube.com/v/wxUqHlZYrRs&hl=en&fs=1" type="application/x-shockwave-flash"
-    allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
-  <p>  
-  </p>  
-
-.block-spacer
-.box_white{:style => "width: 66%;"}
-
-  .float_left
-    <a name="faq_citizen"><h2>For Citizens</h2></a>
-  .float_right
-    %span
-      <a href="#faq">Back to FAQ</a>
-  .double_content_border.clear
-  <p>
-  </p>
-  <a name ="citizen_explanation"></a>
-  <div style="width:425px;text-align:left" id="__ss_969825"><a style="font:14px
-  Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;"
-  href="http://www.slideshare.net/Digidave/for-citizens-presentation" title="For citizens">For
-  citizens</a><object style="margin:0px" width="425" height="355"><param name="movie"
-  value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=citizens-1233284102107397-3&stripped_title=for-citizens-presentation"
-  /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess"
-  value="always"/><embed
-  src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=citizens-1233284102107397-3&stripped_title=for-citizens-presentation"
+  <object width="425" height="344">
+    <param name="movie" value="http://www.youtube.com/v/wxUqHlZYrRs&hl=en&fs=1"></param>
+    <param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+    <embed src="http://www.youtube.com/v/wxUqHlZYrRs&hl=en&fs=1" type="application/x-shockwave-flash"
+ allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
+  </object>
+   <a href="#faq" class="float-right">Back to FAQ</a>
+    <h2><a name="faq_citizen">For Citizens</a></h2>
+    <hr/>
+    <a name="citizen_explanation"></a>
+    <div id="__ss_969825">
+       <a href="http://www.slideshare.net/Digidave/for-citizens-presentation" title="For citizens">For citizens</a>
+       <object width="425" height="355">
+          <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=citizens-1233284102107397-3&stripped_title=for-citizens-presentation"
+  />
+         <param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/>
+         <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=citizens-1233284102107397-3&stripped_title=for-citizens-presentation"
   type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
-  height="355"></embed></object><div
-  style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a
-  style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a
-  style="text-decoration:underline;" href="http://www.slideshare.net/Digidave">David
-  Cohn</a>.</div></div>
+  height="355"></embed>
+      </object>
+      <div>
+         View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/Digidave">David
+  Cohn</a>.
+      </div>
   <a name="faqtip"></a>
   <h3>How Do I Suggest A Story?</h3>
   <p>
@@ -230,36 +223,26 @@
   <h3> Your Privacy</h3>
   <p>
     Privacy is very important to us. We will never share your information with a third party without
-    your EXPRESS permission. No if’s and’s or but’s. To learn more, please check our <a href="/pages/privacy">Privacy Policy.
+    your EXPRESS permission. No if’s and’s or but’s. To learn more, please check our <a href="/pages/privacy">Privacy Policy</a>.
   </p>
-.block-spacer
-.box_white{:style => "width: 66%;"}
-
-  .float_left
     <a name="faq_reporter"></a>
     <h2>For Reporters</h2>
-  .float_right
-    <span>
-      <a href="#faq">Back to FAQ</a>
-  .double_content_border.clear
+    <hr/>
+   <a href="#faq" class="float-right">Back to FAQ</a>
   <a name="reporters_explanation"></a>
-  <p>
-    <div style="width:425px;text-align:left" id="__ss_969770"><a style="font:14px
-    Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;"
-    href="http://www.slideshare.net/Digidave/spotus-for-reporters-presentation-969770"
-    title="Spot.Us - for reporters">Spot.Us - for reporters</a><object style="margin:0px"
-    width="425" height="355"><param name="movie"
-    value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=forreporters-1233282379077707-1&stripped_title=spotus-for-reporters-presentation-969770"
-    /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess"
-    value="always"/><embed
-    src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=forreporters-1233282379077707-1&stripped_title=spotus-for-reporters-presentation-969770"
+    <div id="__ss_969770"><a href="http://www.slideshare.net/Digidave/spotus-for-reporters-presentation-969770" title="Spot.Us - for reporters">Spot.Us - for reporters</a>
+       <object width="425" height="355">
+          <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=forreporters-1233282379077707-1&stripped_title=spotus-for-reporters-presentation-969770"
+    />
+         <param name="allowFullScreen" value="true"/><param name="allowScriptAccess" value="always"/>
+         <embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=forreporters-1233282379077707-1&stripped_title=spotus-for-reporters-presentation-969770"
     type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true"
-    width="425" height="355"></embed></object><div
-    style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a
-    style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a
-    style="text-decoration:underline;" href="http://www.slideshare.net/Digidave">David
-    Cohn</a>.</div></div>
-  </p>
+    width="425" height="355">
+         </embed>
+         </object>
+      <div>View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/Digidave">David
+    Cohn</a>.</div>
+    </div>
   <a name="mandatory"></a>
   <h3>Agreement To Work With Spot.Us And Pricing Guidlines.</h3>
   <h4><a href="/pages/reporter_agreement">Required Reading</a></h4>
@@ -341,32 +324,27 @@
     and get the content published by as many sources as possible. To do so, we use a Creative
     Commons license (attribution, no derivites). You can learn more by reading our <a href="/pages/reporter_contract">Reporter's Contract</a>.
   </p>
-.block-spacer
-.box_white{:style => "width: 66%;"}
-  .float_left
-    <a name="faq_news_organization"></a>
-    <h2>For News Organizations</h2>
-  .float_right
-    <span>
-      <a href="#faq">Back to FAQ</a>
-  .double_content_border.clear
-
-  <a name="news_org_explanation"></a>
-  <p>
-  <div style="width:425px;text-align:left" id="__ss_933112"><a style="font:14px
-  Helvetica,Arial,Sans-serif;display:block;margin:12px 0 3px 0;text-decoration:underline;"
+    <a name="faq_news_organization"> </a>
+    <div class="back_to">
+       <a href="#faq" class="float-right">Back to FAQ</a>
+       <h2>For News Organizations</h2>
+    </div>
+    <hr/>
+    <a name="news_org_explanation"> </a>
+  <div id="__ss_933112"><a
   href="http://www.slideshare.net/Digidave/explanation-for-news-orgs-presentation"
-  title="Explanation for News Orgs">Explanation for News Orgs</a><object style="margin:0px"
-  width="425" height="355"><param name="movie"
+  title="Explanation for News Orgs">Explanation for News Orgs</a>
+  
+  <object width="425" height="355"><param name="movie"
   value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
   /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess"
   value="always"/><embed
   src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
   type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
-  height="355"></embed></object><div
-  style="font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;">View more <a
-  style="text-decoration:underline;" href="http://www.slideshare.net/">presentations</a> from <a
-  style="text-decoration:underline;" href="http://www.slideshare.net/Digidave">David
+  height="355"></embed></object>
+  
+  <div>View more <a href="http://www.slideshare.net/">presentations</a> from <a
+  href="http://www.slideshare.net/Digidave">David
   Cohn</a>.</div></div>
   </p>
   <a name="approval"></a>
@@ -379,7 +357,7 @@
     ideal, but it is important to us that these ethics are followed by anybody that could
     singlehandedly fund an investigation. Feel free to email <a href="mailto:info@spot.us">Spot.Us Team</a> if you have questions. We tend to approve accounts within 24 hours.    
   </p>
-  <a name="work_with">
+  <a name="work_with"> </a>
   <h3>Advice On Working With Spot.Us. How To Bolster Your Freelance Budget.</h3>
   <p>
     Spot.Us is an opportunity to bolster your freelance budget by working with and for the public.
@@ -391,7 +369,6 @@
     100% community funded, so the reporting comes from a profesional reporter, but you can run the
     content for free.
   </p>
-  <p>
   <strong>Here Are Various Ways Your Organization Can Get Involved</strong>
     
   <ul>
@@ -410,23 +387,17 @@
       We encourage you to donate small amounts as well. Even a tiny donations from a news
       organization can be the push to give a pitch the momentum it needs to get community funding -
       and you are welcome to the final content or even to apply as a peer-review editor.</li>
+   </ul>
 
-.block-spacer
-.box_white{:style => "width: 66%;"}
-  .float_left
-    <a name="faq_general">
+
+    <a name="faq_general"> </a>
+    <a href="#faq" class="float-right">Back to FAQ</a>
     <h2>General FAQ</h2>
-  .float_right
-    <span>
-      <a href="#faq">Back to FAQ</a>
-  .double_content_border.clear
-
-  <a name="future">
-    <h2>What Can We Expect in the Future?</h2>
-  <hr/>
-  <p>
-    SO MUCH!!!
-  </p>
+    <hr/>
+     <a name="future"> </a>
+     <h2>What Can We Expect in the Future?</h2>
+     <hr/>
+     <p>SO MUCH!!!</p>
   <p>
     We have lots planned. Our website is currently 1/4th of what we envision. As we
     develop the open source code we want to add the ability for journalists to report on their
@@ -434,7 +405,7 @@
     users (citizen, reporter, news organization) and who knows what else we might cook up along the
     way. We are responsive to you, so your feedback is welcome.
   </p>
-  <a name="why_sf">
+  <a name="why_sf"> </a>
   <h2> Why Are You Focused On Just The Bay Area And Los Angeles?</h2> 
   <hr/>
   <p>
@@ -443,62 +414,55 @@
     like a great place to launch our 1.0 and we expanded into LA. As we improve the site we will
     launch in other cities.
   </p>
-
-END
-#
-
-    .double_content_border
-    
-    .block-spacer
-    
-    Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
-    pledge in your dashboard and make the change. For a donation, if you increase the donation
-    you’ll have to “checkout” again – if you lower your donation, you’ll have spare credits which
-    you can direct to a different pitch (spreading the love).
-    
-    Why Credits? Spot Credits are yours and they will remain in your control until a pitch of your
-    choosing reaches its fundraising goal. All of the money you donate will go to the reporting
-    needed to finish an investigation – Spot.Us also asks for tips to the organization, but it is not
-    required and we are transparent in asking for tips. In the future we will be looking into
-    options outside of credits to pay for investigative reporting – but for this version, it is the
-    best way to get the job done.
-    
-    Why Tell a Friend? Spot.Us is about giving groups a new sense of editorial power. The only way
-    an investigation gets funded is if a group or network sees value in it. If you are a
-    civic-leader, you can take ownership of a tip or pitch by spreading word about it and making it
-    a reality.
-    
-    What’s an RSS feed? RSS stands for Really Simple Syndication. That means instead of you having
-    to visit spot.us to find out what is new – we will send updates directly to your RSS reader. If
-    you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and
-    running – then come back and click this funny orange button. FAQ for Reporters
-    
-    What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to
-    converse. It also allows a reporter to upload any reporting they’ve done while working on the
-    larger investigation. The reporter can make this reporting public or private, but Spot.Us
-    encourages transparency at all levels.
-    
-    Why give extra to spot.us? (also for Right coloumn of Profile View) Spot.Us is an exciting
-    nonprofit project to pioneer “community funded reporting.” We believe journalism is a process –
-    not a product and all we want to do is support good local investigative journalism. While we do
-    everything to keep our overhead low, just accepting donations means we are running at a loss.
-    Credit card companies take a small percentage of every transaction. We are trying to cover that
-    cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a
-    small donation that goes to the organization to recoup this loss.
-    
-    How do I add a photo?
-    
-    How do I add a video?
-    
-    How do I publish? FAQ for News Organizations
-    
-    For News Organizations
-    
-    What Can We Expect in the future? asdf
-    
-    Ways we can get exclusive content 1. 2. 3. You can always run our content for free, unless
-    another news organization has done steps one or two above. 4. We encourage you to donate small
-    amounts as well. Even a tiny donations from a news organization can be the push to get a pitch
-    the momentum it needs to get community funding – and you are welcome to the final content or
-    even to apply as a peer-review editor.
-.block-spacer
+</div>  
+   <!--     Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
+       pledge in your dashboard and make the change. For a donation, if you increase the donation
+       you’ll have to “checkout” again – if you lower your donation, you’ll have spare credits which
+       you can direct to a different pitch (spreading the love).
+       
+       Why Credits? Spot Credits are yours and they will remain in your control until a pitch of your
+       choosing reaches its fundraising goal. All of the money you donate will go to the reporting
+       needed to finish an investigation – Spot.Us also asks for tips to the organization, but it is not
+       required and we are transparent in asking for tips. In the future we will be looking into
+       options outside of credits to pay for investigative reporting – but for this version, it is the
+       best way to get the job done.
+       
+       Why Tell a Friend? Spot.Us is about giving groups a new sense of editorial power. The only way
+       an investigation gets funded is if a group or network sees value in it. If you are a
+       civic-leader, you can take ownership of a tip or pitch by spreading word about it and making it
+       a reality.
+       
+       What’s an RSS feed? RSS stands for Really Simple Syndication. That means instead of you having
+       to visit spot.us to find out what is new – we will send updates directly to your RSS reader. If
+       you’re brand new to RSS, try Google Reader, it’s simple to use. Get your Google Reader up and
+       running – then come back and click this funny orange button. FAQ for Reporters
+       
+       What’s a Reporters Notebook? A reporters notebook allows the QA editor and reporter to
+       converse. It also allows a reporter to upload any reporting they’ve done while working on the
+       larger investigation. The reporter can make this reporting public or private, but Spot.Us
+       encourages transparency at all levels.
+       
+       Why give extra to spot.us? (also for Right coloumn of Profile View) Spot.Us is an exciting
+       nonprofit project to pioneer “community funded reporting.” We believe journalism is a process –
+       not a product and all we want to do is support good local investigative journalism. While we do
+       everything to keep our overhead low, just accepting donations means we are running at a loss.
+       Credit card companies take a small percentage of every transaction. We are trying to cover that
+       cost ourselves but as a small nonprofit, we hope you will help us keep the lights on with a
+       small donation that goes to the organization to recoup this loss.
+       
+       How do I add a photo?
+       
+       How do I add a video?
+       
+       How do I publish? FAQ for News Organizations
+       
+       For News Organizations
+       
+       What Can We Expect in the future? asdf
+       
+       Ways we can get exclusive content 1. 2. 3. You can always run our content for free, unless
+       another news organization has done steps one or two above. 4. We encourage you to donate small
+       amounts as well. Even a tiny donations from a news organization can be the push to get a pitch
+       the momentum it needs to get community funding – and you are welcome to the final content or
+       even to apply as a peer-review editor. -->
+   
