@@ -62,7 +62,11 @@ class NewsItem < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
             
   has_attached_file :featured_image,
-                    :styles => { :thumb => '50x50#', :medium => "200x150#", :front_story => "300x163#", :medium_alt=>"215x180#" },
+                    :styles => { :thumb => '50x50#', 
+                        :medium => "200x150#", 
+                        :front_story => "300x163#", 
+                        :medium_alt=>"215x180#", 
+                        :medium_alt_1=>"268x210#" },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,

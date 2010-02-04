@@ -14,7 +14,7 @@
          <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=most_funded">Most Pledged</a></div></li>
       </ul>
       <h5 style="display:none;">Filter by Channel</h5>
-	<%@channels = []%>
+	<% @channels = [] %>
       <% if @channels.any? %>
          <ul id="channels" class="filter">
          <% @channels.each do |channel| %>
