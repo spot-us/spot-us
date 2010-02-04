@@ -1,9 +1,8 @@
-.block-spacer
-.box_white{:style => "width: 66%;"}
-  %h2 Privacy Policy
-  .double_content_border  
-  
-  <h2> Your privacy is important to us.</h2>
+<%= render :partial => "page_side_panel" %>
+<div id="spotus_page">
+  <h2>Privacy Policy</h2>
+  <hr/>
+  <h3> Your privacy is important to us.</h3>
   
   <p>
     No… seriously. This is a community site and you are our community, ergo your privacy is
@@ -24,7 +23,7 @@
     AGREEMENT TO THESE TERMS AND ANY SUBSEQUENT CHANGES TO THESE TERMS; DO NOT USE THE SITE OR
     PROVIDE INFORMATION IF YOU DO NOT AGREE WITH ALL OF THE TERMS.
   </p>   
-  <h2> On Your Personal Information</h2>
+  <h3> On Your Personal Information</h3>
     
   <p>
     Yes, we do ask for some of your information, including email address, general location,
@@ -42,14 +41,14 @@
     is the only place on the site where we collect user information with the intent of sharing that
     data.
   </p>
-  <h2> We Abide By The Rules, Too</h2>
+  <h3> We Abide By The Rules, Too</h3>
   
   <p>
     If Spot.Us is asked to disclose the information in response to warrants, subpoenas or other
     valid legal process, we will begrudgingly do so, but we hope you can understand that we don’t
     want to break the law.
   </p>  
-  <h2> Some Info You Post Is Public</h2>  
+  <h3> Some Info You Post Is Public</h3>  
   <p>
     Some actions taken on Spot.Us, such as leaving a comment or creating a "pitch" or "tip" are
     visible to the public. Identification of all contributed content may include, but is not limited
@@ -59,7 +58,7 @@
     responsible for the personal information you choose to submit in the public facing parts of the
     site.
   </p>
-  <h2> You Can Opt Out Of Emails From Spot.Us</h2>
+  <h3> You Can Opt Out Of Emails From Spot.Us</h3>
 
   <p>
     The more we know about you, the better we are able to customize our web site to suit your
@@ -71,7 +70,7 @@
     But even if you don't opt-out, we promise not to spam and that when we do reach out it will be
     for a good cause.
   </p>
-  <h2> On Credit Card Information</h2>
+  <h3> On Credit Card Information</h3>
 
   <p>
     We do ask for your credit card information during the process of donating to a pitch. This
@@ -87,7 +86,7 @@
     guarantee the security of information you transmit to us, and you do so at your own risk. We
     are not liable for the illegal acts of any third party.
   </p>
-  <h2> Auto-magical Information We Get</h2>
+  <h3> Auto-magical Information We Get</h3>
   <p>
     The server does, however, keep a record of other actions you take on the site (pages you visit,
     fields you input, etc). Even if you are not logged in we note what URL you visited, your browser
@@ -96,7 +95,7 @@
     information in terms of demographics, not to study individual users. We will not single people
     out as case studies without their explicit permission.
   </p>
-  <h2> Who Doesn’t Love Google?</h2>
+  <h3> Who Doesn’t Love Google?</h3>
 
   <p>
     We analyze traffic to Spot.Us in various ways, including using a service called Google
@@ -104,19 +103,19 @@
     find on their website.) We use this information to generate statistics and measure site activity
     to improve the usefulness of the site to our visitors.
   </p>
-  <h2> Cookie Monster Information</h2>
+  <h3> Cookie Monster Information</h3>
   <p>
     We do use cookies but only to note if you are a user that has previously logged in to our site. This
     cookie is opt-in and noted in the login screen with a “remember me” checkbox.
   </p>
-  <h2>"You Know, For The Kids."</h2>
+  <h3>"You Know, For The Kids."</h3>
   <p>
     This website’s content is intended for adults and we will not knowingly collect personal
     information from children under 13 years of age. If you are a parent or legal guardian of a
     child under age 13 who you believe has submitted personal information to this site, please
     contact us immediately.
   </p>
-  <h2> Not Our Territory</h2>
+  <h3> Not Our Territory</h3>
 
   <p>
     Spot.Us contains links to other sites that are not owned or controlled by Spot.Us. Please be
@@ -125,11 +124,11 @@
     website that collects personal information. This Privacy Policy applies only to information
     collected by Spot.Us Site.
   </p>
-  <h2>Can’t We All Just Get Along?</h2>
+  <h3>Can’t We All Just Get Along?</h3>
   <p>
     If you believe that Spot.Us has not adhered to the Privacy Statement, please contact Spot.Us by
     e-mail at 
-    = mail_to "info@spot.us", nil, :encode => "hex"
+    <%= mail_to "info@spot.us", nil, :encode => "hex" %>
     (please include the subject: Privacy Violation). We will do our best to
     address your concerns. If you feel that your complaint has been addressed incompletely, we
     invite you to let us know for further investigation.
@@ -137,4 +136,4 @@
   <p>
     Effective date of this agreement: October 1st, 2009
   </p>
-.block-spacer   
+</div>   

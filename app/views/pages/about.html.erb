@@ -1,13 +1,4 @@
-<% content_for :head do %>
-   <script>
-      jQuery(document).ready(function($){
-         $("#spotus_page_right_column").height($("#spotus_page").height() + 40);
-      });
-   </script>
-<% end %>
-<div id="spotus_page_right_column">
-   
-</div>
+<%= render :partial => "page_side_panel" %>
 <div id="spotus_page">
   <a name="top"> </a>
   <h2>What is Spot.Us About?</h2>
@@ -70,8 +61,10 @@
        </ul>
      </strong>      
    </p>
-   <a href="#top" class="float-right">Back to top ^</a>
-   <h2><a name="faq">Frequently Asked Questions</a></h2>
+   <div class="back_to">
+      <h2><a name="faq">Frequently Asked Questions</a></h2>
+      <a href="#top" class="float-right">Back to top ^</a>
+   </div>
    <hr/>
 
    <h3> 
@@ -133,12 +126,14 @@
     <embed src="http://www.youtube.com/v/wxUqHlZYrRs&hl=en&fs=1" type="application/x-shockwave-flash"
  allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed>
   </object>
-   <a href="#faq" class="float-right">Back to FAQ</a>
-    <h2><a name="faq_citizen">For Citizens</a></h2>
-    <hr/>
-    <a name="citizen_explanation"></a>
-    <div id="__ss_969825">
-       <a href="http://www.slideshare.net/Digidave/for-citizens-presentation" title="For citizens">For citizens</a>
+   <div class="back_to">
+      <a href="#faq" class="float-right">Back to FAQ</a>
+      <h2><a name="faq_citizen">For Citizens</a></h2>
+   </div>
+   <hr/>
+   <a name="citizen_explanation"></a>
+   <div>
+       
        <object width="425" height="355">
           <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=citizens-1233284102107397-3&stripped_title=for-citizens-presentation"
   />
@@ -147,12 +142,10 @@
   type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
   height="355"></embed>
       </object>
-      <div>
-         View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/Digidave">David
-  Cohn</a>.
-      </div>
-  <a name="faqtip"></a>
-  <h3>How Do I Suggest A Story?</h3>
+   </div>
+   <a name="faqtip"></a>
+   
+   <h3>How Do I Suggest A Story?</h3>
   <p>
     Anyone can "suggest a story" about an important topic you think should be reported on. This is
     often related to the question "what are you passionate about?" You can pledge to this tip, but
@@ -226,11 +219,13 @@
     your EXPRESS permission. No if’s and’s or but’s. To learn more, please check our <a href="/pages/privacy">Privacy Policy</a>.
   </p>
     <a name="faq_reporter"></a>
-    <h2>For Reporters</h2>
-    <hr/>
-   <a href="#faq" class="float-right">Back to FAQ</a>
-  <a name="reporters_explanation"></a>
-    <div id="__ss_969770"><a href="http://www.slideshare.net/Digidave/spotus-for-reporters-presentation-969770" title="Spot.Us - for reporters">Spot.Us - for reporters</a>
+     <div class="back_to">
+        <a href="#faq" class="float-right">Back to FAQ</a>
+        <h2>For Reporters</h2>        
+     </div>
+      <hr/>
+      <a name="reporters_explanation"></a>
+      <div>
        <object width="425" height="355">
           <param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=forreporters-1233282379077707-1&stripped_title=spotus-for-reporters-presentation-969770"
     />
@@ -240,18 +235,16 @@
     width="425" height="355">
          </embed>
          </object>
-      <div>View more <a href="http://www.slideshare.net/">presentations</a> from <a href="http://www.slideshare.net/Digidave">David
-    Cohn</a>.</div>
-    </div>
-  <a name="mandatory"></a>
-  <h3>Agreement To Work With Spot.Us And Pricing Guidlines.</h3>
-  <h4><a href="/pages/reporter_agreement">Required Reading</a></h4>
-  <p>
-    We've created a pricing guidline based on competitive rates for freelancers. This also includes
-    the "reporters agreement" that explains the working relationship between Spot.Us and the
-    reporter. The most important thing to know is that we are flexible. We work for you, so if you
-    have special requests, speak up!
-  </p>  
+      </div>
+      <a name="mandatory"></a>
+      <h3>Agreement To Work With Spot.Us And Pricing Guidlines.</h3>
+      <h5><a href="/pages/reporter_agreement">Required Reading &raquo;</a></h5>
+      <p>
+          We've created a pricing guidline based on competitive rates for freelancers. This also includes
+          the "reporters agreement" that explains the working relationship between Spot.Us and the
+          reporter. The most important thing to know is that we are flexible. We work for you, so if you
+          have special requests, speak up!
+       </p>  
   <a name="pitch_advice"></a>
   <h3>Advice On Creating A Pitch</h3>
   <p>
@@ -329,24 +322,16 @@
        <a href="#faq" class="float-right">Back to FAQ</a>
        <h2>For News Organizations</h2>
     </div>
-    <hr/>
+     <hr/>
     <a name="news_org_explanation"> </a>
-  <div id="__ss_933112"><a
-  href="http://www.slideshare.net/Digidave/explanation-for-news-orgs-presentation"
-  title="Explanation for News Orgs">Explanation for News Orgs</a>
-  
-  <object width="425" height="355"><param name="movie"
-  value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
-  /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess"
-  value="always"/><embed
-  src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
-  type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
-  height="355"></embed></object>
-  
-  <div>View more <a href="http://www.slideshare.net/">presentations</a> from <a
-  href="http://www.slideshare.net/Digidave">David
-  Cohn</a>.</div></div>
-  </p>
+   <div>
+     <object width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
+     /><param name="allowFullScreen" value="true"/><param name="allowScriptAccess"
+     value="always"/><embed
+     src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=newsorgs-1232420177452987-1&stripped_title=explanation-for-news-orgs-presentation"
+     type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425"
+     height="355"></embed></object>
+   </div>
   <a name="approval"></a>
   <h3> Why Do We Need Approval To Get Started?</h3>
   <p>
@@ -391,29 +376,29 @@
 
 
     <a name="faq_general"> </a>
-    <a href="#faq" class="float-right">Back to FAQ</a>
-    <h2>General FAQ</h2>
-    <hr/>
-     <a name="future"> </a>
-     <h2>What Can We Expect in the Future?</h2>
+    <div class="back_to">
+       <a href="#faq" class="float-right">Back to FAQ</a>
+       <h2>General FAQ</h2>
+    </div>
      <hr/>
+     <a name="future"> </a>
+     <h3>What Can We Expect in the Future?</h3>
      <p>SO MUCH!!!</p>
-  <p>
-    We have lots planned. Our website is currently 1/4th of what we envision. As we
-    develop the open source code we want to add the ability for journalists to report on their
-    pitches in public on the Spot.Us site. We will add more functionality for all three types of
-    users (citizen, reporter, news organization) and who knows what else we might cook up along the
-    way. We are responsive to you, so your feedback is welcome.
-  </p>
-  <a name="why_sf"> </a>
-  <h2> Why Are You Focused On Just The Bay Area And Los Angeles?</h2> 
-  <hr/>
-  <p>
-    We do hope to eventually expand into other regions of the country. We are committed to local
-    journalism for many reasons which we could talk your ear off about. As such, the Bay Area seemed
-    like a great place to launch our 1.0 and we expanded into LA. As we improve the site we will
-    launch in other cities.
-  </p>
+     <p>
+       We have lots planned. Our website is currently 1/4th of what we envision. As we
+       develop the open source code we want to add the ability for journalists to report on their
+       pitches in public on the Spot.Us site. We will add more functionality for all three types of
+       users (citizen, reporter, news organization) and who knows what else we might cook up along the
+       way. We are responsive to you, so your feedback is welcome.
+     </p>
+     <a name="why_sf"> </a>
+     <h3> Why Are You Focused On Just The Bay Area And Los Angeles?</h3> 
+     <p>
+       We do hope to eventually expand into other regions of the country. We are committed to local
+       journalism for many reasons which we could talk your ear off about. As such, the Bay Area seemed
+       like a great place to launch our 1.0 and we expanded into LA. As we improve the site we will
+       launch in other cities.
+     </p>
 </div>  
    <!--     Changing a Pledge. You can change a pledge or donation at any time. For a tip, just find the
        pledge in your dashboard and make the change. For a donation, if you increase the donation

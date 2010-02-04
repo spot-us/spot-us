@@ -311,14 +311,18 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
 
 #spotus_page {padding:20px 40px;width:620px;float:left;}
 #spotus_page h2 {margin:0;}
+#spotus_page h3 {margin-bottom:6px;}
 #spotus_page ul {margin-top:12px;}
 #spotus_page a {color:#567683}
-#spotus_page p {margin-bottom:.8em;}
-#spotus_page hr {margin-bottom:.5em;}
+#spotus_page p {color:#222222;line-height:19px;margin-bottom:0.8em;width:540px;}
+#spotus_page hr {margin-bottom:20px;}
 #spotus_page h2 a, #spotus_page h3 a {color:#11363E;}
-#spotus_page_right_column {float:right;background-color:#567683;width:330px;margin-right:34px;}
-#spotus_page .back_to {clear:both;}
+#spotus_page_right_column {float:right;background-color:#567683;width:330px;margin-right:34px;border-left:2px solid #555;}
+#spotus_page .back_to {clear:both;border-top:1px solid #ddd;padding-top:8px;margin-top:20px;}
 #spotus_page .back_to h2 {float:left;}
+#spotus_page embed {margin-bottom:35px;}
+#spotus_page ul, #spotus_page ol {width:450px;font-size:.9em;}
+#spotus_page img {max-width:550px;margin: 5px 20px 15px 0;}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
