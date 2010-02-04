@@ -1,10 +1,4 @@
-require 'rubygems'
-require 'test/unit'
-require 'stringio'
-require 'tempfile'
-require 'shoulda'
-
-require File.join(File.dirname(__FILE__), '..', 'lib', 'paperclip', 'iostream.rb')
+require 'test/helper'
 
 class IOStreamTest < Test::Unit::TestCase
   context "IOStream" do
@@ -17,29 +11,46 @@ class IOStreamTest < Test::Unit::TestCase
 
   context "A file" do
     setup do
-      @file = File.new(File.join(File.dirname(__FILE__), "fixtures", "5k.png"))
+      @file = File.new(File.join(File.dirname(__FILE__), "fixtures", "5k.png"), 'rb')
     end
+
+    teardown { @file.close }
 
     context "that is sent #stream_to" do
 
-      [["/tmp/iostream.string.test", File],
-       [Tempfile.new('iostream.test'), Tempfile]].each do |args|
+      context "and given a String" do
+        setup do
+          FileUtils.mkdir_p(File.join(ROOT, 'tmp'))
+          assert @result = @file.stream_to(File.join(ROOT, 'tmp', 'iostream.string.test'))
+        end
 
-        context "and given a #{args[0].class.to_s}" do
-          setup do
-            assert @result = @file.stream_to(args[0])
-          end
+        should "return a File" do
+          assert @result.is_a?(File)
+        end
 
-          should "return a #{args[1].to_s}" do
-            assert @result.is_a?(args[1])
-          end
-
-          should "contain the same data as the original file" do
-            @file.rewind; @result.rewind
-            assert_equal @file.read, @result.read
-          end
+        should "contain the same data as the original file" do
+          @file.rewind; @result.rewind
+          assert_equal @file.read, @result.read
         end
       end
+
+      context "and given a Tempfile" do
+        setup do
+          tempfile = Tempfile.new('iostream.test')
+          tempfile.binmode
+          assert @result = @file.stream_to(tempfile)
+        end
+
+        should "return a Tempfile" do
+          assert @result.is_a?(Tempfile)
+        end
+
+        should "contain the same data as the original file" do
+          @file.rewind; @result.rewind
+          assert_equal @file.read, @result.read
+        end
+      end
+
     end
 
     context "that is sent #to_tempfile" do
@@ -47,8 +58,15 @@ class IOStreamTest < Test::Unit::TestCase
         assert @tempfile = @file.to_tempfile
       end
 
-      should "convert it to a Tempfile" do
-        assert @tempfile.is_a?(Tempfile)
+      should "convert it to a Paperclip Tempfile" do
+        assert @tempfile.is_a?(Paperclip::Tempfile)
+      end
+
+      should "have the name be based on the original_filename" do
+        name = File.basename(@file.path)
+        extension = File.extname(name)
+        basename = File.basename(name, extension)
+        assert_match %r[^#{Regexp.quote(basename)}.*?#{Regexp.quote(extension)}], File.basename(@tempfile.path)
       end
 
       should "have the Tempfile contain the same data as the file" do
