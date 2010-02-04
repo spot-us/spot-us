@@ -1,37 +1,39 @@
-<div>
-	<%apply_fragment ['pitch_detail_page_top_', @tab, @pitch, @item] do %>
-		<%=render :partial=>'tabs'%>
-		<div class="description_tab tab_panel clearfix">
+<div class="item">
+	<% apply_fragment ['pitch_detail_page_top_', @tab, @pitch, @item] do %>
+		<%= render :partial=>'tabs' %>
+		<div class="item_tab tab_panel clearfix">
+		   <div class="mini_header"><%=pre_title?(@item)%>
+		      <span class="view_all"> <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a> </span>  
+		   </div>
 			<h2 class="title">
-				<%=pre_title?(@item)%>: <%= @item.title %>
+				 <%= @item.title %>
 			</h2>
 			<h3 class="date">
-				posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date)%>
+				posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date) %>
 			</h3>
 			<div class="body">
 		       <%= @item.body %>
-		    </div>
+		   </div>
 			<div class="body backto">
-		       &laquo; <a href="<%=pitch_path(@pitch)%>/<%=@tab%>">Back to <%=pre_title?(@item).pluralize%></a>
-		    </div>
+		       <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a>
+		   </div>
 		</div>
-	<%end%>
-	<%if current_user%>
-		<%apply_fragment ['pitch_detail_page_admin_', @tab, @pitch, @item, current_user] do %>
-			<div class="tabpanel">
-				<%if @tab == 'posts'%>
-					<%if @pitch.postable_by?(current_user)%>
+	<% end %>
+	<% if current_user %>
+		<% apply_fragment ['pitch_detail_page_admin_', @tab, @pitch, @item, current_user] do %>
+			<div class="edit_bar">
+				<% if @tab == 'posts' %>
+					<% if @pitch.postable_by?(current_user) %>
+						<%= link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@pitch, @item) %>
+					<% end %> 
+				<% elsif @tab == 'assignments' %>
+					<% if @pitch.assignable_by?(current_user) %>
 						<h3>You can:</h3>
-						<%=link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@pitch, @item)%>
-					<%end%>
-				<%elsif @tab == 'assignments'%>
-					<%if @pitch.assignable_by?(current_user)%>
-						<h3>You can:</h3>
-						<%=link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item)%>
-					<%end%>
-					<%=render :partial=>'assignment_admin'%>
-				<%end%>
+						<%= link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item) %>
+					<% end %>
+					<%= render :partial=>'assignment_admin' %>
+				<% end %>
 			</div>
-		<%end%>
-	<%end%>
+		<% end %>
+	<% end %>
 </div>
