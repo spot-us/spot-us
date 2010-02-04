@@ -17,17 +17,18 @@ end
 def for_all_attachments
   klass = obtain_class
   names = obtain_attachments
-  ids   = klass.connection.select_values("SELECT id FROM #{klass.table_name}")
-
+  ids   = klass.connection.select_values(klass.send(:construct_finder_sql, :select => 'id'))
   ids.each do |id|
-    instance = klass.find(id)
-    names.each do |name|
-      result = if instance.send("#{ name }?")
-                 yield(instance, name)
-               else
-                 true
-               end
-      print result ? "." : "x"; $stdout.flush
+    instance = klass.find_by_id(id)
+    if instance
+      names.each do |name|
+        result = if instance.send("#{ name }?")
+                   yield(instance, name)
+                 else
+                   true
+                 end
+        print result ? "." : "x"; $stdout.flush
+      end
     end
   end
   puts " Done."
@@ -42,9 +43,11 @@ namespace :paperclip do
     task :thumbnails => :environment do
       errors = []
       for_all_attachments do |instance, name|
-        result = instance.send(name).reprocess!
-        errors << [instance.id, instance.errors] unless instance.errors.blank?
-        result
+        if instance
+          result = instance.send(name).reprocess!
+          errors << [instance.id, instance.errors] unless instance.errors.blank?
+          result
+        end
       end
       errors.each{|e| puts "#{e.first}: #{e.last.full_messages.inspect}" }
     end
