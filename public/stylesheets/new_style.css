@@ -140,6 +140,26 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #news_item #news_item_info .description_tab h2 {font-size:1.7em;font-weight:normal;}
 #news_item #news_item_info .description_tab h3 {font-size:1.5em;font-weight:normal;}
 #news_item #news_item_info .description_tab h4 {font-size:1.3em;font-weight:normal;}
+
+
+#news_item #news_item_info .story_tab {}
+#news_item #news_item_info .story_tab a{}
+#news_item #news_item_info .story_tab h2 {border-bottom: solid 1px #666;}
+#news_item #news_item_info .story_tab .story {margin-bottom:15px;padding-bottom:10px;border-bottom: dashed 1px #666;}
+#news_item #news_item_info .story_tab .date {color:#778;font-size:22px;font-weight:bold;line-height:24px;margin-left:15px;}
+#news_item #news_item_info .story_tab .author {margin-bottom:10px;}
+
+#news_item #news_item_info .item {}
+#news_item #news_item_info .item_tab .mini_header {border-bottom:1px dashed #666;font-size:.9em;position:relative;color:#888;margin-bottom:15px;}
+#news_item #news_item_info .item_tab .mini_header .view_all {position:absolute;right:0;top:0;}
+#news_item #news_item_info .item_tab h2 {margin-bottom:5px;line-height:1em;}
+#news_item #news_item_info .item_tab h3.date {border-bottom:1px dotted #BBBBBB;border-top:1px dotted #BBBBBB;color:#555555;font-size:0.9em;
+			font-weight:normal;margin-bottom:22px;padding:4px 2px;text-align:left;}
+#news_item #news_item_info .item_tab h3.date a {color:#617D86;}
+#news_item #news_item_info .item_tab p {margin-bottom:20px;}
+#news_item #news_item_info .item_tab .backto {border-top: 1px dashed #666;text-align:right;}
+#news_item #news_item_info .item .edit_bar {border-top: 2px solid #333;text-align:center;background-color:#C7D9DB;}
+
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #news_item #news_item_info .tab_panel li .comment{margin-left:60px;width:400px;}
 #news_item #news_item_info .description_tab {padding-right:60px;padding-left:35px;}
@@ -167,7 +187,7 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #news_item #comments_form input[type="text"] {width:480px;padding:3px;font-family:arial, helvetica;font-size:14px;}
 #news_item #comments_form textarea {width:480px;height:140px;padding:5px;margin-top:0;font-family:arial, helvetica;font-size:14px;}
 #news_item .story-block {margin-left:40px;width:500px;font-family:Georgia,serif,"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua";}
-div.featured_image {float:left;padding:0 15px 0 0;width:220px;}
+div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .story-block .story_content img{display:block;float:none;}
 ul.tabs{margin:0;}
 ul.tabs li {display:inline;}
