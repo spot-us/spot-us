@@ -21,6 +21,7 @@ Rails::Initializer.run do |config|
     SpotUs::Cache.initialize!
   end
   
+  # need to update this list soon :-)
   config.gem "haml", :version => '>=2.0.6'
   config.gem "fastercsv"
   config.gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :source => 'http://gems.github.com'
@@ -57,3 +58,6 @@ SubdomainFu.mirrors = %w(www spotus spotreporting)
 # This is the "preferred mirror" if you would rather show this subdomain
 # in the URL than no subdomain at all.
 # SubdomainFu.preferred_mirror = "www"
+
+# define constant to see if it is in a production mode...
+REAL_PRODUCTION_MODE = (RAILS_ENV=="production")
