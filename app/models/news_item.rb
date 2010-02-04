@@ -62,7 +62,7 @@ class NewsItem < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
             
   has_attached_file :featured_image,
-                    :styles => { :thumb => '50x50#', :medium => "200x150#" },
+                    :styles => { :thumb => '50x50#', :medium => "200x150#", :front_story => "300x163#", :medium_alt=>"215x180#" },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,
@@ -117,6 +117,10 @@ class NewsItem < ActiveRecord::Base
     fact_checker || (parent && parent.fact_checker)
   end
 
+  def deleted?
+    !deleted_at.blank?
+  end
+  
   def editable_by?(user)
     if user.nil?
       false
