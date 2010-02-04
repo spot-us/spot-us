@@ -1,47 +1,42 @@
 <% content_for :head do %>
-  <%= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss'}) %>
- <% end %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss'}) %>
+<% end %>
 
 <% @title = "Spot.us - Fund A Story" %>
 
 <div id="fund_a_story">
-   <div id="navigation">
-      <h5>Browse Spot.Us</h5>
-      <ul id="filters" class="filter">
-         <li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=asc">Newest Stories</a></div></li>
-         <li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=desc">Oldest Stories</a></div></li>
-         <li<%=check_active(@filter,"almost_funded") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=almost_funded">Almost Funded</a></div></li>
-         <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=tips&sort_by=desc&x=70&y=14">Recent Tips</a></div></li>
-      </ul>
-      <h5>Filter by Channel</h5>
-      <% if @channels.any? %>
-         <ul id="channels" class="filter">
-         <% @channels.each do |channel| %>
-            <% if channel == @channel %>
-               <li class="active">
-                <%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
-                <div><%= link_to channel.title, channel_path(channel) %></div>
-               </li>
-             <% else %>
-               <li>
-                <%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
-                <div><%= link_to channel.title, channel_path(channel) %></div>
-               </li>
-             <% end %>
-         <% end %>  
-      </ul>
-   <% end %>   
-   </div>
-   <div id="stories">
-      <h3 class="display_inline">NOW VIEWING:</h3> 
-      <h4 class="display_inline"><%= @filter.sub("_", " ").titleize %></h4>
-      <div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
-      <% if @news_items.blank? %>
-         <div>
-          There were no results for your search.  Try different search terms.
-         </div>
-         <% end %>
-    <%= render :partial => @news_items %>
-    <%= will_paginate @news_items %>
-   </div>
+	<div id="navigation">
+	   <h5>Browse Spot.Us</h5>
+	   <ul id="filters" class="filter">
+	      <li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=asc">Newest Stories</a></div></li>
+	      <li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=desc">Oldest Stories</a></div></li>
+	      <li<%=check_active(@filter,"almost_funded") %>><div><a href="/news_items/search?news_item_type=pitches&sort_by=almost_funded">Almost Funded</a></div></li>
+	      <li<%=check_active(@filter,"most_pledged") %>><div><a href="/news_items/search?news_item_type=tips&sort_by=desc&x=70&y=14">Recent Tips</a></div></li>
+	   </ul>
+	   <h5>Filter by Channel</h5>
+		<% if @channels.any? %>
+			<ul id="channels" class="filter">
+				<% @channels.each do |channel| %>            
+					<li<% if channel == @channel %> class="active"<%end%>>
+						<%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
+						<div><%= link_to channel.title, channel_path(channel) %></div>
+					</li>
+				<% end %>  
+			</ul>
+		<% end %>   
+	</div>
+	<div id="stories">
+		<h3 class="display_inline">NOW VIEWING:</h3> 
+		<h4 class="display_inline"><%= @filter.sub("_", " ").titleize %></h4>
+		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
+			&nbsp;
+		</div>
+		<% if @news_items.blank? %>
+			<div>
+				There were no results for your search.  Try different search terms.
+			</div>
+		<% end %>
+		<%= render :partial => @news_items %>
+		<%= will_paginate @news_items %>
+	</div>
 </div>
