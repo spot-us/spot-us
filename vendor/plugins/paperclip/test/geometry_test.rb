@@ -1,8 +1,4 @@
-require 'rubygems'
-require 'test/unit'
-require 'shoulda'
-
-require File.join(File.dirname(__FILE__), '..', 'lib', 'paperclip', 'geometry.rb')
+require 'test/helper'
 
 class GeometryTest < Test::Unit::TestCase
   context "Paperclip::Geometry" do
@@ -12,15 +8,15 @@ class GeometryTest < Test::Unit::TestCase
       assert_equal 768, @geo.height
     end
 
-    should "correctly create a square if the height dimension is missing" do
+    should "set height to 0 if height dimension is missing" do
       assert @geo = Paperclip::Geometry.new(1024)
       assert_equal 1024, @geo.width
-      assert_equal 1024, @geo.height
+      assert_equal 0, @geo.height
     end
 
-    should "correctly create a square if the width dimension is missing" do
+    should "set width to 0 if width dimension is missing" do
       assert @geo = Paperclip::Geometry.new(nil, 768)
-      assert_equal 768, @geo.width
+      assert_equal 0, @geo.width
       assert_equal 768, @geo.height
     end
 
@@ -32,19 +28,20 @@ class GeometryTest < Test::Unit::TestCase
 
     should "be generated from a xH-formatted string" do
       assert @geo = Paperclip::Geometry.parse("x600")
-      assert_equal 600, @geo.width
+      assert_equal 0, @geo.width
       assert_equal 600, @geo.height
     end
-      
+
     should "be generated from a Wx-formatted string" do
       assert @geo = Paperclip::Geometry.parse("800x")
       assert_equal 800, @geo.width
-      assert_equal 800, @geo.height
+      assert_equal 0, @geo.height
     end
 
-    should "ensure the modifier is nil if only one dimension present" do
-      assert @geo = Paperclip::Geometry.parse("123x")
-      assert_nil @geo.modifier
+    should "be generated from a W-formatted string" do
+      assert @geo = Paperclip::Geometry.parse("800")
+      assert_equal 800, @geo.width
+      assert_equal 0, @geo.height
     end
 
     should "ensure the modifier is nil if not present" do
@@ -52,22 +49,60 @@ class GeometryTest < Test::Unit::TestCase
       assert_nil @geo.modifier
     end
 
-    ['>', '<', '#', '@', '%', '^', '!'].each do |mod|
-      should "ensure the modifier #{mod} is preserved" do
+    should "treat x and X the same in geometries" do
+      @lower = Paperclip::Geometry.parse("123x456")
+      @upper = Paperclip::Geometry.parse("123X456")
+      assert_equal 123, @lower.width
+      assert_equal 123, @upper.width
+      assert_equal 456, @lower.height
+      assert_equal 456, @upper.height
+    end
+
+    ['>', '<', '#', '@', '%', '^', '!', nil].each do |mod|
+      should "ensure the modifier #{mod.inspect} is preserved" do
         assert @geo = Paperclip::Geometry.parse("123x456#{mod}")
         assert_equal mod, @geo.modifier
+        assert_equal "123x456#{mod}", @geo.to_s
+      end
+    end
+    
+    ['>', '<', '#', '@', '%', '^', '!', nil].each do |mod|
+      should "ensure the modifier #{mod.inspect} is preserved with no height" do
+        assert @geo = Paperclip::Geometry.parse("123x#{mod}")
+        assert_equal mod, @geo.modifier
+        assert_equal "123#{mod}", @geo.to_s
       end
     end
 
     should "make sure the modifier gets passed during transformation_to" do
       assert @src = Paperclip::Geometry.parse("123x456")
       assert @dst = Paperclip::Geometry.parse("123x456>")
-      assert_equal "123x456>", @src.transformation_to(@dst).to_s
+      assert_equal ["123x456>", nil], @src.transformation_to(@dst)
+    end
+
+    should "generate correct ImageMagick formatting string for W-formatted string" do
+      assert @geo = Paperclip::Geometry.parse("800")
+      assert_equal "800", @geo.to_s
+    end
+
+    should "generate correct ImageMagick formatting string for Wx-formatted string" do
+      assert @geo = Paperclip::Geometry.parse("800x")
+      assert_equal "800", @geo.to_s
+    end
+
+    should "generate correct ImageMagick formatting string for xH-formatted string" do
+      assert @geo = Paperclip::Geometry.parse("x600")
+      assert_equal "x600", @geo.to_s
+    end
+
+    should "generate correct ImageMagick formatting string for WxH-formatted string" do
+      assert @geo = Paperclip::Geometry.parse("800x600")
+      assert_equal "800x600", @geo.to_s
     end
 
     should "be generated from a file" do
       file = File.join(File.dirname(__FILE__), "fixtures", "5k.png")
-      file = File.new(file)
+      file = File.new(file, 'rb')
       assert_nothing_raised{ @geo = Paperclip::Geometry.from_file(file) }
       assert @geo.height > 0
       assert @geo.width > 0
