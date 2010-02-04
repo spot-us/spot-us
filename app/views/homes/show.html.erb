@@ -7,17 +7,17 @@
       </div>
       <ul>
          <% Post.by_network(@current_network).latest.each do |post| %>
-			<%# apply_fragment ['stories_in_progress_home_', post] do %>
+			<% apply_fragment ['stories_in_progress_home_', post] do %>
 	            <li class="post">
 	               <h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
 	               <%= image_tag(post.pitch.featured_image.url(:front_story)) %>
 	               <p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %></p>
 	               <p class="post_body">
 	                  <%= truncate_words(strip_html(post.body), 35)%>
-	                  <%= link_to "Read More &raquo", pitch_post_path(post.pitch, post) %>
+	                  <%= link_to "Read More &raquo;", pitch_post_path(post.pitch, post) %>
 	               </p>
 	            </li>
-			<%# end %>
+			<% end %>
          <% end %>
          <li><%= link_to "See All Blog Posts", "/blogs" %></li>
       </ul>
