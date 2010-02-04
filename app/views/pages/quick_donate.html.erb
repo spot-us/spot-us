@@ -1,0 +1,28 @@
+<%= render :partial => "page_side_panel" %>
+<div id="spotus_page">
+     <h2>Quick Donate</h2>
+     <p>
+       Do you want to support journalism but don't have the time to go through all the Spot.Us pitches to find the right one?
+     </p>
+     <p>
+       Now you can donate to beats and Spot.Us promises that any money donated to these beats will be used ONLY for reporting within those subjects.
+     </p>
+     <ul>
+         <li>
+           Donate to
+           <%= link_to "Environment Reporting", "http://spot.us/pitches/183" %>
+         </li>    
+         <li>
+           Donate to 
+           <%= link_to "Education Reporting", "http://spot.us/pitches/182" %>
+         </li>
+         <li>
+           Donate to local   
+           <%= link_to "Political Reporting", "http://spot.us/pitches/184" %>
+         </li>
+     </ul>
+     <p>
+       Didn't see the topic you want to support? Let us know:
+       <%= mail_to "info@spot.us", nil, :encode => "hex" %>
+     </p>
+</div>
