@@ -44,9 +44,12 @@ namespace :paperclip do
       errors = []
       for_all_attachments do |instance, name|
         if instance
-          result = instance.send(name).reprocess!
-          errors << [instance.id, instance.errors] unless instance.errors.blank?
-          result
+          begin
+            result = instance.send(name).reprocess!
+            errors << [instance.id, instance.errors] unless instance.errors.blank?
+            result
+          rescue
+          end
         end
       end
       errors.each{|e| puts "#{e.first}: #{e.last.full_messages.inspect}" }
