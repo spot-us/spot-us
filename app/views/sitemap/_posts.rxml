@@ -1,0 +1,12 @@
+@posts.each { |post|
+  xml.url{
+      apply_fragment ['sitemap_post_', post] do
+        xml << render (:partial=>"url", 
+          :locals=>{ 
+              :url=>pitch_post_path(post.pitch, post, {:only_path=>false}), 
+              :item_date=>post.updated_at, 
+              :priority=>0.8 
+          })
+      end
+  }
+}
