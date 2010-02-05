@@ -1,0 +1,12 @@
+@pitches.each { |pitch|
+  xml.url{
+      apply_fragment ['sitemap_pitch_', pitch] do
+        xml << render (:partial=>"url", 
+          :locals=>{ 
+              :url=>pitch_path(pitch, {:only_path=>false}), 
+              :item_date=>pitch.updated_at, 
+              :priority=>0.8 
+          })
+      end
+  }
+}
