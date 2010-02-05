@@ -5,6 +5,8 @@
 
 	<%if REAL_PRODUCTION_MODE && APP_SETTINGS[:google_verify]%>
 		<meta name="google-site-verification" content="<%=APP_SETTINGS[:google_verify]%>" />
+	<%elsif !REAL_PRODUCTION_MODE%>
+		<meta name="ROBOTS" content="NOARCHIVE,NOINDEX,NOFOLLOW" />
 	<%end%>
 
 	<title><%= @title || "Spot.us"%></title>
