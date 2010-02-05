@@ -1,8 +1,9 @@
 @stories.each { |story|
   xml.url{
-      apply_fragment ['sitemap_story_', story] do
-        xml << render (:partial=>"url", 
+      apply_fragment ['sitemap_story_', story, @prefix_template] do
+        xml << render (:partial=>"#{@prefix_template}url", 
           :locals=>{ 
+              :title => story.headline,
               :url=>story_path(story, {:only_path=>false}), 
               :item_date=>story.updated_at, 
               :priority=>0.8 
