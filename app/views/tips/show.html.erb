@@ -59,7 +59,7 @@
                <% @tip.comments.each do |comment| %>
                   <li>
                      <h5><%= comment.title %></h5>
-                     <%= link_to image_tag(comment.user.photo(:photo), :class => "avatar"), profile_path(comment.user) %>
+                     <%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
                      <div class="comment"><%= comment.body %>
                         by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
                      </div>
