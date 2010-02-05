@@ -1,12 +1,10 @@
 - if @item.accepted_contributors.any?
-  .double_content_border
   %h4 Contributors:
   .contributor
     - @item.accepted_contributors.each do |contributor|
       = image_tag contributor.photo.url(:thumb), :width => "28"
       = contributor.full_name
 - if current_user != @item.user
-  .double_content_border
   .apply
     - if current_user && @item.accepted_contributors.include?(current_user)
       %em You have been accepted as a contributor to this assignment.
@@ -17,18 +15,18 @@
     - else
       = link_to("Apply to contribute", process_application_pitch_assignment_path(@item.pitch, @item), :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
 - if @item.user == current_user
-  .double_content_border
   #assignments_admin
-    %h5 Assignment Admin
-    %em 
-      status
-      = @item.status
-    - if @item.status == "open"
-      %p= link_to "close assignment", close_assignment_pitch_assignment_path(@item.pitch, @item), :confirm => "Close assignment?"
-    - elsif @item.status == "closed"
-      %p= link_to "re-open assignment", open_assignment_pitch_assignment_path(@item.pitch, @item), :confirm => "Re-open assignment?"
+    %h4 Assignment Admin
+    %p
+      %em 
+        status
+        = @item.status + ":"
+      - if @item.status == "open"
+        = link_to "close assignment?", close_assignment_pitch_assignment_path(@item.pitch, @item), :confirm => "Close assignment?"
+      - elsif @item.status == "closed"
+        = link_to "re-open assignment", open_assignment_pitch_assignment_path(@item.pitch, @item), :confirm => "Re-open assignment?"
     - if @item.contributors.any? and @item.status == "open"
-      %h5 Contributor Applications
+      %h4 Contributor Applications
       %table.assignment_admin{:width => "100%"}
         %tr
           %th name
