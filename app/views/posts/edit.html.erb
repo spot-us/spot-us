@@ -1,0 +1,7 @@
+<div id="spotus_form">
+   <h2>Edit this blog post about <%=@pitch.headline%></h3>
+   <% form_for([@pitch, @post]) do |f| %>
+     <%= render :partial => 'form', :locals => {:f => f} %>
+   <% end %>
+</div>
+
