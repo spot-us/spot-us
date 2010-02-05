@@ -1,0 +1,6 @@
+xml.instruct! :xml, :version=>"1.0" 
+
+xml.urlset(@url_set){
+  xml << render (:partial=>@type)
+}
+
