@@ -210,6 +210,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB
 .tab_panel .body{margin-bottom:10px;}
 .tab_panel ul{}
 .tab_panel li{margin-bottom:15px;}
+.tab_panel p{padding:0px 0px 7px 0px;}
 .tab_panel .row {vertical-align:top;}
 .tab_panel .row label {display:block;}
 .tab_panel .row input, .tab_panel .row textarea {}
