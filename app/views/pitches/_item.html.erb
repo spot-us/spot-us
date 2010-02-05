@@ -24,12 +24,11 @@
 			<div class="edit_bar">
 				<% if @tab == 'posts' %>
 					<% if @pitch.postable_by?(current_user) %>
-						<%= link_to image_tag('edit_in_red.png'), edit_pitch_post_path(@pitch, @item) %>
+						<%= link_to "edit post", edit_pitch_post_path(@pitch, @item), :class => "admin_button float-right" %>
 					<% end %> 
 				<% elsif @tab == 'assignments' %>
 					<% if @pitch.assignable_by?(current_user) %>
-						<h3>You can:</h3>
-						<%= link_to image_tag('edit_in_red.png'), edit_pitch_assignment_path(@pitch, @item) %>
+						<%= link_to "edit assignment", edit_pitch_assignment_path(@pitch, @item), :class => "admin_button float-right" %>
 					<% end %>
 					<%= render :partial=>'assignment_admin' %>
 				<% end %>
