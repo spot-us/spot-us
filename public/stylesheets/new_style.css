@@ -234,7 +234,9 @@ ul.dashboard_tabs li a.myspot_tab.active{background-color:#A2BBC3;color:#111;pad
 			letter-spacing: -0.05em; color: rgb(17, 54, 62);margin-bottom:5px;}
 #stories .pitch .news_item p {margin-bottom:5px;margin-top:5px;}
 #stories .pitch .donater {float:right;position:relative;}
-#stories .pitch .donater .progress_bar {margin-top:18px;}
+#stories .pitch .donater .progress_bar {margin-top:8px;}
+#stories .pitch .donater .small {margin:2px 0;line-height:1em;}
+#stories .pitch .donater p {line-height:1.3em;margin:0;}
 #stories .pitch .author {background:#eee;position:absolute;bottom:0;right:0;width:196px;padding:5px;}
 #stories .pitch .author img.avatar{vertical-align:top; float:left;margin-right:10px;}
 #stories .pitch .author a {color:#17577B;font-family:Arial,Helvetica,sans-serif;font-size:1em;font-weight:bolder;letter-spacing:-1pt;
