@@ -42,7 +42,7 @@
           <% else %>
              <ul>
                 <% @pitch.comments.each do |comment| %>
-					<% apply_fragment ['new2_pitch_comments_', @pitch, comment] do%>
+					<% apply_fragment ['pitch_comments_', @pitch, comment] do%>
 						<a name="<%=comment.id%>">
 						<li>
 							<h5><%= comment.title %></h5>
