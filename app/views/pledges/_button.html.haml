@@ -16,9 +16,9 @@
           = f.text_field :amount
         .float_right= image_submit_tag("pledge.png")
         .clear
-    .small.uppcased_button_text
-      = link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{jQuery("#pledge_button_#{news_item.id}, #pledge_custom_#{news_item.id}").toggle();}
-      .double_content_border
+    / .small.uppcased_button_text
+    /  =# link_to_function "OR PLEDGE ANOTHER AMOUNT &raquo;", %{jQuery("#pledge_button_#{news_item.id}, #pledge_custom_#{news_item.id}").toggle();}
+    /  .double_content_border
     = render :partial => "shared/hey_reporters", :locals => {:tip => news_item}
 
  
