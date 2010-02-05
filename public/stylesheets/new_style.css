@@ -17,6 +17,7 @@ h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:-1px;margi
 h2 {font-size:2em;margin-bottom:0.75em;}
 h2.link{font-family:Verdana,Geneva,sans-serif;font-size:1.4em;font-weight:bold;letter-spacing:-1pt;line-height:1.2em;}
 tr, th, td {vertical-align:top;}
+th {background:#E3EEEF;border-bottom:solid 1px #999;}
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 
 .float-left{float:left;}
@@ -34,9 +35,9 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .border_top {border-top:solid 1px #aaa;}
 .display_block{display:block;}
 .display_inline{display:inline;}
-.admin_button {background:#882618;color:white;padding:5px 8px;line-height:18px;font-size:14px;-moz-border-radius:4px;
+.admin_button {background:#882618;color:white !important;padding:5px 8px;line-height:18px;font-size:14px;-moz-border-radius:4px;
 				-webkit-border-radius:4px;}
-
+a.admin_button  {color:white !important;}
 
 /*rounded courners*/
 .roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
@@ -164,7 +165,8 @@ div#stories_carousel li {width:258px;padding:0 5px;}
 #news_item #news_item_info .item_tab h3.date a {color:#617D86;}
 #news_item #news_item_info .item_tab p {margin-bottom:20px;}
 #news_item #news_item_info .item_tab .backto {border-top: 1px dashed #666;text-align:right;font-size:.9em;}
-#news_item #news_item_info .item .edit_bar {border-top: 2px solid #333;text-align:left;background-color:#C7D9DB;padding:10px;}
+#news_item #news_item_info .item .edit_bar {border: 1px solid #333;text-align:left;background-color:#f1f1f1;padding:10px;}
+#news_item #news_item_info .item .edit_bar a {color:#617D86;}
 #news_item #news_item_info .item .edit_bar h4 {border-bottom:solid 1px #999; margin-bottom:10px;}
 
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
