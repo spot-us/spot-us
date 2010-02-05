@@ -17,7 +17,7 @@ xml.n :news do
   
   xml.n :publication do
     xml.name "SpotUs - http://www.spot.us"
-    xml.language "end"
+    xml.language "en"
   end
   
   xml.n :language, "end"
