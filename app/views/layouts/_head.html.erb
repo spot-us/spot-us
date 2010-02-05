@@ -1,0 +1,44 @@
+<head>
+	<meta name"description" content="<%=@meta_description%>" />
+	<meta name"keywords" content="<%=@meta_keywords%>" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-type" />
+
+	<!-- Some SEO stuff... -->
+	<%if REAL_PRODUCTION_MODE && APP_SETTINGS[:google_verify]%>
+		<meta name="google-site-verification" content="<%=APP_SETTINGS[:google_verify]%>" />
+		<!-- Only index the top domain... -->
+		<%unless @current_network.nil? %>
+			<meta name="ROBOTS" content="NOARCHIVE,NOINDEX,NOFOLLOW" />
+		<%end%>
+	<%elsif !REAL_PRODUCTION_MODE%>
+		<meta name="ROBOTS" content="NOARCHIVE,NOINDEX,NOFOLLOW" />
+	<%end%>
+
+	<title><%= @title || "Spot.us"%></title>
+
+	<!--[if IE 6]> 
+    	<%= stylesheet_link_tag 'ie_spotus.css'%>
+ 	<![endif]-->
+
+  	<%#= stylesheet_link_tag 'screen','screen_spotus','ie.css','facebox', :media => "screen", :cache => "styles_all"%>
+  	<%= stylesheet_link_tag 'screen','new_style','facebox', :media => "screen", :cache => "styles_all" %>
+  	<%= stylesheet_link_tag 'print', :media => "print"%>
+
+	<%= javascript_include_tag 'jquery-1.4.1.min'%>
+  	<script type='text/javascript'>
+    	jQuery.noConflict();
+	</script>
+
+	<%= javascript_include_tag 'fckeditor/fckeditor','jquery-ui','jrails','jquery.pngFix','jquery.equalHeights','prototype','effects','jsProgressBarHandler','jquery.livequery','jquery.cookie','jcarousellite_1.0.1','jquery.form','application','auth','facebox', :cache => "js_all"%>
+  	<%= iboxify_page%>
+  	<%= yield :head%>
+  
+	<%if current_user && !current_user.valid?%>
+		<script type='text/javascript'>
+			jQuery(document).ready(function(){
+				showProfileForm();
+			});
+		</script>
+  	<%end%>
+
+</head>
