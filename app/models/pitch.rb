@@ -340,7 +340,7 @@ class Pitch < NewsItem
   end
   
   def to_s
-    "hhkhjklkh"#headline
+    headline
   end
   
   def short_url(base_url=nil)
