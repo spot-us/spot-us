@@ -1,0 +1,20 @@
+xml.loc(url)
+xml.lastmod(w3c_date(item_date)) unless item_date.blank?
+
+date = Time.now
+date = item_date.to_time unless item_date.blank?
+
+# change frequency
+if 24.hours.ago <= date
+  xml.changefreq("hourly")
+elsif 24.hours.ago < date
+  xml.changefreq("daily")
+elsif 24.hours.ago > date && 4.weeks.ago <= date
+  xml.changefreq("weekly")
+elsif 4.weeks.ago > date && 12.months.ago < date
+  xml.changefreq("monthly")
+else  
+  xml.changefreq("yearly")
+end
+
+xml.priority(priority)
