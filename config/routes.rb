@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 
   map.connect "/sitemap.:type", :controller => "sitemap", :action => "index"
+  map.connect "/sitemap_news.:type", :controller => "sitemap", :action => "index", :news=>true
 
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
