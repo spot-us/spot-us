@@ -6,7 +6,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/sitemap.:type", :controller => "sitemap", :action => "index"
   map.connect "/sitemap_news.:type", :controller => "sitemap", :action => "index", :news=>true
 
-  map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
+  map.resources :news_items, :collection => {:search => :any, :sort_options => :get}  do |news_items|
+    news_items.resources :newest
+    news_items.resources :oldest
+    news_items.resources :almost_funded
+  end
+    
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
@@ -14,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :blogs
   map.resources :channels
   map.resources :city_suggestions
+  map.resources :sections
   
   map.resources :pitches, :member => {:feature => :get, :unfeature => :get, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get} do |pitch|
     pitch.resources :posts, :except => [:index, :show]
@@ -66,6 +72,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :networks
     admin.resources :groups
     admin.resources :channels
+    admin.resources :sections
   end
 
   map.namespace :myspot do |myspot|
