@@ -14,6 +14,11 @@ class Admin::PitchesController < ApplicationController
       redirect_to admin_pitches_path
     end
   end
+  
+  def index
+    @pitches = Pitch.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc", :include => [:donations, 
+              :user, :contributor_applications])
+  end
 
   def fact_checker_chooser
     render :partial => 'fact_checker_chooser', :locals => { :pitch => current_pitch, :cancel => true }
