@@ -1,0 +1,51 @@
+<% content_for :head do %>
+  	<script>
+	    jQuery(document).ready(function($){
+			$("#toggleDivs").click(function(){
+				$('div[id*=toggle_div]').slideToggle(600);
+				return false;
+			});
+	    });
+	</script>
+<% end %>
+<% form_for([:admin, @section], :html => { :multipart => true }) do |f| %>
+    <div class="row">
+        <%= f.label     :title, "Title" %>
+        <%= f.text_field :title %>
+    </div>
+    <div class="row">
+        <%= f.label     :name, "Handle" %>
+        <%= f.text_field :name %>
+    </div>
+    <div class="row">
+      <%= f.label :extended_description, "Description" %>
+      <%= fckeditor_textarea("section", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+    </div>
+    <div class="row">
+		<%= f.label :embed_code, "Embed media", :class => "small" %>
+		<%= f.text_area :embed_code, :rows => 4 %>
+   </div>
+
+	<!-- START OPTIONAL FIELDS -->
+	<div class="row optional">
+		<label id='toggleDivs'><span style="text-decoration:underline;cursor:pointer;">Optional &raquo;</span><br/>
+	         <span class="small" style="text-decoration:none;">
+	            Toggle here to see the optional fields
+	         </span>       
+	     </label>
+	</div>
+    <div class="row" id="toggle_div_how_will_it_help" style="display:none;">
+      <%= f.label :short_description, "Enter a short description for this help section?" %>
+      <%= fckeditor_textarea("section", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+    </div>
+   <div class="row">
+      <label> </label>
+       <% if @section.new_record? %>
+          <%= image_submit_tag image_path('create_a_pitch.png'), :alt => 'Create a pitch' %>
+       <% else %>
+         <%= image_submit_tag image_path('save.png') %>
+         <%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+       <% end %>
+   </div>
+<% end %>
+
