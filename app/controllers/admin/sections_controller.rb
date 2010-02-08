@@ -1,5 +1,5 @@
 class Admin::SectionsController < ApplicationController
-  #before_filter :admin_required
+  before_filter :admin_required
   layout "bare"
   resources_controller_for :sections
   
