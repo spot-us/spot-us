@@ -16,8 +16,8 @@
 				<td><%=section.short%></td>
 				<td><%=section.embed_code.blank? ? '-' : 'Yes'%></td>
 				<td>
-			        <%= button_to 'edit', admin_section_url(section), :method => :update, :class => 'delete_button'%>
-					<%= button_to 'delete', admin_section_url(section), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?', :class => 'delete_button'%>
+			        <%= link_to 'edit', edit_admin_section_url(section)%><br/>
+					<%= link_to 'delete', admin_section_url(section), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?'%>
 				</td>
 			</tr>
 		<%end%>
