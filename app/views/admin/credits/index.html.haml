@@ -1,7 +1,7 @@
 = content_for :head do
   :javascript
     $(function(){
-      $(".tab").removeClass("hilited");
+      $(".admin_tab").removeClass("hilited");
       $("#credits_tab").addClass("hilited");
     });
 
@@ -37,3 +37,4 @@
         %td= credit.user.full_name
         %td= number_to_currency(credit.amount)
         %td= credit.description
+= will_paginate @credits
