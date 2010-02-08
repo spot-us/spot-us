@@ -34,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/assignment/:assignment_id/application/reject/:id", :controller => "assignments", :action => "reject_application"
   map.connect "/admin/channels/:id/add_pitch/:pitch_id", :controller => "admin/channels", :action => "add_pitch"
   map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
-  
+  map.connect "/admin", :controller => "admin/city_suggestions", :action => "index"
   # TODO: remove when done
   map.resources :ui
 
