@@ -12,5 +12,5 @@
       - if current_user && assignment.contributors.include?(current_user)
         %em applied to
       - else
-        = link_to("Apply to contribute", process_application_pitch_assignment_path(assignment.pitch, assignment), :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
+        = link_to("Apply to contribute", process_application_pitch_assignment_path(assignment.pitch, assignment),:class => "admin_button", :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
   .double_content_border
