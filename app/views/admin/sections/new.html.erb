@@ -21,10 +21,6 @@
       <%= f.label :extended_description, "Description" %>
       <%= fckeditor_textarea("section", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
-    <div class="row">
-		<%= f.label :embed_code, "Embed media", :class => "small" %>
-		<%= f.text_area :embed_code, :rows => 4 %>
-   </div>
 
 	<!-- START OPTIONAL FIELDS -->
 	<div class="row optional">
@@ -38,14 +34,18 @@
       <%= f.label :short_description, "Enter a short description for this help section?" %>
       <%= fckeditor_textarea("section", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
-   <div class="row">
-      <label> </label>
-       <% if @section.new_record? %>
-          <%= image_submit_tag image_path('create_a_pitch.png'), :alt => 'Create a pitch' %>
-       <% else %>
-         <%= image_submit_tag image_path('save.png') %>
-         <%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
-       <% end %>
-   </div>
+	<div class="row">
+		<%= f.label :embed_code, "Embed media", :class => "small" %>
+		<%= f.text_area :embed_code, :rows => 4 %>
+   	</div>
+	<div class="row">
+	<label> </label>
+	<% if @section.new_record? %>
+		<%= image_submit_tag image_path('save.png'), :alt => 'Create the help section' %>
+	<% else %>
+		<%= image_submit_tag image_path('save.png') %><br/>
+		<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+	<% end %>
+	</div>
 <% end %>
 

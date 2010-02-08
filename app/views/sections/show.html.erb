@@ -1,4 +1,9 @@
-<h2><%=@section.title%></h2>
-<p><%=@section.embed_code%></p>
-<p><em><%=@section.short_description%></em></p>
-<p><%=@section.extended_description%></p>
+<%if @section%>
+	<h2><%=@section.title%></h2>
+	<p><%=@section.embed_code%></p>
+	<p><em><%=@section.short_description%></em></p>
+	<p><%=@section.extended_description%></p>
+<%else%>
+	<h2>Ooops...</h2>
+	<p>We haven't gotten to that section yet. Check back in a bit and we are sure it will be there for you.</p>
+<%end%>

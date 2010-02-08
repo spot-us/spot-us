@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
-  resources_controller_for :sections
+  resources_controller_for :sections, :only=>[:show]
   
   def show
     #get help section
