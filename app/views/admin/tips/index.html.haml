@@ -1,7 +1,7 @@
 = content_for :head do
   :javascript
     $(function(){
-      $(".tab").removeClass("hilited");
+      $(".admin_tab").removeClass("hilited");
       $("#tips_tab").addClass("hilited");
     });
 
@@ -26,3 +26,4 @@
         %td
           = tip.supporters.map(&:email).join(', ')
         %td=link_to 'Destroy', admin_tip_path(tip), :confirm => 'Are you sure?', :method => :delete
+= will_paginate @tips

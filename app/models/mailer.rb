@@ -112,12 +112,12 @@ class Mailer < ActionMailer::Base
     body       :story => story
   end
 
-  # def admin_reporting_team_notification(pitch)
-  #   recipients '"David Cohn" <david@spot.us>'
-  #   from       MAIL_FROM_INFO
-  #   subject    "Spot.Us: Someone wants to join a pitch's reporting team!"
-  #   body       :pitch => pitch
-  # end
+  def admin_reporting_team_notification(pitch)
+    recipients '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Someone wants to join a pitch's reporting team!"
+    body       :pitch => pitch
+  end
 
   def reporter_reporting_team_notification(pitch)
     recipients pitch.user.email
@@ -126,19 +126,19 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
-  # def approved_reporting_team_notification(pitch, user)
-  #   recipients user.email
-  #   from       MAIL_FROM_INFO
-  #   subject    "Spot.Us: Welcome to the reporting team!"
-  #   body       :pitch => pitch
-  # end
+  def approved_reporting_team_notification(pitch, user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Welcome to the reporting team!"
+    body       :pitch => pitch
+  end
 
-  # def applied_reporting_team_notification(pitch, user)
-  #   recipients user.email
-  #   from       MAIL_FROM_INFO
-  #   subject    "Spot.Us: We received your application!"
-  #   body       :pitch => pitch
-  # end
+  def applied_reporting_team_notification(pitch, user)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: We received your application!"
+    body       :pitch => pitch
+  end
   
   def assignment_application_notification(mail)
     recipients [mail[:assignment].user.email,mail[:contributor].email].join(",")
