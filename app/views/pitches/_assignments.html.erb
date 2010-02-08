@@ -1,13 +1,14 @@
 <% if pitch.assignments.open.any? %>
-	<h3>Assignments</h3>
+	<h2>Assignments</h2>
 	<% pitch.assignments.open.first(5).each do |assignment| %>
 		<% apply_fragment ['pitch_assignment_', pitch, assignment] do %>
-			<h4 class="title"><%= link_to h(assignment.title), pitch_assignment_path(pitch, assignment) %></h4>
-			<div class="date"><%= assignment.created_at.to_s(:date) %></div>
-			<div class="body">
-				<%= truncate_words(strip_tags(assignment.body), 20) %>
-			</div>
-		<%end%>
+   		<div class="assignment">
+   		   <div class="date float-right"><%= short_date(assignment.created_at) %></div>
+   			<h4 class="title"><%= link_to h(assignment.title) + " &raquo;", pitch_assignment_path(pitch, assignment) %></h4>
+   			<%= truncate_words(strip_tags(assignment.body), 20) %><br/>
+   			<%= link_to "read and apply &raquo;", pitch_assignment_path(assignment.pitch, assignment)%>
+   		</div>
+		<% end %>
 	<% end %>
 	<% if pitch.has_more_assignments_than(5) || (current_user and pitch.user == current_user) %>
 		<%= link_to "View all &raquo;", pitch_assignments_path(pitch) %>

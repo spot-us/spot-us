@@ -215,9 +215,9 @@ class Pitch < NewsItem
     return false unless user
     unless contributors.include?(user)
       contributors << user
-      # Mailer.deliver_admin_reporting_team_notification(self)
+      Mailer.deliver_admin_reporting_team_notification(self)
       Mailer.deliver_reporter_reporting_team_notification(self)
-      # Mailer.deliver_applied_reporting_team_notification(self, user)
+      Mailer.deliver_applied_reporting_team_notification(self, user)
     end
   end
 
@@ -340,7 +340,7 @@ class Pitch < NewsItem
   end
   
   def to_s
-    "hjkhkjh"#headline
+    headline
   end
   
   def short_url(base_url=nil)
