@@ -168,7 +168,7 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #news_item #news_item_info .item_tab h3.date a {color:#617D86;}
 #news_item #news_item_info .item_tab p {margin-bottom:20px;}
 #news_item #news_item_info .item_tab .backto {border-top: 1px dashed #666;text-align:right;font-size:.9em;}
-#news_item #news_item_info .item .edit_bar {border: 1px solid #333;text-align:left;background-color:#f1f1f1;padding:10px;}
+#news_item #news_item_info .item .edit_bar {border: 1px solid #bbb;text-align:left;background-color:#f1f1f1;padding:10px;}
 #news_item #news_item_info .item .edit_bar a {color:#617D86;}
 #news_item #news_item_info .item .edit_bar h4 {border-bottom:solid 1px #999; margin-bottom:10px;}
 

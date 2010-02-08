@@ -13,7 +13,7 @@
     - elsif current_user &&  @item.contributors.include?(current_user)
       %em You have applied to contribute to this assignment.
     - else
-      = link_to("Apply to contribute", process_application_pitch_assignment_path(@item.pitch, @item), :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
+      = link_to("Apply to contribute", process_application_pitch_assignment_path(@item.pitch, @item), :class => "admin_button", :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")
 - if @item.user == current_user
   #assignments_admin
     %h4 Assignment Admin
