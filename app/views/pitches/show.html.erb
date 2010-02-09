@@ -59,7 +59,7 @@
    </div>
    <div class="main-column">
       <div class="folded-headers-big">
-		 <%apply_fragment ['pitch_author_top_', @pitch, @pitch.user] do %>
+		 <% apply_fragment ['pitch_author_top_', @pitch, @pitch.user] do %>
 	         <div class="news_item_author">
 	            <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
 	            <h5>Author</h5>
