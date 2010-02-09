@@ -65,6 +65,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :site_options
     admin.resources :networks
     admin.resources :groups
+    admin.resources :posts
     admin.resources :channels
   end
 
