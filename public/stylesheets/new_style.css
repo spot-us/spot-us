@@ -134,7 +134,7 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #prev {float:left;vertical-align:top;width:19px;}
 #show_action_items img{margin-bottom:10px;}
 #news_item {}
-#news_item #news_item_header{padding:20px 15px;}
+#news_item #news_item_header{padding:15px 15px 0px 15px; margin:0px 0px -5px 0px; }
 #news_item .main-column{float:left;width:605px;}
 #news_item .right-column{float:right;width:420px;}
 #news_item .news_item_author{margin:5px 0px 0 68px;width:185px;float:left;}
@@ -202,11 +202,11 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #news_item .story-block {margin-left:40px;width:500px;font-family:Georgia,serif,"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua";}
 div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .story-block .story_content img{display:block;float:none;}
-ul.tabs{margin:0;}
+ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
-			font-weight:bold;letter-spacing:0.03em;padding:4px 4px 2px;border-bottom:1px solid #C7D9DB;}
-ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;padding:4px 4px 2px;border-bottom:1px solid #C7D9DB;}
+			font-weight:bold;letter-spacing:0.03em;padding:8px 8px 8px 8px;border-bottom:1px solid #C7D9DB;}
+ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;padding:8px 8px 8px 8px;border-bottom:1px solid #C7D9DB;}
 .tab_panel {background-color:#f7f7f7;border:solid 5px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:20px;min-height:120px;}
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
