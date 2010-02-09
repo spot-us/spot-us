@@ -28,7 +28,7 @@ module PitchesHelper
   end
   
   def parse_xml_created_at(xml, posts)
-    if posts
+    unless posts.empty?
       xml.pubDate posts.first.created_at.to_s(:rfc822) 
       xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
     else
