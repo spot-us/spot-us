@@ -91,6 +91,12 @@ jQuery(document).ready(function($){
 			}
 		});
 	});
+	
+	
+	$('a[id*=help]').click(function() {
+		jQuery.facebox({ajax:"/sections/"+$(this).attr('id')});
+		return false;
+	});
 					
 });
 function showProfileForm(){
