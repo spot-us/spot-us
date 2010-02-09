@@ -49,9 +49,8 @@ class Admin::ChannelsController < ApplicationController
     @pitch = Pitch.find(params[:pitch_id])
     @channel = Channel.find(params[:id])
     @channel.pitches.delete(@pitch)
-    # clean up the channel/network associations
-    network_ids = @channel.pitches.find(:all, :select=>"network_id, channel_pitches.created_at as created_at").map(&:network_id).join(",")
-    ChannelsNetwork.delete_all(["network_id not in (?) and channel_id=?", network_ids, @channel.id])
+    pitches = @channel.pitches.find_by_network_id(@pitch.network_id)
+    ChannelsNetwork.delete_all(["network_id=? and channel_id=?", @pitch.network_id, @channel.id]) if pitches.empty?
     redirect_to admin_channel_path(@channel)
   end
 
