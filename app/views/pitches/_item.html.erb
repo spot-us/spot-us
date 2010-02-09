@@ -1,6 +1,6 @@
 <div class="item">
+	<%= render :partial=>'tabs' %>
 	<% apply_fragment ['pitch_detail_page_top_', @tab, @pitch, @item] do %>
-		<%= render :partial=>'tabs' %>
 		<div class="item_tab tab_panel clearfix">
 		   <div class="mini_header"><%=pre_title?(@item)%>
 		      <span class="view_all"> <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a> </span>  
@@ -20,20 +20,18 @@
 		</div>
 	<% end %>
 	<% if current_user %>
-		<% apply_fragment ['pitch_detail_page_admin_', @tab, @pitch, @item, current_user] do %>
-			<div class="edit_bar">
-				<% if @tab == 'posts' %>
-					<% if @pitch.postable_by?(current_user) %>
-						<%= link_to "Edit post", edit_pitch_post_path(@pitch, @item), :class => "admin_button" %>
-					<% end %> 
-				<% elsif @tab == 'assignments' %>
-					<% if @pitch.assignable_by?(current_user) %>
-						<%= link_to "Edit assignment", edit_pitch_assignment_path(@pitch, @item), :class => "admin_button" %>
-						<br/><br/>
-					<% end %>
-					<%= render :partial=>'assignment_admin' %>
+		<div class="edit_bar">
+			<% if @tab == 'posts' %>
+				<% if @pitch.postable_by?(current_user) %>
+					<%= link_to "Edit post", edit_pitch_post_path(@pitch, @item), :class => "admin_button" %>
+				<% end %> 
+			<% elsif @tab == 'assignments' %>
+				<% if @pitch.assignable_by?(current_user) %>
+					<%= link_to "Edit assignment", edit_pitch_assignment_path(@pitch, @item), :class => "admin_button" %>
+					<br/><br/>
 				<% end %>
-			</div>
-		<% end %>
+				<%= render :partial=>'assignment_admin' %>
+			<% end %>
+		</div>
 	<% end %>
 </div>
