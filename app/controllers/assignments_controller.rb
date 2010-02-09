@@ -4,9 +4,10 @@ class AssignmentsController < ApplicationController
 
 
   response_for :create do |format|
-    # @assignment.assignment_created_notification
+    
     format.html do
       if resource_saved?
+        @assignment.pitch.save!
         flash[:success] = 'Successfully created assignment'
         redirect_to pitch_assignment_path(@assignment.pitch, @assignment)
       else
