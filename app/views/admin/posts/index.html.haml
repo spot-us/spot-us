@@ -1,0 +1,30 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#posts_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 Posts
+
+.box
+  %table
+    %tr
+      %th Title
+      %th User
+      %th Pitch
+      %th Created
+      %th
+    - @posts.each do |post|
+      %tr
+        %td=link_to post.title, pitch_post_path(post.pitch, post)
+        %td=post.user.full_name
+        %td=h post.pitch.headline
+        %td=medium_date(post.created_at)
+        %td
+          =link_to 'Edit', edit_admin_post_path(post)
+          =link_to 'Destroy', admin_post_path(post), :confirm => 'Are you sure?', :method => :delete
+= will_paginate @posts
+= link_to "New", new_admin_post_path
