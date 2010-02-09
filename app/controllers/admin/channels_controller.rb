@@ -34,6 +34,14 @@ class Admin::ChannelsController < ApplicationController
     @pitch = Pitch.find(params[:pitch_id])
     @channel = Channel.find(params[:id])
     @channel.pitches << @pitch
+    # add relation for channel/network if available
+    cn = ChannelsNetwork.find_by_network_id_and_channel_id(@pitch.network_id, @channel.id)
+    unless cn
+      cn = ChannelsNetwork.new
+      cn.network_id = @pitch.network_id
+      cn.channel_id = @channel.id
+      cn.save
+    end
     redirect_to admin_channel_path(@channel)
   end
   
@@ -41,6 +49,8 @@ class Admin::ChannelsController < ApplicationController
     @pitch = Pitch.find(params[:pitch_id])
     @channel = Channel.find(params[:id])
     @channel.pitches.delete(@pitch)
+    pitches = @channel.pitches.find_by_network_id(@pitch.network_id)
+    ChannelsNetwork.delete_all(["network_id=? and channel_id=?", @pitch.network_id, @channel.id]) if pitches.empty?
     redirect_to admin_channel_path(@channel)
   end
 

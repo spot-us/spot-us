@@ -15,6 +15,7 @@ class Network < ActiveRecord::Base
 
   has_many :categories, :attributes => true, :discard_if => Proc.new {|category| category.name.blank? }
   has_many :pitches
+  has_and_belongs_to_many :channels
 
   named_scope :with_pitches, :conditions => "id IN (SELECT DISTINCT network_id FROM news_items WHERE type = 'pitch' AND deleted_at IS NULL)"
 
