@@ -8,10 +8,10 @@ class StoriesController < ApplicationController
   def index
     find_resources
     respond_to do |format|
+      format.html do
+      end
       format.rss do
         render :layout => false
-      end
-      format.html do
       end
     end
   end
