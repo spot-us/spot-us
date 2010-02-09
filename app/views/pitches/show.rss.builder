@@ -9,8 +9,7 @@ xml.rss :version => "2.0" do
     case @tab.strip.downcase
       when 'posts'
         posts = @pitch.posts.find(:all,:limit=>limit)
-        xml.pubDate posts.first.created_at.to_s(:rfc822)
-        xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
+        parse_xml_created_at(xml, posts)
         posts.each do |post|
           xml.item do
             xml.title post.title
@@ -21,8 +20,7 @@ xml.rss :version => "2.0" do
         end
       when 'comments'
         comments = @pitch.comments.find(:all,:limit=>limit)
-        xml.pubDate comments.first.created_at.to_s(:rfc822)
-        xml.lastBuildDate comments.first.created_at.to_s(:rfc822)
+        parse_xml_created_at(xml, comments)
         comments.each do |comment|
           xml.item do
             xml.title comment.title
@@ -33,8 +31,7 @@ xml.rss :version => "2.0" do
         end
       when 'assignments'
         assignments = @pitch.assignments.find(:all,:limit=>limit)
-        xml.pubDate assignments.first.created_at.to_s(:rfc822)
-        xml.lastBuildDate assignments.first.created_at.to_s(:rfc822)
+        parse_xml_created_at(xml, assignments)
         assignments.each do |assignment|
           xml.item do
             xml.title assignment.title
@@ -45,8 +42,7 @@ xml.rss :version => "2.0" do
         end
       else
         posts = @pitch.posts.find(:all,:limit=>limit)
-        xml.pubDate posts.first.created_at.to_s(:rfc822)
-        xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
+        parse_xml_created_at(xml, posts)
         posts.each do |post|
           xml.item do
             xml.title post.title
