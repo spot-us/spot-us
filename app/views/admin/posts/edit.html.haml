@@ -1,0 +1,15 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#posts_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h1 Edit Post
+.flash.error
+  = error_messages_for :post
+- form_for [:admin, @post], :html => { :multipart => true } do |f|
+  = render :partial => 'form', :locals => {:f => f}
+

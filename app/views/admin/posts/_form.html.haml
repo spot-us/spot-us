@@ -1,0 +1,16 @@
+.field
+  = f.label :title
+.field
+  = f.text_field :title
+%br/
+.field
+  = f.label :body
+.field
+  = fckeditor_textarea("post", "body", :toolbarSet => 'Spotus', :width => '500', :height => '200px')
+%br/
+.field
+  = f.label :media_embed
+.field
+  = f.text_area :media_embed
+%br/
+= f.submit
