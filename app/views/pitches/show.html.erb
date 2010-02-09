@@ -46,8 +46,7 @@
 			<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=h @pitch.status_update %>" title="Share this Pitch on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
          </div>
          <div class="subscribe">
-         <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
-         <img align="right" src="update-button.png"/>
+	         <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
          </div>
       </div>
       
