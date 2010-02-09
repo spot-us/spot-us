@@ -18,14 +18,14 @@ class PitchesController < ApplicationController
     @pitch = find_resource
     @tab = params[:tab] || ""
     respond_to do |format|
-      unless @tab.blank?
-        format.rss do
-          render :layout => false
-        end
-      end
       format.html do
         if !@tab.blank? && params[:item_id]
           @item = @pitch.send(@tab).find_by_id(params[:item_id])
+        end
+      end
+      unless @tab.blank?
+        format.rss do
+          render :layout => false
         end
       end
     end
