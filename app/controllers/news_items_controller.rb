@@ -8,12 +8,12 @@ class NewsItemsController < ApplicationController
     @channels = Channel.by_network(current_network)
     @filter = "newest_stories"
     respond_to do |format|
+      format.html do
+        get_news_items
+      end
       format.rss do
         get_news_items(10)
         render :layout => false
-      end
-      format.html do
-        get_news_items
       end
     end
   end
