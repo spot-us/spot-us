@@ -6,10 +6,10 @@ class BlogsController < ApplicationController
   def index
     @posts = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>10)
     respond_to do |format|
+      format.html do
+      end
       format.rss do
         render :layout => false
-      end
-      format.html do
       end
     end
   end
