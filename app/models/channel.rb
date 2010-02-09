@@ -11,15 +11,20 @@ class Channel < ActiveRecord::Base
                     :url         => "channels/:attachment/:id_partition/:basename_:style.:extension"
   
   named_scope :hilited, :conditions => "channels.status = 'hilited'"
-  named_scope :by_network, lambda {|network|
-    return {:conditions => "channels.status = 'hilited'"} unless network
-    { :conditions => 
-      ["id in (select channel_id from channel_pitches where pitch_id in (select id from news_items where network_id = ? ))", 
-                    network.id] }
-  }
+  #named_scope :by_network, lambda {|network|
+  #  return {:conditions => "channels.status = 'hilited'"} unless network
+  #  { :conditions => 
+  #    ["id in (select channel_id from channel_pitches where pitch_id in (select id from news_items where network_id = ? ))", 
+  #                  network.id] }
+  #}
   
   has_many :pitches, :through => :channel_pitches, :order => "created_at desc"
   has_many :channel_pitches
+  has_and_belongs_to_many  :networks
+  
+  def self.by_network(network)
+    return network ? network.channels : find(:all, :conditions => "channels.status = 'hilited'") 
+  end
   
   def hilite_channel
     self.status = "hilited"
