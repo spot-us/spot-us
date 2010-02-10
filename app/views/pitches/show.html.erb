@@ -50,6 +50,15 @@
          </div>
       </div>
       
+		<div class="right-panel-box clearfix">
+         <div>
+         	<h3>Widget</h3>
+			<iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
+			<span style="width:300px;padding-top:5px;">To get this widget, grab this html code and paste into your template:</span>
+			<textarea style="width:100%;"><%="<iframe src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='0'></iframe>"%></textarea>
+         </div>
+      </div>
+
       <div id="supporters">
           <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
           <%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
