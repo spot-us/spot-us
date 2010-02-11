@@ -9,7 +9,7 @@
       	<div class="spotus_spacer">
       		<h3 class="spotus_pitch_title"><%= link_to h(@pitch.story.headline), @pitch.story %></h3>
       		  <span class="spotus_dateline">Posted<%= @pitch.story.created_at.to_s(:long_date)%>
-      		    by <%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user)%> in <%= @pitch.story.network.name%></span>
+      		    by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user)%> in <%= @pitch.story.network.name%></span>
       		  <p class="short_description alt-spotus">
       		    <%= truncate_words(@pitch.story.extended_description, 30) if @pitch.story.extended_description%>
       		    <%= link_to 'Read More &raquo;', @pitch.story%>
@@ -21,22 +21,22 @@
          	   <div class="spotus_pitch_info">
       		   	<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch %>
          			<h3 class="spotus_pitch_title"><%= link_to h(@pitch.headline), pitch_url(@pitch) %></h3>
-         			<div class="spotus_dateline">Posted <%= @pitch.created_at.to_s(:long_date)%></div>
-         			<div class="spotus_author">by <%= link_to h(@pitch.user.full_name), profile_path(@pitch.user)%> in <%= @pitch.network.name%></div>
-		            <br clear="all"/>
+         			<div class="spotus_dateline"><%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user)%> | <%= short_date(@pitch.created_at)%></div>
+         			<div class="spotus_description">
+         			   "<%= truncate_words(strip_html(@pitch.short_description), 15) unless @pitch.short_description.blank? %>"
+         			</div>
 		         </div>
-      			<% if @pitch.fully_funded? %>
-      				<%= image_tag('fully_funded.png', :alt => 'This News Item is Fully Funded!')%>
-      			<% else %>
-      				<div class="spotus_progress">
-      				   <div class="spotus_funding">funding so far</div>
-      					<%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch}%>
-      					<div class="spotus_contribute">
-      					   <%= link_to image_tag("/images/new_design/fund-widget.png"), @pitch %>
-      					</div>
-      					<%#= link_to image_submit_tag("donate_default.png", :alt => "Donate", :title => "Donate"), pitch_url(@pitch)%>
-      				</div>
-      			<% end %>
+      		   <div class="spotus_progress">
+   				   <div class="spotus_funding">funding so far</div>
+   					<%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch}%>
+   					<div class="spotus_contribute">
+   					<% if @pitch.fully_funded? %>
+   					   <%= image_tag('fully_funded.png', :alt => 'This News Item is Fully Funded!')%>
+   					<% else %>
+   					   <%= link_to image_tag("/images/new_design/fund-widget.png"), @pitch %>
+					   <% end %>
+   					</div>
+   				</div>
       		</div>
       	<% end %>
       <% end %>
