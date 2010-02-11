@@ -1,10 +1,10 @@
+<% apply_fragment ['widget_tmp_', @pitch] do %>
 <div class="spotus_widget">
    <div class="spotus_widget_header">
       <%= link_to image_tag("/images/new_design/spotus-logo-small.png"), root_url, :target => "_parent" %>
       <%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
    </div>
   <div class="spotus_pitch">
-      <% apply_fragment ['widget_tmp_', @pitch] do %>
       	<% if @pitch.story && @pitch.story.published? %>
       	<div class="spotus_spacer">
       		<h3 class="spotus_pitch_title"><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h3>
@@ -39,12 +39,12 @@
    				</div>
       		</div>
       	<% end %>
-      <% end %>
-   </div>
-   <div class="spotus_footer">
-      <div class="spotus_slogan">
-         <span class="spotus_pink">Community</span>
-         <span class="spotus_moss-green">Funded Reporting</span>
+         </div>
+         <div class="spotus_footer">
+            <div class="spotus_slogan">
+               <span class="spotus_pink">Community</span>
+               <span class="spotus_moss-green">Funded Reporting</span>
+            </div>
+         </div>
       </div>
-   </div>
-</div>
+<% end %>
