@@ -1,0 +1,25 @@
+div.spotus_widget{background:#fff;font-size:12px;width:320px;height:270px;font-family:Arial, Helvetica;border: 5px solid #E3EEEF;position:relative;}
+div.spotus_widget a img{border:0;}
+div.spotus_widget .spotus_pitch {}
+div.spotus_widget h3.spotus_pitch_title {margin:0;font-size:18px;}
+div.spotus_widget h3.spotus_pitch_title a {color:#11363E;text-decoration:none;}
+div.spotus_widget h3.spotus_pitch_title a:hover {color:#748F98;}
+div.spotus_widget h4.spotus_help_fund {margin:0; padding:0 0 5px 5px;font-style:italic;background:#E3EEEF;}
+div.spotus_widget h4.spotus_help_fund a {color:#11363E;text-decoration:none;}
+div.spotus_widget h4.spotus_help_fund a:hover {color:#748F98;}
+div.spotus_widget .spotus_pitch_image {width:120px;float:left;margin:0 15px 0px 0;}
+div.spotus_widget .spotus_pitch_info {margin-bottom:5px;}
+div.spotus_widget .spotus_funding {font-size:10px;color:#777;font-style:italic;margin-bottom:2px;}
+div.spotus_widget .spotus_widget_header {color:white;padding:5px;background:#E3EEEF;font-size:13px;position:relative;}
+div.spotus_widget .spotus_widget_header .spotus_about_us {position:absolute;right:10px;top:10px;text-decoration:none;color:#11363E;font-size:11px;}
+div.spotus_widget .spotus_dateline {font-size:10px;color:#777;}
+div.spotus_widget .spotus_author {font-size:11px;color:#555;margin-bottom:5px;}
+div.spotus_widget .spotus_contribute {position:absolute;right:8px;top:13px;}
+/*div.spotus_widget a.spotus_link_button {color:#E3EEEF;font-style:italic;text-decoration:none;font-weight:bold;padding:4px;-moz-border-radius:4px;
+					background:#11363E;}*/
+div.spotus_widget .spotus_progress {position:relative;}
+div.spotus_widget .spotus_footer {position:absolute;bottom:0;background:#11363E;padding: 5px;width:310px;color:#fff;text-align:center;}
+div.spotus_widget .spotus_slogan {text-transform: uppercase;letter-spacing:.10em;}
+div.spotus_widget .spotus_slogan .spotus_pink { color: #ce859d;}
+div.spotus_widget .spotus_slogan .spotus_moss_green { color: #ce859d;}
+div.spotus_widget .spotus_spacer {padding:10px;}
