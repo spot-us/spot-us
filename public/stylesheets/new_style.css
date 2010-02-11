@@ -134,7 +134,7 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #prev {float:left;vertical-align:top;width:19px;}
 #show_action_items img{margin-bottom:10px;}
 #news_item {}
-#news_item #news_item_header{padding:15px 15px 0px 15px; margin:0px 0px -5px 0px; }
+#news_item #news_item_header{padding:15px 15px 0px 15px; margin:0 35px -5px 0; }
 #news_item .main-column{float:left;width:605px;}
 #news_item .right-column{float:right;width:420px;}
 #news_item .news_item_author{margin:5px 0px 0 68px;width:185px;float:left;}
