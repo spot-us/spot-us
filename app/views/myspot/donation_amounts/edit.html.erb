@@ -41,7 +41,7 @@
             <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
                <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
                <div class="donation_item">
-                  <h4>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h4>
+                  <h4 class="display_inline">PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h4><br/>
                   <% if Group.all.any? %>
                       <p>
                         <a href="#group_selection" class="show_group_selector">Donate on behalf of group?</a>
@@ -70,9 +70,9 @@
                 <% content_tag_for :li, credit_pitch, :class => 'unpaid clearfix' do %>
                     <%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
                     <div class="donation_item">
-                       <h4>PITCH:
+                       <h4 class="display_inline">PITCH:
                            <%= link_to credit_pitch.pitch.headline, credit_pitch.pitch %>
-                        </h4>
+                        </h4><br/>
                         <p>
                            <%= truncate_words(credit_pitch.pitch.short_description) %>
                            <%= link_to 'Read More &raquo;', credit_pitch.pitch %>
