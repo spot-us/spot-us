@@ -38,6 +38,7 @@ a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
 .admin_button {background:#882618;color:white !important;padding:5px 8px;line-height:18px;font-size:14px;-moz-border-radius:4px;
 				-webkit-border-radius:4px;}
 a.admin_button  {color:white !important;}
+.hilited_input {background-color:#EDEDE4 !important;cursor:pointer !important;}
 #cse-search-box input[type="text"] {}
 
 
@@ -202,6 +203,7 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #news_item .story-block {margin-left:40px;width:500px;font-family:Georgia,serif,"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua";}
 div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .story-block .story_content img{display:block;float:none;}
+#news_item textarea.widget_code {color:#555;font-size:11px;font-family:arial, helvetica;width:350px;display:block;padding:2px;height:32px;overflow:hidden;}
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
