@@ -14,6 +14,13 @@
 		}).click(function(){
 		   $(this).select();
 		});
+		jQuery(".reveal_widget").toggle(function(){
+		   $(".widget_panel").animate({height:"380px"});
+		   return false;
+		}, function(){
+		   $(".widget_panel").animate({height:"0px"});
+		   return false;
+		});
     });	
   	</script>
 <% end %>
@@ -59,10 +66,13 @@
       
 		<div class="right-panel-box clearfix">
          <div>
-         	<h3>Widget</h3>
-			<iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
-			<span style="width:300px;padding-top:5px;">To get this widget, grab this html code and paste into your template:</span>
-			<textarea class="widget_code"><%="<iframe src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='0'></iframe>"%></textarea>
+         	<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Widget</h3> <em><a class="reveal_widget" href="">CLICK HERE (to add to your blog or site!)</a></em>
+         	<div class="widget_panel">
+			      <iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
+			      <div class="widget_tip">To get this widget, grab this html code and paste into your template:
+			         <textarea class="widget_code"><%="<iframe src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='0'></iframe>"%></textarea>
+			      </div>
+			   </div>
          </div>
       </div>
 
