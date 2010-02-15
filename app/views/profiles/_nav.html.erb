@@ -1,0 +1,4 @@
+<ul id="profile_tabs" class="tabs">
+   <li><%= link_to 'Profile', profile_path(@profile), :id => 'profile_tab', :class => selected_tab=="profile" ? "profile_tab active" : "profile_tab" %></li>
+   <li><%= link_to 'Dashboard', "/profiles/#{@profile.id}/donations", :id => 'dashboard_tab', :class => selected_tab=="dashboard" ? "profile_tab active" : "profile_tab" %></li>      
+</ul>
