@@ -1,0 +1,9 @@
+<table>
+   <tr>
+      <th>Pitch</th>
+      <th>Donated</th>
+      <th>Donation</th>
+      <th>Status</th>
+   </tr>
+   <%= render :partial => "/profiles/donation", :collection => @profile.donations.paid %>
+</table>

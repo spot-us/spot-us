@@ -1,0 +1,18 @@
+<tr>
+  <td class="main">
+    <h5><%= comment.title %></h5>
+    "<%= comment.body %>"
+    <br/>
+    on:
+    <% if comment.commentable.instance_of?(Pitch) %>
+      <%= link_to h(comment.commentable.headline), pitch_url(comment.commentable) %>
+    <% elsif comment.commentable.instance_of?(Story) %>
+      <%= link_to h(comment.commentable.headline), story_path(comment.commentable.story) %>
+    <% else %>
+      Nothing
+    <% end %>
+  </td>
+  <td class="created">
+   <%= comment.created_at.to_s(:date) %>
+  </td>
+</tr>
