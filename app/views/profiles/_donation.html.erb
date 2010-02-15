@@ -1,0 +1,12 @@
+<tr>
+  <td class="pitch">
+    <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), pitch_url(donation.pitch) %>
+    PITCH:
+    <%= link_to h(donation.pitch.headline), pitch_url(donation.pitch) %>
+  </td>
+  <td class="donated"><%= donation.created_at.to_s(:date) %></td>
+  <td class="donation"><%= number_to_currency(donation.amount) %></td>
+  <td class="status">
+    <%= render :partial => "shared/table_progress_bar", :locals => {:pitch => donation.pitch} %>
+  </td>
+</tr>

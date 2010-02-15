@@ -1,0 +1,10 @@
+<tr>
+   <td class="main">
+      <% if pledge.tip.featured_image? %>
+         <%= link_to image_tag(pledge.tip.featured_image.url(:thumb)), tip_url(pledge.tip) %>
+     <% end %>
+     TIP: <%= link_to h(pledge.tip.headline), tip_url(pledge.tip) %>
+   </td> 
+   <td><%= pledge.created_at.to_s(:date) %></td>
+   <td><%= number_to_currency(pledge.amount) %></td>
+</tr>

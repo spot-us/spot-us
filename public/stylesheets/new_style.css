@@ -212,7 +212,7 @@ ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
 			font-weight:bold;letter-spacing:0.03em;padding:8px 8px 8px 8px;border-bottom:1px solid #C7D9DB;}
-ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;padding:8px 8px 8px 8px;border-bottom:1px solid #C7D9DB;}
+ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;border-bottom:1px solid #C7D9DB;}
 .tab_panel {background-color:#f7f7f7;border:solid 5px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:20px;min-height:120px;}
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
@@ -227,10 +227,11 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB
 .tab_panel .row label {display:block;}
 .tab_panel .row input, .tab_panel .row textarea {}
 .comments_tab ul {list-style-type:none;}
-ul.dashboard_tabs.tabs li a{font-size:11px;background:#ccc;font-weight:normal;color:#111;}
-ul.dashboard_tabs li a.myspot_tab.active{background-color:#A2BBC3;color:#111;padding:4px 4px 2px}
+ul.dashboard_tabs{margin:0;height:24px;}
+ul.dashboard_tabs.tabs li a{font-size:13px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
+ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
-#dashboard_tab_container{margin-left:20px;}
+#dashboard_tab_container{margin:10px 0 0 20px;}
 #fund_a_story{padding: 0 0 0 10px;}
 #fund_a_story #navigation{width:220px;float:left;}
 #fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
@@ -315,8 +316,10 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #form_page {padding:20px 40px;}
 
 #myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
-ul#profile_tabs {border-bottom:solid 1px #aaa;margin:10px 0;}
+ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 20px;height:28px;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
+#public_profile #content_wrapper {padding:20px;border: 1px solid #aaa;background:#f3f3f3;min-height:300px;}
+#public_profile #content_wrapper td.main img {float:left;margin-right:8px;}
 #myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
