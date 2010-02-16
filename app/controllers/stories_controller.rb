@@ -6,14 +6,17 @@ class StoriesController < ApplicationController
   resources_controller_for :stories
 
   def index
-    find_resources
-    respond_to do |format|
-      format.html do
-      end
-      format.rss do
-        render :layout => false
-      end
-    end
+    response.headers["Status"] = "301 Moved Permanently"
+    redirect_to "/stories/published"
+    return
+    #find_resources
+    #respond_to do |format|
+    #  format.html do
+    #  end
+    #  format.rss do
+    #    render :layout => false
+    #  end
+    #end
   end
 
   def accept

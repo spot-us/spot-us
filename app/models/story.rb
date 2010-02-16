@@ -73,7 +73,6 @@ class Story < NewsItem
             :uniq => true
   validate_on_update :extended_description
 
-  named_scope :published, :conditions => {:status => 'published'}
   named_scope :latest, :order => "updated_at desc", :limit => 6
   def supporting_organizations
     pitch.supporting_organizations
