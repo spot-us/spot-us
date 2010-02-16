@@ -6,7 +6,7 @@ class NewsItemsController < ApplicationController
 
   def index
     @channels = Channel.by_network(current_network)
-    @filter = "newest_stories"
+    get_filter
     respond_to do |format|
       format.html do
         get_news_items
@@ -17,7 +17,12 @@ class NewsItemsController < ApplicationController
       end
     end
   end
-
+  
+  def get_filter
+    @filter = params[:filter] ? params[:filter] : 'unfunded'
+  end
+  protected :get_filter
+  
   def sort_options
     render :text => options_for_sorting(
       params.fetch(:news_item_type, "news_items"),
@@ -25,34 +30,34 @@ class NewsItemsController < ApplicationController
     )
   end
 
+  #keeping but redirecting to the right urls with 301s...
   def search
-    @channels = Channel.by_network(current_network)
-    @filter = "newest_stories"
     case params[:sort_by]
-      when "asc"
-        @filter = "oldest_stories"
-      when "desc"
-        @filter = "newest_stories"
-      when "almost_funded"
-        @filter = "almost_funded"
-      when "most_funded"
-        @filter = "most_pledged" 
+    when "asc"
+      filter = "unfunded"
+    when "desc"
+      filter = "unfunded"
+    when "almost_funded"
+      filter = "almost-funded"
+    when "most_funded"
+      filter = "most_pledged" 
     end
-    @filter = "recent_tips" if params[:news_item_type] ==  "tips"
-    get_news_items
-    render :action => 'index'
+    
+    filter = "suggested" if params[:news_item_type] ==  "tips"
+
+    response.headers["Status"] = "301 Moved Permanently"
+    redirect_to "/stories/#{filter}"
+    return
   end
 
   protected
 
   def get_news_items(limit=nil)
-    model_name = params[:news_item_type]
-    model_name = 'pitches' unless %w(tips pitches news_items).include?(model_name)
-    model = model_name.classify.constantize
+    
     unless limit
-      @news_items = model.approved.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).paginate(:page => params[:page])
+      @news_items = NewsItem.constrain_type(@filter).by_network(current_network).paginate(:page => params[:page])
     else
-      @news_items = model.approved.with_sort(params[:sort_by]).exclude_type('story').by_network(current_network).find(:all,:limit=>limit)
+      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).by_network(current_network).find(:all,:limit=>limit)
     end
   end
 
