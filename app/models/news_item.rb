@@ -113,7 +113,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :constrain_type, lambda{ |filter|
     news_item_type = MODEL_NAMES[filter]
     news_item_type = 'Pitch' unless news_item_type
-    { :conditions => { :type => news_item_type } }
+    { :conditions => { :type => news_item_type }, :order=>"created_at desc" }
   }
   
   cattr_reader :per_page
