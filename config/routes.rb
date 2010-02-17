@@ -42,13 +42,14 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
   map.connect "/admin", :controller => "admin/city_suggestions", :action => "index"
   
-  map.connect "/profiles/:id/assignments", :controller => "profiles", :action => "assignments"
-  map.connect "/profiles/:id/pledges", :controller => "profiles", :action => "pledges"
-  map.connect "/profiles/:id/donations", :controller => "profiles", :action => "donations"
-  map.connect "/profiles/:id/pitches", :controller => "profiles", :action => "pitches"
-  map.connect "/profiles/:id/posts", :controller => "profiles", :action => "posts"
-  map.connect "/profiles/:id/tips", :controller => "profiles", :action => "tips"
-  map.connect "/profiles/:id/comments", :controller => "profiles", :action => "comments"
+  # map.connect "/profiles/:id/assignments", :controller => "profiles", :action => "assignments"
+  # map.connect "/profiles/:id/pledges", :controller => "profiles", :action => "pledges"
+  # map.connect "/profiles/:id/donations", :controller => "profiles", :action => "donations"
+  # map.connect "/profiles/:id/pitches", :controller => "profiles", :action => "pitches"
+  # map.connect "/profiles/:id/posts", :controller => "profiles", :action => "posts"
+  # map.connect "/profiles/:id/tips", :controller => "profiles", :action => "tips"
+  # map.connect "/profiles/:id/comments", :controller => "profiles", :action => "comments"
+  map.connect "/profiles/:id/:section", :controller => "profiles", :action => "profile", :requirements => {:section=>/assignments|pledges|donations|pitches|posts|tips|comments/}
   
   # TODO: remove when done
   map.resources :ui
