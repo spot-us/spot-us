@@ -25,6 +25,14 @@ module NewsItemsHelper
     out.to_s
   end
   
+  def get_inside_network_text(network)
+    return (network ? ("the "+network.display_name+" network") : "all available networks")
+  end
+
+  def get_inside_network(network)
+    return (network ? network.display_name : "All Networks")
+  end
+  
   def check_active(filter, item)
     ' class="active"' if filter == item
   end

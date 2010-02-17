@@ -12,6 +12,16 @@ module ApplicationHelper
     "#{pre_text}#{@current_network.nil? ? "All Networks" : @current_network.display_name}"
   end
 
+  def parse_xml_created_at(xml, posts)
+    unless posts.empty?
+      xml.pubDate posts.first.created_at.to_s(:rfc822) 
+      xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
+    else
+      xml.pubDate Time.now.to_s(:rfc822) 
+      xml.lastBuildDate Time.now.to_s(:rfc822)
+    end
+  end
+  
   def apply_fragment(key, options = {}, &block)    
     options[:skip] ? block.call : cache(reduce_cache_key(key), options, &block)
   rescue Memcached::Error
