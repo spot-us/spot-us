@@ -40,7 +40,7 @@
    <div class="right-column">
       <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
 
-		<%if @pitch && @pitch.published?%>
+		<%if @pitch.story && @pitch.story.published?%>
 			<div class="right-panel-box">
 				<h3>Here is the published story</h3>
 				STORY:
@@ -54,7 +54,7 @@
 					<%= @pitch.story.network.name %>
 				</div>
 				<p>
-					<%= truncate_words(@pitch.story.short_description, 30) %>
+					<%= truncate_words(strip_tags(@pitch.story.extended_description), 30) %>
 					<%= link_to 'Read the published story &raquo;', @pitch.story %>
 				</p>
 			</div>
