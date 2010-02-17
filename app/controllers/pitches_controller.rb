@@ -11,7 +11,10 @@ class PitchesController < ApplicationController
   bounce_bots(:send_bots, :pitch, :blog_url)
 
   def index
-    redirect_to(news_items_path)
+    response.headers["Status"] = "301 Moved Permanently"
+    redirect_to "/stories/unfunded"
+    return
+    #redirect_to(news_items_path)
   end
   
   def show

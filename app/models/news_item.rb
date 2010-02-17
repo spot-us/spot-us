@@ -89,7 +89,14 @@ class NewsItem < ActiveRecord::Base
   end
 
   named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
+  
   named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded')"
+  named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
+  named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
+  named_scope :published, :conditions => {:status => 'published'}
+  named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft')"
+  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
+  
   named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','')"
   named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft')"
   named_scope :pitch_or_tip, :conditions => 'news_items.type IN("Pitch","Tip")'
@@ -104,6 +111,17 @@ class NewsItem < ActiveRecord::Base
   named_scope :all_news_items
   named_scope :exclude_type, lambda {|type| { :conditions => ['news_items.type != ?', type] } }
 
+  named_scope :constrain_type, lambda{ |type|
+    news_item_type = MODEL_NAMES[type]
+    news_item_type = 'Pitch' unless news_item_type
+    { :conditions => { :type => news_item_type } }
+  }
+  
+  named_scope :order_results, lambda { |type|
+    return {} if type=='almost-funded'
+    return { :order=>"created_at desc" }
+  }
+  
   cattr_reader :per_page
   @@per_page = 10
 
