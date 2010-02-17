@@ -94,7 +94,8 @@ class NewsItem < ActiveRecord::Base
   named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
   named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
   named_scope :published, :conditions => {:status => 'published'}
-  named_scope :suggested, :conditions => "news_item.type='Tip' AND news_items.status NOT IN ('unapproved','draft')"
+  named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft')"
+  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
   
   named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','')"
   named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft')"

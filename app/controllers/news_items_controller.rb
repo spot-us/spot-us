@@ -40,7 +40,7 @@ class NewsItemsController < ApplicationController
     when "almost_funded"
       filter = "almost-funded"
     when "most_funded"
-      filter = "most_pledged" 
+      filter = "unfunded" 
     end
     
     filter = "suggested" if params[:news_item_type] ==  "tips"
@@ -55,9 +55,9 @@ class NewsItemsController < ApplicationController
   def get_news_items(limit=nil)
     
     unless limit
-      @news_items = NewsItem.constrain_type(@filter).by_network(current_network).paginate(:page => params[:page])
+      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).browsable.by_network(current_network).paginate(:page => params[:page])
     else
-      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).by_network(current_network).find(:all,:limit=>limit)
+      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).browsable.by_network(current_network).find(:all,:limit=>limit)
     end
   end
 
