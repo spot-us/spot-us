@@ -28,6 +28,7 @@
          <a href="" id="help_to-support-reporting"><%= image_tag("/images/new_design/to-support-reporting.png")%></a><a href="" id="help_to-start-a-story"><%=  image_tag("/images/new_design/start-a-story.png") %></a><a href="" id="help_as-a-news-publisher"><%= image_tag("/images/new_design/as-a-news-publisher.png") %></a>
       </div>
       <div class="folded-headers">
+		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/unfunded.rss", :class => "rss_button" %>
          <div id="header-container">Fund a story</div>
       </div>
       <div style="clear: both;"></div>
@@ -43,7 +44,7 @@
          </ul>
       </div>
       <div class="folded-headers">
-         <%= link_to image_tag("/images/new_design/rss_16.png"), "/stories.rss", :class => "rss_button" %>
+         <%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/published.rss", :class => "rss_button" %>
          <div id="header-container">Recently Published</div>
       </div>
       <div style="clear: both;"></div>
