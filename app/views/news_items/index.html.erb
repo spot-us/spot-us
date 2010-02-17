@@ -6,12 +6,13 @@
 
 <div id="fund_a_story">
 	<div id="navigation">
-		<h5>Browse Spot.Us</h5>
-	   	<ul id="filters" class="filter">			
-			<li<%=check_active(@filter,"newest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&amp;sort_by=desc">Newest Stories</a></div></li>
-			<li<%=check_active(@filter,"oldest_stories") %>><div><a href="/news_items/search?news_item_type=pitches&amp;sort_by=asc">Oldest Stories</a></div></li>
-			<li<%=check_active(@filter,"almost_funded") %>><div><a href="/news_items/search?news_item_type=pitches&amp;sort_by=almost_funded">Almost Funded</a></div></li>
-			<li<%=check_active(@filter,"recent_tips") %>><div><a href="/news_items/search?news_item_type=tips&amp;sort_by=desc">Recent Tips</a></div></li>
+		<h5>Browse Stories on Spot.Us</h5>
+	   	<ul id="filters" class="filter">
+			<li<%=check_active(@filter,"unfunded") %>><div><a href="/stories/unfunded">Unfunded</a></div></li>
+			<li<%=check_active(@filter,"almost-funded") %>><div><a href="/stories/almost-funded">Almost Funded</a></div></li>
+			<li<%=check_active(@filter,"funded") %>><div><a href="/stories/funded">Funded</a></div></li>
+			<li<%=check_active(@filter,"published") %>><div><a href="/stories/published">Published</a></div></li>
+			<li<%=check_active(@filter,"suggested") %>><div><a href="/stories/suggested">Suggested</a></div></li>
 	   	</ul>
 	   	<h5>Filter by Channel</h5>
 		<% if @channels.any? %>
@@ -27,7 +28,7 @@
 	</div>
 	<div id="stories">
 		<h3 class="display_inline">NOW VIEWING:</h3> 
-		<h4 class="display_inline"><%= @filter.sub("_", " ").titleize %></h4>
+		<h4 class="display_inline"><%= @filter.gsub("_", " ").gsub("-", " ").titleize %> Stories</h4>
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
 			&nbsp;
 		</div>

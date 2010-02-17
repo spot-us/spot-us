@@ -9,10 +9,10 @@
     </p>
   </div>
   <ul id="main-nav">
-     <li class="start_story<%=check_if_tab("start_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", 
-                     :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %></li>
-     <li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>"><%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), news_items_path %></li>
-     <li class="read_story<%=check_if_tab("stories",@selected_tab)%>"><%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), stories_path %></li>
+	<li class="start_story<%=check_if_tab("suggest_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/suggest-a-story.jpg", :width=>"111", :height=>"98", :alt=>"suggest"), new_tip_path %></li>
+	<li class="start_story<%=check_if_tab("start_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %></li>
+	<li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>"><%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), "/stories/unfunded" %></li>
+	<li class="read_story<%=check_if_tab("stories",@selected_tab)%>"><%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published" %></li>
    </ul>
    <!-- REFACTOR how to use -->
    <div class="howtouse">
