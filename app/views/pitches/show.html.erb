@@ -39,6 +39,27 @@
    </div>
    <div class="right-column">
       <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
+
+		<%if @pitch && @pitch.published?%>
+			<div class="right-panel-box">
+				<h3>Here is the published story</h3>
+				STORY:
+				<strong><%= link_to h(@pitch.story.headline), @pitch.story %></strong>
+				<div class="dateline small">
+					Posted
+					<%= @pitch.story.created_at.to_s(:long_date) %>
+					by
+					<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
+					in
+					<%= @pitch.story.network.name %>
+				</div>
+				<p>
+					<%= truncate_words(@pitch.story.short_description, 30) %>
+					<%= link_to 'Read the published story &raquo;', @pitch.story %>
+				</p>
+			</div>
+		<%end%>
+
       <div class="right-panel-box">
          <div class="donate_option">
          <h2>MAKE A DIFFERENCE</h2>
