@@ -17,7 +17,7 @@ div.spotus_widget .spotus_author {font-size:11px;color:#555;margin-bottom:5px;}
 div.spotus_widget .spotus_contribute {position:absolute;right:13px;top:3px;}
 /*div.spotus_widget a.spotus_link_button {color:#E3EEEF;font-style:italic;text-decoration:none;font-weight:bold;padding:4px;-moz-border-radius:4px;
 					background:#11363E;}*/
-div.spotus_widget .spotus_description {font-size:11px;color:#444;font-style:italic;margin-top:3px;max-height:45px;overflow:hidden;}
+div.spotus_widget .spotus_description {font-size:11px;color:#444;font-style:italic;margin-top:3px;max-height:43px;overflow:hidden;}
 div.spotus_widget .spotus_progress {position:relative;color:#333333;font-size:11px;}
 div.spotus_widget .spotus_footer {position:absolute;bottom:0;background:#11363E;padding: 5px;width:310px;color:#fff;text-align:center;}
 div.spotus_widget .spotus_slogan {text-transform: uppercase;letter-spacing:.10em;}
