@@ -126,7 +126,7 @@
          <div class="media-box">
             <h3>Multimedia</h3>
             <div class="align-center">
-               <%= @pitch.video_embed %>
+               <%= transform_embed_code(@pitch.video_embed, 560, 350) %>
             </div>
          </div>
       <% end %>
@@ -134,7 +134,7 @@
       <div class="media-box">
          <h3>Multimedia</h3>
          <div class="align-center">
-            <%= @item.media_embed %>
+            <%= transform_embed_code(@item.media_embed, 560, 350) %>
          </div>
       </div>
 	  <%end%>

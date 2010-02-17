@@ -12,6 +12,14 @@ module ApplicationHelper
     "#{pre_text}#{@current_network.nil? ? "All Networks" : @current_network.display_name}"
   end
 
+  def transform_embed_code(embed_code, width, height)
+    embed_code = embed_code.gsub(/width="([0-9]+)"/, "width='#{width}'")
+    embed_code = embed_code.gsub(/width:"([0-9]+)"/, "width:'#{width}'")
+    embed_code = embed_code.gsub(/height="([0-9]+)"/, "height='#{height}'")
+    embed_code = embed_code.gsub(/height:"([0-9]+)"/, "height:'#{height}'")
+    embed_code
+  end
+  
   def parse_xml_created_at(xml, posts)
     unless posts.empty?
       xml.pubDate posts.first.created_at.to_s(:rfc822) 
