@@ -39,8 +39,8 @@ object embed {display:block;}
 				-webkit-border-radius:4px;}
 a.admin_button  {color:white !important;}
 .hilited_input {background-color:#EDEDE4 !important;cursor:pointer !important;}
+#cse-search-box { text-align:right; margin-bottom:6px; }
 #cse-search-box input[type="text"] {}
-
 
 /*rounded courners*/
 .roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
@@ -85,7 +85,7 @@ a.admin_button  {color:white !important;}
 #header .howtouse .header{font-family:Arial, Helvetica, sans-serif;font-size:12pt;font-weight:bolder;color: #398c9f;line-height:10pt;}
 #header div.howtouse span{line-height:13pt;}
 #header-bar {background-color:#11363E;height:5px;width:100%;}
-#networks-nav{background-color:#E3EEEF;}
+#networks-nav{background-color:#E3EEEF;margin:0px;}
 #networks-nav div.inner{width:1063px;margin:0 auto;height:20px;padding-bottom:2px;}
 #networks-nav ul{display:inline;font-family:verdana;margin:0;font-size:11px;font-weight:bolder;text-transform:uppercase;}
 #networks-nav ul li{display:inline;}
@@ -191,7 +191,8 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #news_item .right-column .right-panel-box .donate_option img{display:block;}
 #news_item .right-column .right-panel-box form img{margin-bottom:5px;}
 #news_item .right-column .right-panel-box .share{float:left;width:100px;}
-#news_item .right-column .right-panel-box .subscribe{float:right;width:230px;}
+#news_item .right-column .right-panel-box .subscribe{float:right;text-align:right;width:250px;}
+#news_item .right-column .right-panel-box .subscribe .new_subscriber { width:250px; text-align:right; }
 #news_item .right-column #supporters {padding:0 15px;font-weight:bold; width:350px;}
 #news_item .right-column #supporters h2 {color:#11363E;font-family:Arial,Helvetica,sans-serif;letter-spacing:-1px;font-size:26px;margin-bottom:10px;
 			text-transform:uppercase; border-bottom:1px solid #999;}
