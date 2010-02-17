@@ -138,7 +138,7 @@ class Pitch < NewsItem
   named_scope :featured, :conditions => {:feature => true}, :order => 'RAND()'
   named_scope :sorted, lambda {|direction| { :order => "news_items.created_at #{direction}" } }
   named_scope :without_a_story, :conditions => 'news_items.id NOT IN (SELECT news_item_id FROM news_items WHERE news_items.type = "Story" AND news_items.status = "published")'
-  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
+  #named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
   
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
