@@ -21,7 +21,7 @@
             <%= @story.pitch.network.name %>
          </div>
          <p>
-            <%= truncate_words(@story.pitch.short_description, 30) %>
+            <%= truncate_words(strip_tags(@story.pitch.short_description), 30) %>
             <%= link_to 'Read Pitch &raquo;', @story.pitch %>
          </p>
       </div>
