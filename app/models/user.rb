@@ -99,6 +99,11 @@ class User < ActiveRecord::Base
       self.all(:conditions => {:tip_id => tip}).map(&:amount).sum
     end
   end
+  
+  named_scope :section?, lambda { |section|
+    return {} if section.blank?
+    self.send(section)
+  }
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password
