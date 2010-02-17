@@ -6,11 +6,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/sitemap.:type", :controller => "sitemap", :action => "index"
   map.connect "/sitemap_news.:type", :controller => "sitemap", :action => "index", :news=>true
 
-  map.resources :news_items, :collection => {:search => :any, :sort_options => :get}  do |news_items|
-    news_items.resources :newest
-    news_items.resources :oldest
-    news_items.resources :almost_funded
-  end
+  #better route support for the search page
+  map.connect "stories.:format", :controller => "news_items", :action => "index", :filter=>'unfunded'
+  map.connect "stories/:filter.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/nil|suggested|unfunded|almost-funded|funded|published/}
+  map.connnect "news_items", :controller => "news_items", :action => "search", :sort_by=>'asc'
+  
+  map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
     
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
