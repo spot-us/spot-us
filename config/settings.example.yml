@@ -1,11 +1,18 @@
-:action_controller: &action_controller
-  :session:
-    :secret: 067b877304e00d1a1e7b83ac46044b1aa72ee904b2090c0636a54263dc9fbecb8e719acb9e566655efe3e87df336e0483c532bf9b4a350958f0262ddc3feb208
-
 development:
-  :action_controller:
-    <<: *action_controller
-
-test:
-  :action_controller:
-    <<: *action_controller
+    :action_controller:
+        :session:
+          :secret:  <your secret session key here>
+    :action_mailer:
+        :delivery_method: :smtp
+        :smtp_settings:
+          :address: <your mail server here>
+          :port: 25
+          :authentication: plain
+          :user_name: <your user name for the mail server here>
+          :password: <your password for your mailserver here>
+          :domain: <your domain here>
+          :perform_deliveries: true
+    :default_host: <your default host here>
+    :bitly: <your bitly api key here for the sharing of content>
+    :google_verify: <your google webmaster tools verification code here>
+    :cron_job_code: <your secret cron job code goes here make this long and preferable a long hash >
