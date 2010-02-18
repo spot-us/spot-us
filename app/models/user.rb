@@ -79,7 +79,8 @@ class User < ActiveRecord::Base
       self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
     end
   end
-
+  has_many :paid_donations, :conditions => {:donation_type => "payment", :status => "paid"}
+  
   has_many :all_donations, :class_name => "Donation"
 
   has_many :spotus_donations

@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     format.html do
       if resource_saved?
         flash[:success] = 'Successfully updated post'
-        redirect_to myspot_posts_path
+        redirect_to pitch_post_path(@post.pitch, @post)
       else
         flash[:error] = 'There was an error updating your post'
         render :action => 'edit'
