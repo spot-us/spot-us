@@ -3,5 +3,6 @@
       <th class="tip_header">Comments</th>
       <th class="created_header">Created</th>
    </tr>
-   <%= render :partial => "comment", :collection => @profile.comments %>
+   <%= render :partial => "comment", :collection => @items %>
 </table>
+<%= will_paginate @items %>
