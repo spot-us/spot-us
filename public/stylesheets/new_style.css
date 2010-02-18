@@ -215,10 +215,10 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
-ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#BFBBBA;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
-			font-weight:bold;letter-spacing:0.03em;padding:8px 8px 8px 8px;border-bottom:1px solid #C7D9DB;}
-ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{background-color:#C7D9DB;color:#000000;border-bottom:1px solid #C7D9DB;}
-.tab_panel {background-color:#f7f7f7;border:solid 5px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:20px;min-height:120px;}
+ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
+			font-weight:normal;letter-spacing:0.03em;padding:8px 8px 7px 8px;text-decoration:none;border-bottom:1px solid #C7D9DB;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:1px solid #ddd;}
+ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;background-color:#fff;font-weight:bold;color:#000000;border-bottom:1px solid #fff;z-index:100;}
+.tab_panel {background-color:#fff;border:solid 1px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:20px;min-height:120px;}
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
 .tab_panel h5{margin-bottom:5px;}
