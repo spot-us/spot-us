@@ -126,6 +126,13 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
+  def create_blog_post_notification(pitch)
+    recipients pitch.user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: Create a blog post, build community and interest around the post!"
+    body       :pitch => pitch
+  end
+  
   def approved_reporting_team_notification(pitch, user)
     recipients user.email
     from       MAIL_FROM_INFO
