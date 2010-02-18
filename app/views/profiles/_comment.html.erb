@@ -1,13 +1,13 @@
 <tr>
   <td class="main">
     <h5><%= comment.title %></h5>
-    "<%= comment.body %>"
+    <em><%= comment.body %></em>
     <br/>
     on:
     <% if comment.commentable.instance_of?(Pitch) %>
       <%= link_to h(comment.commentable.headline), pitch_url(comment.commentable) %>
     <% elsif comment.commentable.instance_of?(Story) %>
-      <%= link_to h(comment.commentable.headline), story_path(comment.commentable.story) %>
+      <%= link_to h(comment.commentable.headline), story_path(comment.commentable) %>
     <% else %>
       Nothing
     <% end %>
