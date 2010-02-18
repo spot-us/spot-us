@@ -2,6 +2,8 @@ class Assignment < ActiveRecord::Base
   belongs_to :pitch
   belongs_to :user
 
+  after_save :touch_pitch
+  
   validates_presence_of :title, :body, :user, :pitch
   has_many :assignment_contributors, :dependent => :destroy
   has_many :applications, :class_name => "AssignmentContributor"
@@ -55,6 +57,10 @@ class Assignment < ActiveRecord::Base
   
   def to_param
     "#{id}-#{to_s.parameterize}"
+  end
+  
+  def touch_pitch
+    self.pitch.touch_pitch!
   end
   
 end
