@@ -3,5 +3,6 @@
       <th>Assignment</th>
       <th>Date</th>
    </tr>
-   <%= render :partial => "assignment", :collection => @profile.assignments %>
+   <%= render :partial => "assignment", :collection => @items %>
 </table>
+<%= will_paginate @items %>
