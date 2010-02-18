@@ -1,33 +1,28 @@
 - @title = "Spot.us - Login"
-- if login_failed?
-  - content_for :error do
-    %h2 Sorry about that.
-    %p Check below to see what happened:
-    %ul
-      %li Was it an invalid E-mail address or password?
-      %li Have you activated your account? You should receive an email with an activation link after signing up.
-    %p
-      If you're experiencing a persistent problem, email
-      = mail_to 'david@spot.us', nil, :encode => "hex"
-      %br
-      Seriously, this guy doesn't sleep and he wants the site to work for you!!!
-
-.block-padding
-.login-boxer
-  - form_tag session_url do
-    .span-6.or_login
+#login
+  - if login_failed?
+    - content_for :error do
+      %h2 Sorry about that.
+      %p Check below to see what happened:
+      %ul
+        %li Was it an invalid E-mail address or password?
+        %li Have you activated your account? You should receive an email with an activation link after signing up.
+      %p
+        If you're experiencing a persistent problem, email
+        = mail_to 'david@spot.us', nil, :encode => "hex"
+        %br
+        Seriously, this guy doesn't sleep and he wants the site to work for you!!!
+  #spotus_form.clearfix
+    - form_tag session_url do
+      = link_to "&raquo; NEW USERS: REGISTER HERE", new_user_path, :class => "float-right"
       %h3 Thanks for joining us!
-      = link_to "NEW USERS: REGISTER HERE", new_user_path
       %br
       %span.small.quieter
         If we already know you - login below.
       %br
       .double_content_border
       = render :partial => 'sessions/form'
-      .clear
-      .double_content_border
-      .float_right
+      .float-right.clearfix
         %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :onclick=>"processLoginForm();"}
-  .clear
-.block-padding
+
 
