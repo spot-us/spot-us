@@ -6,6 +6,15 @@
     <%= f.label :body %>
     <%= fckeditor_textarea("post", "body", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
 </div>
+<div class="row add_media">
+   <label>Add Media<br/>
+      <span class="small">
+         Upload A Blog Image
+      </span>       
+   </label>
+   <%= f.file_field :blog_image %><br/>
+   <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+ </div>
 <div class="row">
     <%= f.label :media_embed %>
     <%= f.text_area :media_embed, :rows => 4 %>
