@@ -5,7 +5,7 @@
 
 	<!-- Some SEO stuff... -->
 	<%if REAL_PRODUCTION_MODE && APP_SETTINGS[:google_verify]%>
-		<meta name="google-site-verification" content="<%=APP_SETTINGS[:google_verify]%>" />
+		<meta name="google-site-verification" content="<%=APP_CONFIG[:google_verify]%>" />
 		<!-- Only index the top domain... -->
 		<%unless @current_network.nil? %>
 			<meta name="ROBOTS" content="NOARCHIVE,NOINDEX,NOFOLLOW" />
