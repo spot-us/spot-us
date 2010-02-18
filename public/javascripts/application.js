@@ -37,6 +37,9 @@ jQuery(document).ready(function($){
   	$.facebox($("#suggest_city").html());
 		return false;
   });
+	$('img.supporter').error(function(){
+	 	$(this).attr('src', '/images/default_avatar.png');
+	});
 	
 });
 
