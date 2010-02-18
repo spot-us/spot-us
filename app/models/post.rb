@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
   belongs_to :pitch
   belongs_to :user
   
+  after_save :touch_pitch
+  
   has_attached_file :blog_image,
                       :styles => { :thumb => '50x50#', 
                           :medium => "200x150#", 
@@ -42,4 +44,9 @@ class Post < ActiveRecord::Base
     {:conditions =>  ["pitch_id in (select id from news_items where network_id in (select id from networks where id = ?))", network]}
     }
     named_scope :latest, :order => "posts.id desc", :limit => 3
+    
+  def touch_pitch
+    self.pitch.touch_pitch!
+  end
+
 end
