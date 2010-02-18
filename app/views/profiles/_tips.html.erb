@@ -4,5 +4,6 @@
       <th>Date</th>
       <th>Pledged</th>
    </tr>
-   <%= render :partial => "tip", :collection => @profile.tips %>
+   <%= render :partial => "tip", :collection => @items %>
 </table>
+<%= will_paginate @items %>

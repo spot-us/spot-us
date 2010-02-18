@@ -162,6 +162,7 @@ div#pitches_carousel .progress_bar {margin-top:10px;}
 #news_item #news_item_info .assignments_tab h2 {border-bottom:solid 1px #666;margin-bottom:15px;}
 
 #news_item #news_item_info .item {}
+#news_item #news_item_info .item_tab .blog_image {float:left;margin:0 10px 10px 0;}
 #news_item #news_item_info .item_tab .mini_header {border-bottom:1px dashed #666;font-size:.9em;position:relative;color:#888;margin-bottom:15px;}
 #news_item #news_item_info .item_tab .mini_header .view_all {position:absolute;right:0;top:0;}
 #news_item #news_item_info .item_tab h2 {margin-bottom:5px;line-height:1em;}
@@ -326,6 +327,9 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 20px;height:28px;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
 #public_profile #content_wrapper {padding:20px;border: 1px solid #aaa;background:#f3f3f3;min-height:300px;}
 #public_profile #content_wrapper td.main img {float:left;margin-right:8px;}
+#public_profile #content_wrapper td.main p {margin:0;}
+#public_profile #content_wrapper .comments a {color:#567680;font-weight:bold;}
+#public_profile #content_wrapper .comments td {border-bottom:solid 1px #aaa;}
 #myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
 
