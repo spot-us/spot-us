@@ -1,7 +1,8 @@
 <table>
    <tr>
-      <th>Pitch</th>
       <th>Title</th>
+      <th>Pitch</th>
    </tr>
-   <%= render :partial => "post", :collection => @profile.posts %>
+   <%= render :partial => "post", :collection => @items %>
 </table>
+<%= will_paginate @items %>
