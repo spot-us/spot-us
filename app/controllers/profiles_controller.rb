@@ -14,7 +14,13 @@ class ProfilesController < ApplicationController
     @profile = User.find(params[:id])
     if ["assignments","pledges","donations","pitches","posts","tips","comments"].include?(params[:section])
       @tab = params[:section]
-      @items = User.find_by_id(@profile.id).send(params[:section]).paginate(:all, :page => params[:page], :per_page => 20, :order => "created_at desc")
+      if params[:section] != "donations"
+        @items = User.find_by_id(@profile.id).send(params[:section]).paginate(:all, :page => params[:page], :per_page => 20, 
+                 :order => "created_at desc")
+      else
+        @items = User.find_by_id(@profile.id).send(params[:section]).paid.paginate(:all, :page => params[:page], :per_page => 20, 
+                 :order => "created_at desc")
+      end                                                                                                                                                                       
     else
       @tab = "show"
     end
