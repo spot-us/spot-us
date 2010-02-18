@@ -27,7 +27,7 @@ object embed {display:block;}
 .small{font-size:0.8em;line-height:1.875em;margin-bottom:1.875em;}
 .strong{font-weight:bold;}
 .headline {font-size:2.5em;font-weight:bold;letter-spacing:-1pt;}
-.media-box{background-color:#CCCCCC;height:380px;margin-top:-30px;padding:15px 15px 20px;width:563px;}
+.media-box{background-color:#CCCCCC;margin-top:-30px;padding:15px 15px 20px;width:563px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
 .margin_top_10{margin-top:10px;}
@@ -103,7 +103,7 @@ a.admin_button  {color:white !important;}
 .stories-in-progress{float:right;width:338px;background:#eee;}
 .stories-in-progress ul{margin:0;padding:0 15px 0 3px;list-style-type:none;}
 .stories-in-progress ul li.post{margin-bottom:20px;}
-.stories-in-progress ul li.post img{display:block;width:300px;height:163px;}
+.stories-in-progress ul li.post img{display:block;width:300px;height:163px;margin-bottom:3px;}
 p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;letter-spacing:0;line-height:13px;text-transform:uppercase;
 				margin-bottom:1.5em;}
 .folded-headers-short {background-image:url(/images/new_design/banner-small.png);background-repeat:no-repeat;color:#FFFFFF;float:right;
@@ -363,7 +363,7 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 20px;height:28px;}
 #login_modal input[type="image"] {margin-top:15px;}
 #login_modal input[type="checkbox"] {margin-bottom:0;}
 
-
+#login {width:590px;padding:20px;}
 
 #spotus_page {padding:20px 40px;width:620px;float:left;}
 #spotus_page h2 {margin:0;}
