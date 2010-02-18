@@ -4,5 +4,6 @@
       <th>Created</th>
       <th>Donations</th>
    </tr>
-   <%= render :partial => "/profiles/pitch", :collection => @profile.pitches %>
+   <%= render :partial => "/profiles/pitch", :collection => @items %>
 </table>
+<%= will_paginate @items %>
