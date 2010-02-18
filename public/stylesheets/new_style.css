@@ -394,6 +394,7 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 20px;height:28px;}
 #footer-notes .middle-column{width:300px;float:left;padding-left:13px;}
 #footer-notes .right-column{width:300px;float:right;padding-right:25px;padding-left:5px;}
 #footer-notes h3 {color:#FFFFFF;font-family:Verdana,Geneva,sans-serif;font-weight:bold;margin:0 0 20px;padding:0 0 5px 0; border-bottom: 1px dotted #fff;}
+#footer-notes h4 {color:#FFFFFF;font-family:Verdana,Geneva,sans-serif;font-weight:bold;margin:0 0 5px;padding:0 0 5px 0; }
 #footer-notes ul{margin:0;list-style-type:none;}
 #footer-notes li img, #footer-notes p img {float:left;margin:0 1em 1em 0;padding:0;}
 #footer a, #user-header a {color:#FFFFFF;text-decoration:none;}
