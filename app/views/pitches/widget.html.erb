@@ -23,7 +23,7 @@
          			<h3 class="spotus_pitch_title"><%= link_to h(@pitch.headline), pitch_url(@pitch), :target => "_parent" %></h3>
          			<div class="spotus_dateline"><%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %> | <%= short_date(@pitch.created_at)%></div>
          			<div class="spotus_description">
-         			   "<%= truncate_words(strip_html(@pitch.short_description), 15) unless @pitch.short_description.blank? %>"
+         			   "<%= truncate_words(strip_html(@pitch.short_description), 14) unless @pitch.short_description.blank? %>"
          			</div>
 		         </div>
       		   <div class="spotus_progress">
@@ -31,7 +31,7 @@
    					<%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch}%>
    					<div class="spotus_contribute">
    					<% if @pitch.fully_funded? %>
-   					   <%= image_tag('fully_funded.png', :alt => 'This News Item is Fully Funded!')%>
+   					   <%= image_tag('/images/new_design/fully_funded_medium.png', :alt => 'This News Item is Fully Funded!')%>
    					<% else %>
    					   <%= link_to image_tag("/images/new_design/fund-widget.png"), @pitch, :target => "_parent" %>
 					   <% end %>

@@ -237,6 +237,11 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #fund_a_story #navigation{width:220px;float:left;}
 #fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
 
+#fund_a_story #stories .story{border-bottom:1px solid #CCCCCC; padding: 0 0 10px 0; margin: 0 0 10px 0;}
+#fund_a_story #stories .story p, #fund_a_story #stories .story p + p {margin:0;}
+#fund_a_story #stories .story .featured_image{padding:0px;width:210px;}
+#fund_a_story #stories .story .description {margin-left:210px;}
+
 #stories{width:776px;float:right;padding:13px 20px 20px 0;margin-right:28px;}
 #stories h3{font-family: Arial,Helvetica,sans-serif; text-transform: uppercase; font-weight: bold; font-size: 16pt; color: rgb(17, 54, 62);letter-spacing:0;}
 #stories h4{font-family: Arial,Helvetica,sans-serif; font-size: 16pt; font-weight: bold; color: rgb(77, 107, 113); letter-spacing: -0.05em;}
