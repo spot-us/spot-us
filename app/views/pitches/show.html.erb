@@ -3,42 +3,42 @@
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
 	<script>
-    jQuery(document).ready(function($){
-		jQuery("#show_action_items").click(function(){
-			jQuery.facebox(jQuery("#action_buttons").html());
-		});
-		jQuery(".widget_code").hover(function(){
-		   $(this).addClass("hilited_input");
-		}, function(){
-		   $(this).removeClass("hilited_input");
-		}).click(function(){
-		   $(this).select();
-		});
-		jQuery(".reveal_widget").toggle(function(){
-		   $(".widget_panel").animate({height:"380px"});
-		   return false;
-		}, function(){
-		   $(".widget_panel").animate({height:"0px"});
-		   return false;
-		});
-    });	
-  	</script>
+		jQuery(document).ready(function($){
+			jQuery("#show_action_items").click(function(){
+				jQuery.facebox(jQuery("#action_buttons").html());
+			});
+			jQuery(".widget_code").hover(function(){
+				$(this).addClass("hilited_input");
+				}, function(){
+					$(this).removeClass("hilited_input");
+				}).click(function(){
+					$(this).select();
+			});
+			jQuery(".reveal_widget").toggle(function(){
+				$(".widget_panel").animate({height:"380px"});
+				return false;
+			}, function(){
+				$(".widget_panel").animate({height:"0px"});
+				return false;
+			});
+		});	
+	</script>
 <% end %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 
 <% if @subscriber && @subscriber.errors.any? %>
-  <div class="error">
-    <%= error_messages_for :subscriber %>
-  </div>
+	<div class="error">
+		<%= error_messages_for :subscriber %>
+	</div>
 <% end %>
 
 <div id="news_item">
-   <div id="news_item_header">
-      <img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-      <h2 class="headline"><%= h @pitch.headline %></h2>
-   </div>
-   <div class="right-column">
-      <%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
+	<div id="news_item_header">
+		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
+		<h2 class="headline"><%= h @pitch.headline %></h2>
+	</div>
+	<div class="right-column">
+		<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
 
 		<%if @pitch.story && @pitch.story.published?%>
 			<div class="right-panel-box">
@@ -60,90 +60,90 @@
 			</div>
 		<%end%>
 
-      <div class="right-panel-box">
-         <div class="donate_option">
-         <h2>MAKE A DIFFERENCE</h2>
-         <%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
-         <%= due_date_in_words(@pitch.expiration_date) %>
-         </div>
-         <div class="donate_option">
-         <%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
-         <%= link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch)) %>
-         </div>
-      </div>
-   
-      <div class="right-panel-box clearfix">
-         <div class="share">
-         <h3>Share</h3>
-			<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @pitch.short_url(request.url) rescue "" end %>&amp;t=<%= h @pitch.status_update(false) %>">
-		 		<%= image_tag("/images/new_design/facebook.png") %>
-			</a>
-			<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=begin h @pitch.status_update rescue "" end %>" title="Share this Pitch on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
-         </div>
-         <div class="subscribe">
-	         <%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
-         </div>
-      </div>
-      
-		<div class="right-panel-box clearfix">
-         <div>
-         	<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab it by clicking <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;">HERE!</a>
-         	<div class="widget_panel">
-			      <iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
-			      <div class="widget_tip">To get this widget, grab this html code and paste into your template:
-			         <textarea class="widget_code"><%="<iframe width='340' height='300' src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='1'></iframe>"%></textarea>
-			      </div>
-			   </div>
-         </div>
-      </div>
+		<div class="right-panel-box">
+			<div class="donate_option">
+				<h2>MAKE A DIFFERENCE</h2>
+				<%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
+				<%= due_date_in_words(@pitch.expiration_date) %>
+			</div>
+			<div class="donate_option">
+				<%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
+				<%= link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch)) %>
+			</div>
+		</div>
 
-      <div id="supporters">
-          <%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
-          <%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-          <%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
-      </div>
-   </div>
-   <div class="main-column">
-      <div class="folded-headers-big">
-		 <% apply_fragment ['pitch_author_top_', @pitch, @pitch.user] do %>
-	         <div class="news_item_author">
-	            <%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
-	            <h5>Author</h5>
-	            <%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
-	         </div>
-		 <%end%>
-         <% if @pitch.peer_reviewer %>
-         	<%apply_fragment ['pitch_peer_reviewer_top_', @pitch, @pitch.peer_reviewer] do %>
+		<div class="right-panel-box clearfix">
+			<div class="share">
+				<h3>Share</h3>
+				<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @pitch.short_url(request.url) rescue "" end %>&amp;t=<%= h @pitch.status_update(false) %>">
+					<%= image_tag("/images/new_design/facebook.png") %>
+				</a>
+				<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=begin h @pitch.status_update rescue "" end %>" title="Share this Pitch on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
+			</div>
+			<div class="subscribe">
+				<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
+			</div>
+		</div>
+
+		<div class="right-panel-box clearfix">
+			<div>
+				<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab it by clicking <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;">HERE!</a>
+				<div class="widget_panel">
+					<iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
+					<div class="widget_tip">To get this widget, grab this html code and paste into your template:
+						<textarea class="widget_code"><%="<iframe width='340' height='300' src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='1'></iframe>"%></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="supporters">
+			<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+			<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+			<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+		</div>
+	</div>
+	<div class="main-column">
+		<div class="folded-headers-big">
+			<% apply_fragment ['pitch_author_top_', @pitch, @pitch.user] do %>
 				<div class="news_item_author">
-		            <%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
-		            <h5>Peer Review Editor</h5>
-		            <%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
-		        </div>
+					<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
+					<h5>Author</h5>
+					<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %>
+				</div>
 			<%end%>
-         <% end %>
-      </div>
-      <% unless @pitch.video_embed.blank? || @item %>
-         <div class="media-box">
-            <h3>Multimedia</h3>
-            <div class="align-center">
-               <%= transform_embed_code(@pitch.video_embed, 560, 350) %>
-            </div>
-         </div>
-      <% end %>
-	  <%if @item && !@item.media_embed.blank?%>
-      <div class="media-box">
-         <h3>Multimedia</h3>
-         <div class="align-center">
-            <%= transform_embed_code(@item.media_embed, 560, 350) %>
-         </div>
-      </div>
-	  <%end%>
-      <div id="news_item_info">
-		<%unless @item%>
-			<%=render :partial=>'main'%>
-    	<%else%>
-			<%=render :partial=>'item'%>
+			<% if @pitch.peer_reviewer %>
+				<%apply_fragment ['pitch_peer_reviewer_top_', @pitch, @pitch.peer_reviewer] do %>
+					<div class="news_item_author">
+						<%= link_to(image_tag(@pitch.peer_reviewer.photo.url(:thumb), :class => "avatar"), profile_path(@pitch.peer_reviewer)) %>
+						<h5>Peer Review Editor</h5>
+						<%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer), :class => "username") %>
+					</div>
+				<%end%>
+			<% end %>
+		</div>
+		<% unless @pitch.video_embed.blank? || @item %>
+			<div class="media-box">
+				<h3>Multimedia</h3>
+				<div class="align-center">
+					<%= transform_embed_code(@pitch.video_embed, 560, 350) %>
+				</div>
+			</div>
+		<% end %>
+		<%if @item && !@item.media_embed.blank?%>
+			<div class="media-box">
+				<h3>Multimedia</h3>
+				<div class="align-center">
+					<%= transform_embed_code(@item.media_embed, 560, 350) %>
+				</div>
+			</div>
 		<%end%>
-  	 </div>
-   </div>
+		<div id="news_item_info">
+			<%unless @item%>
+				<%=render :partial=>'main'%>
+			<%else%>
+				<%=render :partial=>'item'%>
+			<%end%>
+		</div>
+	</div>
 </div>
