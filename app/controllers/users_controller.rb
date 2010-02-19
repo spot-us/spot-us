@@ -5,6 +5,37 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def list
+    # cannot be done with one query unfortunately :-( --- object cache necessary eventually
+    @network = current_network
+    @filter = params[:filter]
+    if @filter=='donated' || @filter.blank?  
+      user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], 
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+    elsif @filter=='most-donated'
+      user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, count(*) as cnt",
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'cnt desc, created_at desc')
+    elsif @filter=='organizations'
+      user_ids_all = Donation.paid.by_network(current_network).find(:all, :conditions=>"users.type='Organization'", :group=>"donations.user_id", :include=>:user).map(&:user_id).join(',')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], 
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+    elsif @filter=='reporters'
+      user_ids_all = Pitch.by_network(current_network).find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
+      @items = Pitch.by_network(current_network).paginate(:page => params[:page], 
+        :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'created_at desc')
+    end
+      
+    respond_to do |format|
+      format.html do
+      end
+      format.rss do
+        render :layout => false
+      end
+    end
+  end
+
   def create
     delete_cookie :auth_token
     @user = User.new(params[:user])
@@ -85,5 +116,3 @@ class UsersController < ApplicationController
   end
   
 end
-
-
