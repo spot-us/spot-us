@@ -1,5 +1,5 @@
 <div class="item">
-	<%= render :partial=>'tabs' %>
+	<%= render :partial=>'tab_header' %>
 	<% apply_fragment ['pitch_detail_page_top_', @tab, @pitch, @item] do %>
 		<div class="item_tab tab_panel clearfix">
 		   <div class="mini_header"><%=pre_title?(@item)%>
