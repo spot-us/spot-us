@@ -1,6 +1,6 @@
 <%if @section%>
 	<h2><%=@section.title%></h2>
-	<p><%=@section.embed_code%></p>
+	<p><%= transform_embed_code(@section.embed_code, 560, 450) %></p>
 	<p><em><%=@section.short_description%></em></p>
 	<p><%=@section.extended_description%></p>
 <%else%>
