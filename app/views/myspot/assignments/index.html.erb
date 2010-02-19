@@ -3,21 +3,23 @@
 <div id="myspot_dashboard">
    <h3>My Spot</h3>
    <%= render :partial => "myspot/nav", :locals => {:selected_tab => "dashboard"} %>
-   <%= render :partial => "myspot/dashboard_nav", :locals => {:selected_tab => "assignments"} %>
-   <div id="dashboard_content">
-      <table>
-         <tr>
-            <th class="tip_header">Assignment</th>
-            <th class="created_header">Created</th>
-         </tr>
-         <tr>
-            <td colspan="4">
-               <%= render :partial => "myspot/assignments/assignment", :collection => @assignments, :spacer_template => "myspot/assignments/assignment_spacer" %>
-            </td>
-         </tr>		
-		 <tr>
-			<td colspan='4'><%=will_paginate @assignments%></td>
-		</tr>
-      </table>
+   <div id="profile_container">
+      <%= render :partial => "myspot/dashboard_nav", :locals => {:selected_tab => "assignments"} %>
+      <div id="dashboard_content">
+         <table>
+            <tr>
+               <th class="tip_header">Assignment</th>
+               <th class="created_header">Created</th>
+            </tr>
+            <tr>
+               <td colspan="4">
+                  <%= render :partial => "myspot/assignments/assignment", :collection => @assignments, :spacer_template => "myspot/assignments/assignment_spacer" %>
+               </td>
+            </tr>		
+   		 <tr>
+   			<td colspan='4'><%=will_paginate @assignments%></td>
+   		</tr>
+         </table>
+      </div>
    </div>
 </div>
