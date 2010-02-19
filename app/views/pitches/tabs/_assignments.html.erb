@@ -1,0 +1,8 @@
+<div class="assignments_tab tab_panel">
+   <% if @pitch.assignments.any? %>
+      <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
+   <% else %>
+      Not every pitch has assignments. Like large cats, some reporters like to work
+      alone. Check to see if other pitches do have assignments you can help out with!
+   <% end %>
+</div>
