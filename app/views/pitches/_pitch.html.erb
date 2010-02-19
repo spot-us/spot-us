@@ -4,7 +4,7 @@
 			<%= render :partial => "donations/button", :locals => { :news_item => pitch } %>
 			<%if pitch.story && pitch.story.published?%>
 				<br/>
-				<%= link_to image_tag('/images/read-story-purple.png', :alt => ""), story_path(pitch.story) %>
+				<%= link_to image_tag('/images/read-story-purple.png', :alt => "", :style=>"padding-top:5px;"), story_path(pitch.story) %>
 			<%end%>		
 		</div>		
 		<%= render :partial => 'news_items/news_item', :object => pitch %>
