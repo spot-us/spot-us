@@ -12,14 +12,14 @@ jQuery(document).ready(function($){
   $('form[rel*=facebox]').facebox();
 
   $("#pitches_carousel").jCarouselLite({
-    btnNext: ".next",
-    btnPrev: ".prev",
+    btnNext: ".next_alt",
+    btnPrev: ".preva_lt",
     visible: 1
   });
 
 	$("#stories_carousel").jCarouselLite({
-    btnNext: ".next_story",
-    btnPrev: ".prev_story",
+    btnNext: ".next_story_alt",
+    btnPrev: ".prev_story_alt",
     visible: 2
   });
 	
