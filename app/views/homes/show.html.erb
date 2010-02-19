@@ -32,8 +32,8 @@
 			<div id="header-container">Fund a story</div>
 		</div>
 		<div style="clear: both;"></div>
-		<a id="prev" class='float-left prev_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
-		<a id="next"  class='float-right next_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>  
+		<a class='float-left prev_alt'>&laquo; PREVIOUS</a>
+		<a class='float-right next_alt'>NEXT &raquo;</a>  
 		<div id="pitches_carousel">
 			<ul>
 				<%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
@@ -44,8 +44,8 @@
 			<div id="header-container">Recently Published</div>
 		</div>
 		<div style="clear: both;"></div>
-		<a id="prev" class='float-left prev_story_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
-		<a id="next"  class='float-right next_story_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>
+		<a class='float-left prev_story_alt'>&laquo; PREVIOUS</a>
+		<a class='float-right next_story_alt'>NEXT &raquo;</a>
 		<div id="stories_carousel">
 			<ul>
 				<%= render :collection => @featured_stories, :partial => 'featured_story' %>
