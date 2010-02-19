@@ -1,67 +1,55 @@
 <% @title = "Spot.us - Home" %>
 <div class="home-boxer">
-   <div class="home-floater stories-in-progress">
-      <div class="folded-headers-short">
-         <%= link_to image_tag("/images/new_design/rss_16.png"), "/blogs.rss", :class => "rss_button" %>
-         <div id="header-container-short"> Stories in Progress</div>
-      </div>
-      <ul>
-         <% Post.by_network(@current_network).latest.each do |post| %>
-   			<% apply_fragment ['stories_in_progress_home_', post] do %>
-   	            <li class="post">
-   	               <h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
-   	               <%= image_tag(post.blog_image_display(:front_story)) %>
-   	               <p class="byline"><%= short_date(post.created_at)%> by <%= link_to post.user.full_name, profile_path(post.user) %></p>
-   	               <p class="post_body">
-   	                  <%= truncate_words(strip_tags(post.body), 35)%>
-   	                  <%= link_to "Read More &raquo;", pitch_post_path(post.pitch, post) %>
-   	               </p>
-   	            </li>
-   			<% end %>
-         <% end %>
-         <li class="float-right"><%= link_to "See All Blog Posts &raquo;", "/blogs" %></li>
-      </ul>
-   </div>
-   <div id="main-area" class="home-floater">
-      <h1>How to Use Spot.Us</h1>
-      <div id="help-images">
-         <a href="" id="help_to-support-reporting" class="help-images-padding"><%= image_tag("/images/new_design/to-support-reporting.png")%></a><a href="" id="help_to-start-a-story"><%=  image_tag("/images/new_design/start-a-story.png") %></a><a href="" id="help_as-a-news-publisher"><%= image_tag("/images/new_design/as-a-news-publisher.png") %></a>
-      </div>
-      <div class="folded-headers">
-		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/unfunded.rss", :class => "rss_button" %>
-         <div id="header-container">Fund a story</div>
-      </div>
-      <div style="clear: both;"></div>
-      <div id="next" style="display:none;">
-         <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next arrow float-right" %>
-      </div>
-      <div id="prev" style="display:none;">
-         <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev arrow float-left" %>
-      </div>
-    	<a id="prev" class='float-left prev_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
-		<a id="next"  class='float-right next_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>  
-	<div id="pitches_carousel">
+	<div class="home-floater stories-in-progress">
+		<div class="folded-headers-short">
+			<%= link_to image_tag("/images/new_design/rss_16.png"), "/blogs.rss", :class => "rss_button" %>
+			<div id="header-container-short"> Stories in Progress</div>
+		</div>
 		<ul>
-             <%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
-         </ul>
-      </div>
-      <div class="folded-headers">
-         <%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/published.rss", :class => "rss_button" %>
-         <div id="header-container">Recently Published</div>
-      </div>
-      <div style="clear: both;"></div>
+			<% @posts.each do |post| %>
+				<% apply_fragment ['stories_in_progress_home_', post] do %>
+					<li class="post">
+						<h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
+						<%= image_tag(post.blog_image_display(:front_story)) %>
+						<p class="byline"><%= short_date(post.created_at)%> by <%= link_to post.user.full_name, profile_path(post.user) %></p>
+						<p class="post_body">
+							<%= truncate_words(strip_tags(post.body), 35)%>
+							<%= link_to "Read More &raquo;", pitch_post_path(post.pitch, post) %>
+						</p>
+					</li>
+				<% end %>
+			<% end %>
+			<li class="float-right"><%= link_to "See All Blog Posts &raquo;", "/blogs" %></li>
+		</ul>
+	</div>
+	<div id="main-area" class="home-floater">
+		<h1>How to Use Spot.Us</h1>
+		<div id="help-images">
+			<a href="" id="help_to-support-reporting" class="help-images-padding"><%= image_tag("/images/new_design/to-support-reporting.png")%></a><a href="" id="help_to-start-a-story"><%=  image_tag("/images/new_design/start-a-story.png") %></a><a href="" id="help_as-a-news-publisher"><%= image_tag("/images/new_design/as-a-news-publisher.png") %></a>
+		</div>
+		<div class="folded-headers">
+			<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/unfunded.rss", :class => "rss_button" %>
+			<div id="header-container">Fund a story</div>
+		</div>
+		<div style="clear: both;"></div>
+		<a id="prev" class='float-left prev_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
+		<a id="next"  class='float-right next_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>  
+		<div id="pitches_carousel">
+			<ul>
+				<%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
+			</ul>
+		</div>
+		<div class="folded-headers">
+			<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/published.rss", :class => "rss_button" %>
+			<div id="header-container">Recently Published</div>
+		</div>
+		<div style="clear: both;"></div>
 		<a id="prev" class='float-left prev_story_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
 		<a id="next"  class='float-right next_story_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>
-      <div id="next_story" style="display:none;">
-         <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next_story arrow float-right" %>
-      </div>
-      <div id="prev_story" style="display:none;">
-         <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev_story arrow float-left" %>
-      </div>
-      <div id="stories_carousel">
-         <ul>
-             <%= render :collection => @featured_stories, :partial => 'featured_story' %>
-         </ul>
-      </div>
-   </div>
+		<div id="stories_carousel">
+			<ul>
+				<%= render :collection => @featured_stories, :partial => 'featured_story' %>
+			</ul>
+		</div>
+	</div>
 </div>

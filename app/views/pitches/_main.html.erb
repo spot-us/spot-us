@@ -1,6 +1,6 @@
 <div>
 	<%=render :partial=>'tabs'%>
-   <% if active_tab?(@tab, '')%>
+	<% if active_tab?(@tab, '')%>
 		<div class="description_tab tab_panel clearfix">
           <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
           <%= @pitch.short_description %>
@@ -29,7 +29,7 @@
             
           <% else %>
              <p>
-                <em>This story has no blog posts.</em>
+                <em>This story has no updates yet.</em>
              </p>
           <% end %>
        </div>
@@ -73,22 +73,22 @@
 </div>
 <br/><br/>
 <div id="tabContainer">
-   <ul class="tabs" id="tabHeader">
-      	<li><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');">Qualifications</a></li>
+	<ul class="tabs" id="tabHeader">
+		<li><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');">Qualifications</a></li>
 		<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');">Deliverables</a></li>
 		<% unless @pitch.disclosure.blank?%>
 			<li><a href="" class="tab" id="disclosure_tab" onclick="selectTab('tabContainer','disclosure');">Disclosure</a></li>
 		<%end%>
-   </ul>
-   <div class="qualifications_tab tab_panel" id="qualifications_content">
-      <%= @pitch.skills %>
-   </div>
+	</ul>
+	<div class="qualifications_tab tab_panel" id="qualifications_content">
+		<%= @pitch.skills %>
+	</div>
 	<div class="deliverables_tab tab_panel hide" id="deliverables_content">
-      <%= @pitch.delivery_description %>
-   </div>
+		<%= @pitch.delivery_description %>
+	</div>
 	<% unless @pitch.disclosure.blank?%>
 		<div class="disclosure_tab tab_panel hide" id="disclosure_content">
-	      <%= @pitch.disclosure %>
-	   	</div>
+			<%= @pitch.disclosure %>
+		</div>
 	<%end%>
 </div>
