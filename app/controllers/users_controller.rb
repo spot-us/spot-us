@@ -5,6 +5,20 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def donors
+    # cannot be done with one query unfortunately :-( --- object cache necessary eventually
+    @network = current_network
+    user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
+    @donations = Donation.paginate(:page => params[:page], :include=>:user, :conditions=>"user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+    respond_to do |format|
+      format.html do
+      end
+      format.rss do
+        render :layout => false
+      end
+    end
+  end
+
   def create
     delete_cookie :auth_token
     @user = User.new(params[:user])
