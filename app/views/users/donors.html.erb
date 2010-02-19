@@ -1,0 +1,41 @@
+<% content_for :head do %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'users', :action => 'donors', :format => 'rss'}) %>
+<% end %>
+
+<% @title = "Spot.us - Fund A Story" %>
+
+<div id="fund_a_story">
+	<div id="navigation">
+		<h5>Browse Donors on Spot.Us</h5>
+	</div>
+	<div id="stories">
+		<%= link_to image_tag("/images/new_design/rss_16.png"), "/donors.rss", :class => "rss_button" %>
+		<h3 class="display_inline">NOW VIEWING:</h3> 
+		<h4 class="display_inline">Spot.Us Donors Inside <%=get_inside_network_text(@network).titleize%></h4>
+		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
+			&nbsp;
+		</div>
+		<% if @donations.blank? %>
+			<div>
+				There were no results for your search.  Try different search terms.
+			</div>
+		<%else%>
+			<%@donations.each do |donation|%>
+				<% apply_fragment ['donors_listing_', donation] do %>
+					<div class="news_item">
+						<%= link_to image_tag(donation.user.photo(:thumb)), profile_path(donation.user) %>
+						<h5><%= link_to donation.user.full_name, profile_path(donation.user) %></h5>
+						<div class="dateline">
+							Joined <%= short_date(donation.created_at) %>
+						</div>  
+						<div class="description">
+							<%= truncate_words(strip_tags((donation.user.about_you.blank? ? "This donor has not added their about you section yet" : donation.user.about_you)), 50) %>
+							<%= link_to "Read their profile &raquo;", profile_path(donation.user) %>
+						</div>
+					</div>
+				<% end %>
+			<%end%>
+		<% end %>
+		<%= will_paginate @donations %>
+	</div>
+</div>
