@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/sitemap.:type", :controller => "sitemap", :action => "index"
   map.connect "/sitemap_news.:type", :controller => "sitemap", :action => "index", :news=>true
   map.connect "/donors.:format", :controller => "users", :action => "donors"
+  map.connect "/reporters.:format", :controller => "users", :action => "reporters"
   
   #better route support for the search page
   map.connect "stories.:format", :controller => "news_items", :action => "index", :filter=>'unfunded'
