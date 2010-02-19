@@ -57,11 +57,16 @@ class Donation < ActiveRecord::Base
   
   #default_scope :conditions => {:donation_type => "payment"}
   named_scope :unpaid, :conditions => "status = 'unpaid'"
-  named_scope :paid, :conditions => "status = 'paid'"
+  named_scope :paid, :conditions => "donations.status = 'paid'"
   named_scope :from_organizations, :include => :user, :conditions => "users.type = 'organization'"
   named_scope :for_pitch, lambda {|pitch| { :conditions => {:pitch_id => pitch.id} } }
   named_scope :by_user, lambda {|user| { :conditions => {:user_id => user.id} } }
   named_scope :other_than, lambda {|donation| { :conditions => "id != #{donation.id}" } }
+  
+  named_scope :by_network, lambda {|network|
+    return {} unless network
+    { :joins=>"INNER JOIN news_items ON news_items.id=donations.pitch_id", :conditions=>["news_items.network_id=? AND news_items.type='Pitch'", network.id] }
+  }
   
   after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
