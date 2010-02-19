@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
 
   $("#pitches_carousel").jCarouselLite({
     btnNext: ".next_alt",
-    btnPrev: ".preva_lt",
+    btnPrev: ".prev_alt",
     visible: 1
   });
 
