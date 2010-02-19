@@ -1,0 +1,53 @@
+<% content_for :head do %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'users', :action => 'list', :format => 'rss', :filter=>@filter}) %>
+<% end %>
+
+<% @title = "Spot.us - Fund A Story" %>
+
+<div id="fund_a_story">
+	<div id="navigation">
+		<h5>Browse Contributors on Spot.Us</h5>
+		<ul id="filters" class="filter">
+			<li<%=check_active(@filter,"donated") %>><div><a href="/contributors/donated">Recently Donated</a></div></li>
+			<li<%=check_active(@filter,"most-donated") %>><div><a href="/contributors/most-donated">Most Donated</a></div></li>
+			<li<%=check_active(@filter,"organizations") %>><div><a href="/contributors/organizations">Organizations</a></div></li>
+			<li<%=check_active(@filter,"reporters") %>><div><a href="/contributors/reporters">Reporters</a></div></li>
+	   	</ul>
+	</div>
+	<div id="stories">
+		<%= link_to image_tag("/images/new_design/rss_16.png"), "/donors.rss", :class => "rss_button" %>
+		<h3 class="display_inline">NOW VIEWING:</h3> 
+		<h4 class="display_inline">Spot.Us <%= @filter.gsub("_", " ").gsub("-", " ").titleize %> Inside <%=get_inside_network_text(@network).titleize%></h4>
+		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
+			&nbsp;
+		</div>
+		<% if @items.blank? %>
+			<div>
+				There were no results for your search.  Try different search terms.
+			</div>
+		<%else%>
+			<%@items.each do |item|%>
+				<% apply_fragment ['item_', item, @filter] do %>
+					<div class="user clearfix">	
+						<div class="featured_contributor">
+							<div class="avatar">
+								<%= link_to image_tag(item.user.photo(:thumb)), profile_path(item.user) %>
+							</div>
+							<div class="contributor">
+								<h5><%= link_to item.user.full_name, profile_path(item.user) %></h5>
+								<div class="dateline">
+									Joined <%= short_date(item.created_at) %> <%if @filter=='most-donated'%>| Donated to <%=item.cnt%> pitches inside <%=get_inside_network_text(@network)%><%end%>
+								</div>  
+							</div>
+							<p class="bio">
+								<%= truncate_words(strip_html((item.user.about_you.blank? ? "This donor has not added their about you section yet" : item.user.about_you)), 50) %>
+								<%= link_to "Read profile &raquo;", profile_path(item.user) %>
+							</p>
+						</div>
+					</div>
+				<%end%>
+			<%end%>
+		<% end %>
+		<%= will_paginate @items %>
+	</div>
+</div>
