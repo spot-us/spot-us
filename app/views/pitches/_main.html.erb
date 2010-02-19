@@ -1,83 +1,14 @@
 <div>
-	<%=render :partial=>'tabs'%>
-	<% if active_tab?(@tab, '')%>
-		<div class="description_tab tab_panel clearfix">
-          <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
-          <%= @pitch.short_description %>
-			<%unless @pitch.extended_description.blank?%>
-				<p style="padding-bottom:0px;margin-bottom:0px;">
-					<h3 style="padding-bottom:-10px;padding-bottom:0px;">How will it help?</h3>
-					<%= @pitch.extended_description %>
-				</p>
-			<%end%>
-		</div>
-	<%end%>
-	<% if active_tab?(@tab, 'posts')%>
-       <div class="story_tab tab_panel">
-          <h2>Story Updates</h2>
-          <% if @pitch.posts.any? %>
-             <% @pitch.posts.each do |post| %>
-				   <% apply_fragment ['pitch_posts_', @pitch, post] do %>
-   	                <div class="story">
-   	                   <div class="date float-right"><%= short_date(post.created_at) %></div>
-   	                   <h3 class="title"><%= link_to h(post.title) + " &raquo;", pitch_post_path(@pitch, post) %></h3>
-   	                   <div class="author">by <%= link_to post.user.full_name, profile_path(post.user) %></div>
-   	                   <%= truncate_words(strip_html(post.body), 20) %> <%= link_to "read &raquo;", pitch_post_path(@pitch, post) %>
-   	                </div>
-   				 <% end %>
-             <% end %>
-            
-          <% else %>
-             <p>
-                <em>This story has no updates yet.</em>
-             </p>
-          <% end %>
-       </div>
-	<%end%>
-	<% if active_tab?(@tab, 'comments')%>
-       <div class="comments_tab tab_panel">
-          <% if !@pitch.comments.any? %>
-             <p>There are no comments yet, be the first!</p>
-          <% else %>
-             <ul>
-                <% @pitch.comments.each do |comment| %>
-					<% apply_fragment ['pitch_comments_', @pitch, comment] do%>
-						<a name="<%=comment.id%>">
-						<li>
-							<h5><%= comment.title %></h5>
-							<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
-							<div class="comment"><%= comment.body %>
-								by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
-							</div>
-						</li>
-					<%end%>
-                <% end %>
-             </ul>
-          <% end %>
-          <h3>Post A Comment</h3>
-          <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
-				<%= render :partial => 'comments/form', :locals => {:f => f} %>
-          <% end %>
-       </div>
-	<%end%>
-	<% if active_tab?(@tab, 'assignments')%>
-       <div class="assignments_tab tab_panel">
-          <% if @pitch.assignments.any? %>
-             <%= render :partial => 'assignments', :locals => {:pitch => @pitch}%>
-          <% else %>
-             Not every pitch has assignments. Like large cats, some reporters like to work
-             alone. Check to see if other pitches do have assignments you can help out with!
-          <% end %>
-       </div>
-	<%end%>
+	<%=render :partial=>'tab_header'%>
+	<%=render :partial=>"pitches/tabs/#{@tab.blank? ? 'description' : @tab}"%>
 </div>
 <br/><br/>
 <div id="tabContainer">
 	<ul class="tabs" id="tabHeader">
-		<li><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');">Qualifications</a></li>
-		<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');">Deliverables</a></li>
+		<li><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');" rel="nofollow">Qualifications</a></li>
+		<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');" rel="nofollow">Deliverables</a></li>
 		<% unless @pitch.disclosure.blank?%>
-			<li><a href="" class="tab" id="disclosure_tab" onclick="selectTab('tabContainer','disclosure');">Disclosure</a></li>
+			<li><a href="" class="tab" id="disclosure_tab" onclick="selectTab('tabContainer','disclosure');" rel="nofollow">Disclosure</a></li>
 		<%end%>
 	</ul>
 	<div class="qualifications_tab tab_panel" id="qualifications_content">

@@ -1,0 +1,20 @@
+<div class="story_tab tab_panel">
+   <h2>Story Updates</h2>
+   <% if @pitch.posts.any? %>
+      <% @pitch.posts.each do |post| %>
+			   <% apply_fragment ['pitch_posts_', @pitch, post] do %>
+             <div class="story">
+                <div class="date float-right"><%= short_date(post.created_at) %></div>
+                <h3 class="title"><%= link_to h(post.title) + " &raquo;", pitch_post_path(@pitch, post) %></h3>
+                <div class="author">by <%= link_to post.user.full_name, profile_path(post.user) %></div>
+                <%= truncate_words(strip_html(post.body), 20) %> <%= link_to "read &raquo;", pitch_post_path(@pitch, post) %>
+             </div>
+			 <% end %>
+      <% end %>
+     
+   <% else %>
+      <p>
+         <em>This story has no updates yet.</em>
+      </p>
+   <% end %>
+</div>
