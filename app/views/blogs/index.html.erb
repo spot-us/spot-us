@@ -7,22 +7,22 @@
 <div id="fund_a_story">
 	<div id="navigation">
 		<h5>Browse Blog Posts:</h5>
-		<h5 style="display:none;">Filter by Channel</h5> 
 	</div>
 	<div id="stories">
-	<h3 class="display_inline">NOW VIEWING:</h3> 
-	<h4 class="display_inline">Blog Posts Inside <%=get_inside_network_text(@network).titleize%></h4>
-	<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
+		<%= link_to image_tag("/images/new_design/rss_16.png"), "/blogs.rss", :class => "rss_button" %>	
+		<h3 class="display_inline">NOW VIEWING:</h3> 
+		<h4 class="display_inline">Blog Posts Inside <%=get_inside_network_text(@network).titleize%></h4>
+		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
 		<% if @posts.blank? %>
 			<div>
 				Oops, there are no blog posts here.
 			</div>
 		<%else%>
-			<ul>
+			<ul style="list-style-type:none;margin-left:0px;">
 				<% @posts.each do |post| %>
 					<li class="post" style="clear:both;">
 						<h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
-						<p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
+						<p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
 						<%= image_tag(post.pitch.featured_image.url, :width=>"100", :style=>"float:left;padding:4px;") %>
 						<p class="post_body">
 							<%= truncate_words(strip_html(post.body), 35)%> <%= link_to "Read more &raquo", pitch_post_path(post.pitch, post) %>
