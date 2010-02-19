@@ -4,6 +4,11 @@ A project you've supported on Spot.Us has an update.
 
 Check out the latest blog post: <%= pitch_post_url(@post.pitch, @post) %>
 
+Here is an excerpt:
+<%=strip_tags(@post.body)[0..250].gsub(/\w+$/, '')+"..."%> 
+Read more at <%= pitch_post_url(@post.pitch, @post) %>
+
+
 Reporting will continue until we've published the finished piece.
  
 Stay tuned for more updates.
