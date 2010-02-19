@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       @items = Donation.by_network(current_network).paginate(:page => params[:page], 
         :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
     elsif @filter=='reporters'
-      user_ids_all = Pitch.by_network(current_network).find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
-      @items = Pitch.by_network(current_network).paginate(:page => params[:page], 
+      user_ids_all = Pitch.by_network(current_network).browsable.find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
+      @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], 
         :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'created_at desc')
     end
       
