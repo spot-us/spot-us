@@ -1,7 +1,7 @@
 <% apply_fragment ['updated_featured_story_home_', featured_story] do %>
 	<li class="story_carousel">
 	   <%= link_to image_tag(featured_story.featured_image.url(:medium_alt_1), :class => "featured_image"), featured_story %>
-	   <h2><%= link_to featured_story.headline, featured_story %></h2>
+	   <h3><%= link_to featured_story.headline, featured_story %></h3>
 	   <p class="byline">
 	      <%= short_date(featured_story.created_at) %> by <%= link_to h(featured_story.user.full_name), profile_path(featured_story.user) %>
 	      in <%= featured_story.network_and_category %>
