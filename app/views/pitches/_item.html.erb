@@ -14,7 +14,7 @@
 			<%= image_tag(@item.blog_image.url(:medium), :class => "blog_image") if @item.class.to_s == "Post" and @item.blog_image_file_name %>
 			<div class="body clearfix">
 		       <%= @item.body %>
-		   </div>
+			</div>
 			<div class="body backto">
 		       <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a>
 		   </div>
