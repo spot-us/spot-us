@@ -235,6 +235,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;bac
 ul.dashboard_tabs{margin:0;height:24px;}
 ul.dashboard_tabs.tabs li a{font-size:13px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
 ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
+#profile_container {background:#fff;padding:20px;border-left:solid 1px #aaa;border-bottom:solid 1px #aaa;border-right:solid 1px #aaa;}
 #dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
 #dashboard_tab_container{margin:10px 0 0 20px;}
 #fund_a_story{padding: 0 0 0 10px;}
@@ -326,7 +327,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #form_page {padding:20px 40px;}
 
 #myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
-ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 20px;height:28px;}
+ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
 #public_profile #content_wrapper {padding:20px;border: 1px solid #aaa;background:#f3f3f3;min-height:300px;}
 #public_profile #content_wrapper td.main img {float:left;margin-right:8px;}
