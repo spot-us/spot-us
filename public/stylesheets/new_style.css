@@ -27,7 +27,8 @@ object embed {display:block;}
 .small{font-size:0.8em;line-height:1.875em;margin-bottom:1.875em;}
 .strong{font-weight:bold;}
 .headline {font-size:2.5em;font-weight:normal;letter-spacing:-1pt;font-family:Georgia;}
-.media-box{background-color:#CCCCCC;margin-top:-30px;padding:15px 15px 20px;width:563px;}
+.media-box{background-color:#f9f9f9;margin-top:-30px;padding:15px 15px 20px;width:563px;border:1px solid #ddd;}
+.media-box h3 { border-bottom: 1px solid #ccc; padding-bottom:3px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
 .margin_top_10{margin-top:10px;}
