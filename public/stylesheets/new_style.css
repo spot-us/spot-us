@@ -285,7 +285,14 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 
 ul#filters li div {margin-top:24px;}
 ul.filter{margin:0 0 10px 0;list-style-type:none;}
-ul.filter li.active, .filter ul li.active a {background-image:url(/images/new_design/filter-bg1.jpg);background-repeat:no-repeat;
+ul.filter li.active, .filter ul li.active a {color:#333;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:2px;vertical-align:middle;background:#eee;border-right:6px solid #999;}
+ul.filter li, .filter ul li a {color:#333;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:2px;vertical-align:middle;background:#fff;border-bottom:1px solid #ccc;border-top:1px solid #ccc;border-right:1px solid #ccc;}
+ul.filter > li {margin:0 0 2px 0;padding:2px 6px;}
+.filter a, .filter a:link {color:#333;}
+ul.filter li img{width:44px;height:44px;float:left;margin-right:10px;margin-top:3px;} 
+ul.filter li div {width:180px;}
+ul.filter li:hover, .filter ul li a:hover{height:54px;color:#333;margin-bottom:2px;background:#eee;border-right:6px solid #999;cursor:pointer;}
+/*ul.filter li.active, .filter ul li.active a {background-image:url(/images/new_design/filter-bg1.jpg);background-repeat:no-repeat;
 			color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
 ul.filter li, .filter ul li a {background-image:url(/images/new_design/filter-bg.jpg);background-repeat:no-repeat;color:#FFFFFF;
 			font-family:Arial,Helvetica,sans-serif;font-weight:bold;height:54px;margin-bottom:0;vertical-align:middle;}
@@ -294,7 +301,7 @@ ul.filter > li {margin:0;padding:2px 6px;}
 ul.filter li img{width:44px;height:44px;float:left;margin-right:10px;margin-top:3px;} 
 ul.filter li div {width:180px;}
 ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.laurenmichell.com/spotus/images/filter-bg2.jpg);height:54px;background-repeat:no-repeat;
-			color: #ffffff;margin-bottom:0px;}
+			color: #ffffff;margin-bottom:0px;}*/
 
 #spotus_form {padding:20px;}
 #spotus_form select {font-size:20px;padding:5px;}
