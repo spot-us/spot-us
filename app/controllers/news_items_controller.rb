@@ -54,7 +54,6 @@ class NewsItemsController < ApplicationController
   protected
 
   def get_news_items(limit=nil)
-    
     unless limit
       @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
     else
@@ -67,6 +66,6 @@ class NewsItemsController < ApplicationController
   end
   
   def select_tab
-      @selected_tab = "pitches"
+    @selected_tab = "pitches"
   end
 end
