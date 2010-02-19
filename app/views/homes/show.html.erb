@@ -13,7 +13,7 @@
    	               <%= image_tag(post.blog_image_display(:front_story)) %>
    	               <p class="byline"><%= short_date(post.created_at)%> by <%= link_to post.user.full_name, profile_path(post.user) %></p>
    	               <p class="post_body">
-   	                  <%= truncate_words(strip_html(post.body), 35)%>
+   	                  <%= truncate_words(strip_tags(post.body), 35)%>
    	                  <%= link_to "Read More &raquo;", pitch_post_path(post.pitch, post) %>
    	               </p>
    	            </li>

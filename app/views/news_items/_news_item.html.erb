@@ -10,7 +10,7 @@
 			<%= news_item.network_and_category %>
 		</div>  
 		<div class="description">
-			<%= truncate_words(strip_html(news_item.short_description), 45) %>
+			<%= truncate_words(strip_tags(news_item.short_description), 45) %>
 			<%= link_to "Read More &raquo;", news_item %>
 		</div>
 	</div>
