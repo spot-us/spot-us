@@ -338,7 +338,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #public_profile #content_wrapper .comments td {border-bottom:solid 1px #aaa;}
 #myspot_side_panel, #story_side_panel{float:right;margin:51px 51px 50px 0;width:200px;}
 #profile_user img {float:left;margin:0 20px 40px 0;}
-
+.profile_section {margin-bottom:20px;margin-left:60px;padding-bottom:10px;border-bottom: 1px dashed #ccc;}
+.profile_section p, .profile_section p + p {margin:0;}
 #public_profile, #purchases{padding:20px 40px;width:730px;float:left;}
 #purchases h2 {border-bottom:1px solid #aaa;}
 #purchases h3 {margin-bottom:15px;border-bottom:1px solid #aaa;}
