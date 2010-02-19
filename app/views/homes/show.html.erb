@@ -32,14 +32,16 @@
          <div id="header-container">Fund a story</div>
       </div>
       <div style="clear: both;"></div>
-      <div id="next">
+      <div id="next" style="display:none;">
          <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next arrow float-right" %>
       </div>
-      <div id="prev">
+      <div id="prev" style="display:none;">
          <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev arrow float-left" %>
       </div>
-      <div id="pitches_carousel">
-         <ul>
+    	<a id="prev" class='float-left prev_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
+		<a id="next"  class='float-right next_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>  
+	<div id="pitches_carousel">
+		<ul>
              <%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
          </ul>
       </div>
@@ -48,10 +50,12 @@
          <div id="header-container">Recently Published</div>
       </div>
       <div style="clear: both;"></div>
-      <div id="next_story">
+		<a id="prev" class='float-left prev_story_alt' style="width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;">&laquo; PREVIOUS</a>
+		<a id="next"  class='float-right next_story_alt' style="width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;">NEXT &raquo;</a>
+      <div id="next_story" style="display:none;">
          <%= link_to image_tag("/images/new_design/right.png"), "", :class => "next_story arrow float-right" %>
       </div>
-      <div id="prev_story">
+      <div id="prev_story" style="display:none;">
          <%= link_to image_tag("/images/new_design/left.png"), "", :class => "prev_story arrow float-left" %>
       </div>
       <div id="stories_carousel">
