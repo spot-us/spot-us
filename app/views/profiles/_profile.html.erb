@@ -2,38 +2,44 @@
    <%= render :partial => 'shared/user', :locals => { :user => @profile } %>
 </div>
 <% if @profile.topics.any? %>
-   <strong><%= h @profile.first_name %></strong>
-      has shown interest in 
-    <%= show_topics(@profile) %>
-  <br/>
+   <div class="profile_section">
+      <strong><%= h @profile.first_name %></strong>
+         has shown interest in 
+       <%= show_topics(@profile) %>
+       <br/>
+   </div>
 <% end %>
-<hr>
 
 <% unless @profile.about_you.blank? %>
-  <h3>About '<%= @profile.first_name %>'</h3>
-  <%= sanitize @profile.about_you %>
+   <div class="profile_section">
+      <h3>About '<%= @profile.first_name %>'</h3>
+      <%= sanitize @profile.about_you %>
+   </div>
+
 <% end %>
 <% if @profile.is_a?(Reporter) && @profile.samples.any? %>
-  <h3>Work Samples</h3>
-  <hr>
-  <% for sample in @profile.samples %>
-      <% if !sample.url.blank? %>
-        <%= link_to h(sample.title), sample.url %>
-      <% else %>
-         <%= h sample.title %>
+   <div class="profile_section">
+      <h3>Work Samples</h3>
+     <% for sample in @profile.samples %>
+         <% if !sample.url.blank? %>
+           <%= link_to h(sample.title), sample.url %>
+         <% else %>
+            <%= h sample.title %>
+         <% end %>
+         <%= sanitize(sample.description) %>
       <% end %>
-      <%= sanitize(sample.description) %>
-   <% end %>
+   </div>
 <% end %>
 <% if @profile.is_a?(Reporter) && @profile.jobs.any? %>
-  <h3>Work History</h3>
-  <hr>
-  <% for job in @profile.jobs %>
-      <% if !job.url.blank? %>
-         <%= link_to h(job.title), job.url %>
-      <% else %>
-         <%= h job.title %>
+   <div class="profile_section">
+     <h3>Work History</h3>
+     <% for job in @profile.jobs %>
+         <% if !job.url.blank? %>
+            <%= link_to h(job.title), job.url %>
+         <% else %>
+            <%= h job.title %>
+         <% end %>
+         <%= sanitize(job.description) %>
       <% end %>
-      <%= sanitize(job.description) %>
-   <% end %>
+   </div>
 <% end %>
