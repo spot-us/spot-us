@@ -36,7 +36,7 @@
 							<div class="contributor">
 								<h5><%= link_to item.user.full_name, profile_path(item.user) %></h5>
 								<div class="dateline">
-									Joined <%= short_date(item.created_at) %> <%if @filter=='most-donated'%>| Donated to <%=item.cnt%> pitches inside <%=get_inside_network_text(@network).titleize%><%end%>
+									Joined <%= short_date(item.created_at) %> <%if @filter=='most-donated'%>| Donated to <%=item.cnt%> pitches inside <%=get_inside_network_text(@network)%><%end%>
 								</div>  
 							</div>
 							<p class="bio">
