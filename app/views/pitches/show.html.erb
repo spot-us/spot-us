@@ -27,9 +27,9 @@
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 
 <% if @subscriber && @subscriber.errors.any? %>
-  <div class="error">
-    <%= error_messages_for :subscriber %>
-  </div>
+	<div class="error">
+		<%= error_messages_for :subscriber %>
+	</div>
 <% end %>
 
 <div id="news_item">
