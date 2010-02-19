@@ -101,7 +101,7 @@ a.admin_button  {color:white !important;}
 .home-boxer h1 {color:#617D86;font-family:Georgia,Helvetica,sans-serif;font-size:23pt;font-weight:bold;letter-spacing:-1pt;margin-bottom:10px;}
 .home-boxer #main-area.home-floater{width:595px;float:left;margin-left:20px;}
 .home-floater {padding:20px 15px 15px;margin-right:23px; height:100%;}
-.stories-in-progress{float:right;width:310px;background:#eee;margin-right:33px; border-left:1px solid #ddd;}
+.stories-in-progress{float:right;width:310px;background:#f9f9f9;margin-right:33px; border-left:1px solid #ccc;}
 .stories-in-progress ul{margin:0px 0px 0px 0px;padding:0 13px 0 3px;list-style-type:none;}
 .stories-in-progress ul li.post{margin-bottom:20px;}
 .stories-in-progress ul li.post img{display:block;width:300px;height:163px;margin-bottom:3px;}
@@ -122,14 +122,14 @@ p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;lett
 #help-images{margin-bottom:-15px;margin-left:-2px;width:645px;}
 #help-images a {padding-right:3px;}
 
-div#pitches_carousel{background-color:#E3EEEF;border:1px solid #11363E;height:353px;padding:5px 5px 0px 5px;vertical-align:text-top;margin:0px;}
+div#pitches_carousel{background-color:#f9f9f9;border:1px solid #11363E;height:353px;padding:5px 5px 0px 5px;vertical-align:text-top;margin:0px;}
 div#pitches_carousel li{width:545px;padding:10px 0px 0px 10px; }
 div#pitches_carousel li .left-column {float:left;width:220px;padding-left:4px;}
 div#pitches_carousel li .left-column img{margin-bottom:20px;}
 div#pitches_carousel li .right-column {float:left;width:310px;}
 div#pitches_carousel h3{margin-bottom:10px;}
 div#pitches_carousel .progress_bar {margin-top:10px;}
-div#stories_carousel{background-color:#E3EEEF;border:1px solid #11363E;width:560px;height:333px;padding:5px;margin-bottom:15px;vertical-align:text-top;}
+div#stories_carousel{background-color:#f9f9f9;border:1px solid #11363E;width:560px;height:333px;padding:5px;margin-bottom:15px;vertical-align:text-top;}
 div#stories_carousel li {width:258px;padding:5px 5px 0 5px; margin:2px 5px 2px 5px; float:left;}
 .story_carousel p { padding:0px; margin:0px; }
 .story_carousel h2 a{ width:259px;}
