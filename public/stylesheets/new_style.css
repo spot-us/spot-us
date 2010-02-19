@@ -241,7 +241,7 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
 #dashboard_tab_container{margin:10px 0 0 20px;}
 #fund_a_story{padding: 0 0 0 10px;}
-#fund_a_story #navigation{width:220px;float:left;}
+#fund_a_story #navigation{padding-top:10px;width:220px;float:left;}
 #fund_a_story #navigation h5 {margin-bottom:0px;font-size:15px;}
 
 #fund_a_story #stories .story{border-bottom:1px solid #CCCCCC; padding: 0 0 10px 0; margin: 0 0 10px 0;}
