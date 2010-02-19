@@ -6,12 +6,12 @@
 
 <div id="fund_a_story">
 	<div id="navigation">
-		<h5>Browse Contributors on Spot.Us</h5>
+		<h5>Browse Contributors</h5>
 		<ul id="filters" class="filter">
-			<li<%=check_active(@filter,"donated") %>><div><a href="/contributors/donated">Recently Donated</a></div></li>
-			<li<%=check_active(@filter,"most-donated") %>><div><a href="/contributors/most-donated">Most Donated</a></div></li>
-			<li<%=check_active(@filter,"organizations") %>><div><a href="/contributors/organizations">Organizations</a></div></li>
-			<li<%=check_active(@filter,"reporters") %>><div><a href="/contributors/reporters">Reporters</a></div></li>
+			<li<%=check_active(@filter,"donated") %> onclick="location.href='/contributors/donated';"><div><a href="/contributors/donated">Recently Donated</a></div></li>
+			<li<%=check_active(@filter,"donated-most") %> onclick="location.href='/contributors/donated-most';"><div><a href="/contributors/donated-most">Most Donated</a></div></li>
+			<li<%=check_active(@filter,"organizations") %> onclick="location.href='/contributors/organizations';"><div><a href="/contributors/organizations">Organizations</a></div></li>
+			<li<%=check_active(@filter,"reporters") %> onclick="location.href='/contributors/reporters';"><div><a href="/contributors/reporters">Reporters</a></div></li>
 	   	</ul>
 	</div>
 	<div id="stories">
