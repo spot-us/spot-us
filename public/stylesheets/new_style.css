@@ -183,7 +183,7 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #news_item #news_item_info .tab_panel li .comment{margin-left:60px;width:400px;}
-#news_item #news_item_info .description_tab {padding-right:60px;padding-left:35px;}
+#news_item #news_item_info .description_tab {}
 #news_item .right-panel-box{background-color:#11363E;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:12pt;font-weight:normal;
 			padding:15px;width:350px;margin-bottom:10px;}
 #news_item #news_item_info .description_tab {font-family:Georgia, Times;}
@@ -221,7 +221,7 @@ ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
 			font-weight:normal;letter-spacing:0.03em;padding:8px 8px 7px 8px;text-decoration:none;border-bottom:1px solid #C7D9DB;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:1px solid #ddd;}
 ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;background-color:#fff;font-weight:bold;color:#000000;border-bottom:1px solid #fff;z-index:100;}
-.tab_panel {background-color:#fff;border:solid 1px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:20px 20px 0px 20px;}
+.tab_panel {background-color:#fff;border:solid 1px #C7D9DB; font-family:Arial,Helvetica,sans-serif;padding:30px 30px 0px 30px;}
 .tab_panel img.featured_image{float:left;margin: 0 15px 5px 0;}
 .tab_panel h4.title{margin:0;}
 .tab_panel h5{margin-bottom:5px;}
