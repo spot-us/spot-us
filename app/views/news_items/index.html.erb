@@ -6,13 +6,13 @@
 
 <div id="fund_a_story">
 	<div id="navigation">
-		<h5>Browse Stories on Spot.Us</h5>
+		<h5>Browse Stories</h5>
 	   	<ul id="filters" class="filter">
-			<li<%=check_active(@filter,"unfunded") %>><div><a href="/stories/unfunded">Unfunded</a></div></li>
-			<li<%=check_active(@filter,"almost-funded") %>><div><a href="/stories/almost-funded">Almost Funded</a></div></li>
-			<li<%=check_active(@filter,"funded") %>><div><a href="/stories/funded">Funded</a></div></li>
-			<li<%=check_active(@filter,"published") %>><div><a href="/stories/published">Published</a></div></li>
-			<li<%=check_active(@filter,"suggested") %>><div><a href="/stories/suggested">Suggested</a></div></li>
+			<li<%=check_active(@filter,"unfunded") %> onclick="location.href='/stories/unfunded';"><div><a href="/stories/unfunded">Unfunded</a></div></li>
+			<li<%=check_active(@filter,"almost-funded") %> onclick="location.href='/stories/almost-funded';"><div><a href="/stories/almost-funded">Almost Funded</a></div></li>
+			<li<%=check_active(@filter,"funded") %> onclick="location.href='/stories/funded';"><div><a href="/stories/funded">Funded</a></div></li>
+			<li<%=check_active(@filter,"published") %> onclick="location.href='/stories/published';"><div><a href="/stories/published">Published</a></div></li>
+			<li<%=check_active(@filter,"suggested") %> onclick="location.href='/stories/suggested';"><div><a href="/stories/suggested">Suggested</a></div></li>
 	   	</ul>
 	   	<h5>Filter by Channel</h5>
 		<% if @channels.any? %>
