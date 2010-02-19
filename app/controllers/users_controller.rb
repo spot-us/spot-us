@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  #### TO-DO Refactor this donors and reporters into one template system 
   def donors
     # cannot be done with one query unfortunately :-( --- object cache necessary eventually
     @network = current_network
@@ -18,6 +19,21 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def reporters
+    # cannot be done with one query unfortunately :-( --- object cache necessary eventually
+    @network = current_network
+    user_ids_all = Pitch.by_network(current_network).find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
+    @pitches = Pitch.paginate(:page => params[:page], :include=>:user, :conditions=>"user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'created_at desc')
+    respond_to do |format|
+      format.html do
+      end
+      format.rss do
+        render :layout => false
+      end
+    end
+  end
+  #### END TO-DO
 
   def create
     delete_cookie :auth_token
