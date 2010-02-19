@@ -1,0 +1,10 @@
+<div class="description_tab tab_panel clearfix">
+  <%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
+  <%= @pitch.short_description %>
+	<%unless @pitch.extended_description.blank?%>
+		<p style="padding-bottom:0px;margin-bottom:0px;">
+			<h3 style="padding-bottom:-10px;padding-bottom:0px;">How will it help?</h3>
+			<%= @pitch.extended_description %>
+		</p>
+	<%end%>
+</div>
