@@ -1,5 +1,5 @@
 <% content_for :head do %>
-	<%= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss'}) %>
+	<%= auto_discovery_link_tag(:rss, {:controller => 'news_items', :action => 'index', :format => 'rss', :filter=>@filter}) %>
 <% end %>
 
 <% @title = "Spot.us - Fund A Story" %>
