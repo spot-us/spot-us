@@ -3,26 +3,26 @@
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
 	<script>
-    jQuery(document).ready(function($){
-		jQuery("#show_action_items").click(function(){
-			jQuery.facebox(jQuery("#action_buttons").html());
-		});
-		jQuery(".widget_code").hover(function(){
-		   $(this).addClass("hilited_input");
-		}, function(){
-		   $(this).removeClass("hilited_input");
-		}).click(function(){
-		   $(this).select();
-		});
-		jQuery(".reveal_widget").toggle(function(){
-		   $(".widget_panel").animate({height:"380px"});
-		   return false;
-		}, function(){
-		   $(".widget_panel").animate({height:"0px"});
-		   return false;
-		});
-    });	
-  	</script>
+		jQuery(document).ready(function($){
+			jQuery("#show_action_items").click(function(){
+				jQuery.facebox(jQuery("#action_buttons").html());
+			});
+			jQuery(".widget_code").hover(function(){
+				$(this).addClass("hilited_input");
+				}, function(){
+					$(this).removeClass("hilited_input");
+				}).click(function(){
+					$(this).select();
+			});
+			jQuery(".reveal_widget").toggle(function(){
+				$(".widget_panel").animate({height:"380px"});
+				return false;
+			}, function(){
+				$(".widget_panel").animate({height:"0px"});
+				return false;
+			});
+		});	
+	</script>
 <% end %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 
