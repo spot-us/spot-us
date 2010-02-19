@@ -81,9 +81,9 @@ a.admin_button  {color:white !important;}
 			height:26px;width:506px;}
 #header ul#main-nav {margin: 25px 0 0 50px;float:left;width:545px;}
 #header ul#main-nav li {display:inline;}
-#header div.howtouse {width:150px;height:100px;font: bold 11px verdana, arial, sans-serif;letter-spacing:-1px;color: #11363e;float:left;
+#header div.howtouse {width:150px;height:100px;font:bold 11px arial, sans-serif;letter-spacing:-1px;color: #11363e;float:left;
 			margin-top:23px;font-family:Arial, Helvetica, sans-serif;font-size:11pt;vertical-align:text-top;}
-#header .howtouse .header{font-family:Arial, Helvetica, sans-serif;font-size:12pt;font-weight:bolder;color: #398c9f;line-height:10pt;}
+#header .howtouse .header{font-family:Arial, Helvetica, sans-serif;font-size:12pt;color: #398c9f;line-height:10pt;}
 #header div.howtouse span{line-height:13pt;}
 #header-bar {background-color:#11363E;height:5px;width:100%;}
 #networks-nav{background-color:#E3EEEF;margin:0px;}
