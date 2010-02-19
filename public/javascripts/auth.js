@@ -1,93 +1,96 @@
 jQuery(document).ready(function($){
-  var jump_to;
-  $.fn.authguard = function(callback) {
-    jump_to = $(this);
-    if ($("#not_logged_in:visible a#sign_in").click().length == 0) {
-      if (callback == "facebox")
-        $.facebox({"ajax": jump_to.attr("href")});
-      else
-        $(document).trigger('close.facebox');
-      if ($.isFunction(callback))
-        callback(jump_to);
-      jump_to = undefined;
-      return callback === undefined;
-    }
-    return false;
-  };
+  	var jump_to;
+	$.fn.authguard = function(callback) {
+		jump_to = $(this);
+		if ($("#not_logged_in:visible a#sign_in").click().length == 0) {
+			if (callback == "facebox"){
+				$.facebox({"ajax": jump_to.attr("href")});
+			}else{
+				$(document).trigger('close.facebox');
+			}
+			if ($.isFunction(callback)){
+				callback(jump_to);
+			}
+			jump_to = undefined;
+			return callback === undefined;
+		}
+		return false;
+	};
 
-  $('a.auth').livequery('click', function() {return $(this).authguard(function(jump_to) { window.location = jump_to.attr('href'); })});
+	$('a.auth').livequery('click', function() {return $(this).authguard(function(jump_to) { window.location = jump_to.attr('href'); })});
 
-  $('form.auth, form.button-to:has(input.auth)').livequery('submit', function() {return $(this).authguard();});
+	$('form.auth, form.button-to:has(input.auth)').livequery('submit', function() {return $(this).authguard();});
 
-  $('a.authbox').livequery('click', function() {
-    return $(this).authguard('facebox');
-  });
+	$('a.authbox').livequery('click', function() {
+		return $(this).authguard('facebox');
+	});
 
-  $('a[rel*=authdrop]').livequery('click', function() {
-    return $(this).authguard(function(j) {
-      $.get(j.attr("href"), function(data) {
-        $("#authdrop").hide().html(data).show("slow")
-      });
-    });
-  });
+	$('a[rel*=authdrop]').livequery('click', function() {
+		return $(this).authguard(function(j) {
+			$.get(j.attr("href"), function(data) {
+				$("#authdrop").hide().html(data).show("slow")
+			});
+		});
+	});
 
-  $("#login_modal form.login").livequery(function() {
-    var form = $(this);
-    $(this).ajaxForm({
-      complete: function(request,message) {
-        if(message == "error") {
-          $("#facebox .content .login-boxer").replaceWith(request.responseText);
-          if (request.responseText == ' ')
-             $(document).trigger('close.facebox');
-          } else {
-          	$("#not_logged_in").hide();
-	          $("#logged_in").show();
-	          $("#sign_in_section").empty().append(request.responseText);
-	          if (jump_to && jump_to.attr("return_to"))
-	             window.location = jump_to.attr("return_to");
-	          else if (jump_to && jump_to.attr("action"))
-	             jump_to.submit();
-	          else if (jump_to && jump_to.attr("href"))
-	             jump_to.click();
-	          else
-		           $(document).trigger('close.facebox');
-		           renderUserHeader();
-				   		 $("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
-							 $("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
-				   		 if($("#flash").length > 0){
-				   		 		$("#flash").html("");
-							 }
-	        	}
-       	  }
-    }); // end ajax form
-  }); // end livequery
-
-  $("#facebox .content #fb_updater #fb_profile form").livequery(function() {
+	$("#login_modal form.login").livequery(function() {
 		var form = $(this);
-    $(this).ajaxForm({
+		$(this).ajaxForm({
 			complete: function(request,message) {
-				 if(message == "error") {
-						$("#facebox .content #fb_profile").replaceWith(request.responseText);
-					} else {
+			if(message == "error") {
+				$("#facebox .content .login-boxer").replaceWith(request.responseText);
+				if (request.responseText == ' ')
+					$(document).trigger('close.facebox');
+				} else {
+					$("#not_logged_in").hide();
+					$("#logged_in").show();
+					$("#sign_in_section").empty().append(request.responseText);
+					if (jump_to && jump_to.attr("return_to")){
+						window.location = jump_to.attr("return_to");
+					} else if (jump_to && jump_to.attr("action")){
+						jump_to.submit();
+					} else if (jump_to && jump_to.attr("href")){
+						jump_to.click();
+					} else{
 						$(document).trigger('close.facebox');
-	          renderUserHeader();
-						$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
 					}
+					renderUserHeader();
+					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
+					$("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
+					if($("#flash").length > 0){
+						$("#flash").html("");
+					}
+				}
+			}
+		}); // end ajax form
+	}); // end livequery
+
+	$("#facebox .content #fb_updater #fb_profile form").livequery(function() {
+		var form = $(this);
+		$(this).ajaxForm({
+			complete: function(request,message) {
+				if(message == "error") {
+					$("#facebox .content #fb_profile").replaceWith(request.responseText);
+				} else {
+					$(document).trigger('close.facebox');
+					renderUserHeader();
+					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+				}
 			}
 		});
 	});
 	
 	$("#facebox .content #fb_updater #spotus_login form").livequery(function() {
 		var form = $(this);
-    $(this).ajaxForm({
+		$(this).ajaxForm({
 			complete: function(request,message) {
-				 if(message == "error") {
-						$("#facebox .content #spotus_login").replaceWith(request.responseText);
-					} else {
-						$(document).trigger('close.facebox');
-	          renderUserHeader();
-						$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
-					}
+				if(message == "error") {
+					$("#facebox .content #spotus_login").replaceWith(request.responseText);
+				} else {
+					$(document).trigger('close.facebox');
+					renderUserHeader();
+					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/start_story");
+				}
 			}
 		});
 	});
@@ -99,7 +102,8 @@ jQuery(document).ready(function($){
 	});
 					
 });
+
 function showProfileForm(){
-	 jQuery.facebox.settings.modal = true;
-   jQuery.facebox({ajax:"/myspot/profile/edit"});
+	jQuery.facebox.settings.modal = true;
+	jQuery.facebox({ajax:"/myspot/profile/edit"});
 }
