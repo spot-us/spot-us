@@ -11,7 +11,7 @@
 			<h3 class="date">
 				posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date) %>
 			</h3>
-			<%= image_tag(@item.blog_image.url(:medium), :class => "blog_image") if @item.blog_image_file_name %>
+			<%= image_tag(@item.blog_image.url(:medium), :class => "blog_image") if @item.class.to_s == "Post" and @item.blog_image_file_name %>
 			<div class="body clearfix">
 		       <%= @item.body %>
 		   </div>
