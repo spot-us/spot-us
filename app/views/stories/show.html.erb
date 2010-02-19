@@ -63,18 +63,14 @@
             </div>
          </div>
       <% end %>
-      <div class="story-block">
-         <%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
-         <div class="story_content">
-            <%= @story.extended_description %>
-         </div>
-      </div>
-      <br/><br/>
       <div id="news_item_info">
          <div>
             <ul class="tabs">
-               <!-- <li><a id="description_tab" href="" class="tab active">Story</a></li> -->
-               <li><a id="comments_tab" href="" class="tab active">Comments (<%=@story.comments.size%>)</a></li>
+               <li><a id="description_tab" href="" class="tab active">Story</a></li>
+               
+				<li>
+					<a id="comments_tab" href="" class="tab">Comments (<%=@story.comments.size%>)</a>
+				</li>
                <% unless @story.external_links.blank? %>
                   <li><a id="external_links_tab" href="" class="tab">External Links</a></li>
                <% end %>
@@ -85,10 +81,11 @@
                   <li><a id="license_tab" href="" class="tab">License</a></li>
                <% end %>
             </ul>
-            <!-- <div class="description_tab tab_panel">
-                 <%#= @story.extended_description %>
-              </div> -->
-            <div class="comments_tab tab_panel">
+			<div class="description_tab tab_panel">
+                 <%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
+				<%= @story.extended_description %>
+             </div>
+            <div class="comments_tab tab_panel hide">
                <ul>
                <% @story.comments.each do |comment| %>
                   <li>

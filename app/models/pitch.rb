@@ -360,7 +360,11 @@ class Pitch < NewsItem
   end
   
   def to_param
-    "#{id}-#{to_s.parameterize}"
+    begin
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
   end
 
   def send_edited_notification
