@@ -143,10 +143,10 @@ div#stories_carousel li {width:258px;padding:5px 5px 0 5px; margin:2px 5px 2px 5
 #news_item #news_item_header{padding:15px 15px 0px 15px; margin:0 35px -5px 0; }
 #news_item .main-column{float:left;width:605px;}
 #news_item .right-column{float:right;width:425px;}
-#news_item .news_item_author{margin:5px 0px 0 68px;width:185px;float:left;}
+#news_item .news_item_author{margin:5px 0px 0 68px;width:220px;float:left;}
 #news_item .news_item_author img.avatar{float:left;margin:0 10px 0 0}
-#news_item .news_item_author h5{margin-bottom:0px;}
-#news_item .news_item_author a.username {color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;line-height:14px;}
+#news_item .news_item_author h5{margin-bottom:0px;font-size:18px;font-family:Georgia,Helvetica,sans-serif; color:#fff;}
+#news_item .news_item_author a.username {color:#eee;font-family:Arial,Helvetica,sans-serif;line-height:14px;}
 #news_item .media-box {margin:0 0 30px 12px;}
 #news_item .media-box h3 {margin-bottom:15px;}
 #news_item #news_item_info {margin-left:12px;margin-bottom:20px;}
