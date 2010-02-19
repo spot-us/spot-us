@@ -253,6 +253,15 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #stories h3{font-family: Georgia,Helvetica,sans-serif; text-transform: uppercase; font-weight: bold; font-size: 16pt; color: rgb(17, 54, 62);letter-spacing:0;}
 #stories h4{font-family: Georgia,Helvetica,sans-serif; font-size: 16pt; font-weight: bold; color: rgb(77, 107, 113); letter-spacing: -0.05em;}
 
+#stories .user {border-bottom:solid 1px #ccc;margin-bottom:10px;position:relative;}
+#stories .user .featured_contributor {width:520px;padding-right:40px;padding-bottom:10px;float:left;}
+#stories .user .featured_contributor .avatar {height:44px;float:left;margin-right:10px;}
+#stories .user .featured_contributor .avatar img {width:44px;float:left;margin-right:10px;}
+#stories .user .featured_contributor .contributor {width:400px;float:left;margin-right:10px;}
+#stories .user .featured_contributor .contributor h5 {font-family: Georgia,Helvetica,sans-serif; font-weight: bold; font-size: 1.5em; 
+			letter-spacing: -0.05em; color: rgb(17, 54, 62);margin-bottom:2px;}
+#stories .user .featured_contributor .bio {margin-bottom:5px;margin-top:5px; float:left;width:600px;}
+
 #stories .pitch {border-bottom:solid 1px #ccc;margin-bottom:10px;position:relative;}
 #stories .pitch .news_item {width:520px;padding-right:40px;padding-bottom:10px;float:left;}
 #stories .pitch .news_item img.featured_image {width:215px;height:180px;float:left;margin-right:10px;}
