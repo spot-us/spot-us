@@ -9,12 +9,7 @@
 		<%=render :partial=>"shared/filters", :locals=>{
 			:title=>"Browse Contributors",
 			:url_base=>"/contributors",
-			:filters=>{
-				"donated"=>"Recently Donated",
-				"donated-most"=>"Donated Most",
-				"organizations"=>"Organizations",
-				"reporters"=>"Reporters"
-			}
+			:filters=>FILTERS_CONTRIBUTORS
 		}%>
 	</div>
 	<div id="stories">

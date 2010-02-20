@@ -9,13 +9,7 @@
 		<%=render :partial=>"shared/filters", :locals=>{
 			:title=>"Browse Stories",
 			:url_base=>"/stories",
-			:filters=>{
-				"unfunded"=>"Unfunded",
-				"almost-funded"=>"Almost Funded",
-				"funded"=>"Funded",
-				"published"=>"Published",
-				"suggested"=>"Suggested"
-			}
+			:filters=>FILTERS_STORIES
 		}%>
 		<%=render :partial=>"shared/channels"%>   
 	</div>
