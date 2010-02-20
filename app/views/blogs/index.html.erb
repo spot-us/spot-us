@@ -13,9 +13,9 @@
 		<h3 class="display_inline">NOW VIEWING:</h3> 
 		<h4 class="display_inline">Blog Posts Inside <%=get_inside_network_text(@network).titleize%></h4>
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
-			<%=render :partial=>"shared/lists", :locals=>{ 
-				:items=>@posts, 
-				:no_items_message=>"Oops, there are no blog posts here." 
-			}%>
+		<%=render :partial=>"shared/lists", :locals=>{ 
+			:items=>@posts, 
+			:no_items_message=>"Oops, there are no blog posts here." 
+		}%>
 	</div>
 </div>
