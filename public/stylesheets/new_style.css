@@ -251,6 +251,8 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #fund_a_story #stories .story p, #fund_a_story #stories .story p + p {margin:0;}
 #fund_a_story #stories .story .featured_image{padding:0px;width:210px;}
 #fund_a_story #stories .story .description {margin-left:210px;}
+#fund_a_story #stories .story .post_body {margin-left:210px;}
+#fund_a_story #stories .story .byline {margin-top:10px;padding-top:5px;margin-left:210px;border-top: 1px dashed #ccc;}
 
 #stories{width:776px;float:right;padding:13px 20px 20px 0;margin-right:28px;}
 #stories h3{font-family: Georgia,Helvetica,sans-serif; text-transform: uppercase; font-weight: bold; font-size: 16pt; color: rgb(17, 54, 62);letter-spacing:0;}
