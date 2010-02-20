@@ -1,0 +1,12 @@
+<% if items.blank? %>
+	<div>
+		<%=no_items_message%>
+	</div>
+<% else %>
+	<%unless defined?(template_name) %>
+		<%= render :partial => items %>
+	<%else%>
+		<%= render :collection => items, :partial => template_name %>
+	<%end%>
+	<%= will_paginate items %>
+<%end%>
