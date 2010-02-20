@@ -139,8 +139,8 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 .dateline{font-size:.8em;}
 #next, #next_story {float:right;vertical-align:top;width:19px;margin-right:2px;}
 #prev, #prev_story {float:left;vertical-align:top;width:19px;margin-left:-25px;}
-.next_alt, .next_story_alt {float:right;vertical-align:top;width:100px;margin-top:-25px;margin-right:-50px;text-decoration:underline;cursor:pointer;}
-.prev_alt, .prev_story_alt {float:left;vertical-align:top;width:100px;margin-top:-25px;margin-left:-15px;text-decoration:underline;cursor:pointer;}
+.next_alt, .next_story_alt {float:right;vertical-align:top;width:100px;margin-top:-25px;margin-right:-45px;font-weight:bold;font-size:15px;text-decoration:underline;cursor:pointer;}
+.prev_alt, .prev_story_alt {float:left;vertical-align:top;width:100px;margin-top:-25px;margin-left:-15px;font-weight:bold;font-size:15px;text-decoration:underline;cursor:pointer;}
 #show_action_items img{margin-bottom:10px;}
 #news_item {}
 #news_item #news_item_header{padding:15px 15px 0px 15px; margin:0 35px -5px 0; }
