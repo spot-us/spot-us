@@ -26,14 +26,9 @@
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
 			&nbsp;
 		</div>
-		<%#=render :partial=>"shared/list"%>
-		<% if @news_items.blank? %>
-			<div>
-				There were no results for your search.  Try different search terms.
-			</div>
-		<% else %>
-			<%= render :partial => @news_items %>
-			<%= will_paginate @news_items %>
-		<%end%>
+		<%=render :partial=>"shared/lists", :locals=>{ 
+			:items=>@news_items, 
+			:no_items_message=>"There were no results for your search.  Try different search terms." 
+		}%>
 	</div>
 </div>

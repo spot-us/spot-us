@@ -13,7 +13,7 @@
 				"donated"=>"Recently Donated",
 				"donated-most"=>"Donated Most",
 				"organizations"=>"Organizations",
-				"reporters"=>"reporters"
+				"reporters"=>"Reporters"
 			}
 		}%>
 	</div>
@@ -24,13 +24,10 @@
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
 			&nbsp;
 		</div>
-		<% if @items.blank? %>
-			<div>
-				There were no results for your search.  Try different search terms.
-			</div>
-		<%else%>
-			<%=render :collection=>@items, :partial=>"item"%>
-			<%= will_paginate @items %>
-		<% end %>
+		<%=render :partial=>"shared/lists", :locals=>{ 
+			:items=>@items, 
+			:template_name=>'item',
+			:no_items_message=>"There were no results for your search.  Try different search terms." 
+		}%>
 	</div>
 </div>
