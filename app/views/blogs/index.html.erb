@@ -20,16 +20,18 @@
 		<%else%>
 			<ul style="list-style-type:none;margin-left:0px;">
 				<% @posts.each do |post| %>
-					<li class="post" style="clear:both;">
+					<li class="story clearfix" style="clear:both;">
 						<h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
-						<p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
-						<%= image_tag(post.pitch.featured_image.url, :width=>"100", :style=>"float:left;padding:4px;") %>
+						<div class="featured_image">
+						   <%= image_tag(post.blog_image.url(:medium)) %>
+						</div>
 						<p class="post_body">
 							<%= truncate_words(strip_html(post.body), 35)%> <%= link_to "Read more &raquo", pitch_post_path(post.pitch, post) %>
 						</p>
+						<p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
 					</li>
 				<% end %>
-				<li class="post" style="border-top:1px solid #ccc;text-align:right;padding-top:4px;margin-top:4px;"><%=will_paginate @posts%></li> 
+				<li class="post" style="text-align:right;margin-top:4px;"><%=will_paginate @posts%></li> 
 			</ul>
 		<%end%>
 	</div>
