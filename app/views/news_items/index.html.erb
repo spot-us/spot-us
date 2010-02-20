@@ -17,8 +17,8 @@
 				"suggested"=>"Suggested"
 			}
 		}%>
-	   	<h5>Filter by Channel</h5>
-		<% if @channels.any? %>
+	   	<% if @channels.any? %>
+			<h5>Filter by Channel</h5>
 			<ul id="channels" class="filter">
 				<% @channels.each do |channel| %>            
 					<li<% if channel == @channel %> class="active"<%end%>>
