@@ -30,7 +30,7 @@
 			</div>
 		<%else%>
 			<%=render :collection=>@items, :partial=>"item"%>
+			<%= will_paginate @items %>
 		<% end %>
-		<%= will_paginate @items %>
 	</div>
 </div>

@@ -40,8 +40,9 @@
 			<div>
 				There were no results for your search.  Try different search terms.
 			</div>
-		<% end %>
-		<%= render :partial => @news_items %>
-		<%= will_paginate @news_items %>
+		<% else %>
+			<%= render :partial => @news_items %>
+			<%= will_paginate @news_items %>
+		<%end%>
 	</div>
 </div>
