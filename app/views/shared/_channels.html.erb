@@ -1,0 +1,11 @@
+<% if @channels.any? %>
+	<h5>Filter by Channel</h5>
+	<ul id="channels" class="filter">
+		<% @channels.each do |channel| %>            
+			<li<% if channel == @channel %> class="active"<%end%>>
+				<%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
+				<div><%= link_to channel.title, channel_path(channel) %></div>
+			</li>
+		<% end %>  
+	</ul>
+<% end %>
