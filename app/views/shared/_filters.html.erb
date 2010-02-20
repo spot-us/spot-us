@@ -1,0 +1,6 @@
+<h5><%=title%></h5>
+<ul id="filters" class="filter">
+	<%filters.each do |filter, name|%>
+		<li<%=check_active(@filter,filter) %> onclick="location.href='<%=url_base%>/<%=filter%>';"><div><a href="<%=url_base%>/<%=filter%>" title="<%=name%>"><%=name%></a></div></li>
+	<%end%>
+</ul>
