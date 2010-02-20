@@ -1,56 +1,40 @@
 <div class="container">
-  <div class="logo">
-    <p>
-      <a href="/" class="logo-link" title="Spot.us - Community Funded Reporting"><span class="hide">Spot.us - Community Powered Reporting</span>
-	  <%if @current_network && @current_network.name=="la"%>
-	  	<br /><img src="/images/new_design/usc.png" />
-	  <%end%>
-		</a>
-    </p>
-  </div>
-  <ul id="main-nav">
-	<li class="start_story<%=check_if_tab("start_story",@selected_tab)%>"><%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %></li>
-	<li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>"><%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), "/stories/unfunded" %></li>
-	<li class="read_story<%=check_if_tab("stories",@selected_tab)%>"><%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published" %></li>
-   </ul>
-   <!-- REFACTOR how to use -->
-   <div class="howtouse">
-      <div style="margin-top:2px;">
-         <div class="roundedcornr_box_807323">
-            <div class="roundedcornr_top_807323"><div></div></div>
-            <div class="roundedcornr_content_807323">
-               <a href="/pages/about">About Spot.Us</a>
-            </div>
-            <div class="roundedcornr_bottom_807323"><div></div></div>
-          </div>
-      <div style="margin-top:2px;">
-         <div class="roundedcornr_box_807323">
-            <div class="roundedcornr_top_807323"><div></div></div>
-            <div class="roundedcornr_content_807323">
-               <a href="http://spot.us1.list-manage.com/subscribe?u=eed5c3b3aed45d5f05eca391c&id=b693cc07c0">Newsletter</a> / <a href="http://blog.spot.us">Blog</a>
-            </div>
-            <div class="roundedcornr_bottom_807323"><div></div></div>
-         </div>
-      </div>
-      <div style="margin-top:2px;">
-         <div class="roundedcornr_box_807323">
-            <div class="roundedcornr_top_807323"><div></div></div>
-            <div class="roundedcornr_content_807323">
-               <a href="/pages/examples">Projects and Partners</a>
-            </div>
-            <div class="roundedcornr_bottom_807323"><div></div></div>
-         </div>
-      </div>
-      
-      <div style="margin-top:2px;">
-         <div class="roundedcornr_box_807323">
-            <div class="roundedcornr_top_807323"><div></div></div>
-            <div class="roundedcornr_content_807323">
-               <%=facebox_login_link_to "Leave a Story Tip", "/tips/new"%>
-            </div>
-            <div class="roundedcornr_bottom_807323"><div></div></div>
-         </div> 
-      </div>
-   </div>
-  </div>
+	
+	<div class="logo">
+		<p>
+			<a href="/" class="logo-link" title="Spot.us - Community Funded Reporting">
+				<span class="hide">Spot.us - Community Powered Reporting</span>
+				<%if @current_network && @current_network.name=="la"%>
+					<br /><img src="/images/new_design/usc.png" />
+				<%end%>
+			</a>
+		</p>
+	</div>
+	
+	<ul id="main-nav">
+		<li class="start_story<%=check_if_tab("start_story",@selected_tab)%>">
+			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %>
+		</li>
+		<li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>">
+			<%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), "/stories/unfunded", :title=>"Find a Pitch to Fund" %>
+		</li>
+		<li class="read_story<%=check_if_tab("stories",@selected_tab)%>">
+			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published", :title=>"Read A Published Spot Us Story" %>
+		</li>
+	</ul>
+	
+	<div class="howtouse">
+		
+		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/pages/about" title="About Spot.Us">About Spot.Us</a>'}%>
+		
+		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="http://spot.us1.list-manage.com/subscribe?u=eed5c3b3aed45d5f05eca391c&amp;id=b693cc07c0" title="Newsletter" rel="nofollow">Newsletter</a> / <a href="http://blog.spot.us">Blog</a>'}%>
+		
+		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/pages/examples" title="Projects and Partners">Projects and Partners</a>'}%>
+		
+		<%=render :partial=>"layouts/howto", :locals=>{:link=>facebox_login_link_to("Leave a Story Tip", "/tips/new")}%>
+
+		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/contributors" title="Spot.Us Community">Spot.Us Community</a>'}%>
+		
+ 	</div>
+
 </div>
