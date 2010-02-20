@@ -30,6 +30,7 @@
 				<%= render :collection => @featured_pitches, :partial => 'featured_pitch' %>
 			</ul>
 		</div>
+		<span class="float-right" style="padding-right:4px;margin-top:4px;"><%= link_to "See All Unfunded Stories &raquo;", "/stories/unfunded" %></span>
 		<!-- END FUND A STORY-->
 		<!-- START RECENTLY PUBLISHED STORIES -->
 		<div class="folded-headers">
@@ -44,6 +45,7 @@
 				<%= render :collection => @featured_stories, :partial => 'featured_story' %>
 			</ul>
 		</div>
+		<span class="float-right" style="padding-right:4px;margin-top:-10px;"><%= link_to "See All Published Stories &raquo;", "/stories/published" %></span>
 		<!-- END RECENTLY PUBLISHED STORIES -->
 	</div>
 </div>
