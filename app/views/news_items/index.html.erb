@@ -17,17 +17,7 @@
 				"suggested"=>"Suggested"
 			}
 		}%>
-	   	<% if @channels.any? %>
-			<h5>Filter by Channel</h5>
-			<ul id="channels" class="filter">
-				<% @channels.each do |channel| %>            
-					<li<% if channel == @channel %> class="active"<%end%>>
-						<%= link_to image_tag(channel.channel_image(:thumb), :title => channel.description), channel_path(channel) %>
-						<div><%= link_to channel.title, channel_path(channel) %></div>
-					</li>
-				<% end %>  
-			</ul>
-		<% end %>   
+		<%=render :partial=>"shared/channels"%>   
 	</div>
 	<div id="stories">
 		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
@@ -36,6 +26,7 @@
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
 			&nbsp;
 		</div>
+		<%#=render :partial=>"shared/list"%>
 		<% if @news_items.blank? %>
 			<div>
 				There were no results for your search.  Try different search terms.
