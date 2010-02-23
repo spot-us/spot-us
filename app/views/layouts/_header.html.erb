@@ -12,13 +12,13 @@
 	</div>
 	
 	<ul id="main-nav">
-		<li class="start_story<%=check_if_tab("start_story",@selected_tab)%>">
+		<li class="start_story">
 			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %>
 		</li>
-		<li class="fund_story<%=check_if_tab("pitches",@selected_tab)%>">
+		<li class="fund_story">
 			<%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), "/stories/unfunded", :title=>"Find a Pitch to Fund" %>
 		</li>
-		<li class="read_story<%=check_if_tab("stories",@selected_tab)%>">
+		<li class="read_story">
 			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published", :title=>"Read A Published Spot Us Story" %>
 		</li>
 	</ul>

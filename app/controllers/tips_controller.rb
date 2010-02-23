@@ -4,7 +4,7 @@ class TipsController < ApplicationController
   before_filter :block_if_donated_to, :only => :edit
   before_filter :login_required, :only => [:new, :create, :update]
   bounce_bots(:send_bots, :tip, :blog_url)
-  before_filter :select_tab, :only => [:new]
+  # before_filter :select_tab, :only => [:new]
   before_filter :set_meta_tags, :only => [:show]
 
   def block_if_donated_to
@@ -46,9 +46,9 @@ class TipsController < ApplicationController
   
   protected
 
-    def select_tab
-       @selected_tab = "suggest_story"
-    end
+    # def select_tab
+    #    @selected_tab = "suggest_story"
+    # end
     
     def set_meta_tags
        tip = find_resource
