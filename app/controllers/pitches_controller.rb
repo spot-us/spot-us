@@ -19,7 +19,14 @@ class PitchesController < ApplicationController
   
   def blog_posts
     pitch = find_resource
-    redirect_to "#{pitch_url(pitch)/posts}"
+    respond_to do |format|
+      format.html do
+        redirect_to "#{pitch_url(pitch)/posts}"
+      end
+      format.rss do
+        redirect_to "#{pitch_url(pitch)/posts.rss}"
+      end
+    end
     return
   end
   
