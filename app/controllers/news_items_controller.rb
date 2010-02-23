@@ -64,8 +64,8 @@ class NewsItemsController < ApplicationController
   def load_networks
     @networks = Network.all
   end
-  
-  def select_tab
-    @selected_tab = "pitches"
-  end
+  # 
+  # def select_tab
+  #   @selected_tab = "pitches"
+  # end
 end
