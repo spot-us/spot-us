@@ -36,7 +36,7 @@
          <div class="media-box">
             <h3>Multimedia</h3>
             <div class="align-center">
-               <%= @tip.video_embed %>
+               <%= transform_embed_code(@tip.video_embed, 560, 350) %>
             </div>
          </div>
       <% end %>
