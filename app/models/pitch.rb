@@ -338,10 +338,6 @@ class Pitch < NewsItem
     Donation.paid.for_pitch(self).map(&:group).uniq.compact
   end
   
-  def to_s
-    headline
-  end
-  
   def short_url(base_url=nil)
     base_url = "http://spot.us/" unless base_url
     authorize = UrlShortener::Authorize.new 'spotus', APP_CONFIG[:bitly]
@@ -357,6 +353,11 @@ class Pitch < NewsItem
     msg += headline.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : headline
     msg += " - #{short_url}" if show_url
     msg
+  end
+  
+  # intelligent URLS - with headline appended to id
+  def to_s
+    headline
   end
   
   def to_param

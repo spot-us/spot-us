@@ -2,7 +2,7 @@ class NewsItemsController < ApplicationController
   include NewsItemsHelper
 
   before_filter :load_networks, :only => [:index, :search]
-  before_filter :select_tab, :only => [:index, :search]
+  # before_filter :select_tab, :only => [:index, :search]
 
   def index
     @channels = Channel.by_network(current_network)
@@ -64,8 +64,8 @@ class NewsItemsController < ApplicationController
   def load_networks
     @networks = Network.all
   end
-  
-  def select_tab
-    @selected_tab = "pitches"
-  end
+  # 
+  # def select_tab
+  #   @selected_tab = "pitches"
+  # end
 end
