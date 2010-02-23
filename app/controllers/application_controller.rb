@@ -28,7 +28,9 @@ class ApplicationController < ActionController::Base
   
   def block_ips
     return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86'].include?(request.remote_ip)
+    return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
   end
+  
   
   # minify the html
   def minify_html
