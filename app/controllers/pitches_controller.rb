@@ -21,10 +21,10 @@ class PitchesController < ApplicationController
     pitch = find_resource
     respond_to do |format|
       format.html do
-        redirect_to "#{pitch_url(pitch)/posts}"
+        redirect_to "#{pitch_url(pitch)}/posts"
       end
       format.rss do
-        redirect_to "#{pitch_url(pitch)/posts.rss}"
+        redirect_to "#{pitch_url(pitch)}/posts.rss"
       end
     end
     return
