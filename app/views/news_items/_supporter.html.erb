@@ -5,10 +5,7 @@
 			<%= link_to supporter.full_name, profile_path(supporter)%>
 			<br/>
 			<%if news_item.user == supporter%>
-				Created this
-				<%= news_item.class%>
-				on
-				<%= news_item.created_at.to_s(:date)%>
+				Created <%= short_date(news_item.created_at) %>
 			<%else%>
 				<%if news_item.tip?%>
 					Pledged

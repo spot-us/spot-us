@@ -206,7 +206,7 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 #news_item .right-column #supporters h2 {color:#11363E;font-family:georgia,Helvetica,sans-serif;letter-spacing:-1px;font-size:26px;margin-bottom:10px;
 			text-transform:uppercase; border-bottom:1px solid #999;}
 #news_item .right-column #supporters .supporters {font-size:.9em;}
-#news_item .right-column #supporters .supporters .supporter_avatar {float:left;width:40px;margin:0 20px 0px 17px;height:130px;}
+#news_item .right-column #supporters .supporters .supporter_avatar {float:left;font-size:0.9em;height:130px;padding:0 29px 0 17px;width:40px;}
 #news_item .right-column #supporters .supporters a{font-size:1.1em;}
 #news_item #comments_form input[type="text"] {width:480px;padding:3px;font-family:arial, helvetica;font-size:14px;}
 #news_item #comments_form textarea {width:480px;height:140px;padding:5px;margin-top:0;font-family:arial, helvetica;font-size:14px;}
