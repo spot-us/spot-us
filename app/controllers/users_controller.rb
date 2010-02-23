@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @filter=='donated' || @filter.blank?  
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
       @items = Donation.by_network(current_network).paginate(:page => params[:page], 
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'donations.created_at desc')
     elsif @filter=='donated-most'
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
       @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, count(*) as cnt",
