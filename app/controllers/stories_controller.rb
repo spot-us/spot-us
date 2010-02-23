@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   before_filter :can_view?, :only => [:show]
   before_filter :can_edit?, :only => :edit
-  before_filter :select_tab
+  # before_filter :select_tab
   before_filter :set_meta_tags, :only => [:show]
   resources_controller_for :stories
 
@@ -76,9 +76,9 @@ class StoriesController < ApplicationController
       @stories = Story.by_network(current_network).published.paginate(:page => params[:page], :per_page => 10, :order=>"created_at desc")
     end
     
-    def select_tab
-        @selected_tab = "stories"
-    end
+    # def select_tab
+    #     @selected_tab = "stories"
+    # end
     
     def set_meta_tags
       story = find_resource
