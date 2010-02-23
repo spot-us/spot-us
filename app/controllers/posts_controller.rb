@@ -3,9 +3,9 @@ class PostsController < ApplicationController
   before_filter :login_required, :except => [:show, :index]
 
   response_for :create do |format|
-    @post.blog_posted_notification
     format.html do
       if resource_saved?
+        @post.blog_posted_notification
         flash[:success] = 'Successfully created post'
         redirect_to myspot_posts_path
       else
