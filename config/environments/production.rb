@@ -6,9 +6,6 @@ config.cache_classes = true
 config.whiny_nils = true
 SslRequirement.disable_ssl_check = false
 
-
-config.log_level = :debug
-
 if APP_CONFIG[:action_mailer].is_a?(Hash)
   config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]
   config.action_mailer.smtp_settings   = APP_CONFIG[:action_mailer][:smtp_settings]
