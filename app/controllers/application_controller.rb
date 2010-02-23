@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   before_filter :can_create?, :only => [:new, :create]
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
   before_filter :current_network
+  before_filter :block_ips
   before_filter :set_default_html_meta_tags
 
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
@@ -24,6 +25,10 @@ class ApplicationController < ActionController::Base
   before_filter :set_facebook_session
   helper_method :facebook_session
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
+  
+  def block_ips
+    return head(:bad_request) if ['174.129.157.195','67.202.11.49'].include?(request.remote_ip)
+  end
   
   # minify the html
   def minify_html
