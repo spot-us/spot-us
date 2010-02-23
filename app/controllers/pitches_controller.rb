@@ -3,7 +3,7 @@ class PitchesController < ApplicationController
   before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute, :feature, :unfeature]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
-  before_filter :select_tab, :only => [:new]
+  # before_filter :select_tab, :only => [:new]
   after_filter :send_edited_notification, :only => [:update]
 
   resources_controller_for :pitch
@@ -140,9 +140,9 @@ class PitchesController < ApplicationController
       html_meta_tags(pitch.short_description,pitch.keywords) if pitch
   end
   
-  def select_tab
-     @selected_tab = "start_story"
-  end
+  # def select_tab
+  #    @selected_tab = "start_story"
+  # end
   
   def send_edited_notification
     pitch = find_resource
