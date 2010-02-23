@@ -17,11 +17,6 @@ class PitchesController < ApplicationController
     #redirect_to(news_items_path)
   end
   
-  def blog_posts
-    params[:tab]='posts'
-    show
-  end
-  
   def show
     @pitch = find_resource
     @tab = params[:tab] || ""
