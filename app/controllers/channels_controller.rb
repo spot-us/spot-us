@@ -1,5 +1,5 @@
 class ChannelsController < ApplicationController
-  before_filter :select_tab   
+  # before_filter :select_tab   
   before_filter :load_networks, :only => [:show]
   
   def show
@@ -23,7 +23,7 @@ class ChannelsController < ApplicationController
     @networks = Network.all
   end
   
-  def select_tab
-    @selected_tab = "pitches"
-  end
+  # def select_tab
+  #   @selected_tab = "pitches"
+  # end
 end
