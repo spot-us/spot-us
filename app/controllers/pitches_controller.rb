@@ -8,7 +8,7 @@ class PitchesController < ApplicationController
 
   resources_controller_for :pitch
 
-  bounce_bots(:send_bots, :pitch, :blog_url)
+  #bounce_bots(:send_bots, :pitch, :blog_url)
 
   def index
     response.headers["Status"] = "301 Moved Permanently"
@@ -33,6 +33,11 @@ class PitchesController < ApplicationController
       end
     end
   end
+ 
+  #def test_script
+  #  pitch = find_resource
+  #  render :text => pitch_url(pitch) + "          " + pitch_url(pitch)
+  #end
   
   def apply_to_contribute
     pitch = find_resource
