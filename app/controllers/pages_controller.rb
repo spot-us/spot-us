@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_filter :select_tab   
+  #before_filter :select_tab   
     
   PAGES = %w(
     about
@@ -29,9 +29,9 @@ class PagesController < ApplicationController
     redirect_to root_path
   end
   
-  protected
-  
-  def select_tab
-      @selected_tab = "about" if params[:id] == "about"
-  end
+  # protected
+  # 
+  # def select_tab
+  #     @selected_tab = "about" if params[:id] == "about"
+  # end
 end
