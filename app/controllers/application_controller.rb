@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
   def block_ips
-    return head(:bad_request) if ['174.129.157.195','67.202.11.49'].include?(request.remote_ip)
+    return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86'].include?(request.remote_ip)
   end
   
   # minify the html
