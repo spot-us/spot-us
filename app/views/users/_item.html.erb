@@ -1,19 +1,21 @@
 <% apply_fragment ['item_user_', item, @filter] do %>
-	<div class="user clearfix">	
-		<div class="featured_contributor">
-			<div class="avatar">
-				<%= link_to image_tag(item.user.photo(:thumb)), profile_path(item.user) %>
+	<%if item.user%>
+		<div class="user clearfix">	
+			<div class="featured_contributor">
+				<div class="avatar">
+					<%= link_to image_tag(item.user.photo(:thumb)), profile_path(item.user) %>
+				</div>
+				<div class="contributor">
+					<h5><%= link_to item.user.full_name, profile_path(item.user) %></h5>
+					<div class="dateline">
+						Joined <%= short_date(item.created_at) %> <%if @filter=='most-donated'%>| Donated to <%=item.cnt%> pitches inside <%=get_inside_network_text(@network)%><%end%>
+					</div>  
+				</div>
+				<p class="bio">
+					<%= truncate_words(strip_html((item.user.about_you.blank? ? "This contributor has not added their About you section yet..." : item.user.about_you)), 50) %>
+					<%= link_to "Read profile &raquo;", profile_path(item.user) %>
+				</p>
 			</div>
-			<div class="contributor">
-				<h5><%= link_to item.user.full_name, profile_path(item.user) %></h5>
-				<div class="dateline">
-					Joined <%= short_date(item.created_at) %> <%if @filter=='most-donated'%>| Donated to <%=item.cnt%> pitches inside <%=get_inside_network_text(@network)%><%end%>
-				</div>  
-			</div>
-			<p class="bio">
-				<%= truncate_words(strip_html((item.user.about_you.blank? ? "This contributor has not added their About you section yet..." : item.user.about_you)), 50) %>
-				<%= link_to "Read profile &raquo;", profile_path(item.user) %>
-			</p>
 		</div>
-	</div>
+	<%end%>
 <%end%>
