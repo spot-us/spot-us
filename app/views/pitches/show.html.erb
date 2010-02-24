@@ -68,7 +68,7 @@
 			</div>
 			<div class="donate_option">
 				<%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
-				<%= link_to(pluralize(@pitch.assignments.open.size, "assignments"), pitch_assignments_path(@pitch)) %>
+				<%= link_to(pluralize(@pitch.assignments.status_open.size, "assignments"), pitch_assignments_path(@pitch)) %>
 			</div>
 		</div>
 
