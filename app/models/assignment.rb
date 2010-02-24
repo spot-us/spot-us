@@ -12,8 +12,8 @@ class Assignment < ActiveRecord::Base
            :conditions => "assignment_contributors.status = 'accepted'"
   has_many :rejected_contributors, :through => :assignment_contributors, :source => :contributor, :foreign_key => :user_id,
            :conditions => "assignment_contributors.status = 'rejected'"
-  named_scope :open, :conditions => "status = 'open'"
-  named_scope :closed, :conditions => "status = 'closed'"
+  named_scope :status_open, :conditions => "status = 'open'"
+  named_scope :status_closed, :conditions => "status = 'closed'"
   # def blog_posted_notification
   #    Mailer.deliver_blog_posted_notification(self)
   #  end
@@ -28,6 +28,11 @@ class Assignment < ActiveRecord::Base
   
   def is_closed?
     return true if self.status == "closed"
+    return false
+  end
+  
+  def is_open?
+    return true if self.status == "open"
     return false
   end
   

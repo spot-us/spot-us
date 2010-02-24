@@ -37,6 +37,7 @@ class PitchesController < ApplicationController
       format.html do
         if !@tab.blank? && params[:item_id]
           @item = @pitch.send(@tab).find_by_id(params[:item_id])
+          redirect_to pitch_assignments_path(@pitch) if  @item.class.to_s == "Assignment" && @item.is_closed? && @item.user != current_user
         end
       end
       unless @tab.blank?
