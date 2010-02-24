@@ -136,13 +136,13 @@ class NewsItem < ActiveRecord::Base
   end
   
   def peer_reviewer
-    # fact_checker || (parent && parent.fact_checker)
-    if assignments.any?
-      if assignments.last.title.starts_with?("Apply to be Peer Review Editor") and assignments.last.open
-        return assignments.last.accepted_contributors.last if assignments.last.accepted_contributors.last
-      end
-    end
-    return false   
+    fact_checker || (parent && parent.fact_checker)
+    #if assignments.any?
+    #  if assignments.last.title.starts_with?("Apply to be Peer Review Editor") and assignments.last.open
+    #    return assignments.last.accepted_contributors.last if assignments.last.accepted_contributors.last
+    # end
+    #end
+    #return false   
   end
 
   def deleted?
