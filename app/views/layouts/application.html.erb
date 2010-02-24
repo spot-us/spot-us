@@ -31,14 +31,14 @@
 	    <div class="body-content">
 	       <% if yield(:error) %>
 	         <div class="error">
-	            <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
-	            <p><%= yield(:error)%></p>
+	            <span class="dismiss"><%= link_to image_tag('/images/close_square.png'), @close_flash_link || '' %></span>
+				<p><%= yield(:error)%></p>
 	         </div>
 	       <% end %>
 	       <div id="flash">
 	          <% flash.each do |key, value| %>
 	            <div class="<%=key%>">
-	               <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span>
+					<span class="dismiss"><%= link_to image_tag('/images/close_square.png'), @close_flash_link || '' %></span>
 	               <p><%= value%></p>
 	            </div>
 	          <% end %>
