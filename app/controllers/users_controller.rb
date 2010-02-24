@@ -11,20 +11,20 @@ class UsersController < ApplicationController
     @filter = params[:filter]
     if @filter=='donated' || @filter.blank?  
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
-      @items = Donation.by_network(current_network).paginate(:page => params[:page], 
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, max(donations.id) as max_id", 
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc')
     elsif @filter=='donated-most'
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
-      @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, count(*) as cnt",
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'cnt desc, created_at desc')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, count(*) as cnt, max(donations.id) as max_id",
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'cnt desc, max_id desc')
     elsif @filter=='organizations'
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :conditions=>"users.type='Organization'", :group=>"donations.user_id", :include=>:user).map(&:user_id).join(',')
-      @items = Donation.by_network(current_network).paginate(:page => params[:page], 
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'created_at desc')
+      @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, max(donations.id) as max_id", 
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc')
     elsif @filter=='reporters'
       user_ids_all = Pitch.by_network(current_network).browsable.find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
-      @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], 
-        :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'created_at desc')
+      @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], :select=>"donations.*, max(news_items.id) as max_id", 
+        :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'max_id desc')
     end
       
     respond_to do |format|
