@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc')
     elsif @filter=='reporters'
       user_ids_all = Pitch.by_network(current_network).browsable.find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
-      @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], :select=>"donations.*, max(news_items.id) as max_id", 
+      @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], :select=>"news_items.*, max(news_items.id) as max_id", 
         :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'max_id desc')
     end
       
