@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :login_required
 
-  #bounce_bots :send_bots, :comment, :blog_url
+  bounce_bots :send_bots, :comment, :blog_url
 
   resources_controller_for :comments, :only => [:create, :index]
 
