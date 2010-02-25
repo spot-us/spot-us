@@ -1,6 +1,6 @@
 class PitchesController < ApplicationController
   before_filter :store_location, :only => :show
-  before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute, :feature, :unfeature]
+  before_filter :login_required, :only => [:new, :create, :update, :apply_to_contribute, :feature, :unfeature, :begin_story]
   before_filter :organization_required, :only => [:half_fund, :fully_fund, :show_support]
   before_filter :set_meta_tags, :only => [:show]
   # before_filter :select_tab, :only => [:new]
@@ -69,6 +69,13 @@ class PitchesController < ApplicationController
       pitch.unfeature!
     end
     redirect_to pitch_path(pitch)
+  end
+  
+  def begin_story
+    pitch = find_resource
+    redirect_to :back if !pitch or current_user != pitch.user
+    pitch.create_associated_story 
+    redirect_to edit_story_path(pitch.story)
   end
 
   def widget
