@@ -377,17 +377,19 @@ class Pitch < NewsItem
     self.save
   end
   
+  def create_associated_story
+    self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
+  end
+  
   protected
 
   def do_fund_events
     send_fund_notification
     create_associated_story
   end
-
-  def create_associated_story
-    self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user)
-  end
   
+
+
   def create_peer_editor_assignment
     Assignment.create(:pitch_id => self.id, :user_id => self.user.id, :title =>"Apply to be Peer Review Editor", 
                       :body => ["The Peer-Review editor has three main responsibilities – to ensure fair and accurate reporting, ",
