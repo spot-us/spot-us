@@ -19,8 +19,8 @@
     #assignments
       - if current_user && current_user == @pitch.user
         = render :partial => @pitch.assignments 
-      - elsif @pitch.assignments.open.any?
-        = render :partial => @pitch.assignments.open
+      - elsif @pitch.assignments.status_open.any?
+        = render :partial => @pitch.assignments.status_open
       - else
         Not every pitch has assignments. Like large cats, some reporters like to work alone. Check
         to see if other pitches do have assignments you can help out with!
