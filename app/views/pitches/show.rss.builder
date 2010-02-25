@@ -37,7 +37,7 @@ xml.rss :version => "2.0" do
             xml.title assignment.title
             xml.description assignment.body
             xml.pubDate assignment.created_at.to_s(:rfc822)
-            xml.link pitch_assigment_path(@pitch, assignment)
+            xml.link pitch_assignment_path(@pitch, assignment)
           end
         end
       else
