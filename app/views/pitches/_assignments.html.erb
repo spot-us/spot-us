@@ -1,6 +1,6 @@
-<% if pitch.assignments.open.any? %>
+<% if pitch.assignments.status_open.any? %>
 	<h2>Assignments</h2>
-	<% pitch.assignments.open.first(5).each do |assignment| %>
+	<% pitch.assignments.status_open.first(5).each do |assignment| %>
 		<% apply_fragment ['pitch_assignment_', pitch, assignment] do %>
    		<div class="assignment">
    		   <div class="date float-right"><%= short_date(assignment.created_at) %></div>
