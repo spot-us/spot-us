@@ -20,15 +20,20 @@ class Post < ActiveRecord::Base
                                ":basename_:style.:extension",
                       :default_url => "/images/featured_images/missing_:style.png"
                       
-  if Rails.env.production?
+  #if Rails.env.production?
     validates_attachment_content_type :blog_image,
       :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
                         'image/x-png', 'image/jpg'],
-      :message      => "Oops! Make sure you are uploading an image file."
+      :message      => "Oops! Make sure you are uploading an image file.",
+      :unless => :blog_image_name
 
-    validates_attachment_size :blog_image, :in => 1..5.megabytes
-  end
+    validates_attachment_size :blog_image, :in => 1..5.megabytes, :unless => :blog_image_name
+  #end
   validates_presence_of :title, :body, :user, :pitch
+  
+  def blog_image_name
+    blog_image_file_name.blank?
+  end
   
   def blog_posted_notification
     Mailer.deliver_blog_posted_notification(self)
