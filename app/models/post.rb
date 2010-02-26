@@ -36,7 +36,20 @@ class Post < ActiveRecord::Base
   end
   
   def blog_posted_notification
-    Mailer.deliver_blog_posted_notification(self)
+    #email supporters
+    emails = post.supporters.map{ |email| "'#{email}'"}
+    post.supporters.each do |supporter|
+      Mailer.deliver_blog_posted_notification(self, supporter.full_name, supporter.email)
+    end
+    #email admins
+    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
+      Mailer.deliver_blog_posted_notification(self, admin.full_name, admin.email)
+    end
+    #email subscribers
+    post.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+      Mailer.deliver_blog_posted_notification(self, subscriber, subscriber.email, subscriber)
+    end
   end
   
   def blog_image_display(style)

@@ -1,4 +1,4 @@
-Hello,
+Dear <%=@to%>,
 
 A project you've supported on Spot.Us has been published! 
 
@@ -11,3 +11,5 @@ If you have questions or concerns - please contact: David@spot.us
 
 Sincerely,
 Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@email, :subscriber=>@subscriber }%>
