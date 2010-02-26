@@ -1,5 +1,6 @@
 class Mailer < ActionMailer::Base
   include ActionController::UrlWriter
+  helper :application
   default_url_options[:host] = DEFAULT_HOST
 
   def activation_email(user)
@@ -201,4 +202,5 @@ class Mailer < ActionMailer::Base
     subject     "Spot.Us: Subscription to '#{subscriber.pitch.headline}' confirmation required"
     body        :subscriber => subscriber
   end
+  
 end
