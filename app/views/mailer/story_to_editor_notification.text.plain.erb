@@ -1,4 +1,4 @@
-Hello,
+Dear <%=@to%>,
 
 A story you're a peer reviewer for on Spot.Us has been sent to you for review.
 
@@ -9,3 +9,5 @@ If you have questions or concerns - please contact: David@spot.us
 
 Sincerely,
 Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@email }%>

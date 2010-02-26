@@ -1,4 +1,4 @@
-Hello,
+Dear subscriber,
 
 Please click the link below to complete your subscription to receive email updates to the Spot.Us story:
 
@@ -19,3 +19,5 @@ Thanks for your interest in Spot.Us.
 Sincerely,
 David Cohn
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@subscriber.email }%>
