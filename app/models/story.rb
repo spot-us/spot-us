@@ -145,6 +145,7 @@ class Story < NewsItem
   end
   
   def notify_donors
+    self.pitch.touch_pitch!
     Mailer.deliver_story_published_notification(self,fact_checker_recipients)
   end
   
