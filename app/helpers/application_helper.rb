@@ -52,6 +52,15 @@ module ApplicationHelper
     current_user.current_balance
   end
 
+  def get_comments_url(commentable)
+    if commentable.type.to_s='Pitch'
+      return "#{pitch_url(commentable)}/comments"
+    elsif commentable.type.to_s='Story'
+      return "#{story_url(commentable)}/comments"
+    end
+    
+  end
+
   def topic_check_boxes(resource, model = nil)
     render :partial => "topics/topic", :collection => Topic.all, :locals => {:resource => resource, :model => model}
   end
