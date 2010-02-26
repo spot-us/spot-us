@@ -1,3 +1,5 @@
+Dear <%=@user.full_name%>,
+
 Your application to contribute to this assignment has been accepted!
 
 See the assignment at:
@@ -14,3 +16,5 @@ They may have specific hints/tips for this assignment.
 
 Sincerely,
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

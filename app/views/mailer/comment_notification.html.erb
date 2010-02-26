@@ -1,4 +1,4 @@
-Hello,
+Dear <%=@user.full_name%>,
 
 There is a new comment on Spot.Us to a story you've shown interest in.
 
@@ -12,3 +12,5 @@ If you have questions or concerns - please contact: David@spot.us
 
 Sincerely,
 Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

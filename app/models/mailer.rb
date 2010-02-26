@@ -65,35 +65,38 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
 
-  def pitch_accepted_notification(pitch)
-    recipients '"David Cohn" <david@spot.us>'
-    bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(pitch.subscribers.map(&:email)).uniq.join(', ')
+  def pitch_accepted_notification(pitch,to,email,subscriber=nil)
+    #recipients '"David Cohn" <david@spot.us>'
+    #bcc pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(pitch.subscribers.map(&:email)).uniq.join(', ')
+    recipients  email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Success!! Your Story is Funded!"
-    body       :pitch => pitch
+    body       :pitch => pitch, :to => to, :email => email, :subscriber=>subscriber
   end
   
-  def blog_posted_notification(post)
-    recipients '"David Cohn" <david@spot.us>'
-    bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).concat(post.pitch.subscribers.map(&:email)).uniq.join(', ')
+  def blog_posted_notification(post,to,email,subscriber=nil)
+    #recipients '"David Cohn" <david@spot.us>'
+    #bcc post.pitch.blog_subscribers.map(&:email).concat(Admin.all.map(&:email)).concat(post.pitch.subscribers.map(&:email)).uniq.join(', ')
+    recipients  email
     from       MAIL_FROM_INFO
     subject    "Spot.Us Blog Update: '#{post.pitch.headline}'"
-    body       :post => post
+    body       :post => post, :to => to, :email => email, :subscriber=>subscriber
   end
   
-  def comment_notification(comment)
-    recipients '"David Cohn" <david@spot.us>'
-    bcc (comment.commentable.comment_subscribers - [comment.user]).map(&:email).join(", ")
+  def comment_notification(comment, user)
+    #recipients '"David Cohn" <david@spot.us>'
+    #bcc (comment.commentable.comment_subscribers - [comment.user]).map(&:email).join(", ")
+    recipients  user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us Blog Update: '#{comment.commentable.headline}'"
-    body       :comment => comment
+    body       :comment => comment, :user => user
   end
   
-  def story_to_editor_notification(story,send_to)
-    recipients send_to
+  def story_to_editor_notification(story,to,email)
+    recipients email
     from       MAIL_FROM_INFO
     subject    "Spot.Us Story Review: '#{story.headline}'"
-    body       :story => story
+    body       :story => story, :to => to, :email => email
   end
   
   def story_rejected_notification(story)
@@ -104,12 +107,14 @@ class Mailer < ActionMailer::Base
     body       :story => story
   end
   
-  def story_published_notification(story, send_to)
-    recipients send_to
-    bcc story.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(story.pitch.subscribers.map(&:email)).uniq.join(', ')
+  def story_published_notification(story,to,email,subscriber=nil)
+    #recipients send_to
+    #bcc story.pitch.supporters.map(&:email).concat(Admin.all.map(&:email)).concat(story.pitch.subscribers.map(&:email)).uniq.join(', ')
+    #send_to
+    recipients  email
     from       MAIL_FROM_INFO
     subject    "Spot.Us Story Published: '#{story.headline}'"
-    body       :story => story
+    body       :story => story, :to => to, :email => email, :subscriber=>subscriber
   end
 
   def admin_reporting_team_notification(pitch)
@@ -137,14 +142,14 @@ class Mailer < ActionMailer::Base
     recipients user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Welcome to the reporting team!"
-    body       :pitch => pitch
+    body       :pitch => pitch, :user => user
   end
 
   def applied_reporting_team_notification(pitch, user)
     recipients user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: We received your application!"
-    body       :pitch => pitch
+    body       :pitch => pitch, :user => user
   end
   
   def assignment_application_notification(mail)
@@ -159,14 +164,14 @@ class Mailer < ActionMailer::Base
     recipients user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Assignment application accepted!"
-    body       :assignment => assignment
+    body       :assignment => assignment, :user => user
   end
   
   def assignment_application_rejected_notification(assignment, user)
     recipients user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Assignment application rejected!"
-    body       :assignment => assignment
+    body       :assignment => assignment, :user => user
   end
 
   def story_ready_notification(story)
@@ -187,7 +192,7 @@ class Mailer < ActionMailer::Base
     recipients  donation.user.email
     from        MAIL_FROM_INFO
     subject     "Spot.Us: Thank You for Donating!"
-    body        :donation => donation
+    body        :donation => donation, :user => donation.user
   end
   
   def confirm_subscription(subscriber)
