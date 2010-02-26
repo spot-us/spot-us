@@ -1,4 +1,4 @@
-Hello Spot.Us Reporter,
+Dear <%=@assignment.pitch.user.full_name%>,
 
 <%= @contributor.full_name %> has applied to contribute to one of your assignments assignment.
 
@@ -19,3 +19,5 @@ If you want to be introduced to them, email info@spot.us.
 
 Sincerely,
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>"#{@assignment.pitch.user.email} and #{@contributor.email}" }%>

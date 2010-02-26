@@ -1,3 +1,5 @@
+Dear <%=@user.full_name%>,
+
 Thanks for applying to join this pitch's reporting team!
 
 <%= @pitch.headline %>
@@ -19,3 +21,5 @@ You'll receive an email when you are approved.
 
 Sincerely,
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>
