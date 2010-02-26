@@ -42,7 +42,6 @@ module ApplicationHelper
     Digest::SHA1.hexdigest(final_key)
   end
   
-  
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
   end
