@@ -1,4 +1,4 @@
-Dear <%= @donation.user.full_name %>,
+Dear <%= @donation.user.first_name %>,
 
 Thank you for donating $<%= @donation.amount.to_i%> to <%= @donation.pitch.headline %> 
 at <%= pitch_url(@donation.pitch) %>!

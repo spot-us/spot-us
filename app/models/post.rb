@@ -39,16 +39,16 @@ class Post < ActiveRecord::Base
     #email supporters
     emails = post.supporters.map{ |email| "'#{email}'"}
     post.supporters.each do |supporter|
-      Mailer.deliver_blog_posted_notification(self, supporter.full_name, supporter.email)
+      Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email)
     end
     #email admins
     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
     Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
-      Mailer.deliver_blog_posted_notification(self, admin.full_name, admin.email)
+      Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
     end
     #email subscribers
     post.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
-      Mailer.deliver_blog_posted_notification(self, subscriber, subscriber.email, subscriber)
+      Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
   end
   
