@@ -1,3 +1,5 @@
+Dear <%=@user.first_name%>,
+
 Welcome to Spot.Us and thanks for joining our effort to produce
 community powered reporting.
 
@@ -22,3 +24,5 @@ Don’t hesitate to contact us:  info@spot.us
 Sincerely,
 David Cohn
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

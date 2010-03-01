@@ -1,4 +1,4 @@
-Hello Spot.Us Community Member
+Dear <%=@user.first_name%>,
 
 Your application to contribute to this assignment has been rejected.
 
@@ -11,3 +11,5 @@ Perhaps there is another assignment out there to which you can contribute.
 
 Sincerely,
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>
