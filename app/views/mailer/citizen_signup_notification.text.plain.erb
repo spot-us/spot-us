@@ -1,3 +1,5 @@
+Dear <%=@user.first_name%>,
+
 Welcome to Spot.Us and thanks for joining our effort to produce
 community funded investigative journalism.
 
@@ -26,3 +28,5 @@ information needs of our communities are met. We work for you!!!!
 Sincerely,
 David Cohn
 Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

@@ -1,4 +1,4 @@
-Hello,
+Dear <%=@story.user.first_name%>,
 
 Your peer reviewer is suggesting further edits on your story on Spot.Us.
 
@@ -9,3 +9,5 @@ If you have questions or concerns - please contact: David@spot.us
 
 Sincerely,
 Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@story.user.email }

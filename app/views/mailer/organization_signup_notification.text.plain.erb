@@ -1,3 +1,5 @@
+Dear <%=@user.first_name%>,
+
 Thank you for your interest in joining Spot.Us.  We apologize for the
 slight delay that you will experience in getting this status.
 
@@ -18,3 +20,5 @@ If you want - feel free to sign up as a "citizen" or "reporter," but use a diffe
 
 Sincerely,
 Spot.Us Team - David Cohn
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

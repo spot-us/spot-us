@@ -23,6 +23,7 @@ class Assignment < ActiveRecord::Base
     return false if self.contributors.include?(user)
     self.contributors << user
     Mailer.deliver_assignment_application_notification(:assignment => self,:contributor => user)
+    touch_pitch
     true
   end
   
