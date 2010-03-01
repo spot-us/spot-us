@@ -57,6 +57,10 @@ jQuery(document).ready(function($){
 					renderUserHeader();
 					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
 					$("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
+					if(("#assignment_admin").length > 0)
+					{
+						
+					}
 					if($("#flash").length > 0){
 						$("#flash").html("");
 					}
