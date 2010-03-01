@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   after_save :touch_commentable
   
   def send_notification
-    (comment.commentable.comment_subscribers - [comment.user]).each do |commenter|
+    (self.commentable.comment_subscribers - [self.user]).each do |commenter|
       Mailer.deliver_comment_notification(self, commenter)
     end
   end
