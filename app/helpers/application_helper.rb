@@ -42,7 +42,6 @@ module ApplicationHelper
     Digest::SHA1.hexdigest(final_key)
   end
   
-  
   def body_class
     controller.controller_path.underscore.gsub('/', '_')
   end
@@ -52,6 +51,20 @@ module ApplicationHelper
     current_user.current_balance
   end
 
+  def get_comments_url(commentable)
+    if commentable.type.to_s='Pitch'
+      return "#{pitch_url(commentable)}/comments"
+    elsif commentable.type.to_s='Story'
+      return "#{story_url(commentable)}/comments"
+    end
+  end
+  
+  def get_unsubscribe_link_text(subscriber)
+    url  = "Go to: #{root_url}"
+    url += subscriber ? "subscription/cancel/#{@subscriber.invite_token}" : "myspot/settings/edit"
+    url
+  end
+  
   def topic_check_boxes(resource, model = nil)
     render :partial => "topics/topic", :collection => Topic.all, :locals => {:resource => resource, :model => model}
   end
