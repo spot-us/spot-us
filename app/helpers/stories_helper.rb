@@ -10,7 +10,7 @@ module StoriesHelper
     end
     case @story.status
     when 'draft' then
-      if @story.editable_by?(user)
+      if @story.editable_by?(user) && @story.peer_reviewer
         out << content_tag(:div, link_to(image_tag('send_to_editor.png', :class => 'send_to_editor'), 
         fact_check_story_path(@story), :method => :put), :class => 'centered')
       end
