@@ -1,3 +1,5 @@
+Dear <%=@pitch.user.first_name%>,
+
 Someone wants to join your pitch's reporting team:
 
 <%= @pitch.headline %>
@@ -19,3 +21,5 @@ Spot.Us: <info@spot.us> or David Cohn <david@spot.us>
 
 Sincerely,
 The Spot.Us Team.
+
+<%= render :partial=>"footer.html.erb", :locals=>{ :email=>@pitch.user.email }%>
