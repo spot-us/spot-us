@@ -30,14 +30,15 @@ class StoriesController < ApplicationController
     story = find_resource
     story.reject!
     flash[:notice] = "Your story has been sent back to the reporter for edits"
-    redirect_back_or_default("/")
+    redirect_to story_path(story)
   end
 
   def fact_check
+    debugger
     story = find_resource
     story.verify!
     flash[:notice] = "Your story has been sent to the peer reviewer"
-    redirect_back_or_default("/")
+    redirect_to story_path(story)
   end
 
   def publish
