@@ -7,6 +7,11 @@ config.whiny_nils = true
 config.action_mailer.perform_deliveries = true
 SslRequirement.disable_ssl_check = false
 
+if APP_CONFIG[:action_mailer].is_a?(Hash)
+  config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]
+  config.action_mailer.smtp_settings   = APP_CONFIG[:action_mailer][:smtp_settings]
+end
+
 ActiveMerchant::Billing::Base.mode = :test
 config.to_prepare do
   if APP_CONFIG[:gateway].is_a?(Hash)
