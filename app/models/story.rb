@@ -90,6 +90,10 @@ class Story < NewsItem
     pitch.supporters
   end
   
+  def fact_checker
+    self.peer_reviewer
+  end
+  
   def total_amount_donated
     pitch.total_amount_donated
   end
@@ -109,8 +113,10 @@ class Story < NewsItem
 
   def viewable_by?(user)
     return true if user.is_a?(Admin)
-    return true if self.published?
-    return true if self.fact_checker == user
+    #return true if self.published?
+    #return true if self.fact_checker == user
+    
+    return true if self.pitch.peer_reviewer == user
     return true if self.user == user
     # if user.is_a?(Reporter)
     #   return reporter_view_permissions(user)
@@ -163,8 +169,8 @@ class Story < NewsItem
   protected
   def fact_checker_recipients
       recipients = '"David Cohn" <david@spot.us>'
-      if self.pitch && self.pitch.fact_checker_id
-          fact_checker = User.find_by_id(self.pitch.fact_checker_id)
+      if self.pitch && self.pitch.fact_checker
+          fact_checker = User.find_by_id(self.pitch.fact_checker.id)
           if fact_checker && fact_checker.email
               recipients += (", " + fact_checker.email)
           end

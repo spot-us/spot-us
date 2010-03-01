@@ -20,8 +20,8 @@
       = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"
     - if pitch.assignable_by?(current_user)
       = link_to image_tag('make_assignment.gif'), new_pitch_assignment_path(pitch), :title => "Make Assignment"
-    - if pitch.story && pitch.fact_checker == current_user
-      = link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"
+    -# if pitch.story && pitch.fact_checker == current_user
+    = link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"
     - if current_user == pitch.user
       = link_to image_tag('report.gif'), begin_story_pitch_path(pitch), :title => "begin your story draft" if !pitch.story
     - if !pitch.fully_funded? && current_user == pitch.user
