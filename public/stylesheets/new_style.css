@@ -103,7 +103,7 @@ a.admin_button  {color:white !important;}
 .home-floater {padding:20px 15px 15px;margin-right:23px; height:100%;}
 .stories-in-progress{float:right;width:310px;background:#eee;margin-right:34px; border-left:1px solid #ccc; border-bottom:1px solid #ccc;}
 .stories-in-progress ul{margin:0px 0px 0px 0px;padding:0 13px 0 3px;list-style-type:none;}
-.stories-in-progress ul li.post{margin-bottom:20px;}
+.stories-in-progress ul li.post{margin-bottom:20px; width:284px;}
 .stories-in-progress ul li.post img{display:block;width:300px;height:163px;margin-bottom:3px;}
 p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;letter-spacing:0;line-height:13px;text-transform:uppercase;
 				margin-bottom:1.5em;}
