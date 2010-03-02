@@ -1,0 +1,16 @@
+Dear <%=@user.first_name%>,
+
+There is a new comment on Spot.Us to a story you've shown interest in.
+
+by <%= @comment.user.full_name %> on the <%= @comment.commentable.type.to_s.downcase %> "<%=h @comment.commentable.headline %>"
+
+Check it out at <%= get_comments_url(@comment.commentable) %>
+
+You can opt to stop receiving comment notifications by visiting your settings page <%= root_url + "myspot/settings/edit" %>
+
+If you have questions or concerns - please contact: David@spot.us
+
+Sincerely,
+Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>
