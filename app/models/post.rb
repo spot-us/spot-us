@@ -37,8 +37,8 @@ class Post < ActiveRecord::Base
   
   def blog_posted_notification
     #email supporters
-    emails = post.supporters.map{ |email| "'#{email}'"}
-    post.supporters.each do |supporter|
+    emails = self.supporters.map{ |email| "'#{email}'"}
+    self.supporters.each do |supporter|
       Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email)
     end
     #email admins
@@ -47,7 +47,7 @@ class Post < ActiveRecord::Base
       Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
     end
     #email subscribers
-    post.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+    self.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
       Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
   end
