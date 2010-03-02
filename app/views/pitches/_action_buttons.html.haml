@@ -22,7 +22,7 @@
       = link_to image_tag('make_assignment.gif'), new_pitch_assignment_path(pitch), :title => "Make Assignment"
     - if pitch.story
       = link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"
-    - if (current_user == pitch.user && (!pitch.story || pitch.story.editable_by?(current_user)))
+    - if (current_user == pitch.user && !pitch.story)
       = link_to image_tag('report.gif'), begin_story_pitch_path(pitch), :title => "begin your story draft"
     - if (!pitch.fully_funded? && current_user == pitch.user)
       = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"
