@@ -14,6 +14,11 @@ module StoriesHelper
         out << content_tag(:div, link_to(image_tag('send_to_editor.png', :class => 'send_to_editor'), 
         fact_check_story_path(@story), :method => :put), :class => 'centered')
       end
+      if !@story.peer_reviewer
+        out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
+                                  accept_story_path(@story), :method => :put), :class => 'centered')
+      end
+        
     when 'fact_check' then
       if @story.fact_checkable_by?(user)
         out << content_tag(:div, link_to(image_tag('edit_in_gray.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
