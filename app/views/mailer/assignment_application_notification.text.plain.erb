@@ -1,13 +1,14 @@
 Dear <%=@assignment.pitch.user.first_name%>,
 
-<%= @contributor.full_name %> has applied to contribute to one of your assignments assignment.
+<%= @contributor.full_name %> has applied to contribute to one of your assignments.
 
 <%= @assignment.pitch.headline %>
 
 See the assignment at:
 <%= pitch_assignment_url(@assignment.pitch, @assignment) %>
 
-Who becomes part of your reporting team is up to your discretion. 
+Who becomes part of your reporting team is up to your discretion (note: Spot.Us will
+occasionally assign somebody as the Peer Review Editor). 
 
 Visit your pitch and click into the specific assignment in question. 
 At the bottom you can see who applied for the task and can approve/reject them. 
