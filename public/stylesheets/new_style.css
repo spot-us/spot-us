@@ -68,7 +68,7 @@ a.admin_button  {color:white !important;}
 #user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
 #user-header .newsletter {padding: 3px;padding-right:15px;font-size:10px;float:right;}
 #user-header ul.user-header-nav {margin:0;color:#ccc;float:left;}
-#user-header ul.user-header-nav li {line-height: 24px;height: 24px;}
+#user-header ul.user-header-nav li {line-height: 24px;height: 24px;float:left;}
 #user-header ul.user-header-nav li a {vertical-align: middle;}
 #user-header .slogan {padding: 5px 0 3px 0;text-transform: uppercase;letter-spacing: .15em;float: right;}
 
