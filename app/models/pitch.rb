@@ -385,7 +385,7 @@ class Pitch < NewsItem
 
   def do_fund_events
     send_fund_notification
-    create_associated_story
+    create_associated_story unless self.story
   end
   
 
@@ -399,8 +399,8 @@ class Pitch < NewsItem
 
   def send_fund_notification
     #email supporters
-    emails = pitch.supporters.map{ |email| "'#{email}'"}
-    pitch.supporters.each do |supporter|
+    emails = self.supporters.map{ |email| "'#{email}'"}
+    self.supporters.each do |supporter|
       Mailer.deliver_pitch_accepted_notification(self, supporter.first_name, supporter.email)
     end
     #email admins
@@ -409,7 +409,7 @@ class Pitch < NewsItem
       Mailer.deliver_pitch_accepted_notification(self, admin.first_name, admin.email)
     end
     #email subscribers
-    pitch.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+    self.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
       Mailer.deliver_pitch_accepted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
   end
