@@ -59,7 +59,7 @@ class Story < NewsItem
   end
 
   aasm_event :accept do
-    transitions :from => :fact_check, :to => :ready, :on_transition => :notify_admin
+    transitions :from => [:fact_check,:draft], :to => :ready, :on_transition => :notify_admin
   end
 
   aasm_event :publish do
@@ -113,9 +113,7 @@ class Story < NewsItem
 
   def viewable_by?(user)
     return true if user.is_a?(Admin)
-    #return true if self.published?
-    #return true if self.fact_checker == user
-    
+    return true if self.published?
     return true if self.pitch.peer_reviewer == user
     return true if self.user == user
     # if user.is_a?(Reporter)

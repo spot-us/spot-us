@@ -3,7 +3,7 @@
 	<% apply_fragment ['pitch_detail_page_top_', @tab, @pitch, @item] do %>
 		<div class="item_tab tab_panel clearfix">
 		   <div class="mini_header"><%=pre_title?(@item)%>
-		      <span class="view_all"> <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a> </span>  
+		      <span class="view_all"> <a href="<%=pitch_path(@pitch)%>/<%=@tab%>"> &laquo; view all <%=pre_title?(@item).pluralize.downcase %></a> </span>
 		   </div>
 			<h2 class="title">
 				 <%= @item.title %>
