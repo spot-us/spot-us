@@ -371,13 +371,18 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #donation_amounts p {margin-bottom:.5em;}
 #donation_amounts a {color:#398C9F;}
 #donation_amounts h4 a {color:#11363E;}
-#donation_amounts ul {list-style-type:none;margin:0 30px;}
+#donation_amounts ul {list-style-type:none;margin:0 20px; width:95%;}
 #donation_amounts ul li img {float:left;margin: 0 35px 10px 0;}
 #donation_amounts h2.heading {border-bottom:5px solid #eee;color: #800000; text-align: center;margin-bottom:25px;}
 #donation_amounts h3.heading {border-bottom:5px solid #eee;margin-bottom:20px;padding-bottom:5px;}
 #donation_amounts .donation {margin-bottom:15px;border-bottom: 1px solid #eee;padding-bottom:10px;}
-#donation_amounts .donation_item {float:left;width:500px;margin-right:30px;}
-#donation_amounts .donater {float:left;width:75px;}
+#donation_amounts .donation_item, #donation_amounts .donation_extra, #donation_amounts .donation_owe {float:left;width:500px;margin-right:30px;}
+#donation_amounts .donation_extra { font-weight:normal; font-size:16px; }
+#donation_amounts .donation_extra h3 { font-weight:normal; font-size:16px; padding:0px; margin:0px;}
+#donation_amounts .donation_owe { font-size:20px; }
+#donation_amounts .donater, #donation_amounts .donater_owe, #donation_amounts .donater_credit  {float:right;}
+#donation_amounts .donater_credit  {float:right;color:red; font-weight:bold;}
+#donation_amounts .donater_owe span { font-size:20px; padding:0px; margin:0px;}
 
 
 #login_modal {padding:20px;}
