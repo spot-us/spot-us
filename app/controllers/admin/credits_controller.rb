@@ -20,7 +20,7 @@ class Admin::CreditsController < ApplicationController
   private
   
     def load_users_and_credits
-      @users = User.find :all, :order => "last_name" # this could be huge list ... 
+      @users = User.find :all, :order => "last_name asc, first_name asc" # this could be huge list ... 
       @credits = Credit.paginate(:page => params[:page], :per_page => 50, :order => "created_at desc")
     end
 end
