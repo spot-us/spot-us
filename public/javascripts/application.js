@@ -103,6 +103,25 @@ $(function() {
 	}
 });
 
+function getTotalAmounts(){
+	owe_amount = 0;
+	credit = 0;
+	total_amount = 0;
+	jQuery('input[id*=donation_amounts]').each(function() {
+		owe_amount += parseFloat(this.value);
+	});	
+	jQuery('input[id*=credit_pitch_amounts]').each(function() {
+		owe_amount += parseFloat(this.value);
+	});
+	spot_us_support = jQuery('#spotus_donation').val() || 0;
+	credit = jQuery('#spotus_credit_amount').html() || 0;
+	total_amount = parseFloat(owe_amount)+parseFloat(spot_us_support)-parseFloat(credit);
+	if (total_amount<=0) {
+		total_amount=0;
+	}
+	jQuery('#spotus_total_amount').html('$'+total_amount);
+}
+
 function renderUserHeader() {
 	if (jQuery.cookie('current_user_full_name')) {
 		// we are logged in
