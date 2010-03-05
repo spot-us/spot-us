@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   def index
     #nothing here if you have the wrong hash to pass in here :-)
     unless params[:code] && params[:code]==APP_CONFIG[:cron_job_code]
-      response.headers["Status"] = "404 Page Not Found"
+      head(:bad_request)
       render :text=>"Ooops, something doesn't exist there."
       return
     end
