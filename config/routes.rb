@@ -10,7 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   
   #better route support for the search page
   map.connect "stories.:format", :controller => "news_items", :action => "index", :filter=>'unfunded'
-  map.connect "stories/:filter.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
+  map.connect "stories/:filter.:format", :controller => "news_items", :action => "index", :filter=>nil, :length=>"short", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
+  map.connect "stories/:filter/:length.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
   map.connnect "news_items", :controller => "news_items", :action => "search", :sort_by=>'asc'
   
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
