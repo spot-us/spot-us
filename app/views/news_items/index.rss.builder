@@ -10,7 +10,8 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title news_item.headline
         xml.author news_item.user.full_name
-        xml.description truncate_words(strip_tags((news_item.short_description.blank? ? news_item.extended_description : news_item.short_description)), 50)
+        description = (news_item.short_description.blank? ? news_item.extended_description : news_item.short_description)
+        xml.description @full ? description : truncate_words(strip_tags(description), 50) 
         xml.pubDate news_item.created_at.to_s(:rfc822)
         xml.link url_for_news_item(news_item)
       end
