@@ -98,6 +98,9 @@
             <li id="support_spotus" class="donation clearfix">
                <div class="donation_extra">
                   <h3>Support Spot.Us</h3>
+				  <p>
+					We are a nonprofit and this money goes to support our overhead such as credit card fees to process your contribution.
+                  </p>
                </div>
                <div class="donater">
                   $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;" %>
@@ -111,7 +114,7 @@
          <ul>
             <li id="support_spotus" class="donation clearfix">
                <div class="donation_extra">
-                  <h3>Available credits</h3>
+                  <h3>Your available credits</h3>
                </div>
                <div class="donater_credit">
 				 - $<span id="spotus_credit_amount"><%=number_to_currency(current_user.total_credits, :unit => '')%></span>
