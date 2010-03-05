@@ -47,8 +47,7 @@ class NewsItemsController < ApplicationController
     
     filter = "suggested" if params[:news_item_type] ==  "tips"
 
-    response.headers["Status"] = "301 Moved Permanently"
-    redirect_to "/stories/#{filter}"
+    redirect_to "/stories/#{filter}", :status=>301
     return
   end
 
