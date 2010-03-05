@@ -117,7 +117,12 @@ function getTotalAmounts(){
 	credit = jQuery('#spotus_credit_amount').html() || 0;
 	total_amount = parseFloat(owe_amount)+parseFloat(spot_us_support)-parseFloat(credit);
 	if (total_amount<=0) {
+		jQuery('#purchase').hide();
+		jQuery('#apply_credits').show();
 		total_amount=0;
+	} else {
+		jQuery('#purchase').show();
+		jQuery('#apply_credits').hide();
 	}
 	jQuery('#spotus_total_amount').html('$'+total_amount);
 }
