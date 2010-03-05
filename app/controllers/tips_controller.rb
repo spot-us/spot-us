@@ -16,10 +16,8 @@ class TipsController < ApplicationController
   end
 
   def index
-    response.headers["Status"] = "301 Moved Permanently"
-    redirect_to "/stories/suggested"
+    redirect_to "/stories/suggested", :status=>301
     return
-    #redirect_to news_items_path
   end
 
   private
