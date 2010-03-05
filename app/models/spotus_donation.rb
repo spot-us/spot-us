@@ -14,11 +14,21 @@
 class SpotusDonation < ActiveRecord::Base
   belongs_to :user
   belongs_to :purchase
-
+  belongs_to :credit
+  
   validates_presence_of :amount
 
-  named_scope :unpaid, :conditions => { :purchase_id => nil }, :limit => 1
-  named_scope :paid, :conditions => 'purchase_id IS NOT NULL'
+  named_scope :unpaid, :conditions => "(purchase_id is null and credit_id is null) OR 
+        (credit_id is not null and spotus_donations.amount>ABS(credits.amount)) OR 
+        (purchase_id is not null and spotus_donations.amount>purchases.total_amount) OR 
+        (credit_id is not null and purchase_id is not null and spotus_donations.amount>(purchases.total_amount+ABS(credits.amount)))", 
+      :joins=>"left join credits on credits.id=credit_id left join purchases on purchases.id=purchase_id", 
+      :limit => 1
+      
+  named_scope :paid, :conditions => "(credit_id is not null and spotus_donations.amount<=ABS(credits.amount)) OR 
+          (purchase_id is not null and spotus_donations.amount<=purchases.total_amount) OR 
+          (credit_id is not null and purchase_id is not null and spotus_donations.amount<=(purchases.total_amount+ABS(credits.amount)))", 
+      :joins=>"left join credits on credits.id=credit_id left join purchases on purchases.id=purchase_id"
 
   SPOTUS_TITHE = 0.10
 
@@ -32,7 +42,11 @@ class SpotusDonation < ActiveRecord::Base
   end
 
   def unpaid?
-    purchase.blank?
+    (purchase.blank? && credit.blank?) || (!credit.blank? && credit.amount.abs<amount) || (!purchase.blank? && purchase.total_amount<amount) || (!credit.blank? && !purchase.blank? && (credit.amount.abs+purchase.total_amount)<amount)
+  end
+  
+  def paid?
+    !unpaid?
   end
 
   def self.find_from_paypal(paypal_params)
