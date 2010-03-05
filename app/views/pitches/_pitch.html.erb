@@ -1,7 +1,9 @@
-<% apply_fragment ['pitch_', pitch] do %>
+<% apply_fragment ['pitch_listing_top_', pitch] do %>
 	<% div_for(pitch, :class => "clearfix") do %>
 		<div class="donater">
+<%end%>
 			<%= render :partial => "donations/button", :locals => { :news_item => pitch } %>
+<% apply_fragment ['pitch_listing_bottom_', pitch] do %>
 			<%if pitch.story && pitch.story.published?%>
 				<br/>
 				<%= link_to image_tag('/images/read-story-purple.png', :alt => "", :style=>"padding-top:5px;"), story_path(pitch.story) %>
