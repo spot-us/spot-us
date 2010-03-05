@@ -379,6 +379,7 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #donation_amounts .donation_item, #donation_amounts .donation_extra, #donation_amounts .donation_owe {float:left;width:500px;margin-right:30px;}
 #donation_amounts .donation_extra { font-weight:normal; font-size:16px; }
 #donation_amounts .donation_extra h3 { font-weight:normal; font-size:16px; padding:0px; margin:0px;}
+#donation_amounts .donation_extra p { font-size:12px;font-weight:normal; padding:4px 0px 0px 0px; margin:0px;}
 #donation_amounts .donation_owe { font-size:20px; }
 #donation_amounts .donater, #donation_amounts .donater_owe, #donation_amounts .donater_credit  {float:right;}
 #donation_amounts .donater_credit  {float:right;color:red; font-weight:bold;}
