@@ -15,13 +15,19 @@ jQuery(document).ready(function($){
 	$("#pitches_carousel").jCarouselLite({
 		btnNext: ".next_alt",
 		btnPrev: ".prev_alt",
-		visible: 1
+		visible: 1,
+		circular: true,
+		easing: "easeInOut",
+		speed:1000
 	});
 
 	$("#stories_carousel").jCarouselLite({
 		btnNext: ".next_story_alt",
 		btnPrev: ".prev_story_alt",
-		visible: 2
+		visible: 2,
+		circular: true,
+		easing: "easeInOut",
+		speed:1000
 	});
 
 	$(".tab").click(function(){
