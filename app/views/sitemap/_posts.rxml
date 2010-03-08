@@ -1,6 +1,6 @@
 @posts.each { |post|
   xml.url{
-      apply_fragment ['sitemap_post_', post, @prefix_template] do
+      apply_fragment ['new_sitemap_post_', post, @prefix_template] do
         xml << render (:partial=>"#{@prefix_template}url", 
           :locals=>{ 
               :title => post.title,
