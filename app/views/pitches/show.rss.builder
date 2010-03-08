@@ -24,7 +24,7 @@ xml.rss :version => "2.0" do
         comments = @pitch.comments.find(:all,:limit=>limit)
         parse_xml_created_at(xml, comments)
         comments.each do |comment|
-          apply_fragment ['pitch_rss_comments', commment] do
+          apply_fragment ['pitch_rss_comments', comment] do
             xml.item do
               xml.title comment.title
               xml.description comment.body
