@@ -71,7 +71,7 @@ class PitchesController < ApplicationController
   
   def begin_story
     pitch = find_resource
-    redirect_to :back if !pitch or current_user != pitch.user
+    redirect_to pitch_url(pitch) if !pitch || (current_user && current_user.id != pitch.user.id)
     pitch.create_associated_story 
     redirect_to edit_story_path(pitch.story)
   end
