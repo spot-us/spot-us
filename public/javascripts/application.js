@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 	
 	$('a[rel*=facebox]').facebox();
 	$('form[rel*=facebox]').facebox();
-	$('a[title*=lightbox]').facebox();
+	$('a[href*=/get_external_url]').facebox();
 
 	$("#pitches_carousel").jCarouselLite({
 		btnNext: ".next_alt",
