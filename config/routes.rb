@@ -3,6 +3,8 @@ ActionController::Routing::Routes.draw do |map|
   map.start_story 'start_story', :controller => 'homes', :action => "start_story"
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 
+  map.connect "/link/:width/:height", :controller=>"sections", :action=>"link", :width=>nil, :height=>nil
+  
   map.connect "/sitemap.:type", :controller => "sitemap", :action => "index"
   map.connect "/sitemap_news.:type", :controller => "sitemap", :action => "index", :news=>true
   map.connect "/contributors.:format", :controller => "users", :action => "list", :filter=>'donated'
