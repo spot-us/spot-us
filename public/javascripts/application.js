@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 	
 	$('a[rel*=facebox]').facebox();
 	$('form[rel*=facebox]').facebox();
-	$('a[href*=market2]').facebox();
+	$('a[title*=lightbox]').facebox();
 
 	$("#pitches_carousel").jCarouselLite({
 		btnNext: ".next_alt",
