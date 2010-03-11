@@ -11,12 +11,12 @@ xml.rss :version => "2.0" do
         posts = @pitch.posts.find(:all,:limit=>limit)
         parse_xml_created_at(xml, posts)
         posts.each do |post|
-          apply_fragment ['pitch_rss_posts', post] do
+          apply_fragment ['pitch_rss_posts_modified_', post] do
             xml.item do
               xml.title post.title
               xml.description post.body
               xml.pubDate post.created_at.to_s(:rfc822)
-              xml.link pitch_post_path(@pitch, post)
+              xml.link pitch_post_path(@pitch, post,{:only_path=>false})
             end
           end
         end
@@ -24,12 +24,12 @@ xml.rss :version => "2.0" do
         comments = @pitch.comments.find(:all,:limit=>limit)
         parse_xml_created_at(xml, comments)
         comments.each do |comment|
-          apply_fragment ['pitch_rss_comments', comment] do
+          apply_fragment ['pitch_rss_comments_modified_', comment] do
             xml.item do
               xml.title comment.title
               xml.description comment.body
               xml.pubDate comment.created_at.to_s(:rfc822)
-              xml.link pitch_path(@pitch)+"/comments##{comment.id}"
+              xml.link pitch_path(@pitch,{:only_path=>false})+"/comments##{comment.id}"
             end
           end
         end
@@ -37,12 +37,12 @@ xml.rss :version => "2.0" do
         assignments = @pitch.assignments.find(:all,:limit=>limit)
         parse_xml_created_at(xml, assignments)
         assignments.each do |assignment|
-          apply_fragment ['pitch_rss_assignments', assignment] do
+          apply_fragment ['pitch_rss_assignments_modified_', assignment] do
             xml.item do
               xml.title assignment.title
               xml.description assignment.body
               xml.pubDate assignment.created_at.to_s(:rfc822)
-              xml.link pitch_assignment_path(@pitch, assignment)
+              xml.link pitch_assignment_path(@pitch, assignment,{:only_path=>false})
             end
           end
         end
@@ -50,12 +50,12 @@ xml.rss :version => "2.0" do
         posts = @pitch.posts.find(:all,:limit=>limit)
         parse_xml_created_at(xml, posts)
         posts.each do |post|
-          apply_fragment ['pitch_rss_posts', post] do
+          apply_fragment ['pitch_rss_posts_modified_', post] do
             xml.item do
               xml.title post.title
               xml.description post.body
               xml.pubDate post.created_at.to_s(:rfc822)
-              xml.link pitch_post_path(@pitch, post)
+              xml.link pitch_post_path(@pitch, post,{:only_path=>false})
             end
           end
         end
