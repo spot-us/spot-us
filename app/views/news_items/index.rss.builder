@@ -7,7 +7,7 @@ xml.rss :version => "2.0" do
     xml.language "en-us"
     parse_xml_created_at(xml, @news_items)
     @news_items.each do |news_item|
-      #apply_fragment ['search_rss_modified_', news_item, @full] do 
+      apply_fragment ['search_rss_modified2_', news_item, @full] do 
         xml.item do
           xml.title news_item.headline
           xml.author news_item.user.full_name
@@ -24,7 +24,7 @@ xml.rss :version => "2.0" do
             xml.link news_item_path(news_item, {:only_path=>false})
           end
         end
-      #end
+      end
     end
   end
 end
