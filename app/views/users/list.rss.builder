@@ -13,7 +13,7 @@ xml.rss :version => "2.0" do
           xml.author item.user.full_name
           xml.description truncate_words(strip_tags((item.user.about_you.blank? ? "The donor #{item.user.full_name} has not added their about you section yet" : item.user.about_you)), 50)
           xml.pubDate item.user.created_at.to_s(:rfc822)
-          xml.link profile_path(item.user)
+          xml.link profile_path(item.user, {:only_path=>false})
         end
       end
     end
