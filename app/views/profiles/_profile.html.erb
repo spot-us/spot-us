@@ -43,3 +43,10 @@
       <% end %>
    </div>
 <% end %>
+<% if current_user && current_user.is_a?(Admin) %>
+   <div class="profile_section">
+     <h3>Admin</h3>
+     <%=link_to 'Log in as', log_in_as_admin_user_path(user)%>
+   </div>
+<% end %>
+
