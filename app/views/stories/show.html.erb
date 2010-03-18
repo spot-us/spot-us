@@ -26,7 +26,7 @@
 		</div>
 
 		<div class="right-panel-box clearfix">
-			div class="share">
+			<div class="share">
 				<h3>Share</h3>
 				<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @story.short_url(request.url) rescue "" end %>&amp;t=<%= h @story.status_update(false) %>">
 					<%= image_tag("/images/new_design/facebook.png") %>
