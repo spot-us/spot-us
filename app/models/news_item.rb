@@ -175,7 +175,7 @@ class NewsItem < ActiveRecord::Base
   def status_update(show_url=true)
     url_length = show_url ? 22 : 0
     share_type = type.to_s.titleize
-    max_length = PREPEND_STATUS_UPDATE.length + share_length + url_length + 15
+    max_length = PREPEND_STATUS_UPDATE.length + share_type.length + url_length + 15
     msg  = "#{PREPEND_STATUS_UPDATE} #{share_type}: "
     msg += headline.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : headline
     msg += " - #{short_url}" if show_url
