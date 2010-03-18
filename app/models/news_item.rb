@@ -152,6 +152,36 @@ class NewsItem < ActiveRecord::Base
     return false   
   end
 
+  def to_s
+    headline
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
+  
+  def short_url(base_url=nil)
+    base_url = "http://spot.us/" unless base_url
+    authorize = UrlShortener::Authorize.new 'spotus', APP_CONFIG[:bitly]
+    client = UrlShortener::Client.new(authorize)
+    shorten = client.shorten("#{base_url}#{to_param}")
+    shorten.urls
+  end
+  
+  def status_update(show_url=true)
+    url_length = show_url ? 22 : 0
+    share_type = type.to_s.titleize
+    max_length = PREPEND_STATUS_UPDATE.length + share_length + url_length + 15
+    msg  = "#{PREPEND_STATUS_UPDATE} #{share_type}: "
+    msg += headline.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : headline
+    msg += " - #{short_url}" if show_url
+    msg
+  end
+
   def deleted?
     !deleted_at.blank?
   end

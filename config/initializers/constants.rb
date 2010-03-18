@@ -9,7 +9,7 @@ LOCATIONS = [
 
 MAIL_FROM_INFO = %("Spot.Us" <info@spot.us>)
 MAIL_WEBMASTER = %("Webmaster Spot.Us" <webmaster@spot.us>)
-PREPEND_STATUS_UPDATE = "Spot.Us Pitch:"
+PREPEND_STATUS_UPDATE = "Spot.Us"
 
 MODEL_NAMES = {
   'suggested' => 'Tip',

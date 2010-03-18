@@ -180,18 +180,6 @@ class Story < NewsItem
     end
   end
   
-  def to_s
-    headline
-  end
-  
-  def to_param
-    begin 
-      "#{id}-#{to_s.parameterize}"
-    rescue
-      "#{id}"
-    end
-  end
-  
   protected
   def fact_checker_recipients
       recipients = '"David Cohn" <david@spot.us>'
