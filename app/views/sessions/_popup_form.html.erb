@@ -1,3 +1,17 @@
+<div style="display:none;" id="loginError">
+	<h2>Sorry about that.</h2>
+	<p>Check below to see what happened:</p>
+	<ul>
+		<li>Was it an invalid E-mail address or password?</li>
+		<li>Have you activated your account? You should receive an email with an activation link after signing up.</li>
+	</ul>
+	<p>
+		If you're experiencing a persistent problem, email
+		<%= mail_to 'david@spot.us', nil, :encode => "hex"%>
+		<br/>
+		Seriously, this guy doesn't sleep and he wants the site to work for you!!!
+	</p>
+</div>
 <div class="row">
     <label>Your E-mail Address</label>
     <div class="login">

@@ -35,12 +35,16 @@ jQuery(document).ready(function($){
 
 	$("#login_modal form.login").livequery(function() {
 		var form = $(this);
+		$('#loginError').hide();
 		$(this).ajaxForm({
 			complete: function(request,message) {
 			if(message == "error") {
-				$("#facebox .content .login-boxer").replaceWith(request.responseText);
-				if (request.responseText == ' ')
-					$(document).trigger('close.facebox');
+				//$("#facebox .content .login-boxer").replaceWith(request.responseText);
+				if (typeof (request.getResponseHeader('error'))!=null) {
+					$('#loginError').show();
+					$('#flash').hide('');
+				}else if (request.responseText == ' ')
+					$(document).trigger('close.facebox')
 				} else {
 					$("#not_logged_in").hide();
 					$("#logged_in").show();
@@ -59,7 +63,6 @@ jQuery(document).ready(function($){
 					$("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
 					if(("#assignment_admin").length > 0)
 					{
-						
 					}
 					if($("#flash").length > 0){
 						$("#flash").html("");
