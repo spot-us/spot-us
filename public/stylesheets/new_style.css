@@ -350,9 +350,9 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 
 #spotus_form.purchase_lite {padding:0;}
 #spotus_form.purchase_lite .box {background:#FEFFD9;}
-#spotus_form.purchase_lite .row {margin-left:0px;margin-bottom:10px;}
+#spotus_form.purchase_lite .row {margin-left:0px;margin-bottom:10px;width:100%;display:block;}
 #spotus_form.purchase_lite .row input, #spotus_form.purchase_lite .row select {padding:2px;font-size:1.1em;font-family:arial, helvetica;}
-#spotus_form.purchase_lite label {width:80%;text-align:left;padding:0;}
+#spotus_form.purchase_lite label {width:100%;text-align:left;padding:0;}
 
 #form_page {padding:20px 40px;}
 
