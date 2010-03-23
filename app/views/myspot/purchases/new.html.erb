@@ -81,7 +81,7 @@
                         <%= hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}" %>
                         <%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
                         <%= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
-                        <%= image_submit_tag "buy_now.gif" %>
+                        <%= image_submit_tag "buy_now.gif", :style=>"height:25px;" %>
                      <% end %>
                   <% end %>
                </div>

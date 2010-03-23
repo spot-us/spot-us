@@ -45,13 +45,6 @@
             <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
                <div class="donation_item">
                   <h4 class="display_inline"><%= link_to donation.pitch.headline, donation.pitch %></h4>
-                  <% if Group.all.any? %>
-                      <p style="padding:2px;margin:2px;">
-                        <a href="#group_selection" class="show_group_selector">Donate on behalf of group?</a>
-                        <%= select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>select a group</option>' +  options_from_collection_for_select(Group.all, :id, :name), :class => "invisible" %>
-                        <em class="invisible quiet small">optional</em>
-                      </p>
-                  <% end %>
                </div>
                <div class="donater">
                    $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;" %>
