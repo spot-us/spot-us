@@ -50,6 +50,7 @@
         </strong>
       </p>
     </div>
+	<div class="clearfix"></div>
      <% unless @purchase.credit_covers_total? %>
          <h3>Pay With PayPal</h3>
             <% if @purchase.credit_covers_partial? %>
@@ -62,8 +63,8 @@
                   </ol>
                </div>
             <% else %>
-               Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.
-               <div class="float-right">
+              <p>Use PayPal to fund a donation with money in your PayPal account, or to pay with a credit card.</p>
+               <p>
                   <% form_tag PAYPAL_POST_URL do %>
                      <%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
                      <%= hidden_field_tag "cmd", "_cart" %>
@@ -81,11 +82,11 @@
                         <%= hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}" %>
                         <%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
                         <%= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
-                        <%= image_submit_tag "buy_now.gif", :style=>"height:25px;" %>
+                        <%= image_submit_tag "buy_now.gif" %>
                      <% end %>
                   <% end %>
-               </div>
-               <div class="clear"> </div>
+               </p>
+               <div class="clearfix"> </div>
             <% end %>
         <% end %>
         <% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "spotus_form", :class => cookies[:spotus_lite] ? 'purchase_lite' : '"purchase'} do |f| %>
@@ -102,7 +103,6 @@
                      <%=  f.label :last_name %>
                      <%= f.text_field :last_name %>
                    </div>
-                   <hr/>
                    <div class="row">
                      <%= f.label :credit_card_type %>
                      <%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']] %>
@@ -122,7 +122,6 @@
                      <%= f.label :verification_value, 'Security Code' %>
                      <%= f.text_field :verification_value, :size => 4 %>
                    </div>
-                   <hr/>
                    <div class="row">
                      <%= f.label :address1, 'Address (1)' %>
                      <%= f.text_field :address1 %>
@@ -146,9 +145,9 @@
                  </div>
               <% end %>
               <div class="float-right">
-                 <input type="image" src="/images/purchase.png" alt="Purchase">
+                 <input type="image" src="/images/purchase.png" alt="Purchase" />
               </div>
          <% end %>
-		<div class="total clearfix">
+		<div class="clearfix">
 	    </div>
 </div>
