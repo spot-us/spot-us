@@ -10,6 +10,9 @@
 				<%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
 			</div>
 			<div class="spotus_pitch">
+				<% if flash[:success]%>
+					<span><%=flash[:success]%></span>
+				<%end%>
 				<%= yield %>
 			</div>
 			<div class="spotus_footer">

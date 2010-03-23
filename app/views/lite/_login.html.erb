@@ -15,6 +15,7 @@
 					<%= password_field_tag "password", nil, :class=>"text_lite", :id=>"passwordField" %>
 					<%= hidden_field_tag "encoded_password", nil, :class=>"text_lite", :id=>"passwordHiddenField" %>
 					<%= hidden_field_tag "return_to", pitch_path(@pitch).gsub('pitches','lite'), :class=>"text_lite", :id=>"spotusLite" %>
+					<%= hidden_field_tag "spotus_lite", @pitch.id, :class=>"text_lite" %>
 				</div>
 			</div>
 			<input type='image' src='/images/login.png' alt="Login" onclick="processLoginForm();$('#spotusLiteLogin').submit();"> 

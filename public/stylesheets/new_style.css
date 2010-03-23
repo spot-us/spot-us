@@ -394,7 +394,7 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #login_modal .forgot_password {margin: 0 10px;}
 #login_modal .row, #spotus_lite .row {clear:both;}
 #login_modal h3, #spotus_lite h3 {margin-bottom:15px;}
-#login_modal #register_form label, #spotus_lite #register {float:left; width:120px; display:block;}
+#login_modal #register_form label, #spotus_lite #register label {float:left; width:120px; display:block;}
 #login_modal input[type="image"], #spotus_lite input[type="image"] {margin-top:15px;}
 #login_modal input[type="checkbox"], #spotus_lite input[type="checkbox"] {margin-bottom:0;}
 

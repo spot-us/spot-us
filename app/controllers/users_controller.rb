@@ -39,18 +39,22 @@ class UsersController < ApplicationController
   def create
     delete_cookie :auth_token
     @user = User.new(params[:user])
+    return_path = root_path
+    return_path = params[:return_to] if params[:return_to] && params[:spotus_lite]
     if @user.save
       unless @user.organization?
         @user.activate!
         self.current_user = @user
         create_current_login_cookie
         update_balance_cookie
-        flash_and_redirect(:success, 'Welcome to Spot.Us!', root_path)
+        flash_and_redirect(:success, 'Welcome to Spot.Us!', return_path)
       else
-        flash_and_redirect(:success, "Your account will be reviewed prior to approval. We'll get back to you as soon as possible.", root_path)
+        flash_and_redirect(:success, "Your account will be reviewed prior to approval. We'll get back to you as soon as possible.", return_path)
       end
     else
-      if request.xhr?
+      if params[:spotus_lite]
+        redirect_to return_path
+      elsif request.xhr?
         render :partial => 'sessions/header_form', :status => :unprocessable_entity
       else
         render :action => 'new', :status => :unprocessable_entity
