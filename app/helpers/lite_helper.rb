@@ -1,0 +1,2 @@
+module LiteHelper
+end

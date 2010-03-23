@@ -17,9 +17,4 @@ class HomesController < ApplicationController
     end
   end
   
-  def spotus_lite
-      @pitch = Pitch.find_by_id(params[:id]);
-      render :layout=>"widget"
-  end
-  
 end

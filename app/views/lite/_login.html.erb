@@ -1,0 +1,24 @@
+<div id="spotus_lite">
+	<% form_tag session_url(:protocol => 'http'), :class => "login", :id=>'spotusLiteLogin' do %>
+		<div id="signin">
+        	<h3>Thanks for joining us!</h3>  
+			<div class="row">
+			    <label>Your E-mail Address</label>
+			    <div>
+					<%= text_field_tag "email", nil, :class=>"text_lite" %>
+			    </div>
+			</div>
+
+			<div class="row">
+			    <label>Your Password</label>
+				<div>
+					<%= password_field_tag "password", nil, :class=>"text_lite", :id=>"passwordField" %>
+					<%= hidden_field_tag "encoded_password", nil, :class=>"text_lite", :id=>"passwordHiddenField" %>
+					<%= hidden_field_tag "return_to", pitch_path(@pitch).gsub('pitches','lite'), :class=>"text_lite", :id=>"spotusLite" %>
+				</div>
+			</div>
+			<input type='image' src='/images/login.png' alt="Login" onclick="processLoginForm();$('#spotusLiteLogin').submit();"> 
+		</div>
+   <% end %>
+   <a href="<%="#{pitch_path(@pitch).gsub('pitches','lite')}"%>/register" title="Register at Spot.Us">Do you want to register?</a>
+</div>

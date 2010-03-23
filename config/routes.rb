@@ -33,8 +33,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.connect "pitches/:id/blog_posts", :controller => "pitches", :action => "index", :tab=>'posts'
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
-  map.connect "lite/:id", :controller => "homes", :action => "spotus_lite"
-  map.connect "pitches/:id/lite", :controller => "pitches", :action => "spotus_lite"
+  map.connect "test_spotus_lite/:id", :controller => "lite", :action => "test"
+  map.connect "lite/:id/:sub", :controller => "lite", :action => "index", :sub=>nil
   map.connect "pitches/:id/:tab.:format", :controller => "pitches", :action => "show", :requirements => {:tab=>/posts|comments|assignments/}
   map.connect "pitches/:id/:tab/:item_id", :controller => "pitches", :action => "show", :item_id=>nil, :requirements => {:tab=>/posts|comments|assignments/}
   

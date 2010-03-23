@@ -1,0 +1,5 @@
+<%if !@action || @action.blank?%>
+	<%=render :partial=>"pitch"%>
+<% else%>
+	<%=render :partial=>@action%>
+<%end%>

@@ -26,14 +26,20 @@ class SessionsController < ApplicationController
       handle_first_donation_for_non_logged_in_user
       handle_first_pledge_for_non_logged_in_user
      
-      if request.xhr?
+      if params[:return_to]
+        redirect_to params[:return_to]
+        return 
+      elsif request.xhr?
         render :nothing => true
       else
         redirect_back_or_default('/')
       end
     else
       @user = User.new
-      if request.xhr?
+      if params[:return_to]
+        redirect_to params[:return_to]
+        return 
+      elsif request.xhr?
         set_ajax_flash(:error, 'Invalid email or password.')
         render :status => :unprocessable_entity, :nothing => true
       else

@@ -1,0 +1,41 @@
+<div id="login_modal">
+   	<% form_for(:user, @user, :url => user_path, :html => {:class => 'register'}) do |f| %>
+		<div id="login_form">
+			<h3>Register for Spot.Us</h3>
+		    <div class="row">
+		      <%= f.label :first_name, "Your First Name" %>
+		      <%= f.text_field :first_name, :class => "text_lite", :tabindex => 1 %>
+		    </div>
+		    <div class="row">
+		      <%= f.label :last_name, "Your Last Name" %>
+		      <%= f.text_field :last_name, :class => "text_lite", :tabindex => 2 %>
+		    </div>
+		    <div class="row">
+		      <%= f.label :password %>
+		      <%= f.password_field :password, :class => "text_lite", :tabindex => 3 %>
+		    </div>
+		    <div class="row">
+		      <%= f.label :password_confirmation, "Confirm Password" %>
+		      <%= f.password_field :password_confirmation, :class => "text_lite", :tabindex => 4 %>
+		    </div>
+		    <div class="row">
+		      <%= f.label :email, "Your E-mail Address" %>
+		      <%= f.text_field :email, :class => "text_lite", :tabindex => 5 %>
+		    </div>
+		    <div class="row">
+		      <%= f.label :type, "I am a" %>
+		      <%= f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]] %>
+		    </div>
+		    <div class="row">
+		      <%= f.check_box :terms_of_service, {}, '1', '0' %>
+		      <label>Accept the</label>
+		      <%= link_to 'Terms of Service', page_path('terms') %>
+		      <div>
+		        <input type="image" src="/images/register.png" value="Register">
+		      </div>
+		    </div>
+		</div>
+	<% end %>
+   <a href="<%="#{pitch_path(@pitch).gsub('pitches','lite')}"%>/login" title="Login ot Spot.Us">Do you want to login instead?</a>
+</div>
+
