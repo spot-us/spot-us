@@ -6,6 +6,7 @@
     - else
       = f.text_field :amount, :value => number_to_currency(news_item.default_donation_amount, :unit => '')
   = f.hidden_field :pitch_id
+  = hidden_field :spotus_lite, spotus_lite
   .float_right
     = image_submit_tag("donate.png", :title => "Donate another amount", :alt => "Donate another amount")
 

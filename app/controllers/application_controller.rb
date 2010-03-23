@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include HoptoadNotifier::Catcher
   filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
-
+  
   include AuthenticatedSystem
   include SslRequirement
 
@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   before_filter :current_network
   before_filter :block_ips
   before_filter :set_default_html_meta_tags
-
+  before_filter :spotus_lite
+  
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   
   META_DESCRIPTION = "Spot.Us enables the public to commission journalists to do investigations on important and perhaps overlooked stories. " + 
@@ -31,6 +32,13 @@ class ApplicationController < ActionController::Base
     return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
   end
   
+  def spotus_lite
+    if session && params[:spotus_lite]
+      session[:spotus_lite] = true
+    elsif session
+      session[:spotus_lite] = false
+    end
+  end
   
   # minify the html
   def minify_html
