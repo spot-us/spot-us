@@ -88,6 +88,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :sections
   end
 
+  
   map.namespace :myspot do |myspot|
     myspot.resource :profile do |profile|
       profile.resources :jobs

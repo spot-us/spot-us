@@ -11,7 +11,7 @@ class Myspot::DonationsController < ApplicationController
     if resource_saved?
       update_balance_cookie
       if params[:spotus_lite]
-        format.html { redirect_to "#{myspot_donations_amounts_path}/spotus_lite" }
+        format.html { redirect_to spotus_lite_myspot_donations_amounts_path }
       else
         format.html { redirect_to edit_myspot_donations_amounts_path }
       end

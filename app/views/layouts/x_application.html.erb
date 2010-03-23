@@ -36,12 +36,12 @@
            </div>
            <% if yield(:error) %>
              <div class="error">
-               <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || '' %></span><!-- # empty string means self-->
+               <span class="dismiss"><%= link_to image_tag('/images/close_square.png'), @close_flash_link || '' %></span><!-- # empty string means self-->
                <p><%= yield(:error) %></p>
                <div id="flash">
                 <% flash.each do |key, value| %>
                   <div class="<%=key%>">
-                    <span class="dismiss"><%= link_to image_tag('close_square.png'), @close_flash_link || ''%></span><!-- # empty string means self-->
+                    <span class="dismiss"><%= link_to image_tag('/images/close_square.png'), @close_flash_link || ''%></span><!-- # empty string means self-->
                     <p><%= value %></p>
                    </div>
                 <% end %>

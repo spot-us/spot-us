@@ -13,6 +13,7 @@ class Myspot::PurchasesController < ApplicationController
                              :spotus_donation => current_user.current_spotus_donation,
                              :first_name => current_user.first_name,
                              :last_name  => current_user.last_name)
+    render :layout=>'lite' if cookies[:spotus_lite]
   end
 
   def create
@@ -25,13 +26,21 @@ class Myspot::PurchasesController < ApplicationController
     begin
       if @purchase.save
         update_balance_cookie
-        redirect_to myspot_donations_path
+        redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
       else
-        render :action => 'new'
+        unless cookies[:spotus_lite]
+          render :action => 'new'
+        else
+          render :action => 'new', :layout=>'lite'
+        end
       end
     rescue ActiveMerchant::ActiveMerchantError, Purchase::GatewayError => e
       flash[:error] = e.message
-      render :action => 'new'
+      unless cookies[:spotus_lite]
+        render :action => 'new'
+      else
+        render :action => 'new', :layout=>'lite'
+      end
     end
   end
 
@@ -42,7 +51,7 @@ class Myspot::PurchasesController < ApplicationController
     else
       flash[:success] = "Thanks! Your payment has been received."
     end
-    redirect_to myspot_donations_path
+    redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
   end
 
   def paypal_ipn

@@ -176,7 +176,7 @@ function load_categories(id) {
 
 jQuery(document).ajaxComplete(function(options, r) {
 	var notice;
-	var dismiss = "<span class=\"dismiss\"><a href=\"\"><img src=\"/images/close_square.png\" alt=\"Dismiss\" /></span>";
+	var dismiss = "<span class=\"dismiss\"><a href=\"\"><img src=\"http://www.spot.us/images/close_square.png\" alt=\"Dismiss\" /></span>";
 	// switched from append to html call to prevent stacking  
 	jQuery.each(["Success", "Notice", "Error"], function() {
 		if(notice = r.getResponseHeader("X-Flash-" + this)) {

@@ -1,5 +1,5 @@
 <% @title = "Spot.us - Your Donations" %>
-<%= render :partial => 'layouts/common_questions' %>
+<%= render :partial => 'layouts/common_questions' unless cookies[:spotus_lite]%>
 <div id="purchases">
    
       <% unless @purchase.errors.empty? %>

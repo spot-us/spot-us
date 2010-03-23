@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   before_filter :can_edit?, :only => [:edit, :update, :destroy]
   before_filter :current_network
   before_filter :block_ips
+  before_filter :clear_spotus_lite
   before_filter :set_default_html_meta_tags
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
@@ -31,11 +32,18 @@ class ApplicationController < ActionController::Base
     return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
   end
   
+  # clear cookie if inside the normal site
+  def clear_spotus_lite
+    unless ['myspot/donation_amounts','myspot/donations','myspot/purchases','lite'].include?(params[:controller])
+      cookies[:spotus_lite] = nil
+    end
+  end
+  
   # minify the html
   def minify_html
     response.body.gsub!(/[ \t\v]+/, ' ')
     response.body.gsub!(/\s*[\n\r]+\s*/, "\n")
-    response.body.gsub!(/>\s+</, '> <')
+      response.body.gsub!(/>\s+</, '> <')
     response.body.gsub!(/<\!\-\-([^>\n\r]*?)\-\->/, '')
   end
 
