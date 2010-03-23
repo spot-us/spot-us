@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   before_filter :current_network
   before_filter :block_ips
   before_filter :set_default_html_meta_tags
-  before_filter :spotus_lite
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   
@@ -30,14 +29,6 @@ class ApplicationController < ActionController::Base
   def block_ips
     return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86'].include?(request.remote_ip)
     return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
-  end
-  
-  def spotus_lite
-    if session && params[:spotus_lite]
-      session[:spotus_lite] = true
-    elsif session
-      session[:spotus_lite] = false
-    end
   end
   
   # minify the html

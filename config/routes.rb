@@ -69,7 +69,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :amounts, :name_prefix => 'myspot_donations_',
                          :path_prefix => 'myspot/donations',
-                         :controller  => 'myspot/donation_amounts'
+                         :controller  => 'myspot/donation_amounts',
+                         :member=>{:spotus_lite=>:get}
 
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :approve => :put}

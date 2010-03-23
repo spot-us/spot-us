@@ -385,6 +385,25 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #donation_amounts .donater_credit  {float:right;color:red; font-weight:bold;}
 #donation_amounts .donater_owe span { font-size:20px; padding:0px; margin:0px;}
 
+#donation_amounts_lite { height:100%; margin-bottom:15px; padding:5px; }
+#donation_amounts_lite p {margin-bottom:2px;;}
+#donation_amounts_lite a {color:#398C9F;}
+#donation_amounts_lite h4 a {color:#11363E;}
+#donation_amounts_lite ul {list-style-type:none;margin:0 20px; width:95%;}
+#donation_amounts_lite ul li {margin:0px;padding:2px;}
+#donation_amounts_lite ul li img {float:left;margin: 0 35px 10px 0;}
+#donation_amounts_lite h2.heading {border-bottom:5px solid #eee;color: #800000; text-align: center;margin-bottom:10px;}
+#donation_amounts_lite h3.heading {border-bottom:5px solid #eee;margin-bottom:20px;padding-bottom:5px;}
+#donation_amounts_lite .donation {margin-bottom:15px;border-bottom: 1px solid #eee;padding-bottom:10px;}
+#donation_amounts_lite .donation_item, #donation_amounts_lite .donation_extra, #donation_amounts_lite .donation_owe {float:left;width:60%;}
+#donation_amounts_lite .donation_extra { font-weight:normal; font-size:16px; }
+#donation_amounts_lite .donation_extra h3 { font-weight:normal; font-size:16px; padding:0px; margin:0px;width:60%;}
+#donation_amounts_lite .donation_extra p { font-size:12px;font-weight:normal; padding:4px 0px 0px 0px; margin:0px;width:60%;}
+#donation_amounts_lite .donation_owe { font-size:20px; }
+#donation_amounts_lite .donater, #donation_amounts_lite .donater_owe, #donation_amounts_lite .donater_credit  {display:block;}
+#donation_amounts_lite .donater_credit  {color:red; font-weight:bold;}
+#donation_amounts_lite .donater_owe span { font-size:20px; padding:0px; margin:0px;width:60%;}
+
 
 #login_modal, #spotus_lite {padding:20px;}
 #login_modal label, #spotus_lite label {font-size:11px;}

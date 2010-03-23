@@ -10,7 +10,11 @@ class Myspot::DonationsController < ApplicationController
   response_for :create do |format|
     if resource_saved?
       update_balance_cookie
-      format.html { redirect_to edit_myspot_donations_amounts_path }
+      if params[:spotus_lite]
+        format.html { redirect_to "#{myspot_donations_amounts_path}/spotus_lite" }
+      else
+        format.html { redirect_to edit_myspot_donations_amounts_path }
+      end
     else
       format.html {
         flash[:error] = 'There was a problem with your donation. Please try again'
