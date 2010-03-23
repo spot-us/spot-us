@@ -1,6 +1,6 @@
 <% @title = "Spot.us - Your Donations" %>
 <%= render :partial => 'layouts/common_questions' unless cookies[:spotus_lite]%>
-<div id="purchases">
+<div id="purchases<%="_lite" if cookies[:spotus_lite]%>">
    
       <% unless @purchase.errors.empty? %>
         <% content_for :error do %>
@@ -88,7 +88,7 @@
                <div class="clear"> </div>
             <% end %>
         <% end %>
-        <% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "spotus_form", :class => "purchase"} do |f| %>
+        <% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "spotus_form", :class => cookies[:spotus_lite] ? 'purchase_lite' : '"purchase'} do |f| %>
             <% if @purchase.credit_covers_total? %>
                 You have enough credits to cover this transaction. Please click Purchase to continue.
             <% else %>
