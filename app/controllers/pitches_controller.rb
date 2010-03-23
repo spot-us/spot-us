@@ -80,6 +80,11 @@ class PitchesController < ApplicationController
     @pitch = find_resource
     render :layout => "widget"
   end
+  
+  def spotus_lite
+    @pitch = find_resource
+    render :layout => "widget"
+  end
 
   def show_support
     pitch = find_resource

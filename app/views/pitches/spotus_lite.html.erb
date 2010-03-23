@@ -1,0 +1,46 @@
+<%# apply_fragment ['spotus_lite_', @pitch] do %>
+<div class="spotus_widget" style="height:300px;">
+	<div class="spotus_widget_header">
+		<%= link_to image_tag("/images/new_design/spotus-logo-small.png"), root_url, :target => "_parent" %>
+		<%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
+	</div>
+	<div class="spotus_pitch">
+		<% if @pitch.story && @pitch.story.published? %>
+			<div class="spotus_spacer">
+				<h3 class="spotus_pitch_title"><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h3>
+				<span class="spotus_dateline">Posted<%= @pitch.story.created_at.to_s(:long_date)%>
+				by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %> in <%= @pitch.story.network.name%></span>
+				<p class="short_description alt-spotus">
+					<%= truncate_words(@pitch.story.extended_description, 30) if @pitch.story.extended_description%>
+					<%= link_to 'Read More &raquo;', @pitch.story, :target => "_parent" %>
+				</p>
+			</div>
+		<% else %>
+			<h4 class="spotus_help_fund" style="font-size:12px;font-style:normal;"><%= link_to "help fund this news story!", @pitch, :target => "_parent" %></h4>
+			<div class="spotus_spacer">
+				<div class="spotus_pitch_info">
+					<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %>
+					<h3 class="spotus_pitch_title"><%= link_to h(@pitch.headline), pitch_url(@pitch), :target => "_parent" %></h3>
+					<div class="spotus_dateline"><%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %> | <%= short_date(@pitch.created_at)%></div>
+					<div class="spotus_description">
+						"<%= truncate_words(strip_html(@pitch.short_description), 14) unless @pitch.short_description.blank? %>"
+					</div>
+				</div>
+				<div class="spotus_progress">
+					<% if @pitch.fully_funded? %>
+						<%= image_tag('/images/new_design/fully_funded_medium.png', :alt => 'This News Item is Fully Funded!')%>
+					<% else %>
+						<%=render :partial=>"donations/button_widget"%>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div class="spotus_footer">
+		<div class="spotus_slogan">
+			<span class="spotus_pink">Community</span>
+			<span class="spotus_moss-green">Funded Reporting</span>
+		</div>
+	</div>
+</div>
+<%# end %>

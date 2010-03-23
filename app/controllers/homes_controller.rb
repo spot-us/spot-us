@@ -16,4 +16,10 @@ class HomesController < ApplicationController
       redirect_to new_tip_path
     end
   end
+  
+  def spotus_lite
+      @pitch = Pitch.find_by_id(params[:id]);
+      render :layout=>"widget"
+  end
+  
 end

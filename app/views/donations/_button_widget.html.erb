@@ -1,0 +1,16 @@
+<% if @pitch.fully_funded? %>
+	<%= render :partial => 'donations/fully_funded' %>
+<%elsif current_user && (current_user.remaining_credits > 0) && (@pitch.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(@pitch)) %>
+	<%= render :partial => 'credits/credit_pitch', :locals => {:news_item => @pitch} %>
+<%elsif current_user && (!current_user.can_donate_to?(@pitch) || (@pitch.total_amount_allocated_by_user(current_user) >= current_user.max_donation_for(@pitch))) %>
+	<%= render :partial => 'donations/can_not_donate', :locals => {:news_item => @pitch} %>
+<%elsif @pitch.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(@pitch) < Donation::DEFAULT_AMOUNT) %>
+	<%= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => @pitch}  %>
+<%elsif current_user && current_user.can_donate_to?(@pitch)%>
+	<%= render :partial => 'donations/donate_default', :locals => {:news_item => @pitch}%>
+<%elsif !current_user%>
+	<div class="clearfix">
+	   <%=facebox_login_link_to(image_tag("/images/new_design/fund.png", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}"), "#{pitch_path(@pitch)}/lite")%>
+	   <%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch} %>
+	</div>
+<%end%>
