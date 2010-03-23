@@ -9,8 +9,8 @@
 # This should only be necessary until the final version of the new profile is released.
 
 development:
-  api_key: 2fcb4aee61a85a43662109224c03998e
-  secret_key: 43f0a739e2bf1eb6a5ccc5aa5bf46afb
+  api_key: xxxxxxxxxx
+  secret_key: xxxxxxxxxx
   canvas_page_name:
   callback_url: http://localhost:3000/
   pretty_errors: true
@@ -36,10 +36,10 @@ test:
     server_alive_interval: 0
     
 staging:
-  api_key: fa0a51420700dc645f6acde214395ddc
-  secret_key: c5fb41d223c153e2347560827d6bc82d
+  api_key: xxxxxxxxxx
+  secret_key: xxxxxxxxxx
   canvas_page_name: 
-  callback_url: http://www.spotreporting.com/
+  callback_url: http://www.domain.com/
   set_asset_host_to_callback_url: false   
   tunnel:
     public_host_username: 
@@ -49,10 +49,10 @@ staging:
     server_alive_interval: 0
 
 production:
-  api_key: be16215ea16aecad8be4c3a98211cc06
-  secret_key: 4bcf802601b9a428b96654ebfd631aba
+  api_key: xxxxxxxxxx
+  secret_key: xxxxxxxxxx
   canvas_page_name: 
-  callback_url: http://spot.us/
+  callback_url: http://domain.com/
   set_asset_host_to_callback_url: false   
   tunnel:
     public_host_username: 
