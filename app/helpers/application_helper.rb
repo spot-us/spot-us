@@ -56,6 +56,8 @@ module ApplicationHelper
       return "#{pitch_url(commentable)}/comments"
     elsif commentable.type.to_s=='Story'
       return "#{story_url(commentable)}/comments"
+    elsif commentable.type.to_s=='Tip'
+      return "#{tip_url(commentable)}/comments"
     end
   end
   
