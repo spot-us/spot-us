@@ -89,7 +89,7 @@ class Mailer < ActionMailer::Base
     #bcc (comment.commentable.comment_subscribers - [comment.user]).map(&:email).join(", ")
     recipients  user.email
     from       MAIL_FROM_INFO
-    subject    "Spot.Us Blog Update: '#{comment.commentable.headline}'"
+    subject    "Spot.Us Comment: '#{comment.commentable.headline}'"
     body       :comment => comment, :user => user
   end
   
