@@ -213,9 +213,10 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 #news_item .story-block {margin-left:40px;width:500px;font-family:Georgia,serif,"Warnock Pro","Goudy Old Style","Palatino","Book Antiqua";}
 div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .story-block .story_content img{display:block;float:none;}
-#news_item textarea.widget_code {margin:3px 0 0 0;color:#555;font-size:11px;font-family:arial, helvetica;width:340px;display:block;padding:2px;height:32px;overflow:hidden;}
+#news_item textarea.widget_code {margin:3px 0 0 0;color:#555;font-size:11px;font-family:arial, helvetica;width:330px;display:block;padding:2px;height:75px;overflow:hidden;}
 #news_item h3.get_widget img {vertical-align:middle;padding-bottom:3px;}
-#news_item .widget_panel {height:0;overflow:hidden;font-size:13px;color:#eee;}
+#news_item .widget_panel {font-size:13px;color:#eee;display:none;}
+#news_item .widget_panel iframe {margin-left:-15px;}
 #news_item .widget_panel .widget_tip {background:#f3f3f3;color:#222;padding:5px;font-size:11px;-moz-border-radius:5px;-webkit-boder-radius:5px;}
 
 ul.tabs{margin:0 0 4px 0;}

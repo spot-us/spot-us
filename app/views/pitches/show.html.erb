@@ -14,13 +14,6 @@
 				}).click(function(){
 					$(this).select();
 			});
-			jQuery(".reveal_widget").toggle(function(){
-				$(".widget_panel").animate({height:"380px"});
-				return false;
-			}, function(){
-				$(".widget_panel").animate({height:"0px"});
-				return false;
-			});
 		});	
 	</script>
 <% end %>
@@ -87,11 +80,18 @@
 
 		<div class="right-panel-box clearfix">
 			<div>
-				<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab it by clicking <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;">HERE!</a>
+				<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab it by clicking <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="jQuery('.widget_panel').slideToggle(200)">HERE!</a>
 				<div class="widget_panel">
-					<iframe src="<%=pitch_path(@pitch)%>/widget" border="0" style="width:100%;height:300px;padding:5px;"></iframe>
+					<script language='JavaScript'>
+						<!--
+						function calcHeight(){ 
+							var the_height=document.getElementById('spotus_lite').contentWindow.document.body.scrollHeight;document.getElementById('spotus_lite').height=the_height;
+						}
+						//-->
+					</script>
+					<iframe width='340' src='<%=pitch_path(@pitch).gsub('pitches','lite')%>' onLoad="calcHeight();" onChange="calcHeight();" border='1' id='spotus_lite' scrolling='no' noscroll></iframe>
 					<div class="widget_tip">To get this widget, grab this html code and paste into your template:
-						<textarea class="widget_code"><%="<iframe width='340' height='300' src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='1'></iframe>"%></textarea>
+						<textarea class="widget_code"><%="#{javascript_include_tag 'spotus_lite'}<iframe width='340' src='#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}' onLoad='calcHeight();' onChange='calcHeight();' border='1' id='spotus_lite' scrolling='no' noscroll></iframe>"%></textarea>
 					</div>
 				</div>
 			</div>

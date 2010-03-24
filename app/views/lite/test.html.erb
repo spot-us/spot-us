@@ -1,1 +1,2 @@
-<iframe width='400' src='<%=pitch_path(@pitch).gsub('pitches','lite')%>' border='1' style="height:100%;"></iframe>
+<%= javascript_include_tag 'spotus_lite'%>
+<iframe width='340' src='<%=pitch_path(@pitch).gsub('pitches','lite')%>' onLoad="calcHeight();" onChange="calcHeight();" border='1' id='spotus_lite' scrolling='no' noscroll></iframe>
