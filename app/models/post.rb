@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
     end
     #email admins
     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
-    Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
+    Admin.find(:all,:conditions=>"email!='kara@spot.us' and email not in (#{emails.join(',')})").each do |admin|
       Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
     end
     #email subscribers
