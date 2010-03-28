@@ -165,7 +165,7 @@ class NewsItem < ActiveRecord::Base
   end
   
   def short_url(start_url,base_url=nil)
-    base_url  = "http://spot.us/" unless base_url
+    base_url  = "" unless base_url
     base_url += "#{start_url}/"
     authorize = UrlShortener::Authorize.new 'spotus', APP_CONFIG[:bitly]
     client = UrlShortener::Client.new(authorize)
