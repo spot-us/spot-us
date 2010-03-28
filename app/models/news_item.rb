@@ -164,9 +164,9 @@ class NewsItem < ActiveRecord::Base
     end
   end
   
-  def short_url(start_url,base_url=nil)
-    base_url  = "" unless base_url
-    base_url += "#{start_url}/"
+  def short_url(start_url=nil,base_url=nil)
+    base_url  = "http://spot.us/" unless base_url
+    base_url += "#{type.to_s.downcase.pluralize}/"
     authorize = UrlShortener::Authorize.new 'spotus', APP_CONFIG[:bitly]
     client = UrlShortener::Client.new(authorize)
     shorten = client.shorten("#{base_url}#{to_param}")
@@ -179,7 +179,7 @@ class NewsItem < ActiveRecord::Base
     max_length = PREPEND_STATUS_UPDATE.length + share_type.length + url_length + 15
     msg  = "#{PREPEND_STATUS_UPDATE} #{share_type}: "
     msg += headline.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : headline
-    msg += " - #{short_url(share_type.downcase.pluralize)}" if show_url
+    msg += " - #{short_url}" if show_url
     msg
   end
 

@@ -68,7 +68,7 @@
 		<div class="right-panel-box clearfix">
 			<div class="share">
 				<h3>Share</h3>
-				<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @pitch.short_url(request.url) rescue "" end %>&amp;t=<%= h @pitch.status_update(false) %>">
+				<a title="Share this Pitch on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @pitch.short_url rescue "" end %>&amp;t=<%= h @pitch.status_update(false) %>">
 					<%= image_tag("/images/new_design/facebook.png") %>
 				</a>
 				<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=begin h @pitch.status_update rescue "" end %>" title="Share this Pitch on Twitter"><%= image_tag("/images/new_design/twitter.png") %></a>
