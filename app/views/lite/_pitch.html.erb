@@ -1,4 +1,4 @@
-<% if @pitch.story && @pitch.story.published? %>
+<% if @pitch && @pitch.story && @pitch.story.published? %>
 	<div class="spotus_spacer">
 		<h3 class="spotus_pitch_title"><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h3>
 		<span class="spotus_dateline">Posted<%= @pitch.story.created_at.to_s(:long_date)%>
