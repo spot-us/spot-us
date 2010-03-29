@@ -1,8 +1,8 @@
 class LiteController < ApplicationController
 
   def index
-    cookies[:spotus_lite] = params[:id]
-    @pitch = Pitch.find_by_id(params[:id])
+    cookies[:spotus_lite] = params[:id] if params[:id]
+    @pitch = Pitch.find_by_id(cookies[:spotus_lite])
     @action = params[:sub]
     @user = User.new(params[:user_id]) if @action=='register'
     render :layout=>"lite"
