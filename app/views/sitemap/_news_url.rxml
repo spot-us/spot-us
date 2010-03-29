@@ -12,7 +12,7 @@
 #  <n:stock_tickers>NASDAQ:A, NASDAQ:B</n:stock_tickers>
 #</n:news>
 
-xml.loc(url)
+xml.loc(url.gsub('www.',''))
 xml.n :news do
   
   xml.n :publication do
