@@ -1,6 +1,6 @@
 <% div_for(pitch, :class => "clearfix") do %>
 		<div class="donater">
-			<%= render :partial => "donations/button", :locals => { :news_item => pitch } %>gjkgjh
+			<%= render :partial => "donations/button", :locals => { :news_item => pitch } %>
 <% apply_fragment ['pitch_listing_bottom_', pitch] do %>
 			<%if pitch.story && pitch.story.published?%>
 				<br/>
