@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   # clear cookie if inside the normal site
   def clear_spotus_lite
     unless ['myspot/donation_amounts','myspot/donations','myspot/purchases','lite'].include?(params[:controller])
-      cookies[:spotus_lite] = nil
+      cookies.delete spotus_lite
     end
   end
   
