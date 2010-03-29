@@ -2,6 +2,7 @@ class LiteController < ApplicationController
 
   def index
     pitch_id = cookies[:spotus_lite] && cookies[:spotus_lite].blank? ? cookies[:spotus_lite] : params[:id]
+    cookies[:spotus_lite] = params[:id] if params[:id]
     @pitch = Pitch.find_by_id(pitch_id)
     @action = params[:sub]
     @user = User.new(params[:user_id]) if @action=='register'
