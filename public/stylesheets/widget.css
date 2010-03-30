@@ -1,4 +1,4 @@
-div.spotus_widget{background:#fff;font-size:12px;width:100%;height:100%;font-family:Arial, Helvetica;border: 5px solid #E3EEEF;position:relative;}
+div.spotus_widget{background:#fff;font-size:12px;width:97%;height:100%;font-family:Arial, Helvetica;border: 0px solid #E3EEEF;position:relative;}
 div.spotus_widget a img{border:0;}
 div.spotus_widget .spotus_pitch {}
 div.spotus_widget h3.spotus_pitch_title {margin:0;font-size:14px;line-height:15px;max-height:45px;overflow:hidden;}
@@ -19,7 +19,7 @@ div.spotus_widget .spotus_contribute {position:absolute;right:13px;top:3px;}
 					background:#11363E;}*/
 div.spotus_widget .spotus_description {font-size:11px;color:#444;font-style:italic;margin-top:3px;max-height:43px;overflow:hidden;}
 div.spotus_widget .spotus_progress {position:relative;color:#333333;font-size:11px;}
-div.spotus_widget .spotus_footer {position:absolute;bottom:0;background:#11363E;padding: 5px;width:310px;color:#fff;text-align:center;}
+div.spotus_widget .spotus_footer {position:absolute;bottom:0;background:#11363E;padding: 5px 0px 5px 0px;width:100%;color:#fff;text-align:center;}
 div.spotus_widget .spotus_slogan {text-transform: uppercase;letter-spacing:.10em;}
 div.spotus_widget .spotus_slogan .spotus_pink { color: #ce859d;}
 div.spotus_widget .spotus_slogan .spotus_moss_green { color: #ce859d;}

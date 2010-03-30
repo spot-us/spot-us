@@ -86,7 +86,7 @@
 				<div class="widget_panel">
 					<iframe width='340' src='<%=pitch_path(@pitch).gsub('pitches','lite')%>' onLoad="calcHeight();" onChange="calcHeight();" border='1' id='spotus_lite' scrolling='no' noscroll></iframe>
 					<div class="widget_tip">To get this widget, grab this html code and paste into your template:
-						<textarea class="widget_code"><%="<script src='#{javascript_path 'http://www.spot.us/javascripts/spotus_lite'}' type='text/javascript'></script><iframe width='340' style='height:100%;' src='#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}' onLoad='calcHeight();' onChange='calcHeight();' border='1' id='spotus_lite' scrolling='no' noscroll></iframe>"%></textarea>
+						<textarea class="widget_code"><%="<script src='#{javascript_path 'http://www.spot.us/javascripts/spotus_lite'}' type='text/javascript'></script><iframe width='340' style='display:block;' src='#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}' onLoad='calcHeight();' onChange='calcHeight();' border='1' id='spotus_lite' scrolling='no' noscroll></iframe>"%></textarea>
 					</div>
 				</div>
 			</div>
