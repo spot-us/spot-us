@@ -2,7 +2,7 @@ class LiteController < ApplicationController
 
   def index
     pitch_id = cookies[:spotus_lite] && cookies[:spotus_lite].blank? ? cookies[:spotus_lite] : params[:id]
-    @pitch = pitch_id && pitch_id.blank? ? Pitch.find_by_id(pitch_id) : Pitch.featured.first
+    @pitch = pitch_id && pitch_id.blank? ? Pitch.find_by_id(pitch_id) : Pitch.featured_by_network(current_network).first
     cookies[:spotus_lite] = {
       :value => @pitch.id,
       :expires => 10.minutes.from_now
