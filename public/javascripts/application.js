@@ -52,6 +52,13 @@ jQuery(document).ready(function($){
 	
 });
 
+// save the state using the helper html file
+function resizePipe(host){
+	var height = document.body.scrollHeight;
+	var pipe = document.getElementById('helpframe');
+	pipe.src = host+'/helper.html?height='+height+'&cacheb='+Math.random();
+}
+
 /* Simple tabbing function */
 function selectTab(container, id){
 	header = container.find('ul');

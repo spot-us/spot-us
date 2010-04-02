@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
 	<%= render :partial => 'layouts/head' %>
-	 <body style='height:100%;background:#E3EEEF;'>
+	<body style='background:#E3EEEF;'>
+		<iframe id="helpframe" src='' height='0' width='0' frameborder='0'></iframe>
 		<%= fb_connect_javascript_tag %>
 		<%= init_fb_connect "XFBML" %>
-		<div class="spotus_widget" style="height:100%;padding-bottom:30px;margin:0px auto;">
+		<div class="spotus_widget" style="padding-bottom:30px;margin:0px auto;" id='spotus_widget'>
 			<div class="spotus_widget_header">
 				<%= link_to image_tag("/images/new_design/spotus-logo-small.png"), root_url, :target => "_parent" %>
 				<%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
@@ -23,5 +24,17 @@
 			</div>
 		</div>
 		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
-	 </body>
+		<script>
+			//jQuery(document).ready(function($){
+				var host = jQuery.cookie('spotus_lite_host');
+				var height = document.body.scrollHeight;
+				var pipe = document.getElementById('helpframe');
+				var domain = unescape(host);
+				domain = domain.replace('http://', '');
+				domain = domain.replace('www.', '');
+				pipe.src = host+'/helper.html?height='+height+'&domain='+domain+'&cacheb='+Math.random();
+			//});
+		</script>
+		
+	</body>
 </html>

@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   def minify_html
     response.body.gsub!(/[ \t\v]+/, ' ')
     response.body.gsub!(/\s*[\n\r]+\s*/, "\n")
-      response.body.gsub!(/>\s+</, '> <')
+    response.body.gsub!(/>\s+</, '> <')
     response.body.gsub!(/<\!\-\-([^>\n\r]*?)\-\->/, '')
   end
 
