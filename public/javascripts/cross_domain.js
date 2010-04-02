@@ -18,20 +18,6 @@ function parentIframeResize(){
 	}	
 }
 
-// Helper function, parse param from request string
-function getParam( name ){
-	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-	var regexS = "[\\?&]"+name+"=([^&#]*)";
-	var regex = new RegExp( regexS );
-	var results = regex.exec( window.location.href );
-	if( results == null ){
-		return "";
-	} else{
-		return results[1];
-	}
-}
-
-
 jQuery.extend({
   getUrlVars: function(){
     var vars = [], hash;
@@ -50,6 +36,6 @@ jQuery.extend({
 });
 
 // load the document when ready
-//jQuery(document).ready(function($){
+jQuery(document).ready(function($){
 	parentIframeResize();
-//});
+});
