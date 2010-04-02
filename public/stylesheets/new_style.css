@@ -218,6 +218,7 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .widget_panel {font-size:13px;color:#eee;display:none;}
 #news_item .widget_panel iframe {margin-left:0px;padding:2px;margin-bottom:5px;}
 #news_item .widget_panel .widget_tip {background:#f3f3f3;color:#222;padding:5px;font-size:11px;width:335px;}
+#news_item .widget_panel .widget_tip a {color:#222;}
 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}

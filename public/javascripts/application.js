@@ -52,6 +52,17 @@ jQuery(document).ready(function($){
 	
 });
 
+function slideWidget(name){
+	if (name=='spotus_lite_widget'){
+		jQuery('#simple_widget:visible').slideToggle(200);
+		jQuery('#spotus_lite_widget').slideToggle(200);
+	} else if (name=='simple_widget') {
+		jQuery('#spotus_lite_widget:visible').slideToggle(200);
+		jQuery('#simple_widget').slideToggle(400);		
+	}
+	return false;
+}
+
 // save the state using the helper html file
 function resizePipe(host){
 	var height = document.body.scrollHeight;
