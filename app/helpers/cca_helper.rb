@@ -1,0 +1,2 @@
+module CcaHelper
+end
