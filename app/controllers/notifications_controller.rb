@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
       render :text=>"Ooops, something doesn't exist there."
       return
     end
-    notify_pitch_owners if !params[:notification] || params[:notification]=='pitch_owners'
+    notify_pitch_owners if params[:notification]=='pitch_owners'
     notify_pitch_owners if params[:notification]=='unpaid_donations'
     render :text=>"ok!" 
   end
@@ -23,8 +23,8 @@ class NotificationsController < ApplicationController
   end
   
   def notify_unpaid_donations
-    Donation.unpaid.all({:conditions=>["donations.created_at>?", 2.weeks.ago]}).map(&:user).uniq.each do |donation|
-      Mailer.deliver_unpaid_donations(donation)
+    Donation.unpaid.all({:conditions=>["donations.created_at>?", 2.weeks.ago]}).map(&:user).uniq.each do |user|
+      Mailer.deliver_unpaid_donations(user)
     end
     return
   end
