@@ -11,22 +11,22 @@
 <div id="news_item">
 	<div id="news_item_header">
 		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-		<h2 class="headline">TITLE OF THE CCA ITEM</h2>
+		<h2 class="headline"><%=@cca.title%></h2>
 	</div>
 	<div class="right-column">
 				
 		<div class="right-panel-box">
-			Info about the partner in charge - picture, about section. Let us create another user type Sponsor and we take it out from the registration flow. 
+      <%=@cca.user.full_name %> and more stuff about cca sponsor drawn from user profile.
 		</div>
 
 	</div>
 	<div class="main-column">
 		<div class="folded-headers-big">
 			<div class="news_item_author">
-				a little smaller headline and dates and stuff about the ad itself
+				<%=@cca.description %> 
 			</div>
 		</div>
-		<%if 1==2#@item && !@item.media_embed.blank?%>
+		<%if 1==2 %>
 			<div class="media-box">
 				<h3>Multimedia</h3>
 				<div class="align-center">
@@ -35,7 +35,7 @@
 			</div>
 		<%end%>
 		<div id="news_item_info">
-			<%=render :partial=>'item'%>
+			<%=render :partial=>'item' %>
 		</div>
 	</div>
 </div>

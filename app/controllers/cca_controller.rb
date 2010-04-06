@@ -1,7 +1,8 @@
 class CcaController < ApplicationController
   
   def show
-    @cca = User.find_by_id(1)
+    @cca = Cca.find_by_id(params[:id])
+   
   end
   
 end
