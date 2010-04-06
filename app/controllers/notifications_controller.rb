@@ -23,7 +23,7 @@ class NotificationsController < ApplicationController
   end
   
   def notify_unpaid_donations
-    Donation.unpaid.all({:conditions=>["donations.created_at>?", 2.weeks.ago]}).map(&:user).uniq.each do |user|
+    Donation.unpaid.all({:conditions=>["donations.created_at>?", 3.weeks.ago]}).map(&:user).uniq.each do |user|
       Mailer.deliver_unpaid_donations(user)
     end
     return
