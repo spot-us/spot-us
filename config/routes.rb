@@ -113,7 +113,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   #notifications urls
-  map.connect "notify/:code", :controller => 'notifications', :action => 'index'
+  map.connect "notify/:code/:notification", :controller => 'notifications', :action => 'index', :notification=>nil
 
   map.connect '*path', :controller => 'homes', :action => 'show'
 end
