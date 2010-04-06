@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "lite/helper", :controller => "lite", :action => "helper"
   map.connect "lite/:id/:sub", :controller => "lite", :action => "index", :sub=>nil
   
-  map.connect "/cca/:id", :controller => "cca", :action => "show"
+  #map.connect "/cca/:id", :controller => "cca", :action => "show"
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
