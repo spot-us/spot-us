@@ -106,11 +106,11 @@ class Pitch < NewsItem
     end
   end
   has_many :donations_and_credits, :class_name => "Donation"
-  has_many :organizational_donors, :through => :donations_and_credits, :source => :user, :order => "donations.created_at", 
+  has_many :organizational_donors, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
             
-  has_many :supporters, :through => :donations_and_credits, :source => :user, :order => "donations.created_at and donations.status='paid'", :uniq => true
+  has_many :supporters, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", :uniq => true
   has_many :blog_subscribers, :select => "users.email", :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
            :order => "donations.created_at", :uniq => true
   has_many :subscribers, :conditions => "subscribers.status = 'subscribed'"
