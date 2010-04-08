@@ -35,7 +35,7 @@
 				<%= f.check_box :terms_of_service, {}, '1', '0' %>
 				<label>Accept the</label>
 				<%= link_to 'Terms of Service', page_path('terms'), :target=>"_blank" %>
-				<%= hidden_field_tag "return_to", pitch_path(@pitch).gsub('pitches','lite'), :class=>"text_lite", :id=>"spotusLite" %>
+				<%= hidden_field_tag "return_to", edit_myspot_donations_amounts_path, :class=>"text_lite", :id=>"spotusLite" %>
 				<%= hidden_field_tag "spotus_lite", @pitch.id, :class=>"text_lite" %>
 				<div>
 					<input type="image" src="/images/register.png" value="Register">
