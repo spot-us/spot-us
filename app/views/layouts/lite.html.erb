@@ -147,11 +147,9 @@
 			//jQuery(document).ready(function($){
 				var host = jQuery.cookie('spotus_lite_host');
 				var height = document.body.scrollHeight;
-				if(BrowserDetect.browser=='Safari'){
-					height += 80;
-				} else{
-					height += 25;
-				}
+				height = (document.getElementById('spotus_widget').scrollHeight ? document.getElementById('spotus_widget').scrollHeight 
+							: document.body.scrollHeight ? document.body.scrollHeight 
+							: document.body.offsetHeight); // find height of internal page
 				var pipe = document.getElementById('helpframe');
 				var domain = unescape(host);
 				domain = domain.replace('http://', '');
