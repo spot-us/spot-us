@@ -29,14 +29,17 @@
 				var host = jQuery.cookie('spotus_lite_host');
 				var height = document.body.scrollHeight;
 				var height_offset = document.body.offsetHeight;
+				var height_obj = document.getElementById('spotus_widget').scrollHeight;
+				var height_obj_offset = document.getElementById('spotus_widget').offsetHeight;
 				if (height_offset > height) {
 					height = height_offset;
 				}
-				/*
-				height = (document.getElementById('spotus_widget').scrollHeight ? document.getElementById('spotus_widget').scrollHeight 
-							: document.body.scrollHeight ? document.body.scrollHeight 
-							: document.body.offsetHeight); // find height of internal page 
-				*/
+				if (height_obj > height) {
+					height = height_obj;
+				}
+				if (height_obj_offset > height) {
+					height = height_obj_offset;
+				}
 				var pipe = document.getElementById('helpframe');
 				var domain = unescape(host);
 				domain = domain.replace('http://', '');
