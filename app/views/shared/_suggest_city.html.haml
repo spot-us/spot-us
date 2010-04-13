@@ -9,7 +9,7 @@
       = f.text_field :email
     .row
       %label Are you human?
-      = recaptcha_tags
+      = recaptcha_tags :ajax=>true
     %label &nbsp;
     = image_submit_tag "submit.png", :alt => "Submit suggestion", :title => "Submit suggestion"
     
