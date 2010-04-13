@@ -18,7 +18,7 @@
     - for subscriber in @subscribers
       %tr
         %td= subscriber.email
-        %td= subscriber.pitch.headline
+        %td= (subscriber.pitch ? subscriber.pitch.headline : "No pitch associated... Hmm)"
         %td= subscriber.status
         %td
           =link_to 'Delete', admin_subscriber_path(subscriber), :confirm => 'Are you sure?', :method => :delete
