@@ -6,9 +6,9 @@
 		<%= fb_connect_javascript_tag %>
 		<%= init_fb_connect "XFBML" %>
 		<div class="spotus_widget" style="padding-bottom:30px;margin:0px auto;" id='spotus_widget'>
-			<div class="spotus_widget_header">
-				<%= link_to image_tag("/images/new_design/spotus-logo-small.png"), root_url, :target => "_parent" %>
-				<%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
+			<div class="spotus_widget_header" style='text-transform:upper-case;background:#11363E;font-size:11px;margin:0px auto;text-align:center;'>
+				<span>SpotUs Lite</span>
+				<span style="color: #ce859d;">Beta</span>
 			</div>
 			<div class="spotus_pitch">
 				<% if flash[:success]%>
@@ -25,16 +25,27 @@
 		</div>
 		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
 		<script>
-			//jQuery(document).ready(function($){
+			jQuery(document).ready(function($){
 				var host = jQuery.cookie('spotus_lite_host');
 				var height = document.body.scrollHeight;
+				var height_offset = document.body.offsetHeight;
+				var height_obj = document.getElementById('spotus_widget').scrollHeight;
+				var height_obj_offset = document.getElementById('spotus_widget').offsetHeight;
+				if (height_offset > height) {
+					height = height_offset;
+				}
+				if (height_obj > height) {
+					height = height_obj;
+				}
+				if (height_obj_offset > height) {
+					height = height_obj_offset;
+				}
 				var pipe = document.getElementById('helpframe');
 				var domain = unescape(host);
 				domain = domain.replace('http://', '');
 				domain = domain.replace('www.', '');
 				pipe.src = host+'/helper.html?height='+height+'&domain='+domain+'&cacheb='+Math.random();
-			//});
+			});
 		</script>
-		
 	</body>
 </html>

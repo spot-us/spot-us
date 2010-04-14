@@ -1,6 +1,6 @@
 module PitchesHelper
   def citizen_supporters_for(pitch)
-    pitch.supporters.paid - pitch.donations_and_credits.from_organizations.map(&:user)
+    pitch.supporters - pitch.donations_and_credits.from_organizations.map(&:user)
   end
   
   def active_tab_class?(tab, tab_try)

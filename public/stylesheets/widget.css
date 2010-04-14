@@ -10,7 +10,7 @@ div.spotus_widget h4.spotus_help_fund a:hover {color:#748F98;}
 div.spotus_widget .spotus_pitch_image {width:119px;float:left;margin:0 10px 0px 0;}
 div.spotus_widget .spotus_pitch_info {margin-bottom:10px;min-height:90px;}
 div.spotus_widget .spotus_funding {font-size:10px;color:#777;font-style:italic;margin-bottom:2px;}
-div.spotus_widget .spotus_widget_header {color:white;padding:5px;background:#E3EEEF;font-size:13px;position:relative;}
+div.spotus_widget .spotus_widget_header {color:white;padding:5px;background:#E3EEEF;font-size:14px;position:relative;}
 div.spotus_widget .spotus_widget_header .spotus_about_us {position:absolute;right:10px;top:10px;text-decoration:none;color:#11363E;font-size:11px;}
 div.spotus_widget .spotus_dateline {font-size:10px;color:#777;}
 div.spotus_widget .spotus_author {font-size:11px;color:#555;margin-bottom:5px;}
@@ -21,7 +21,7 @@ div.spotus_widget .spotus_description {font-size:11px;color:#444;font-style:ital
 div.spotus_widget .spotus_progress {position:relative;color:#333333;font-size:11px;}
 div.spotus_widget .spotus_footer {position:absolute;bottom:0;background:#11363E;padding: 5px 0px 5px 0px;width:100%;color:#fff;text-align:center;}
 div.spotus_widget .spotus_footer_simple {background:#11363E;padding: 5px 0px 5px 5px;margin:-10px 0px 3px 0px;width:100%;color:#fff;text-align:center;}
-div.spotus_widget .spotus_slogan {text-transform: uppercase;letter-spacing:.10em;}
+div.spotus_widget .spotus_slogan {text-transform: uppercase;letter-spacing:.10em;font-size:11px;}
 div.spotus_widget .spotus_slogan .spotus_pink { color: #ce859d;}
 div.spotus_widget .spotus_slogan .spotus_moss_green { color: #ce859d;}
 div.spotus_widget .spotus_spacer {padding:10px;}

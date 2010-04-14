@@ -9,7 +9,6 @@
 		</p>
 	</div>
 <% else %>
-	<h4 class="spotus_help_fund" style="font-size:12px;font-style:normal;"><%= link_to "help fund this news story!", @pitch, :target => "_parent" %></h4>
 	<div class="spotus_spacer">
 		<div class="spotus_pitch_info">
 			<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %>
