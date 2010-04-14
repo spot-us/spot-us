@@ -14,6 +14,7 @@ class Admin::CcaQuestionsController < ApplicationController
   
   def update
     @cca_question = CcaQuestion.find_by_id(params[:id])
+    #debugger
     if @cca_question.update_attributes(params[:cca_question])
       flash[:success] = "You have successfuly updated the question."
       redirect_to admin_cca_path(@cca_question.cca)
