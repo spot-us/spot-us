@@ -9,27 +9,40 @@
 <% end %>
 
 <div id="news_item">
-	<div id="news_item_header">
-		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-		<h2 class="headline"><%= @cca.title %> - Spot.Us Sponsorship</h2>
-	</div>
-	<div class="right-column">
+	<%if @cca%>
+		<div id="news_item_header">
+			<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
+			<h2 class="headline"><%= @cca.title %> - Spot.Us Sponsorship</h2>
+		</div>
+		<div class="right-column">
 				
-		<div class="right-panel-box survey_about">
-		  <%= render :partial => "sponsor_info"%>
-		</div>
+			<div class="right-panel-box survey_about">
+			  <%= render :partial => "sponsor_info"%>
+			</div>
 
-	</div>
-	<div class="main-column">
-		<div class="survey_description">
-			<%= @cca.description %> 
 		</div>
-		<div id="survey">
-		  <% if @cca.survey_completed?(current_user) %>
-		    you have completed this survey.
-		  <% else %>
-			  <%= render :partial=>'item' %>
-			<% end %>
+		<div class="main-column">
+			<div class="survey_description">
+				<%= @cca.description %> 
+			</div>
+			<div id="survey">
+			  <% if @cca.survey_completed?(current_user) %>
+			    you have completed this survey.
+			  <% else %>
+				  <%= render :partial=>'item' %>
+				<% end %>
+			</div>
 		</div>
-	</div>
+	<%else%>
+		<div id="news_item_header">
+			<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
+			<h2 class="headline">Spot.Us Sponsorship</h2>
+		</div>
+		<div class="main-column">
+			<div id="survey">
+				We do not have any active sponsorship surveys. Are you interested in making one? Please contact <a href='mailto:info@spot.us'>info@spot.us</a> and
+				we will tell you how you can get one live here.
+			</div>
+		</div>
+	<%end%>
 </div>
