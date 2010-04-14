@@ -11,31 +11,25 @@
 <div id="news_item">
 	<div id="news_item_header">
 		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-		<h2 class="headline">TITLE OF THE CCA ITEM</h2>
+		<h2 class="headline"><%= @cca.title %> - Spot.Us Sponsorship</h2>
 	</div>
 	<div class="right-column">
 				
-		<div class="right-panel-box">
-			Info about the partner in charge - picture, about section. Let us create another user type Sponsor and we take it out from the registration flow. 
+		<div class="right-panel-box survey_about">
+		  <%= render :partial => "sponsor_info"%>
 		</div>
 
 	</div>
 	<div class="main-column">
-		<div class="folded-headers-big">
-			<div class="news_item_author">
-				a little smaller headline and dates and stuff about the ad itself
-			</div>
+		<div class="survey_description">
+			<%= @cca.description %> 
 		</div>
-		<%if 1==2#@item && !@item.media_embed.blank?%>
-			<div class="media-box">
-				<h3>Multimedia</h3>
-				<div class="align-center">
-					<%#= transform_embed_code(@item.media_embed, 560, 350) %>
-				</div>
-			</div>
-		<%end%>
-		<div id="news_item_info">
-			<%=render :partial=>'item'%>
+		<div id="survey">
+		  <% if @cca.survey_completed?(current_user) %>
+		    you have completed this survey.
+		  <% else %>
+			  <%= render :partial=>'item' %>
+			<% end %>
 		</div>
 	</div>
 </div>

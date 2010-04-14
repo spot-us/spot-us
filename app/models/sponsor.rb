@@ -1,0 +1,2 @@
+class Sponsor < User
+end

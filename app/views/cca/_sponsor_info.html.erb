@@ -1,0 +1,12 @@
+<h3>Sponsoring this survey:</h3>
+<div class="sponsor_header clearfix">
+<%= link_to image_tag(@cca.user.photo(:thumb)), profile_path(@cca.user) %> <%= link_to @cca.user.full_name, profile_path(@cca.user), :class => "sponsor" %>
+</div>
+<div>
+  <label>website</label>
+  <%= link_to @cca.user.website, @cca.user.website %>
+</div>
+<div>
+  <label>about</label>
+  <%= @cca.user.about_you %>
+</div>

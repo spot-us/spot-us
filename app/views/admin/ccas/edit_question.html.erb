@@ -1,0 +1,14 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#ccas_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+
+<%= render :partial => "/admin/admin_header" %>
+
+<h2>Edit CCA Question</h2>
+
+<%= render :partial => "/admin/ccas/question_form" %>
