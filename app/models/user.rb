@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   include AASMWithFixes
   include NetworkMethods
 
-  TYPES = ["Citizen", "Reporter", "Organization", "Admin"]
+  TYPES = ["Citizen", "Reporter", "Organization", "Admin", "Sponsor"]
   CREATABLE_TYPES = TYPES - ["Admin"]
 
   aasm_column :status
@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
-
+  
   def self.opt_in_defaults
     { :notify_blog_posts => true,
       :notify_comments => true,
@@ -235,6 +235,10 @@ class User < ActiveRecord::Base
 
   def admin?
     self.is_a? Admin
+  end
+  
+  def sponsor?
+    self.is_a? Sponsor
   end
 
   def total_credits_in_cents

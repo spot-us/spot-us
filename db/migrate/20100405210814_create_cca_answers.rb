@@ -4,8 +4,8 @@ class CreateCcaAnswers < ActiveRecord::Migration
        t.integer :cca_id
        t.integer :user_id
        t.integer :cca_question_id
-       t.string :answer
-       t.integer :status, :limit => 2
+       t.string :answer, :limit => 1000
+       t.integer :status, :limit => 2, :default => 0
        t.timestamps
      end
   end

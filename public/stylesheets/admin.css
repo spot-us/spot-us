@@ -42,6 +42,10 @@ table.admin_pitches tr td form input.delete_button {
 	border-bottom:solid 1px #ddd;
 	margin: 20px 0;
 }
+#question_form .row{border-bottom:dotted 1px #aaa;margin-bottom:10px;padding-bottom:10px;}
+#question_form input[type="text"]{width:350px;}
+h5{margin-bottom:5px !important;}
+hr {border: solid 1px #555 !important;margin-top:10px !important;}
 .widen{margin:0 10px;color:#999;}
 .admin_tab{padding:4px 8px 2px;background:#f3f3f3;}
 a.admin_tab{text-decoration:none;color:darkred;}

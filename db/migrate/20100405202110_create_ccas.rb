@@ -3,8 +3,8 @@ class CreateCcas < ActiveRecord::Migration
      create_table :ccas do |t|
        t.integer :sponsor_id
        t.string :title
-       t.string :description
-       t.integer :status, :limit => 2
+       t.string :description, :limit => 500
+       t.integer :status, :limit => 2, :default => 0
        t.timestamps
      end
    end
