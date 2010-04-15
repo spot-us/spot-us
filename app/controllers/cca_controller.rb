@@ -6,7 +6,7 @@ class CcaController < ApplicationController
   def show
   end
   
-  def csv_results
+  def results
     @cca = find_resource
   
     respond_to do |format|
@@ -14,7 +14,7 @@ class CcaController < ApplicationController
       end
       format.csv do
         send_data @cca.generate_csv, :type => 'text/csv; charset=iso-8859-1; header=present',
-                              :disposition => "attachment; filename=#{@cca.to_param}.csv"
+                              :disposition => "attachment; filename=results_#{@cca.to_param}.csv"
       end
     end
   end
