@@ -1,7 +1,7 @@
 class CcaQuestion < ActiveRecord::Base
   belongs_to :cca
   has_many :cca_answers
-  validates_presence_of   :cca_id, :question, :question_type, :required, :position
+  validates_presence_of   :cca_id, :question, :question_type, :position
   
   default_scope :order => "position asc"
   

@@ -95,6 +95,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :sections
     admin.resources :ccas
     admin.resources :cca_questions
+    admin.resources :feedbacks
   end
 
   

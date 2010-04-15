@@ -1,12 +1,12 @@
 class CcaController < ApplicationController
   before_filter :login_required
-  before_filter :get_cca
+  before_filter :get_cca, :only => [:show]
   def show
     
   end
   
   def submit_answers
-    @cca = Cca.find_by_id(params[:cca_id])
+    @cca = Cca.find_by_id(params[:id])
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
     is_completed = @cca.process_answers(params[:answers], current_user)  # process the survey answers

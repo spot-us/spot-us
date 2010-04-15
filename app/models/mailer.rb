@@ -23,6 +23,13 @@ class Mailer < ActionMailer::Base
     subject    "Welcome to Spot.Us – Reporting on Communities"
     body :user => user
   end
+  
+  def sponsor_interest_notification(user)
+    recipients '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us - Someone has signed up to a Sponsor"
+    body :user => user
+  end
 
   def organization_signup_notification(user)
     recipients user.email

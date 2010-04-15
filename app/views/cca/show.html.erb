@@ -15,11 +15,9 @@
 			<h2 class="headline"><%= @cca.title %> - Spot.Us Sponsorship</h2>
 		</div>
 		<div class="right-column">
-				
 			<div class="right-panel-box survey_about">
 			  <%= render :partial => "sponsor_info"%>
 			</div>
-
 		</div>
 		<div class="main-column">
 			<div class="survey_description">
@@ -27,7 +25,8 @@
 			</div>
 			<div id="survey">
 			  <% if @cca.survey_completed?(current_user) %>
-			    you have completed this survey.
+			  
+			    <h2>You have completed this survey. Thank you.</h2>
 			  <% else %>
 				  <%= render :partial=>'item' %>
 				<% end %>

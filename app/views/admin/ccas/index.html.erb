@@ -12,11 +12,13 @@
 <%= link_to "Create a new CCA", new_admin_cca_path %>
 <div class="box">
 	<table class="admin_ccas">
+	  <tr>
 		<th>Sponsor</th>
 		<th>CCA Title</th>
 		<th>Sort Position</th>
 		<th>Status</th>
 		<th>Actions</th>
+		</tr>
 		<% @ccas.each do |cca| %>
 			<tr class="quiet">
 				<td><%= cca.id %> <%= link_to cca.user.full_name, "/cca/#{cca.id}" %></td>
