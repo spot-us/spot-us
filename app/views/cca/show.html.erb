@@ -25,7 +25,6 @@
 			</div>
 			<div id="survey">
 			  <% if @cca.survey_completed?(current_user) %>
-			  
 			    <h2>You have completed this survey. Thank you.</h2>
 			  <% else %>
 				  <%= render :partial=>'item' %>
