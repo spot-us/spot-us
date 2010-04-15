@@ -92,6 +92,7 @@ class User < ActiveRecord::Base
   has_many :samples
   has_many :credits
   has_many :assignments
+  has_many :ccas, :primary_key=>'sposnor_id'
 
   has_many :comments
   has_many :contributor_applications

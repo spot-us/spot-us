@@ -80,7 +80,7 @@ ActionController::Routing::Routes.draw do |map|
                          :member=>{:spotus_lite=>:get}
 
   map.namespace :admin do |admin|
-    admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
+    admin.resources :users, :member => {:log_in_as => :get, :promote_to_sponsor => :get, :approve => :put}
     admin.resources :credits
     admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
     admin.resources :tips
