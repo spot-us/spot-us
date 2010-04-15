@@ -4,10 +4,9 @@ class Cca < ActiveRecord::Base
   has_many :cca_questions, :order => "position"
   has_many :cca_answers
   
-  def self.DEFAULT_CREDIT_AMOUNT
-    5
-  end
-    
+  # status 
+  # 0 = editing | 1 = live | 2 = maxed_out
+      
   def survey_completed?(user)
     completed_answer = self.cca_answers.find(:first, :conditions => "user_id = #{user.id} and status = 1")
     return false if completed_answer.blank?
@@ -15,16 +14,32 @@ class Cca < ActiveRecord::Base
   end
   
   def award_credit(user)
-    Credit.create(:user_id => user.id, :amount => Cca.DEFAULT_CREDIT_AMOUNT, :description => "Awarded for #{self.title} | #{self.id}")
+    Credit.create(:user_id => user.id, :amount => self.award_amount, 
+                          :description => "Awarded for #{self.title} | #{self.id}")
+    self.update_credits_awarded(self.award_amount)
     self.set_completed_status(user)
   end 
+  
+  def update_credits_awarded(amount)
+    self.credits_awarded = self.credits_awarded + amount
+    self.status = 2 if self.credits_awarded > self.max_credits_amount
+    self.save!
+  end
   
   def set_completed_status(user)
     self.cca_answers.update_all("status = 1", "user_id = #{user.id}" )
   end
   
+  def is_editing?
+    self.status == 0 ? true : false
+  end
+  
   def is_live?
     self.status == 1 ? true : false
+  end
+  
+  def is_maxed_out?
+    self.status == 2 ? true : false
   end
   
   def process_answers(answers, user)

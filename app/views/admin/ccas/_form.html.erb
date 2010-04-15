@@ -19,5 +19,13 @@
         <%= f.label     :status, "Status: Live?" %>
         <%= f.check_box :status %>
     </div>
+    <div class="row">
+        <%= f.label     :max_credits_amount, "Maxiumum amount" %>
+        <%= f.text_field :max_credits_amount %>
+    </div>
+    <div class="row">
+        <%= f.label     :award_amount, "Award amount" %>
+        <%= f.text_field :award_amount %>
+    </div>
     <%= image_submit_tag image_path('save.png'), :alt => 'Edit the CCA' %>
 <% end %>
