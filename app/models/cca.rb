@@ -28,20 +28,21 @@ class Cca < ActiveRecord::Base
   def award_credit(user)
     Credit.create(:user_id => user.id, :amount => self.award_amount, 
                           :description => "Awarded for #{self.title} | #{self.id}")
-    self.update_credits_awarded(self.award_amount)
+    self.process_credits_awarded(self.award_amount)
     self.set_completed_status(user)
   end 
   
-  def update_credits_awarded(amount)
+  def process_credits_awarded(amount)
     self.credits_awarded = self.credits_awarded + amount
     self.status = 2 if self.credits_awarded > self.max_credits_amount
     self.save!
   end
   
   def set_completed_status(user)
+    # cca_answers status is completed when user has answered all required questions
     self.cca_answers.update_all("status = 1", "user_id = #{user.id}" )
   end
-  
+
   def is_editing?
     self.status == 0 ? true : false
   end

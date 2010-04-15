@@ -27,7 +27,7 @@ class CcaController < ApplicationController
     is_completed = @cca.process_answers(params[:answers], current_user)  # process the survey answers
     if is_completed && tos
       @cca.award_credit(current_user)
-      redirect_to  "/cca/apply_credits/#{@cca.id}"
+      redirect_to  cca_path(@cca)
     elsif !tos                                                           # they need to check the TOS box on form
       flash[:error] = "You have to accept the terms of service to complete this survey."
       redirect_to :back
