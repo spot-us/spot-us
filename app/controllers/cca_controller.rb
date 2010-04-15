@@ -1,6 +1,6 @@
 class CcaController < ApplicationController
   before_filter :login_required
-  before_filter :get_cca, :only => [:show]
+  before_filter :load_cca, :only => [:show]
   resources_controller_for :ccas
   
   def show
@@ -31,7 +31,7 @@ class CcaController < ApplicationController
   
   protected
   
-  def get_cca
+  def load_cca
     @cca = Cca.find_by_id(params[:id])
     redirect_to root_url unless @cca && @cca.is_live? || current_user.admin?
   end

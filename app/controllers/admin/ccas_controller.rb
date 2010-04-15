@@ -1,6 +1,6 @@
 class Admin::CcasController < ApplicationController
   before_filter :admin_required
-  before_filter :load_users, :only => [:new, :edit]
+  before_filter :load_users, :only => [:new, :edit, :update]
   layout 'bare'
   resources_controller_for :ccas
 

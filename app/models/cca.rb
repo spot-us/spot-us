@@ -1,6 +1,6 @@
 class Cca < ActiveRecord::Base
   validates_presence_of   :sponsor_id, :title
-  before_update :check_credit_settings
+  validate :check_credit_settings, :on => [:update, :new]
   belongs_to :user, :foreign_key => :sponsor_id
   has_many :cca_questions, :order => "position"
   has_many :cca_answers
@@ -13,8 +13,10 @@ class Cca < ActiveRecord::Base
   end
   
   def check_credit_settings
-    raise "Amounts incorrect" if self.award_amount > self.max_credits_amount
-    return false
+    if self.award_amount > self.max_credits_amount
+      errors.add_to_base("Award amount cannot be greater than maximum credit amount")
+      #return false
+    end
   end
 
   def survey_completed?(user)

@@ -10,4 +10,7 @@
 <%= render :partial => "/admin/admin_header" %>
 
 <h2>Edit CCA</h2>
+<div class="flash error">
+  <%= error_messages_for :cca %>
+</div>
 <%= render :partial => "form" %>
