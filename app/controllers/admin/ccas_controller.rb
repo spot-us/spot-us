@@ -38,6 +38,6 @@ class Admin::CcasController < ApplicationController
   protected 
   
   def load_users
-    @users = User.find :all, :order => "last_name asc, first_name asc" # this could be huge list ... 
+    @users = Sponsor.find :all, :order => "last_name asc, first_name asc" # this could be huge list ... 
   end 
 end
