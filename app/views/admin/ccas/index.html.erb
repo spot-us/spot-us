@@ -15,6 +15,7 @@
 	  <tr>
 		<th>Sponsor</th>
 		<th>CCA Title</th>
+		<th>Credit Amounts</th>
 		<th>Sort Position</th>
 		<th>Status</th>
 		<th>Actions</th>
@@ -23,6 +24,11 @@
 			<tr class="quiet">
 				<td><%= cca.id %> <%= link_to cca.user.full_name, "/cca/#{cca.id}" %></td>
 				<td><%=cca.title%></td>
+				<td>Max Amount: <%= number_to_currency(cca.max_credits_amount) %><br/>
+				  Award Amount: <%= number_to_currency(cca.award_amount) %><br/>
+				  Amount Awarded: <%= number_to_currency(cca.credits_awarded) %><br/>
+				</td>
+				  
 				<td><%=cca.position%></td>
 				<td><%=cca.status == 0 ? "Editing" : "Live" %></td>
 				<td>
