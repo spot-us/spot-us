@@ -7,5 +7,8 @@
     <li><%= link_to "Tips (#{current_user.tips.count})", myspot_tips_path, :class => selected_tab=="tips" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_tips_tab" %></li>
     <li><%= link_to "Comments (#{current_user.comments.count})", myspot_comments_path, :class => selected_tab=="comments" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_comments_tab" %></li>
     <li><%= link_to "Assignments (#{current_user.assignments.count})", myspot_assignments_path, :class => selected_tab=="assignments" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_assignments_tab" %></li>
+	<%if current_user.is_a?(Admin) || current_user.is_a?(Sponsor)%>
+    	<li><%= link_to "CCAs (#{current_user.ccas.count})", myspot_ccas_path, :class => selected_tab=="ccas" ? "myspot_tab active" : "myspot_tab", :id => "dashboard_ccas_tab" %></li>
+	<%end%>
   </ul>
 </div>

@@ -41,9 +41,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "lite/helper", :controller => "lite", :action => "helper"
   map.connect "lite/:id/:sub", :controller => "lite", :action => "index", :sub=>nil
   
-  map.connect "/cca/submit_answers", :controller => "cca", :action => "submit_answers"
-  map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
-  map.connect "/cca/:id", :controller => "cca", :action => "show"
+  #map.connect "/cca/submit_answers", :controller => "cca", :action => "submit_answers"
+  #map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
+  #map.connect "/cca/:id", :controller => "cca", :action => "show"
+  map.resources :cca, :only=>[:show], :member=>{:submit_answers=>:put, :apply_credits=>:get, :csv_results=>:get}
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
@@ -115,6 +116,7 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :tips
     myspot.resources :comments
     myspot.resources :assignments
+    myspot.resources :ccas
   end
 
   #notifications urls
