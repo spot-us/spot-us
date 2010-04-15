@@ -26,6 +26,8 @@
 			<div id="survey">
 			  <% if @cca.survey_completed?(current_user) %>
 			    <h2>You have completed this survey. Thank you.</h2>
+			  <% elsif @cca.is_maxed_out? %>
+			    <h2>This survey has finished.</h2>
 			  <% else %>
 				  <%= render :partial=>'item' %>
 				<% end %>

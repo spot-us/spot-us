@@ -5,9 +5,10 @@ class Cca < ActiveRecord::Base
   has_many :cca_questions, :order => "position"
   has_many :cca_answers
   
-  # status 
-  # 0 = editing | 1 = live | 2 = maxed_out
-    
+  def self.STATUS_VALUES
+    ["Pending","Live","Finished"]
+  end
+  
   def number_of_answers
     cca_answers.any? ? cca_answers.count(:select=>"distinct user_id") : 0
   end
@@ -15,11 +16,11 @@ class Cca < ActiveRecord::Base
   def check_credit_settings
     if self.award_amount > self.max_credits_amount
       errors.add_to_base("Award amount cannot be greater than maximum credit amount")
-      #return false
     end
   end
 
   def survey_completed?(user)
+    # checks if user has completed this survey
     completed_answer = self.cca_answers.find(:first, :conditions => "user_id = #{user.id} and status = 1")
     return false if completed_answer.blank?
     return true
@@ -43,7 +44,7 @@ class Cca < ActiveRecord::Base
     self.cca_answers.update_all("status = 1", "user_id = #{user.id}" )
   end
 
-  def is_editing?
+  def is_pending?
     self.status == 0 ? true : false
   end
   
@@ -56,7 +57,7 @@ class Cca < ActiveRecord::Base
   end
   
   def status?
-    return "Pending" if is_editing?
+    return "Pending" if is_pending?
     return "Live" if is_live?
     return "Finished" if is_maxed_out?
     return "Unknown"
