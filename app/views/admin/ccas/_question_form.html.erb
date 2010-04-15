@@ -31,7 +31,7 @@
   </div>
   <div class="row">
       <%= f.label     :position, "Sort Position " %>
-      <%= f.text_field :position, :style => "width:40px" %>
+      <%= f.text_field :position, :style => "width:40px", :value=>(@cca.cca_questions.empty? ? "0" : @cca.cca_questions.count) %>
       <em class="small">Sort order.</em>
   </div>
   <%= image_submit_tag image_path('save.png') %>
