@@ -8,6 +8,10 @@ class Cca < ActiveRecord::Base
     5
   end
     
+  def number_of_answers
+    cca_answers.any? ? cca_answers.count(:select=>"distinct user_id") : 0
+  end
+  
   def survey_completed?(user)
     completed_answer = self.cca_answers.find(:first, :conditions => "user_id = #{user.id} and status = 1")
     return false if completed_answer.blank?
@@ -25,6 +29,10 @@ class Cca < ActiveRecord::Base
   
   def is_live?
     self.status == 1 ? true : false
+  end
+  
+  def status?
+    (is_live? ? "Live" : "Pending")
   end
   
   def process_answers(answers, user)

@@ -147,6 +147,7 @@ class User < ActiveRecord::Base
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
+  named_scope :sponsors_and_admins, :conditions => 'type="Admin" OR type="Sponsor"'
   
   def self.opt_in_defaults
     { :notify_blog_posts => true,
