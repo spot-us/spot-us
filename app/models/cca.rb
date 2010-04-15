@@ -47,7 +47,10 @@ class Cca < ActiveRecord::Base
   end
   
   def status?
-    (is_live? ? "Live" : "Pending")
+    return "Pending" if is_editing?
+    return "Live" if is_live?
+    return "Finished" if is_maxed_out?
+    return "Unknown"
   end
   
   def process_answers(answers, user)
