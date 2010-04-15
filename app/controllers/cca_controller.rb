@@ -1,9 +1,23 @@
 class CcaController < ApplicationController
   before_filter :login_required
   before_filter :load_cca, :only => [:show]
-  resources_controller_for :ccas
+  resources_controller_for :cca
+
   
   def show
+  end
+  
+  def results
+    @cca = find_resource
+  
+    respond_to do |format|
+      format.html do
+      end
+      format.csv do
+        send_data @cca.generate_csv, :type => 'text/csv; charset=iso-8859-1; header=present',
+                              :disposition => "attachment; filename=results_#{@cca.to_param}.csv"
+      end
+    end
   end
   
   def submit_answers
