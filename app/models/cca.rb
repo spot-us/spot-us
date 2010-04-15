@@ -53,6 +53,30 @@ class Cca < ActiveRecord::Base
     return "Unknown"
   end
   
+  def to_s
+    title
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
+  
+  def generate_csv
+    FasterCSV.generate do |csv|
+      csv << ['Question', ''Answers]
+      cca_questions.each do |question|
+        csv << [question.question, '', '']
+        question.cca_answers.each do |answer|
+          csv << ['',answer.user.full_name, answer.answer]
+        end
+      end
+    end
+  end
+  
   def process_answers(answers, user)
     incomplete = false
     self.cca_questions.each do |question|
