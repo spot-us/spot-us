@@ -1,3 +1,4 @@
+body{font-size:.7em !important;}
 table.admin_pitches, table.admin_comments {
   font-size:0.9em;
   line-height: 1.4em;
@@ -38,6 +39,7 @@ table.admin_pitches tr td form input.delete_button {
   border: 1px solid #990000;
   text-transform: uppercase;
 }
+table tr, table td {vertical-align:top;border-bottom:dotted 1px #bbb;}
 #admin_header{
 	border-bottom:solid 1px #ddd;
 	margin: 20px 0;

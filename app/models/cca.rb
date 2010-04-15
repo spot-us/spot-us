@@ -1,5 +1,6 @@
 class Cca < ActiveRecord::Base
   validates_presence_of   :sponsor_id, :title
+  before_update :check_credit_settings
   belongs_to :user, :foreign_key => :sponsor_id
   has_many :cca_questions, :order => "position"
   has_many :cca_answers
@@ -9,6 +10,11 @@ class Cca < ActiveRecord::Base
     
   def number_of_answers
     cca_answers.any? ? cca_answers.count(:select=>"distinct user_id") : 0
+  end
+  
+  def check_credit_settings
+    raise "Amounts incorrect" if self.award_amount > self.max_credits_amount
+    return false
   end
 
   def survey_completed?(user)
