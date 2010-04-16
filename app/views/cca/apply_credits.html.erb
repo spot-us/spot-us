@@ -13,7 +13,7 @@
 	</div>
 	<div id="apply_credits">
 		  <% if @cca.survey_completed?(current_user) %>
-			  Congrats! By completing the survey, you have earned $<%= Cca.DEFAULT_CREDIT_AMOUNT %> in credits, and have a total of <%= number_to_currency(current_user.remaining_credits) %>. Feel free to apply now to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.<br/><br/>
+			  Congrats! By completing the survey, you have earned <%= number_to_currency(@cca.award_amount) %> in credits, and have a total of <%= number_to_currency(current_user.remaining_credits) %>. Feel free to apply now to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.<br/><br/>
 			  <div id="stories">
     			  <%=render :partial=>"shared/lists", :locals=>{ 
         			:items=>@news_items, 

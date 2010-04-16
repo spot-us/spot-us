@@ -26,13 +26,15 @@
 	</div>
 	<div class="row">
 		<%= f.label     :question_data, "Radio Button Elements (only for radio button type)" %>
-		<em  class="small">Separate each radio button item with '||'<br/> Eg: Red||Blue|Green||Yellow</em><br/>
-		<%= f.text_area :question_data, :style => "height:80px" %><br/>
+		<em  class="small">One element per line.</em><br/>
+		<%#= f.text_area :question_data, :style => "height:80px" %>
+		<textarea name="cca_question[question_data]" style="width:260px;height:140px"><%=@cca_question.question_data.gsub("\n", "") if @cca_question.question_data %></textarea>
+		<br/>    
 	</div>
 	<div class="row">
-		<%= f.label     :section, "Section" %>
-		<%= f.text_field :section, :id=>'section_field' %>
-		<em class="small">Optional. Each question in the same section will be grouped visually.</em>
+      <%= f.label     :section, "Section" %>
+      <%= f.text_field :section %><br/>
+      <em class="small">Optional. Each question in the same section will be grouped visually.</em>
 		<%unless @cca.sections.empty?%>
 			<br/>
 			Already specified sections: <%=section_links(@cca.sections)%>

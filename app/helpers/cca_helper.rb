@@ -13,7 +13,7 @@ module CcaHelper
       text << answer.answer if show_answer && answer
       text << '</textarea>'
     when question.question_type == "radio"
-      items = question.question_data.split("||")
+      items = question.question_data.split("\n")
       items.each do |item|
         text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
         answer = question.answer_by_user(user)

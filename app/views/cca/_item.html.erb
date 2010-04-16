@@ -2,7 +2,7 @@
 <div id="tabContainer" class="cca">
 	<div class="tab_panel">
 		<h2 class="headline">Survey Questions</h2>
-		<% form_tag "/cca/submit_answers" do %>
+		<% form_tag(submit_answers_cca_path(@cca), :method => "put") do %>
   		Fill out the survey below. Once complete you can use your credits to fund the story of your choice.<br/>
       <span class="deep-red small">* Required</span><br/><br/>
   		<%= hidden_field_tag "id", @cca.id %>

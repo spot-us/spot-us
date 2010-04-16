@@ -16,8 +16,9 @@
         <%= f.text_field :position, :style => "width:40px" %>
     </div>
     <div class="row">
-        <%= f.label     :status, "Status: Live?" %>
-        <%= f.check_box :status %>
+        <%= f.label     :status, "Set Status" %>
+        <%= f.select(:status, Cca.STATUS_VALUES.collect {|s| [s, Cca.STATUS_VALUES.index(s)] }) %><br/>
+        <em class="small">Note: Surveys will automatically switch to Finished status when awarded credits equal the max amount.</em>
     </div>
     <div class="row">
         <%= f.label     :max_credits_amount, "Maxiumum credit amount" %>
