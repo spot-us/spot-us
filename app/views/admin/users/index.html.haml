@@ -32,8 +32,9 @@
         %td=link_to 'Edit', edit_admin_user_path(user)
         %td=link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete
         %td=link_to 'Log in as', log_in_as_admin_user_path(user)
+        %td=link_to 'Promote to Sponsor', promote_to_sponsor_admin_user_path(user) unless user.is_a?(Sponsor)
       %tr
-        %td{:colspan=>9}
+        %td{:colspan=>10}
           %div.append-2{:style=>"float:left;width:480px"}
             %div
               About

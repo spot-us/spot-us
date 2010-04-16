@@ -9,7 +9,6 @@ class CcaController < ApplicationController
   
   def results
     @cca = find_resource
-  
     respond_to do |format|
       format.html do
       end
@@ -21,7 +20,7 @@ class CcaController < ApplicationController
   end
   
   def submit_answers
-    @cca = Cca.find_by_id(params[:id])
+    @cca = find_resource
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
     is_completed = @cca.process_answers(params[:answers], current_user)  # process the survey answers
@@ -39,7 +38,7 @@ class CcaController < ApplicationController
   end 
   
   def apply_credits
-    @cca = Cca.find_by_id(params[:id])
+    @cca = find_resource
     @filter = "almost-funded"
     @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
   end
