@@ -7,6 +7,14 @@
 		function setSection(section){
 			$('#section_field').val(section);
 		}
+		function toggleAdditionalQuestionData(){
+			selected_text = $('#question_type:selected').text();
+			if(selected_text.indexOf("text")<0 && $('#additional_question_data').is(":hidden")){
+				$('#additional_question_data').slideToggle('slow');
+			} else if ($('#additional_question_data').is(":visible")) {
+				$('#additional_question_data').slideUp('slow');
+			}
+		}
 	</script>
 <% end %>
 <% form_for([:admin, @cca_question], :html => { :multipart => true ,:id => "question_form"}) do |f| %>
@@ -17,14 +25,14 @@
 	</div>
 	<div class="row">
 		<%= f.label     :question_type, "Type" %>
-		<%= f.select(:question_type, CcaQuestion.QUESTION_TYPES.collect {|q| [q.sub("_", " "),q]}) %>
+		<%= f.select(:question_type, CcaQuestion.QUESTION_TYPES.collect {|q| [q.sub("_", " "),q]}, {}, {:onclick=>'toggleAdditionalQuestionData();', :id=>"question_type"}) %>
 	</div>
 	<div class="row">
 		<%= f.label     :description, "Short Description " %>
 		<%= f.text_field :description %><br/>
 		<em class="small">Optional. Goes below question title.</em>
 	</div>
-	<div class="row">
+	<div class="row" id="additional_question_data" style="display:none;">
 		<%= f.label     :question_data, "Radio Button Elements (only for radio button type)" %>
 		<em  class="small">One element per line.</em><br/>
 		<%#= f.text_area :question_data, :style => "height:80px" %>
