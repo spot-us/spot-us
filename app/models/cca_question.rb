@@ -6,7 +6,11 @@ class CcaQuestion < ActiveRecord::Base
   default_scope :order => "position asc"
   
   def self.QUESTION_TYPES
-    ["text_small","text_big","radio","checkboxes"]
+    ["text_small","text_big","radio","checkbox"]
+  end
+  
+  def self.QUESTION_TYPE_DESCRIPTIONS
+    "A single line textbox (short answer),A multi line textbox (longer answer),A radio button set (select an answer),A checkbox button set (select multiple answers)"
   end
   
   def answer_by_user(user)
