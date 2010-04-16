@@ -25,16 +25,19 @@ class CcaController < ApplicationController
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
     is_completed = @cca.process_answers(params[:answers], current_user)  # process the survey answers
-    if is_completed && tos
-      @cca.award_credit(current_user)
-      update_balance_cookie
-      redirect_to apply_credits_cca_path(@cca)
-    elsif !tos                                                           # they need to check the TOS box on form
-      flash[:error] = "You have to accept the terms of service to complete this survey."
-      redirect_to :back
+	if @cca.already_submitted?(current_user)
+		# if the user has nav'd back in the browser they could try and submit again -- so we just bring them to the apply credits page
+		redirect_to apply_credits_cca_path(@cca)
+	elsif is_completed && tos
+		@cca.award_credit(current_user)
+		update_balance_cookie
+		redirect_to apply_credits_cca_path(@cca)
+	elsif !tos                                                           # they need to check the TOS box on form
+		flash[:error] = "You have to accept the terms of service to complete this survey."
+		redirect_to :back
     else
-      flash[:error] = "Please answer all questions to earn your credits."
-      redirect_to :back
+		flash[:error] = "Please answer all questions to earn your credits."
+		redirect_to :back
     end
   end 
   
