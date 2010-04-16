@@ -41,7 +41,7 @@
 		&nbsp;&nbsp;&nbsp;<em class="quiet" id="display_question_description"></em>
 	</div>
 	<div class="row" id="additional_question_data" style="display:none;padding:10px;background:#eee">
-		<%= f.label     :question_data, "Radio/Checkbox Button Elements (only for radio and checkbox buttons)" %>
+		<%= f.label     :question_data, "Input Elements (for radio or checkbox buttons)" %>
 		<em  class="small">One element per line.</em><br/>
 		<textarea name="cca_question[question_data]" style="width:260px;height:140px"><%=@cca_question.question_data.gsub("\n", "") if @cca_question.question_data %></textarea>
 		<br/>    

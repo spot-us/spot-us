@@ -15,6 +15,7 @@ module CcaHelper
 		when question.question_type == "radio"
 			items = question.question_data.split("\n")
 			items.each do |item|
+				item = item.strip
 				text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
 				answer = question.answer_by_user(user)
 				text << 'value="' << item << '"'
@@ -26,10 +27,11 @@ module CcaHelper
 		when question.question_type == "checkbox"
 			items = question.question_data.split("\n")
 			items.each do |item|
-				text << '<input type="checkbox" name="answers[question_' << question.id.to_s << ']"'
+				item = item.strip
+				text << '<input type="checkbox" name="answers[question_' << question.id.to_s << '][]"'
 				answer = question.answer_by_user(user)
 				text << 'value="' << item << '"'
-				text << ' checked' if show_answer && answer && answer.answer == item
+				text << ' checked="yes"' if show_answer && answer && answer.answer.split("\n").include?(item)
 				text << '> '
 				text << item
 				text << "<br/>"

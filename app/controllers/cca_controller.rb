@@ -20,6 +20,7 @@ class CcaController < ApplicationController
   end
   
   def submit_answers
+	#debugger
     @cca = find_resource
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor

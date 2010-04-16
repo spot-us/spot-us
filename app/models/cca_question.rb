@@ -10,7 +10,7 @@ class CcaQuestion < ActiveRecord::Base
   end
   
   def self.QUESTION_TYPE_DESCRIPTIONS
-    "A single line textbox (short answer),A multi line textbox (longer answer),A radio button set (select an answer),A checkbox button set (select multiple answers)"
+    "A single line textbox (short answer),A multi line textbox (longer answer),A radio button set (user selects an answer),A checkbox button set (user selects multiple answers)"
   end
   
   def answer_by_user(user)

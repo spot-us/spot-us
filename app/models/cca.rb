@@ -91,23 +91,30 @@ class Cca < ActiveRecord::Base
     end
   end
   
-  def process_answers(answers, user)
-    incomplete = false
-    self.cca_questions.each do |question|
-      answer = eval("answers[:question_#{question.id}]") || nil
-      if question.required == true && (!answer || answer.strip == "")
-        #debugger
-        incomplete = true
-      else
-        existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
-        if existing_answer
-          CcaAnswer.update(existing_answer.id, :answer => answer)
-        else
-          CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer)
-        end
-      end
-    end
-    !incomplete
-  end
+def process_answers(answers, user)
+	incomplete = false
+	self.cca_questions.each do |question|
+		answer = eval("answers[:question_#{question.id}]") || nil
+		# check for incomplete answer on required element
+		if question.required == true 
+			if question.question_type == "checkbox"
+				incomplete = true if !answer || answer.size == 0
+			elsif !answer || answer.strip == ""
+				incomplete = true
+			end
+		end
+		# process item that is completed
+		unless incomplete == true
+			answer = answer.join("\n") if question.question_type == "checkbox"
+			existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
+			if existing_answer
+				CcaAnswer.update(existing_answer.id, :answer => answer)
+			else
+				CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer)
+			end
+		end
+	end
+	!incomplete
+end
     
 end
