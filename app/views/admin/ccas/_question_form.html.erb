@@ -1,38 +1,52 @@
+<% content_for :head do %>
+	<script>
+		$(function(){
+			$(".admin_tab").removeClass("hilited");
+			$("#ccas_tab").addClass("hilited");
+		});
+		function setSection(section){
+			$('#section_field').val(section);
+		}
+	</script>
+<% end %>
 <% form_for([:admin, @cca_question], :html => { :multipart => true ,:id => "question_form"}) do |f| %>
-  <%= f.hidden_field :cca_id, :value => @cca.id %>
-  <div class="row">
-      <%= f.label     :question, "Question Title" %>
-      <%= f.text_field :question %>
-  </div>
-  <div class="row">
-      <%= f.label     :question_type, "Type" %>
-      <%= f.select(:question_type, CcaQuestion.QUESTION_TYPES.collect {|q| [q.sub("_", " "),q]}) %>
-  </div>
-  <div class="row">
-      <%= f.label     :description, "Short Description " %>
-      <%= f.text_field :description %><br/>
-      <em class="small">Optional. Goes below question title.</em>
-  </div>
-  <div class="row">
-      <%= f.label     :question_data, "Radio Button Elements (only for radio button type)" %>
-      <em  class="small">Separate each radio button item with '||'<br/> Eg: Red||Blue|Green||Yellow</em><br/>
-      <%= f.text_area :question_data, :style => "height:80px" %><br/>
-      
-  </div>
-  <div class="row">
-      <%= f.label     :section, "Section" %>
-      <%= f.text_field :section %>
-      <em class="small">Optional. Each question in the same section will be grouped visually.</em>
-  </div>
-  <div class="row">
-      <%= f.label     :required, "Required? " %>
-      <%= f.check_box :required %>
-      <em>Make the question a required element.</em>
-  </div>
-  <div class="row">
-      <%= f.label     :position, "Sort Position " %>
-      <%= f.text_field :position, :style => "width:40px", :value=>(@cca.cca_questions.empty? ? "0" : @cca.cca_questions.count) %>
-      <em class="small">Sort order.</em>
-  </div>
-  <%= image_submit_tag image_path('save.png') %>
+	<%= f.hidden_field :cca_id, :value => @cca.id %>
+	<div class="row">
+		<%= f.label     :question, "Question Title" %>
+		<%= f.text_field :question %>
+	</div>
+	<div class="row">
+		<%= f.label     :question_type, "Type" %>
+		<%= f.select(:question_type, CcaQuestion.QUESTION_TYPES.collect {|q| [q.sub("_", " "),q]}) %>
+	</div>
+	<div class="row">
+		<%= f.label     :description, "Short Description " %>
+		<%= f.text_field :description %><br/>
+		<em class="small">Optional. Goes below question title.</em>
+	</div>
+	<div class="row">
+		<%= f.label     :question_data, "Radio Button Elements (only for radio button type)" %>
+		<em  class="small">Separate each radio button item with '||'<br/> Eg: Red||Blue|Green||Yellow</em><br/>
+		<%= f.text_area :question_data, :style => "height:80px" %><br/>
+	</div>
+	<div class="row">
+		<%= f.label     :section, "Section" %>
+		<%= f.text_field :section, :id=>'section_field' %>
+		<em class="small">Optional. Each question in the same section will be grouped visually.</em>
+		<%unless @cca.sections.empty?%>
+			<br/>
+			Already specified sections: <%=section_links(@cca.sections)%>
+		<%end%>
+	</div>
+	<div class="row">
+		<%= f.label     :required, "Required? " %>
+		<%= f.check_box :required %>
+		<em>Make the question a required element.</em>
+	</div>
+	<div class="row">
+		<%= f.label     :position, "Sort Position " %>
+		<%= f.text_field :position, :style => "width:40px", :value=>(@cca.cca_questions.empty? ? "0" : @cca.cca_questions.count) %>
+		<em class="small">Sort order.</em>
+	</div>
+	<%= image_submit_tag image_path('save.png') %>
 <% end %>

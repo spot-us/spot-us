@@ -12,6 +12,10 @@ class Cca < ActiveRecord::Base
     cca_answers.any? ? cca_answers.count(:select=>"distinct user_id") : 0
   end
   
+  def sections
+    cca_questions.all(:select=>"distinct section", :conditions=>'section is not null and section!=""').map(&:section).compact
+  end
+  
   def check_credit_settings
     if self.award_amount > self.max_credits_amount
       errors.add_to_base("Award amount cannot be greater than maximum credit amount")
