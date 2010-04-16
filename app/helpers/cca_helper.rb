@@ -1,33 +1,44 @@
 module CcaHelper
-  def survey_element(question, user, show_answer)
-    text = ""
-    case
-    when question.question_type == "text_small"
-      text << '<input type="text" name="answers[question_' << question.id.to_s << ']"'
-      answer = question.answer_by_user(user)
-      text << 'value="' << answer.answer << '"' if show_answer && answer
-      text << ' />'
-    when question.question_type == "text_big"
-      text << '<textarea name="answers[question_' << question.id.to_s << ']">'
-      answer = question.answer_by_user(user)
-      text << answer.answer if show_answer && answer
-      text << '</textarea>'
-    when question.question_type == "radio"
-      items = question.question_data.split("\n")
-      items.each do |item|
-        text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
-        answer = question.answer_by_user(user)
-        text << 'value="' << item << '"'
-        text << ' checked' if show_answer && answer && answer.answer == item
-        text << '> '
-        text << item
-        text << "<br/>"
-      end
-    else
-      
-    end
-    text
-  end
+	def survey_element(question, user, show_answer)
+		text = ""
+		case
+		when question.question_type == "text_small"
+			text << '<input type="text" name="answers[question_' << question.id.to_s << ']"'
+			answer = question.answer_by_user(user)
+			text << 'value="' << answer.answer << '"' if show_answer && answer
+			text << ' />'
+		when question.question_type == "text_big"
+			text << '<textarea name="answers[question_' << question.id.to_s << ']">'
+			answer = question.answer_by_user(user)
+			text << answer.answer if show_answer && answer
+			text << '</textarea>'
+		when question.question_type == "radio"
+			items = question.question_data.split("\n")
+			items.each do |item|
+				text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
+				answer = question.answer_by_user(user)
+				text << 'value="' << item << '"'
+				text << ' checked' if show_answer && answer && answer.answer == item
+				text << '> '
+				text << item
+				text << "<br/>"
+			end
+		when question.question_type == "checkbox"
+			items = question.question_data.split("\n")
+			items.each do |item|
+				text << '<input type="checkbox" name="answers[question_' << question.id.to_s << ']"'
+				answer = question.answer_by_user(user)
+				text << 'value="' << item << '"'
+				text << ' checked' if show_answer && answer && answer.answer == item
+				text << '> '
+				text << item
+				text << "<br/>"
+			end
+		else
+
+		end
+		text
+	end
   
   def is_required(bool)
     ' <span class="deep-red">*</span>' if bool
