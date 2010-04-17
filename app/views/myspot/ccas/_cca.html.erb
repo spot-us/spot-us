@@ -1,0 +1,22 @@
+<tr>
+	<td class="pitch">    
+		<%= link_to h(cca.title), cca_path(cca)%><br/>
+		Created at <%=cca.created_at.to_s(:date)%>
+	</td>
+	<td class="donated">
+		<%=cca.number_of_answers%>
+	</td>
+	<td class="status">
+		<%=cca.status?%>
+	</td>
+	<td>
+		<%if current_user.is_a?(Admin)%>
+			<%= link_to 'Edit', edit_admin_cca_url(cca)%> | 
+			<%= link_to 'Delete', admin_cca_url(cca), :method => :delete, :confirm => 'Are you sure you want to delete this cca?'%> | 
+			<%= link_to 'Edit questions', admin_cca_url(cca) %><br/>
+		<%end%>
+		<%= link_to 'See results', "#{results_cca_path(cca)}" %> | 
+		<%= link_to 'Results as CSV', "#{results_cca_path(cca)}.csv" %>
+		
+	</td>
+</tr>

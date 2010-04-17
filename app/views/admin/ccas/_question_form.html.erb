@@ -1,0 +1,69 @@
+<% content_for :head do %>
+	<script>
+		var question_type_descriptions = '<%= CcaQuestion.QUESTION_TYPE_DESCRIPTIONS %>'.split(",");
+		var setTypeDisplay = function(){
+			var index = $("#question_type").attr("selectedIndex");
+			$("#display_question_description").html(question_type_descriptions[index]);
+			if(index >= 2) {
+				if($('#additional_question_data').is(":hidden")){
+					$('#additional_question_data').slideDown('slow');
+				}
+			} else
+			{
+				if($('#additional_question_data').is(":visible")){
+					$('#additional_question_data').slideUp("fast");
+				}
+			}
+		}
+		$(function(){
+			$(".admin_tab").removeClass("hilited");
+			$("#ccas_tab").addClass("hilited");
+			$("#question_type").change(setTypeDisplay);
+			$("#question_type").change();
+		});
+	</script>
+<% end %>
+
+<% form_for([:admin, @cca_question], :html => { :multipart => true ,:id => "question_form"}) do |f| %>
+	<%= f.hidden_field :cca_id, :value => @cca.id %>
+	<div class="row">
+		<%= f.label     :question, "Question Title" %>
+		<%= f.text_field :question %>
+	</div>
+	<div class="row">
+		<%= f.label     :description, "Short Description " %>
+		<%= f.text_field :description %><br/>
+		<em class="small">Optional. Goes below question title.</em>
+	</div>
+	<div class="row" style="border-bottom:none;padding-bottom:0px">
+		<%= f.label     :question_type, "Type" %>
+		<%= f.select(:question_type, CcaQuestion.QUESTION_TYPES.collect {|q| [q.sub("_", " "),q]}, {}, :id=>"question_type") %>
+		&nbsp;&nbsp;&nbsp;<em class="quiet" id="display_question_description"></em>
+	</div>
+	<div class="row" id="additional_question_data" style="display:none;padding:10px;background:#eee">
+		<%= f.label     :question_data, "Input Elements (for radio or checkbox buttons)" %>
+		<em  class="small">One element per line.</em><br/>
+		<textarea name="cca_question[question_data]" style="width:260px;height:140px"><%=@cca_question.question_data.gsub("\n", "") if @cca_question.question_data %></textarea>
+		<br/>    
+	</div>
+	<div class="row" style="border-top:dotted 1px #ccc;padding-top:10px">
+		<%= f.label     :section, "Section" %>
+		<%= f.text_field :section %><br/>
+		<em class="small">Optional. Each question in the same section will be grouped visually.</em>
+		<%unless @cca.sections.empty?%>
+			<br/>
+			Already specified sections: <%=section_links(@cca.sections)%>
+		<%end%>
+	</div>
+	<div class="row">
+		<%= f.label     :required, "Required? " %>
+		<%= f.check_box :required %>
+		<em>Make the question a required element.</em>
+	</div>
+	<div class="row">
+		<%= f.label     :position, "Sort Position" %>
+		<%= f.text_field :position, :style => "width:40px", :value=>(@cca.cca_questions.empty? ? "0" : @cca.cca_questions.count) %>
+		<em class="small">Sort order.</em>
+	</div>
+	<%= image_submit_tag image_path('save.png') %>
+<% end %>

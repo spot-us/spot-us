@@ -35,10 +35,10 @@
 				  <%= render :partial=>'assignment_admin' %>
 				</div>
 			<% end %>
-	<% else %>
-	<div class="apply">
-    <%= link_to "Apply to contribute", "javascript:alert('To apply to this pitch: please login, refresh this page, and click this button again.');", :class => "admin_button" if !current_user %>
-	</div>
+	<% elsif @tab == 'assignments' %>
+		<div class="apply">
+		    <%= link_to "Apply to contribute", "javascript:alert('To apply to this pitch: please login, refresh this page, and click this button again.');", :class => "admin_button" if !current_user %>
+		</div>
 	<% end %>
 	</div>
 </div>

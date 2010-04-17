@@ -1,9 +1,11 @@
 %h1 Spot.Us Admin
 #admin_header
+  = link_to "ccas", admin_ccas_path, :id => "ccas_tab", :class => "admin_tab"
   = link_to "city suggestions", admin_city_suggestions_path, :id => "city_suggestions_tab", :class => "admin_tab"
   = link_to "comments", admin_comments_path, :id => "comments_tab", :class => "admin_tab"
   = link_to "channels", admin_channels_path, :id => "channels_tab", :class => "admin_tab"
   = link_to "credits", admin_credits_path, :id => "credits_tab", :class => "admin_tab"
+  = link_to "feedbacks", admin_feedbacks_path, :id => "feedbacks_tab", :class => "admin_tab"
   = link_to "groups", admin_groups_path, :id => "groups_tab", :class => "admin_tab"
   = link_to "networks", admin_networks_path, :id => "networks_tab", :class => "admin_tab"
   = link_to "sections", admin_sections_path, :id => "sections_tab", :class => "admin_tab"

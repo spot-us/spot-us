@@ -32,7 +32,21 @@
 	</div>
 	<div class="right-column">
 		<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
-
+		
+		<%unless @pitch.fully_funded? && @pitch.story && @pitch.story.published?%>
+			<div class="right-panel-box">
+				<div class="donate_option">
+					<h2>MAKE A DIFFERENCE</h2>
+					<%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
+					<%= due_date_in_words(@pitch.expiration_date) %>
+				</div>
+				<div class="donate_option">
+					<%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
+					<%= link_to(pluralize(@pitch.assignments.status_open.size, "assignments"), pitch_assignments_path(@pitch)) %>
+				</div>
+			</div>
+		<%end%>
+		
 		<%if @pitch.story && @pitch.story.published?%>
 			<div class="right-panel-box">
 				<h3>Here is the published story</h3>
@@ -53,18 +67,6 @@
 			</div>
 		<%end%>
 
-		<div class="right-panel-box">
-			<div class="donate_option">
-				<h2>MAKE A DIFFERENCE</h2>
-				<%= render :partial => "donations/button", :locals => { :news_item => @pitch } %>
-				<%= due_date_in_words(@pitch.expiration_date) %>
-			</div>
-			<div class="donate_option">
-				<%= link_to image_tag("/images/new_design/donate-talent.png", :class => "display_block"), pitch_assignments_path(@pitch), :title => 'Join Reporting Team' %>
-				<%= link_to(pluralize(@pitch.assignments.status_open.size, "assignments"), pitch_assignments_path(@pitch)) %>
-			</div>
-		</div>
-
 		<div class="right-panel-box clearfix">
 			<div class="share">
 				<h3>Share</h3>
@@ -80,11 +82,38 @@
 
 		<div class="right-panel-box clearfix">
 			<div>
-				<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab it by clicking <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="jQuery('.widget_panel').slideToggle(200);calcHeight();return false;">HERE!</a>
-				<div class="widget_panel">
-					<iframe width='340' src='<%=pitch_path(@pitch).gsub('pitches','lite')%>' onLoad="calcHeight();" onChange="calcHeight();" border='1' id='spotus_lite' scrolling='no' noscroll></iframe>
-					<div class="widget_tip">To get this widget, grab this html code and paste into your template:
-						<textarea class="widget_code"><%="#{javascript_include_tag 'spotus_lite'}<iframe width='340' src='#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}' onLoad='calcHeight();' onChange='calcHeight();' border='1' id='spotus_lite' scrolling='no' noscroll></iframe>"%></textarea>
+				<h3 class="get_widget"><%=image_tag("/images/new_design/widget.png")%> Get the Spot.Us Pitch Widget</h3> Want the embed code to add to your blog or site!? Grab the different widgets below.<br/>
+				<a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="slideWidget('simple_widget');return false;">Simple Widget</a> | <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="slideWidget('spotus_lite_widget');return false;">Spot.Us Lite</a>
+				
+				<div class="widget_panel" id='simple_widget'>
+					<div style="border:1px solid #fff;margin:0px 0px 5px 0px;padding:0px;width:344px;">
+						<iframe width='340' height='270' src='<%=pitch_path(@pitch)%>/widget' border='1' scrolling='no' noscroll></iframe>
+					</div>
+					<div class="widget_tip">To get this widget, just grab this html code and paste into your template.
+						<textarea class="widget_code" style='width:320px;height:25px;'><%="<iframe width='340' src='#{pitch_path(@pitch,{:only_path=>false})}' border='1' scrolling='no' noscroll></iframe>"%></textarea>
+						You can of course change the width of the iframe to fit your template.
+					</div>
+				</div>
+				
+				<div class="widget_panel" id='spotus_lite_widget'>
+					<div class="widget_tip_lite">
+						<h3>Spot.Us Lite</h3>
+						<p><em>Spot.Us Lite</em> is widget which allows anyone to register at Spot.Us, login at Spot.Us and even donate to a pitch without having to leave the site hosting the widget. Isn't that cool?'</p>
+						<p>You need to follow a few steps to get <em>Spot.Us Lite</em> working on your site. Just follow these simple steps below to get it up and running in no time.<p>
+						<ol>
+							<li>Download the file <a href='http://www.spot.us/helper.html' title='Grab the helper.html file' target='_blank'>http://www.spot.us/helper.html</a>, and upload it to your root folder on your server.</li>
+							<li>Grab this html code and paste into your template:
+							<textarea class="widget_code" style='width:300px;height:155px;'><%="<script type='text/javascript'> 						
+   var spotus_lite_host = 'http://www.domain.com/path'; // Example: If you can access the helper.html file at http://www.domain.com/path/helper.html, then you add http://www.domain.com/path there.
+   var spotus_lite_url = '#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}';
+</script>
+<script src='http://spot.us/javascripts/spotus_lite_min.js' type='text/javascript'></script>
+<iframe width='300' src='' border='1' onChange='resizeIframe();' onLoad='resizeIframe();' id='spotus_lite' scrolling='no' noscroll></iframe>"
+							%></textarea></li>	
+							<li>You now need to modify the pasted code. You need to change <em>'http://www.domain.com/path'</em> to the root path of your server. Example: If you can access the helper.html file at http://www.domain.com/path/helper.html, then you add http://www.domain.com/path there.</li>					
+						</ol>
+						<p>You can of course change the width of the iframe to fit your template. Note: As Spot.Us Lite is an interactive widget, we recommend that you do not use widths below 300px.</p>
+						<p>If you have any issues with the widget, please contact <a href='mailto:info@spot.us' title='info@spot.us'>info@spot.us</a></p>
 					</div>
 				</div>
 			</div>

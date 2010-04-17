@@ -1,0 +1,42 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#ccas_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>CCAs</h2>
+<%= link_to "Create a new CCA", new_admin_cca_path %>
+<div class="box">
+	<table class="admin_ccas">
+	  <tr>
+		<th>Sponsor</th>
+		<th>CCA Title</th>
+		<th>Credit Amounts</th>
+		<th>Sort Position</th>
+		<th>Status</th>
+		<th>Actions</th>
+		</tr>
+		<% @ccas.each do |cca| %>
+			<tr class="quiet">
+				<td><%= cca.id %> <%= link_to cca.user.full_name, "/cca/#{cca.id}" %></td>
+				<td><%=cca.title%></td>
+				<td>Max Amount: <%= number_to_currency(cca.max_credits_amount) %><br/>
+				  Award Amount: <%= number_to_currency(cca.award_amount) %><br/>
+				  Amount Awarded: <%= number_to_currency(cca.credits_awarded) %><br/>
+				</td>
+				  
+				<td><%=cca.position%></td>
+				<td><%=Cca.STATUS_VALUES[cca.status] %></td>
+				<td>
+			    <%= link_to 'edit', edit_admin_cca_url(cca)%><br/>
+					<%= link_to 'delete', admin_cca_url(cca), :method => :delete, :confirm => 'Are you sure you want to delete this cca?'%><br/>
+					<%= link_to 'questions', admin_cca_url(cca) %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

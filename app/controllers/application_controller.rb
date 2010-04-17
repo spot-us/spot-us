@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
                   "We are an open source project, to pioneer \"community funded reporting.\""
   META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
   
-  before_filter :set_facebook_session
+  #before_filter :set_facebook_session
   helper_method :facebook_session
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   def minify_html
     response.body.gsub!(/[ \t\v]+/, ' ')
     response.body.gsub!(/\s*[\n\r]+\s*/, "\n")
-      response.body.gsub!(/>\s+</, '> <')
+    response.body.gsub!(/>\s+</, '> <')
     response.body.gsub!(/<\!\-\-([^>\n\r]*?)\-\->/, '')
   end
 

@@ -33,10 +33,18 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.connect "pitches/:id/blog_posts", :controller => "pitches", :action => "index", :tab=>'posts'
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
-  map.connect "test_spotus_lite/:id", :controller => "lite", :action => "test"
-  map.connect "lite/:id/:sub", :controller => "lite", :action => "index", :sub=>nil
   map.connect "pitches/:id/:tab.:format", :controller => "pitches", :action => "show", :requirements => {:tab=>/posts|comments|assignments/}
   map.connect "pitches/:id/:tab/:item_id", :controller => "pitches", :action => "show", :item_id=>nil, :requirements => {:tab=>/posts|comments|assignments/}
+  
+  map.connect "test_spotus_lite/:id", :controller => "lite", :action => "test"
+  map.connect "lite", :controller => "lite", :action => "index"
+  map.connect "lite/helper", :controller => "lite", :action => "helper"
+  map.connect "lite/:id/:sub", :controller => "lite", :action => "index", :sub=>nil
+  
+  #map.connect "/cca/submit_answers", :controller => "cca", :action => "submit_answers"
+  #map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
+  #map.connect "/cca/:id", :controller => "cca", :action => "show"
+  map.resources :cca, :only=>[:show], :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get}
   
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
@@ -73,7 +81,7 @@ ActionController::Routing::Routes.draw do |map|
                          :member=>{:spotus_lite=>:get}
 
   map.namespace :admin do |admin|
-    admin.resources :users, :member => {:log_in_as => :get, :approve => :put}
+    admin.resources :users, :member => {:log_in_as => :get, :promote_to_sponsor => :get, :approve => :put}
     admin.resources :credits
     admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
     admin.resources :tips
@@ -86,6 +94,9 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :posts
     admin.resources :channels
     admin.resources :sections
+    admin.resources :ccas
+    admin.resources :cca_questions
+    admin.resources :feedbacks
   end
 
   
@@ -105,10 +116,11 @@ ActionController::Routing::Routes.draw do |map|
     myspot.resources :tips
     myspot.resources :comments
     myspot.resources :assignments
+    myspot.resources :ccas
   end
 
   #notifications urls
-  map.connect "notify/:code", :controller => 'notifications', :action => 'index'
+  map.connect "notify/:code/:notification", :controller => 'notifications', :action => 'index', :notification=>nil
 
   map.connect '*path', :controller => 'homes', :action => 'show'
 end

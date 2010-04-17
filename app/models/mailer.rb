@@ -23,6 +23,13 @@ class Mailer < ActionMailer::Base
     subject    "Welcome to Spot.Us – Reporting on Communities"
     body :user => user
   end
+  
+  def sponsor_interest_notification(user)
+    recipients '"David Cohn" <david@spot.us>'
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us - Someone has signed up to a Sponsor"
+    body :user => user
+  end
 
   def organization_signup_notification(user)
     recipients user.email
@@ -137,6 +144,13 @@ class Mailer < ActionMailer::Base
     from       MAIL_FROM_INFO
     subject    "Spot.Us: Create a blog post, build community and interest around the post!"
     body       :pitch => pitch
+  end
+  
+  def unpaid_donations(userr)
+    recipients user.email
+    from       MAIL_FROM_INFO
+    subject    "Spot.Us: You have unpaid donations!"
+    body       :user => user
   end
   
   def approved_reporting_team_notification(pitch, user)

@@ -8,6 +8,13 @@ class Admin::UsersController < ApplicationController
     update_balance_cookie
     redirect_to root_path
   end
+  
+  def promote_to_sponsor
+    user = User.find(params[:id])
+    user.type = 'Sponsor'
+    user.save
+    redirect_to profile_path(user)
+  end
 
   def approve
     org = Organization.find(params[:id])

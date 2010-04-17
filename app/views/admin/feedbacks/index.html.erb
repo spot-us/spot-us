@@ -1,0 +1,33 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#feedbacks_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>Feedback</h2>
+<div class="box">
+	<table class="admin_ccas">
+	  <tr>
+		<th>User</th>
+		<th>Email</th>
+		<th>Feedback Type</th>
+		<th>Content</th>
+		<th>Actions</th>
+		</tr>
+		<% @feedbacks.each do |feedback| %>
+			<tr class="quiet">
+				<td><%= link_to feedback.user.full_name, profile_path(feedback.user) %></td>
+				<td><%= feedback.user ? feedback.user.email : feedback.email %>
+				<td><%=feedback.feedback_type %></td>
+				<td><%=h feedback.content ? feedback.content : "NA" %></td>
+				<td>
+					<%= link_to 'delete', admin_feedback_url(feedback), :method => :delete, :confirm => 'Are you sure you want to delete this feedback?'%><br/>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

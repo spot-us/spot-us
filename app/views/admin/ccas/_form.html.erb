@@ -1,0 +1,32 @@
+<% form_for([:admin, @cca], :html => { :multipart => true }) do |f| %>
+    <div class="row">
+        <%= f.label     :sponsor_id, "Sponsor" %>
+        <%= f.select(:sponsor_id, @users.collect {|u| [ u.full_name, u.id ] }, { :include_blank => true }) %>
+    </div>
+    <div class="row">
+        <%= f.label     :title, "Title" %>
+        <%= f.text_field :title %>
+    </div>
+    <div class="row">
+        <%= f.label     :description, "Description" %>
+        <%= f.text_area :description, :style => "height:120px" %>
+    </div>
+    <div class="row">
+        <%= f.label     :position, "Sort Position" %>
+        <%= f.text_field :position, :style => "width:40px" %>
+    </div>
+    <div class="row">
+        <%= f.label     :status, "Set Status" %>
+        <%= f.select(:status, Cca.STATUS_VALUES.collect {|s| [s, Cca.STATUS_VALUES.index(s)] }) %><br/>
+        <em class="small">Note: Surveys will automatically switch to Finished status when awarded credits equal the max amount.</em>
+    </div>
+    <div class="row">
+        <%= f.label     :max_credits_amount, "Maxiumum credit amount" %>
+        <%= f.text_field :max_credits_amount %>
+    </div>
+    <div class="row">
+        <%= f.label     :award_amount, "Award amount" %>
+        <%= f.text_field :award_amount %>
+    </div>
+    <%= image_submit_tag image_path('save.png'), :alt => 'Edit the CCA' %>
+<% end %>

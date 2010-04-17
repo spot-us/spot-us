@@ -1,0 +1,13 @@
+Dear <%=@user.first_name%>,
+
+Hello from Spot.Us. We've noticed that you started the donation process to support one of our pitches, but never completed the process.
+
+Completing your tax-deductible contribution is quick and simple. Just log into Spot.Us and go here: <%= edit_myspot_donations_amounts_path %>
+
+With your support we can make sure that important, but overlooked stories are finally told.
+
+Sincerely,
+
+The Spot.Us Team
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

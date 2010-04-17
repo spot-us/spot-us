@@ -1,0 +1,47 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#ccas_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+
+<h2 onclick="jQuery('#manage-cca').slideToggle('slow');return false;" style='cursor:pointer;'>Manage &raquo;</h2>
+<div id='manage-cca'>
+	<label>Title</label>
+	<h3><%= @cca.title %></h3>
+	
+	<label>Sponsor</label>
+	<h4><%= @cca.user.full_name %></h4>
+
+	<label>Description</label>
+	<div><%= @cca.description %></div>
+</div>
+<hr/>
+
+<h3 onclick="jQuery('#existing-questions-div').slideToggle('slow');return false;" style='cursor:pointer;'>CCA Questions (view/edit/add) &raquo;</h3>
+<div style="background:#eee;padding:10px;" id='existing-questions-div'>
+	<% @cca.cca_questions.each_with_index do |question, index| %>
+		<%= survey_section(question, index) %>
+		<h5><%= question.question %> <%= is_required(question.required) %></h5>
+		<%= "<div style='font-size:11px;color:#555'>#{question.description}</div>" if !question.description.blank? %>
+		<%= survey_element(question, current_user, false) %><br/>
+		<%= link_to 'delete', admin_cca_question_url(question), :method => :delete, :confirm => 'Are you sure you want to delete this question?'%> |
+		<%= link_to 'edit', edit_admin_cca_question_url(question) %>
+		<br/>
+		<hr/>
+	<% end %>
+	<%= end_survey_sections %>
+</div>
+
+<hr/>
+
+<h4 onclick="jQuery('#question-form-div').slideToggle('slow');return false;" style='cursor:pointer;'>Add Question Below &raquo;</h4>
+<div id='question-form-div'>
+	<fieldset>
+		<%= render :partial => "/admin/ccas/question_form" %>
+	</fieldset>
+</div>
