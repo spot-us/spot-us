@@ -15,6 +15,9 @@
 				}
 			}
 		}
+		function setSection(section){
+			$('#section_field').val(section);
+		}
 		$(function(){
 			$(".admin_tab").removeClass("hilited");
 			$("#ccas_tab").addClass("hilited");
@@ -48,7 +51,7 @@
 	</div>
 	<div class="row" style="border-top:dotted 1px #ccc;padding-top:10px">
 		<%= f.label     :section, "Section" %>
-		<%= f.text_field :section %><br/>
+		<%= f.text_field :section, :id=>'section_field' %><br/>
 		<em class="small">Optional. Each question in the same section will be grouped visually.</em>
 		<%unless @cca.sections.empty?%>
 			<br/>

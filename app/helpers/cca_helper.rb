@@ -63,12 +63,12 @@ module CcaHelper
     def end_survey_sections
       '</fieldset>' if !@current_section.blank?
     end
-      
+
     def section_links(sections)
       section_links = []
-			sections.each do |section|
-				section_links << "<a href='' onclick='setSection(\"#{section}\");return false;'>#{section}</a>"
-			end
-			section_links.compact.join(' | ')
+  		sections.each do |section|
+  			section_links << "<a href=\"\" onclick=\"setSection('#{section}');return false;\">#{section}</a>"
+  		end
+  		section_links.compact.join(' | ')
     end
 end
