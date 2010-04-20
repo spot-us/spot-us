@@ -451,18 +451,6 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #spotus_page ul, #spotus_page ol {width:450px;font-size:.9em;}
 #spotus_page img {max-width:550px;margin: 5px 20px 15px 0;}
 
-/*#survey textarea {width:470px;height:120px;margin-bottom:10px;margin-top:3px;padding:7px;font-size:14px;color:#444;font-family:arial;}
-#survey input[type="text"] {width:400px;margin-bottom:10px;margin-top:5px;padding:4px;font-size:14px;color:#444}
-#survey {margin-left:20px;margin-bottom:20px;}
-.survey_description {color:white;margin-left:20px;padding:10px 50px;font-size:14px;background:#11363E;}
-#survey .headline {background:#11363E;color:white;padding-left:20px;}
-#survey h5 {color:#333;font-family:Arial, Helvetica;}
-.survey_about h3 {color:white;text-transform:uppercase;font-size:20px;}
-.survey_about .sponsor_header img {float:left; margin-right:10px;}
-.survey_about a.sponsor {font-size:25px;}
-.survey_about label {display:block;font-size:12px;font-weight:normal;border-bottom:dotted 1px #ccc;}
-.survey_about div {margin-bottom:25px;}*/
-
 #survey #survey_header {background:#E3EEEF;padding:6px 30px;width:972px;}
 #survey #survey_header h2 {font-size:21px;display:inline;color:#0A4A57;font-weight:normal;}
 #survey #survey_header a {color:#567680;padding-top:6px;}

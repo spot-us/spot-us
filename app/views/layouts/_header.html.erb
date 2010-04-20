@@ -22,7 +22,7 @@
 			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published", :title=>"Read A Published Spot Us Story" %>
 		</li>
 		<li class="start_story">
-			<%= facebox_login_link_to image_tag("/images/new_design/earn_credits.jpg", :width=>"111", :height=>"98", :alt=>"Earn credits"), "/" %>
+			<%= facebox_login_link_to image_tag("/images/new_design/earn_credits.jpg", :width=>"111", :height=>"98", :alt=>"Earn credits"), cca_path(Cca.first) %>
 		</li>
 	</ul>
 	
