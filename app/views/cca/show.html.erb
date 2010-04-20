@@ -10,20 +10,23 @@
 
 <div id="survey">
 	<% if @cca %>
-		<div id="survey_header">
-			<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
-			<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
-		</div>
-		<div id="survey_wrapper">
-			<div id="survey_info">
-				<%= render :partial => "sponsor_info" %>
+		<% apply_fragment ['cca_', @cca] do %>
+			<div id="survey_header">
+				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
+				<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
 			</div>
-			<div id="survey_main">
-				<h1><%= @cca.title %></h1>
-				<div id="survey_description">
-					<%= @cca.description %> 
+			<div id="survey_wrapper">
+				<div id="survey_info">
+					<%= render :partial => "sponsor_info" %>
 				</div>
-				<div id="q_header">Questionnaire</div>
+			
+				<div id="survey_main">
+					<h1><%= @cca.title %></h1>
+					<div id="survey_description">
+						<%= @cca.description %> 
+					</div>
+					<div id="q_header">Questionnaire</div>
+		<% end %> <!-- end of cached fragment --> 
 				<div id="survey_form_wrapper">
 				  <% if @cca.survey_completed?(current_user) %>
 				    <h2>You have completed this survey. Thank you.</h2>
