@@ -1,5 +1,5 @@
 class CcaController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :except=>[:show]
   before_filter :load_cca, :only => [:show]
   resources_controller_for :cca
 

@@ -1,5 +1,5 @@
 <div id="survey_form">
-	<% form_tag(submit_answers_cca_path(@cca), :method => "put") do %>
+	<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
 		Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.<br/>
 		<span class="deep-red small">* Required Fields</span><br/><br/>
 		<%= hidden_field_tag "id", @cca.id %>
