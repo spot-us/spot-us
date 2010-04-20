@@ -28,7 +28,7 @@
 					<div id="q_header">Questionnaire</div>
 		<% end %> <!-- end of cached fragment --> 
 				<div id="survey_form_wrapper">
-				  <% if @cca.survey_completed?(current_user) %>
+				  <% if current_user && @cca.survey_completed?(current_user) %>
 				    <h2>You have completed this survey. Thank you.</h2>
 				  <% elsif @cca.is_maxed_out? %>
 				    <h2>This survey has finished.</h2>

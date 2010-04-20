@@ -1,5 +1,5 @@
 class CcaController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :except=>[:show]
   before_filter :load_cca, :only => [:show]
   resources_controller_for :cca
 
@@ -21,7 +21,6 @@ class CcaController < ApplicationController
   end
   
   def submit_answers
-	#debugger
     @cca = find_resource
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
