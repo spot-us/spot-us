@@ -1,12 +1,16 @@
-<h3>Sponsoring this survey:</h3>
-<div class="sponsor_header clearfix">
-<%= link_to image_tag(@cca.user.photo(:thumb)), profile_path(@cca.user) %> <%= link_to @cca.user.full_name, profile_path(@cca.user), :class => "sponsor" %>
+<label>Survey Sponsor:</label>
+<div class="section clearfix">
+	<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
+	<h3><%= @cca.user.full_name %></h3>
+	
 </div>
-<div>
-  <label>website</label>
-  <%= link_to @cca.user.website, @cca.user.website %>
+<div class="section">
+  <label>Website:</label>
+  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
 </div>
-<div>
-  <label>about</label>
-  <%= @cca.user.about_you %>
+<div class="section">
+  <label>About:</label>
+	<div class="about_sponsor">
+  		<%= @cca.user.about_you %>
+	</div>
 </div>

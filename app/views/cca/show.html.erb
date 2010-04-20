@@ -2,47 +2,45 @@
 <% end %>
 <% @title = "Spot.us - Community Centered Advertising" %>
 
-<% if 1==2 #@subscriber && @subscriber.errors.any? %>
+<% if @cca.errors.any? %>
 	<div class="error">
 		<%= error_messages_for :cca %>
 	</div>
 <% end %>
 
-<div id="news_item">
-	<%if @cca%>
-		<div id="news_item_header">
-			<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-			<h2 class="headline"><%= @cca.title %> - Spot.Us Sponsorship</h2>
+<div id="survey">
+	<% if @cca %>
+		<div id="survey_header">
+			<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right" %>
+			<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
 		</div>
-		<div class="right-column">
-			<div class="right-panel-box survey_about">
-			  <%= render :partial => "sponsor_info"%>
+		<div id="survey_wrapper">
+			<div id="survey_info">
+				<%= render :partial => "sponsor_info" %>
 			</div>
-		</div>
-		<div class="main-column">
-			<div class="survey_description">
-				<%= @cca.description %> 
+			<div id="survey_main">
+				<h1><%= @cca.title %></h1>
+				<div id="survey_description">
+					<%= @cca.description %> 
+				</div>
+				<div id="q_header">Questionnaire</div>
+				<div id="survey_form_wrapper">
+				  <% if @cca.survey_completed?(current_user) %>
+				    <h2>You have completed this survey. Thank you.</h2>
+				  <% elsif @cca.is_maxed_out? %>
+				    <h2>This survey has finished.</h2>
+				  <% else %>
+					  <%= render :partial=>'item' %>
+				  <% end %>
+				</div>
 			</div>
-			<div id="survey">
-			  <% if @cca.survey_completed?(current_user) %>
-			    <h2>You have completed this survey. Thank you.</h2>
-			  <% elsif @cca.is_maxed_out? %>
-			    <h2>This survey has finished.</h2>
-			  <% else %>
-				  <%= render :partial=>'item' %>
-				<% end %>
-			</div>
+			
 		</div>
-	<%else%>
-		<div id="news_item_header">
-			<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-			<h2 class="headline">Spot.Us Sponsorship</h2>
+	<% else %>
+		<div id="survey_header">
+			<h3 class="headline">Spot.Us Sponsorship</h3>
 		</div>
-		<div class="main-column">
-			<div id="survey">
-				We do not have any active sponsorship surveys. Are you interested in making one? Please contact <a href='mailto:info@spot.us'>info@spot.us</a> and
-				we will tell you how you can get one live here.
-			</div>
-		</div>
-	<%end%>
+		We do not have any active sponsorship surveys. Are you interested in making one? Please contact <a href='mailto:info@spot.us'>info@spot.us</a> and
+		we will tell you how you can get one live here.
+	<% end %>
 </div>
