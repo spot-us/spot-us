@@ -5,7 +5,7 @@ class CcaController < ApplicationController
 
   
   def show
-
+	@cache_questions = @cca.has_begun?(current_user) ? current_user : nil
   end
   
   def results
@@ -51,7 +51,7 @@ class CcaController < ApplicationController
   protected
   
   def load_cca
-    @cca = Cca.find_by_id(params[:id])
+    @cca = Cca.find_by_id(params[:id], :include => [:cca_questions, :cca_answers])
     redirect_to root_url unless @cca && @cca.is_live? || current_user.admin?
   end
   

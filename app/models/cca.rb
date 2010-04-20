@@ -5,10 +5,18 @@ class Cca < ActiveRecord::Base
 	has_many :cca_questions, :order => "position"
 	has_many :cca_answers
   
-  named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
-  
+	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
+	
+	named_scope :section?, lambda { |section|
+	    return {} if section.blank?
+	    self.send(section)
+	  }
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
+	end
+	
+	def has_begun?(user)
+		CcaAnswer.find_by_user_id_and_cca_id(user.id, self.id)
 	end
 
 	def number_of_answers
@@ -114,6 +122,8 @@ class Cca < ActiveRecord::Base
 				else
 					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer)
 				end
+			else
+				user.touch_user! # this is for fragment cache - browser will be redirected to redisplay form so we need to refresh cache
 			end
 		end
 		!incomplete
