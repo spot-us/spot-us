@@ -286,7 +286,7 @@ class Pitch < NewsItem
     @total_ammount_allocated ||= calculate_total_amount_allocated_by_user(user)
   end
   
-  def calculate_total_amount_allocated_by_user(us)
+  def calculate_total_amount_allocated_by_user(user)
     donations.by_user(user).map(&:amount).sum + credit_pitches.by_user(user).map(&:amount).sum
   end
 

@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
   
   def notify_pitch_owners
     posts = Post.find(:all, :conditions=> "created_at>='#{1.week.ago}'" ).map(&:pitch_id).uniq
-    Pitch.unfunded.find(:all, :conditions => "id not in (#{posts.join(',')})").each do |pitch|
+    Pitch.unfunded.find(:all, :conditions => "id not in (#{posts.join(',')}) and created_at>='#{1.week.ago}'").each do |pitch|
       Mailer.deliver_create_blog_post_notification(pitch)
     end
     return

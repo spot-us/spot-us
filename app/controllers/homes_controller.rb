@@ -3,6 +3,7 @@ class HomesController < ApplicationController
   def show
     @featured_pitches = Pitch.featured_by_network(current_network)
     @featured_stories = Story.published.latest
+    @cca = Cca.cca_home.first
     @posts = Post.by_network(@current_network).latest
   end
 
