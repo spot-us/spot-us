@@ -5,6 +5,8 @@ class Cca < ActiveRecord::Base
 	has_many :cca_questions, :order => "position"
 	has_many :cca_answers
   
+  named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
+  
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
 	end
