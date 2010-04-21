@@ -474,8 +474,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #survey_info .about_sponsor {font-size:11.5px;}
 #survey_info .about_sponsor p {margin:0;}
 
-#apply_credits {width: 824px;margin: 0 0 0 20px;}
-#apply_credits #stories {border-top:solid 1px #aaa;}
+#apply_credits_to_pitches {width: 824px;margin: 0 0 0 20px;}
+#apply_credits_to_pitches #stories {border-top:solid 1px #aaa;}
 #apply_credits_sponsor_info {background:none repeat scroll 0 0 #11363E;float:right;margin-right:33px;margin-top:90px;padding:10px;width:169px;
 					color:white;}
 #apply_credits_sponsor_info h3 {font-size:16px;margin-bottom:10px;}

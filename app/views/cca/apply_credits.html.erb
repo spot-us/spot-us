@@ -11,7 +11,7 @@
 		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
 		<h2 class="headline"><%= @cca.user.full_name %> thanks you!</h2>
 	</div>
-	<div id="apply_credits">
+	<div id="apply_credits_to_pitches">
 		<% if @cca.survey_completed?(current_user) %>
 			<div style="padding-right:100px">
 				Congrats! By completing the survey "<%= @cca.title %>", you have earned <strong><%= number_to_currency(@cca.award_amount) %></strong> in credits, and have a total of <strong><%= number_to_currency(current_user.remaining_credits) %></strong>. Feel free to apply now to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.
