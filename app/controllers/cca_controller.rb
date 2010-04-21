@@ -5,7 +5,8 @@ class CcaController < ApplicationController
 
   
   def show
-	@cache_questions = current_user && @cca.has_begun?(current_user) ? current_user : nil
+	latest_answer = @cca.last_answer(current_user)
+	@cache_form = current_user && latest_answer ? latest_answer : nil
   end
   
   def results

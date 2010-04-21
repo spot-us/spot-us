@@ -6,14 +6,12 @@ class Cca < ActiveRecord::Base
 	has_many :cca_answers
   
 	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
+		
 	
-	named_scope :section?, lambda { |section|
-	    return {} if section.blank?
-	    self.send(section)
-	  }
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
 	end
+	
 	
 	def has_begun?(user)
 		CcaAnswer.find_by_user_id_and_cca_id(user.id, self.id)
