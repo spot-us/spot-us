@@ -5,7 +5,7 @@ class CcaController < ApplicationController
 
   
   def show
-	latest_answer = @cca.last_answer(current_user)
+	latest_answer = CcaAnswer.latest_answer(@cca,current_user)
 	@cache_form = current_user && latest_answer ? latest_answer : nil
   end
   
