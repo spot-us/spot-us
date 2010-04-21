@@ -89,7 +89,7 @@ class Cca < ActiveRecord::Base
   
 	def generate_csv
 		FasterCSV.generate do |csv|
-			csv << ['Question', 'Answers']
+			csv << ['Question', 'User', 'Answers']
 			cca_questions.each do |question|
 				csv << [question.question, '', '']
 				question.cca_answers.each do |answer|
