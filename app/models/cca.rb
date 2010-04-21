@@ -100,20 +100,18 @@ class Cca < ActiveRecord::Base
 	end
 
 	def process_answers(answers, user)
-		incomplete = false
-		debugger
+		form_incomplete = false
 		self.cca_questions.each do |question|
+			answer_incomplete = false
 			answer = eval("answers[:question_#{question.id}]") || nil
-			# check for incomplete answer on required element
-			if question.required == true 
-				if question.question_type == "checkbox"
-					incomplete = true if !answer || answer.size == 0
-				elsif !answer || answer.strip == ""
-					incomplete = true
-				end
+			if question.question_type == "checkbox"
+				answer_incomplete = true if !answer || answer.size == 0
+			else
+				answer_incomplete = true if !answer || answer.strip == ""
 			end
-			# process item that is completed
-			if incomplete == false
+			form_incomplete = true if answer_incomplete and question.required == true 
+			# insert/update db for items that are completed
+			if answer_incomplete == false
 				answer = answer.join("\n") if question.question_type == "checkbox"
 				existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
 				if existing_answer
@@ -123,7 +121,8 @@ class Cca < ActiveRecord::Base
 				end
 			end
 		end
-		!incomplete
+		# return whether form is finished or user needs to still fill out elements
+		!form_incomplete
 	end
 	
 	def already_submitted?(user)
