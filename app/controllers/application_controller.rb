@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   before_filter :current_network
   before_filter :block_ips
   before_filter :clear_spotus_lite
+  before_filter :set_cca
   before_filter :set_default_html_meta_tags
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
@@ -37,6 +38,10 @@ class ApplicationController < ActionController::Base
     unless ['myspot/donation_amounts','myspot/donations','myspot/purchases','lite'].include?(params[:controller])
       cookies.delete :spotus_lite
     end
+  end
+  
+  def set_cca
+    @cca_header = Cca.cca_home.first
   end
   
   # minify the html
