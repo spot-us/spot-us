@@ -101,6 +101,7 @@ class Cca < ActiveRecord::Base
 
 	def process_answers(answers, user)
 		incomplete = false
+		debugger
 		self.cca_questions.each do |question|
 			answer = eval("answers[:question_#{question.id}]") || nil
 			# check for incomplete answer on required element
@@ -112,7 +113,7 @@ class Cca < ActiveRecord::Base
 				end
 			end
 			# process item that is completed
-			unless incomplete == true
+			if incomplete == false
 				answer = answer.join("\n") if question.question_type == "checkbox"
 				existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
 				if existing_answer
@@ -120,8 +121,6 @@ class Cca < ActiveRecord::Base
 				else
 					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer)
 				end
-			else
-				user.touch_user! # this is for fragment cache - browser will be redirected to redisplay form so we need to refresh cache
 			end
 		end
 		!incomplete
