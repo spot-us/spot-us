@@ -7,22 +7,21 @@
 	<div id="profile_container">
 		<%= render :partial => "myspot/dashboard_nav", :locals => {:selected_tab => "ccas"} %>
 		<div id="dashboard_content">
-		<% if @ccas.any? %>
-			<table class="donations">
-				<tr>
-					<td colspan="4" class="header">
-						Community Centered Advertisements
-					</td>
-				</tr>
-				<tr>
-					<th class="pitch_header">Question</th>
-					<th class="donation_header">User</th>
-					<th class="status_header" colspan='2'>Answer</th>
-				</tr>
-				<%= render :partial => "myspot/ccas/cca_question", :collection => @cca.cca_questions, :spacer_template => "myspot/ccas/cca_spacer" %>
-			</table>
-		<% end %>
-		<%= will_paginate @ccas %>
+			<% if @cca %>
+				<table class="donations">
+					<tr>
+						<td colspan="4" class="header">
+							Community Centered Advertisements
+						</td>
+					</tr>
+					<tr>
+						<th class="pitch_header">Question</th>
+						<th class="donation_header">User</th>
+						<th class="status_header" colspan='2'>Answer</th>
+					</tr>
+					<%= render :partial => "myspot/ccas/cca_question", :collection => @cca.cca_questions, :spacer_template => "myspot/ccas/cca_spacer" %>
+				</table>
+			<% end %>
 		</div>
 	</div>
 </div>
