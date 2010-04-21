@@ -21,9 +21,9 @@
 		<li class="read_story">
 			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published", :title=>"Read A Published Spot Us Story" %>
 		</li>
-		<%if @cca%>
+		<%if @cca_header%>
 			<li class="start_story">
-				<%= link_to image_tag("/images/new_design/earn_credits.jpg", :width=>"111", :height=>"98", :alt=>"Earn credits"),  cca_path(@cca)%>
+				<%= link_to image_tag("/images/new_design/earn_credits.jpg", :width=>"111", :height=>"98", :alt=>"Earn credits"),  cca_path(@cca_header)%>
 			</li>
 		<%end%>
 	</ul>
