@@ -1,7 +1,7 @@
 <div id="login_modal">
    <% form_tag session_url(:protocol => 'http'), :class => "login" do %>
       <div id="login_form">
-         <div class="float-right"><strong><a id="show_register_form" href="">&raquo; Register For Spot.Us</a></strong></div>
+         <div class="float-right"><strong><a id="show_register_form" href="" class='popup_link'>&raquo; Register For Spot.Us</a></strong></div>
          <h3>Thanks for joining us!</h3> 
          <%= render :partial => 'sessions/popup_form' %>
          <input type='image' src='/images/login.png' alt="Login" onclick="processLoginForm();"> 
