@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   before_filter :current_network
   before_filter :block_ips
   before_filter :clear_spotus_lite
-  befoe_filter :set_cca
+  before_filter :set_cca
   before_filter :set_default_html_meta_tags
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
