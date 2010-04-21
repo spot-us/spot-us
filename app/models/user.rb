@@ -471,6 +471,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def touch_user!
+    self.updated_at = Time.now
+    self.save
+  end
+
   protected
   
   def encrypt_password
@@ -502,9 +507,6 @@ class User < ActiveRecord::Base
     self.update_attribute(:activation_code, nil)
   end
   
-
-
-
 end
 
 

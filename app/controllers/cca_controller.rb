@@ -5,7 +5,7 @@ class CcaController < ApplicationController
 
   
   def show
-
+	@cache_questions = current_user && @cca.has_begun?(current_user) ? current_user : nil
   end
   
   def results
@@ -21,7 +21,6 @@ class CcaController < ApplicationController
   end
   
   def submit_answers
-	#debugger
     @cca = find_resource
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
@@ -51,7 +50,7 @@ class CcaController < ApplicationController
   protected
   
   def load_cca
-    @cca = Cca.find_by_id(params[:id])
+    @cca = Cca.find_by_id(params[:id]), :include => [:cca_questions, :cca_answers])
     redirect_to root_url unless @cca && @cca.is_live? || (current_user && current_user.admin?)
   end
   
