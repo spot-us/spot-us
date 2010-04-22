@@ -20,11 +20,7 @@
 					<th class="status_header">Status</th>
 					<th class="actions_header">Actions</th>
 				</tr>
-				<tr>
-					<td colspan="4">
-						<%= render :partial => "myspot/ccas/cca", :collection => @ccas, :spacer_template => "myspot/ccas/cca_spacer" %>
-					</td>
-				</tr>
+				<%= render :partial => "myspot/ccas/cca", :collection => @ccas, :spacer_template => "myspot/ccas/cca_spacer" %>
 			</table>
 		<% end %>
 		<%= will_paginate @ccas %>

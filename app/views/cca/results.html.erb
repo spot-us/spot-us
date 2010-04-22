@@ -1,0 +1,27 @@
+<% @title = "Spot.us - Member Dashboard" %>
+<%= render :partial => "layouts/common_questions" %>
+<div id="myspot_dashboard">
+	<h3>My Spot</h3>
+
+	<%= render :partial => "myspot/nav", :locals => {:selected_tab => "dashboard"} %>
+	<div id="profile_container">
+		<%= render :partial => "myspot/dashboard_nav", :locals => {:selected_tab => "ccas"} %>
+		<div id="dashboard_content">
+			<% if @cca %>
+				<table class="donations">
+					<tr>
+						<td colspan="4" class="header">
+							Community Centered Advertisements
+						</td>
+					</tr>
+					<tr>
+						<th class="pitch_header">Question</th>
+						<th class="donation_header">User</th>
+						<th class="status_header" colspan='2'>Answer</th>
+					</tr>
+					<%= render :partial => "cca/cca_question", :collection => @cca.cca_questions, :spacer_template => "cca/cca_spacer" %>
+				</table>
+			<% end %>
+		</div>
+	</div>
+</div>

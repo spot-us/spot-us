@@ -15,6 +15,11 @@ class CcaController < ApplicationController
   
   def results
     @cca = find_resource
+    
+    if !current_user.is_a?(Admin) || (@cca && current_user!=@cca.user)
+      return head(:bad_request)
+    end
+    
     respond_to do |format|
       format.html do
       end

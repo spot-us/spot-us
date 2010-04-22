@@ -1,0 +1,15 @@
+<tr>
+	<td class="pitch">    
+		<strong><%= cca_question.question%></strong>
+		<% if cca_question.description && !cca_question.description.empty?%>
+			<p><%=cca_question.description%></p>
+		<%end%>
+	</td>
+	<td class="donated">
+		&nbsp;
+	</td>
+	<td colspan='2'>
+		&nbsp;
+	</td>
+</tr>
+<%= render :partial => "cca/cca_answer", :collection => cca_question.cca_answers, :spacer_template => "cca/cca_spacer" %>
