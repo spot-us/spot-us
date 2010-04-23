@@ -2,7 +2,7 @@
 	<% apply_fragment ['cca_form_', @cca, @cache_form] do %>
 		<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
 			Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.<br/>
-			<span class="deep-red small">* Required Fields</span><br/><br/>
+			<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
 			<%= hidden_field_tag "id", @cca.id %>
 			<% @cca.cca_questions.each_with_index do |question, index| %>
 				<%= survey_section(question, index) %>
@@ -13,12 +13,11 @@
 			<%= end_survey_sections %>
 			<br/>
 			<hr>
-			<h5>I'd like to sponsor a survey like this one.</h5>
-			<input name="sponsor_interest" value="yes" type="checkbox" /> Sign me up!
-			<span class="small">(Spot.Us will email you with details)</span>
+			<h5>I'd like to know how to sponsor a survey like this one.</h5>
+			<input name="sponsor_interest" value="yes" type="checkbox" /> Spot.Us will email you with details
 			<br/><br/>
 			<h5>Terms of Service. <span class="deep-red">*</span></h5> 
-			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared on the site <em>but my identity will remain anonymous</em>.<br/><br/>
+			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
 			<%= image_submit_tag image_path('submit.png') %>
 		<% end %>
 	<% end %>
