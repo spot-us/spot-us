@@ -47,3 +47,11 @@
 		we will tell you how you can get one live here.
 	<% end %>
 </div>
+<%unless current_user%>
+	<script>
+	    jQuery(document).ready(function($){
+			jQuery.facebox({ajax:"/sections/cca"});
+	    });
+	</script>
+  	
+<%end%>
