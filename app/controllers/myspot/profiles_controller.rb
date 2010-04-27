@@ -12,7 +12,7 @@ class Myspot::ProfilesController < ApplicationController
   def edit
     @profile = find_resource
      if request.xhr?
-       render :partial => 'users/popup_form'
+       render :partial => 'users/fb_popup_form'
      end
   end
   
@@ -30,7 +30,7 @@ class Myspot::ProfilesController < ApplicationController
       end
     else
       if request.xhr?
-        render :partial => 'users/popup_form', :status => :unprocessable_entity
+        render :partial => 'users/fb_popup_form', :status => :unprocessable_entity
       else
         flash[:error] = "Your profile was not updated."
         redirect_to edit_myspot_profile_path

@@ -122,7 +122,7 @@ class User < ActiveRecord::Base
 
   before_validation_on_create :generate_activation_code
   before_save :encrypt_password, :unless => lambda {|user| user.password.blank? }
-  after_create :register_user_to_fb
+  # after_create :register_user_to_fb
   
   has_attached_file :photo,
                     :styles      => { :thumb => '44x44#' },
@@ -171,6 +171,27 @@ class User < ActiveRecord::Base
       raise ArgumentError, "invalid subclass of #{inspect}"
     end
   end
+
+################### new facebook oauth 2 ###############
+
+	def link_identity!(uid)
+		self.fb_user_id = uid
+		self.save!
+	end
+	
+	def self.from_identity(credentials)
+		user = User.find_by_fb_user_id(credentials["id"].to_i)
+		debugger
+		return user if user
+		new_user = User.new(:first_name => credentials["first_name"], :last_name => credentials["last_name"], :login => "facebook_#{credentials["id"]}", 
+			:password => "", :email => "", :network_id => Network.first)
+    new_user.type = "Citizen"
+    new_user.status = "active"
+    new_user.fb_user_id = credentials["id"]
+    #We need to save without validations
+    new_user.save(false)
+	  return new_user
+	end
   
 ################### facebook ######################
   #find the user in the database, first by the facebook user id and if that fails through the email hash
