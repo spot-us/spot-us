@@ -60,9 +60,12 @@ class Post < ActiveRecord::Base
   end
   
   def update_twitter
-    require 'twitter_update'
-    TwitterUpdate.update_status?(status_update)
+    if Rails.env.development?
+      require 'twitter_update'
+      TwitterUpdate.update_status?(status_update)
+    end
   end
+
   
   def blog_posted_notification
     #email supporters
