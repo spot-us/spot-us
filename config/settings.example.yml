@@ -13,7 +13,9 @@ production:
         :domain: domain.com
         :perform_deliveries: true
   :default_host: domain.com
-  :bitly: bitly_api_key
+  :bitly: 
+      :login: some_login
+      :api_key: bitly_api_key
   :google:
       :analytics_user_id: google_analytics_code
       :verification_code: google_webmaster_verification_code
@@ -25,3 +27,9 @@ production:
   :recaptcha:
       :public_key: public_key
       :private_key: private_key
+  :hoptoad:
+      :api_key: some_obscure_key
+  :s3_bucket:
+      :production: name-for-production-storage
+      :staging: name-for-staging-storage
+      :development: name-for-development-storage
