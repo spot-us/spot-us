@@ -1,4 +1,9 @@
+require "url_shortener"
+
 class Post < ActiveRecord::Base
+  
+  include ActionController::UrlWriter
+  
   belongs_to :pitch
   belongs_to :user
   
@@ -35,6 +40,30 @@ class Post < ActiveRecord::Base
     blog_image_file_name.blank?
   end
   
+  def short_url(start_url=nil,base_url=nil)
+    base_url  = "http://spot.us/" unless base_url
+    base_url += "pitches/"
+    authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
+    client = UrlShortener::Client.new(authorize)
+    shorten = client.shorten("#{base_url}#{pitch.to_param}/posts/#{id}")
+    shorten.urls
+  end
+  
+  def status_update(show_url=true)
+    url_length = show_url ? 22 : 0
+    share_type = type.to_s.titleize
+    max_length = PREPEND_STATUS_UPDATE.length + share_type.length + url_length + 15
+    msg  = "#{PREPEND_STATUS_UPDATE} #{share_type}: "
+    msg += title.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : title
+    msg += " - #{short_url}" if show_url
+    msg
+  end
+  
+  def update_twitter
+    require 'twitter_update'
+    TwitterUpdate.update_status?(status_update)
+  end
+  
   def blog_posted_notification
     #email supporters
     emails = self.pitch.supporters.map{ |email| "'#{email}'"}
@@ -50,6 +79,7 @@ class Post < ActiveRecord::Base
     self.pitch.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
       Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
+    update_twitter
   end
   
   def blog_image_display(style)

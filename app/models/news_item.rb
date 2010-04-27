@@ -38,12 +38,14 @@
 #  current_funding             :decimal(15, 2)
 #
 
+require "url_shortener"
+
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
   include Sanitizy
   include NetworkMethods
-
+  
   cleanse_columns(:delivery_description, :extended_description, :short_description, :external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
@@ -182,7 +184,12 @@ class NewsItem < ActiveRecord::Base
     msg += " - #{short_url}" if show_url
     msg
   end
-
+  
+  def update_twitter
+    require 'twitter_update'
+    TwitterUpdate.update_status?(status_update)
+  end
+  
   def deleted?
     !deleted_at.blank?
   end

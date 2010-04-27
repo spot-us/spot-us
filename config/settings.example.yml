@@ -33,3 +33,6 @@ production:
       :production: name-for-production-storage
       :staging: name-for-staging-storage
       :development: name-for-development-storage
+  :twitter:
+      :login: login_to_twitter
+      :password: password_to_twitter
