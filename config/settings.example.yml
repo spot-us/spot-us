@@ -13,11 +13,23 @@ production:
         :domain: domain.com
         :perform_deliveries: true
   :default_host: domain.com
-  :google_verify: google_webmaster_verification_code
-  :bitly: bitly_api_key
+  :bitly: 
+      :login: some_login
+      :api_key: bitly_api_key
+  :google:
+      :analytics_user_id: google_analytics_code
+      :verification_code: google_webmaster_verification_code
+      :custom_search_key: google_custom_search_code
   :cron_job_code: secret_key_to_access_the_cronjob
   :gateway:
       :login: login_to_payment_gateway
       :password: password_to_payment_gateway
-  :google_analytics:
-      :api_key: google_analytics_user_id
+  :recaptcha:
+      :public_key: public_key
+      :private_key: private_key
+  :hoptoad:
+      :api_key: some_obscure_key
+  :s3_bucket:
+      :production: name-for-production-storage
+      :staging: name-for-staging-storage
+      :development: name-for-development-storage

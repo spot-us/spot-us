@@ -40,7 +40,7 @@ end
 
 PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
-S3_BUCKET = "spotus-development-storage"
+S3_BUCKET = APP_CONFIG[:s3_bucket][:staging]
 
 #FACEBOOK_APP_ID          = "201444872960"
 FACEBOOK_CONSUMER_KEY    = "2fcb4aee61a85a43662109224c03998e"
