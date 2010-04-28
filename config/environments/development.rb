@@ -42,7 +42,6 @@ PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
 S3_BUCKET = APP_CONFIG[:s3_bucket][:development]
 
-#FACEBOOK_APP_ID          = "201444872960"
-FACEBOOK_CONSUMER_KEY    = "2fcb4aee61a85a43662109224c03998e"
-FACEBOOK_CONSUMER_SECRET = "43f0a739e2bf1eb6a5ccc5aa5bf46afb"
+FACEBOOK_CONSUMER_KEY    = APP_CONFIG[:facebook][:consumer_key]
+FACEBOOK_CONSUMER_SECRET = APP_CONFIG[:facebook][:consumer_secret]
 
