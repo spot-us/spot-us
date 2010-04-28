@@ -38,12 +38,14 @@
 #  current_funding             :decimal(15, 2)
 #
 
+require "url_shortener"
+
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
   include Sanitizy
   include NetworkMethods
-
+  
   cleanse_columns(:delivery_description, :extended_description, :short_description, :external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
@@ -165,7 +167,7 @@ class NewsItem < ActiveRecord::Base
   end
   
   def short_url(start_url=nil,base_url=nil)
-    base_url  = "http://spot.us/" unless base_url
+    base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
     base_url += "#{type.to_s.downcase.pluralize}/"
     authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
     client = UrlShortener::Client.new(authorize)
@@ -182,7 +184,14 @@ class NewsItem < ActiveRecord::Base
     msg += " - #{short_url}" if show_url
     msg
   end
-
+  
+  def update_twitter
+    if Rails.env.development?
+      require 'twitter_update'
+      TwitterUpdate.update_status?(status_update)
+    end
+  end
+  
   def deleted?
     !deleted_at.blank?
   end

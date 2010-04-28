@@ -178,6 +178,7 @@ class Story < NewsItem
             Mailer.deliver_story_published_notification(self,fact_checker.first_name,fact_checker.email)
         end
     end
+    update_twitter
   end
   
   protected

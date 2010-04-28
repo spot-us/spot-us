@@ -38,8 +38,6 @@
 #  current_funding             :decimal(15, 2)
 #
 
-require "url_shortener"
-
 class Pitch < NewsItem
   # extend ActiveSupport::Memoizable
   aasm_initial_state  :unapproved
@@ -390,6 +388,7 @@ class Pitch < NewsItem
 
   def send_approved_notification
     Mailer.deliver_pitch_approved_notification(self)
+    update_twitter
   end
 
   def expiration_date_cannot_be_in_the_past 
