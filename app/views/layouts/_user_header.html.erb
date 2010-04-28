@@ -8,19 +8,16 @@
     <li>
       <%= link_to "My Spot", myspot_profile_path %>
     </li>
-    <% if logged_in? && current_user.facebook_user? && facebook_session %>
-       <li class="no-pipe">
-         <a href="#" onclick='FB.Connect.logoutAndRedirect("<%= destroy_session_path %>")'>Logout</a>
-         <em class="small">facebook connected</em>
-       </li>
-    <% else %>
-       <li>
-         <%= link_to 'Logout', destroy_session_path %>
-       <li class="no-pipe">
-         <%= fb_login_button('window.location = "/users/link_user_accounts";', :size => "small") %>
-         <em class="small"> connect</em>
-       </li>
-    <% end %>
+     <li>
+       <%= link_to 'Logout', destroy_session_path %>
+	</li>
+    <li class="small italic">
+	<% if !fb_session %>
+		<%= fb_login_link  %>
+	<% else %>
+		<%= fb_logged_in %>
+	<% end %>
+    </li>
   </div>
 </ul>
 <ul class="user-header-nav">
@@ -31,9 +28,8 @@
     <li>
       <%= link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in" %>
     </li>
-    <li class="no-pipe">
-      <%= fb_login_button('window.location = "/users/link_user_accounts";', :size => "small") %>
-      <em class="small"> connect</em>
+    <li class="no-pipe small italic">
+      <%= fb_login_link %>
     </li>
   </div>
 </ul>

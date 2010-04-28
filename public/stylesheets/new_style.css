@@ -36,6 +36,7 @@ object embed {display:block;}
 .border_top {border-top:solid 1px #aaa;}
 .display_block{display:block;}
 .display_inline{display:inline;}
+.italic{font-style:italic;}
 .admin_button {background:#882618;color:white !important;padding:5px 8px;line-height:18px;font-size:14px;-moz-border-radius:4px;
 				-webkit-border-radius:4px;}
 a.admin_button  {color:white !important;}

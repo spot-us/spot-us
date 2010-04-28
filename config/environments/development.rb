@@ -11,7 +11,7 @@ config.whiny_nils = true
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
 config.action_view.debug_rjs                         = true
-config.action_controller.perform_caching             = true
+config.action_controller.perform_caching             = false
 SslRequirement.disable_ssl_check = true
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
@@ -41,4 +41,8 @@ end
 PAYPAL_POST_URL = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info+s_1240233800_per@spot.us"
 S3_BUCKET = APP_CONFIG[:s3_bucket][:development]
+
+#FACEBOOK_APP_ID          = "201444872960"
+FACEBOOK_CONSUMER_KEY    = "2fcb4aee61a85a43662109224c03998e"
+FACEBOOK_CONSUMER_SECRET = "43f0a739e2bf1eb6a5ccc5aa5bf46afb"
 

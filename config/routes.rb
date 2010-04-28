@@ -15,6 +15,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "stories/:filter/:length.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
   map.connnect "news_items", :controller => "news_items", :action => "search", :sort_by=>'asc'
   
+  map.connect '/auth/facebook', :controller => "sessions", :action => "facebook_login"
+  map.connect '/auth/facebook/callback', :controller => "sessions", :action => "facebook_callback"
+
+
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
     
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
