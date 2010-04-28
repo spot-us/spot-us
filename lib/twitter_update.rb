@@ -1,3 +1,5 @@
+#hold class until the next step
+
 class TwitterUpdate
 
   def self.update_status?(status)
