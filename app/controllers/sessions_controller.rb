@@ -1,58 +1,40 @@
 require "digest/sha1"
 
 class SessionsController < ApplicationController
-  #ssl_required :create
-	# require 'rubygems'
-	# require 'sinatra'
-	# require 'oauth2'
-	# require 'json'
-	#before_filter :load_oauth_client, :only => ["facebook_login"]
 
-	def oauth_client
-		OAuth2::Client.new(FACEBOOK_CONSUMER_KEY, FACEBOOK_CONSUMER_SECRET, :site => 'https://graph.facebook.com')
-	end
+  include OauthConnect
+
 
 	def facebook_login
-		# get '/auth/facebook' do
+		# '/auth/facebook' do
 		#debugger
 		redirect_to oauth_client.web_server.authorize_url(
-			:redirect_uri => redirect_uri,
-			:display => "page"
-			#, 
-			#:scope => 'email,offline_access'
+			:redirect_uri => redirect_uri(request.url),
+			:display => "page", # popup
+			:scope => "publish_stream"
 		)
 	end
 	
 	def facebook_callback
 	# get '/auth/facebook/callback' do
-		access_token = oauth_client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+		access_token = fb_access_token(params[:code],request.url)
 	  user = JSON.parse(access_token.get('/me'))
-	  #debugger
+	  user ? session[:fb_session] = params[:code] : session[:fb_session] = nil
 		if current_user
 			@user = current_user
-			@user.link_identity!(user.id)
+			@user.link_identity!(user["id"].to_i)
 			# otherwise locate or create a new native account and associate 
 		else
 			@user = User.from_identity(user)
 			self.current_user = @user
 			flash[:notice] = "Welcome to Spot.Us."
-			
 		end
-		# put these in a method
-		# handle_remember_me
-		#debugger
+		
     create_current_login_cookie
-    # update_balance_cookie
-    # handle_first_donation_for_non_logged_in_user
-    # handle_first_pledge_for_non_logged_in_user
+    update_balance_cookie
+    handle_first_donation_for_non_logged_in_user
+		handle_first_pledge_for_non_logged_in_user
 	  redirect_to "/"
-	end
-
-	def redirect_uri
-		uri = URI.parse(request.url)
-		uri.path = '/auth/facebook/callback'
-		uri.query = nil
-		uri.to_s
 	end
 
 	def new
@@ -66,12 +48,14 @@ class SessionsController < ApplicationController
 	end
 
 	def create
+	  if params[:link_facebook] == "true"
+      # self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+      new_fb_user = current_user
+    end
 		self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
-		if params[:link_facebook] == "true"
-			self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
-		end
-		if logged_in?
 
+		if logged_in?
+      current_user.connect_fb(new_fb_user) if new_fb_user
 			handle_remember_me
 			create_current_login_cookie
 			update_balance_cookie

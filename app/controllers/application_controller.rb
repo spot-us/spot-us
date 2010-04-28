@@ -24,10 +24,14 @@ class ApplicationController < ActionController::Base
                   "We are an open source project, to pioneer \"community funded reporting.\""
   META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
   
-  #before_filter :set_facebook_session
-  helper_method :facebook_session
+  # before_filter :set_facebook_session
+  helper_method :fb_session
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
+  def fb_session
+    session[:fb_session]
+  end
+	
   def block_ips
     return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86'].include?(request.remote_ip)
     return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
