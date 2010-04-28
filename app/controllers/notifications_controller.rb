@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
       return
     end
     notify_pitch_owners if params[:notification]=='pitch_owners'
-    notify_pitch_owners if params[:notification]=='unpaid_donations'
+    notify_unpaid_donations if params[:notification]=='unpaid_donations'
     render :text=>"ok!" 
   end
   
