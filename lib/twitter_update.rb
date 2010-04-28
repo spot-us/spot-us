@@ -3,13 +3,15 @@
 class TwitterUpdate
 
   def self.update_status?(status)
-    begin
-      client = Twitter::Client.new(:login => APP_CONFIG[:twitter][:login], :password => APP_CONFIG[:twitter][:password])
-      obj = update_status(client, status)
-    rescue Twitter::RESTError => re 
-      logger.info("REST ERROR: Automatic Twitter Update for #{headline} failed")
-    rescue Twitter::Error
-      logger.info("ERROR: Automatic Twitter Update for #{headline} failed")
+    if APP_CONFIG[:twitter]
+      begin
+        client = Twitter::Client.new(:login => APP_CONFIG[:twitter][:login], :password => APP_CONFIG[:twitter][:password])
+        obj = update_status(client, status)
+      rescue Twitter::RESTError => re 
+        logger.info("REST ERROR: Automatic Twitter Update for #{headline} failed")
+      rescue Twitter::Error
+        logger.info("ERROR: Automatic Twitter Update for #{headline} failed")
+      end
     end
   end
 
