@@ -21,6 +21,8 @@ PAYPAL_POST_URL = "https://www.paypal.com/cgi-bin/webscr"
 PAYPAL_EMAIL = "info@spot.us"
 S3_BUCKET = APP_CONFIG[:s3_bucket][:production]
 
+UPDATE_USER_TWITTER = true
+
 FACEBOOK_CONSUMER_KEY    = APP_CONFIG[:facebook][:consumer_key]
 FACEBOOK_CONSUMER_SECRET = APP_CONFIG[:facebook][:consumer_secret]
 
