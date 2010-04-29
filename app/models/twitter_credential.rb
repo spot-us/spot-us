@@ -26,7 +26,7 @@ class TwitterCredential < ActiveRecord::Base
       end
     else
       #get the user and email update
-      obj = Notifier.deliver_email(MAIL_WEBMASTER, "Update of Twitter for #{user.user_name} with email #{user.email}","Test Twitter update with this status: #{status}") if user
+      obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.user_name} with email #{user.email}","Test Twitter update with this status: #{status}") if user
     end               
     
     obj
@@ -46,7 +46,7 @@ class TwitterCredential < ActiveRecord::Base
   end
   
   def raise_error?(type='ERROR', status='')
-    Notifier.deliver_email(MAIL_WEBMASTER, "Update of Twitter for #{user.user_name} with email #{user.email}","Attempted Twitter update with this status: #{status}") if user
+    Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.user_name} with email #{user.email}", "Attempted Twitter update with this status: #{status}") if user
     logger.info("#{type}: Update of Twitter for #{user.user_name} with email #{user.email}")
     return false
   end
