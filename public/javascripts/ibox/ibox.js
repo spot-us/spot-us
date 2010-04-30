@@ -101,7 +101,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -526,7 +526,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -951,7 +951,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -1376,7 +1376,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -1801,7 +1801,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -2226,7 +2226,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -2651,7 +2651,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -3076,7 +3076,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
@@ -3501,7 +3501,7 @@ createIbox = function(elem) {
      strHTML += "<div id=\"ibox_content\"></div>";
      strHTML += "<div id=\"ibox_footer_wrapper\">";
      strHTML += "<div id=\"ibox_close\" style=\"float:right;\">";
-     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.ushttp://www.spot.us/images/close_square.png\"/></a></div>";
+     strHTML += "<a id=\"ibox_close_a\" href=\"javascript:void(null);\" ><img src=\"http://www.spot.us/images/close_square.png\"/></a></div>";
      strHTML += "<div id=\"ibox_footer\">&nbsp;</div>";
      strHTML += "</div></div></div>";
 
