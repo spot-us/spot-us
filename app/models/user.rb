@@ -194,7 +194,7 @@ class User < ActiveRecord::Base
 	end
 	
 	def self.info_account?
-    User.find_by_email(APP_CONFIG[:site][:info_account])
+    User.find_by_email(APP_CONFIG[:site][:info_account_email])
   end
 	
   def self.find_by_fb_user(uid)

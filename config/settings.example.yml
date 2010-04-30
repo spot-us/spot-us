@@ -34,7 +34,7 @@ production:
       :staging: name-for-staging-storage
       :development: name-for-development-storage
   :site:
-      :info_acount_email: email_of_the_info_account_at_the_site
+      :info_account_email: email_of_the_info_account_at_the_site
   :facebook:
       :consumer_key: api_key
       :consumer_secret: application_secret
