@@ -8,16 +8,12 @@ class TwitterCredential < ActiveRecord::Base
   validates_presence_of :password, :on => :create, :message => "Password cannot be blank"
   validates_presence_of :user_id, :on => :create, :message => "User id cannot be blank"
   
-  def update?(msg, options)
-    update_status_msg(user, msg, options)
-  end
-    
-  def update_status_msg(user, status, options={})  
+  def update?(status)
     obj = nil
     
     unless UPDATE_TWITTER
       begin
-        client = get_client(user, option)
+        client = get_client
         obj = update_status(client, status)
       rescue Twitter::RESTError => re 
         return raise_error?('REST ERROR', status)
@@ -34,7 +30,7 @@ class TwitterCredential < ActiveRecord::Base
   
   def check_connection?
     begin
-      client = get_client(user, option)
+      client = get_client
       status = client.timeline_for(:me)
       return true
     rescue Twitter::RESTError => re 
@@ -47,16 +43,12 @@ class TwitterCredential < ActiveRecord::Base
   
   def raise_error?(type='ERROR', status='')
     Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.user_name} with email #{user.email}", "Attempted Twitter update with this status: #{status}") if user
-    logger.info("#{type}: Update of Twitter for #{user.user_name} with email #{user.email}")
+    logger.info("#{type}: Update of Twitter for #{user.user_name} with email #{user.email}") if user
     return false
   end
   
-  def get_client(user, option)
-    unless user && (!options[:user_name] || options[:password])
-      return Twitter::Client.new(:login => user_name,:password => password)
-    else
-      return Twitter::Client.new(:login => options[:user_name],:password => options[:password])
-    end
+  def get_client
+    Twitter::Client.new(:login => login,:password => password)
   end
   
   #updates twitter

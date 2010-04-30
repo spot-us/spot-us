@@ -193,6 +193,10 @@ class User < ActiveRecord::Base
 	  return new_user
 	end
 	
+	def self.info_account?
+    User.find_by_email(APP_CONFIG[:site][:info_account])
+  end
+	
   def self.find_by_fb_user(uid)
     User.find_by_fb_user_id(uid) # || User.find_by_email_hash(fb_user.email_hashes)
   end

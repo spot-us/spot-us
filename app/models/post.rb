@@ -60,9 +60,11 @@ class Post < ActiveRecord::Base
   end
   
   def update_twitter
-    if Rails.env.development?
-      require 'twitter_update'
-      TwitterUpdate.update_status?(status_update)
+    unless Rails.env.development?
+      msg = status_update
+      [user, User.info_account?].compact.each do |u|
+        u.twitter_credential.update?(msg) if u && u.twitter_credential
+      end
     end
   end
 
