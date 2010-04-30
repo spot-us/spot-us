@@ -1,7 +1,7 @@
 class AddSettingsColumnToUsers < ActiveRecord::Migration
   def self.up
-    add_column :users, :notify_facebook_wall, :boolean, :default => false, :after => :notify_comments
-    add_column :users, :notify_twitter, :boolean, :default => false, :after => :notify_facebook_wall
+    add_column :users, :notify_facebook_wall, :boolean, :default => true, :after => :notify_comments
+    add_column :users, :notify_twitter, :boolean, :default => true, :after => :notify_facebook_wall
     User.update_all("notify_facebook_wall = 1, notify_twitter = 1")
   end
 
