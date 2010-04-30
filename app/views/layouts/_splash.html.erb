@@ -1,0 +1,8 @@
+<%if !cookies[:shown_splash] && params[:controller]=='cca'%>
+	<script>
+	    jQuery(document).ready(function($){
+			jQuery.facebox({ajax:"/sections/newsletter"});
+	    });
+	</script>
+	<% cookies[:shown_splash] = { :value => true, :expires => 1.year.from_now } %>
+<%end%>
