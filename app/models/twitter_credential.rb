@@ -3,11 +3,24 @@ require 'twitter'
 class TwitterCredential < ActiveRecord::Base
     
   belongs_to :user
-  validates_uniqueness_of :user_name, :on => :create, :message => "The username is already taken"
-  validates_presence_of :user_name, :on => :create, :message => "The username cannot be blank"
+  validates_uniqueness_of :login, :on => :create, :message => "The username is already taken"
+  validates_presence_of :login, :on => :create, :message => "The username cannot be blank"
   validates_presence_of :password, :on => :create, :message => "Password cannot be blank"
   validates_presence_of :user_id, :on => :create, :message => "User id cannot be blank"
-  
+  validate :check_connection
+
+  def check_connection
+    begin
+      client = get_client
+      status = client.timeline_for(:me)
+      return true
+    rescue Twitter::RESTError => re 
+      errors.add_to_base("Oops, those credentials doesn't seem valid. Please check them.")
+    rescue Twitter::Error
+      errors.add_to_base("Oops, those credentials doesn't seem valid. Please check them.")
+    end
+  end
+      
   def update?(status)
     obj = nil
     
@@ -26,19 +39,6 @@ class TwitterCredential < ActiveRecord::Base
     end               
     
     obj
-  end
-  
-  def check_connection?
-    begin
-      client = get_client
-      status = client.timeline_for(:me)
-      return true
-    rescue Twitter::RESTError => re 
-      return raise_error?('REST ERROR')
-    rescue Twitter::Error
-      return raise_error?
-    end
-    return false
   end
   
   def raise_error?(type='ERROR', status='')

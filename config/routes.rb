@@ -111,6 +111,7 @@ ActionController::Routing::Routes.draw do |map|
     end
 
     myspot.resource :settings
+    myspot.resource :twitter_credentials
     myspot.resources :donations
     myspot.resources :credit_pitches
     myspot.resources :pitches, :member => {:accept => :put}

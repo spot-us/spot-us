@@ -1,0 +1,2 @@
+module Myspot::TwitterCredentialsHelper
+end
