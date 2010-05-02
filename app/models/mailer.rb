@@ -153,7 +153,7 @@ class Mailer < ActionMailer::Base
     body       :pitch => pitch
   end
   
-  def unpaid_donations(userr)
+  def unpaid_donations(user)
     recipients user.email
     from       MAIL_FROM_INFO
     subject    "Spot.Us: You have unpaid donations!"
