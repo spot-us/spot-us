@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   # caches_page :show
-  include OauthConnect
+  # include OauthConnect
   def show
     @featured_pitches = Pitch.featured_by_network(current_network)
     @featured_stories = Story.published.latest

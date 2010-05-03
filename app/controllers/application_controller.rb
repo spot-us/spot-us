@@ -25,9 +25,10 @@ class ApplicationController < ActionController::Base
   META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
   
   # before_filter :set_facebook_session
-  helper_method :fb_session
+  
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
+  helper_method :fb_session
   def fb_session
     session[:fb_session]
   end

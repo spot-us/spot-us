@@ -194,6 +194,18 @@ class NewsItem < ActiveRecord::Base
     end
   end
   
+  def update_facebook
+    unless Rails.env.development?
+      # access_token = fb_access_token(session[:fb_session], request.url) 
+      # fb_wall_publish(access_token, { :message      => "Fortune is real.... is lonely",
+      #                                 :description  => "it's real if you look closely",
+      #                                 :link         => "http://spot.us",
+      #                                 :picture      => "http://photos-d.ak.fbcdn.net/hphotos-ak-snc3/hs522.snc3/29731_391647542444_646187444_3907874_6050715_s.jpg",
+      #                                 :name         => "Merton Hanks"  
+      # })
+    end
+  end
+  
   def deleted?
     !deleted_at.blank?
   end

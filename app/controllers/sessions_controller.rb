@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	end
 	
 	def facebook_callback
-	# get '/auth/facebook/callback' do
+	  # get '/auth/facebook/callback' do
 		access_token = fb_access_token(params[:code],request.url)
 	  user = JSON.parse(access_token.get('/me'))
 	  user ? session[:fb_session] = params[:code] : session[:fb_session] = nil

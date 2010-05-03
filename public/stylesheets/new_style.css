@@ -486,6 +486,17 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 
 
 
+#fb_updater h5 {margin-bottom:10px;}
+#fb_updater .update_header {padding:8px;background:#eee;border-bottom:2px solid #666;height:40px;margin-bottom:10px}
+#fb_updater .update_header img {float:left; margin-right:10px;}
+#fb_updater .update_header h4 {float:left;padding-top:10px}
+#fb_updater label {float:left;width:160px;}
+#fb_updater input.text {font-size:16px;margin: 0 0 10px 0;}
+#fb_updater select {font-size:14px;padding:3px;}
+#fb_updater .update-buttons {margin-top:10px;padding-top:10px;border-top:dotted 1px #aaa;}
+#fb_updater .update-buttons input {vertical-align:middle;margin-left:25px;}
+
+
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;
 }
