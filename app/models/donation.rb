@@ -68,7 +68,7 @@ class Donation < ActiveRecord::Base
     { :joins=>"INNER JOIN news_items ON news_items.id=donations.pitch_id", :conditions=>["news_items.network_id=? AND news_items.type='Pitch'", network.id] }
   }
   
-  after_save :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
+  after_save :update_twitter, :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
   def self.createable_by?(user)
     user
@@ -95,6 +95,31 @@ class Donation < ActiveRecord::Base
     Mailer.deliver_user_thank_you_for_donating(self)
   end
 
+  def short_url(start_url=nil,base_url=nil)
+    base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
+    base_url += "pitches/"
+    authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
+    client = UrlShortener::Client.new(authorize)
+    shorten = client.shorten("#{base_url}#{pitch.to_param}/posts/#{id}")
+    shorten.urls
+  end
+  
+  def status_update(show_url=true, admin=false)
+    url_length = show_url ? 22 : 0
+    max_length = PREPEND_STATUS_UPDATE.length + url_length + 23
+    msg  = "#{PREPEND_STATUS_UPDATE} Donation: "
+    title = "I have just donated to #{pitch.to_param}"
+    msg += title.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : title
+    msg += " - #{short_url}" if show_url
+    msg
+  end
+
+  def update_twitter
+    unless Rails.env.development?
+      user.twitter_credential.update?(status_update) if user && user.twitter_credential
+    end
+  end
+  
   def update_pitch_funding
     pitch.current_funding += amount.to_f
     pitch.save
