@@ -10,6 +10,8 @@
 	<% end %>
 	<% form_for @twitter_credential, :url => myspot_twitter_credentials_path, :html => { :method => :put, :class => "form" } do |f| %>
 		<h4>Your Twitter Credential</h4>
+		<p>If you provide us with your Twitter credentials, we will automatically post updates of your accepted pitches, 
+			published stories, blog posts and all your donations.</p>
 		<div class="row clearfix">
 			<%= f.label :login, 'Twitter User Name' %>
 			<%= f.text_field :login %>
