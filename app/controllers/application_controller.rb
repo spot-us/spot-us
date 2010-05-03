@@ -24,10 +24,11 @@ class ApplicationController < ActionController::Base
                   "We are an open source project, to pioneer \"community funded reporting.\""
   META_KEYWORDS = "journalism, reporting, community, local, news, open source, media, donation, creative commons"
   
-  # before_filter :set_facebook_session
+  before_filter :set_fb_session
   
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
+  # may not need this
   helper_method :fb_session
   def fb_session
     session[:fb_session]
@@ -78,6 +79,10 @@ class ApplicationController < ActionController::Base
 
   protected
  
+  def set_fb_session
+    current_user.fb_session ||= session[:fb_session]  if current_user && session[:fb_session]
+  end
+  
   def login_cookies
     create_current_login_cookie
     update_balance_cookie

@@ -3,6 +3,7 @@ require "url_shortener"
 class Post < ActiveRecord::Base
   
   include ActionController::UrlWriter
+  include Utils
   
   belongs_to :pitch
   belongs_to :user
@@ -59,6 +60,11 @@ class Post < ActiveRecord::Base
     msg
   end
   
+  def update_facebook
+    description = strip_html(self.body)[0..200]
+    self.user.post_fb_wall("Spot.Us Blog Post",description, self.short_url,self.blog_image.url, self.title)
+  end
+  
   def update_twitter
     unless Rails.env.development?
       msg = status_update
@@ -67,7 +73,6 @@ class Post < ActiveRecord::Base
       end
     end
   end
-
   
   def blog_posted_notification
     #email supporters
@@ -85,6 +90,7 @@ class Post < ActiveRecord::Base
       Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
     update_twitter
+    update_facebook
   end
   
   def blog_image_display(style)

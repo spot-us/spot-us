@@ -179,6 +179,7 @@ class Story < NewsItem
         end
     end
     update_twitter
+    update_facebook
   end
   
   protected

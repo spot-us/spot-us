@@ -389,6 +389,12 @@ class Pitch < NewsItem
   def send_approved_notification
     Mailer.deliver_pitch_approved_notification(self)
     update_twitter
+    update_facebook
+  end
+  
+  def update_facebook
+    description = strip_html(self.body)[0..200]
+    self.user.post_fb_wall("Spot.Us Blog Post",description, self.short_url,self.blog_image.url, self.title)
   end
 
   def expiration_date_cannot_be_in_the_past 

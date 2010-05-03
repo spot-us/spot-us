@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
   include NetworkMethods
-
+  include OauthConnect
   TYPES = ["Citizen", "Reporter", "Organization", "Admin", "Sponsor"]
   CREATABLE_TYPES = TYPES - ["Admin"]
 
@@ -110,7 +110,8 @@ class User < ActiveRecord::Base
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password
-
+  cattr_accessor :fb_session
+  
   validates_presence_of     :email, :first_name, :last_name
   validates_presence_of     :password, :password_confirmation, :if => :should_validate_password?
   validates_length_of       :password, :within => 4..40,       :if => :should_validate_password?
@@ -207,17 +208,21 @@ class User < ActiveRecord::Base
     new_fb_user.destroy!
   end
   
-  def fb_wall_publish(access_token, post)
-    return false if post[:message].blank?
-    query_string = ""
-    query_string << "message=" + post[:message] if post[:message]
-    query_string << "&description=" + post[:description] if post[:description]
-    query_string << "&link=" + post[:link] if post[:link]
-    query_string << "&picture=" + post[:picture] if post[:picture]
-    query_string << "&name=" + post[:name] if post[:name]
-    access_token.post('/me/feed?' + query_string)
+  def post_fb_wall(message,description,link,picture,name)
+    #unless Rails.env.development?
+    if self.notify_facebook_wall
+        return false if message.blank? || self.fb_session.blank?
+        query_string = ""
+        query_string << "message=" + message if message
+        query_string << "&description=" + description if description
+        query_string << "&link=" + link if link
+        query_string << "&picture=" + picture if picture
+        query_string << "&name=" + name if name
+        access_token = fb_access_token(self.fb_session) 
+        access_token.post('/me/feed?' + query_string)
+      end
+    #end
   end
-  
   
   def facebook_user?
     return !fb_user_id.nil? && fb_user_id > 0
