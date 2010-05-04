@@ -38,7 +38,11 @@ class ApplicationController < ActionController::Base
 	def async_posts
 	  if current_user && current_user.facebook_user?
       ap = AsyncPost.facebook_wall_updates_to_post.first
-      current_user.post_fb_wall(ap.message, ap.description, ap.link, ap.picture, ap.title) if ap
+      if ap && fb_session
+        current_user.post_fb_wall(ap.message, ap.description, ap.link, ap.picture, ap.title)
+        ap.status = 1
+        ap.save
+      end
     end
   end
 	

@@ -123,7 +123,7 @@ class Donation < ActiveRecord::Base
   def update_facebook
     #unless Rails.env.development?
       description = strip_html(pitch.short_description)
-      user.post_fb_wall("Spot.Us Donation",description,pitch.short_url,pitch.featured_image.url, pitch.headline)
+      user.save_async_post("Spot.Us Donation",description,pitch.short_url,pitch.featured_image.url, pitch.headline)
     #end
   end
   

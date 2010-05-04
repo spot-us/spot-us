@@ -1,4 +1,4 @@
 class AsyncPost < ActiveRecord::Base
   belongs_to :user
-  named_scope :facebook_wall_updates_to_post, :conditions=>"type='Facebook'", :order => 'created_at desc'
+  named_scope :facebook_wall_updates_to_post, :conditions=>"status=0 and type='Facebook'", :order => 'created_at desc'
 end
