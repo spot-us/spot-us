@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   before_filter :clear_spotus_lite
   before_filter :set_cca
   before_filter :set_default_html_meta_tags
+  after_filter :async_posts
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   
@@ -32,6 +33,13 @@ class ApplicationController < ActionController::Base
   helper_method :fb_session
   def fb_session
     session[:fb_session]
+  end
+	
+	def async_posts
+	  if current_user && current_user.facebook_user?
+      ap = AsyncPost.facebook_wall_updates_to_post.first
+      current_user.post_fb_wall(ap.message, ap.description, ap.link, ap.picture, ap.title) if ap
+    end
   end
 	
   def block_ips

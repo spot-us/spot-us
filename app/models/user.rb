@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   end
 
   has_one :twitter_credential
+  has_many :async_posts
   belongs_to :category
 
   has_many :donations, :conditions => {:donation_type => "payment"} do
