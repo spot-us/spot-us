@@ -1,0 +1,102 @@
+<div id="fb_updater">
+	<div id="fb_profile">
+		<div class="update_header clearfix">
+			<%= image_tag("/images/new_design/facebook.png") %> 
+			<h4>Welcome from Facebook.</h4>
+		</div>
+		<h5>To finish registration:</h5>
+
+		<% if @profile && @profile.errors.any? %>
+			<div class="error">
+				<%= error_messages_for :profile %>
+			</div>
+		<% end %>
+		<ul>
+			<li>Fill out your name and email in the form below.</li>
+			<li>Or <a href="" class="login_link">Login</a> and connect to an existing Spot.Us Account.</li>
+		</ul>
+		
+		<% form_for :profile, :url => myspot_profile_path, :html => { :method => :put } do |f| %>
+			<div class="register clearfix">
+				<div class="row">
+					<%= f.label :first_name, "Your First Name" %>
+					<%= f.text_field :first_name, :class => "text", :tabindex => 1 %>
+				</div>
+				<div class="row">
+					<%= f.label :last_name, "Your Last Name" %>
+					<%= f.text_field :last_name, :class => "text", :tabindex => 2 %>
+				</div>
+	        	<div class="row">
+					<%= f.label :email, "Your E-mail Address" %>
+					<%= f.text_field :email, :class => "text", :tabindex => 5  %>
+				</div>
+				<div class="row">
+					<%= f.label :type, "I am a" %>
+					<%= f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]] %>
+				</div>
+				<div class="row">
+					
+				</div>
+				<div class="row">
+					<label>Accept the </label>
+					<%= f.check_box :terms_of_service, {}, '1', '0' %>
+					<%= link_to 'Terms of Service', page_path('terms') %>
+				</div>
+				
+				<div class="row align-right update-buttons clearfix">
+					<%= link_to "No Thanks", destroy_session_path %>
+					<input type="image" src="/images/save.png" value="Update">
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div id="spotus_login" class="hide">
+		<div class="update_header clearfix">
+			<%= image_tag("/images/new_design/facebook.png") %>
+			<h4>Connect your Facebook login to an existing Spot.Us Account</h4>
+		</div>
+	    <% if @profile && @profile.errors.any? %>
+			<div class="error">
+				<%= error_messages_for :profile %>
+			</div>
+		<% end %>
+	    <ul>
+			<li>Login with your Spot.Us credentials below to Facebook connect.</li>
+			<li>or  <a href="" class="profile_link">&laquo; go back</a></li>
+		</ul>
+		<% form_tag session_url(:protocol => 'http') do %>
+			<div class="register clearfix">
+				<div class="row">
+					<label>Your E-mail Address</label>
+					<%= text_field_tag "email", nil, :class=>"text" %>
+				</div>
+		        <div class="row">
+		          <label>Your Password</label>
+		          <%= password_field_tag "password", nil, :class=>"text", :id=>"passwordField" %>
+		          <%= hidden_field_tag "encoded_password", nil, :class=>"text", :id=>"passwordHiddenField" %>
+		          <%= hidden_field_tag "link_facebook", "true" %>
+				</div>
+				<div class="row align-right update-buttons clearfix">
+					<%= link_to "No Thanks", destroy_session_path %>
+					<input type="image" src="/images/login.png" value="Login" class="float-right" onclick="processLoginForm();">
+				
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div> 
+<script>
+  jQuery(document).ready(function(){
+    jQuery('.login_link').click(function(){
+      jQuery('#fb_profile').hide();
+      jQuery('#spotus_login').show();
+      return false;
+    });
+    jQuery('.profile_link').click(function(){
+      jQuery('#fb_profile').show();
+      jQuery('#spotus_login').hide();
+      return false;
+    });
+  });
+</script>
+

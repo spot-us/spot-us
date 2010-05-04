@@ -45,6 +45,7 @@ class NewsItem < ActiveRecord::Base
   include AASMWithFixes
   include Sanitizy
   include NetworkMethods
+  include Utils
   
   cleanse_columns(:delivery_description, :extended_description, :short_description, :external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
@@ -195,8 +196,9 @@ class NewsItem < ActiveRecord::Base
   end
   
   def update_facebook
+    debugger
     description = strip_html(self.short_description)
-    self.user.post_fb_wall("Spot.Us #{type.to_s.titleize}",description, self.short_url,self.featured_image.url, self.headline)
+    self.user.post_fb_wall("Spot.Us #{type.to_s.titleize}",description,self.short_url,self.featured_image.url,self.headline)
   end
   
   def deleted?

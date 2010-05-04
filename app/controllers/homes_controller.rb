@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   # caches_page :show
-  include OauthConnect
+  #include OauthConnect
   def show
     @featured_pitches = Pitch.featured_by_network(current_network)
     @featured_stories = Story.published.latest
@@ -8,7 +8,7 @@ class HomesController < ApplicationController
     @posts = Post.by_network(@current_network).latest
     
     #############  TEST FOR POSTING TO FB WALL
-    access_token = fb_access_token(session[:fb_session]) 
+    # access_token = fb_access_token(session[:fb_session]) 
     
     # fb_wall_publish(access_token, { :message      => "Fortune is real.... is lonely",
     #                                 :description  => "it's real if you look closely",

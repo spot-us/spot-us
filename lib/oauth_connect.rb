@@ -9,16 +9,15 @@ module OauthConnect
   end
 	  
   def fb_access_token(code)
-
 	  oauth_client.web_server.get_access_token(code, :redirect_uri => "http://" + append_port(APP_CONFIG[:default_host]) + "/auth/facebook/callback") # | redirect_uri(uri)
   end
 
   def redirect_uri(uri)
-		uri = URI.parse(uri)
-		uri.path = '/auth/facebook/callback'
-		uri.query = nil
-		uri.to_s
-	end
+    uri = URI.parse(uri)
+    uri.path = '/auth/facebook/callback'
+    uri.query = nil
+    uri.to_s
+  end
 
 	
 end

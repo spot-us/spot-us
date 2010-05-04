@@ -14,7 +14,7 @@
 #
 
 class Donation < ActiveRecord::Base
-
+  include Utils
   DEFAULT_AMOUNT = 20
 
   cattr_reader :per_page
@@ -68,7 +68,7 @@ class Donation < ActiveRecord::Base
     { :joins=>"INNER JOIN news_items ON news_items.id=donations.pitch_id", :conditions=>["news_items.network_id=? AND news_items.type='Pitch'", network.id] }
   }
   
-  after_save :update_twitter, :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
+  after_save :update_twitter, :update_facebook, :update_pitch_funding, :send_thank_you, :if => lambda {|me| me.paid?}
 
   def self.createable_by?(user)
     user
@@ -118,6 +118,13 @@ class Donation < ActiveRecord::Base
     unless Rails.env.development?
       user.twitter_credential.update?(status_update) if user && user.twitter_credential
     end
+  end
+  
+  def update_facebook
+    #unless Rails.env.development?
+      description = strip_html(pitch.short_description)
+      user.post_fb_wall("Spot.Us Donation",description,pitch.short_url,pitch.featured_image.url, pitch.headline)
+    #end
   end
   
   def update_pitch_funding

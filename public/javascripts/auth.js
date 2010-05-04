@@ -16,7 +16,13 @@ jQuery(document).ready(function($){
 		}
 		return false;
 	};
-
+	
+	// $("#fb_login_link").live("click",function(){
+	// 	var fb_pop=window.open($(this).attr("href"),'fbpopup','height=360,width=360');
+	// 	// var fb = fb_pop.document.getElementById("login_form");
+	// 	// alert(fb_pop);
+	// 	return false;
+	// });
 	$('a.auth').livequery('click', function() {return $(this).authguard(function(jump_to) { window.location = jump_to.attr('href'); })});
 
 	$('form.auth, form.button-to:has(input.auth)').livequery('submit', function() {return $(this).authguard();});

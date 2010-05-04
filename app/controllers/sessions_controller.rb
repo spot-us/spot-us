@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 		#debugger
 		redirect_to oauth_client.web_server.authorize_url(
 			:redirect_uri => redirect_uri(request.url),
-			:display => "page", # popup
+			:display => "popup", # page
 			:scope => "publish_stream"
 		)
 	end
