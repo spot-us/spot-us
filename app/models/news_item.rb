@@ -189,7 +189,7 @@ class NewsItem < ActiveRecord::Base
   def update_twitter
     unless Rails.env.development?
       msg = status_update
-      [user, User.info_account?].compact.each do |u|
+      [user, User.info_account?].compact.uniq.each do |u|
         u.twitter_credential.update?(msg) if u && u.twitter_credential
       end
     end

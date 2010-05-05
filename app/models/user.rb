@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
     new_fb_user.destroy!
   end
   
-  def post_fb_wall(message,description,link,picture,name)
+  def post_fb_wall(message, description, link, picture, name)
     unless Rails.env.development?
       if self.notify_facebook_wall              # this will now not be necessary but I will keep it still...
         return false if message.blank? || self.fb_session.blank?
