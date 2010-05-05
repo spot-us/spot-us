@@ -115,21 +115,17 @@ class Donation < ActiveRecord::Base
   end
 
   def update_twitter
-    unless Rails.env.development?
+    #unless Rails.env.development?
       user.twitter_credential.update?(status_update) if user && user.twitter_credential
-    end
+    #end
   end
   
   def update_facebook
-    unless Rails.env.development?
+    #unless Rails.env.development?
       description = strip_html(pitch.short_description)
       description = "#{description[0..200]}..." if description.length>200
-      user.save_async_post({:message => "Spot.Us Donation: I have donated to this pitch at Spot.Us", 
-        :description => description, 
-        :link => pitch.short_url, 
-        :picture => pitch.featured_image.url, 
-        :name => pitch.headline}) if user
-    end
+      user.save_async_post("Spot.Us Donation: I have donated to this pitch at Spot.Us", description, pitch.short_url, pitch.featured_image.url, pitch.headline) if user
+    #end
   end
   
   def update_pitch_funding

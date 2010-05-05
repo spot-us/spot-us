@@ -210,18 +210,18 @@ class User < ActiveRecord::Base
   end
   
   def post_fb_wall(args)
-    unless Rails.env.development?
+    #unless Rails.env.development?
       if self.notify_facebook_wall              # this will now not be necessary but I will keep it still...
         return false if args[:message].blank? || self.fb_session.blank?
         query_string = args.compact.uniq.collect {|k,v| "#{k.to_s}=#{v}"}.join("&")
         access_token = fb_access_token(self.fb_session) 
         access_token.post('/me/feed?' + query_string) if access_token
       end
-    end
+    #end
   end
   
   def save_async_post(message, description, link, picture, title)
-    unless Rails.env.development?
+    #unless Rails.env.development?
       if self.notify_facebook_wall
         ap = AsyncPost.new
         ap.user_id = id
@@ -233,7 +233,7 @@ class User < ActiveRecord::Base
         ap.title = title
         ap.save
       end
-    end
+    #end
   end
   
   def facebook_user?
