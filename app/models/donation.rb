@@ -121,10 +121,11 @@ class Donation < ActiveRecord::Base
   end
   
   def update_facebook
-    #unless Rails.env.development?
+    unless Rails.env.development?
       description = strip_html(pitch.short_description)
+      description = "#{description[0..200]}..." if description.length>200
       user.save_async_post("Spot.Us Donation", description, pitch.short_url, pitch.featured_image.url, pitch.headline)
-    #end
+    end
   end
   
   def update_pitch_funding
