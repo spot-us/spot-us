@@ -65,7 +65,11 @@ class Post < ActiveRecord::Base
       description = strip_html(self.body)
       description = "#{description[0..200]}..." if description.length>200
       [self.user, User.info_account?].compact.uniq.each do |u|
-        u.save_async_post("Spot.Us Blog Post", description, self.short_url, self.blog_image.url, self.title) if u && u.facebook_user?
+        u.save_async_post({:message => "Spot.Us Blog Post", 
+          :description => description, 
+          :link => self.short_url, 
+          :picture => self.blog_image.url, 
+          :name => self.title}) if u && u.facebook_user?
       end
     end
   end
