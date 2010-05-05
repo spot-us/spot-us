@@ -6,8 +6,6 @@ class SessionsController < ApplicationController
 
 
 	def facebook_login
-		# '/auth/facebook' do
-		#debugger
 		redirect_to oauth_client.web_server.authorize_url(
 			:redirect_uri => redirect_uri(request.url),
 			:display => "popup", # page
@@ -16,7 +14,6 @@ class SessionsController < ApplicationController
 	end
 	
 	def facebook_callback
-	  # get '/auth/facebook/callback' do
 		access_token = fb_access_token(params[:code])
 	  user = JSON.parse(access_token.get('/me'))
 	  user ? session[:fb_session] = params[:code] : session[:fb_session] = nil
@@ -29,7 +26,6 @@ class SessionsController < ApplicationController
 			self.current_user = @user
 			flash[:notice] = "Welcome to Spot.Us."
 		end
-		
     create_current_login_cookie
     update_balance_cookie
     handle_first_donation_for_non_logged_in_user

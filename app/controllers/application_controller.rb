@@ -80,6 +80,7 @@ class ApplicationController < ActionController::Base
   protected
  
   def set_fb_session
+    #debugger
     current_user.fb_session ||= session[:fb_session]  if current_user && session[:fb_session]
   end
   
