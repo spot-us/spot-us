@@ -1,9 +1,9 @@
 class ModyfyingFieldInAsyncPosts < ActiveRecord::Migration
   def self.up
-    rename_column :users, :type, :post_type
+    rename_column :async_posts, :type, :post_type
   end
 
   def self.down
-    rename_column :users, :post_type, :type
+    rename_column :async_posts, :post_type, :type
   end
 end
