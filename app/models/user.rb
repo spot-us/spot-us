@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
       if self.notify_facebook_wall
         ap = AsyncPost.new
         ap.user_id = id
-        ap.type = 'Facebook'
+        ap.post_type = 'Facebook'
         ap.message = message
         ap.description = description
         ap.link = link
