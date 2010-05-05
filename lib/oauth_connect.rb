@@ -3,13 +3,17 @@ module OauthConnect
 		OAuth2::Client.new(FACEBOOK_CONSUMER_KEY, FACEBOOK_CONSUMER_SECRET, :site => 'https://graph.facebook.com')
 	end
 	
-	def append_port(default_host)
-	  default_host << ":3000" if default_host == "spotus.local"
+	def check_is_dev(default_host)
+	  return "spotus.local:3000" if Rails.env.development?
 	  default_host
   end
 	  
   def fb_access_token(code)
-	  oauth_client.web_server.get_access_token(code, :redirect_uri => "http://" + append_port(APP_CONFIG[:default_host]) + "/auth/facebook/callback") # | redirect_uri(uri)
+    begin
+	    oauth_client.web_server.get_access_token(code, :redirect_uri => "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/facebook/callback") # | redirect_uri(uri)
+    rescue 
+      return false
+    end
   end
 
   def redirect_uri(uri)
