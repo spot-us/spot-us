@@ -61,7 +61,7 @@ class Post < ActiveRecord::Base
   end
   
   def update_facebook
-    unless Rails.env.development?
+    #unless Rails.env.development?
       description = strip_html(self.body)
       description = "#{description[0..200]}..." if description.length>200
       [self.user, User.info_account?].compact.uniq.each do |u|
@@ -71,7 +71,7 @@ class Post < ActiveRecord::Base
           :picture => self.blog_image.url, 
           :name => self.title}) if u && u.facebook_user?
       end
-    end
+    #end
   end
   
   def update_twitter

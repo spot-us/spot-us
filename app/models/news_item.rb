@@ -196,7 +196,7 @@ class NewsItem < ActiveRecord::Base
   end
   
   def update_facebook
-    unless Rails.env.development?
+    #unless Rails.env.development?
       description = strip_html(self.short_description)
       description = "#{description[0..200]}..." if description.length>200
       [self.user, User.info_account?].compact.uniq.each do |u|
@@ -206,7 +206,7 @@ class NewsItem < ActiveRecord::Base
             :picture => self.featured_image.url, 
             :name => self.headline}) if u && u.facebook_user?
       end
-    end
+    #end
   end
   
   def deleted?
