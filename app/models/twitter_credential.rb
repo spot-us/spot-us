@@ -24,7 +24,7 @@ class TwitterCredential < ActiveRecord::Base
   def update?(status)
     obj = nil
     
-    unless UPDATE_TWITTER
+    unless UPDATE_USER_TWITTER
       begin
         client = get_client
         obj = update_status(client, status)
