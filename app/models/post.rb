@@ -81,19 +81,19 @@ class Post < ActiveRecord::Base
   
   def blog_posted_notification
     #email supporters
-    # emails = self.pitch.supporters.map{ |email| "'#{email}'"}
-    #     self.pitch.supporters.each do |supporter|
-    #       Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email)
-    #     end
-    #     #email admins
-    #     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
-    #     Admin.find(:all,:conditions=>"email!='kara@spot.us' and email not in (#{emails.join(',')})").each do |admin|
-    #       Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
-    #     end
-    #     #email subscribers
-    #     self.pitch.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
-    #       Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
-    #     end
+    emails = self.pitch.supporters.map{ |email| "'#{email}'"}
+    self.pitch.supporters.each do |supporter|
+      Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email)
+    end
+    #email admins
+    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    Admin.find(:all,:conditions=>"email!='kara@spot.us' and email not in (#{emails.join(',')})").each do |admin|
+      Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
+    end
+    #email subscribers
+    self.pitch.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+      Mailer.deliver_blog_posted_notification(self, "Subscriber", subscriber.email, subscriber)
+    end
     update_twitter
     update_facebook
   end
