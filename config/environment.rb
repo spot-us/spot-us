@@ -12,7 +12,7 @@ else
   APP_CONFIG = {}
 end
 
-DEFAULT_HOST = APP_CONFIG[:default_host] || "spotus.local"
+DEFAULT_HOST = APP_CONFIG[:default_host] || ".spotus.local"
 
 Rails::Initializer.run do |config|
   
