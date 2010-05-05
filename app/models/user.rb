@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
     #unless Rails.env.development?
       if self.notify_facebook_wall              # this will now not be necessary but I will keep it still...
         return false if args[:message].blank? || self.fb_session.blank?
-        query_string = args.compact.uniq.collect {|k,v| "#{k.to_s}=#{v}"}.join("&")
+        query_string = args.collect {|k,v| "#{k.to_s}=#{v}" if v}.to_a.compact.uniq.join("&")
         access_token = fb_access_token(self.fb_session) 
         access_token.post('/me/feed?' + query_string) if access_token
       end
