@@ -198,7 +198,7 @@ class NewsItem < ActiveRecord::Base
   def update_facebook
     debugger
     description = strip_html(self.short_description)
-    self.user.post_fb_wall("Spot.Us #{type.to_s.titleize}",description,self.short_url,self.featured_image.url,self.headline)
+    self.user.save_async_post("Spot.Us #{type.to_s.titleize}", description, self.short_url, self.featured_image.url, self.headline)
   end
   
   def deleted?

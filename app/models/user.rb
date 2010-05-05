@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
   end
 
   has_one :twitter_credential
+  has_many :async_posts
   belongs_to :category
 
   has_many :donations, :conditions => {:donation_type => "payment"} do
@@ -209,8 +210,8 @@ class User < ActiveRecord::Base
   end
   
   def post_fb_wall(message,description,link,picture,name)
-    #unless Rails.env.development?
-    if self.notify_facebook_wall
+    unless Rails.env.development?
+      if self.notify_facebook_wall              # this will now not be necessary but I will keep it still...
         return false if message.blank? || self.fb_session.blank?
         query_string = ""
         query_string << "message=" + message if message
@@ -221,7 +222,23 @@ class User < ActiveRecord::Base
         access_token = fb_access_token(self.fb_session) 
         access_token.post('/me/feed?' + query_string)
       end
-    #end
+    end
+  end
+  
+  def save_async_post(message, description, link, picture, title)
+    unless Rails.env.development?
+      if self.notify_facebook_wall
+        ap = AsyncPost.new
+        ap.user_id = id
+        ap.type = 'Facebook'
+        ap.message = message
+        ap.description = description
+        ap.link = link
+        ap.picture = picture
+        ap.title = title
+        ap.save
+      end
+    end
   end
   
   def facebook_user?

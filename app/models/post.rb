@@ -61,8 +61,10 @@ class Post < ActiveRecord::Base
   end
   
   def update_facebook
-    description = strip_html(self.body)[0..200]
-    self.user.post_fb_wall("Spot.Us Blog Post",description, self.short_url,self.blog_image.url, self.title)
+    #unless Rails.env.development?
+      description = strip_html(self.body)[0..200]
+      self.user.save_async_post("Spot.Us Blog Post", description, self.short_url, self.blog_image.url, self.title)
+    #end
   end
   
   def update_twitter
