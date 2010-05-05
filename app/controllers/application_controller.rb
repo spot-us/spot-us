@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
           :description=>ap.description, 
           :link=>ap.link, 
           :picture=>ap.picture, 
-          :title=>ap.title})
+          :name=>ap.title})
         ap.status = 1
         ap.save
       end
