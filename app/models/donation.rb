@@ -124,7 +124,7 @@ class Donation < ActiveRecord::Base
     unless Rails.env.development?
       description = strip_html(pitch.short_description)
       description = "#{description[0..200]}..." if description.length>200
-      user.save_async_post("Spot.Us Donation", description, pitch.short_url, pitch.featured_image.url, pitch.headline)
+      user.save_async_post("Spot.Us Donation: I have donated to this pitch at Spot.Us", description, pitch.short_url, pitch.featured_image.url, pitch.headline)
     end
   end
   
