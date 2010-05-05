@@ -39,7 +39,11 @@ class ApplicationController < ActionController::Base
 	  if current_user && current_user.facebook_user?
       ap = current_user.async_posts.facebook_wall_updates_to_post.first
       if ap && fb_session
-        current_user.post_fb_wall(ap.message, ap.description, ap.link, ap.picture, ap.title)
+        current_user.post_fb_wall({:message=>ap.message, 
+          :description=>ap.description, 
+          :link=>ap.link, 
+          :picture=>ap.picture, 
+          :title=>ap.title})
         ap.status = 1
         ap.save
       end
