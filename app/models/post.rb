@@ -55,7 +55,7 @@ class Post < ActiveRecord::Base
     share_type = type.to_s.titleize
     max_length = PREPEND_STATUS_UPDATE.length + share_type.length + url_length + 15
     msg  = "#{PREPEND_STATUS_UPDATE} #{share_type}: "
-    msg += title.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : title
+    msg += title.length > 140-max_length ? "#{title[0..max_length].gsub(/\w+$/, '')}..." : title
     msg += " - #{short_url}" if show_url
     msg
   end
