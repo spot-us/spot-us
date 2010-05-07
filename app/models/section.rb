@@ -2,7 +2,7 @@ class Section < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
   validates_presence_of :title
-  #validates_presence_of :extended_description
+  validates_presence_of :extended_description
 
   def short
     if short_description.blank? 
