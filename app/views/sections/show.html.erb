@@ -1,5 +1,5 @@
 <%if @section%>
-	<h2><%=@section.title%></h2>
+	<h2 class="section"><%=@section.title%></h2>
 	<%unless @section.embed_code.blank?%>
 		<p><%= transform_embed_code(@section.embed_code, 570, 450) %></p>
 	<%end%>
