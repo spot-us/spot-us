@@ -495,6 +495,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #fb_updater select {font-size:14px;padding:3px;}
 #fb_updater .update-buttons {margin-top:10px;padding-top:10px;border-top:dotted 1px #aaa;}
 #fb_updater .update-buttons input {vertical-align:middle;margin-left:25px;}
+#fb_updater ul {font-size:16px;color:#333;list-style-type:square;}
+#fb_updater ul a {font-weight:bold;}
 
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {

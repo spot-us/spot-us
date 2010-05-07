@@ -4,7 +4,6 @@ class HomesController < ApplicationController
   def show
     @featured_pitches = Pitch.featured_by_network(current_network)
     @featured_stories = Story.published.latest
-    session[:hi] = "hello"
     @posts = Post.by_network(@current_network).latest
   end
 
