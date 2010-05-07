@@ -1,6 +1,6 @@
 @pitches.each { |pitch|
   xml.url{
-      apply_fragment ['newa_sitemap_pitch_', pitch, @prefix_template] do
+      apply_fragment ['newb_sitemap_pitch_', pitch, @prefix_template] do
         xml << render (:partial=>"#{@prefix_template}url", 
           :locals=>{ 
               :title => pitch.headline,

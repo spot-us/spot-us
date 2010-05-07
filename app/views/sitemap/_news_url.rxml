@@ -16,7 +16,7 @@ xml.loc(url.gsub('www.',''))
 xml.n :news do
   
   xml.n :publication do
-    xml.n :name, "Spot Us"
+    xml.n :name, "Spot.Us"
     xml.n :language, "en"
   end
   
