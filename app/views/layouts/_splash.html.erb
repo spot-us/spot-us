@@ -1,4 +1,4 @@
-<%if !cookies[:shown_splash] && (@cca || params[:controller]!='lite')%>
+<%if !cookies[:shown_splash] && params[:controller]!='cca' && params[:controller]!='lite'%>
 	<script>
 	    jQuery(document).ready(function($){
 			jQuery.facebox({ajax:"/sections/newsletter"});
