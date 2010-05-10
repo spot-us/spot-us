@@ -21,7 +21,7 @@
 			<tr class="quiet">
 				<td><%=section.title%></td>
 				<td><%=section.name%></td>
-				<td><%=section.short%></td>
+				<td><%=h section.short%></td>
 				<td><%=section.embed_code.blank? ? '-' : 'Yes'%></td>
 				<td>
 			        <%= link_to 'edit', edit_admin_section_url(section)%><br/>

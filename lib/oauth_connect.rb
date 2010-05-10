@@ -16,11 +16,12 @@ module OauthConnect
     end
   end
 
-  def redirect_uri(uri)
-    uri = URI.parse(uri)
-    uri.path = '/auth/facebook/callback'
-    uri.query = nil
-    uri.to_s
+  def redirect_uri
+    "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/facebook/callback"
+    # uri = URI.parse(uri)
+    # uri.path = '/auth/facebook/callback'
+    # uri.query = nil
+    # uri.to_s
   end
 
 	

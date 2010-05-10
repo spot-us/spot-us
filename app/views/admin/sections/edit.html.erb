@@ -8,6 +8,11 @@
 	    });
 	</script>
 <% end %>
+<%= render :partial => "/admin/admin_header"%>
+<h2>Edit Section</h2>
+<div class="flash error">
+  <%= error_messages_for :section %>
+</div>
 <% form_for([:admin, @section], :html => { :multipart => true }) do |f| %>
     <div class="row">
         <%= f.label     :title, "Title" %>
@@ -35,16 +40,16 @@
       <%= fckeditor_textarea("section", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 	<div class="row">
-		<%= f.label :embed_code, "Embed media", :class => "small" %>
-		<%= f.text_area :embed_code, :rows => 4 %>
+		<%= f.label :embed_code, "Embed media"%>
+		<%= f.text_area :embed_code, :style => "height:160px;width:680px" %>
    	</div>
 	<div class="row">
 	<label> </label>
 	<% if @section.new_record? %>
 		<%= image_submit_tag image_path('save.png'), :alt => 'Create the help section' %>
 	<% else %>
-		<%= image_submit_tag image_path('save.png') %><br/>
 		<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+		<%= image_submit_tag image_path('save.png') %>
 	<% end %>
 	</div>
 <% end %>

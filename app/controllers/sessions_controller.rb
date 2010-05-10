@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
 
 	def facebook_login
 		redirect_to oauth_client.web_server.authorize_url(
-			:redirect_uri => redirect_uri(request.url),
-			:display => "popup", # page
+			:redirect_uri => "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/facebook/callback",
+			:display => "page", # page
 			:scope => "publish_stream"
 		)
 	end
