@@ -40,7 +40,7 @@ class Cca < ActiveRecord::Base
 
 	def award_credit(user)
 		Credit.create(:user_id => user.id, :amount => self.award_amount, 
-		                      :description => "Awarded for #{self.title} | #{self.id}")
+		                      :description => "Awarded for #{self.title} | #{self.id}", :is_cca_credit=>true)
 		self.process_credits_awarded(self.award_amount)
 		self.set_completed_status(user)
 	end 
