@@ -244,7 +244,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;bac
 .tab_panel .row input, .tab_panel .row textarea {}
 .comments_tab ul {list-style-type:none;}
 ul.dashboard_tabs{margin:0;height:24px;}
-ul.dashboard_tabs.tabs li a{font-size:13px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
+ul.dashboard_tabs.tabs li a{font-size:12px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
 ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #profile_container {background:#fff;padding:20px;border-left:solid 1px #aaa;border-bottom:solid 1px #aaa;border-right:solid 1px #aaa;}
 #dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
