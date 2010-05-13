@@ -10,7 +10,7 @@ class Admin::CcasController < ApplicationController
   
   def credits
     @cca = Cca.find_by_id(params[:id])
-    @credits = @cca.credits.paginate(:page => params[:page], :conditions=>'credits.amount>0')
+    @credits = @cca.credits.paginate(:page => params[:page], :conditions=>'credits.amount>0', :order=>'credits.id desc')
   end
   
   def show
