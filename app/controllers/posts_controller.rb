@@ -6,8 +6,9 @@ class PostsController < ApplicationController
     format.html do
       if resource_saved?
         @post.blog_posted_notification
+        set_cookie("social_notifier", {:value => "post"})
         flash[:success] = 'Successfully created post'
-        redirect_to myspot_posts_path
+        redirect_to pitch_post_path(@post.pitch, @post)
       else
         flash[:error] = 'There was an error saving your post'
         render :action => 'new'

@@ -88,21 +88,6 @@ class Donation < ActiveRecord::Base
     return false if user.nil?
     (user.admin? || self.user == user) && !self.paid? 
   end
-
-  protected
-
-  def send_thank_you
-    Mailer.deliver_user_thank_you_for_donating(self)
-  end
-
-  def short_url(start_url=nil,base_url=nil)
-    base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
-    base_url += "pitches/"
-    authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
-    client = UrlShortener::Client.new(authorize)
-    shorten = client.shorten("#{base_url}#{pitch.to_param}/posts/#{id}")
-    shorten.urls
-  end
   
   def status_update(show_url=true, admin=false)
     url_length = show_url ? 22 : 0
@@ -113,18 +98,39 @@ class Donation < ActiveRecord::Base
     msg += " - #{short_url}" if show_url
     msg
   end
+  
+  def short_url(start_url=nil,base_url=nil)
+    base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
+    base_url += "pitches/"
+    authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
+    client = UrlShortener::Client.new(authorize)
+    shorten = client.shorten("#{base_url}#{pitch.to_param}/posts/#{id}")
+    shorten.urls
+  end
+
+  protected
+
+  def send_thank_you
+    Mailer.deliver_user_thank_you_for_donating(self)
+  end
+
+
 
   def update_twitter
     #unless Rails.env.development?
-      user.twitter_credential.update?(status_update) if user && user.twitter_credential
+       if user && user.twitter_credential && user.notify_twitter
+         user.twitter_credential.update?(status_update) 
+       end
     #end
   end
   
   def update_facebook
     #unless Rails.env.development?
-      description = strip_html(pitch.short_description)
-      description = "#{description[0..200]}..." if description.length>200
-      user.save_async_post("Spot.Us Donation: I have just donated to this pitch.", description, pitch.short_url, pitch.featured_image.url, pitch.headline) if user
+      if user.notify_facebook_wall
+        description = strip_html(pitch.short_description)
+        description = "#{description[0..200]}..." if description.length>200
+        user.save_async_post("Spot.Us Donation: I have just donated to this pitch.", description, pitch.short_url, pitch.featured_image.url, pitch.headline) if user
+      end
     #end
   end
   

@@ -1,0 +1,29 @@
+<div id="social_notifier_wrapper" class="hide">
+	<div id="social_notifier">
+		<% if cookies[:social_notifier] == "donation" %>
+			<h3>Nice donation to '<%= @notify_object.pitch.headline %>'!</h3>
+			<hr>
+			<div class="panel">
+				Would you like to share the news of your donation?<br/>
+		<% elsif cookies[:social_notifier] == "post" %>
+			<h3>Nice blog post on '<%= @notify_object.pitch.headline %>'!</h3>
+			<hr>
+			<div class="panel">
+				Would you like to share your post?<br/>
+		<% end %>
+			<% if !current_user.notify_facebook_wall %>
+				<a title="Share this on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @notify_object.short_url rescue "" end %>&amp;t=<%= h @notify_object.status_update(false) %>"><%= image_tag("/images/new_design/facebook_32.png") %>
+				</a>
+			<% end %>
+			<% if !current_user.notify_twitter %>
+				<a  target="_blank" rel="nofollow" href="http://twitter.com/home?status=<%=begin h @notify_object.status_update rescue "" end %>" title="Share this on Twitter"><%= image_tag("/images/new_design/twitter_32.png") %></a>
+			<% end %>
+			<a  target="_blank" rel="nofollow" href="" title="Share this by Email"><%= image_tag("/images/new_design/email_32.png") %></a>
+		</div>
+		<% if !current_user.notify_facebook_wall or current_user.notify_twitter %>
+			<div class="sync">
+				You can also <strong><%= link_to "sync", edit_myspot_twitter_credentials_path %></strong> Spot.Us to automatically update your Facebook and Twitter feeds.
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -8,6 +8,7 @@
 			<%= error_messages_for_resource %>
 		<% end %>
 	<% end %>
+	<br/ >
 	<% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
 		<h4>Contact Info</h4>
 		<div class="row clearfix">
@@ -68,17 +69,7 @@
 			<%= f.label     :notify_comments,  "Comments" %>
 		</div>
 		
-		<h4>Automatic sharing</h4>
-		<div class="row">
-			<p>If you provide us with your Facebook credentials and/or Twitter credentials, we will automatically post updates of your accepted pitches, 
-				published stories and blog posts as well as your donations.</p>
-				
-			<%= f.check_box :notify_facebook_wall %>
-			<%= f.label     :notify_facebook_wall,  "Update your Facebook wall" %>
-			<br/>
-			<%= f.check_box :notify_twitter %>
-			<%= f.label     :notify_twitter,  "Update your Twitter status" %>
-		</div>
+	
 		<div class="">
 			<input type="image" src="/images/save.png">
 		</div>

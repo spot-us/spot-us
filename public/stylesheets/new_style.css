@@ -244,7 +244,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;bac
 .tab_panel .row input, .tab_panel .row textarea {}
 .comments_tab ul {list-style-type:none;}
 ul.dashboard_tabs{margin:0;height:24px;}
-ul.dashboard_tabs.tabs li a{font-size:13px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
+ul.dashboard_tabs.tabs li a{font-size:12px;background:#ccc;font-weight:normal;color:#111;padding:5px;}
 ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #profile_container {background:#fff;padding:20px;border-left:solid 1px #aaa;border-bottom:solid 1px #aaa;border-right:solid 1px #aaa;}
 #dashboard_content{padding:15px;border:solid 1px #aaa;margin-bottom:20px;}
@@ -497,6 +497,10 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #fb_updater ul {font-size:16px;color:#333;list-style-type:square;}
 #fb_updater ul a {font-weight:bold;}
 
+#social_notifier {padding:10px;}
+#social_notifier div.panel {padding:15px;-moz-border-radius:10px;-webkit-border-radius:10px;margin-bottom:10px;border: solid 1px #ccc;
+			font-size:16px;background:#e3eeef}
+#social_notifier div.sync {font-size:1.2em;}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;

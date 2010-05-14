@@ -1,5 +1,6 @@
 class Myspot::TwitterCredentialsController < ApplicationController
   resources_controller_for :twitter_credentials
+  #before_filter :login_required
   
   response_for :create do |format|
     format.html do
@@ -26,6 +27,7 @@ class Myspot::TwitterCredentialsController < ApplicationController
   private
   
   def find_resource
+     @settings = current_user
     current_user.twitter_credential ? current_user.twitter_credential : TwitterCredential.new(:user_id=>current_user.id)
   end
   

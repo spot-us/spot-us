@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){	
+	socialNotifier();
 	$('#equalize').equalHeights();
 	$(document).pngFix();
 	$("select[name=news_item_type]").change(refreshSortOrder);
@@ -51,6 +52,13 @@ jQuery(document).ready(function($){
 	});
 	
 });
+
+function socialNotifier(){
+	if( jQuery.cookie('social_notifier') != null ) {
+	    jQuery.facebox(jQuery("#social_notifier_wrapper").html());
+	}
+	
+}
 
 function slideWidget(name){
 	if (name=='spotus_lite_widget'){

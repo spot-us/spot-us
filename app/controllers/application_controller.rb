@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   before_filter :clear_spotus_lite
   before_filter :set_cca
   before_filter :set_default_html_meta_tags
+  before_filter :social_notifier
   after_filter :async_posts
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
@@ -29,10 +30,26 @@ class ApplicationController < ActionController::Base
   
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
   
-  # may not need this
   helper_method :fb_session
   def fb_session
     session[:fb_session]
+  end
+  
+  def social_notifier
+    if current_user
+      if cookies[:social_notifier_shown]
+         delete_cookie(:social_notifier)
+         delete_cookie(:social_notifier_shown)
+      elsif cookies[:social_notifier]
+        set_cookie("social_notifier_shown", {:value => "true"})
+        case
+          when "donations"
+            @notify_object = current_user.donations.last
+          when "post"
+            @notify_object = current_user.posts.last
+        end
+      end
+    end
   end
 	
 	def async_posts
