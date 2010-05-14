@@ -4,9 +4,9 @@ class Cca < ActiveRecord::Base
 	belongs_to :user, :foreign_key => :sponsor_id
 	has_many :cca_questions, :order => "position"
 	has_many :cca_answers
+  has_many :credits, :foreign_key=>'cca_id'
   
 	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
-		
 	
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
@@ -40,7 +40,7 @@ class Cca < ActiveRecord::Base
 
 	def award_credit(user)
 		Credit.create(:user_id => user.id, :amount => self.award_amount, 
-		                      :description => "Awarded for #{self.title} | #{self.id}")
+		                      :description => "Awarded for #{self.title} | #{self.id}", :cca_id=>self.id)
 		self.process_credits_awarded(self.award_amount)
 		self.set_completed_status(user)
 	end 

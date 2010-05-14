@@ -8,6 +8,11 @@ class Admin::CcasController < ApplicationController
     @ccas = Cca.paginate(:page => params[:page])
   end
   
+  def credits
+    @cca = Cca.find_by_id(params[:id])
+    @credits = @cca.credits.paginate(:page => params[:page], :conditions=>'credits.amount>0', :order=>'credits.id desc')
+  end
+  
   def show
     @cca = Cca.find_by_id(params[:id])
     @cca_question = CcaQuestion.new
