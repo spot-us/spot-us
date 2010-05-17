@@ -1,0 +1,26 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#ccas_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+
+<div id="fund_a_story">
+	<div id="navigation">
+	</div>
+	<div id="stories">
+		<h3 class="display_inline">Credits allocated for CCA: <%=@cca.title%></h3> 
+		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
+			&nbsp;
+		</div>
+		<%=render :partial=>"shared/lists", :locals=>{ 
+			:items=>@credits,
+			:template_name => 'admin/ccas/credit',
+			:no_items_message=>"There were no results for your search.  Try different search terms." 
+		}%>
+	</div>
+</div>

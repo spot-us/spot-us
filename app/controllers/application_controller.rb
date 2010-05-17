@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_cca
   before_filter :set_default_html_meta_tags
   before_filter :social_notifier
-  after_filter :async_posts
+  after_filter  :async_posts
+
   
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   

@@ -94,7 +94,7 @@ class Donation < ActiveRecord::Base
     max_length = PREPEND_STATUS_UPDATE.length + url_length + 23
     msg  = "#{PREPEND_STATUS_UPDATE} Donation: "
     title = "I have just donated to #{pitch.to_param}"
-    msg += title.length > 140-max_length ? "#{headline[0..max_length].gsub(/\w+$/, '')}..." : title
+    msg += title.length > 140-max_length ? "#{pitch.headline[0..max_length].gsub(/\w+$/, '')}..." : title
     msg += " - #{short_url}" if show_url
     msg
   end

@@ -20,7 +20,8 @@
 			<% end %>
 			<a  target="_blank" rel="nofollow" href="" title="Share this by Email"><%= image_tag("/images/new_design/email_32.png") %></a>
 		</div>
-		<% if !current_user.notify_facebook_wall or current_user.notify_twitter %>
+
+		<% if !current_user.notify_facebook_wall or !current_user.notify_twitter %>
 			<div class="sync">
 				You can also <strong><%= link_to "sync", edit_myspot_twitter_credentials_path %></strong> Spot.Us to automatically update your Facebook and Twitter feeds.
 			</div>
