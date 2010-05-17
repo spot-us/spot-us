@@ -82,7 +82,7 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :headline, :user_id
 
-  if Rails.env.production?
+  unless Rails.env.development?
     validates_attachment_content_type :featured_image,
       :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
                         'image/x-png', 'image/jpg'],
