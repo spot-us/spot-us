@@ -128,7 +128,7 @@ class NewsItem < ActiveRecord::Base
   
   cattr_reader :per_page
   @@per_page = 10
-
+ 
   def featured_image_name
     featured_image_file_name.blank? && (type.to_s=='Story' || type.to_s=='Tip')
   end
