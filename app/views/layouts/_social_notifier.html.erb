@@ -1,7 +1,7 @@
 <div id="social_notifier_wrapper" class="hide">
 	<div id="social_notifier">
 		<%= social_notify_header(cookies[:social_notifier], @notify_object) %>
-		<% if !current_user.notify_facebook_wall or !fb_session%>
+		<% if !current_user.notify_facebook_wall or !fb_session %>
 			<a title="Share this on Facebook" target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<%= begin @notify_object.short_url rescue "" end %>&amp;t=<%= h @notify_object.status_update(false) %>"><%= image_tag("/images/new_design/facebook_32.png", :class => "badge") %>
 			</a>
 		<% end %>
@@ -20,7 +20,7 @@
 			
 
 		</div>
-		<% if !current_user.notify_facebook_wall or !current_user.notify_twitter %>
+		<% if !current_user.notify_facebook_wall or !fb_session  or !current_user.notify_twitter or !current_user.twitter_credential %>
 			<div class="sync">
 				<div class="quieter">You can also:</div>
 				<div>
