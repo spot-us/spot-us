@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
 
   def index
     @posts = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>10)
+    @full = (params[:length]=='full')
     respond_to do |format|
       format.html do
       end
