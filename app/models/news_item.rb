@@ -82,7 +82,7 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :headline, :user_id
 
-  if Rails.env.production?
+  unless Rails.env.development?
     validates_attachment_content_type :featured_image,
       :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
                         'image/x-png', 'image/jpg'],
@@ -128,9 +128,9 @@ class NewsItem < ActiveRecord::Base
   
   cattr_reader :per_page
   @@per_page = 10
-
+ 
   def featured_image_name
-    featured_image_file_name.blank? && type.to_s=='Story'
+    featured_image_file_name.blank? && (type.to_s=='Story' || type.to_s=='Tip')
   end
 
   # NOTE: You can chain scopes off of with_sort, but you can't chain with_sort off of scopes.
