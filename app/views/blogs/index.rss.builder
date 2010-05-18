@@ -2,7 +2,7 @@ xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
     @posts.each do |post|
-      apply_fragment ['blog_post_rss_modified_', post] do
+      apply_fragment ['blog_post_rss_modified_', post, @full] do
         xml.item do
           xml.title post.title
           xml.author post.user.full_name
