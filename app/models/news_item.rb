@@ -148,9 +148,11 @@ class NewsItem < ActiveRecord::Base
     return false if !["Pitch","Story"].include?(self.class.to_s)
     item = self.class.to_s == "Pitch" ? self : self.pitch
     if item.assignments.any?
-     if item.assignments.last.title.starts_with?("Apply to be Peer Review Editor") and item.assignments.last.is_open?
-       return item.assignments.last.accepted_contributors.last if item.assignments.last.accepted_contributors.last
-    end
+      if item.assignments.last.title.starts_with?("Apply to be Peer Review Editor") and item.assignments.last.is_closed?
+        #return item.assignments.last.accepted_contributors.last if item.assignments.last.accepted_contributors.last
+        return fact_checker if fact_checker
+        return parent.fact_checker if parent && parent.fact_checker
+      end
     end
     return false   
   end
@@ -197,7 +199,9 @@ class NewsItem < ActiveRecord::Base
   
   def update_facebook
     #unless Rails.env.development?
-      description = strip_html(self.short_description)
+      description = ""
+      description = strip_html(self.short_description) if self.short_description
+      description = strip_html(self.extended_description) if self.extended_description && description.blank?
       description = "#{description[0..200]}..." if description.length>200
       [self.user, User.info_account?].compact.uniq.each do |u|
         u.save_async_post("Spot.Us #{type.to_s.titleize}", description, self.short_url, self.featured_image.url, self.headline) if u && u.facebook_user?
