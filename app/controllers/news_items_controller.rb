@@ -7,7 +7,7 @@ class NewsItemsController < ApplicationController
   def index
     @channels = Channel.by_network(current_network)
     @network = current_network
-    @full = params[:length]=='full'
+    @full = (params[:length]=='full')
     get_filter
     respond_to do |format|
       format.html do
