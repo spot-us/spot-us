@@ -501,6 +501,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #social_notifier div.panel {padding:15px;-moz-border-radius:10px;-webkit-border-radius:10px;margin-bottom:10px;border: solid 1px #ccc;
 			font-size:16px;background:#e3eeef}
 #social_notifier div.sync {font-size:1.2em;}
+#social_notifier textarea {width:420px;height:70px;padding:3px;}
+#social_notifier #email_notify {background:#eee;-moz-border-radius:4px;padding:12px;border:solid 1px #999;}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;

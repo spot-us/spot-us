@@ -39,11 +39,11 @@ class ApplicationController < ActionController::Base
   def social_notifier
     if current_user
       if cookies[:social_notifier_shown]
-         delete_cookie(:social_notifier)
+         delete_cookie(:social_notifier) if cookies[:social_notifier]
          delete_cookie(:social_notifier_shown)
       elsif cookies[:social_notifier]
         set_cookie("social_notifier_shown", {:value => "true"})
-        case
+        case cookies[:social_notifier]
           when "donations"
             @notify_object = current_user.donations.last
           when "post"

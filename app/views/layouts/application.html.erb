@@ -49,6 +49,6 @@
 	    </div>
 	    <%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
 		<%= render :partial => 'layouts/splash' %>
-		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user %>
+		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
 	 </body>
 </html>

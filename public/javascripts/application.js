@@ -1,3 +1,7 @@
+String.prototype.trim = function() {
+	return this.replace(/^\s+|\s+$/g,"");
+}
+
 jQuery(document).ready(function($){	
 	socialNotifier();
 	$('#equalize').equalHeights();
@@ -56,8 +60,53 @@ jQuery(document).ready(function($){
 function socialNotifier(){
 	if( jQuery.cookie('social_notifier') != null ) {
 	    jQuery.facebox(jQuery("#social_notifier_wrapper").html());
+		jQuery("#share_by_email").live("click",function(){
+			jQuery(this).next().slideToggle(200);
+			return false;
+		});
+		jQuery("#email_notify").live("submit",function(){
+			var form = jQuery(this);
+			var ta = form.find("textarea");
+			var notice = form.find("#email_result");
+			var query_params = form.serialize();
+			notice.html("sending...");
+			ta.attr("disabled", true);
+			var emails = ta.attr("value");
+			if(emails.length > 500) {
+				alert("That's just too much email for us to handle at once.");
+				return false;
+			}
+			if (email_validate(emails) == false){
+				alert('One or more email is not valid. Please try again.');
+				ta.attr("disabled", false);
+				notice.html("");
+				return false;
+			}
+			jQuery.post(form.attr("action"), query_params, function(data){
+				ta.attr("value", "");
+				notice.html(data);
+				ta.attr("disabled", false);
+			});
+			return false;
+		});
 	}
 	
+}
+
+function email_validate(emails) {
+	var email_list;
+	if(emails.indexOf(",") > -1){
+		email_list = emails.split(",");
+	} else {
+		email_list = new Array(emails);
+	}
+	for (i=0;i<email_list.length;i++) {
+	   	var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	   	if(reg.test(email_list[i].trim()) == false) {
+	      	return false;
+	   	}
+	}
+	return true;
 }
 
 function slideWidget(name){

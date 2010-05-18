@@ -18,7 +18,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/auth/facebook', :controller => "sessions", :action => "facebook_login"
   map.connect '/auth/facebook/callback', :controller => "sessions", :action => "facebook_callback"
 
-
+  map.connect '/notifications/social_notify', :controller => "notifications", :action => "social_notify"
+  
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
     
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
