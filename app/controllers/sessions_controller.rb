@@ -19,21 +19,29 @@ class SessionsController < ApplicationController
 		  flash[:error] = "Oops, we're having trouble connecting to Facebook right now."
       redirect_to "/"
 	  else
-	    user = JSON.parse(access_token.get('/me'))
+	    begin 
+	      user = JSON.parse(access_token.get('/me'))
+	    rescue
+	      user = nil
+      end
 	    user ? session[:fb_session] = params[:code] : session[:fb_session] = nil
-	    if current_user
-  			@user = current_user
-  			@user.link_identity!(user["id"].to_i)
-  			# otherwise locate or create a new native account and associate 
-  		else
-  			@user = User.from_identity(user)
-  			self.current_user = @user
-  			flash[:notice] = "Welcome to Spot.Us."
-  		end
-      create_current_login_cookie
-      update_balance_cookie
-      handle_first_donation_for_non_logged_in_user
-  		handle_first_pledge_for_non_logged_in_user
+	    if user
+	      if current_user
+    			@user = current_user
+    			@user.link_identity!(user["id"].to_i)
+    			# otherwise locate or create a new native account and associate 
+    		else
+    			@user = User.from_identity(user)
+    			self.current_user = @user
+    			flash[:notice] = "Welcome to Spot.Us."
+    		end
+        create_current_login_cookie
+        update_balance_cookie
+        handle_first_donation_for_non_logged_in_user
+    		handle_first_pledge_for_non_logged_in_user
+    	else
+    	  flash[:notice] = "Could not connect to Facebook right now. Try again later."
+    	end
   	  redirect_to "/"
     end
 		

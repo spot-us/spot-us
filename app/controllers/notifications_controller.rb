@@ -12,6 +12,11 @@ class NotificationsController < ApplicationController
     render :text=>"ok!" 
   end
   
+  def social_notify
+     Mailer.deliver_notification_email(params[:email_list],params[:subject],params[:message]) 
+     render :text => "email has been sent."
+  end
+  
   private
   
   def notify_pitch_owners

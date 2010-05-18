@@ -190,15 +190,19 @@ class NewsItem < ActiveRecord::Base
   
   def update_twitter
     #unless Rails.env.development?
+    #debugger
+    if user.notify_twitter
       msg = status_update
       [user, User.info_account?].compact.uniq.each do |u|
         u.twitter_credential.update?(msg) if u && u.twitter_credential
       end
+    end
     #end
   end
   
   def update_facebook
     #unless Rails.env.development?
+    if user.notify_facebook_wall
       description = ""
       description = strip_html(self.short_description) if self.short_description
       description = strip_html(self.extended_description) if self.extended_description && description.blank?
@@ -206,6 +210,7 @@ class NewsItem < ActiveRecord::Base
       [self.user, User.info_account?].compact.uniq.each do |u|
         u.save_async_post("Spot.Us #{type.to_s.titleize}", description, self.short_url, self.featured_image.url, self.headline) if u && u.facebook_user?
       end
+    end
     #end
   end
   

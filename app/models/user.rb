@@ -144,7 +144,7 @@ class User < ActiveRecord::Base
   attr_accessible :about_you, :address1, :address2, :city, :country,
     :email, :fact_check_interest, :first_name, :last_name,
     :location, :notify_blog_posts, :notify_comments, :notify_pitches, :notify_spotus_news, :notify_stories,
-    :notify_tips, :password, :password_confirmation, :phone, :photo, :state,
+    :notify_tips,:notify_facebook_wall,:notify_twitter, :password, :password_confirmation, :phone, :photo, :state,
     :terms_of_service, :topics_params, :website, :zip, :organization_name,
     :established_year, :network_id, :category_id
   named_scope :fact_checkers, :conditions => {:fact_check_interest => true}

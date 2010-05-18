@@ -3,7 +3,7 @@ class Mailer < ActionMailer::Base
   helper :application
   default_url_options[:host] = DEFAULT_HOST
 
-  def notitification_email(to, subject, message)
+  def notification_email(to, subject, message)
     recipients to
     from       MAIL_WEBMASTER
     subject    subject

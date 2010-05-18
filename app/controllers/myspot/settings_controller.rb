@@ -14,7 +14,7 @@ class Myspot::SettingsController < ApplicationController
     resource.attributes = params[resource_name]
     if resource_saved?
       flash[:success] = 'Your settings have been saved.'
-      redirect_to edit_myspot_settings_path
+      redirect_to params[:return_to] || edit_myspot_settings_path
     else
       render :action => 'edit'
     end

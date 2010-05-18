@@ -10,6 +10,7 @@ module OauthConnect
 	  
   def fb_access_token(code)
     begin
+      debugger
 	    oauth_client.web_server.get_access_token(code, :redirect_uri => "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/facebook/callback") # | redirect_uri(uri)
     rescue 
       return false
