@@ -22,9 +22,10 @@ class Myspot::PurchasesController < ApplicationController
     @donations                = current_user.donations.unpaid
     @purchase.donations       = @donations
     @purchase.spotus_donation = current_user.current_spotus_donation
-
+    debugger
     begin
       if @purchase.save
+        set_social_notifier_cookie("donation")
         update_balance_cookie
         redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
       else
@@ -75,6 +76,7 @@ class Myspot::PurchasesController < ApplicationController
     if notify.acknowledge
       if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
         purchase.save
+        set_social_notifier_cookie("donation")
       else
         logger.error("PayPal acknowledgement was unpaid or the amounts didn't match for the following transaction: #{notify.params['txn_id']}")
       end
@@ -88,7 +90,7 @@ class Myspot::PurchasesController < ApplicationController
   protected
 
   def unpaid_donations_required
-    redirect_to myspot_donations_path if current_user.donations.unpaid.empty? && (current_user.unpaid_spotus_donation.nil? || current_user.unpaid_spotus_donation.amount <= 0)
+    # redirect_to myspot_donations_path if current_user.donations.unpaid.empty? && (current_user.unpaid_spotus_donation.nil? || current_user.unpaid_spotus_donation.amount <= 0)
   end
 
 end

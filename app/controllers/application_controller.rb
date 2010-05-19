@@ -142,6 +142,10 @@ class ApplicationController < ActionController::Base
     set_cookie("balance_text",  {:value => render_to_string(:partial => 'shared/balance')})
   end
 
+  def set_social_notifier_cookie(notify_type)
+    set_cookie("social_notifier", {:value => notify_type})
+  end
+  
   def set_cookie(name, options={})
     cookies[name.to_sym] = options.merge(:domain => DEFAULT_HOST)
   end

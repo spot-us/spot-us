@@ -106,6 +106,7 @@ class Purchase < ActiveRecord::Base
 
   def associate_donations
     (@new_donations || []).each do |donation|
+        debugger
       donation.purchase = self
       donation.pay!
       
