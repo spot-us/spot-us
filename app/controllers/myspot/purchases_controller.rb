@@ -22,7 +22,6 @@ class Myspot::PurchasesController < ApplicationController
     @donations                = current_user.donations.unpaid
     @purchase.donations       = @donations
     @purchase.spotus_donation = current_user.current_spotus_donation
-    debugger
     begin
       if @purchase.save
         set_social_notifier_cookie("donation")
@@ -77,6 +76,7 @@ class Myspot::PurchasesController < ApplicationController
       if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
         purchase.save
         set_social_notifier_cookie("donation")
+		
       else
         logger.error("PayPal acknowledgement was unpaid or the amounts didn't match for the following transaction: #{notify.params['txn_id']}")
       end

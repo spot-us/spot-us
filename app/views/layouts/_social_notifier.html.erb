@@ -17,8 +17,6 @@
 					<input type="submit" value="Send"> &nbsp;&nbsp;<em id="email_result" class="quiet small"></em>
 				<% end %>
 			</div>
-			
-
 		</div>
 		<% if !current_user.notify_facebook_wall or !fb_session  or !current_user.notify_twitter or !current_user.twitter_credential %>
 			<div class="sync">
@@ -30,7 +28,5 @@
 				<em class="quieter small">Syncing will automatically update your social networks every time you post.</em>
 			</div>
 		<% end %>
-
-
 	</div>
 </div>
