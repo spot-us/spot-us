@@ -10,7 +10,7 @@ class Myspot::DonationsController < ApplicationController
   response_for :create do |format|
     if resource_saved?
       update_balance_cookie
-      set_cookie("social_notifier", {:value => "donation"})
+      session[:donation_id] = @donation.id # temporary solution for being able to retrieve donation for share popup
       if params[:spotus_lite]
         format.html { redirect_to spotus_lite_myspot_donations_amounts_path }
       else

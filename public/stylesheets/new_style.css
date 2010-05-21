@@ -503,6 +503,11 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #social_notifier div.sync {font-size:1.2em;}
 #social_notifier textarea {width:420px;height:70px;padding:3px;}
 #social_notifier #email_notify {background:#eee;-moz-border-radius:4px;padding:12px;border:solid 1px #999;}
+#social_notifier .sync {background-color:#eee;border: solid 2px #f5f5f5; color:white;padding:5px 15px;}
+/*#social_notifier .sync_button {background:#eee;padding:3px 8px;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;}*/
+#social_notifier img.badge {margin:10px 5px 0 0 !important;}
+#social_notifier img {vertical-align:middle}
+#social_notifier  a {}
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;

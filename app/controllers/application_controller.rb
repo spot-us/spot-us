@@ -45,7 +45,10 @@ class ApplicationController < ActionController::Base
         set_cookie("social_notifier_shown", {:value => "true"})
         case cookies[:social_notifier]
           when "donation"
-            @notify_object = current_user.donations.last
+			if session[:donation_id]
+            	@notify_object = Donation.find(session[:donation_id])  # current_user.donations.last
+				session[:donation_id] = nil
+			end
           when "post"
             @notify_object = current_user.posts.last
         end
@@ -142,6 +145,10 @@ class ApplicationController < ActionController::Base
     set_cookie("balance_text",  {:value => render_to_string(:partial => 'shared/balance')})
   end
 
+  def set_social_notifier_cookie(notify_type)
+    set_cookie("social_notifier", {:value => notify_type})
+  end
+  
   def set_cookie(name, options={})
     cookies[name.to_sym] = options.merge(:domain => DEFAULT_HOST)
   end
