@@ -97,6 +97,7 @@ class Purchase < ActiveRecord::Base
   def validate_credit_card
     unless credit_card.valid?
       credit_card.errors.each do |field, messages|
+        logger.info("Message: " + messages.join(". "))
         messages.each do |message|
           errors.add(:"credit_card_#{field}", message)
         end
@@ -149,6 +150,7 @@ class Purchase < ActiveRecord::Base
 
   def bill_credit_card
     return true if credit_covers_total?
+    
     response = gateway.purchase(total_amount_for_gateway,
                                 credit_card,
                                 billing_hash)
@@ -171,13 +173,22 @@ class Purchase < ActiveRecord::Base
 
 
   def credit_card_hash
-    { :first_name         => first_name,
-      :last_name          => last_name,
-      :number             => credit_card_number,
-      :month              => credit_card_month,
-      :year               => credit_card_year,
-      :verification_value => verification_value,
-      :type               => credit_card_type }
+    unless gateway.test?
+      { :first_name         => first_name,
+        :last_name          => last_name,
+        :number             => credit_card_number,
+        :month              => credit_card_month,
+        :year               => credit_card_year,
+        :verification_value => verification_value,
+        :type               => credit_card_type }
+    else
+      { :first_name         => first_name,
+        :last_name          => last_name,
+        :number             => credit_card_number,
+        :month              => credit_card_month,
+        :year               => credit_card_year,
+        :verification_value => verification_value }
+    end
   end
 
   def email

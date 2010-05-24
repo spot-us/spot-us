@@ -26,7 +26,8 @@ class Myspot::PurchasesController < ApplicationController
       if @purchase.save
         set_social_notifier_cookie("donation")
         update_balance_cookie
-        redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
+        redirect_url = @donations && !@donations.empty? && @donations.first ? pitch_url(@donations.first.pitch) : myspot_donations_path
+        redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : redirect_url
       else
         unless cookies[:spotus_lite]
           render :action => 'new'
