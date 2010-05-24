@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
         case cookies[:social_notifier]
           when "donation"
 			if session[:donation_id]
-            	@notify_object = Donation.find(session[:donation_id])  # current_user.donations.last
+            	@notify_object = Donation.find_by_id(session[:donation_id])  # current_user.donations.last
 				session[:donation_id] = nil
 			end
           when "post"
