@@ -40,8 +40,8 @@ jQuery(document).ready(function($){
 		if ($(this).parent().parent().attr('id')!='tabHeaderPitch'){
 			$(this).parent().parent().parent().find(".tab_panel").hide();
 			$("." + $(this).attr("id")).show();
-			$(this).parent().parent().find(".tab").removeClass("active");
-			$(this).addClass("active");
+			$(this).parent().parent().find(".tab").removeClass("active").parent().removeClass("active");
+			$(this).addClass("active").parent().addClass("active");
 			return false;
 		}
 	});
@@ -130,10 +130,10 @@ function resizePipe(host){
 /* Simple tabbing function */
 function selectTab(container, id){
 	header = container.find('ul');
-	header.find('li').removeClass('active');
-	header.find(id+'_tab').addClass('active');
-	$('#'+container).find('div').hide();
-	$('#'+container).find(id+'_content').show();
+	// header.find('li').removeClass('active').parent().addClass('active');
+	// header.find(id+'_tab').addClass('active').parent().addClass('active');
+	// $('#'+container).find('div').hide();
+	// $('#'+container).find(id+'_content').show();
 	return false;
 }
 

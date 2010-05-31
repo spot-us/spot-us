@@ -1,11 +1,13 @@
 <% if pitch.assignments.status_open.any? %>
-	<h2>Assignments</h2>
+	<h5>Apply to donate your talent</h5>
 	<% pitch.assignments.status_open.first(5).each do |assignment| %>
 		<% apply_fragment ['pitch_assignment_', pitch, assignment] do %>
    		<div class="assignment">
    		   <div class="date float-right"><%= short_date(assignment.created_at) %></div>
-   			<h4 class="title"><%= link_to h(assignment.title) + " &raquo;", pitch_assignment_path(pitch, assignment) %></h4>
-   			<%= truncate_words(strip_tags(assignment.body), 20) %><br/>
+   			<h3 class="title"><%= link_to h(assignment.title) + " &raquo;", pitch_assignment_path(pitch, assignment) %></h3>
+   			<div class="summary">
+				<%= truncate_words(strip_tags(assignment.body), 30) %>
+			</div>
    			<%= link_to "read and apply &raquo;", pitch_assignment_path(assignment.pitch, assignment)%>
    		</div>
 		<% end %>

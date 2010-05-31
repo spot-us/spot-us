@@ -143,10 +143,14 @@ module ApplicationHelper
   
   def due_date_in_words(due_date)
     if due_date > Time.now
-      '<span class="deep-green">due in ' + time_ago_in_words(due_date) + "</span>"
+      '<span class="grey">due in ' + time_ago_in_words(due_date) + "</span>"
     else
-      '<span class="pink">' + time_ago_in_words(due_date)  + " overdue</span>"
+      '<span class="grey">' + time_ago_in_words(due_date)  + " overdue</span>"
     end
+  end
+
+  def pitch_date(dt)
+	dt.strftime("%d %b %Y")
   end
   
   def short_date(dt)

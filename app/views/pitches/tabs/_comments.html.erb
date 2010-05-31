@@ -2,23 +2,34 @@
    <% if !@pitch.comments.any? %>
       <p>There are no comments yet, be the first!</p>
    <% else %>
-      <ul>
-         <% @pitch.comments.each do |comment| %>
+		<div id="comments">
+	        <% @pitch.comments.each do |comment| %>
 				<% apply_fragment ['pitch_comments_', @pitch, comment] do%>
-					<a name="<%=comment.id%>">
-					<li>
-						<h5><%= comment.title %></h5>
+					<a name="<%=comment.id%>"/>
+					<div class="comment clearfix <%=cycle(' even',' odd')%>">
+					
 						<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
-						<div class="comment"><%= comment.body %>
-							by <%= link_to comment.user.full_name, profile_path(comment.user) %> on <%= comment.created_at.to_s(:long_date) %>
+						<div class="contents">
+							<h5><%= comment.title %></h5>
+							<%= link_to comment.user.full_name, profile_path(comment.user), :class => "author" %>
+							<div class="comment_body">
+								<div class="date"><%= medium_date(comment.created_at) %></div>
+							
+								<%= comment.body %>
+							
+							</div>
 						</div>
-					</li>
-				<%end%>
-         <% end %>
-      </ul>
+					</div>
+			
+				<% end %>	
+	        <% end %>
+		</div>
    <% end %>
-   <h3>Post A Comment</h3>
-   <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
-			<%= render :partial => 'comments/form', :locals => {:f => f} %>
-   <% end %>
+	<br/>
+	<div class="post_comment">
+ 	  <h5>Post A Comment</h5>
+	   <% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+				<%= render :partial => 'comments/form', :locals => {:f => f} %>
+	   <% end %>
+	</div>
 </div>

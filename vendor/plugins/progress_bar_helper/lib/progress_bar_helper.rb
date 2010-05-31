@@ -16,9 +16,26 @@ module ProgressBarHelper
     value = ((value*100.0).round.to_f)/100.0
     result =  '<span id="'+name+'_progress_bar" >'+
             image_tag('progress_bar/percentImage.png',
+              :style => 'margin: 0pt; padding: 0pt; width: 180px; height: 20px;
+                          background-position: '+(value*180-180).to_s+'px 50%;
+                          background-image: url(/images/progress_bar/percentImage_back1.png);',
+              :alt => (value*100).to_s+'%',
+              :id => name+'_percentImage',
+              :title => '80%')
+     if display_percentage_text 
+       result += '<span id="'+name+'_percentText">'+(value*100).to_s+'%'+'</span>'
+     end
+     result += '</span>'
+  end
+
+
+  def smaller_static_progress_bar(name, value, display_percentage_text = false)
+    value = ((value*100.0).round.to_f)/100.0
+    result =  '<span id="'+name+'_progress_bar" >'+
+            image_tag('progress_bar/percentImage_old.png',
               :style => 'margin: 0pt; padding: 0pt; width: 120px; height: 12px;
                           background-position: '+(value*120-120).to_s+'px 50%;
-                          background-image: url(/images/progress_bar/percentImage_back1.png);',
+                          background-image: url(/images/progress_bar/percentImage_back1_old.png);',
               :alt => (value*100).to_s+'%',
               :id => name+'_percentImage',
               :title => '80%')
