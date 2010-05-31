@@ -8,7 +8,7 @@
 	</div>
 <% end %>
 
-<div id="news_item" class="pitch_container">
+<div id="news_item" class="pitch_container clearfix">
 	<div class="pitch_left">
 		<div class="small_header">
 			<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
@@ -71,6 +71,24 @@
 						</div>
 						<%= due_date_in_words(@pitch.expiration_date) %>
 					</div>
+				</div>
+			<% end %>
+			<% if @pitch.story && @pitch.story.published? %>
+				<div class="published">
+					<h5>This story has been published:</h5>
+					<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %></h4><br clear="all">
+					<div class="">
+						by
+						<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
+						|
+						<%= pitch_date(@pitch.story.created_at) %>
+						|
+						<%= @pitch.story.network.name %>
+					</div>
+					<div class="story_summary">
+						<%= truncate_words(strip_tags(@pitch.story.extended_description), 80) %><br/>
+					</div>
+					<%= link_to 'Read the published story', @pitch.story, :class => "read" %>
 				</div>
 			<% end %>
 		</div>
