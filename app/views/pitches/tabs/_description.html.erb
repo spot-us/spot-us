@@ -1,4 +1,4 @@
-<% if @pitch.video_embed %>
+<% if !@pitch.video_embed.blank? %>
 	<div class="watch_video">
 		<%= link_to "&raquo; Watch Video &laquo;", "", :class=> "toggle_video" %>
 	</div>
