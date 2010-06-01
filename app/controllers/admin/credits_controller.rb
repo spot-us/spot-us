@@ -10,6 +10,7 @@ class Admin::CreditsController < ApplicationController
   def create
     @credit = Credit.new(params[:credit])
     if @credit.save
+      update_balance_cookie
       redirect_to admin_credits_path
     else
       load_users_and_credits
