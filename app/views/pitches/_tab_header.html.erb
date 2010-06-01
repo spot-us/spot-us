@@ -1,4 +1,4 @@
-<% apply_fragment ['pitch_detail_page_', @tab, @pitch] do %>
+<% apply_fragment ['pitch_detail_page_alt_', @tab, @pitch] do %>
 	<ul id="tabHeaderPitch" class="pitch_nav">
 		<li class="story<%= active_tab_class?(@tab, '')%>"><a href="<%=pitch_path(@pitch)%>" class="tab<%= active_tab_class?(@tab, '')%>">Story</a></li>
 		<li class="<%= active_tab_class?(@tab, 'posts')%>"><a href="<%=pitch_path(@pitch)%>/posts" class="tab<%= active_tab_class?(@tab, 'posts')%>">Updates (<%= @pitch.posts.size %>)</a></li>

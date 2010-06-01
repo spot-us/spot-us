@@ -28,13 +28,13 @@
 	<div class="pitch_right">
 		<div class="blue_panel">
 			<div class="pitch_author clearfix">
-				<% apply_fragment ['pitch_author_top_', @pitch, @pitch.user] do %>
+				<% apply_fragment ['pitch_author_top_alt_', @pitch, @pitch.user] do %>
 					<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
 					<em>Author</em><br/>
 					<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %><br/>
 				<% end %>
 				<% if @pitch.peer_reviewer %>
-					<% apply_fragment ['pitch_peer_reviewer_top_', @pitch, @pitch.peer_reviewer] do %>
+					<% apply_fragment ['pitch_peer_reviewer_top_alt_', @pitch, @pitch.peer_reviewer] do %>
 						<em class="peer_reviewer">Peer review: 
 							<strong><%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer)) %></strong>
 						</em>
