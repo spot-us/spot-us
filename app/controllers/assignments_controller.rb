@@ -29,6 +29,17 @@ class AssignmentsController < ApplicationController
     end
   end
   
+  def update_assignments
+    return head(:bad_request) if !current_user || !current_user.admin?
+    Assignment.all.each do |assignment|
+      if assignment.title.starts_with?("Apply to be Peer Review Editor")
+        assignment.is_factchecker_assignment = true
+        assignment.save
+      end
+    end
+    render :text=>"done"
+  end
+  
   def process_application
     assignment = Assignment.find(params[:id])
     redirect_to :back if !assignment || assignment.is_closed?
