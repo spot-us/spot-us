@@ -51,6 +51,7 @@ class AssignmentsController < ApplicationController
     application = AssignmentContributor.find(params[:id])
     redirect_to pitch_assignments_path(assignment.pitch) if assignment.user != current_user || !application 
     if application.accept
+      assignment.close if assignment.is_factchecker_assignment
       flash[:success] = 'Application status is now set to "accepted"'
       redirect_to pitch_assignment_path(assignment.pitch, assignment)
     else
