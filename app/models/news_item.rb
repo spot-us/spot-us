@@ -148,7 +148,7 @@ class NewsItem < ActiveRecord::Base
     return nil if !["Pitch","Story"].include?(self.class.to_s)
     item = self.class.to_s == "Pitch" ? self : self.pitch
     if item.assignments.any?
-      assignment = item.assignments.find_by_is_factchecker_assignment(true)
+      assignment = item.assignments.find(:first, :conditions=>"is_factchecker_assignment=1")
       return assignment.accepted_contributors.last if assignment && assignment.is_closed?
     else
       return (fact_checker || (parent && parent.fact_checker))

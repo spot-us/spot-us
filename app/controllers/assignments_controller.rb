@@ -33,8 +33,14 @@ class AssignmentsController < ApplicationController
     return head(:bad_request) if !current_user || !current_user.admin?
     Assignment.all.each do |assignment|
       if assignment.title.starts_with?("Apply to be Peer Review Editor")
+        # set the assignment status...
         assignment.is_factchecker_assignment = true
         assignment.save
+        
+        # close the assignment if it is open...
+        if assignment.accepted_contributors && !assignment.accepted_contributors.empty?
+          assignment.close
+        end
       end
     end
     render :text=>"done"
