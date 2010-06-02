@@ -224,7 +224,8 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 #news_item .widget_panel {font-size:13px;color:#eee;display:none;}
 #news_item .widget_panel iframe {margin-left:0px;padding:2px;margin-bottom:5px;}
 #news_item .widget_panel .widget_tip {background:#e5e5e5;color:#222;padding:5px;font-size:11px;width:326px;font-family:arial, helvetica;}
-#news_item .widget_panel .widget_tip_lite {background:#e5e5e5;color:#222;padding:10px;font-size:12px;width:326px;font-family:arial, helvetica;}
+#news_item .widget_panel .widget_tip_lite {background:#e5e5e5;color:#222;padding:10px;font-size:12px;width:316px;font-family:arial, helvetica;border: solid 1px #bbb;
+			margin-top:10px;}
 #news_item .widget_panel .widget_tip a, #news_item .widget_panel .widget_tip_lite a {color:#222;}
 #news_item .widget_panel .widget_tip p, #news_item .widget_panel .widget_tip_lite p {color:#222;font-size:12px;font-family:arial, helvetica;}
 #news_item .widget_panel .widget_tip ol, #news_item .widget_panel .widget_tip_lite ol {margin-top:10px;margin-bottom:10px;}
@@ -237,14 +238,19 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_container {font-family:Georgia;margin-bottom:20px;}
 .pitch_container a {text-decoration:none;}
 .pitch_container a:hover {text-decoration:underline;}
-.pitch_left {width: 556px;float:left;margin:25px 30px;}
-.pitch_right {position:absolute;right:70px;top:25px;width:370px;}
+.pitch_left {width: 556px;float:left;margin:25px 30px;position:relative;}
+.pitch_right {float:right;margin: 25px 60px 20px 0;width:370px;}
 
 .pitch_left .small_header {position:relative;color:#808080;letter-spacing:1px;margin-bottom:10px;font-family:Georgia;}
 .pitch_left .small_header a {font-weight:bold;}
-.pitch_left .small_header .share_buttons {position:absolute;right:0;color:#808080;}
+.pitch_left .small_header .share_buttons {position:absolute;right:-10px;top:5px;color:#808080;}
+.pitch_left .small_header .share_buttons a#fb_share {position:absolute;top:0;right:0;}
+.pitch_left .small_header .share_buttons iframe {position:absolute;right:55px;top:0;}
+
 
 .pitch_left h1 {color:#191819;font-weight:normal;font-size:34px;line-height:38px;letter-spacing:1px;}
+.pitch_left h2.title {font-weight:normal;margin:0;}
+.pitch_left h3.date {margin-bottom:15px;color:#707070;font-weight:normal;}
 .pitch_left ul.pitch_nav {background:#E7F5F9;margin-bottom:15px;}
 .pitch_left ul.pitch_nav {list-style:none;margin:15px 0 0;}
 .pitch_left ul.pitch_nav li {float:left;width:120px;padding-left:25px;background:#E7F5F9;padding-bottom:3px;border-top:solid 2px #ddd;}
@@ -262,8 +268,10 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left .description_tab .extended_description h4 {margin-bottom:5px;font-family:Verdana;font-weight:normal;}
 .pitch_left .comments_tab, .pitch_left .description_tab, .pitch_left .story_tab, .pitch_left .assignments_tab {margin-left:17px;}
 .pitch_left .story_tab {}
+.pitch_left .pitch_item {margin:0 20px;}
+.pitch_left .pitch_item .mini_header {font-family:Verdana;font-size:.8em;color:#707070;}
 .pitch_left .story_tab h5, .pitch_left .assignments_tab h5 {font-family:Verdana;font-weight:normal;border-bottom:solid 1px #ccc;color:#808080;}
-
+.pitch_left .video_container {margin-left:20px;margin-bottom:15px;}
 
 .pitch_left .story_tab h3, .pitch_left .assignments_tab h3 {font-weight:normal;font-size:1.8em;margin:5px 0;}
 .pitch_left .story_tab .story, .pitch_left .assignments_tab .assignment {padding: 15px 0;color:#555;border-bottom: solid 1px #ccc;}
@@ -279,6 +287,7 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left .comments_tab .comment .comment_body .date {font-size:.8em;color:#888;font-style:italic;text-align:left;margin-bottom:10px;}
 .pitch_left .comments_tab .comment.even {background-color:#fcfbfc;}
 .pitch_left .comments_tab .post_comment {margin-left:0px;}
+.pitch_left .media_embed {margin:25px 0;font-size:.8em;font-family:Verdana;}
 #comments_form input[type="text"] {width:433px;padding:3px;font-family:arial, helvetica;font-size:14px;}
 #comments_form textarea {width:433px;height:160px;padding:5px;margin-top:0;font-family:arial, helvetica;font-size:14px;}
 .qualifications_tab {padding:20px !important;}
@@ -319,6 +328,8 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .public_support .supporters .supporter_avatar a {font-size:10px;}
 .pitch_right .public_support .supporters .supporter_avatar img {width:32px;height:32px;margin-right:0;}
 .pitch_right .public_support .supporters .supporter_avatar div {margin-left:44px;}
+
+
 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}

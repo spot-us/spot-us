@@ -4,7 +4,7 @@
    <% else %>
 		<div id="comments">
 	        <% @pitch.comments.each do |comment| %>
-				<% apply_fragment ['pitch_comments_', @pitch, comment] do%>
+				<% apply_fragment ['pitch_comments_alt_', @pitch, comment] do%>
 					<a name="<%=comment.id%>"/>
 					<div class="comment clearfix <%=cycle(' even',' odd')%>">
 					

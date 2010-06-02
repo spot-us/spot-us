@@ -2,7 +2,7 @@
    <h5>Story blog postings</h5>
    <% if @pitch.posts.any? %>
       <% @pitch.posts.each do |post| %>
-			   <% apply_fragment ['pitch_posts_', @pitch, post] do %>
+			   <% apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
              <div class="story">
 
 				<div class="small_header"><%= link_to post.user.full_name, profile_path(post.user) %> | <%= pitch_date(post.created_at) %></div>

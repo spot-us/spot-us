@@ -5,7 +5,7 @@ class Mailer < ActionMailer::Base
 
   def notification_email(to, subject, message)
     recipients to
-    from       MAIL_WEBMASTER
+    from       MAIL_FROM_INFO
     subject    subject
     body :message => message
   end

@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
   # after_create :register_user_to_fb
   
   has_attached_file :photo,
-                    :styles      => { :thumb => '44x44#' },
+                    :styles      => { :thumb => '44x44#', :mini_thumb => '32x32#' },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,

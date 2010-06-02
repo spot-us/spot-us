@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item pitch_item">
 	<% apply_fragment ['pitch_detail_page_top_alt_', @tab, @pitch, @item] do %>
 		<div class="item_tab tab_panel clearfix">
 		   <div class="mini_header"><%=pre_title?(@item)%>
@@ -11,6 +11,11 @@
 				posted by <%= link_to @item.user.full_name, profile_path(@item.user) %> at <%= @item.created_at.to_s(:long_date) %>
 			</h3>
 			<%= image_tag(@item.blog_image.url(:medium), :class => "blog_image") if @item.class.to_s == "Post" and @item.blog_image_file_name %>
+			<% unless @item.media_embed.blank? %>
+				<div class="media_embed">
+					<%= @item.media_embed %>
+				</div>
+			<% end %>
 			<div class="body clearfix">
 		       <%= @item.body %>
 			</div>
