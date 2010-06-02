@@ -59,6 +59,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "subscription/cancel/:id", :controller => "subscribers", :action => "cancel"
   map.connect "/assignment/:assignment_id/application/accept/:id", :controller => "assignments", :action => "accept_application"
   map.connect "/assignment/:assignment_id/application/reject/:id", :controller => "assignments", :action => "reject_application"
+  map.connect "/update_assignments", :controller => "assignments", :action => "update_assignments"
   map.connect "/admin/channels/:id/add_pitch/:pitch_id", :controller => "admin/channels", :action => "add_pitch"
   map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
   map.connect "/admin", :controller => "admin/city_suggestions", :action => "index"

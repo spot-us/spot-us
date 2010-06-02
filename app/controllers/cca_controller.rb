@@ -5,18 +5,18 @@ class CcaController < ApplicationController
 
   
   def show
-	if current_user
-		latest_answer = CcaAnswer.latest_answer(@cca,current_user)
-		@cache_form = latest_answer ? latest_answer : nil
-	else
-		@cache_form = nil
-	end
+  	if current_user
+  		latest_answer = CcaAnswer.latest_answer(@cca,current_user)
+  		@cache_form = latest_answer ? latest_answer : nil
+  	else
+  		@cache_form = nil
+  	end
   end
   
   def results
     @cca = find_resource
     
-    if !current_user.is_a?(Admin) || (@cca && current_user!=@cca.user)
+    if @cca && !current_user.is_a?(Admin) && current_user!=@cca.user
       return head(:bad_request)
     end
     

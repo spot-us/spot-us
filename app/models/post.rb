@@ -87,7 +87,7 @@ class Post < ActiveRecord::Base
     #email supporters
     emails = self.pitch.supporters.map{ |email| "'#{email}'"}
     self.pitch.supporters.each do |supporter|
-      Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email)
+      Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email) if supporter.notify_blog_posts
     end
     #email admins
     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq

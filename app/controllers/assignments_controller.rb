@@ -29,6 +29,23 @@ class AssignmentsController < ApplicationController
     end
   end
   
+  def update_assignments
+    return head(:bad_request) if !current_user || !current_user.admin?
+    Assignment.all.each do |assignment|
+      if assignment.title.starts_with?("Apply to be Peer Review Editor")
+        # set the assignment status...
+        assignment.is_factchecker_assignment = true
+        assignment.save
+        
+        # close the assignment if it is open...
+        if assignment.accepted_contributors && !assignment.accepted_contributors.empty?
+          assignment.close
+        end
+      end
+    end
+    render :text=>"done"
+  end
+  
   def process_application
     assignment = Assignment.find(params[:id])
     redirect_to :back if !assignment || assignment.is_closed?
@@ -51,6 +68,7 @@ class AssignmentsController < ApplicationController
     application = AssignmentContributor.find(params[:id])
     redirect_to pitch_assignments_path(assignment.pitch) if assignment.user != current_user || !application 
     if application.accept
+      assignment.close if assignment.is_factchecker_assignment
       flash[:success] = 'Application status is now set to "accepted"'
       redirect_to pitch_assignment_path(assignment.pitch, assignment)
     else

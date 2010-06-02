@@ -145,16 +145,15 @@ class NewsItem < ActiveRecord::Base
   
   def peer_reviewer
     #fact_checker || (parent && parent.fact_checker)
-    return false if !["Pitch","Story"].include?(self.class.to_s)
+    return nil if !["Pitch","Story"].include?(self.class.to_s)
     item = self.class.to_s == "Pitch" ? self : self.pitch
     if item.assignments.any?
-      if item.assignments.last.title.starts_with?("Apply to be Peer Review Editor") and item.assignments.last.is_closed?
-        #return item.assignments.last.accepted_contributors.last if item.assignments.last.accepted_contributors.last
-        return fact_checker if fact_checker
-        return parent.fact_checker if parent && parent.fact_checker
-      end
+      assignment = item.assignments.find(:first, :conditions=>"is_factchecker_assignment=1")
+      return assignment.accepted_contributors.last if assignment && assignment.is_closed?
+    else
+      return (item.fact_checker || (item.parent && item.parent.fact_checker))
     end
-    return false   
+    return nil   
   end
 
   def to_s
