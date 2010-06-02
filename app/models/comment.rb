@@ -9,7 +9,7 @@ class Comment < ActiveRecord::Base
   
   def send_notification
     (self.commentable.comment_subscribers - [self.user]).each do |commenter|
-      Mailer.deliver_comment_notification(self, commenter)
+      Mailer.deliver_comment_notification(self, commenter)  if commenter.notify_comments
     end
   end
   
