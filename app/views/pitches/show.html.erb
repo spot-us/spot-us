@@ -99,6 +99,9 @@
 		<div class="blue_panel widget">
 			<%= render :partial => "widget" %>
 		</div>
+		<div class="blue_panel subscribe">
+			<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
+		</div>
 		<div id="supporters">
 			<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
 			<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>

@@ -328,8 +328,9 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .public_support .supporters .supporter_avatar a {font-size:10px;}
 .pitch_right .public_support .supporters .supporter_avatar img {width:32px;height:32px;margin-right:0;}
 .pitch_right .public_support .supporters .supporter_avatar div {margin-left:44px;}
-
-
+.pitch_right .subscribe h6 {margin:0;border:none;padding:0 0 2px 0;}
+.blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;padding:3px 9px;}
+.pitch_right .subscribe input[type="text"] { color:#999;font-size:.7em;}
 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}

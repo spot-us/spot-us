@@ -9,8 +9,8 @@
     });
     });
 .clearfix
-  %h3 Watch this story
+  %h6 Follow this story
   - form_for Subscriber.new(:pitch => pitch), :url => subscribers_path do |f|
     = f.text_field :email, :value => "email address", :id => "subscriber_email", :style => "width:200px;margin-bottom:3px;"
     = f.hidden_field :pitch_id
-    = image_submit_tag "/images/new_design/update-button.png", :class => "float-right"
+    = f.submit "SEND ME UPDATES", :class => "float-right blue_button"
