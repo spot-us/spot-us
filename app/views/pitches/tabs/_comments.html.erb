@@ -7,16 +7,13 @@
 				<% apply_fragment ['pitch_comments_alt_', @pitch, comment] do%>
 					<a name="<%=comment.id%>"/>
 					<div class="comment clearfix <%=cycle(' even',' odd')%>">
-					
 						<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
 						<div class="contents">
 							<h5><%= comment.title %></h5>
 							<%= link_to comment.user.full_name, profile_path(comment.user), :class => "author" %>
 							<div class="comment_body">
 								<div class="date"><%= medium_date(comment.created_at) %></div>
-							
 								<%= comment.body %>
-							
 							</div>
 						</div>
 					</div>

@@ -243,12 +243,12 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 
 .pitch_left .small_header {position:relative;color:#808080;letter-spacing:1px;margin-bottom:10px;font-family:Georgia;}
 .pitch_left .small_header a {font-weight:bold;}
-.pitch_left .small_header .share_buttons {position:absolute;right:-10px;top:5px;color:#808080;}
-.pitch_left .small_header .share_buttons a#fb_share {position:absolute;top:0;right:0;}
+.pitch_left .small_header .share_buttons {position:absolute;right:-10px;top:3px;color:#808080;}
+.pitch_left .small_header .share_buttons a#fb_share {position:absolute;top:-2px;right:0;}
 .pitch_left .small_header .share_buttons iframe {position:absolute;right:55px;top:0;}
 
 
-.pitch_left h1 {color:#191819;font-weight:normal;font-size:34px;line-height:38px;letter-spacing:1px;}
+.pitch_left h1 {color:#191819;font-weight:normal;font-size:34px;line-height:38px;letter-spacing:1px;margin-top:20px;}
 .pitch_left h2.title {font-weight:normal;margin:0;}
 .pitch_left h3.date {margin-bottom:15px;color:#707070;font-weight:normal;}
 .pitch_left ul.pitch_nav {background:#E7F5F9;margin-bottom:15px;}
@@ -266,7 +266,8 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left .watch_video img {vertical-align:bottom;}
 .pitch_left .description_tab .short_description {margin-bottom:15px;}
 .pitch_left .description_tab .extended_description h4 {margin-bottom:5px;font-family:Verdana;font-weight:normal;}
-.pitch_left .comments_tab, .pitch_left .description_tab, .pitch_left .story_tab, .pitch_left .assignments_tab {margin-left:17px;}
+.pitch_left .comments_tab, .pitch_left .description_tab, .pitch_left .story_tab, .pitch_left .assignments_tab, 
+		.pitch_left .keywords_tab {margin-left:17px;}
 .pitch_left .story_tab {}
 .pitch_left .pitch_item {margin:0 20px;}
 .pitch_left .pitch_item .mini_header {font-family:Verdana;font-size:.8em;color:#707070;}
@@ -276,23 +277,38 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left .story_tab h3, .pitch_left .assignments_tab h3 {font-weight:normal;font-size:1.8em;margin:5px 0;}
 .pitch_left .story_tab .story, .pitch_left .assignments_tab .assignment {padding: 15px 0;color:#555;border-bottom: solid 1px #ccc;}
 .pitch_left .story_tab .story .summary, .pitch_left .assignments_tab .assignment .summary {font-style:italic; margin:10px 0;font-size:1.1em;}
-.pitch_left .comments_tab #comments {border-top:solid 1px #aaa;}
-.pitch_left .comments_tab .comment {padding:20px 10px;border-bottom:solid 1px #ccc;}
-.pitch_left .comments_tab .comment .contents {margin-left:60px;}
-.pitch_left .comments_tab .comment h5 {margin:0;font-family:Verdana;font-weight:normal;color:#555;}
-.pitch_left .comments_tab .comment .author {font-family:Georgia;font-weight:bold;}
-.pitch_left .comments_tab .comment p {margin:0;}
-.pitch_left .comments_tab .comment img.avatar {float:left;margin:0 15px 15px 0;}
-.pitch_left .comments_tab .comment .comment_body {color:#555;}
-.pitch_left .comments_tab .comment .comment_body .date {font-size:.8em;color:#888;font-style:italic;text-align:left;margin-bottom:10px;}
-.pitch_left .comments_tab .comment.even {background-color:#fcfbfc;}
-.pitch_left .comments_tab .post_comment {margin-left:0px;}
+.pitch_left #comments {border-top:solid 1px #aaa;}
+.pitch_left #comments .comment {padding:20px 30px 20px 10px;border-bottom:solid 1px #ccc;}
+.pitch_left #comments .comment .contents {margin-left:60px;}
+.pitch_left #comments .comment h5 {margin:0;font-family:Verdana;font-weight:normal;color:#555;}
+.pitch_left #comments .comment .author {font-family:Georgia;font-weight:bold;}
+.pitch_left #comments .comment p {margin:0;}
+.pitch_left #comments .comment img.avatar {float:left;margin:0 15px 15px 0;}
+.pitch_left #comments .comment .comment_body {color:#555;}
+.pitch_left #comments .comment .comment_body .date {font-size:.8em;color:#888;font-style:italic;text-align:left;margin-bottom:10px;}
+.pitch_left #comments .comment.even {background-color:#fcfbfc;}
+.pitch_left #comments .post_comment {margin-left:0px;}
 .pitch_left .media_embed {margin:25px 0;font-size:.8em;font-family:Verdana;}
 #comments_form input[type="text"] {width:433px;padding:3px;font-family:arial, helvetica;font-size:14px;}
 #comments_form textarea {width:433px;height:160px;padding:5px;margin-top:0;font-family:arial, helvetica;font-size:14px;}
 .qualifications_tab {padding:20px !important;}
+.pitch_left .story_content h1, .pitch_left .story_content h2, .pitch_left .story_content h3, 
+		.pitch_left .story_content h4 {font-weight:normal;padding-top:15px;}
+.pitch_left .story_content h2 {font-size:1.8em;}		
+.pitch_left .story_content {margin-bottom:10px;width:520px;}
+.pitch_left .story_content p img {}
+.pitch_left .story_content p img {max-width:490px;max-height:500px;}
+.pitch_left .story_content p {font-size:1.1em;margin-bottom:7px;}
+.pitch_left .story_content ul {margin-top:15px;}
+.pitch_left .story_content ul li {font-style:Verdana;}
+.pitch_left .story_content h2 {font-weight:normal;}
+.pitch_left .post_comment  h5, .pitch_left #comments h5, .pitch_left h5.generic {font-family:Verdana;color:#555;font-size:1em;margin-bottom:1px;margin-top:10px;}
+.pitch_left .post_comment form {margin-left:70px;}
+.pitch_left .post_comment label {display:block;font-family:Verdana;font-weight:normal;font-size:11px;color:#888;}
+.pitch_left .story_info {margin-top:35px;padding-top:0px;border-top: dotted 2px #bbb;}
 
-.pitch_right .pitch_author {border-bottom: dotted 2px #bbb;padding:20px 2px 5px;}
+
+.pitch_right .pitch_author {border-bottom: dotted 2px #bbb;padding:5px 2px;}
 .pitch_right .pitch_author img.avatar {float:left;margin-right:10px;border: solid 1px #fff;}
 .pitch_right .pitch_author em {color:#999;font-size:.8em;line-height:1em}
 .pitch_right .pitch_author a.username {font-family:Verdana;font-size:1.1em;line-height:1.2em;}
@@ -331,7 +347,9 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .subscribe h6 {margin:0;border:none;padding:0 0 2px 0;}
 .blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;padding:3px 9px;}
 .pitch_right .subscribe input[type="text"] { color:#999;font-size:.7em;}
-
+.pitch_right .date_published {margin:10px 0;color:#555;}
+.pitch_right .pitch_description {font-style:italic;color:#555;}
+.pitch_right .original_pitch h3 {font-weight:normal;font-size:1.4em;}
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
