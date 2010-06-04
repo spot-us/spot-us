@@ -12,6 +12,11 @@
 		<h1><%= h @story.pitch.headline %></h1>
 
 		<br class="clear"/>
+		<% unless @story.video_embed.blank? %>
+			<div class="media_embed">
+				<%= transform_embed_code(@story.video_embed, 520, 320) %>
+			</div>
+		<% end %>
 		<div class="clearfix story_content">
 			<%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
 			<%= @story.extended_description %>
@@ -53,7 +58,7 @@
 			<% end %>
 			<% unless @story.pitch.keywords.blank? %>
 				<h5 class="generic">Keywords</h5>
-				<div>
+				<div class="keywords">
 					<%= h @story.pitch.keywords %>
 				</div>
 			<% end %>
@@ -62,6 +67,10 @@
 				<div>
 					<%= @story.license %>
 				</div>
+			<% end %>
+			<% if logged_in? %>
+				<br/>
+				<%= publishing_workflow_buttons_for(current_user) %>
 			<% end %>
 		</div>
 	</div>
