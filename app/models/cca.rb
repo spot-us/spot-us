@@ -93,7 +93,7 @@ class Cca < ActiveRecord::Base
 			cca_questions.each do |question|
 				csv << [question.question, '', '']
 				question.cca_answers.each do |answer|
-					csv << ['',answer.user.full_name, answer.answer]
+					csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer]
 				end
 			end
 		end

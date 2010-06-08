@@ -3,7 +3,7 @@
 		&nbsp;
 	</td>
 	<td class="donated">
-		<%=cca_answer.user.full_name%>
+		<%=cca_answer.user ? cca_answer.user.full_name : "deleted user" %>
 	</td>
 	<td colspan='2'>
 		<%=cca_answer.answer%>
