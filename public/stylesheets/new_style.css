@@ -243,9 +243,9 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 
 .pitch_left .small_header {position:relative;color:#808080;letter-spacing:1px;margin-bottom:10px;font-family:Georgia;}
 .pitch_left .small_header a {font-weight:bold;}
-.pitch_left .small_header .share_buttons {position:absolute;right:-10px;top:3px;color:#808080;}
-.pitch_left .small_header .share_buttons a#fb_share {position:absolute;top:-2px;right:0;}
-.pitch_left .small_header .share_buttons iframe {position:absolute;right:55px;top:0;}
+.pitch_left .small_header .share_buttons {position:absolute;right:0px;top:3px;color:#808080;width:200px;}
+.pitch_left .small_header .share_buttons a#fb_share {float:right;}
+.pitch_left .small_header .share_buttons iframe {float:right;}
 
 
 .pitch_left h1 {color:#191819;font-weight:normal;font-size:34px;line-height:38px;letter-spacing:1px;margin-top:20px;}
@@ -346,7 +346,7 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .public_support .supporters .supporter_avatar img {width:32px;height:32px;margin-right:0;}
 .pitch_right .public_support .supporters .supporter_avatar div {margin-left:44px;}
 .pitch_right .subscribe h6 {margin:0;border:none;padding:0 0 2px 0;}
-.blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;padding:3px 9px;}
+.blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;padding:3px 9px;cursor:pointer;}
 .pitch_right .subscribe input[type="text"] { color:#999;font-size:.7em;}
 .pitch_right .date_published {margin:10px 0;color:#555;}
 .pitch_right .pitch_description {font-style:italic;color:#555;}
