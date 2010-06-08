@@ -11,7 +11,7 @@
 		<iframe width='330' height='280' src='<%=pitch_path(@pitch)%>/widget' border='1' scrolling='no' noscroll></iframe>
 	</div>
 	<div class="widget_tip">To get this widget, just grab this html code and paste into your template.
-		<textarea class="widget_code" style='width:320px;height:25px;'><%="<iframe width='330' src='#{pitch_path(@pitch,{:only_path=>false})}' border='1' scrolling='no' noscroll></iframe>"%></textarea>
+		<textarea class="widget_code" style='width:320px;height:25px;'><%="<iframe width='330' src='#{pitch_path(@pitch,{:only_path=>false})}/widget' border='1' scrolling='no' noscroll></iframe>"%></textarea>
 		You can of course change the width of the iframe to fit your template.
 	</div>
 </div>
