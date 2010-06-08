@@ -20,6 +20,7 @@ h2.link{font-family:Georgia,Geneva,sans-serif;font-size:1.5em;font-weight:bold;m
 tr, th, td {vertical-align:top;}
 th {background:#E3EEEF;border-bottom:solid 1px #999;}
 a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
+div.dotted {border-top: 2px dotted #bbb;height:3px;}
 object embed {display:block;}
 .float-left{float:left;}
 .float-right{float:right;}
@@ -315,17 +316,17 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_right .pitch_author a.username {font-family:Verdana;font-size:1.1em;line-height:1.2em;}
 .pitch_right .pitch_author em.peer_reviewer {line-height:1.4em;} 
 .pitch_right h5 {font-family:Verdana;color:#555;font-size:1em;margin-bottom:1px;}
-.pitch_right h5.difference {margin-left:5px;}
+.pitch_right h5.difference {margin:0 0 0 5px;}
 .pitch_right h5.get_widget {margin-bottom:4px;margin-top:3px;}
 input[type="submit"].donate {background:#107a35;border:0;width:180px;height:41px;line-height:40px;-moz-border-radius:8px;-webkit-border-radius:8px;font-size:23px;
 				color:#fff;padding-bottom:3px;cursor:pointer;}
 .pitch_right form.donate {float:left;margin-right:10px;}
 a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-radius:8px;background:#07383e;color:#fff;text-align:center;
 			display:block;float:left;font-size:17px;font-family:verdana;line-height:41px;}
-.pitch_right .donate_buttons {margin:14px 0 15px;}
-.pitch_right h6 {color:#888;font-weight:normal;border-bottom: dotted 2px #bbb;font-family:verdana;padding:0 8px 3px;font-size:.8em;margin-bottom:10px;}
-.pitch_right .funding {color:#016937;margin-bottom:20px;}
-.pitch_right .funding_status {width:150px;float:left;margin-left:8px;font-size:1.2em;line-height:1.1em;}
+.pitch_right .donate_buttons {margin:5px 0 5px;}
+.pitch_right h6 {color:#888;font-weight:normal;border-bottom: dotted 2px #bbb;font-family:verdana;padding:0 7px 3px;font-size:.8em;margin-bottom:10px;}
+.pitch_right .funding {color:#016937;margin-bottom:15px;margin-top:10px;}
+.pitch_right .funding_status {width:143px;float:left;margin-left:7px;font-size:1.2em;line-height:1.1em;}
 .pitch_right .progress_bar {float:left;width:170px;padding-top:2px;font-style:italic;}
 .pitch_right .progress_bar span {line-height:16px;}
 .pitch_right .widget img.widget_icon {vertical-align:text-bottom;width:22px;float:left;}
@@ -351,6 +352,8 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .date_published {margin:10px 0;color:#555;}
 .pitch_right .pitch_description {font-style:italic;color:#555;}
 .pitch_right .original_pitch h3 {font-weight:normal;font-size:1.4em;}
+.pitch_right h3.fully_funded {font-family:Verdana;font-style:italic;font-size:20px;text-transform:uppercase;color:#016937;margin-left:5px;}
+ 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
