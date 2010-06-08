@@ -50,10 +50,13 @@
 				<h5 class="difference">Make a Difference!</h5>
 				<div class="donate_buttons clearfix">
 					<%= render :partial => "donations/new_button", :locals => { :news_item => @pitch } %>
-					<%= link_to "Donate Talent", pitch_assignments_path(@pitch), :title => 'Join Reporting Team', :class => "donate_talent" %>
 				</div>
 				<div class="funding clearfix">
-					<h6>Funding to date</h6>
+					<% unless @pitch.fully_funded? %>
+						<h6>Funding to date</h6>
+					<% else %>
+						<div class="dotted"></div>
+					<% end %>
 					<div class="funding_status">
 						<%= number_to_currency(@pitch.current_funding) %> raised
 						<% if @pitch.fully_funded? %>
