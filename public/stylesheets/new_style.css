@@ -353,7 +353,7 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .pitch_description {font-style:italic;color:#555;}
 .pitch_right .original_pitch h3 {font-weight:normal;font-size:1.4em;}
 .pitch_right h3.fully_funded {font-family:Verdana;font-style:italic;font-size:20px;text-transform:uppercase;color:#016937;margin-left:5px;}
- 
+
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
 ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
@@ -491,6 +491,11 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #spotus_form.purchase_lite .row {margin-left:0px;margin-bottom:5px;}
 #spotus_form.purchase_lite .row input, #spotus_form.purchase_lite .row select {padding:2px;font-size:1.1em;font-family:arial, helvetica;}
 #spotus_form.purchase_lite label {width:100%;text-align:left;padding:0;}
+
+#purchase_form {position:relative;}
+#purchase_form div.purchase_overlay {position:absolute;top:0;left:0;width:1000px;height:1000px;z-index:1000;}
+#loading_status {background:#eee;border:solid 1px #333;position:fixed;left:50%;top:200px;opacity:.8;
+				margin-left:-150px;width:300px;height:45px;padding:30px;text-align:center;display:none;}
 
 #form_page {padding:20px 40px;}
 
