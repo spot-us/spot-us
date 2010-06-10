@@ -14,6 +14,7 @@ class Myspot::PurchasesController < ApplicationController
                              :first_name => current_user.first_name,
                              :last_name  => current_user.last_name)
     render :layout=>'lite' if cookies[:spotus_lite]
+	render :partial => "/myspot/purchases/purchase_form", :layout => false
   end
 
   def create
