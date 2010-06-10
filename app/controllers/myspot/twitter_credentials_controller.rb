@@ -2,6 +2,8 @@ class Myspot::TwitterCredentialsController < ApplicationController
   resources_controller_for :twitter_credentials
   #before_filter :login_required
   
+  require "twitter"
+  
   response_for :create do |format|
     format.html do
       if resource_saved?

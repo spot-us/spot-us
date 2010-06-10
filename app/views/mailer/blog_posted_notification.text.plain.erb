@@ -5,7 +5,7 @@ A project you've supported on Spot.Us has an update.
 Check out the latest blog post: <%= pitch_post_url(@post.pitch, @post) %>
 
 Here is an excerpt:
-<%=strip_tags(@post.body)[0..250].gsub(/\w+$/, '')+"..."%> 
+<%=strip_tags(@post.body)[0..250].gsub(/\w+$/, '').strip + "..."%> 
 Read more at <%= pitch_post_url(@post.pitch, @post) %>
 
 
