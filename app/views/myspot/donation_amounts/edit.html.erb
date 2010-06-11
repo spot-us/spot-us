@@ -74,7 +74,7 @@
                <div class="donater">
                    $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id %>
                   <div class="action">
-                     <%= link_to "Remove", myspot_donation_url(donation).sub("https","http"), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
+                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
                   </div> 
                </div>
             <% end %>
