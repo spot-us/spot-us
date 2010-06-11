@@ -347,7 +347,7 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .public_support .supporters .supporter_avatar img {width:32px;height:32px;margin-right:0;}
 .pitch_right .public_support .supporters .supporter_avatar div {margin-left:44px;}
 .pitch_right .subscribe h6 {margin:0;border:none;padding:0 0 2px 0;}
-.blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white;padding:3px 9px;cursor:pointer;}
+.blue_button {background-color:#07383E;border:0;-moz-border-radius:8px;-webkit-border-radius:8px;color:white !important;padding:3px 9px;cursor:pointer;}
 .pitch_right .subscribe input[type="text"] { color:#999;font-size:.7em;}
 .pitch_right .date_published {margin:10px 0;color:#555;}
 .pitch_right .pitch_description {font-style:italic;color:#555;}
@@ -496,6 +496,27 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #purchase_form div.purchase_overlay {position:absolute;top:0;left:0;width:1000px;height:1000px;z-index:1000;}
 #loading_status {background:#eee;border:solid 1px #333;position:fixed;left:50%;top:200px;opacity:.8;
 				margin-left:-150px;width:300px;height:45px;padding:30px;text-align:center;display:none;}
+				
+				
+.myspot_donation_amounts  #facebox .body {padding:20px !important;}
+#donation_processor .total {position:relative;margin-top:5px;}
+#donation_processor .total h3 {font-size:20px;font-family:Verdana;font-weight:bold;}
+#donation_processor .total .paypal {position:absolute;right:0;top:0;}
+#donation_processor .total em.paypal_label {font-size:16px;color:#aaa;position:absolute;right:80px;top:4px;}
+#donation_processor .total .paypal form {display:inline;}
+#donation_processor form#spotus_form {padding:0;margin:0;}
+#donation_processor form#spotus_form h3 {font-family:Verdana;font-weight:normal;background:#dbf2f3;border-top:solid 1px #333;font-size:18px;
+				padding:3px 10px 5px;margin-bottom:20px;}
+#donation_processor form#spotus_form .row {margin-bottom:5px;}
+#donation_processor form#spotus_form label {color:#999;float:left;margin-right:15px;padding:5px;text-align:right;width:135px;font-weight:normal;}
+#donation_processor form#spotus_form input {font-family:verdana;}
+#donation_processor form#spotus_form select {font-size:14px;font-family:verdana;}
+#donation_processor form#spotus_form input[type="text"] {font-size:14px;line-height:16px;padding:4px;border:solid 1px #bbb;}
+#donation_processor form#spotus_form input[type="text"].big {width:330px;}
+#donation_processor form#spotus_form input[type="text"].small {width:100px;}
+#donation_processor form#spotus_form input[type="text"].tiny {width:40px;}
+#donation_processor form#spotus_form input[type="submit"]{margin-right:68px;font-size:13px;}
+
 
 #form_page {padding:20px 40px;}
 
