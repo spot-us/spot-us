@@ -1,7 +1,7 @@
 <div id="login_modal">
    <% form_tag session_url(:protocol => 'http'), :class => "login" do %>
       <div id="login_form">
-         <div class="float-right"><strong><span style="color:red"><a id="show_register_form" href="" class='popup_link'>&raquo; Register For Spot.Us</a><span></strong></div>
+         <div class="float-right"><strong><span style="color:red"><a href="" class='popup_link show_register_form'>&raquo; REGISTER FOR SPOT.US</a><span></strong></div>
          <h3>Thanks for joining us!</h3> 
          <%= render :partial => 'sessions/popup_form' %>
          <input type='image' src='/images/login.png' alt="Login" onclick="processLoginForm();"> 
@@ -11,7 +11,7 @@
 </div>
 <% javascript_tag do %>
    jQuery(function(){
-      jQuery("#show_register_form").click(function(){
+      jQuery(".show_register_form").click(function(){
          jQuery("#register_form").show();
          jQuery("#login_form").hide();
          return false;
