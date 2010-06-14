@@ -406,7 +406,7 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #stories .user .featured_contributor .bio {margin-bottom:5px;margin-top:5px; float:left;width:600px;}
 
 #stories .pitch {border-bottom:solid 1px #ccc;margin-bottom:10px;position:relative;}
-#stories .pitch .news_item {width:520px;padding-right:40px;padding-bottom:10px;float:left;}
+#stories .pitch .news_item {width:520px;padding-right:30px;padding-bottom:10px;float:left;}
 #stories .pitch .news_item img.featured_image {width:215px;height:180px;float:left;margin-right:10px;}
 #stories .pitch .news_item h5 {font-family: Georgia,Helvetica,sans-serif; font-weight: bold; font-size: 1.5em; 
 			letter-spacing: -0.05em; color: rgb(17, 54, 62);margin-bottom:5px;}
@@ -415,6 +415,7 @@ ul.dashboard_tabs li a.active{background-color:#A2BBC3;color:#111;}
 #stories .pitch .donater .progress_bar {margin-top:8px;}
 #stories .pitch .donater .small {margin:2px 0;line-height:1em;}
 #stories .pitch .donater p {line-height:1.3em;margin:0;}
+#stories .pitch .donater h3 {font-size:13pt;}
 #stories .pitch .author {background:#eee;position:absolute;bottom:0;right:0;width:196px;padding:5px;}
 #stories .pitch .author img.avatar{vertical-align:top; float:left;margin-right:10px;}
 #stories .pitch .author a {color:#17577B;font-family:Arial,Helvetica,sans-serif;font-size:1em;font-weight:bolder;letter-spacing:-1pt;
@@ -502,7 +503,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #donation_processor .total {position:relative;margin-top:5px;}
 #donation_processor .total h3 {font-size:20px;font-family:Verdana;font-weight:bold;}
 #donation_processor .total .paypal {position:absolute;right:0;top:0;}
-#donation_processor .total em.paypal_label {font-size:16px;color:#aaa;position:absolute;right:80px;top:4px;}
+#donation_processor .total em.paypal_label {font-size:16px;color:#666;position:absolute;right:95px;top:4px;}
 #donation_processor .total .paypal form {display:inline;}
 #donation_processor form#spotus_form {padding:0;margin:0;}
 #donation_processor form#spotus_form h3 {font-family:Verdana;font-weight:normal;background:#dbf2f3;border-top:solid 1px #333;font-size:18px;
