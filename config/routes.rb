@@ -50,7 +50,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
   #map.connect "/cca/:id", :controller => "cca", :action => "show"
   map.resources :cca, :only=>[:show], :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get}
-  
+
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
   map.connect "users/link_user_accounts", :controller => "users", :action => "link_user_accounts"

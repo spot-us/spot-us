@@ -1,0 +1,106 @@
+<div id="donation_processor">
+	<div class="total">
+	    <h3>Your Total:
+	      <%= number_to_currency @purchase.total_amount %>
+	    </h3>
+	 <% unless @purchase.credit_covers_total? %>
+		<em class="paypal_label">Pay through PAYPAL</em>&nbsp;
+		<div class="paypal">
+	      <% if @purchase.credit_covers_partial? %>
+	         <div id="paypal_credit_notice">
+	            Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
+	            <ol>
+	              <li> Remove the donations you wanted to purchase with PayPal from your cart</li>
+	              <li> Come back and purchase just the items covered by credit</li>
+	              <li> Re-donate and select PayPal for the items you wanted use PayPal for</li>
+	            </ol>
+	         </div>
+	      <% else %>
+	            <% form_tag PAYPAL_POST_URL do %>
+	               <%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
+	               <%= hidden_field_tag "cmd", "_cart" %>
+	               <%= hidden_field_tag "upload", "1" %>
+	               <%= hidden_field_tag "business", PAYPAL_EMAIL %>
+	               <% i = 1 %>
+	               <% @donations.each do |donation| %>
+	                  <%= hidden_field_tag "item_number_#{i}", "#{donation.id}" %>
+	                  <%= hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}" %>
+				<% amount = 0 %>
+				<% amount = donation.amount%>
+				<% amount -= donation.credit.amount if donation.credit%>
+	                  <%= hidden_field_tag "amount_#{i}", amount %>
+	                  <% i += 1 %>
+	                  <%= hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}" %>
+	                  <%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
+	                  <%= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
+
+	               <% end %>
+					<%= image_submit_tag "/images/paypal_buynow.gif", :style => "width:85px;" %>
+	            <% end %>
+	      <% end %>
+		</div>
+	  <% end %>
+	</div>
+
+	  <% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "spotus_form", :class => cookies[:spotus_lite] ? 'purchase_lite' : '"purchase'} do |f| %>
+	      <% if @purchase.credit_covers_total? %>
+	          You have enough credits to cover this transaction. Please click Purchase to continue.
+	      <% else %>
+	          <h3>Pay with your Credit Card</h3>
+	          <div class="">
+	             <div class="row">
+	               <%= f.label :first_name %>
+	               <%= f.text_field :first_name, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%=  f.label :last_name %>
+	               <%= f.text_field :last_name, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :credit_card_type %>
+	               <%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']] %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :credit_card_number %>
+	               <%= f.text_field :credit_card_number, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :credit_card_month, 'Expiration Date' %>
+	               <%= f.text_field :credit_card_month, :size => 2, :class => "tiny" %>
+	               <%= '/' %>
+	               <%= f.text_field :credit_card_year, :size => 4, :class => "small" %>
+	               (MM/YYYY)
+	             </div>
+	             <div class="row">
+	               <%= f.label :verification_value, 'Security Code' %>
+	               <%= f.text_field :verification_value, :size => 4, :class => "tiny" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :address1, 'Address (1)' %>
+	               <%= f.text_field :address1, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :address2, 'Address (2)' %>
+	               <%= f.text_field :address2, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :city %>
+	               <%= f.text_field :city, :class => "big" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :state %>
+	               <%= f.text_field :state, :size => 2, :class => "tiny" %>
+	             </div>
+	             <div class="row">
+	               <%= f.label :zip %>
+	               <%= f.text_field :zip, :size => 5, :class => "small" %>
+	             </div>
+	           </div>
+	        <% end %>
+	        <div class="float-right">
+	           <input type="submit" value="Submit Purchase" alt="Purchase" class="blue_button" />
+	        </div>
+	   <% end %>
+	<div class="clearfix">
+	</div>
+</div>

@@ -1,6 +1,7 @@
 class Myspot::DonationsController < ApplicationController
   before_filter :login_required, :except => :create
   resources_controller_for :donations, :only => [:index, :create, :destroy]
+  ssl_required :destroy
 
   response_for :index do |format|
     @credit_pitches = current_user.credit_pitches.paid

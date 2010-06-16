@@ -3,7 +3,7 @@
 	<p>Check below to see what happened:</p>
 	<ul>
 		<li>Was it an invalid E-mail address or password?</li>
-		<li>Have you activated your account? You should receive an email with an activation link after signing up.</li>
+		<li>Have you registered yet? <%= link_to "Register now", "",  :class => 'popup_link show_register_form' %></li>
 	</ul>
 	<p>
 		If you're experiencing a persistent problem, email
@@ -30,7 +30,6 @@
    <%= check_box_tag 'remember_me', '1', false, :class => "float-left" %>
    <label>Remember Me</label>
    <%= link_to "Forgot Password?", password_user_path, :class => "forgot_password" %> | 
-   <%= link_to "Resend Activation Email", activation_email_user_path, :class => "forgot_password" %>
 </div>
     
   

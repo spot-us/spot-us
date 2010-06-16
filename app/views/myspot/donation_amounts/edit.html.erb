@@ -1,8 +1,21 @@
 <% @title = "Spot.us - Fund Your Donations" %>
 
 <% content_for :head do %>
+
 	<% javascript_tag do %>
+
 	jQuery(document).ready(function(){
+		jQuery("form#donation_amounts").submit(function(){
+			if(jQuery("#purchase").css("display") == "inline") {
+				jQuery("#loading_status").fadeIn(50);
+				jQuery.post(jQuery(this).attr("action"), jQuery(this).serialize(), function(result){
+					jQuery("#loading_status").hide();
+					jQuery.facebox(result);
+					return false;
+				}, "script");
+				return false;
+			}
+		});
 		jQuery('#remove_spotus_donation').click(function(){
 			jQuery('input#spotus_donation').val('');
 			jQuery('#support_spotus').hide();
@@ -22,8 +35,7 @@
 		
 		jQuery('input').change(function(){
 			getTotalAmounts();
-		});	
-		
+		});		
 	});
 	<% end %>
 <% end %>
@@ -40,7 +52,7 @@
     <% if unpaid_donations.any? %>
 		<h3 class="heading">Fund Your Donations</h3>
     <% end %>   
-    <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix" do %>
+    <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix", :id => "donation_amounts" do %>
        <ul class="unpaid_donations">
          <% unpaid_donations.each do |donation| %>
             <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
@@ -60,9 +72,9 @@
                   </p>
                </div>
                <div class="donater">
-                   $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;" %>
+                   $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id %>
                   <div class="action">
-                     <%= link_to "Remove", myspot_donation_path(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
+                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
                   </div> 
                </div>
             <% end %>
@@ -127,7 +139,7 @@
          <ul style="background:#eee;border:1px solid #ccc;width:100%;margin-left:0px;margin-bottom:10px;">
             <li id="support_spotus" class="donation clearfix" style="font-weight:bold;padding:10px;margin:0px;">
                <div class="donation_owe">
-                  <h3>You Need To Pay:</h3>
+                  <h3>Total:</h3>
                </div>
                <div class="donater_owe" style="padding-right:5px;">
                   <span id="spotus_total_amount">-</span>
@@ -135,9 +147,10 @@
             </li>
          </ul>
       <div class="float-right">
-         <%#= image_submit_tag 'update.png', :alt => 'Update', :name =>"submit", :value => "update" %>
         <%= image_submit_tag 'apply_credits_checkout.png', :alt => 'Apply Credits', :name =>"submit", :value => "apply_credits", :id=>"apply_credits" %> 
 		<%= image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase", :id=>"purchase" %>
       </div>
+	
   <% end %>
 </div>
+<div id="loading_status">One sec ... <%= image_tag("/images/new_design/grey_status_ball.gif") %></div>
