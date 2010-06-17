@@ -5,6 +5,7 @@ class CcaController < ApplicationController
 
   
   def show
+	@pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
   	if current_user
   		latest_answer = CcaAnswer.latest_answer(@cca,current_user)
   		@cache_form = latest_answer ? latest_answer : nil
@@ -31,17 +32,27 @@ class CcaController < ApplicationController
   end
   
   def submit_answers
-    @cca = find_resource
+	@cca = Cca.find_by_id(params[:id])
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
-    is_completed = @cca.process_answers(params[:answers], current_user)  # process the survey answers
+    is_completed = @cca.process_answers(params[:answers], current_user, params[:pitch_id])  # process the survey answers
 	if @cca.already_submitted?(current_user)
 		# if the user has nav'd back in the browser they could try and submit again -- so we just bring them to the apply credits page
-		redirect_to apply_credits_cca_path(@cca)
+		if params[:pitch_id]
+			redirect_to edit_myspot_donations_amounts_path
+		else
+			redirect_to apply_credits_cca_path(@cca)
+		end
 	elsif is_completed && tos
 		@cca.award_credit(current_user)
-		update_balance_cookie
-		redirect_to apply_credits_cca_path(@cca)
+		if credit_to_pitch?
+			update_balance_cookie
+			redirect_to edit_myspot_donations_amounts_path
+		else
+			update_balance_cookie
+			redirect_to apply_credits_cca_path(@cca)
+		end
+
 	elsif !tos                                                           # they need to check the TOS box on form
 		flash[:error] = "You have to accept the terms of service to complete this survey."
 		redirect_to :back
@@ -56,8 +67,26 @@ class CcaController < ApplicationController
     @filter = "almost-funded"
     @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
   end
+
+  def credit_to_pitch?
+	if params[:pitch_id] and valid_pitch?
+		Donation.create(:pitch_id => params[:pitch_id], :amount => @cca.award_amount, :donation_type => "credit", :user_id => current_user.id)
+		return true
+	else 
+		return false
+	end
+  end
   
   protected
+
+  def valid_pitch?
+	pitch = Pitch.find_by_id(params[:pitch_id])
+	if pitch and !pitch.fully_funded?
+		true
+	else
+		false
+	end
+  end
   
   def load_cca
     @cca = Cca.find_by_id(params[:id], :include => [:cca_questions, :cca_answers])

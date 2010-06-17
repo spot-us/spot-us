@@ -1,7 +1,13 @@
 <div id="survey_form">
-	<% apply_fragment ['cca_form_', @cca, @cache_form] do %>
+	<% apply_fragment ['cca_form_', @cca, @cache_form, params[:pitch_id]] do %>
 		<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
-			Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.<br/>
+			<% if @pitch %>
+				Fill out the survey below. Once complete, your credit will be applied to the pitch:<br/>
+				<strong><%=link_to (h @pitch.headline), pitch_path(@pitch) %></strong><br/>
+			<% else %>
+				Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.
+			<% end %>	
+			<br/>
 			<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
 			<%= hidden_field_tag "id", @cca.id %>
 			<% @cca.cca_questions.each_with_index do |question, index| %>
@@ -15,6 +21,9 @@
 			<hr>
 			<h5>I'd like, or know somebody who would like, to sponsor a survey like this one.</h5>
 			<input name="sponsor_interest" value="yes" type="checkbox" /> Spot.Us will email you with details
+			<% unless params[:pitch_id].blank? %>
+				<input type="hidden" name="pitch_id" value="<%= params[:pitch_id]  %>">
+			<% end %>
 			<br/><br/>
 			<h5>Terms of Service. <span class="deep-red">*</span></h5> 
 			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>

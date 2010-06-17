@@ -43,7 +43,7 @@ object embed {display:block;}
 .serif {font-family:Georgia;}
 .normal {font-weight:normal;}
 .blue_panel {background:#eff8fa;-moz-border-radius:8px;-webkit-border-radius:8px;padding:15px 17px;margin-bottom:10px;}
-
+.light_panel {background:#F7F9F9;-moz-border-radius:8px;-webkit-border-radius:8px;padding:10px;margin:0;}
 .admin_button {background:#882618;color:white !important;padding:5px 8px;line-height:18px;font-size:14px;-moz-border-radius:4px;
 				-webkit-border-radius:4px;}
 a.admin_button  {color:white !important;}
@@ -353,6 +353,9 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .pitch_description {font-style:italic;color:#555;}
 .pitch_right .original_pitch h3 {font-weight:normal;font-size:1.4em;}
 .pitch_right h3.fully_funded {font-family:Verdana;font-style:italic;font-size:20px;text-transform:uppercase;color:#016937;margin-left:5px;}
+.pitch_right .light_panel h6 {border-bottom:none;padding:0 1px;margin:0;}
+.pitch_right .light_panel {margin-bottom:10px;padding: 10px 12px;}
+.pitch_right .light_panel h5 a {color:#107a35;}
 
 ul.tabs{margin:0 0 4px 0;}
 ul.tabs li {display:inline;}
