@@ -1,8 +1,9 @@
-- form_for Donation.new(:pitch => news_item, :amount => current_user.remaining_credits, :donation_type => "credit"), :url => myspot_donations_path, :html => {:id => "new_credit_pitch_#{news_item.id}", :class => "auth"} do |f|
+- form_for Donation.new(:pitch => news_item, :amount => current_user.remaining_credits, :donation_type => "credit"), :url => myspot_donations_path, :html => {:id => "new_credit_pitch_#{news_item.id}", :class => "donate auth"} do |f|
   = f.hidden_field :amount, :id => "credit_pitch_amount"
   = f.hidden_field :pitch_id
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :donation_type, :value => "credit"
-  = image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
+  = f.submit "Apply Credits", :class => "donate"
+  =# image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
 .double_content_border
-= render :partial => "shared/progress_bar", :locals => {:pitch => news_item}
+= render :partial => "shared/progress_bar", :locals => {:pitch => news_item} unless params[:controller] == "pitches"
