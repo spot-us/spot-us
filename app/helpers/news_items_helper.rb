@@ -26,7 +26,8 @@ module NewsItemsHelper
   end
   
   def get_inside_network_text(network)
-    return (network ? ("the "+network.display_name+" network") : "all available networks")
+	return "" unless APP_CONFIG[:has_networks]
+    return (network ? ("the "+network.display_name+" network") : "inside all available networks")
   end
 
   def get_inside_network(network)

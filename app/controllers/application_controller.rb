@@ -100,6 +100,9 @@ class ApplicationController < ActionController::Base
 
   def current_network
     subdomain = current_subdomain.downcase if current_subdomain
+	if !APP_CONFIG[:has_networks] and subdomain
+		redirect_to root_url(:subdomain => false) + request.request_uri[1..-1] #request.protocol + request.host_with_port + 
+	end
     @current_network ||= Network.find_by_name(subdomain)
   end
   
