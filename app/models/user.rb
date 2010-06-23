@@ -268,11 +268,16 @@ class User < ActiveRecord::Base
   end
 
   def total_credits
-    self.credits.map(&:amount).sum.to_f
+    #self.credits.map(&:amount).sum.to_f
+    self.total_available_credits.map(&:amount).sum.to_f
+  end
+  
+  def total_available_credits
+    self.credits - self.donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit) - self.spotus_donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit)
   end
   
   def remaining_credits
-      total_credits - self.credit_pitches.unpaid.map(&:amount).sum.to_f
+    total_credits - self.credit_pitches.unpaid.map(&:amount).sum.to_f
   end
   
   def allocated_credits?(credit_these_pitches)
