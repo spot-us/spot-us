@@ -20,10 +20,6 @@ class ChannelsController < ApplicationController
   protected
   
   def load_networks
-    @networks = Network.all
+	@networks = Network.all
   end
-  
-  # def select_tab
-  #   @selected_tab = "pitches"
-  # end
 end

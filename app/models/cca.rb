@@ -4,7 +4,7 @@ class Cca < ActiveRecord::Base
 	belongs_to :user, :foreign_key => :sponsor_id
 	has_many :cca_questions, :order => "position"
 	has_many :cca_answers
-  has_many :credits, :foreign_key=>'cca_id'
+  	has_many :credits, :foreign_key=>'cca_id'
   
 	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
 	
@@ -99,7 +99,7 @@ class Cca < ActiveRecord::Base
 		end
 	end
 
-	def process_answers(answers, user)
+	def process_answers(answers, user, pitch_id)
 		form_incomplete = false
 		self.cca_questions.each do |question|
 			answer_incomplete = false
@@ -115,9 +115,9 @@ class Cca < ActiveRecord::Base
 				answer = answer.join("\n") if question.question_type == "checkbox"
 				existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
 				if existing_answer
-					CcaAnswer.update(existing_answer.id, :answer => answer)
+					CcaAnswer.update(existing_answer.id, :answer => answer, :pitch_id => pitch_id)
 				else
-					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer)
+					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer, :pitch_id => pitch_id)
 				end
 			end
 		end

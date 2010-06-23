@@ -3,11 +3,14 @@
 <%= render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item} if current_user && (!current_user.can_donate_to?(news_item) || (news_item.total_amount_allocated_by_user(current_user) >= current_user.max_donation_for(news_item))) %>
 <%#= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item, :spotus_lite=>false} if  news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT) %>
 
-<% if !news_item.fully_funded? && (!current_user || (current_user && current_user.can_donate_to?(news_item))) %>
+<% if (!current_user || (current_user && current_user.can_donate_to?(news_item) && current_user.remaining_credits <= 0 && !news_item.fully_funded?)) %>
 	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
 		  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
 		  <%= f.hidden_field :pitch_id %>
 		  <%= f.submit "Fund Story", :class => "donate" %>
 	<% end %>
-	<%= link_to "Donate Talent", pitch_assignments_path(news_item), :title => 'Join Reporting Team', :class => "donate_talent" %>
+	
 <% end %>
+<% if !news_item.fully_funded? %>
+	<%= link_to "Donate Talent", pitch_assignments_path(news_item), :title => 'Join Reporting Team', :class => "donate_talent" %>
+<% end %> 

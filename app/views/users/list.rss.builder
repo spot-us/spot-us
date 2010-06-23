@@ -3,7 +3,7 @@ xml.rss :version => "2.0" do
   xml.channel do
     xml.title "Spot.Us: #{@filter.gsub("_", " ").gsub("-", " ").titleize} From #{get_inside_network_text(@network).titleize}"
     xml.link request.url
-    xml.description "These are the #{@filter.gsub("_", " ").gsub("-", " ").titleize} from Spot.Us inside #{get_inside_network_text(@network)}."
+    xml.description "These are the #{@filter.gsub("_", " ").gsub("-", " ").titleize} from Spot.Us #{get_inside_network_text(@network)}."
     xml.language "en-us"
     parse_xml_created_at(xml, @items)
     @items.each do |item|

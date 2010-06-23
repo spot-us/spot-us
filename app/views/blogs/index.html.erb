@@ -11,7 +11,7 @@
 	<div id="stories">
 		<%= link_to image_tag("/images/new_design/rss_16.png"), "/blogs.rss", :class => "rss_button" %>	
 		<h3 class="display_inline">NOW VIEWING:</h3> 
-		<h4 class="display_inline">Blog Posts Inside <%=get_inside_network_text(@network).titleize%></h4>
+		<h4 class="display_inline">Blog Posts <%=get_inside_network_text(@network).titleize%></h4>
 		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">&nbsp;</div>
 		<%=render :partial=>"shared/lists", :locals=>{ 
 			:items=>@posts, 
