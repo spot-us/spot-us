@@ -133,9 +133,9 @@ class NewsItem < ActiveRecord::Base
     featured_image_file_name.blank? && (type.to_s=='Story' || type.to_s=='Tip')
   end
 
-  def network_id
-	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
-  end
+	# def network_id
+	# 	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
+	# end
 
   # NOTE: You can chain scopes off of with_sort, but you can't chain with_sort off of scopes.
   # Well, you can, but you will lose the previous scopes.
