@@ -277,7 +277,7 @@ class User < ActiveRecord::Base
   end
   
   def total_available_credits
-    self.credits - self.donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit) - self.spotus_donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit)
+    self.credits - self.all_donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit) - self.spotus_donations.find(:all, :conditions=>"credit_id is not null", :include=>:credit).map(&:credit)
   end
   
   def remaining_credits
