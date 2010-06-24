@@ -8,15 +8,10 @@ namespace :credits do
     single_credit_ids = single_non_applied_credits.map(&:id)
     
     effective_credits = Credit.find(:all, :select=>"user_id, sum(amount) as effective_credit", :conditions=>"id not in (#{single_credit_ids})", :group=>"user_id having effective_credit>0")
-    effective_credits.each do |credit|
-      puts %|             --- Creating effective credit entry for user #{credit.user ? credit.user.full_name : "Anonymous"}...|
-      active_credit = Credit.create(:user_id => credit.user_id, :description => "Creating effective credit",
-                      :amount => credit.effective_credit)
-    end
     
     puts %|------------------------------------------------------------------------------------------------|
     puts %| Number of users with a single unallocated credit: #{single_non_applied_credits.length} |
-    puts %| Number of users with new effective credits created: #{effective_credits.length} |
+    puts %| Number of users with new effective credits to be created created: #{effective_credits.length} |
     puts %|------------------------------------------------------------------------------------------------|
       
     # correct the donations
@@ -100,6 +95,21 @@ namespace :credits do
     puts %| Number of processed spotus donations: #{processed_donations}|
     puts %| Number of unprocessed credits for spotus donations: #{SpotusDonation.find(:all, :conditions=>"credit_id is not null and credits.amount<0", :include=>:credit).length} | 
     puts %|------------------------------------------------------------------------------------------------|
+  
+    puts %|------------------------------------------------------------------------------------------------|
+    puts %|   Create effective credits for all users who need such entries... |
+    puts %|------------------------------------------------------------------------------------------------|
+    
+    puts %|     Deleting unused credits... | 
+    Credit.delete_all("id not in (#{corrected_credits.join(',')})")
+    
+    puts %|       Create effective credits for all users who need such entries... |
+    effective_credits.each do |credit|
+      puts %|             --- Creating effective credit entry for user #{credit.user ? credit.user.full_name : "Anonymous"}...|
+      active_credit = Credit.create(:user_id => credit.user_id, :description => "Creating effective credit",
+                      :amount => credit.effective_credit)
+    end
+    
   end
   
   desc "Test script for old credits (obsolete)..."
