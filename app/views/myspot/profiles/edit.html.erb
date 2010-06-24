@@ -30,9 +30,11 @@
             <%= f.text_field :website %>
             <em class='small'>use http://</em>
          </div>
-         <div class="row">
-            <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @profile} %>
-         </div>
+		<% if APP_CONFIG[:has_networks] %>
+	         <div class="row">
+	            <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @profile} %>
+	         </div>
+		<% end %>
         <% if @profile.is_a?(Reporter) %>
           <div class="row">
             <%= f.label :fact_check_interest, "I am interested in being a Peer-Review Editor" %>
