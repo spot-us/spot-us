@@ -7,7 +7,7 @@ namespace :credits do
     single_non_applied_credits = Credit.find(:all, :select=>"id, user_id, count(*) as cnt, amount, description", :group => 'user_id having cnt=1')
     single_credit_ids = single_non_applied_credits.map(&:id)
     
-    effective_credits = Credit.find(:all, :select=>"user_id, sum(amount) as effective_credit", :conditions=>"id not in (#{single_credit_ids})", :group=>"user_id having effective_credit>0")
+    effective_credits = Credit.find(:all, :select=>"user_id, sum(amount) as effective_credit", :conditions=>"id not in (#{single_credit_ids.join(',')})", :group=>"user_id having effective_credit>0")
     
     puts %|------------------------------------------------------------------------------------------------|
     puts %| Number of users with a single unallocated credit: #{single_non_applied_credits.length} |
@@ -163,5 +163,18 @@ namespace :credits do
     puts %| Number of users with only two credits from cca: #{nr_of_users_with_only_two_credits_from_cca} |
     
   end
+  
+  task :show => :environment do
+  
+    users = User.find(:all, :order=>"last_name, first_name asc")
+    users.each do |user|
+      if user.total_credits>50
+        puts %|       #{user.full_name} (#{user.id}) has total credits #{user.total_credits} |
+      end
+    end
+    
+    
+  end
+  
   
 end

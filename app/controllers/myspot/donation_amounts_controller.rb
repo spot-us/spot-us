@@ -23,12 +23,13 @@ class Myspot::DonationAmountsController < ApplicationController
     
     donation_amounts = params[:donation_amounts]
     credit_pitch_amounts = params[:credit_pitch_amounts]
+    available_credits = 0
     
     #merge the amounts arrays
     amounts = {}
     amounts.merge!(donation_amounts) if donation_amounts
     amounts.merge!(credit_pitch_amounts) if credit_pitch_amounts
-
+    
     @donations = []
     @credit_pitches = []
     
@@ -64,7 +65,7 @@ class Myspot::DonationAmountsController < ApplicationController
       if spotus_donation && ( (!params[:spotus_donation_amount].blank? && params[:spotus_donation_amount].to_f>0) || (!spotus_donation.amount.blank? && spotus_donation.amount.to_f>0) )     # todo: make sure we can pay the spotus donation in credits
         spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
         spotus_donation_valid = true
-        if available_credits && available_credits>0
+        if available_credits>0
           if spotus_donation.amount.to_f > available_credits
             if credits && !credits.empty?
               spotus_donation = apply_credits_for_spotus_donation(credits, key, spotus_donation.amount.to_f, "Donated to SpotUs")
