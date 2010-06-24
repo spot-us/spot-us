@@ -182,6 +182,10 @@ class User < ActiveRecord::Base
 		self.save!
 	end
 	
+	# def network_id
+	# 	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
+	# end
+	
 	def self.from_identity(credentials)
 		user = User.find_by_fb_user_id(credentials["id"].to_i)
 		return user if user
