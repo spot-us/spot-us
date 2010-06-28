@@ -22,11 +22,11 @@ module OauthConnect
   end
 
   def twitter_access_token()
-    begin
+    #begin
 	  twitter_oauth_client.request_token(:oauth_callback =>  "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/twitter/callback")
-    rescue  
+    #rescue  
 	  return false
-    end
+    #end
   end
 
   def redirect_uri
