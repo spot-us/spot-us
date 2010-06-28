@@ -24,32 +24,37 @@ class Myspot::TwitterCredentialsController < ApplicationController
 		else
 			flash[:notice] = "Error authorizing twitter"
 		end
-
-		debugger
 		redirect_to edit_myspot_twitter_credentials_path	
 	end
-  
-  response_for :create do |format|
+	
+  response_for :destroy do |format|
     format.html do
-      if resource_saved?
-        flash[:success] = "You have successfuly linked your twitter credentials to your account!"
-        redirect_to myspot_twitter_credentials_path
-      else
-        render :action => 'new'
-      end
+		flash[:notice] = "You have disconnected your Twitter account."
+      	redirect_to edit_myspot_twitter_credentials_path
     end
   end
   
-  response_for :update do |format|
-    format.html do
-      if resource_saved?
-        flash[:success] = "You have successfully updated your twitter credentials to your account!"
-        redirect_to edit_myspot_twitter_credentials_path
-      else
-        render :action => 'edit'
-      end
-    end
-  end
+  # response_for :create do |format|
+  #   format.html do
+  #     if resource_saved?
+  #       flash[:success] = "You have successfuly linked your twitter credentials to your account!"
+  #       redirect_to myspot_twitter_credentials_path
+  #     else
+  #       render :action => 'new'
+  #     end
+  #   end
+  # end
+  # 
+  # response_for :update do |format|
+  #   format.html do
+  #     if resource_saved?
+  #       flash[:success] = "You have successfully updated your twitter credentials to your account!"
+  #       redirect_to edit_myspot_twitter_credentials_path
+  #     else
+  #       render :action => 'edit'
+  #     end
+  #   end
+  # end
   
   private
   

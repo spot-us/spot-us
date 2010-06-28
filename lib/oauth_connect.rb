@@ -29,13 +29,7 @@ module OauthConnect
     end
   end
 
-
-
   def redirect_uri
     "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/facebook/callback"
   end
-
-
-
-	
 end
