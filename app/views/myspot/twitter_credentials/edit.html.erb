@@ -9,23 +9,31 @@
 		<% end %>
 	<% end %>
 	<br/>
-	<% form_for @twitter_credential, :url => myspot_twitter_credentials_path, :html => { :method => :put, :class => "form" } do |f| %>
-		<h4>1] Supply your Twitter credential</h4>
-		<p>If you provide us with your Twitter credentials, we can automatically post updates of your accepted pitches, 
-			published stories, blog posts and all your donations (see setting below to turn on).</p>
-		<div class="row clearfix">
-			<%= f.label :login, 'Twitter User Name' %>
-			<%= f.text_field :login %>
+	<%# form_for @twitter_credential, :url => myspot_twitter_credentials_path, :html => { :method => :put, :class => "form" } do |f| %>
+		<h4>1] Connect your Twitter account</h4>
+		<div class="italic" style="background:#e3eeef;border:solid 1px #ccc;padding:20px">
+			<% if !current_user.twitter_connected? %>
+				Click to 
+				<%= link_to "Twitter Connect", "/auth/twitter" %>
+			<% else %>
+				You are Twitter connected. <%= link_to "Disconnect", myspot_twitter_credentials_path, :method => "delete" %>
+			<% end %>
+		</div>
+		<!-- <p>If you provide us with your Twitter credentials, we can automatically post updates of your accepted pitches, 
+			published stories, blog posts and all your donations (see setting below to turn on).</p> -->
+		<!-- <div class="row clearfix"> -->
+			<%#= f.label :login, 'Twitter User Name' %>
+			<%#= f.text_field :login %>
 			<br/>
-			<%= f.label :password, 'Password' %>
-			<%= f.password_field :password %>
-			<%= f.hidden_field :user_id %>
-		</div>
+			<%#= f.label :password, 'Password' %>
+			<%#= f.password_field :password %>
+			<%#= f.hidden_field :user_id %>
+		<!-- </div> -->
 		
-		<div class="">
+		<!-- <div class="">
 			<input type="image" src="/images/save.png">
-		</div>
-	<% end %>
+		</div> -->
+	<%# end %>
 	<br/>
 	<hr/>
 	<h4>2] Connect your Facebook account</h4>
@@ -46,13 +54,14 @@
 			<p>Automatically post updates of your accepted pitches, 
 				published stories and blog posts, as well as your donations.</p>
 			<input type="hidden" name="return_to" value="<%= edit_myspot_twitter_credentials_path %>">
-			<%= f.check_box :notify_facebook_wall %>
-			<%= f.label     :notify_facebook_wall,  "Update your Facebook wall" %>
-			<%= '<em class="quiet small">* Updates will not be posted unless you Facebook Connect (above)</em>' if current_user.notify_facebook_wall && !fb_session %>
-			<br/>
 			<%= f.check_box :notify_twitter %>
 			<%= f.label     :notify_twitter,  "Update your Twitter status" %>
-			<%= '<em class="quiet small">* Updates will not be posted unless you provide your Twitter credentials (above)</em>' if current_user.notify_twitter && !current_user.twitter_credential %>
+			<%= '<em class="quiet small">* Updates will not be posted unless you Twitter Connect (#1 above)</em>' if current_user.notify_twitter && (!current_user.twitter_credential || !current_user.twitter_connected?) %>
+			<br/>
+			<%= f.check_box :notify_facebook_wall %>
+			<%= f.label     :notify_facebook_wall,  "Update your Facebook wall" %>
+			<%= '<em class="quiet small">* Updates will not be posted unless you Facebook Connect (#2 above)</em>' if current_user.notify_facebook_wall && !fb_session %>
+			
 		</div>
 		<div class="">
 			<input type="image" src="/images/save.png">

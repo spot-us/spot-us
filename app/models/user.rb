@@ -247,6 +247,10 @@ class User < ActiveRecord::Base
 
 ########### end facebook ##############
 
+  def twitter_connected?
+	twitter_credential && twitter_credential.access_token
+  end
+
   def citizen?
     self.is_a? Citizen
   end
