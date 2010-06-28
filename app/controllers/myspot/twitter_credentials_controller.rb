@@ -1,8 +1,33 @@
 class Myspot::TwitterCredentialsController < ApplicationController
   resources_controller_for :twitter_credentials
-  #before_filter :login_required
+  # before_filter :login_required, :only => [:twitter_login, :twitter_callback]
   
-  require "twitter"
+  # require "twitter"
+	include OauthConnect
+
+	def twitter_login
+		session[:request_token] = twitter_access_token
+		redirect_to session[:request_token].authorize_url # "http://twitter.com/oauth/authorize?oauth_token=#{}"
+	end
+
+	def twitter_callback
+		client = twitter_oauth_client
+		access_token = client.authorize(session[:request_token].token,session[:request_token].secret,:oauth_verifier => params[:oauth_verifier])
+		if client.authorized?
+			if current_user.twitter_credential
+				current_user.twitter_credential.access_token = (access_token.token + "," + access_token.secret)
+				current_user.twitter_credential.save!
+				current_user.twitter_credential
+			else
+				TwitterCredential.create(:user_id => current_user.id, :access_token => (access_token.token + "," + access_token.secret))
+			end
+		else
+			flash[:notice] = "Error authorizing twitter"
+		end
+
+		debugger
+		redirect_to edit_myspot_twitter_credentials_path	
+	end
   
   response_for :create do |format|
     format.html do
@@ -30,7 +55,7 @@ class Myspot::TwitterCredentialsController < ApplicationController
   
   def find_resource
      @settings = current_user
-    current_user.twitter_credential ? current_user.twitter_credential : TwitterCredential.new(:user_id=>current_user.id)
+     current_user.twitter_credential ? current_user.twitter_credential : TwitterCredential.new(:user_id=>current_user.id)
   end
   
 end
