@@ -7,9 +7,12 @@ class Myspot::TwitterCredentialsController < ApplicationController
 
 	def twitter_login
 		session[:request_token] = twitter_access_token
-		#hhh = twitter_access_token
-		#debugger
-		redirect_to session[:request_token].authorize_url # "http://twitter.com/oauth/authorize?oauth_token=#{}"
+		if session[:request_token] && session[:request_token].authorize_url
+			redirect_to session[:request_token].authorize_url  # "http://twitter.com/oauth/authorize?oauth_token=#{}"
+		else
+			flash[:notice] = "Error connecting to Twitter"
+			redirect_to :back
+		end
 	end
 
 	def twitter_callback
@@ -24,7 +27,7 @@ class Myspot::TwitterCredentialsController < ApplicationController
 				TwitterCredential.create(:user_id => current_user.id, :access_token => (access_token.token + "," + access_token.secret))
 			end
 		else
-			flash[:notice] = "Error authorizing twitter"
+			flash[:notice] = "Error authorizing Twitter"
 		end
 		redirect_to edit_myspot_twitter_credentials_path	
 	end
