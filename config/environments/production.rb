@@ -25,4 +25,6 @@ UPDATE_USER_TWITTER = true
 
 FACEBOOK_CONSUMER_KEY    = APP_CONFIG[:facebook][:consumer_key]
 FACEBOOK_CONSUMER_SECRET = APP_CONFIG[:facebook][:consumer_secret]
+TWITTER_CONSUMER_KEY    = APP_CONFIG[:twitter][:consumer_key]
+TWITTER_CONSUMER_SECRET = APP_CONFIG[:twitter][:consumer_secret]
 

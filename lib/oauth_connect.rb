@@ -5,6 +5,7 @@ module OauthConnect
   
   def twitter_oauth_client
 	TwitterOAuth::Client.new(:consumer_key => TWITTER_CONSUMER_KEY,:consumer_secret => TWITTER_CONSUMER_SECRET)
+	#debugger
   end
 
 	
@@ -25,7 +26,7 @@ module OauthConnect
     #begin
 	  twitter_oauth_client.request_token(:oauth_callback =>  "http://" + check_is_dev(APP_CONFIG[:default_host]) + "/auth/twitter/callback")
     #rescue  
-	  return false
+	  #return false
     #end
   end
 

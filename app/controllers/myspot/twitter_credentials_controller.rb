@@ -7,6 +7,8 @@ class Myspot::TwitterCredentialsController < ApplicationController
 
 	def twitter_login
 		session[:request_token] = twitter_access_token
+		#hhh = twitter_access_token
+		#debugger
 		redirect_to session[:request_token].authorize_url # "http://twitter.com/oauth/authorize?oauth_token=#{}"
 	end
 
