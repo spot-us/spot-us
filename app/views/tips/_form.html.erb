@@ -9,9 +9,11 @@
        <%= f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you!</span>" %>
        <%= fckeditor_textarea("tip", "short_description", :toolbarSet => 'Spotus', :width => '680px', :height => '200px') %>
     </div>
-   <div class="row">
-      <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
-   </div>
+	<% if APP_CONFIG[:has_networks] %>
+	   <div class="row">
+	      <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
+	   </div>
+	<% end %>
    <div class="row  clearfix">
       <label>Topics</label>
       <div class="tip_topics">
