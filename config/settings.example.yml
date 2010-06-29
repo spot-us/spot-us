@@ -38,3 +38,6 @@ production:
   :facebook:
       :consumer_key: api_key
       :consumer_secret: application_secret
+  :twitter:
+      :consumer_key: api_key
+      :consumer_secret: application_secret
