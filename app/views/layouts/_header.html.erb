@@ -13,21 +13,24 @@
 	
 	<ul id="main-nav">
 		<li class="start_story">
-			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"start"), new_pitch_path %>
+			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Start a Story by Creating your own Pitch", :class => "primary_button", :id => "about_start_story"), new_pitch_path %>
 		</li>
 		<li class="fund_story">
-			<%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"fund"), "/stories/unfunded", :title=>"Find a Pitch to Fund" %>
+			<%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Find a Story to Fund", :class => "primary_button", :id => "about_fund_story"), "/stories/unfunded", :title=>"" %>
 		</li>
 		<li class="read_story">
-			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"read"), "/stories/published", :title=>"Read A Published Spot Us Story" %>
+			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Read A Published Spot Us Story", :class => "primary_button", :id => "about_read_story"), "/stories/published", :title=>"" %>
 		</li>
 		<%if @cca_header%>
 			<li class="start_story">
-				<%= link_to image_tag("/images/new_design/earn_credits.jpg", :width=>"111", :height=>"98", :alt=>"Earn credits"),  cca_path(@cca_header)%>
+				<%= link_to image_tag("/images/new_design/earn_spot_credit.png", :width=>"111", :height=>"98", :alt=>"earn credits to help fund a story", :class => "primary_button", :id => "about_earn_credits"),  cca_path(@cca_header)%>
 			</li>
 		<%end%>
 	</ul>
-	
+	<div id="about_start_story_status" class="hide">start your story by creating a pitch</div>
+	<div id="about_fund_story_status" class="hide">contribute to stories that need funding</div>
+	<div id="about_read_story_status" class="hide">browse published stories</div>
+	<div id="about_earn_credits_status" class="hide">earn credits to help fund a story</div>
 	<div class="howtouse">
 		
 		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/pages/about" title="About Spot.Us">About Spot.Us</a>'}%>

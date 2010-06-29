@@ -1,15 +1,12 @@
 - @title = "Spot.us - Subscription Confirmed"
-.block-spacer
-.home-boxer
-  .box_white.padding_60
-    - if @subscriber
-      %h3 Success! 
-      %h3 You have been subscribed to receive email updates for the pitch:
-      %h2
-        = link_to '"' + @subscriber.pitch.headline + '"', pitch_path(@subscriber.pitch)
-      To cancel your subscription, click
-      = link_to "cancel", root_url + "subscription/cancel/" + @subscriber.invite_token
-    - else
-      %h3
-        Sorry, we can't find this subscription. Please check the subscription link in your email.
-.block-spacer
+.padding_50
+  - if @subscriber
+    %h3 Success! 
+    %h3 You have been subscribed to receive email updates for the pitch:
+    %h2
+      = link_to '"' + @subscriber.pitch.headline + '"', pitch_path(@subscriber.pitch)
+    To cancel your subscription, click
+    = link_to "cancel", root_url + "subscription/cancel/" + @subscriber.invite_token
+  - else
+    %h3
+      Sorry, we can't find this subscription. Please check the subscription link in your email.

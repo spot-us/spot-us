@@ -4,7 +4,7 @@
 	      <%= number_to_currency @purchase.total_amount %>
 	    </h3>
 	 <% unless @purchase.credit_covers_total? %>
-		<em class="paypal_label">Pay through PAYPAL</em>&nbsp;
+		<em class="paypal_label">or pay with PayPal</em>&nbsp;
 		<div class="paypal">
 	      <% if @purchase.credit_covers_partial? %>
 	         <div id="paypal_credit_notice">
@@ -35,7 +35,7 @@
 	                  <%= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
 
 	               <% end %>
-					<%= image_submit_tag "/images/paypal_buynow.gif", :style => "width:85px;" %>
+					<%= image_submit_tag "/images/new_design/yellow_paypal_buynow.gif", :style => "" %>
 	            <% end %>
 	      <% end %>
 		</div>
