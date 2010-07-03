@@ -32,9 +32,9 @@
     %tr.notice
       %td{:colspan => 3} No records found
   - @credits.each do |credit|
-    - unless credit.blank? || credit.user.blank?
+    - unless credit.blank?
       %tr
-        %td= credit.user.full_name
+        %td= credit.user ? credit.user.full_name : 'Aonymous'
         %td= number_to_currency(credit.amount)
         %td= credit.description
 = will_paginate @credits
