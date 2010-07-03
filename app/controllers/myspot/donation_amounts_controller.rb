@@ -69,15 +69,15 @@ class Myspot::DonationAmountsController < ApplicationController
         if available_credits>0
           if spotus_donation.amount.to_f > available_credits
             if credits && !credits.empty?
-              spotus_donation = apply_credits_for_spotus_donation(credits, key, spotus_donation.amount.to_f, "Donated to SpotUs")
+              spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
-              spotus_donation = SpotusDonation.update(key, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
+              spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           else
             if credits && !credits.empty?
-              spotus_donation = apply_credits_for_spotus_donation(credits, key, spotus_donation.amount.to_f, "Donated to SpotUs")
+              spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
-              spotus_donation = SpotusDonation.update(key, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
+              spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           end
         end
