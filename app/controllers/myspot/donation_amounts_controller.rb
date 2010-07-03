@@ -23,8 +23,8 @@ class Myspot::DonationAmountsController < ApplicationController
     
     donation_amounts = params[:donation_amounts]
     credit_pitch_amounts = params[:credit_pitch_amounts]
-    available_credits = 0
-    credits = current_user.total_available_credits
+    available_credits = current_user.total_credits
+    credits = current_user.total_available_credits 
     
     #merge the amounts arrays
     amounts = {}
