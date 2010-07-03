@@ -168,7 +168,7 @@ namespace :credits do
   
     users = User.find(:all, :order=>"last_name, first_name asc")
     users.each do |user|
-      if user.total_credits>50
+      if user.total_credits>0
         puts %|       #{user.full_name} (#{user.id}) has total credits #{user.total_credits} |
       end
     end
