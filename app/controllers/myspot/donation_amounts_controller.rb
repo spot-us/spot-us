@@ -63,7 +63,8 @@ class Myspot::DonationAmountsController < ApplicationController
     if params[:submit] == "update"
       redirect_to :back
     else
-      if spotus_donation && ( (!params[:spotus_donation_amount].blank? && params[:spotus_donation_amount].to_f>0) || (!spotus_donation.amount.blank? && spotus_donation.amount.to_f>0) )     # todo: make sure we can pay the spotus donation in credits
+      spotus_donation = SpotusDonation.create({ :amount => params[:spotus_donation_amount], :user_id => current_user.id  }) if params[:spotus_donation_amount] && params[:spotus_donation_amount].to_f>0
+      if spotus_donation && !spotus_donation.amount.blank? && spotus_donation.amount.to_f>0     # todo: make sure we can pay the spotus donation in credits
         spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
         spotus_donation_valid = true
         if available_credits>0
