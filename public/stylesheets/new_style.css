@@ -31,6 +31,7 @@ object embed {display:block;}
 .headline {font-size:2.5em;font-weight:normal;letter-spacing:-1pt;font-family:Georgia;}
 .media-box{background-color:#f9f9f9;margin-top:-30px;padding:15px 15px 20px;width:563px;border:1px solid #ddd;}
 .media-box h3 { border-bottom: 1px solid #ccc; padding-bottom:3px;}
+.padding_50 {padding:50px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
 .margin_top_10{margin-top:10px;}
@@ -71,7 +72,10 @@ h2.section{border-bottom: solid 1px #ddd;}
 .deep-green { color: #3A6425;}
 .grey {color:#777;}
 
-
+#about_start_story_status {color:#688549;left:465px;position:absolute;top:151px;}
+#about_fund_story_status {color:#688549;left:578px;position:absolute;top:151px;}
+#about_read_story_status {color:#688549;left:651px;position:absolute;top:151px;}
+#about_earn_credits_status {color:#688549;left:722px;position:absolute;top:151px;}
 
 #user-header {background-color:#11363e;color: #fff;padding:0 10px;height:26px;}
 #user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
@@ -505,8 +509,8 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 .myspot_donation_amounts  #facebox .body {padding:20px !important;}
 #donation_processor .total {position:relative;margin-top:5px;}
 #donation_processor .total h3 {font-size:20px;font-family:Verdana;font-weight:bold;}
-#donation_processor .total .paypal {position:absolute;right:0;top:0;}
-#donation_processor .total em.paypal_label {font-size:16px;color:#666;position:absolute;right:95px;top:4px;}
+#donation_processor .total .paypal {position:absolute;right:42px;top:51px;}
+#donation_processor .total em.paypal_label {color:#333333;font-size:16px;position:absolute;right:120px;top:51px;}
 #donation_processor .total .paypal form {display:inline;}
 #donation_processor form#spotus_form {padding:0;margin:0;}
 #donation_processor form#spotus_form h3 {font-family:Verdana;font-weight:normal;background:#dbf2f3;border-top:solid 1px #333;font-size:18px;

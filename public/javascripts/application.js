@@ -17,7 +17,11 @@ jQuery(document).ready(function($){
 	$('a[rel*=facebox]').facebox();
 	$('form[rel*=facebox]').facebox();
 	$('a[href*=/get_external_url]').facebox();
-
+	$(".primary_button").hover(function(){
+		$("#" + $(this).attr("id") + "_status").fadeIn(100);
+	}, function(){
+		$("#" + $(this).attr("id") + "_status").fadeOut(200);
+	});
 	$("#pitches_carousel").jCarouselLite({
 		btnNext: ".next_alt",
 		btnPrev: ".prev_alt",
