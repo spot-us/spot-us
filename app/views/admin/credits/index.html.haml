@@ -39,6 +39,6 @@
         %td= credit.user ? credit.user.full_name : 'Anonymous'
         %td= number_to_currency(credit.amount)
         %td= credit.description
-        %td= credit.pitch.headline
+        %td= credit.donation && credit.donation.pitch ? credit.donation.pitch.headline : ""
         %td= credit.cca ? credit.cca.title : "-"
 = will_paginate @credits
