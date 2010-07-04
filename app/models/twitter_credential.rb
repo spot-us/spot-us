@@ -60,7 +60,7 @@ class TwitterCredential < ActiveRecord::Base
     return false
   end
   
-  def get_client
+  def get_client2
     # Twitter::Client.new(:login => login,:password => password)
     TwitterOAuth::Client.new(
         :consumer_key => TWITTER_CONSUMER_KEY,
