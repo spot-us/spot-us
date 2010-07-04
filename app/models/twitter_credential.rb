@@ -22,16 +22,16 @@ class TwitterCredential < ActiveRecord::Base
   # end
 
   def update?(status)
-	obj = nil
-	if UPDATE_USER_TWITTER
-		client = get_client
-		obj = update_status(client, status)
-	else
-	      #get the user and email update
-		obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
+  	obj = nil
+  	if UPDATE_USER_TWITTER
+  		client = get_client2
+  		obj = update_status(client, status)
+  	else
+  	      #get the user and email update
+  		obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
 	
-	end
-	obj
+  	end
+  	obj
   end
       
   # def update?(status)
