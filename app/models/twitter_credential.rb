@@ -72,15 +72,8 @@ class TwitterCredential < ActiveRecord::Base
   
   #updates twitter
   def update_status(client, status)
-	request_status = client.update(status)
-	
-    # request_status = nil
-    #     begin
-    #       request_status = client.status(:post, status)
-    #     rescue Twitter::RESTError => re 
-    #       logger.info(re.inspect)
-    #     rescue Twitter::Error
-    #     end
+    request_status = nil
+  	request_status = client.update(status) if client
     return request_status
   end
 
