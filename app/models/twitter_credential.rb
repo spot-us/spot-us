@@ -62,12 +62,12 @@ class TwitterCredential < ActiveRecord::Base
   
   def get_client
     # Twitter::Client.new(:login => login,:password => password)
-	TwitterOAuth::Client.new(
-	    :consumer_key => TWITTER_CONSUMER_KEY,
-	    :consumer_secret => TWITTER_CONSUMER_SECRET,
-	    :token => self.access_token.split(",")[0], 
-	    :secret => self.access_token.split(",")[1]
-	)
+    TwitterOAuth::Client.new(
+        :consumer_key => TWITTER_CONSUMER_KEY,
+        :consumer_secret => TWITTER_CONSUMER_SECRET,
+        :token => self.access_token.split(",")[0], 
+        :secret => self.access_token.split(",")[1]
+    ) if self.access_token
   end
   
   #updates twitter
