@@ -36,7 +36,7 @@
   - @credits.each do |credit|
     - unless credit.blank?
       %tr
-        %td= credit.user ? credit.user.full_name : 'Aonymous'
+        %td= credit.user ? credit.user.full_name : 'Anonymous'
         %td= number_to_currency(credit.amount)
         %td= credit.description
         %td= credit.pitch.headline
