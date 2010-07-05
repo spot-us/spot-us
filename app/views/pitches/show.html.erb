@@ -51,7 +51,11 @@
 				<% if @cca_header and !@pitch.fully_funded? %>
 					<div class="light_panel">
 						<h6>Short on cash to donate?</h6>
-						<h5><%= link_to "Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}" %></h5>
+						<%if current_user%>
+							<h5><%= link_to "Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}" %></h5>
+						<%else%>
+							<h5><%= facebox_login_link_to("Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}") %></h5>
+						<%end%>
 					</div>
 				<% end %>
 				<div class="donate_buttons clearfix">
