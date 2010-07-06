@@ -26,3 +26,5 @@
       = link_to image_tag('report.gif'), begin_story_pitch_path(pitch), :title => "begin your story draft"
     - if (!pitch.fully_funded? && current_user == pitch.user)
       = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"
+    = link_to image_tag('delete.png'), pitch_path(pitch), :method => :destroy, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"
+    = #"<br/><br/><a onclick=\"alert('hjkhjkhjkhjkh'); $('#list_pitch_supporters').slideToggle(); return false;\" style='cursor:pointer;'>All Donors:</a> <p id='list_pitch_supporters' style='display:none;'>#{pitch.supporters.map(&:email).join(', ')}</p>"
