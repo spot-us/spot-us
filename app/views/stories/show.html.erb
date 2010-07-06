@@ -106,5 +106,10 @@
 				<%= render :partial => "pitches/supporters", :locals => {:news_item => @story.pitch} %>
 			</div>
 		</div>
+		<div style="clear:both;"></div>
+		<div class="blue_panel original_pitch">
+			<h5>MediaBugs: Report An Error</h5>
+			<a href="#" onclick="reportMediaBug('<%=h @story.headline%>','Spot.Us','<%=h @story.pitch.user.full_name%>','<%=h report_an_error_date(@story.created_at)%>','<%=h story_path(@story, {:only_path=>false})%>');">Send your report</a>
+		</div>
 	</div>
 </div>

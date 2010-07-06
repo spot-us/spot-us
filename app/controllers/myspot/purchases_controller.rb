@@ -1,7 +1,7 @@
 class Myspot::PurchasesController < ApplicationController
   include ActiveMerchant::Billing::Integrations
 
-  before_filter :login_required, :except => :paypal_ipn
+  before_filter :login_required, :except => [:paypal_ipn]
   ssl_required :create, :new
   before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
