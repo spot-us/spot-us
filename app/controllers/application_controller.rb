@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_cca
   before_filter :set_default_html_meta_tags
   before_filter :social_notifier
+  
   after_filter  :async_posts
 
   
@@ -30,7 +31,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_fb_session
   
   after_filter :minify_html, :unless => Proc.new { Rails.env.development? }
-  
+
   helper_method :fb_session
   def fb_session
     session[:fb_session]

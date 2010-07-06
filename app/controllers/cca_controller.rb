@@ -89,7 +89,12 @@ class CcaController < ApplicationController
   end
   
   def load_cca
-    @cca = Cca.find_by_id(params[:id], :include => [:cca_questions, :cca_answers])
+	if params[:id] == "home"
+		cca_home = Cca.cca_home
+		@cca = Cca.cca_home.first if cca_home.any?
+	else
+    	@cca = Cca.find_by_id(params[:id], :include => [:cca_questions, :cca_answers])
+	end		
     redirect_to root_url unless @cca && @cca.is_live? || (current_user && current_user.admin?)
   end
   
