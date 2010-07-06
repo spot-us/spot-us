@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
   before_filter :social_notifier
   after_filter  :async_posts
 
-  
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   
   META_DESCRIPTION = "Spot.Us enables the public to commission journalists to do investigations on important and perhaps overlooked stories. " + 
