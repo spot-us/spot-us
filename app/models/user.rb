@@ -293,7 +293,7 @@ class User < ActiveRecord::Base
   end
   
   def allocated_credits?(credit_these_pitches)
-      credit_these_pitches.map(&:amount).sum.to_f
+    credit_these_pitches.map(&:amount).sum.to_f
   end
   
   #depricated
@@ -347,7 +347,7 @@ class User < ActiveRecord::Base
   end
   
   def current_balance
-      unpaid_donations_sum - allocated_credits + current_spotus_donation.amount
+    unpaid_donations_sum + current_spotus_donation.amount #unpaid_donations_sum - allocated_credits + current_spotus_donation.amount
   end
   
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
