@@ -150,7 +150,11 @@ module ApplicationHelper
   end
 
   def pitch_date(dt)
-	dt.strftime("%d %b %Y")
+	  dt.strftime("%d %b %Y")
+  end
+  
+  def report_an_error_date(dt)
+	  dt.strftime("%Y-%b-%d")
   end
   
   def short_date(dt)
