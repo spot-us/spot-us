@@ -153,7 +153,7 @@ class Myspot::DonationAmountsController < ApplicationController
       if credit.amount > spotus_donation_amount
         sliced_off_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",
                         :amount => (credit.amount-spotus_donation_amount), :cca_id => credit.cca_id)
-        credit.update_attributes(:amount => donation_amount)
+        credit.update_attributes(:amount => spotus_donation_amount)
       end
       
       # pay the spotus donation using the credit while the paid amount is larger than the spotus donation amount...
