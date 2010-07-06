@@ -1,8 +1,28 @@
-<%if !cookies[:shown_splash] && params[:controller]!='cca' && params[:controller]!='lite'%>
-	<script>
-	    jQuery(document).ready(function($){
-			jQuery.facebox({ajax:"/sections/newsletter"});
-	    });
-	</script>
-	<% cookies[:shown_splash] = { :value => true, :expires => 1.year.from_now } %>
+<%if !cookies[:shown_splash] && params[:controller]!='cca' && params[:controller]!='lite' %>
+	<% if Section.sections_include?(["intro","newsletter"]) %>
+		<script>
+			jQuery(document).ready(function($){
+				jQuery.facebox({ajax:"/sections/intro"});
+				jQuery(".show_register").live("click",function(){
+					jQuery.facebox({"ajax": "/session/new?register=true" });
+					return false;
+				});
+				jQuery(".show_newsletter").live("click",function(){
+					jQuery.facebox({ajax:"/sections/newsletter"});
+					return false;
+				});
+			});
+		</script>	
+		<% cookies[:shown_splash] = { :value => true, :expires => 1.year.from_now } %>
+	<% end %>
 <%end%>
+
+<% if flash[:success] == "Welcome to Spot.Us!" %>
+	<% if Section.sections_include?(["earn-credits"]) %>
+		<script>
+			jQuery(document).ready(function($){
+				jQuery.facebox({ajax:"/sections/earn-credits"});
+			});
+		</script>
+	<% end %>
+<% end %>

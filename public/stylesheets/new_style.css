@@ -51,7 +51,7 @@ a.admin_button  {color:white !important;}
 .hilited_input {background-color:#EDEDE4 !important;cursor:pointer !important;}
 #cse-search-box { text-align:right; margin-bottom:6px; }
 #cse-search-box input[type="text"] {}
-h2.section{border-bottom: solid 1px #ddd;}
+h2.section{border-bottom: dashed 1px #ddd;}
 /*rounded courners*/
 .roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
 .roundedcornr_top_807323 div {background: url(/images/new_design/roundedcornr_807323_tl.png) no-repeat top left;   
@@ -72,10 +72,10 @@ h2.section{border-bottom: solid 1px #ddd;}
 .deep-green { color: #3A6425;}
 .grey {color:#777;}
 
-#about_start_story_status {color:#688549;left:465px;position:absolute;top:151px;}
-#about_fund_story_status {color:#688549;left:578px;position:absolute;top:151px;}
-#about_read_story_status {color:#688549;left:651px;position:absolute;top:151px;}
-#about_earn_credits_status {color:#688549;left:722px;position:absolute;top:151px;}
+#about_start_story_status {color:#688549;left:477px;position:absolute;top:151px;}
+#about_fund_story_status {color:#688549;left:590px;position:absolute;top:151px;}
+#about_read_story_status {color:#688549;left:662px;position:absolute;top:151px;}
+#about_earn_credits_status {color:#688549;left:735px;position:absolute;top:151px;}
 
 #user-header {background-color:#11363e;color: #fff;padding:0 10px;height:26px;}
 #user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
@@ -504,8 +504,17 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #purchase_form div.purchase_overlay {position:absolute;top:0;left:0;width:1000px;height:1000px;z-index:1000;}
 #loading_status {background:#eee;border:solid 1px #333;position:fixed;left:50%;top:200px;opacity:.8;
 				margin-left:-150px;width:300px;height:45px;padding:30px;text-align:center;display:none;}
-				
-				
+
+
+#section_popup {padding:15px;color:#777;}
+#section_popup h2 {font-size:22px;}
+#section_popup h4 {font-weight:normal;font-family:Verdana;font-size:19px;}
+#section_popup .row {margin-top:15px;font-size:16px;}
+#section_popup .row img {float:left;margin-right:20px;}
+#section_popup .row .main_col {color:#777;float:left;width:420px;}
+#section_popup .row .main_col em {font-size:12px;}
+
+	
 .myspot_donation_amounts  #facebox .body {padding:20px !important;}
 #donation_processor .total {position:relative;margin-top:5px;}
 #donation_processor .total h3 {font-size:20px;font-family:Verdana;font-weight:bold;}

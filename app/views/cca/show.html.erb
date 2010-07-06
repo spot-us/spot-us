@@ -15,7 +15,7 @@
 				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
 				<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
 			</div>
-			<div id="survey_wrapper">
+			<div id="survey_wrapper" class="clearfix">
 				<div id="survey_info">
 					<%= render :partial => "sponsor_info" %>
 				</div>

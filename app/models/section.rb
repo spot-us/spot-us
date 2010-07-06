@@ -12,4 +12,14 @@ class Section < ActiveRecord::Base
     end
   end
 
+  def self.sections_include?(sections)
+	all_sections = Section.all
+	result = true
+	sections.each do |section|
+		has_sec = Section.all.map(&:name).include?(section)
+		result = false if !has_sec
+	end
+	result
+  end
+
 end
