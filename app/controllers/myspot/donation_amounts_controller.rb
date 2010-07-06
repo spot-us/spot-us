@@ -23,7 +23,8 @@ class Myspot::DonationAmountsController < ApplicationController
     
     donation_amounts = params[:donation_amounts]
     credit_pitch_amounts = params[:credit_pitch_amounts]
-    available_credits = 0
+    available_credits = current_user.total_credits
+    credits = current_user.total_available_credits 
     
     #merge the amounts arrays
     amounts = {}
@@ -62,21 +63,22 @@ class Myspot::DonationAmountsController < ApplicationController
     if params[:submit] == "update"
       redirect_to :back
     else
-      if spotus_donation && ( (!params[:spotus_donation_amount].blank? && params[:spotus_donation_amount].to_f>0) || (!spotus_donation.amount.blank? && spotus_donation.amount.to_f>0) )     # todo: make sure we can pay the spotus donation in credits
+      spotus_donation = SpotusDonation.create({ :amount => params[:spotus_donation_amount], :user_id => current_user.id  }) if !spotus_donation && params[:spotus_donation_amount] && params[:spotus_donation_amount].to_f>0
+      if spotus_donation && !spotus_donation.amount.blank? && spotus_donation.amount.to_f>0     # todo: make sure we can pay the spotus donation in credits
         spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
         spotus_donation_valid = true
         if available_credits>0
           if spotus_donation.amount.to_f > available_credits
             if credits && !credits.empty?
-              spotus_donation = apply_credits_for_spotus_donation(credits, key, spotus_donation.amount.to_f, "Donated to SpotUs")
+              spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
-              spotus_donation = SpotusDonation.update(key, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
+              spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           else
             if credits && !credits.empty?
-              spotus_donation = apply_credits_for_spotus_donation(credits, key, spotus_donation.amount.to_f, "Donated to SpotUs")
+              spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
-              spotus_donation = SpotusDonation.update(key, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
+              spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           end
         end
@@ -151,7 +153,7 @@ class Myspot::DonationAmountsController < ApplicationController
       if credit.amount > spotus_donation_amount
         sliced_off_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",
                         :amount => (credit.amount-spotus_donation_amount), :cca_id => credit.cca_id)
-        credit.update_attributes(:amount => donation_amount)
+        credit.update_attributes(:amount => spotus_donation_amount)
       end
       
       # pay the spotus donation using the credit while the paid amount is larger than the spotus donation amount...

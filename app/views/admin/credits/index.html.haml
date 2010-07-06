@@ -28,13 +28,17 @@
     %th Name
     %th Amount
     %th Description
+    %th Pitch
+    %th CCA
   - if @credits.empty?
     %tr.notice
       %td{:colspan => 3} No records found
   - @credits.each do |credit|
-    - unless credit.blank? || credit.user.blank?
+    - unless credit.blank?
       %tr
-        %td= credit.user.full_name
+        %td= credit.user ? credit.user.full_name : 'Anonymous'
         %td= number_to_currency(credit.amount)
         %td= credit.description
+        %td= credit.donation && credit.donation.pitch ? credit.donation.pitch.headline : ""
+        %td= credit.cca ? credit.cca.title : "-"
 = will_paginate @credits

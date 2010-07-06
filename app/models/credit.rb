@@ -14,6 +14,8 @@
 class Credit < ActiveRecord::Base
   belongs_to :user
   has_one :donation
+  belongs_to :cca
+  belongs_to :pitch
   validates_presence_of :user_id, :description, :amount
 end
 

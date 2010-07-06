@@ -22,16 +22,16 @@ class TwitterCredential < ActiveRecord::Base
   # end
 
   def update?(status)
-	obj = nil
-	if UPDATE_USER_TWITTER
-		client = get_client
-		obj = update_status(client, status)
-	else
-	      #get the user and email update
-		obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
+  	obj = nil
+  	if UPDATE_USER_TWITTER
+  		client = get_client2
+  		obj = update_status(client, status)
+  	else
+  	      #get the user and email update
+  		obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
 	
-	end
-	obj
+  	end
+  	obj
   end
       
   # def update?(status)
@@ -60,27 +60,20 @@ class TwitterCredential < ActiveRecord::Base
     return false
   end
   
-  def get_client
+  def get_client2
     # Twitter::Client.new(:login => login,:password => password)
-	TwitterOAuth::Client.new(
-	    :consumer_key => TWITTER_CONSUMER_KEY,
-	    :consumer_secret => TWITTER_CONSUMER_SECRET,
-	    :token => self.access_token.split(",")[0], 
-	    :secret => self.access_token.split(",")[1]
-	)
+    TwitterOAuth::Client.new(
+        :consumer_key => TWITTER_CONSUMER_KEY,
+        :consumer_secret => TWITTER_CONSUMER_SECRET,
+        :token => self.access_token.split(",")[0], 
+        :secret => self.access_token.split(",")[1]
+    ) if self.access_token
   end
   
   #updates twitter
   def update_status(client, status)
-	request_status = client.update(status)
-	
-    # request_status = nil
-    #     begin
-    #       request_status = client.status(:post, status)
-    #     rescue Twitter::RESTError => re 
-    #       logger.info(re.inspect)
-    #     rescue Twitter::Error
-    #     end
+    request_status = nil
+  	request_status = client.update(status) if client
     return request_status
   end
 

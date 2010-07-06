@@ -199,8 +199,8 @@ function getTotalAmounts(){
 	jQuery('input[id*=credit_pitch_amounts]').each(function() {
 		owe_amount += parseFloat(this.value);
 	});
-	spot_us_support = jQuery('#spotus_donation').val() || 0;
-	credit = jQuery('#spotus_credit_amount').html() || 0;
+	spot_us_support = parseFloat(jQuery('#spotus_donation').val()) || 0;
+	credit = parseFloat(jQuery('#spotus_credit_amount').html().replace(',', '')) || 0;
 	total_amount = parseFloat(owe_amount)+parseFloat(spot_us_support)-parseFloat(credit);
 	if (total_amount<=0) {
 		jQuery('#purchase').hide();
