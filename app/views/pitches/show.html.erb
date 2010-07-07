@@ -54,7 +54,7 @@
 						<%if current_user%>
 							<h5><%= link_to "Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}" %></h5>
 						<%else%>
-							<h5><%= facebox_login_link_to("Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}") %></h5>
+							<h5><%= facebox_login_link_to("Click here to earn credits", cca_path(@cca_header) + "/#{@pitch.id}", {:return_to => cca_path(@cca_header) + "/#{@pitch.id}"}) %></h5>
 						<%end%>
 					</div>
 				<% end %>
