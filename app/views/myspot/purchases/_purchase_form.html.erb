@@ -17,7 +17,7 @@
 	         </div>
 	      <% else %>
 	            <% form_tag PAYPAL_POST_URL do %>
-					<%paypal_return_myspot_purchases_url = "/myspot/purchases/paypal_return"%>
+					<%paypal_return_myspot_purchases_url = "http://spot.us/myspot/purchases/paypal_return"%>
 	               <%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
 	               <%= hidden_field_tag "cmd", "_cart" %>
 	               <%= hidden_field_tag "upload", "1" %>
