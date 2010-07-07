@@ -3,11 +3,7 @@ module ApplicationHelper
   def facebox_login_link_to(*args, &block)
     return link_to(*args, &block) if current_user
     url = url_for(args.second)
-    if args.third && args.third[:return_to]
-      cookies[:return_to] = args.third[:return_to]
-      args.third[:return_to] = nil
-      args.third.compact!
-    end
+    cookies[:return_to] = args.third[:return_to] if args.third && args.third[:return_to]
     options = args.third || {}
     options.merge!({:class => 'authbox', :return_to => url, :rel=>"nofollow"})
     link_to args.first, new_session_path(:return_to => url), options
