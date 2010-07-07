@@ -17,7 +17,7 @@
 	<% end %>
 <%end%>
 
-<% if flash[:success] == "Welcome to Spot.Us!" %>
+<% if flash[:success] == "Welcome to Spot.Us!" && !cookies[:return_to] %>
 	<% if Section.sections_include?(["earn-credits"]) %>
 		<script>
 			jQuery(document).ready(function($){
