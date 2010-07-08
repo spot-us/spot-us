@@ -156,29 +156,39 @@ class Story < NewsItem
   
   def notify_donors
     self.pitch.touch_pitch!
-    #email supporters
+    
     emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
-    self.pitch.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
+    conditions = ""
+    
+    #email supporters
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    self.pitch.supporters.find(:all,:conditions=>conditions).each do |supporter|
       Mailer.deliver_story_published_notification(self, supporter.first_name, supporter.email)
     end
     emails = emails.concat(self.pitch.supporters.map{ |email| "'#{email}'"})
+    
     #email admins
-    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
-    Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    Admin.find(:all,:conditions=>conditions).each do |admin|
       Mailer.deliver_story_published_notification(self, admin.first_name, admin.email)
     end
+    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    
     #email subscribers
-    emails = emails.concat(self.pitch.subscribers.map{ |email| "'#{email}'"}).uniq
-    self.pitch.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    self.pitch.subscribers.find(:all,:conditions=>conditions).each do |subscriber|
       Mailer.deliver_story_published_notification(self, "Subscriber", subscriber.email, subscriber)
     end
+    emails = emails.concat(self.pitch.subscribers.map{ |email| "'#{email}'"}).uniq
+    
     #email fact checker if not already covered...
     if self.pitch && self.pitch.fact_checker_id
         fact_checker = User.find_by_id(self.pitch.fact_checker_id)
-        if fact_checker && fact_checker.email && emails.include?("'#{fact_checker.email}'")
+        if fact_checker && fact_checker.email && !emails.include?("'#{fact_checker.email}'")
             Mailer.deliver_story_published_notification(self,fact_checker.first_name,fact_checker.email)
         end
     end
+    
     update_twitter
     update_facebook
   end
