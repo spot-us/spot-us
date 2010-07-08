@@ -85,8 +85,9 @@ class Post < ActiveRecord::Base
   
   def blog_posted_notification
     #email supporters
-    emails = self.pitch.supporters.map{ |email| "'#{email}'"}
-    self.pitch.supporters.each do |supporter|
+    emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
+    emails = emails.conact(self.pitch.supporters.map{ |email| "'#{email}'"})
+    self.pitch.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
       Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email) if supporter.notify_blog_posts
     end
     #email admins
