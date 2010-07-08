@@ -91,7 +91,8 @@
 			<% if @pitch.story && @pitch.story.published? %>
 				<div class="published">
 					<h5>This story has been published:</h5>
-					<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %></h4><br clear="all">
+					<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %> </h4>
+					
 					<div class="">
 						by
 						<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
