@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/auth/twitter', :controller => "myspot/twitter_credentials", :action => "twitter_login"
   map.connect '/auth/twitter/callback', :controller => "myspot/twitter_credentials", :action => "twitter_callback"
-
+  map.connect '/sessions/disconnect_from_fb', :controller => "sessions", :action => "disconnect_from_fb"
   map.connect '/notifications/social_notify', :controller => "notifications", :action => "social_notify"
   
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}

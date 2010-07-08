@@ -9,47 +9,50 @@
 		<% end %>
 	<% end %>
 	<br/>
-	<%# form_for @twitter_credential, :url => myspot_twitter_credentials_path, :html => { :method => :put, :class => "form" } do |f| %>
-		<h4>1] Connect your Twitter account</h4>
-		<div class="italic" style="background:#e3eeef;border:solid 1px #ccc;padding:20px">
+		<h4>Connect your Twitter account</h4>
+		<div class="social_panel" style="">
 			<% if !current_user.twitter_connected? %>
-				Click to 
-				<%= link_to "Twitter Connect", "/auth/twitter" %>
+				Your Spot.Us and <%= image_tag("/images/new_design/small_twitter.png") %> Twitter accounts are currently <strong>not connected</strong>.
+				<%= link_to "Click here", "/auth/twitter" %> to connect them.
 			<% else %>
-				You are Twitter connected. <%= link_to "Disconnect", myspot_twitter_credentials_path, :method => "delete" %>
+				Your Spot.Us and <%= image_tag("/images/new_design/small_twitter.png") %> Twitter accounts are currently <strong>connected</strong>. <%= link_to "Click here", myspot_twitter_credentials_path, :method => "delete" %> to disconnect them.
+				<% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
+					<div class="options">
+						<input type="hidden" name="return_to" value="<%= edit_myspot_twitter_credentials_path %>">
+						<em>To automatically Tweet your Spot.Us activity:</em>
+						Turn on Auto-Tweet <%= f.check_box :notify_twitter %> 					
+						<%= '<em class="quiet small">* Updates will not be posted unless you Twitter Connect (#1 above)</em>' if current_user.notify_twitter && (!current_user.twitter_credential || !current_user.twitter_connected?) %>
+			
+						<input type="submit" value="save setting" class="blue_button">
+					</div>
+				<% end %>
 			<% end %>
 		</div>
-		<!-- <p>If you provide us with your Twitter credentials, we can automatically post updates of your accepted pitches, 
-			published stories, blog posts and all your donations (see setting below to turn on).</p> -->
-		<!-- <div class="row clearfix"> -->
-			<%#= f.label :login, 'Twitter User Name' %>
-			<%#= f.text_field :login %>
-			<br/>
-			<%#= f.label :password, 'Password' %>
-			<%#= f.password_field :password %>
-			<%#= f.hidden_field :user_id %>
-		<!-- </div> -->
-		
-		<!-- <div class="">
-			<input type="image" src="/images/save.png">
-		</div> -->
-	<%# end %>
 	<br/>
 	<hr/>
-	<h4>2] Connect your Facebook account</h4>
-	<div class="italic" style="background:#e3eeef;border:solid 1px #ccc;padding:20px">
-		<% if !fb_session %>
-		Click to 
-			<%= fb_login_link  %>
+	<h4>Connect your Facebook account</h4>
+	<div class="social_panel">
+		<% if fb_session.blank? %>
+			Your Spot.Us and <%= image_tag("/images/new_design/small_facebook.png") %> Facebook accounts are currently <strong>not connected</strong>.
+			<%= link_to "Click here", "/auth/facebook" %> to connect them.	
 		<% else %>
-		You are 
-			<%= fb_logged_in %>
+			Your Spot.Us and <%= image_tag("/images/new_design/small_facebook.png") %> Facebook accounts are currently <strong>connected</strong>. 
+			<%= link_to "Click here", "/sessions/disconnect_from_fb" %> to disconnect them.
+			<% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
+				<div class="options">
+					<input type="hidden" name="return_to" value="<%= edit_myspot_twitter_credentials_path %>">
+					<em>To automatically wall-post your Spot.Us activity:</em>
+					Turn on Auto-Wall-Post <%= f.check_box :notify_facebook_wall %> 					
+					<%= '<em class="quiet small">* Updates will not be posted unless you Twitter Connect (#1 above)</em>' if current_user.notify_twitter && (!current_user.twitter_credential || !current_user.twitter_connected?) %>
+
+					<input type="submit" value="save setting" class="blue_button">
+				</div>
+			<% end %>
 		<% end %>
 	</div>
 	<br/>
 	<hr/>
-	<% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
-		<h4>3] Turn on automatic sharing</h4>
+	<!-- <% form_for :settings, :url => myspot_settings_path, :html => { :method => :put, :class => "form" } do |f| %>
 		<div class="row">
 			<p>Automatically post updates of your accepted pitches, 
 				published stories and blog posts, as well as your donations.</p>
@@ -66,7 +69,7 @@
 		<div class="">
 			<input type="image" src="/images/save.png">
 		</div>
-	<% end %>
+	<% end %> -->
 </div>
 
 
