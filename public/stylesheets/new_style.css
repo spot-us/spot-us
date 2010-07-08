@@ -377,7 +377,7 @@ ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;bac
 .tab_panel .body{margin-bottom:10px;}
 .tab_panel ul{}
 .tab_panel li{margin-bottom:15px;}
-.tab_panel p{padding:0px 0px 7px 0px;}
+.tab_panel p{padding:0px 0px 14px 0px;}
 .tab_panel .row {vertical-align:top;}
 .tab_panel .row label {display:block;}
 .tab_panel .row input, .tab_panel .row textarea {}
@@ -683,6 +683,11 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #social_notifier img.badge {margin:10px 5px 0 0 !important;}
 #social_notifier img {vertical-align:middle}
 #social_notifier  a {}
+
+.social_panel {background:#e3eeef;border:solid 1px #ccc;padding:20px;-moz-border-radius:12px;-webkit-border-radius:12px;margin-top:10px;font-size:15px}
+.social_panel .options {margin-top:10px;border-top:1px dashed #bbb;padding-top:10px;padding-left:40px}
+.social_panel .options em {color:#999;font-size:.9em;display:block;margin-bottom:10px;}
+
 
 #footer #footer-copyright .footer-nav li, #user-header .user-header-nav li, ul.search_navigation li {
 			display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 8px 0 0;padding:0 8px 0 0;

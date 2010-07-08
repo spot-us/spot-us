@@ -12,7 +12,7 @@
        <%= link_to 'Logout', destroy_session_path %>
 	</li>
     <li class="small italic">
-	<% if !fb_session %>
+	<% if fb_session.blank? %>
 		<%= fb_login_link  %>
 	<% else %>
 		<%= fb_logged_in %>
