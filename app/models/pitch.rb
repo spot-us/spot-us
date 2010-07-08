@@ -368,10 +368,10 @@ class Pitch < NewsItem
   def send_fund_notification
     #email supporters
     emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
-    emails = emails.concat(self.supporters.map{ |email| "'#{email}'"})
     self.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
       Mailer.deliver_pitch_accepted_notification(self, supporter.first_name, supporter.email)
     end
+    emails = emails.concat(self.supporters.map{ |email| "'#{email}'"})
     #email admins
     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
     Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|

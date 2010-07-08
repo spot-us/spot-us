@@ -158,10 +158,10 @@ class Story < NewsItem
     self.pitch.touch_pitch!
     #email supporters
     emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
-    emails = emails.concat(self.pitch.supporters.map{ |email| "'#{email}'"})
     self.pitch.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
       Mailer.deliver_story_published_notification(self, supporter.first_name, supporter.email)
     end
+    emails = emails.concat(self.pitch.supporters.map{ |email| "'#{email}'"})
     #email admins
     emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
     Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
