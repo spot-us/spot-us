@@ -111,7 +111,7 @@ class Donation < ActiveRecord::Base
   protected
 
   def send_thank_you
-    Mailer.deliver_user_thank_you_for_donating(self)
+    Mailer.deliver_user_thank_you_for_donating(self) unless BlacklistEmail.find_by_email(self.user.email)
   end
 
 

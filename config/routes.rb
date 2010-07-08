@@ -106,6 +106,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :ccas, :member => { :credits => :get }
     admin.resources :cca_questions
     admin.resources :feedbacks
+    admin.resources :blacklist_emails
   end
 
   map.connect "/myspot/purchases/paypal_return", :controller => "myspot/purchases", :action => "paypal_return"

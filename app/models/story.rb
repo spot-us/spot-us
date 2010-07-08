@@ -157,8 +157,9 @@ class Story < NewsItem
   def notify_donors
     self.pitch.touch_pitch!
     #email supporters
-    emails = self.pitch.supporters.map{ |email| "'#{email}'"}
-    self.pitch.supporters.each do |supporter|
+    emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
+    emails = emails.conact(self.pitch.supporters.map{ |email| "'#{email}'"})
+    self.pitch.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
       Mailer.deliver_story_published_notification(self, supporter.first_name, supporter.email)
     end
     #email admins

@@ -8,7 +8,8 @@ class Comment < ActiveRecord::Base
   after_save :touch_commentable
   
   def send_notification
-    (self.commentable.comment_subscribers - [self.user]).each do |commenter|
+    emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
+    (self.commentable.comment_subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})") - [self.user]).each do |commenter|
       Mailer.deliver_comment_notification(self, commenter)  if commenter.notify_comments
     end
   end
