@@ -1,0 +1,14 @@
+.supporters
+  - if news_item.credits.cca_credits.any?
+    %h2 Public Support via Community Centered Advertising
+    = number_to_currency news_item.credits.cca_credits.map(&:credit_amount).sum
+    donated by
+    = pluralize(news_item.credits.cca_credits.count, "person")
+    %br
+    %br
+    
+.supporters
+  .supporter
+    - if via_cca_citizen_supporters_for(news_item).any?
+      - via_cca_citizen_supporters_for(news_item).each do |supporter|
+        = render :partial => 'news_items/supporter', :locals => {:news_item => news_item, :supporter => supporter}

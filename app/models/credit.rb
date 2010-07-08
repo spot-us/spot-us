@@ -16,7 +16,14 @@ class Credit < ActiveRecord::Base
   has_one :donation
   belongs_to :cca
   belongs_to :pitch
+  
+  named_scope :cca_credits, :conditions => 'cca_id is not null'
+  
   validates_presence_of :user_id, :description, :amount
+
+  def credit_amount
+    amount
+  end
 end
 
 

@@ -93,6 +93,8 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
+
+  has_many :credits, :through => :donations
   
   has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}, :dependent => :destroy do
     def for_user(user)
