@@ -94,8 +94,6 @@ class Pitch < NewsItem
     end
   end
 
-  has_many :credits, :through => :donations
-  
   has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
@@ -109,7 +107,8 @@ class Pitch < NewsItem
   has_many :organizational_donors, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
-            
+  
+  has_many :credits, :through => :donations_and_credits, :source => :credit, :conditions => "credit_id is not null and donations.status='paid'"          
   has_many :supporters, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", :uniq => true
   has_many :blog_subscribers, :select => "users.email", :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
            :order => "donations.created_at", :uniq => true
