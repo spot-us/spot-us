@@ -4,7 +4,7 @@ module PitchesHelper
   end
   
   def via_cca_citizen_supporters_for(pitch)
-    pitch.credits.cca_credits.find(:all, :include => :user).map(&:user)
+    pitch.cca_credits.map(&:user)
   end
 
   def active_tab_class?(tab, tab_try)

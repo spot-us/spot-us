@@ -1,9 +1,9 @@
-- if news_item.credits.any? && news_item.credits.cca_credits.any?
+- if news_item.cca_credits.any?
   .supporters
     %h2 Public Support via Community Centered Advertising
-    = number_to_currency news_item.credits.cca_credits.map(&:credit_amount).sum
+    = number_to_currency news_item.cca_credits.map(&:amount).sum
     donated by
-    = pluralize(news_item.credits.cca_credits.count, "person")
+    = pluralize(news_item.cca_credits.count, "person")
     %br
     %br
     

@@ -108,7 +108,7 @@ class Pitch < NewsItem
             :conditions => "users.type = 'organization'",
             :uniq => true
   
-  has_many :credits, :through => :donations_and_credits, :source => :credit, :conditions => "credit_id is not null and donations.status='paid'"          
+  has_many :cca_credits, :class_name=>'Donation', :conditions => "credit_id is not null and donations.status='paid' and credits.cca_id is not null", :uniq => true, :include => :credit   
   has_many :supporters, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", :uniq => true
   has_many :blog_subscribers, :select => "users.email", :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
            :order => "donations.created_at", :uniq => true
