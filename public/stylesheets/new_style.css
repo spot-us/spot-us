@@ -358,7 +358,7 @@ a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-r
 .pitch_right .original_pitch h3 {font-weight:normal;font-size:1.4em;}
 .pitch_right h3.fully_funded {font-family:Verdana;font-style:italic;font-size:20px;text-transform:uppercase;color:#016937;margin-left:5px;}
 .pitch_right .light_panel h6 {border-bottom:none;padding:0 1px;margin:0;}
-.pitch_right .light_panel {margin-bottom:10px;padding: 10px 12px;}
+.pitch_right .light_panel {margin:5px 0 10px;padding: 5px 12px;border:1px solid #E7E7E7;}
 .pitch_right .light_panel h5 a {color:#107a35;}
 
 ul.tabs{margin:0 0 4px 0;}
