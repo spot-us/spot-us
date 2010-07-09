@@ -93,7 +93,7 @@ class Pitch < NewsItem
       for_user(user).map(&:amount).sum
     end
   end
-  
+
   has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}, :dependent => :destroy do
     def for_user(user)
       find_all_by_user_id(user.id)
@@ -107,7 +107,8 @@ class Pitch < NewsItem
   has_many :organizational_donors, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", 
             :conditions => "users.type = 'organization'",
             :uniq => true
-            
+  
+  has_many :cca_credits, :class_name=>'Donation', :conditions => "credit_id is not null and donations.status='paid' and credits.cca_id is not null", :uniq => true, :include => :credit   
   has_many :supporters, :through => :donations_and_credits, :source => :user, :conditions=>"donations.status='paid'", :order => "donations.created_at", :uniq => true
   has_many :blog_subscribers, :select => "users.email", :through => :donations, :source => :user, :conditions => "users.notify_blog_posts = 1", 
            :order => "donations.created_at", :uniq => true
@@ -366,19 +367,26 @@ class Pitch < NewsItem
   end
 
   def send_fund_notification
-    #email supporters
     emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
-    emails = emails.conact(self.supporters.map{ |email| "'#{email}'"})
-    self.supporters.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |supporter|
+    conditions = ""
+    
+    #email supporters
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    self.supporters.find(:all,:conditions=>conditions).each do |supporter|
       Mailer.deliver_pitch_accepted_notification(self, supporter.first_name, supporter.email)
     end
+    emails = emails.concat(self.supporters.map{ |email| "'#{email}'"})
+    
     #email admins
-    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
-    Admin.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |admin|
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    Admin.find(:all,:conditions=>conditions).each do |admin|
       Mailer.deliver_pitch_accepted_notification(self, admin.first_name, admin.email)
     end
+    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    
     #email subscribers
-    self.subscribers.find(:all,:conditions=>"email not in (#{emails.join(',')})").each do |subscriber|
+    conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
+    self.subscribers.find(:all,:conditions=>conditions).each do |subscriber|
       Mailer.deliver_pitch_accepted_notification(self, "Subscriber", subscriber.email, subscriber)
     end
   end

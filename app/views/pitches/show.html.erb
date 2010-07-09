@@ -89,37 +89,47 @@
 				</div>
 			<% end %>
 			<% if @pitch.story && @pitch.story.published? %>
-				<div class="published">
-					<h5>This story has been published:</h5>
-					<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %> </h4>
+				<% apply_fragment ['pitch_story_published_', @pitch, @pitch.story] do %>
+					<div class="published">
+						<h5>This story has been published:</h5>
+						<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %> </h4>
 					
-					<div class="">
-						by
-						<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
-						|
-						<%= pitch_date(@pitch.story.created_at) %>
-						|
-						<%= @pitch.story.network.name %>
+						<div class="">
+							by
+							<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
+							|
+							<%= pitch_date(@pitch.story.created_at) %>
+							|
+							<%= @pitch.story.network.name %>
+						</div>
+						<div class="story_summary">
+							<%= truncate_words(strip_tags(@pitch.story.extended_description), 80) %><br/>
+						</div>
+						<%= link_to 'Read the published story', @pitch.story, :class => "read" %>
 					</div>
-					<div class="story_summary">
-						<%= truncate_words(strip_tags(@pitch.story.extended_description), 80) %><br/>
-					</div>
-					<%= link_to 'Read the published story', @pitch.story, :class => "read" %>
-				</div>
+				<%end%>
 			<% end %>
 		</div>
-		<div class="blue_panel widget">
-			<%= render :partial => "widget" %>
-		</div>
+		<% apply_fragment ['pitch_widget_', @pitch, current_user] do %>
+			<div class="blue_panel widget">
+				<%= render :partial => "widget" %>
+			</div>
+		<%end%>
 		<div class="blue_panel subscribe">
 			<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
 		</div>
 		<div id="supporters">
-			<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
-			<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-			<div class="public_support">
-				<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
-			</div>
+			<% apply_fragment ['pitch_supporters_1_', @pitch] do %>
+				<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+				<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+				<div class="public_support">
+					<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
+				</div>
+				<div style="clear:both;"></div>
+				<div class="public_support">
+					<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+				</div>
+			<%end%>
 		</div>
 	</div>
 </div>

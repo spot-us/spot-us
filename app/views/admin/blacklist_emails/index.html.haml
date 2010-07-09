@@ -1,0 +1,35 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#blacklist_emails_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h2 Blacklisted Emails
+%hr
+
+%h2 Add email
+= error_messages_for :blacklist_email
+- form_for :blacklist_email, @blacklist_email, :url => admin_blacklist_emails_path do |f|
+  = f.text_field :email
+  = image_submit_tag image_path('add.png')
+
+
+%h2 List
+%table
+  %tr
+    %th Email
+    %th Created At
+    %th Admin
+  - if @blacklist_emails.empty?
+    %tr.notice
+      %td{:colspan => 3} No records found
+  - @blacklist_emails.each do |blacklist_email|
+    - unless blacklist_email.blank?
+      %tr
+        %td= blacklist_email.email
+        %td= medium_date(blacklist_email.created_at)
+        %td= button_to 'delete', admin_blacklist_email_url(blacklist_email), :method => :delete, :confirm => 'Are you sure you want to unblock this email?', :class => 'delete_button'
+= will_paginate @blacklist_emails
