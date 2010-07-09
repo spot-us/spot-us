@@ -119,15 +119,13 @@
 			<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
 		</div>
 		<div id="supporters">
-			<% apply_fragment ['pitch_supporters_', @pitch] do %>
+			<% apply_fragment ['pitch_supporters_1_', @pitch] do %>
 				<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
 				<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-				<%if false%>
-					<div class="public_support">
-						<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
-					</div>
-					<div style="clear:both;"></div>
-				<%end%>
+				<div class="public_support">
+					<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
+				</div>
+				<div style="clear:both;"></div>
 				<div class="public_support">
 					<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
 				</div>
