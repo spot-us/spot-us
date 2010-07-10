@@ -200,7 +200,7 @@ function getTotalAmounts(update_spotus_donation){
 	jQuery('input[id*=credit_pitch_amounts]').each(function() {
 		owe_amount += parseFloat(this.value);
 	});
-	spot_us_support = parseFloat(jQuery('#spotus_donation').val()) || 0;
+	
 	if(jQuery('#spotus_credit_amount').length > 0) {
 		credit = parseFloat(jQuery('#spotus_credit_amount').html().replace(',', '')) || 0;
 	}
@@ -208,6 +208,11 @@ function getTotalAmounts(update_spotus_donation){
 	{
 		credit = 0;
 	}
+	
+	if(update_spotus_donation){
+		jQuery('#spotus_donation').attr("value",formatAsMoney(owe_amount/10));
+	}
+	spot_us_support = parseFloat(jQuery('#spotus_donation').val()) || 0;
 	total_amount = parseFloat(owe_amount)+parseFloat(spot_us_support)-parseFloat(credit);
 	
 	if (total_amount<=0) {
@@ -218,9 +223,7 @@ function getTotalAmounts(update_spotus_donation){
 		jQuery('#purchase').show();
 		jQuery('#apply_credits').hide();
 	}
-	if(update_spotus_donation){
-		jQuery('#spotus_donation').attr("value",formatAsMoney(owe_amount/10));
-	}
+
 	jQuery('#spotus_total_amount').html('$'+formatAsMoney(total_amount));
 }
 
