@@ -66,7 +66,7 @@ class Myspot::PurchasesController < ApplicationController
     @donations = Donation.find_all_from_paypal(notify.params)
     @user = @donations.first.user
 
-    unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten)
+    unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten.compact)
       logger.error("Invalid users for PayPal transaction 28C98632UU123291R")
       render :nothing => true and return
     end
