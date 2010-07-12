@@ -7,10 +7,15 @@
 	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
 		  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
 		  <%= f.hidden_field :pitch_id %>
-		  <%= f.submit "Fund Story", :class => "donate" %>
+		  <%= f.submit "Fund Story", :alt => "help this story get produced by making a donation", :class => "donate show_status" %>
 	<% end %>
 	
 <% end %>
-<% if !news_item.fully_funded? %>
-	<%= link_to "Donate Talent", pitch_assignments_path(news_item), :title => 'Join Reporting Team', :class => "donate_talent" %>
-<% end %> 
+
+<% if @cca_header and !@pitch.fully_funded? %>
+	<% if current_user %>
+		<%= link_to "Earn Credits", cca_path(@cca_header) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" %>
+	<% else %>
+		<%= facebox_login_link_to("Earn Credits", cca_path(@cca_header) + "/#{@pitch.id}", {:return_to => cca_path(@cca_header) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
+	<% end %>
+<% end %>

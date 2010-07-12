@@ -14,6 +14,18 @@ jQuery(document).ready(function($){
 		load_categories(id);
 	}
 	
+	if($("#button_status").length > 0) {
+		$(".show_status, .donate_buttons a.authbox").hover(function(){
+			$("#button_status").html($(this).attr("alt"));
+		},function(){
+			$("#button_status").html("&nbsp");
+		});
+		$(".earn_credits, .donate_buttons a.authbox").hover(function(){
+			$("#button_status").addClass("align-right");
+		},function(){
+			$("#button_status").removeClass("align-right");
+		});
+	}
 	$('a[rel*=facebox]').facebox();
 	$('form[rel*=facebox]').facebox();
 	$('a[href*=/get_external_url]').facebox();

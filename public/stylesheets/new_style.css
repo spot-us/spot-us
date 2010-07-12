@@ -34,6 +34,7 @@ object embed {display:block;}
 .padding_50 {padding:50px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
+
 .margin_top_10{margin-top:10px;}
 .margin_bottom_10{margin-bottom:10px;}
 .border_top {border-top:solid 1px #aaa;}
@@ -322,14 +323,17 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_right h5 {font-family:Verdana;color:#555;font-size:1em;margin-bottom:1px;}
 .pitch_right h5.difference {margin:0 0 0 5px;}
 .pitch_right h5.get_widget {margin-bottom:4px;margin-top:3px;}
-input[type="submit"].donate {background:#107a35;border:0;width:180px;height:41px;line-height:40px;-moz-border-radius:8px;-webkit-border-radius:8px;font-size:23px;
-				color:#fff;padding-bottom:3px;cursor:pointer;}
+input[type="submit"].donate,a.earn_credits, .donate_buttons a.authbox {background:#107a35;border:0;padding:8px 22px 5px;;line-height:40px;-moz-border-radius:8px;
+				-webkit-border-radius:8px;font-size:22px;color:#fff;padding-bottom:3px;cursor:pointer;font-family:Helvetica, Verdana;}
 .pitch_right form.donate {float:left;margin-right:10px;}
-a.donate_talent {width:146px;height:41px;-moz-border-radius:8px;-webkit-border-radius:8px;background:#07383e;color:#fff;text-align:center;
-			display:block;float:left;font-size:17px;font-family:verdana;line-height:41px;}
-.pitch_right .donate_buttons {margin:5px 0 5px;}
+a.earn_credits, .donate_buttons a.authbox {padding-top:9px;padding-bottom:5px;}
+input[type="submit"].donate:hover {background:#1F5929;}
+a.earn_credits:hover, .donate_buttons a.authbox:hover {text-decoration:none;background:#1F5929;}
+#button_status {color:#3B686F;font-size:12px;line-height:12px;font-family:Georgia;margin-left:7px;}
+
+.pitch_right .donate_buttons {margin:5px 0 0px;}
 .pitch_right h6 {color:#888;font-weight:normal;border-bottom: dotted 2px #bbb;font-family:verdana;padding:0 7px 3px;font-size:.8em;margin-bottom:10px;}
-.pitch_right .funding {color:#016937;margin-bottom:15px;margin-top:10px;}
+.pitch_right .funding {color:#016937;margin-bottom:15px;margin-top:7px;}
 .pitch_right .funding_status {width:143px;float:left;margin-left:7px;font-size:1.2em;line-height:1.1em;}
 .pitch_right .progress_bar {float:left;width:170px;padding-top:2px;font-style:italic;}
 .pitch_right .progress_bar span {line-height:16px;}
