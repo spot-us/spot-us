@@ -73,10 +73,10 @@ h2.section{border-bottom: dashed 1px #ddd;}
 .deep-green { color: #3A6425;}
 .grey {color:#777;}
 
-#about_start_story_status {color:#688549;left:477px;position:absolute;top:151px;}
-#about_fund_story_status {color:#688549;left:590px;position:absolute;top:151px;}
-#about_read_story_status {color:#688549;left:662px;position:absolute;top:151px;}
-#about_earn_credits_status {color:#688549;left:735px;position:absolute;top:151px;}
+#about_start_story_status {color:#688549;left:349px;position:absolute;top:124px;}
+#about_fund_story_status {color:#688549;left:463px;position:absolute;top:124px;}
+#about_read_story_status {color:#688549;right:402px;position:absolute;top:124px;}
+#about_earn_credits_status {color:#688549;right:290px;position:absolute;top:124px;}
 
 #user-header {background-color:#11363e;color: #fff;padding:0 10px;height:26px;}
 #user-header .slogan {padding: 3px 0;text-transform: uppercase;letter-spacing:.10em;float:right;}
@@ -87,7 +87,7 @@ h2.section{border-bottom: dashed 1px #ddd;}
 #user-header .slogan {padding: 5px 0 3px 0;text-transform: uppercase;letter-spacing: .15em;float: right;}
 
 #header {background-color:#E3EEEF;height:170px;}
-.container {text-align:left;margin:auto;padding:0 15px;width:1060px;}
+.container {text-align:left;margin:auto;padding:0 15px;width:1060px;position:relative;}
 #header .logo {background:transparent url(/images/new_design/spotus-logo.jpg) no-repeat scroll 0 0;float:left;
 			margin-left:-3px;margin-top:52px;width:285px;}
 #header .logo-link {display:block;height:31px;width:222px;}
@@ -329,7 +329,7 @@ input[type="submit"].donate,a.earn_credits, .donate_buttons a.authbox {backgroun
 a.earn_credits, .donate_buttons a.authbox {padding-top:9px;padding-bottom:5px;}
 input[type="submit"].donate:hover {background:#1F5929;}
 a.earn_credits:hover, .donate_buttons a.authbox:hover {text-decoration:none;background:#1F5929;}
-#button_status {color:#3B686F;font-size:12px;line-height:12px;font-family:Georgia;margin-left:7px;}
+#button_status {color:#688549;font-size:12px;line-height:12px;font-family:Verdana;margin-left:7px;}
 
 .pitch_right .donate_buttons {margin:5px 0 0px;}
 .pitch_right h6 {color:#888;font-weight:normal;border-bottom: dotted 2px #bbb;font-family:verdana;padding:0 7px 3px;font-size:.8em;margin-bottom:10px;}
