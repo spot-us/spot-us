@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_cca
-	@cca_header = Cca.home.first
+	@cca_header = Cca.cca_home.first
   end
   
   # minify the html
