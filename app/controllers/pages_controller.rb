@@ -12,15 +12,17 @@ class PagesController < ApplicationController
     quick_donate
     reporter_agreement
     reporter_contract
+	support
     terms
     who
   ).freeze
 
   def show
     if PAGES.include?(params[:id])
-      render :action => params[:id]
+		@hide_gs = true if params[:id] == "support"
+      	render :action => params[:id]
     else
-      raise ActiveRecord::RecordNotFound,
+      	raise ActiveRecord::RecordNotFound,
             "No such static page: #{params[:id].inspect}"
     end
   end
