@@ -6,7 +6,7 @@ class Cca < ActiveRecord::Base
 	has_many :cca_answers
   	has_many :credits, :foreign_key=>'cca_id'
   
-	named_scope :cca_home, :conditions=>'status=100', :order => 'RAND()'
+	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
 	
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
