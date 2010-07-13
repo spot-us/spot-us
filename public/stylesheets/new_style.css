@@ -323,7 +323,7 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_right h5 {font-family:Verdana;color:#555;font-size:1em;margin-bottom:1px;}
 .pitch_right h5.difference {margin:0 0 0 5px;}
 .pitch_right h5.get_widget {margin-bottom:4px;margin-top:3px;}
-input[type="submit"].donate,a.earn_credits, .donate_buttons a.authbox {background:#107a35;border:0;padding:8px 22px 5px;;line-height:40px;-moz-border-radius:8px;
+input[type="submit"].donate,a.earn_credits, .donate_buttons a.authbox {background:#107a35;border:0;padding:8px 16px 5px;;line-height:40px;-moz-border-radius:8px;
 				-webkit-border-radius:8px;font-size:22px;color:#fff;padding-bottom:3px;cursor:pointer;font-family:Helvetica, Verdana;}
 .pitch_right form.donate {float:left;margin-right:10px;}
 a.earn_credits, .donate_buttons a.authbox {padding-top:9px;padding-bottom:5px;}
