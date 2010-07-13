@@ -87,12 +87,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_cca
-	cca = Cca.cca_home
-	if !cca.blank?  
-		@cca_header = cca
-	else
-		@cca_header = nil
-	end
+	@cca_header = Cca.home.first
   end
   
   # minify the html
