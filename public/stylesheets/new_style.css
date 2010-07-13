@@ -74,7 +74,14 @@ h2.section{border-bottom: dashed 1px #ddd;}
 .grey {color:#777;}
 
 #fdbk_tab {top:241px !important;}
-/*#support #fdbk_iframe {background-color:#fff !important;}*/
+#gsfn_search_form {margin-bottom:10px;}
+#support ul {list-style:none;margin:0;}
+#support ul .time {color:#888;font-size:.8em !important; }
+div#gsfn_list_widget div#gsfn_content a.gsfn_link {padding-right:5px;}
+#support .gsfn_suggestion {margin-bottom:10px !important;color:#555;}
+#support .gsfn_submit {margin-top:15px !important;color:#555;border-top:solid 1px #ccc;padding-top:5px;}
+#support .gsfn_link {font-size:20px !important;}
+
 
 #about_start_story_status {color:#688549;left:349px;position:absolute;top:124px;}
 #about_fund_story_status {color:#688549;left:463px;position:absolute;top:124px;}
