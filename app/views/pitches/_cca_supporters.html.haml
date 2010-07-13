@@ -1,14 +1,12 @@
-- if news_item.cca_credits.any?
+- if !Donation.cca_supporters(news_item.id).all.empty?
   .supporters
     %h2 Public Support via Community Centered Advertising
-    = number_to_currency news_item.cca_credits.map(&:amount).sum
-    donated by
-    = pluralize(news_item.cca_credits.count, "person")
+    = number_to_currency Donation.cca_supporters(news_item.id).map{ |obj| obj.cca_total_amount.to_f }.sum
+    donated
     %br
     %br
     
   .supporters
     .supporter
-      - if via_cca_citizen_supporters_for(news_item).any?
-        - via_cca_citizen_supporters_for(news_item).each do |supporter|
-          = render :partial => 'news_items/supporter', :locals => {:news_item => news_item, :supporter => supporter}
+      - via_cca_supporters_for(news_item).each do |donation|
+        = render :partial => 'news_items/cca_supporter', :locals => {:news_item => news_item, :cca => donation.cca, :amount => donation.cca_total_amount}

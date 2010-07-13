@@ -48,6 +48,7 @@ class Donation < ActiveRecord::Base
   belongs_to :purchase
   belongs_to :credit
   belongs_to :group
+  belongs_to :cca
   validates_presence_of :pitch_id
   validates_presence_of :user_id
   validates_presence_of :amount
@@ -63,6 +64,14 @@ class Donation < ActiveRecord::Base
   named_scope :by_user, lambda {|user| { :conditions => {:user_id => user.id} } }
   named_scope :other_than, lambda {|donation| { :conditions => "id != #{donation.id}" } }
   
+  named_scope :cca_supporters, lambda { |pitch_id|
+    {
+      :select => 'credits.cca_id, sum(credits.amount) as cca_total_amount', 
+      :joins => 'INNER JOIN credits ON credits.id=donations.credit_id', 
+      :conditions => ['cca_id is not null and pitch_id=?', pitch_id], 
+      :group => 'cca_id'
+    }
+  }
   named_scope :by_network, lambda {|network|
     return {} unless network
     { :joins=>"INNER JOIN news_items ON news_items.id=donations.pitch_id", :conditions=>["news_items.network_id=? AND news_items.type='Pitch'", network.id] }

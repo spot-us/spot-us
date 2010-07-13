@@ -1,0 +1,6 @@
+.supporter_avatar
+  = link_to(image_tag(cca.user.photo.url(:thumb)), cca_path(cca))
+  %div
+    = link_to cca.title, cca_path(cca)
+    %br
+    = number_to_currency(amount)

@@ -3,8 +3,8 @@ module PitchesHelper
     pitch.supporters - pitch.donations_and_credits.from_organizations.map(&:user)
   end
   
-  def via_cca_citizen_supporters_for(pitch)
-    pitch.cca_credits.map(&:user)
+  def via_cca_supporters_for(pitch)
+    Donation.cca_supporters(pitch.id)
   end
 
   def active_tab_class?(tab, tab_try)
