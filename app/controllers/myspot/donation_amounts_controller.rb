@@ -58,24 +58,29 @@ class Myspot::DonationAmountsController < ApplicationController
       @donations << donation if donation
     end
     
-    update_balance_cookie
-    
     if params[:submit] == "update"
       redirect_to :back
     else
       spotus_donation = SpotusDonation.create({ :amount => params[:spotus_donation_amount], :user_id => current_user.id  }) if !spotus_donation && params[:spotus_donation_amount] && params[:spotus_donation_amount].to_f>0
       if spotus_donation && !spotus_donation.amount.blank? && spotus_donation.amount.to_f>0     # todo: make sure we can pay the spotus donation in credits
+        u = User.find_by_id(current_user.id)            # reload the user...
+        available_credits = u.total_credits             # get the fresh number of available credits for each donation
+        credits = u.total_available_credits             # get a fresh copy of credits for each donation
         spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
         spotus_donation_valid = true
         if available_credits>0
+          logger.info("You have credits")
           if spotus_donation.amount.to_f > available_credits
+            logger.info("Donation is larger than the available credits")
             if credits && !credits.empty?
               spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
               spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           else
+            logger.info("Donation is less than the available credits")
             if credits && !credits.empty?
+              logger.info("Applyting credits")
               spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
               spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
@@ -86,15 +91,19 @@ class Myspot::DonationAmountsController < ApplicationController
         spotus_donation.destroy if spotus_donation
         spotus_donation_valid = false
       end
+      update_balance_cookie
       if (@donations && !@donations.empty? && @donations.all?{|d| d.valid? }) || (spotus_donation && spotus_donation.unpaid? && spotus_donation_valid)
+        logger.info("Something weird is happening...")
+        logger.info("Spotus donation exists...") if spotus_donation
+        logger.info("Spotus donation is unpaid...") if spotus_donation.unpaid?
+        logger.info("Spotus donation is valid...") if spotus_donation_valid
+        logger.info("Total Credits: #{current_user.total_credits}")
         session[:donation_id] = @donations.first.id if @donations.any?
 		    redirect_to new_myspot_purchase_path
       else
         if !@credit_pitches || @credit_pitches.empty?
-          update_balance_cookie
           redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
         else
-          update_balance_cookie
           set_social_notifier_cookie("donation")
           session[:donation_id] = @credit_pitches.first.id
           redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : pitch_url(@credit_pitches.first.pitch)
@@ -113,6 +122,7 @@ class Myspot::DonationAmountsController < ApplicationController
       
       # if the credit is larger than the donation amount, slice off the remainer...
       if credit.amount > donation_amount
+        logger.info("test")
         sliced_off_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",
                         :amount => (credit.amount-donation_amount), :cca_id => credit.cca_id)
         credit.update_attributes(:amount => donation_amount)
