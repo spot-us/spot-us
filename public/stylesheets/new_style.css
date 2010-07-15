@@ -75,7 +75,11 @@ h2.section{border-bottom: dashed 1px #ddd;}
 
 #fdbk_tab {top:241px !important;}
 #gsfn_search_form {margin-bottom:10px;}
+#support {padding:25px 50px;background:#e3eeef;width:932px;}
+#support h2 {margin-bottom:10px;font-size:24px}
+#support .gs_widget {border:solid 1px #888;padding:20px;width:890px;background:#fff}
 #support ul {list-style:none;margin:0;}
+#gsfn_search_widget {border:solid 1px #888;padding:20px;width:890px;background:white;margin-top:15px}
 #support ul .time {color:#888;font-size:.8em !important; }
 div#gsfn_list_widget div#gsfn_content a.gsfn_link {padding-right:5px;}
 #support .gsfn_suggestion {margin-bottom:10px !important;color:#555;}

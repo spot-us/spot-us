@@ -1,78 +1,70 @@
+<% if GS_APP %>
+	<div id="support">
+		<h2>Get Support and Share Ideas:</h2>
+		<div class="gs_widget">
+			<script type="text/javascript" charset="utf-8">
+			  var is_ssl = ("https:" == document.location.protocol);
+			  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+			  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+			</script>
 
-<div id="support" style="padding:25px 50px;background:#e3eeef;width:932px;">
-	<h2 style="margin-bottom:10px;font-size:24px">Get Support and Share Ideas:</h2>
-	<div style="border:solid 1px #888;padding:20px;width:890px;background:#fff">
-		<script type="text/javascript" charset="utf-8">
-		  var is_ssl = ("https:" == document.location.protocol);
-		  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-		  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
+			<script type="text/javascript" charset="utf-8">
+			  var feedback_widget_options = {};
 
-		<script type="text/javascript" charset="utf-8">
-		  var feedback_widget_options = {};
+			  feedback_widget_options.display = "inline";  
+			  feedback_widget_options.company = "<%= GS_APP %>";
+			  feedback_widget_options.placement = "left";
+			  feedback_widget_options.color = "#00373a";
+			  feedback_widget_options.height = 320;
+			  feedback_widget_options.style = "idea";
+			  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+			</script>
+		</div>
+	
+		<style media='all' type='text/css'>
+			div#gsfn_list_widget img { border: none; }
+			div#gsfn_list_widget { font-size: 18px; width: 890px; border: 1px solid #888; padding: 20px;background:#fff; margin-top:15px;}
+			div#gsfn_list_widget a.widget_title { color: #3B686F; display: block; margin-bottom: 10px; font-weight: bold; }
+			div#gsfn_list_widget .powered_by { margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD; }
+			div#gsfn_list_widget .powered_by a { color: #3B686F; font-size: 90%; }
+			div#gsfn_list_widget div#gsfn_content { }
+			div#gsfn_list_widget div#gsfn_content li { text-align:left; margin-bottom:6px; }
+			div#gsfn_list_widget div#gsfn_content a.gsfn_link { line-height: 1; }
+			div#gsfn_list_widget div#gsfn_content span.time { font-size: 90%; padding-left: 3px; }
+			div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
 
-		  feedback_widget_options.display = "inline";  
-		  feedback_widget_options.company = "spot_us";
-		  feedback_widget_options.placement = "left";
-		  feedback_widget_options.color = "#00373a";
-		  feedback_widget_options.height = 320;
-		  feedback_widget_options.bg_color = "#000"
-		  feedback_widget_options.style = "idea";
-		  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-		</script>
+		</style>
+		<div id='gsfn_list_widget'>
+			<a href="http://getsatisfaction.com/<%= GS_APP %>" class="widget_title">View All Support Discussions &raquo;</a>
+			<div id='gsfn_content'>Loading...</div>
+		</div>
+
+		<script src="http://getsatisfaction.com/<%= GS_APP %>/widgets/javascripts/4936d8d8e3/widgets.js" type="text/javascript"></script>
+		<script src="http://getsatisfaction.com/<%= GS_APP %>/topics.widget?callback=gsfnTopicsCallback&amp;limit=5&amp;sort=last_active_at" type="text/javascript"></script>
+	
+		<div id='gsfn_search_widget'>
+			<div class='gsfn_content'>
+				<form accept-charset='utf-8' action='http://getsatisfaction.com/<%= GS_APP %>' id='gsfn_search_form' method='get' onsubmit='gsfn_search(this); return false;'>
+					<div>
+						<input name='style' type='hidden' value='idea' />
+						<input name='limit' type='hidden' />
+						<input name='utm_medium' type='hidden' value='widget_search' />
+						<input name='utm_source' type='hidden' value='widget_<%= GS_APP %>' />
+						<input name='callback' type='hidden' value='gsfnResultsCallback' />
+						<input name='format' type='hidden' value='widget' />
+						<label class='gsfn_label' for='gsfn_search_query'>Search Support:</label>
+						<input id='gsfn_search_query' maxlength='120' name='query' type='text' value='' />
+						<input id='continue' type='submit' value='Continue' />
+					</div>
+				</form>
+				<div id='gsfn_search_results' style='height: auto;'></div>
+			</div>
+
+		</div>
+		<script src="http://getsatisfaction.com/<%= GS_APP %>/widgets/javascripts/4936d8d8e3/widgets.js" type="text/javascript"></script>
 	</div>
-	
-
-	
-	
-	
-	<style media='all' type='text/css'>
-	div#gsfn_list_widget img { border: none; }
-	div#gsfn_list_widget { font-size: 18px; width: 890px; border: 1px solid #888; padding: 20px;background:#fff; margin-top:15px;}
-	div#gsfn_list_widget a.widget_title { color: #3B686F; display: block; margin-bottom: 10px; font-weight: bold; }
-	div#gsfn_list_widget .powered_by { margin-top: 8px; padding-top: 8px; border-top: 1px solid #DDD; }
-	div#gsfn_list_widget .powered_by a { color: #3B686F; font-size: 90%; }
-	div#gsfn_list_widget div#gsfn_content { }
-	div#gsfn_list_widget div#gsfn_content li { text-align:left; margin-bottom:6px; }
-	div#gsfn_list_widget div#gsfn_content a.gsfn_link { line-height: 1; }
-	div#gsfn_list_widget div#gsfn_content span.time { font-size: 90%; padding-left: 3px; }
-	div#gsfn_list_widget div#gsfn_content p.gsfn_summary { margin-top: 2px }
-
-	</style>
-	<div id='gsfn_list_widget'>
-	<a href="http://getsatisfaction.com/spot_us" class="widget_title">View All Support Discussions &raquo;</a>
-
-	<div id='gsfn_content'>Loading...</div>
-	<!-- <div class='powered_by'>
-	<a href="http://getsatisfaction.com/"><img alt="Favicon" src="http://getsatisfaction.com/favicon.gif" style="vertical-align: middle;" /></a>
-	<a style="font-size:11px" href="http://getsatisfaction.com/">Get Satisfaction support network</a>
-	</div> -->
-	</div>
-
-	<script src="http://getsatisfaction.com/spot_us/widgets/javascripts/4936d8d8e3/widgets.js" type="text/javascript"></script>
-	<script src="http://getsatisfaction.com/spot_us/topics.widget?callback=gsfnTopicsCallback&amp;limit=5&amp;sort=last_active_at" type="text/javascript"></script>
-	
-	
-	
-	
-	<div id='gsfn_search_widget' style="border:solid 1px #888;padding:20px;width:890px;background:white;margin-top:15px">
-	<div class='gsfn_content'>
-	<form accept-charset='utf-8' action='http://getsatisfaction.com/spot_us' id='gsfn_search_form' method='get' onsubmit='gsfn_search(this); return false;'>
-	<div>
-	<input name='style' type='hidden' value='idea' />
-	<input name='limit' type='hidden' />
-	<input name='utm_medium' type='hidden' value='widget_search' />
-	<input name='utm_source' type='hidden' value='widget_spot_us' />
-	<input name='callback' type='hidden' value='gsfnResultsCallback' />
-	<input name='format' type='hidden' value='widget' />
-	<label class='gsfn_label' for='gsfn_search_query'>Search Support:</label>
-	<input id='gsfn_search_query' maxlength='120' name='query' type='text' value='' />
-	<input id='continue' type='submit' value='Continue' />
-	</div>
-	</form>
-	<div id='gsfn_search_results' style='height: auto;'></div>
-	</div>
-
-	</div>
-	<script src="http://getsatisfaction.com/spot_us/widgets/javascripts/4936d8d8e3/widgets.js" type="text/javascript"></script>
+<% else %>
+<div class="padding_50">
+	<h2>No Support is currently configured.</h2>
 </div>
+<% end %>

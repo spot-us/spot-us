@@ -11,7 +11,7 @@ config.whiny_nils = true
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
 config.action_view.debug_rjs                         = true
-config.action_controller.perform_caching             = true
+config.action_controller.perform_caching             = false
 SslRequirement.disable_ssl_check = true
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
@@ -44,8 +44,9 @@ S3_BUCKET = APP_CONFIG[:s3_bucket][:development]
 
 UPDATE_USER_TWITTER = false
 
-FACEBOOK_CONSUMER_KEY    = APP_CONFIG[:facebook][:consumer_key]
-FACEBOOK_CONSUMER_SECRET = APP_CONFIG[:facebook][:consumer_secret]
-TWITTER_CONSUMER_KEY    = APP_CONFIG[:twitter][:consumer_key]
-TWITTER_CONSUMER_SECRET = APP_CONFIG[:twitter][:consumer_secret]
+FACEBOOK_CONSUMER_KEY    	= APP_CONFIG[:facebook][:consumer_key]
+FACEBOOK_CONSUMER_SECRET 	= APP_CONFIG[:facebook][:consumer_secret]
+TWITTER_CONSUMER_KEY    	= APP_CONFIG[:twitter][:consumer_key]
+TWITTER_CONSUMER_SECRET 	= APP_CONFIG[:twitter][:consumer_secret]
+GS_APP						= APP_CONFIG[:get_satisfaction][:app_name]	
 

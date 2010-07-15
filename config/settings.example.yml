@@ -41,3 +41,5 @@ production:
   :twitter:
       :consumer_key: api_key
       :consumer_secret: application_secret
+  :get_satisfaction:
+      :app_name: app_name
