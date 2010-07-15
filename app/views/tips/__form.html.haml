@@ -11,7 +11,7 @@
     .yellow-spacer-negative
     .row
       = f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you!</span>"
-      = fckeditor_textarea("tip", "short_description", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
+      = ckeditor_textarea("tip", "short_description", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
     .yellow-spacer-negative
     .row
       %label{:for => ""}

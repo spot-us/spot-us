@@ -15,7 +15,7 @@
     </div>
     <div class="row">
 		<%= f.label :short_description, "Why would someone care? What are the details?<br /> Sell the story! <br /><span class='small quieter'>Required</span>" %>
-		<%= fckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+		<%= ckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 	<% if APP_CONFIG[:has_networks] %>
     	<div class="row">
@@ -30,7 +30,7 @@
     </div>
     <div class="row">
 		<%= f.label :skills, "Qualifications<br /> Do you have the skills/access to report this story? <br /><span class='small quieter'>Tell us who you are and why we should support you.</span>" %>
- 		<%= fckeditor_textarea("pitch", "skills", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+ 		<%= ckeditor_textarea("pitch", "skills", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
     <div class="row">
        <label>Requested Amount<br/>
@@ -56,7 +56,9 @@
     <div class="row">
        <label>Provide some details on what you will produce.<br /> Justify your pricing.<br /></label>
        <%#= f.text_area :delivery_description, :style => "width:683px;height:200px" %>
-		<%= fckeditor_textarea("pitch", "delivery_description", :toolbarSet => 'Spotus', :width => '683px', :height => '150px') %>
+		<div class="rte">
+			<%= ckeditor_textarea("pitch", "delivery_description", :toolbarSet => 'Spotus', :width => '683px', :height => '150px') %>
+		</div>
     </div>
     <div class="row add_media">
       <label>Add Media<br/>
@@ -86,11 +88,11 @@
 	</div>
     <div class="row" id="toggle_div_how_will_it_help" style="display:none;">
       <%= f.label :extended_description, "How can your reporting help?" %>
-      <%= fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 	<div class="row" id="toggle_div_disclosure" style="display:none;">
       <%= f.label :disclosure, "Disclosure<br /><span class='small quieter'>Here you may disclose any relationships or similar</span>" %>
-      <%= fckeditor_textarea("pitch", "disclosure", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("pitch", "disclosure", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 	<div class="row" id="toggle_div_caption" style="display:none;">
 		<%= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>

@@ -1,0 +1,118 @@
+h1. Rails CKEditor integration plugin with SWFUpload support
+
+CKEditor is a text editor to be used inside web pages. It's a WYSIWYG editor, which means that the text being edited on it looks as similar as possible to 
+the results users have when publishing it. It brings to the web common editing features found on desktop editing applications like Microsoft Word and OpenOffice.
+
+Because CKEditor is licensed under flexible Open Source and commercial licenses, you'll be able to integrate and use it inside any kind of application. 
+This is the ideal editor for developers, created to provide easy and powerful solutions to their users.
+
+http://ckeditor.com/
+http://swfupload.org/
+
+h2. Install
+
+@./script/plugin install git://github.com/standout/rails-ckeditor.git@
+
+@rake ckeditor:install@
+
+@rake ckeditor:config@
+
+Last rake generated file config/ckeditor.yml:
+<pre><code>
+development: 
+  swf_file_post_name: "data"
+  
+  swf_image_file_types_description: "Images"
+  swf_image_file_types: "*.jpg;*.jpeg;*.png;*.gif"
+  swf_image_file_size_limit: "5 MB"
+  swf_image_file_upload_limit: 10
+  
+  swf_types_description: "Files"
+  swf_file_types: "*.doc;*.wpd;*.pdf;*.swf;*.xls"
+  swf_file_size_limit: "10 MB"
+  swf_file_file_upload_limit: 5
+  
+  public_uri: "/uploads"
+  public_path: "public/uploads"
+  
+  file_manager_uri: "/ckeditor/files"
+  file_manager_upload_uri: "/ckeditor/create?kind=file"
+  
+  file_manager_image_upload_uri: "/ckeditor/create?kind=image"
+  file_manager_image_uri: "/ckeditor/images"
+</code></pre>
+
+Check the file "rails-ckeditor/app/controllers/ckeditor_controller.rb", it used objects "Picture" and "AttachmentFile" 
+to preserve images and files, respectively. So, in folder "rails-ckeditor/examples" are examples of these objects for the paperclip and attachment_fu.
+You can correct this controller for your needs, or copy the necessary files in yours project folder "app/models", and do not forget about migration.
+
+h2. Usage
+
+Basically include this in the page you wish to use the editor in
+<pre><code>
+  <%= javascript_include_tag :ckeditor %>
+</code></pre>
+
+Then instead of the normal textarea helper from Rails use this one
+<pre><code>
+  <%= ckeditor_textarea("object", "field", :width => '100%', :height => '200px') %>
+</code></pre>
+
+FormBuilder helper for more usefully 
+
+<pre><code>  
+  <% form_for :page, :url => pages_path do |form| -%>
+    ...
+    <%= form.cktext_area :content, :toolbar=>'Full', :swf_params=>{:assetable_type=>'User', :assetable_id=>current_user.id} %>
+    ...
+  <% end -%>
+</code></pre>
+  
+h3. Support options
+<pre><code> 
+  :cols    # Textarea cols
+  :rows    # Textarea rows
+  :width   # Editor width
+  :height  # Editor height
+  :class   # Textarea css class name
+  :toolbar # Toolbar name
+  :skin    # Editor skin
+  :language # Editor language
+  :swf_params # SWFUpload additional params
+</code></pre>
+
+Check "public/javascripts/ckcustom.js" for config options.
+Modify "public/javascripts/ckcustom/contents.css" - this stylesheet use editor
+
+h3. AJAX
+
+To use a remote form you need to do something like this
+<pre><code>
+  <%= form_remote_tag :url => @options.merge(:controller => @scaffold_controller),
+                    :before => Ckeditor_before_js('note', 'text') %>
+
+    <%= ckeditor_textarea( "note", "text", :ajax => true ) %>
+
+  <%= end_form_tag %>
+</code></pre>
+
+If you forget to put in the :before it won't work, you can also use the Ckeditor_form_remote_tag described below
+
+h3. Multiple Editors in a form
+
+To create a form using multiple editors use the Ckeditor_form_remote_tag helper and pass the :editors option. This takes an hash of model symbol keys with each having
+an array as its value. The array should contain the list of fields that will have editors attached to them.
+<pre><code>
+  <%= ckeditor_form_remote_tag :url => @options.merge(:controller => @scaffold_controller),
+                              :editors => { :multinote => ['text1', 'text2'] } %>
+
+    <%= ckeditor_textarea( "multinote", "text1", :ajax => true ) %>
+    <%= ckeditor_textarea( "multinote", "text2", :ajax => true ) %>
+
+  <%= end_form_tag %>
+</code></pre>
+
+h2. TODOs
+
+1. Add support for choose filemanager storage
+2. More integration upload system

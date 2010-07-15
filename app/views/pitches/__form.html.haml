@@ -10,7 +10,7 @@
     .yellow-spacer-negative
     .row
       = f.label :short_description, "Why would someone care? Sell the story! <br /><span class='small quieter'>Required. <br /><br /> This is your chance to explain what the pitch is about. Think of it like a nut graph.</span>"
-      = fckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
+      = ckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '67%', :height => '200px')
     .yellow-spacer-negative
     .row
       %label{:for => ""}
@@ -20,7 +20,7 @@
     .yellow-spacer-negative
     .row
       = f.label :extended_description, "How can your reporting help?"
-      = fckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
+      = ckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '100%', :height => '200px')
       .yellow-spacer-negative
       .row
       = f.label :skills, "Do you have the skills and access to report on this story? <br /><span class='small quieter'>Make a case for why your expertise as a journalist is worth the money you are requesting.</span>"
