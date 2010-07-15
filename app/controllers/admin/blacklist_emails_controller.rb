@@ -22,7 +22,7 @@ class Admin::BlacklistEmailsController < ApplicationController
   protected
   
   def load_blacklisted_emails
-    @blacklist_emails = BlacklistEmail.paginate(:page => params[:page])
+    @blacklist_emails = BlacklistEmail.paginate(:page => params[:page], :order => 'created_at desc')
   end
   
 end
