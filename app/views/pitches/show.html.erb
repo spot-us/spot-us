@@ -119,7 +119,7 @@
 			<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
 		</div>
 		<div id="supporters">
-			<% apply_fragment ['pitch_supporters_1_', @pitch] do %>
+			<% apply_fragment ['pitch_supporters_2_', @pitch] do %>
 				<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
 				<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
 				<div class="public_support">
