@@ -93,11 +93,6 @@ class Myspot::DonationAmountsController < ApplicationController
       end
       update_balance_cookie
       if (@donations && !@donations.empty? && @donations.all?{|d| d.valid? }) || (spotus_donation && spotus_donation.unpaid? && spotus_donation_valid)
-        logger.info("Something weird is happening...")
-        logger.info("Spotus donation exists...") if spotus_donation
-        logger.info("Spotus donation is unpaid...") if spotus_donation.unpaid?
-        logger.info("Spotus donation is valid...") if spotus_donation_valid
-        logger.info("Total Credits: #{current_user.total_credits}")
         session[:donation_id] = @donations.first.id if @donations.any?
 		    redirect_to new_myspot_purchase_path
       else
