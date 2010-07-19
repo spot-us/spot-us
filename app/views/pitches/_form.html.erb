@@ -13,9 +13,9 @@
         <%= f.label     :headline, "Your Pitch's Headline <br />Catch our attention<br /><span class='small quieter'>Required</span>" %>
         <%= f.text_area :headline, :rows => 2 %>
     </div>
-    <div class="row">
+    <div class="row clearfix">
 		<%= f.label :short_description, "Why would someone care? What are the details?<br /> Sell the story! <br /><span class='small quieter'>Required</span>" %>
-		<%= ckeditor_textarea("pitch", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+		<%= ckeditor_textarea("pitch", "short_description", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
     </div>
 	<% if APP_CONFIG[:has_networks] %>
     	<div class="row">
@@ -28,9 +28,9 @@
           <%= topic_check_boxes(@pitch) %>
        </div>    
     </div>
-    <div class="row">
+    <div class="row clearfix">
 		<%= f.label :skills, "Qualifications<br /> Do you have the skills/access to report this story? <br /><span class='small quieter'>Tell us who you are and why we should support you.</span>" %>
- 		<%= ckeditor_textarea("pitch", "skills", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+ 		<%= ckeditor_textarea("pitch", "skills", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
     </div>
     <div class="row">
        <label>Requested Amount<br/>
@@ -53,11 +53,11 @@
           <%= f.check_box :deliver_photo %><br/>
       </div>
     </div>
-    <div class="row">
+    <div class="row clearfix">
        <label>Provide some details on what you will produce.<br /> Justify your pricing.<br /></label>
        <%#= f.text_area :delivery_description, :style => "width:683px;height:200px" %>
 		<div class="rte">
-			<%= ckeditor_textarea("pitch", "delivery_description", :toolbarSet => 'Spotus', :width => '683px', :height => '150px') %>
+			<%= ckeditor_textarea("pitch", "delivery_description", :toolbar => 'Medium', :width => '683px', :height => '150px') %>
 		</div>
     </div>
     <div class="row add_media">
@@ -86,19 +86,19 @@
 	         </span>       
 	     </label>
 	</div>
-    <div class="row" id="toggle_div_how_will_it_help" style="display:none;">
+    <div class="row clearfix" id="toggle_div_how_will_it_help" style="display:none;">
       <%= f.label :extended_description, "How can your reporting help?" %>
-      <%= ckeditor_textarea("pitch", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("pitch", "extended_description", :toolbar => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
-	<div class="row" id="toggle_div_disclosure" style="display:none;">
+	<div class="row clearfix" id="toggle_div_disclosure" style="display:none;">
       <%= f.label :disclosure, "Disclosure<br /><span class='small quieter'>Here you may disclose any relationships or similar</span>" %>
-      <%= ckeditor_textarea("pitch", "disclosure", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("pitch", "disclosure", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
     </div>
-	<div class="row" id="toggle_div_caption" style="display:none;">
+	<div class="row clearfix" id="toggle_div_caption" style="display:none;">
 		<%= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>
 		<%= f.text_area :featured_image_caption, :rows => 2 %>
     </div>
-	<div class="row" id="toggle_div_keywords" style="display:none;">
+	<div class="row clearfix" id="toggle_div_keywords" style="display:none;">
        <%= f.label :keyword, "Keywords <br /><span class='small quieter'>Optional.  Keywords, or tags, should be separate by commas, for example: &quot;car, automobile, SUVs.&quot;</span>" %>
        <%= f.text_area :keywords, :rows => 3 %>
     </div>

@@ -19,7 +19,7 @@
     </div>
     <div class="row">
       <%= f.label :extended_description, "Description" %>
-      <%= ckeditor_textarea("section", "extended_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("section", "extended_description", :toolbar => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 
 	<!-- START OPTIONAL FIELDS -->
@@ -32,7 +32,7 @@
 	</div>
     <div class="row" id="toggle_div_how_will_it_help" style="display:none;">
       <%= f.label :short_description, "Enter a short description for this help section?" %>
-      <%= ckeditor_textarea("section", "short_description", :toolbarSet => 'Spotus', :width => '683px', :height => '200px') %>
+      <%= ckeditor_textarea("section", "short_description", :toolbar => 'Spotus', :width => '683px', :height => '200px') %>
     </div>
 	<div class="row">
 		<%= f.label :embed_code, "Embed media", :class => "small" %>

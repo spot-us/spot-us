@@ -10,7 +10,7 @@ CKEDITOR.editorConfig = function( config )
   config.PreserveSessionOnFileBrowser = true;
   // Define changes to default configuration here. For example:
   config.language = 'en';
-  // config.uiColor = '#AADC6E';
+  config.uiColor = '#e3eeef';
 
   //config.ContextMenu = ['Generic','Anchor','Flash','Select','Textarea','Checkbox','Radio','TextField','HiddenField','ImageButton','Button','BulletedList','NumberedList','Table','Form'] ;
   
@@ -46,10 +46,23 @@ CKEDITOR.editorConfig = function( config )
   config.toolbar_Spotus =
     [
         ['PasteText','PasteFromWord','Format','Bold','Italic','Underline','Strike','TextColor',
-        'NumberedList','BulletedList','Outdent','Indent','Blockquote'], 
-        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Link','Unlink'],
-        ['Image','Embed','HorizontalRule','Source','Maximize']
+        'NumberedList','BulletedList','Outdent','Indent','Blockquote', 
+        'JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink',
+        'Image','Embed','Source','Maximize']
     ];
+  config.toolbar_Medium =
+    [
+        ['PasteText','PasteFromWord','Bold','Italic','Underline',
+        'NumberedList','BulletedList','Image','Embed'], 
+        ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image']
+    ];
+  config.toolbar_Basic =
+    [
+        ['Bold','Italic','Underline',
+        'NumberedList','BulletedList'], 
+        ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image']
+    ];
+
 	// config.resize_maxWidth = 500;
 	// config.resize_minWidth = 500;
 	config.removePlugins = 'elementspath';
