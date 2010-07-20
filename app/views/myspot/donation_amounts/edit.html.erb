@@ -17,7 +17,7 @@
 			}
 		});
 		jQuery('#remove_spotus_donation').click(function(){
-			jQuery('input#spotus_donation').val('');
+			jQuery('input#spotus_donation').remove();
 			jQuery('#support_spotus').hide();
 			getTotalAmounts(true);
 			return false;
