@@ -1,0 +1,91 @@
+<script type="text/javascript">	  
+  var upload_path = "<%= new_attachment_path_with_session_information(:image) %>";
+  
+  function setUrl(url) 
+  {  
+    CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
+    window.close();
+  }
+  
+  function uploadButton(button)
+  {
+    var element = $('fj');
+    
+    if (element.style.display == '')
+    {
+      element.style.display = 'none';
+    }
+    else
+    {
+      element.style.display = '';
+    }
+  }
+  
+  window.onload = function()
+  {
+    init_swfupload();
+    var f = new FileThumb('qu');
+    var t = new ToolBar('nv');
+    
+    var b1 = new Button('Upload New File', 'Upload', 'add.gif');
+    var b2 = new Button('Refresh', 'Refresh', 'refresh.gif');
+    
+    b1.callback = uploadButton;
+    b2.callback = function(){ window.location.reload(); }
+    
+    t.buttons.push(b1);
+    t.buttons.push(b2);
+    
+    t.init();
+  }
+</script>
+
+<table width="100%" cellspacing="0" cellpadding="0">
+	<tbody>
+	<tr>
+		<td class="TB_ToolbarSet" id="nv"></td>
+	</tr>
+
+	<tr id="fj" style='display:none;'>
+		<td style="white-space: normal;" class="FCKUploadArea">
+			<div class="PopupTitle">
+				<span>Upload New Files</span>
+			</div>
+			<div id="cY">
+				<table cellspacing="0" cellpadding="0" style="padding: 10px;">
+					<tbody>
+					<tr>
+						<td>
+              <span id='spanButtonPlaceholder'></span>
+              <div id="divFileProgressContainer" style="clear:both;"></div>
+              
+							<%= render :partial=>"swfupload" %>
+						</td>
+					</tr>
+				  </tbody>
+			  </table>
+			  <div class="PopupButtons">
+				  <div style="width: 100%;">
+					  <table width="100%" cellspacing="0" cellpadding="0">
+						  <tbody><tr>
+							  <td width="100%"></td>
+							  <td nowrap="nowrap">
+								  <button onclick="uploadButton()" class="Button"><span ckf:lang="CancelBtn">Cancel</span></button>
+							  </td>
+						  </tr>
+					  </tbody></table>
+				  </div>
+			  </div>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td style="height: 100%;" id="qu">
+		  <div style="overflow:auto; height:550px;">
+			 <%= render :partial=>"image", :collection=>@images %>
+		  </div>
+		</td>
+	</tr>
+</tbody>
+</table>

@@ -6,7 +6,7 @@
 .field
   = f.label :body
 .field
-  = fckeditor_textarea("post", "body", :toolbarSet => 'Spotus', :width => '500', :height => '200px')
+  = ckeditor_textarea("post", "body", :toolbar => 'Basic', :width => '500px', :height => '200px')
 %br/
 .field
   = f.label :media_embed

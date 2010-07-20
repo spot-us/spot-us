@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <%= f.label     :description, "Description" %>
-		<%= fckeditor_textarea("cca", "description", :toolbarSet => 'Spotus', :width => '480px', :height => '180px') %>
+		<%= ckeditor_textarea("cca", "description", :toolbar => 'Basic', :width => '480px', :height => '180px') %>
     </div>
     <div class="row">
         <%= f.label     :position, "Sort Position" %>

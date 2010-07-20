@@ -86,6 +86,7 @@ div#gsfn_list_widget div#gsfn_content a.gsfn_link {padding-right:5px;}
 #support .gsfn_submit {margin-top:15px !important;color:#555;border-top:solid 1px #ccc;padding-top:5px;}
 #support .gsfn_link {font-size:20px !important;}
 
+.cke_skin_kama {float:left;}
 
 #about_start_story_status {color:#688549;left:349px;position:absolute;top:124px;}
 #about_fund_story_status {color:#688549;left:463px;position:absolute;top:124px;}

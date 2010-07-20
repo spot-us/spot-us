@@ -47,10 +47,13 @@
             <%= topic_check_boxes(@profile, "profile") %> 
           </div>
         </div>
-        <div class="row">
-          <%= f.label :about_you %>
-          <%= fckeditor_textarea("profile", "about_you", :toolbarSet => 'Spotus', :width => '500px', :height => '200px') %>
-        </div>
+        <div class="row clearfix">
+          	<label>About You</label>
+
+          		<%= ckeditor_textarea("profile", "about_you", :toolbar => 'Basic', :width => '520px', :height => '200px') %>
+
+		</div>
+		<div>&nbsp;</div>
         <div class="row">
           <label>&nbsp; </label>
           <%= link_to image_tag('cancel.png', :alt => 'Cancel'), myspot_profile_path %>

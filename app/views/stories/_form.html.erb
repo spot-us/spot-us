@@ -5,18 +5,18 @@
     </div>
     <div class="row">
       <%= f.label :extended_description, "This is your story body." %>
-      <%= fckeditor_textarea("story", "extended_description", :toolbarSet => 'Spotus', :width => '682px', :height => '400px') %>
+      <%= ckeditor_textarea("story", "extended_description", :toolbar => 'Spotus', :width => '682px', :height => '400px') %>
     </div>
     <% if current_user.admin? %>
       <div class="row">
         <%= f.label :external_links %>
-        <%= fckeditor_textarea("story", "external_links", :toolbarSet => 'Spotus', :width => '682px', :height => '200px') %>
+        <%= ckeditor_textarea("story", "external_links", :toolbar => 'Basic', :width => '682px', :height => '200px') %>
       </div>
     <% end %>
     <% if current_user.admin? %>
       <div class="row">
         <%= f.label :license %>
-        <%= fckeditor_textarea("story", "license", :toolbarSet => 'Spotus', :width => '682px', :height => '200px') %>
+        <%= ckeditor_textarea("story", "license", :toolbar => 'Basic', :width => '682px', :height => '200px') %>
       </div>
     <% end %>
     <div class="row">
