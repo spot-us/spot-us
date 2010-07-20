@@ -110,6 +110,6 @@ module CkeditorFileUtils
       install(false)
     end
     # copy over the config file (unless it exists)
-    # copy_configuration
+    copy_configuration
   end
 end
