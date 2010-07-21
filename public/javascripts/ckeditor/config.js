@@ -1,1 +1,0 @@
-/Users/dpnewman/RoR/spot-us/public/javascripts/ckcustom.js
