@@ -15,9 +15,6 @@ xml.story {
       xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
     } if news_item.peer_reviewer
 
-    xml.requestedAmount number_to_currency(news_item.requested_amount)
-    xml.currentFunding number_to_currency(news_item.current_funding)
-    xml.fundingNeeded number_to_currency(news_item.funding_needed)
   end
   
   xml.shortDescription h(news_item.short_description)
