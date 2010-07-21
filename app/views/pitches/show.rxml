@@ -1,6 +1,7 @@
 xml.instruct! :xml, :version=>"1.0" 
 
 xml.pitch {
+  
   xml.headline @pitch.headline
   xml.createdAt @pitch.created_at
   xml.permaLink pitch_path(@pitch, {:only_path => false})
@@ -38,8 +39,8 @@ xml.pitch {
       xml.permaLink profile_path(@pitch.peer_reviewer)
     } if @pitch.peer_reviewer
     
-    xml.shortDescription h @pitch.short_description
-    xml.extendedDescription h @pitch.extended_description
+    xml.shortDescription h(@pitch.short_description)
+    xml.extendedDescription h(@pitch.extended_description)
     
   } if @pitch.story
   
