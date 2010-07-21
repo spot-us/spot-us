@@ -34,7 +34,7 @@ object embed {display:block;}
 .padding_50 {padding:50px;}
 .align-center{text-align:center;}
 .align-right{text-align:right;}
-.test {}
+
 .margin_top_10{margin-top:10px;}
 .margin_bottom_10{margin-bottom:10px;}
 .border_top {border-top:solid 1px #aaa;}
@@ -72,6 +72,8 @@ h2.section{border-bottom: dashed 1px #ddd;}
 .deep-red { color: #673122;}
 .deep-green { color: #3A6425;}
 .grey {color:#777;}
+
+.toggle_video {font-family:verdana;font-size:10px;}
 
 #fdbk_tab {top:241px !important;}
 #gsfn_search_form {margin-bottom:10px;}
@@ -283,7 +285,7 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left ul.pitch_nav li.qualifications {border-left:solid 2px #ddd;}
 .pitch_left ul.pitch_nav li.assignments {width:162px;}
 .pitch_left ul.pitch_nav li:last-child {border-right:solid 2px #ddd;}
-.pitch_left .watch_video {margin:0 0 10px 17px;}
+.pitch_left .watch_video {margin:0 17px 1px 0;text-align:right;}
 .pitch_left .watch_video img {vertical-align:bottom;}
 .pitch_left .description_tab .short_description {margin-bottom:15px;}
 .pitch_left .description_tab .extended_description h4 {margin-bottom:5px;font-family:Verdana;font-weight:normal;}

@@ -62,7 +62,7 @@ CKEDITOR.editorConfig = function( config )
         'NumberedList','BulletedList'], 
         ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image']
     ];
-
+	config.linkShowAdvancedTab = false;
 	// config.resize_maxWidth = 500;
 	// config.resize_minWidth = 500;
 	config.removePlugins = 'elementspath';
