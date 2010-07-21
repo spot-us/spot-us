@@ -45,7 +45,7 @@ xml.pitch {
     xml.organizationSupporters {
       if news_item.supporting_organizations.any? || news_item.donations_and_credits.from_organizations.any? 
         news_item.organizational_donors.each do |supporter|
-          apply_fragment ['pitch_organizational_donor_api_', supporter] do
+          apply_fragment ['pitch_organizational_donor_api_', news_item, supporter] do
             xml.organizationalDonor{
               xml.fullName supporter.full_name
               xml.permaLink profile_path(supporter, {:only_path => false})
@@ -55,7 +55,7 @@ xml.pitch {
           end
         end
         news_item.supporting_organizations.each do |supporter|
-          apply_fragment ['pitch_organizational_supporter_api_', supporter] do
+          apply_fragment ['pitch_organizational_supporter_api_', news_item, supporter] do
             xml.organizationalSupporter{
               xml.fullName supporter.full_name
               xml.permaLink profile_path(supporter, {:only_path => false})
@@ -67,7 +67,7 @@ xml.pitch {
     }
     xml.groupSupporters {
       news_item.donating_groups.each do |group|
-        apply_fragment ['pitch_group_donor_api_', group] do
+        apply_fragment ['pitch_group_donor_api_', news_item, group] do
           xml.groupDonor {
             xml.groupName group.name 
             xml.permaLink group_path(group, { :only_path => false })
@@ -81,7 +81,7 @@ xml.pitch {
       xml.totalAmountDonated number_to_currency(Donation.cca_supporters(news_item.id).map{ |obj| obj.cca_total_amount.to_f }.sum)
       if !Donation.cca_supporters(news_item.id).all.empty?
         via_cca_supporters_for(news_item).each do |donation|
-          apply_fragment ['pitch_cca_supporter_api_', donation] do
+          apply_fragment ['pitch_cca_supporter_api_', news_item, donation] do
             xml.ccaSupporter{
               xml.ccaTitle donation.cca.title 
               xml.permaLink cca_path(donation.cca, { :only_path => false })
@@ -96,7 +96,7 @@ xml.pitch {
       xml.totalAmountDonated number_to_currency(news_item.total_amount_donated)
       if citizen_supporters_for(news_item).any?
         citizen_supporters_for(news_item).each do |supporter|
-          apply_fragment ['pitch_public_supporter_api_', supporter] do
+          apply_fragment ['pitch_public_supporter_api_', news_item, supporter] do
             xml.publicSupporter{
               xml.fullName supporter.full_name
               xml.permaLink profile_path(supporter, {:only_path => false})
