@@ -11,4 +11,5 @@ public/system
 public/coverage
 public/features_rcov
 public/javascripts/js_all.js
+public/javascripts/ckeditor/config.js
 public/stylesheets/styles_all.css

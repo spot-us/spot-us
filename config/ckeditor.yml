@@ -15,11 +15,11 @@ development:
   public_uri: "/uploads"
   public_path: "public/uploads"
   
-  file_manager_uri: "/ckeditor/files"
-  file_manager_upload_uri: "/ckeditor/create?kind=file"
+  file_manager_uri: :null
+  file_manager_upload_uri: :null
   
-  file_manager_image_upload_uri: "/ckeditor/create?kind=image"
-  file_manager_image_uri: "/ckeditor/images"
+  file_manager_image_upload_uri: :null
+  file_manager_image_uri: :null
   
 staging: 
   swf_file_post_name: "data"
@@ -37,11 +37,11 @@ staging:
   public_uri: "/uploads"
   public_path: "public/uploads"
 
-  file_manager_uri: "/ckeditor/files"
-  file_manager_upload_uri: "/ckeditor/create?kind=file"
+  file_manager_uri: :null
+  file_manager_upload_uri: :null
 
-  file_manager_image_upload_uri: "/ckeditor/create?kind=image"
-  file_manager_image_uri: "/ckeditor/images"
+  file_manager_image_upload_uri: :null
+  file_manager_image_uri: :null
 
 production: 
   swf_file_post_name: "data"
@@ -59,8 +59,8 @@ production:
   public_uri: "/uploads"
   public_path: "public/uploads"
   
-  file_manager_uri: "/ckeditor/files"
-  file_manager_upload_uri: "/ckeditor/create?kind=file"
+  file_manager_uri: :null
+  file_manager_upload_uri: :null
   
-  file_manager_image_upload_uri: "/ckeditor/create?kind=image"
-  file_manager_image_uri: "/ckeditor/images"
+  file_manager_image_upload_uri: :null
+  file_manager_image_uri: :null
