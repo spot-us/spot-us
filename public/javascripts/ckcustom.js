@@ -46,7 +46,7 @@ CKEDITOR.editorConfig = function( config )
   config.toolbar_Spotus =
     [
         ['PasteText','PasteFromWord','Format','Bold','Italic','Underline','Strike','TextColor',
-        'NumberedList','BulletedList','Outdent','Indent','Blockquote', 
+        'NumberedList','BulletedList','Blockquote', 
         'JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink',
         'Image','Embed','Source','Maximize']
     ];
