@@ -1,0 +1,41 @@
+xml.story {
+  
+  apply_fragment ['story_header_api_', news_item] do
+    xml.headline news_item.headline
+    xml.createdAt news_item.created_at
+    xml.permaLink news_item_path(news_item, {:only_path => false})
+
+    xml.reporter{
+        xml.fullName news_item.user.full_name
+        xml.permaLink profile_path(news_item.user, {:only_path => false})
+    }
+
+    xml.editor {
+      xml.fullName news_item.peer_reviewer.full_name
+      xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+    } if news_item.peer_reviewer
+
+  end
+  
+  xml.shortDescription h(news_item.short_description)
+
+  apply_fragment ['story_pitch_api_', news_item] do
+    xml.pitch{
+      xml.headline news_item.pitch.headline
+      xml.createdAt news_item.pitch.created_at
+      xml.permaLink story_path(news_item.pitch, {:only_path => false})
+      xml.reporter{
+          xml.fullName news_item.user.full_name
+          xml.permaLink profile_path(news_item.user, {:only_path => false})
+      }
+      xml.editor {
+        xml.fullName news_item.peer_reviewer.full_name
+        xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+      } if news_item.peer_reviewer
+
+      xml.shortDescription h(news_item.short_description)
+
+    } if news_item.pitch
+  end
+
+}

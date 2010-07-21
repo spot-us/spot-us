@@ -1,0 +1,105 @@
+xml.instruct! :xml, :version=>"1.0" 
+
+xml.pitch {
+  
+  xml.headline @pitch.headline
+  xml.createdAt @pitch.created_at
+  xml.permaLink pitch_path(@pitch, {:only_path => false})
+  
+  xml.reporter{
+      xml.fullName @pitch.user.full_name
+      xml.permaLink profile_path(@pitch.user, {:only_path => false})
+      xml.qualifications @pitch.skills
+      xml.disclosure @pitch.disclosure unless @pitch.disclosure.blank?
+  }
+  
+  xml.editor {
+    xml.fullName @pitch.peer_reviewer.full_name
+    xml.permaLink profile_path(@pitch.peer_reviewer)
+  } if @pitch.peer_reviewer
+  
+  xml.requestedAmount number_to_currency(@pitch.requested_amount)
+  xml.currentFunding number_to_currency(@pitch.current_funding)
+  xml.fundingNeeded number_to_currency(@pitch.funding_needed)
+  xml.deliverables @pitch.delivery_description
+  
+  xml.shortDescription h @pitch.short_description
+  xml.extendedDescription h @pitch.extended_description
+  
+  xml.story{
+    xml.headline @pitch.story.headline
+    xml.createdAt @pitch.story.created_at
+    xml.permaLink story_path(@pitch.story, {:only_path => false})
+    xml.reporter{
+        xml.fullName @pitch.user.full_name
+        xml.permaLink profile_path(@pitch.user, {:only_path => false})
+    }
+    xml.editor {
+      xml.fullName @pitch.peer_reviewer.full_name
+      xml.permaLink profile_path(@pitch.peer_reviewer)
+    } if @pitch.peer_reviewer
+    
+    xml.shortDescription h(@pitch.short_description)
+    xml.extendedDescription h(@pitch.extended_description)
+    
+  } if @pitch.story
+  
+  xml.supporters{
+    xml.organizationSupporters {
+      if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any? 
+        @pitch.organizational_donors.each do |supporter|
+          xml.organizationalDonor{
+            xml.fullName supporter.full_name
+            xml.permaLink profile_path(supporter, {:only_path => false})
+            xml.avatar supporter.photo.url(:thumb)
+            xml.donationAmount number_to_currency(supporter.amount_donated_to(@pitch))
+          }
+        end
+        @pitch.supporting_organizations.each do |supporter|
+          xml.organizationalDonor{
+            xml.fullName supporter.full_name
+            xml.permaLink profile_path(supporter, {:only_path => false})
+            xml.avatar supporter.photo.url(:thumb)
+          }
+        end
+      end
+    }
+    xml.groupSupporters {
+      @pitch.donating_groups.each do |group|
+        xml.groupDonor {
+          xml.groupName group.name 
+          xml.permaLink group_path(group, { :only_path => false })
+          xml.avatar group.image.url(:thumb)
+          xml.donationAmount number_to_currency(group.donations_for_pitch(@pitch))
+        }
+      end
+    }
+    xml.ccaSupporters {
+      xml.totalAmountDonated number_to_currency(Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum)
+      if !Donation.cca_supporters(@pitch.id).all.empty?
+        via_cca_supporters_for(@pitch).each do |donation|
+          xml.ccaSupporter{
+            xml.ccaTitle donation.cca.title 
+            xml.permaLink cca_path(donation.cca, { :only_path => false })
+            xml.avatar donation.cca.user.photo.url(:thumb)
+            xml.donationAmount number_to_currency(donation.cca_total_amount)
+          }
+        end
+      end
+    }
+    xml.publicSupporters {
+      xml.totalAmountDonated number_to_currency(@pitch.total_amount_donated)
+      if citizen_supporters_for(@pitch).any?
+        citizen_supporters_for(@pitch).each do |supporter|
+          xml.publicSupporter{
+            xml.fullName supporter.full_name
+            xml.permaLink profile_path(supporter, {:only_path => false})
+            xml.avatar supporter.photo.url(:thumb)
+            xml.donationAmount number_to_currency(supporter.amount_donated_to(@pitch))
+          }
+        end
+      end
+    }
+  }
+  
+}

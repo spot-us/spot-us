@@ -13,6 +13,9 @@ class NewsItemsController < ApplicationController
       format.html do
         get_news_items
       end
+      format.xml do
+        get_news_items
+      end
       format.rss do
         get_news_items(10)
         render :layout => false
@@ -54,6 +57,7 @@ class NewsItemsController < ApplicationController
   protected
 
   def get_news_items(limit=nil)
+    @requested_page = params[:page] || 1
     unless limit
       @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
     else
