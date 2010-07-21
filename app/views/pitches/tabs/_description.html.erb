@@ -1,8 +1,8 @@
 <% if !@pitch.video_embed.blank? %>
 	<div class="watch_video">
-		<%= link_to "&raquo; Watch Video &laquo;", "", :class=> "toggle_video" %>
+		<%= link_to "Show/Hide Video", "", :class=> "toggle_video" %>
 	</div>
-	<div class="video_container hide">
+	<div class="video_container">
 		<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
 	</div>
 <% end %>
