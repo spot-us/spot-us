@@ -353,8 +353,8 @@ class Pitch < NewsItem
   protected
 
   def do_fund_events
-    send_fund_notification unless self.status = 'published'
-    create_associated_story unless self.story
+    send_fund_notification unless story && story.published?
+    create_associated_story unless story
   end
   
 
