@@ -130,7 +130,7 @@ div#gsfn_list_widget div#gsfn_content a.gsfn_link {padding-right:5px;}
 				min-height:500px;position:relative;}
 .home-boxer{}
 .home-boxer h1 {color:#617D86;font-family:Georgia,Helvetica,sans-serif;font-size:23pt;font-weight:bold;letter-spacing:-1pt;margin-bottom:10px;margin-left:-22px;}
-.home-boxer #main-area.home-floater{width:595px;float:left;margin-left:20px;}
+.home-boxer #main-area.home-floater{width:595px;float:left;margin-left:20px;margin-bottom:35px;}
 .home-floater {padding:20px 15px 15px;margin-right:23px; height:100%;}
 .stories-in-progress{float:right;width:310px;background:#eee;margin-right:34px; border-left:1px solid #ccc; border-bottom:1px solid #ccc;}
 .stories-in-progress ul{margin:0px 0px 0px 0px;padding:0 13px 0 3px;list-style-type:none;}
@@ -145,14 +145,14 @@ p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;lett
 .folded-headers .rss_button {float:right;margin-right:5px;margin-top:7px;}
 .folded-headers {
 			background-image:url(/images/new_design/banner.png);background-repeat:no-repeat;clear:both;color:#FFFFFF;float:left;
-			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-left:-67px;margin-top:30px;
+			font-family:Arial,Helvetica,sans-serif;font-size:16pt;font-weight:bold;height:60px;margin-left:-67px;margin-top:10px;
 			padding:5px;text-transform:uppercase;width:652px;}
 .folded-headers-big {background-image:url(/images/new_design/thick-fold.png);background-repeat:no-repeat;height:152px;margin-bottom:0;
 			margin-left:-38px;padding:10px 10px 0;	position:relative;}
 #header-container {margin-left:43px;}
 #header-container-short {margin-left:40px;}			
-#help-images{margin-left:-22px;margin-bottom:-15px;width:655px;}
-#help-images a {padding-right:15px;}
+#help-images{margin-top:2px;}
+#help-images a {padding-right:6px;}
 
 div#pitches_carousel{background-color:#f9f9f9;border:1px solid #11363E;height:353px;padding:5px 5px 0px 5px;vertical-align:text-top;margin:0px 0px 0px -20px;}
 div#pitches_carousel li{width:590px;padding:10px 0px 0px 10px; }
