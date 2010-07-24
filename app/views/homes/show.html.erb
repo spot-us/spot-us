@@ -34,9 +34,14 @@
 			</ul>
 		</div>
 		<span class="float-right" style="padding-right:4px;margin-top:4px;margin-bottom:20px"><%= link_to "See All Unfunded Stories &raquo;", "/stories/unfunded" %></span>
+
 		<!-- END FUND A STORY-->
-			<br clear="all">
-		<%= render :partial => "/shared/connect_buttons" %>
+		<div class="clearfix">
+			<div class="folded-headers">
+				<div id="header-container">GET INVOLVED</div>
+			</div>
+			<%= render :partial => "/shared/connect_buttons" %>
+		</div>
 		<!-- START RECENTLY PUBLISHED STORIES -->
 		<div class="folded-headers">
 			<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/published.rss", :class => "rss_button" %>

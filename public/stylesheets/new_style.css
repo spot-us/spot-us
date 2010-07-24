@@ -149,6 +149,8 @@ p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;lett
 			padding:5px;text-transform:uppercase;width:652px;}
 .folded-headers-big {background-image:url(/images/new_design/thick-fold.png);background-repeat:no-repeat;height:152px;margin-bottom:0;
 			margin-left:-38px;padding:10px 10px 0;	position:relative;}
+.home-boxer #main-area .connect_buttons img {margin-top:0px;}
+
 #header-container {margin-left:43px;}
 #header-container-short {margin-left:40px;}			
 #help-images{margin-top:2px;}
