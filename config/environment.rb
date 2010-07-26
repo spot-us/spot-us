@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem "cucumber", :lib => false, :version => "= 0.1.16"
   config.gem "webrat", :lib => false, :version => "= 0.4.4"
   config.gem "money", :version => ">=2.1.3"
+  config.gem 'sanitize'
   config.gem "oauth2"
   config.gem "json"
   config.gem "twitter_oauth"

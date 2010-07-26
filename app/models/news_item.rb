@@ -47,14 +47,21 @@ class NewsItem < ActiveRecord::Base
   include NetworkMethods
   include Utils
   
-  cleanse_columns(:delivery_description, :extended_description, :short_description, :external_links) do |sanitizer|
+  cleanse_columns( :external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
+
+  # cleanse_columns(:delivery_description, :extended_description, :short_description, :skills) do |sanitizer|
+  #   sanitizer.allowed_tags.add(%w(object param embed a img))
+  #   sanitizer.allowed_attributes.add(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
+  # end
 
   cleanse_columns(:video_embed, :widget_embed) do |sanitizer|
     sanitizer.allowed_tags.replace(%w(object param embed a img))
     sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
   end
+  before_save :clean_columns
+
 
   acts_as_paranoid
   aasm_column :status
@@ -241,6 +248,13 @@ class NewsItem < ActiveRecord::Base
     author = user.notify_comments ? [user] : nil
     comment_subscribers = comments.map(&:user).find_all{|user| user.notify_comments}.uniq
     (author + comment_subscribers).uniq
+  end
+
+  def clean_columns
+	self.delivery_description = html_cleanup(self.delivery_description) if self.delivery_description
+	self.extended_description = html_cleanup(self.extended_description) if self.extended_description
+	self.short_description = html_cleanup(self.short_description) if self.short_description
+	self.skills = html_cleanup(self.skills) if self.skills
   end
 
 end
