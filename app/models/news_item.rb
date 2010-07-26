@@ -47,7 +47,7 @@ class NewsItem < ActiveRecord::Base
   include NetworkMethods
   include Utils
   
-  cleanse_columns( :external_links) do |sanitizer|
+  cleanse_columns(:external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
 
@@ -251,10 +251,14 @@ class NewsItem < ActiveRecord::Base
   end
 
   def clean_columns
-	self.delivery_description = html_cleanup(self.delivery_description) if self.delivery_description
-	self.extended_description = html_cleanup(self.extended_description) if self.extended_description
-	self.short_description = html_cleanup(self.short_description) if self.short_description
-	self.skills = html_cleanup(self.skills) if self.skills
+	options = {
+		:tags => %w(object param embed a img), 
+		:attributes => %w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality)}
+	self.extended_description 		= self.extended_description.sanitize(options) #html_cleanup(self.extended_description) if self.extended_description
+	self.short_description 			= self.short_description.sanitize(options) 
+	self.skills 					= self.skills.sanitize(options)
+	self.delivery_description 		= self.delivery_description.sanitize(options)
+
   end
 
 end
