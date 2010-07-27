@@ -251,9 +251,7 @@ class NewsItem < ActiveRecord::Base
   end
 
   def clean_columns
-	options = {
-		:tags => %w(object param embed a img), 
-		:attributes => %w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality)}
+	options = {}
 	self.extended_description 		= self.extended_description.sanitize(options) if self.extended_description
 	self.short_description 			= self.short_description.sanitize(options) if self.short_description
 	self.skills 					= self.skills.sanitize(options) if self.skills
