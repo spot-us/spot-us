@@ -3,6 +3,7 @@ ActionView::Base.sanitized_allowed_attributes.replace  %w(id type width height r
 
 class String
   def sanitize(options={})
-    ActionController::Base.helpers.sanitize(self, options)
+    ActionController::Base.helpers.sanitize(self, options) if self
+    nil
   end
 end
