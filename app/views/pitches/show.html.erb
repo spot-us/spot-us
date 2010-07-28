@@ -10,17 +10,18 @@
 
 <div id="news_item" class="pitch_container clearfix">
 	<div class="pitch_left">
-		<div class="small_header">
-			<div class="share_buttons">
-				<%= render :partial => "/shared/social_buttons" %>
+		<% apply_fragment ['pitch_header_left', @pitch] do %>
+			<div class="small_header">
+				<div class="share_buttons">
+					<%= render :partial => "/shared/social_buttons" %>
+				</div>
+				<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
 			</div>
-			<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
-		</div>
-		<h1><%= h @pitch.headline %></h1>
-
+			<h1><%= h @pitch.headline %></h1>
+		<%end%>
 		<%= render :partial => "tab_header" %>
 		<br class="clear"/>
-				
+			
 		<% unless @item %>
 			<%=render :partial=>'main' %>
 		<% else %>

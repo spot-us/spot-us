@@ -1,26 +1,26 @@
 <div class="story_tab tab_panel">
-   <h5>Story blog postings</h5>
-   <% if @pitch.posts.any? %>
-      <% @pitch.posts.each do |post| %>
-			   <% apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
-             <div class="story">
+	<h5>Story blog postings</h5>
+	<% if @pitch.posts.any? %>
+		<% @pitch.posts.each do |post| %>
+			<% apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
+				<div class="story">
 
-				<div class="small_header"><%= link_to post.user.full_name, profile_path(post.user) %> | <%= pitch_date(post.created_at) %></div>
-                <h3 class="title"><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h3>
-                
-				<div class="summary">
-                	<%= truncate_words(strip_html(post.body), 30) %> 
+					<div class="small_header"><%= link_to post.user.full_name, profile_path(post.user) %> | <%= pitch_date(post.created_at) %></div>
+					<h3 class="title"><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h3>
+
+					<div class="summary">
+						<%= truncate_words(strip_html(post.body), 30) %> 
+					</div>
+
+					<%= link_to "read &raquo;", pitch_post_path(@pitch, post) %>
+
 				</div>
+			<% end %>
+		<% end %>
 
-				<%= link_to "read &raquo;", pitch_post_path(@pitch, post) %>
-				
-             </div>
-			 <% end %>
-      <% end %>
-     
-   <% else %>
-      <p>
-         <em>This story has no updates yet.</em>
-      </p>
-   <% end %>
+	<% else %>
+		<p>
+			<em>This story has no updates yet.</em>
+		</p>
+	<% end %>
 </div>

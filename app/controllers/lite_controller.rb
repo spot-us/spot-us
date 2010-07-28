@@ -8,6 +8,8 @@ class LiteController < ApplicationController
     pitch_id = params[:id] if params[:id]
     @pitch = pitch_id && !pitch_id.blank? ? Pitch.find_by_id(pitch_id) : Pitch.featured_by_network(current_network).first
     
+    @pitch = Pitch.featured_by_network(current_network).first unless @pitch
+    
     # save the pitch id so that we can keep track of which pitch we are on...
     cookies[:spotus_lite] = {
       :value => @pitch.id,
