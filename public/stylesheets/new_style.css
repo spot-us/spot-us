@@ -103,7 +103,7 @@ h2.section{border-bottom: dashed 1px #ddd;}
 #story_listing .info {float:left;width:230px;max-height:70px;overflow:hidden;font-size:11px;}
 #story_listing .info a {text-decoration:none;color:#666;}
 #story_listing .description {max-height:52px;margin:5px 0 8px;overflow:hidden;}
-#story_listing .description.story {max-height:120px;}
+#story_listing .description.story {max-height:95px;}
 #story_listing .description a {text-decoration:none;color:#777;}
 #story_listing .funding {color:#333;}
 #story_listing .pitch .donater input[type="image"] {width:100px;margin-bottom:5px;}
