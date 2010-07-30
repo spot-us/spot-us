@@ -10,6 +10,7 @@
 		<%= link_to "Stories", "/stories/published", :class => "blue_button" + active_button("stories") %>
 		<%= link_to "Tips", "/stories/suggested", :class => "blue_button" + active_button("tips") %>
 		<%= link_to "Channels", channel_path(@channels.first), :class => "blue_button" + active_button("channels") %>
+		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
 	</div>
 	<div id="sub_nav" class="clearfix">
 		<%= channels_filter %>
@@ -20,7 +21,7 @@
 		<%= render :partial => "shared/lists", 
 			:locals => {:items => @news_items, :no_items_message => "There were no results for your search.  Try different search terms."} %>
 			
-		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
+		
 	</div>
 </div>
 

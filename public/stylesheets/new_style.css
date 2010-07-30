@@ -77,7 +77,8 @@ h2.section{border-bottom: dashed 1px #ddd;}
 
 
 #browse_stories {min-height:400px;}
-#browse_stories #browsing_header {background:#e7f2f3;padding:35px 35px 10px;width:962px;border-bottom:solid 1px #888;}
+#browse_stories #browsing_header {background:#e7f2f3;padding:35px 35px 10px;width:962px;border-bottom:solid 1px #888;position:relative;}
+#browse_stories #browsing_header .rss_button {position:absolute;bottom:10px;right:40px;}
 
 #browse_stories #browsing_header .blue_button {-moz-border-radius:4px;-webkit-border-radius:4px;display:block;font-size:16px;height:32px;
 			line-height:32px;text-align:center;text-decoration:none;text-transform:uppercase;width:105px;background:#226a74;float:left;
