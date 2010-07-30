@@ -4,25 +4,27 @@
 
 <% @title = "Spot.us - Fund A Story" %>
 
-<div id="fund_a_story">
-	<div id="navigation">
-		<%=render :partial=>"shared/filters", :locals=>{
-			:title=>"Browse Stories",
-			:url_base=>"/stories",
-			:filters=>FILTERS_STORIES
-		}%>
-		<%=render :partial=>"shared/channels"%>   
+<div id="browse_stories">
+	<div id="browsing_header" class="clearfix">
+		<%= link_to "Pitches", "/stories/unfunded", :class => "blue_button" + active_button("pitches") %>
+		<%= link_to "Stories", "/stories/published", :class => "blue_button" + active_button("stories") %>
+		<%= link_to "Tips", "/stories/suggested", :class => "blue_button" + active_button("tips") %>
+		<%= link_to "Channels", channel_path(@channels.first), :class => "blue_button" + active_button("channels") %>
 	</div>
-	<div id="stories">
+	<div id="sub_nav" class="clearfix">
+		<%= channels_filter %>
+		<%= stories_filter("/stories",FILTERS_STORIES)  %>
+	</div>
+	<div id="story_listing">
+		
+		<%= render :partial => "shared/lists", 
+			:locals => {:items => @news_items, :no_items_message => "There were no results for your search.  Try different search terms."} %>
+			
 		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
-		<h3 class="display_inline">NOW VIEWING:</h3> 
-		<h4 class="display_inline"><%= @filter.gsub("_", " ").gsub("-", " ").titleize %> Stories <%=get_inside_network_text(@network).titleize%></h4>
-		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
-			&nbsp;
-		</div>
-		<%=render :partial=>"shared/lists", :locals=>{ 
-			:items=>@news_items, 
-			:no_items_message=>"There were no results for your search.  Try different search terms." 
-		}%>
 	</div>
 </div>
+
+
+
+
+

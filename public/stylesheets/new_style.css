@@ -75,6 +75,41 @@ h2.section{border-bottom: dashed 1px #ddd;}
 
 .toggle_video {font-family:verdana;font-size:10px;}
 
+
+#browse_stories {min-height:400px;}
+#browse_stories #browsing_header {background:#e7f2f3;padding:35px 35px 10px;width:962px;border-bottom:solid 1px #888;}
+
+#browse_stories #browsing_header .blue_button {-moz-border-radius:4px;-webkit-border-radius:4px;display:block;font-size:16px;height:32px;
+			line-height:32px;text-align:center;text-decoration:none;text-transform:uppercase;width:105px;background:#226a74;float:left;
+			margin-right:6px;}
+#browse_stories #browsing_header .blue_button.selected {background:#07383e;}
+#browse_stories #browsing_header .blue_button:hover {background:#07383e;}
+#browse_stories #sub_nav {text-align:right;width:972px;padding: 10px 30px;color:#888;border-bottom: solid 1px #ddd;font-size:12px;}
+#browse_stories #sub_nav strong {color:#777;font-weight:normal;font-size:11px;margin-right:5px;}
+#browse_stories #sub_nav a {text-decoration:none;text-transform:uppercase;padding:3px 10px;color:#11363E;}
+#browse_stories #sub_nav a.active {font-weight:bold;-moz-border-radius:4px;-webkit-border-radius:4px;background:#eee;}
+#browse_stories #sub_nav span {margin:0 8px;}
+
+#story_listing {width:992px;padding:20px 20px;}
+#story_listing .pitch {width:300px;float:left;margin:0 0px 10px;padding:0 15px;height:350px;overflow:hidden;color:#888;font-size:12px;
+		border-bottom:1px dotted #AAAAAA}
+#story_listing .donate input[type="submit"] {border:none;background:none;color:green;text-transform:uppercase;font-weight:bold;padding:0;
+				margin-left:-3px;font-size:13px;}
+#story_listing .story_image {margin-bottom:10px;}
+#story_listing h5 {font-weight:normal;}
+#story_listing h5 a {text-decoration:none;color:#11363e !important;font-size:16px;line-height:18px;}
+#story_listing .avatar {float:right;margin-left:8px;width:36px;height:36px;}
+
+#story_listing .info {float:left;width:230px;max-height:70px;overflow:hidden;font-size:11px;}
+#story_listing .info a {text-decoration:none;color:#666;}
+#story_listing .description {max-height:52px;margin:5px 0 8px;overflow:hidden;}
+#story_listing .description.story {max-height:120px;}
+#story_listing .description a {text-decoration:none;color:#777;}
+#story_listing .funding {color:#333;}
+#story_listing .pitch .donater input[type="image"] {width:100px;margin-bottom:5px;}
+#story_listing .pitch .donater {margin-top:10px;}
+#story_listing .pitch .donater img {width:100px;margin-bottom:5px;}
+
 #fdbk_tab {top:241px !important;}
 #gsfn_search_form {margin-bottom:10px;}
 #support {padding:25px 50px;background:#e3eeef;width:932px;}
