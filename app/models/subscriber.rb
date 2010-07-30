@@ -4,7 +4,7 @@ class Subscriber < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   belongs_to :pitch
   before_create :assign_invite_token
-  after_save :send_subscription_email
+  after_create :send_subscription_email
   
   def subscribe
     self.status = "subscribed"
