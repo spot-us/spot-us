@@ -14,7 +14,7 @@
 
 <% if @cca_header and !@pitch.fully_funded? %>
 	<% if current_user %>
-		<%= link_to "Earn Credits", cca_path(@cca_header) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" %>
+		<%= link_to "Earn Credits", cca_path(@cca_header) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" 	%>
 	<% else %>
 		<%= facebox_login_link_to("Earn Credits", cca_path(@cca_header) + "/#{@pitch.id}", {:return_to => cca_path(@cca_header) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
 	<% end %>
