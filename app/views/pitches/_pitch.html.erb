@@ -1,13 +1,13 @@
 <% div_for(pitch, :class => "clearfix") do %>			
-	<% apply_fragment ['pitch_listing_bottom_alt_', pitch] do %>				
+	<% apply_fragment ['pitch_listing_bottom_alt1_', pitch] do %>				
 		<%= render :partial => 'news_items/news_item', :object => pitch %>
 	
 	<% end %>
 	<% if @cca_header and !pitch.fully_funded? %>
 		<% if current_user %>
-			<%= link_to "Earn Credits", cca_path(@cca_header) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" 	%>
+			<%= link_to "Earn Credits", cca_path(@cca_header) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
 		<% else %>
-			<%= facebox_login_link_to("Earn Credits", cca_path(@cca_header) + "/#{pitch.id}", {:return_to => cca_path(@cca_header) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
+			<%= facebox_login_link_to("Earn Credits", cca_path(@cca_header) + "/#{pitch.id}", {:return_to => cca_path(@cca_header) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
 		<% end %>
 	<% end %>
 	<%= render :partial => "donations/text_button", :locals => { :news_item => pitch } %>

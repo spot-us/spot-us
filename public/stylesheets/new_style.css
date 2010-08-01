@@ -94,8 +94,8 @@ h2.section{border-bottom: dashed 1px #ddd;}
 #story_listing {width:992px;padding:20px 20px;}
 #story_listing .pitch {width:300px;float:left;margin:0 0px 10px;padding:0 15px;height:350px;overflow:hidden;color:#888;font-size:12px;
 		border-bottom:1px dotted #AAAAAA}
-#story_listing .donate input[type="submit"] {border:none;background:none;color:green;text-transform:uppercase;font-weight:bold;padding:0;
-				margin-left:-3px;font-size:13px;}
+#story_listing .donate input[type="submit"], .earn_credits_listing, #story_listing .authbox {border:none;background:none;color:green;text-transform:uppercase;font-weight:bold;padding:0;
+				margin-left:-3px;font-size:13px;font-weight:normal;text-decoration:none;}
 #story_listing .story_image {margin-bottom:10px;}
 #story_listing h5 {font-weight:normal;}
 #story_listing h5 a {text-decoration:none;color:#11363e !important;font-size:16px;line-height:18px;}
