@@ -59,7 +59,6 @@ class NewsItemsController < ApplicationController
   def get_news_items(limit=nil)
     @requested_page = params[:page] || 1
     unless limit
-      NewsItem.per_page = 10
       @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
     else
       @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).find(:all,:limit=>limit)
