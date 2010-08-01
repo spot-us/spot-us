@@ -27,7 +27,7 @@ module StoriesHelper
 				results << ("<span>" + link_to(channel.title, channel_path(channel)) + "</span>")
 			end
 		end
-		return "<strong>filter:</strong>" + results.join("|")
+		return "<strong>Browse By Topic:</strong>" + results.join("|")
 	end	
   end
 
@@ -41,7 +41,7 @@ module StoriesHelper
 				  				url_base + '/' + filter + '" title="' + name + '">' + name + '</a></span>')
 			end
 		end
-		return "<strong>filter:</strong>" + results.join("|")
+		return "<strong>Filter:</strong>" + results.join("|")
 	end
   end
 
