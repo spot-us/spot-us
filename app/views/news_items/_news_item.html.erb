@@ -1,16 +1,19 @@
-<% apply_fragment ['news_items_listing_', news_item] do %>
+<% apply_fragment ['news_items_listing_alt_', news_item] do %>
 	<div class="news_item">
-		<%= link_to image_tag(news_item.featured_image.url(:medium), :class => "featured_image"), news_item %>
-		<h5><%= link_to news_item.headline, news_item %></h5>
-		<div class="dateline">
-			<%= short_date(news_item.created_at) %>
-			by
-			<%= link_to h(news_item.user.full_name), profile_path(news_item.user) %>
-			in
-			<%= news_item.network_and_category %>
-		</div>  
+		<%= link_to image_tag(news_item.featured_image.url(:front_story), :class => "story_image"), news_item %>
+		
+		<div class="clearfix">
+			<%= link_to image_tag(news_item.user.photo(:thumb), :class => "avatar", :alt => ""), profile_path(news_item.user) %>	
+			<div class="info">
+				<h5><%= link_to news_item.headline, news_item %></h5>
+				<%= short_date(news_item.created_at) %>
+				by
+				<%= link_to h(news_item.user.full_name), profile_path(news_item.user) %>
+			
+			</div> 
+		</div> 
 		<div class="description">
-			<%= truncate_words(strip_tags(news_item.short_description), 45) %>
+			<%= truncate_words(strip_tags(news_item.short_description), 22) %>
 			<%= link_to "Read More &raquo;", news_item %>
 		</div>
 	</div>

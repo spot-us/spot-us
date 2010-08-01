@@ -1,4 +1,50 @@
 module StoriesHelper
+  def display_filters 
+	["unfunded","almost-funded","funded"]
+  end 
+
+  def active_button(selected)
+	result = ""
+	if selected == "pitches"
+		result = display_filters.include?(params[:filter]) ? " selected" : ""
+	elsif selected == "stories"
+		result = params[:filter] == "published" ? " selected" : ""
+	elsif selected == "tips"
+		result = params[:filter] == "suggested" ? " selected" : ""
+	elsif selected == "channels"
+		result = params[:controller] == "channels" ? " selected" : ""
+	end
+	result
+  end
+
+  def channels_filter
+	if params[:controller] == "channels" && @channels.any?
+		results = []
+		@channels.each do |channel|
+			if channel == @channel    
+				results << ("<span>" + link_to(channel.title, channel_path(channel), :class => "active") + "</span>")
+			else
+				results << ("<span>" + link_to(channel.title, channel_path(channel)) + "</span>")
+			end
+		end
+		return "<strong>filter:</strong>" + results.join("|")
+	end	
+  end
+
+  def stories_filter(url_base, filters)
+	if params[:controller] == "news_items" and display_filters.include?(params[:filter])
+		results = []
+		filters.each do |filter, name|
+			if display_filters.include?(filter) 
+				class_attr 	= 	@filter == filter ? ' class="active"' : ""
+				results 	<< 	('<span onclick="location.href=\'' + url_base + '/' +  filter + '\';"><a' + class_attr + ' href="' +
+				  				url_base + '/' + filter + '" title="' + name + '">' + name + '</a></span>')
+			end
+		end
+		return "<strong>filter:</strong>" + results.join("|")
+	end
+  end
+
   def supporters_count
     @story.pitch.supporters.size
   end
