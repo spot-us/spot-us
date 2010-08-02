@@ -2,8 +2,6 @@
     <strong>FULLY FUNDED</strong>
 <% elsif current_user && (current_user.remaining_credits > 0) && (news_item.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(news_item)) %>
     <%= render :partial => 'credits/credit_pitch', :locals => {:news_item => news_item} %>
-<% elsif current_user && (!current_user.can_donate_to?(news_item) || (news_item.total_amount_allocated_by_user(current_user) >= current_user.max_donation_for(news_item))) %>
-    <%= render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item} %>
 <% elsif news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT) %>
     <%= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item, :spotus_lite=>false} %>
 <% elsif !current_user || (current_user && current_user.can_donate_to?(news_item)) %>
