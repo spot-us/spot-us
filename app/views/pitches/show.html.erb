@@ -45,7 +45,7 @@
 				<% end %>
 			</div>
 		</div>
-		<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} %>
+		<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} if current_user%>
 		<div class="blue_panel">
 			<% unless @pitch.fully_funded? && @pitch.story && @pitch.story.published? %>
 				<h5 class="difference">Make a Difference!</h5>
