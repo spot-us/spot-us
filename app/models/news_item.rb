@@ -253,8 +253,8 @@ class NewsItem < ActiveRecord::Base
   def clean_columns
 	options = {}
 	self.extended_description 		= self.extended_description.sanitize(options) if self.extended_description
-	self.short_description 			= self.short_description.sanitize(options) if self.short_description
-	self.skills 					= self.skills.sanitize(options) if self.skills
+	self.short_description 			  = self.short_description.sanitize(options) if self.short_description
+	self.skills 					        = self.skills.sanitize(options) if self.skills
 	self.delivery_description 		= self.delivery_description.sanitize(options) if self.delivery_description
 
   end
