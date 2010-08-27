@@ -12,7 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   #better route support for the search page
   map.connect "stories.:format", :controller => "news_items", :action => "index", :filter=>'unfunded'
   map.connect "stories/:filter.:format", :controller => "news_items", :action => "index", :filter=>nil, :length=>"short", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
-  map.connect "stories/:filter/:length.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
+  map.connect "stories/:filter/:topic.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :topic=>/#{Topic.all.map(&:seo_name).join('|').to_s}/}
+  map.connect "stories/:filter/:length.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :length=>/full|short/}
   map.connnect "news_items", :controller => "news_items", :action => "search", :sort_by=>'asc'
   
   map.connect '/auth/facebook', :controller => "sessions", :action => "facebook_login"

@@ -7,6 +7,7 @@ class NewsItemsController < ApplicationController
   def index
     @channels = Channel.by_network(current_network)
     @network = current_network
+    @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil
     @full = (params[:length]=='full')
     get_filter
     respond_to do |format|
@@ -59,9 +60,9 @@ class NewsItemsController < ApplicationController
   def get_news_items(limit=nil)
     @requested_page = params[:page] || 1
     unless limit
-      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
+      @news_items = NewsItem.constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
     else
-      @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).find(:all,:limit=>limit)
+      @news_items = NewsItem.constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).find(:all,:limit=>limit)
     end
   end
 

@@ -119,6 +119,10 @@ class NewsItem < ActiveRecord::Base
     return {} unless network
     { :conditions => { :network_id => network.id } }
   }
+  named_scope :constrain_topic, lambda {|topic|
+    return {} unless topic
+    { :conditions => " topics.seo_name='#{topic.seo_name}'" , :include => :topics }
+  }
   named_scope :all_news_items
   named_scope :exclude_type, lambda {|type| { :conditions => ['news_items.type != ?', type] } }
 
@@ -130,7 +134,7 @@ class NewsItem < ActiveRecord::Base
   
   named_scope :order_results, lambda { |type|
     return {} if type=='almost-funded'
-    return { :order=>"created_at desc" }
+    return { :order=>"news_items.created_at desc" }
   }
   
   cattr_reader :per_page

@@ -1,20 +1,20 @@
 module StoriesHelper
   def display_filters 
-	["unfunded","almost-funded","funded"]
+	  ["unfunded","almost-funded","funded"]
   end 
 
   def active_button(selected)
-	result = ""
-	if selected == "pitches"
-		result = display_filters.include?(params[:filter]) ? " selected" : ""
-	elsif selected == "stories"
-		result = params[:filter] == "published" ? " selected" : ""
-	elsif selected == "tips"
-		result = params[:filter] == "suggested" ? " selected" : ""
-	elsif selected == "channels"
-		result = params[:controller] == "channels" ? " selected" : ""
-	end
-	result
+  	result = ""
+  	if selected == "pitches"
+  		result = display_filters.include?(params[:filter]) && !@topic ? " selected" : ""
+  	elsif selected == "stories"
+  		result = params[:filter] == "published" ? " selected" : ""
+  	elsif selected == "tips"
+  		result = params[:filter] == "suggested" ? " selected" : ""
+  	elsif selected == "topics"
+  		result = @topic ? " selected" : ""
+  	end
+  	result
   end
 
   def channels_filter
@@ -29,6 +29,18 @@ module StoriesHelper
 		end
 		return "<strong>Browse By Topic:</strong>" + results.join("|")
 	end	
+  end
+  
+  def topics_filter
+		results = []
+		Topic.all.each do |topic|
+			if topic == @topic    
+				results << ("<span>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name, :class => "active") + "</span>")
+			else
+				results << ("<span>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name) + "</span>")
+			end
+		end
+		return "<strong>Browse By Topic:</strong>" + results.join("|")
   end
 
   def stories_filter(url_base, filters)
