@@ -19,6 +19,12 @@
         <%= ckeditor_textarea("story", "license", :toolbar => 'Basic', :width => '682px', :height => '200px') %>
       </div>
     <% end %>
+    <div class="row clearfix">
+       <label>Topics</label>
+       <div class="pitch_topics">
+          <%= topic_check_boxes(@story) %>
+       </div>    
+    </div>
     <div class="row">
       <label>Add Media</label>
     </div>

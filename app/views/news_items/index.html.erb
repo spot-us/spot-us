@@ -9,7 +9,6 @@
 		<%= link_to "Pitches", "/stories/unfunded", :class => "blue_button" + active_button("pitches") %>
 		<%= link_to "Stories", "/stories/published", :class => "blue_button" + active_button("stories") %>
 		<%= link_to "Tips", "/stories/suggested", :class => "blue_button" + active_button("tips") %>
-		<%#= link_to "Topics", channel_path(@channels.first), :class => "blue_button" + active_button("channels") %>
 		<%= link_to "Topics", "/stories/unfunded/" + Topic.first.seo_name, :class => "blue_button" + active_button("topics") %>
 		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
 	</div>
