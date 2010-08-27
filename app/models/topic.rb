@@ -2,6 +2,13 @@ class Topic < ActiveRecord::Base
   validates_presence_of   :name
   validates_uniqueness_of :name
   has_many :topic_memberships
+  
+  after_create :set_seo_name
+  
+  def set_seo_name
+    self.update_attributes({ :seo_name => self.name.parameterize.to_s })
+  end
+  
 end
 
 # == Schema Information
