@@ -15,7 +15,7 @@
 	</div>
 	<div id="sub_nav" class="clearfix">
 		<%= channels_filter %>
-		<%= @topic ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
+		<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
 	</div>
 	<div id="story_listing">
 		
