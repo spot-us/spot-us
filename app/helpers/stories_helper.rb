@@ -35,9 +35,9 @@ module StoriesHelper
 		results = []
 		Topic.all.each do |topic|
 			if topic == @topic    
-				results << ("<span>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name, :class => "active") + "</span>")
+				results << ("<span class='topics'>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name, :class => "active") + "</span>")
 			else
-				results << ("<span>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name) + "</span>")
+				results << ("<span class='topics'>" + link_to(topic.name, "/stories/unfunded/"+topic.seo_name) + "</span>")
 			end
 		end
 		return "<strong>Browse By Topic:</strong>" + results.join("|")

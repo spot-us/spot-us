@@ -4,6 +4,10 @@ class AddSeoNameToTopics < ActiveRecord::Migration
     Topic.all.each do |topic|
         topic.update_attributes({:seo_name => topic.name.parameterize.to_s})
     end
+    Topic.create({:name => 'Los Angeles'})
+    t = Topic.first
+    t.seo_name = t.seo_name.gsub('+-', '')
+    t.save
   end
 
   def self.down
