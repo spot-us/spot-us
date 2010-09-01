@@ -1,0 +1,27 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#topics_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>Topics</h2>
+<%= link_to "Create A Topic", new_admin_topic_path%>
+<div class="box">
+	<table class="admin_pitches">
+		<th>Topic</th>
+		<th>Actions</th>
+		<% @topics.each do |topic| %>
+			<tr class="quiet">
+				<td><%=topic.name%></td>
+				<td>
+			        <%= link_to 'edit', edit_admin_topic_url(topic)%><br/>
+					<%= link_to 'delete', admin_topic_url(topic), :method => :delete, :confirm => 'Are you sure you want to delete this topic?'%>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

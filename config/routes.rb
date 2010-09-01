@@ -103,6 +103,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :groups
     admin.resources :posts
     admin.resources :channels
+    admin.resources :topics
     admin.resources :sections
     admin.resources :ccas, :member => { :credits => :get }
     admin.resources :cca_questions

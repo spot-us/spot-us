@@ -1,0 +1,23 @@
+<% content_for :head do %>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+<h2>Edit Topic</h2>
+<div class="flash error">
+  <%= error_messages_for :topic %>
+</div>
+<% form_for([:admin, @topic], :html => { :multipart => true }) do |f| %>
+	<div class="row">
+        <%= f.label     :name, "Name" %>
+        <%= f.text_field :name %>
+    </div>
+	<div class="row">
+	<label> </label>
+	<% if @topic.new_record? %>
+		<%= image_submit_tag image_path('save.png'), :alt => 'Create the help topic' %>
+	<% else %>
+		<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+		<%= image_submit_tag image_path('save.png') %>
+	<% end %>
+	</div>
+<% end %>
+
