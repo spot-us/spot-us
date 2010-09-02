@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     return_path = root_path
     return_path = params[:return_to] if params[:return_to] && params[:spotus_lite]
-    return_path = cookies[:return_to] if cookies[:return_to]
+    return_path = URI.decode(cookies[:return_to]) if cookies[:return_to]
     if @user.save
       unless @user.organization?
         @user.activate!
