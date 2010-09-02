@@ -15,7 +15,7 @@
 			<%= f.label :email, 'Email Address' %>
 			<%= f.text_field :email %>
 		</div>
-		<% if @settings.is_a?(Reporter) || @settings.is_a?(Organization) %>
+		<% if @settings.is_a?(Reporter) || @settings.is_a?(Organization) || @settings.is_a?(Sponsor) %>
 			<div class="row">
 				<%= f.label :phone, 'Phone Number' %>
 				<%= f.text_field :phone %>
