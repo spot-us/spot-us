@@ -17,7 +17,7 @@
 		<%= f.label :short_description, "Why would someone care? What are the details?<br /> Sell the story! <br /><span class='small quieter'>Required</span>" %>
 		<%= ckeditor_textarea("pitch", "short_description", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
     </div>
-	<% if APP_CONFIG[:has_networks] %>
+	<% if APP_CONFIG[:has_networks] || (current_user && current_user.admin?)%>
     	<div class="row">
 	       <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch} %>
 	    </div>
