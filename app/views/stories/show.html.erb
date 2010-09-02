@@ -9,7 +9,7 @@
 			</div>
 			<%= link_to @story.pitch.user.full_name, profile_path(@story.pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@story.created_at) %>
 		</div>
-		<h1><%= h @story.pitch.headline %></h1>
+		<h1><%= h @story.headline %></h1>
 
 		<br class="clear"/>
 		<% unless @story.video_embed.blank? %>
