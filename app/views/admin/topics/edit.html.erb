@@ -10,14 +10,27 @@
         <%= f.label     :name, "Name" %>
         <%= f.text_field :name %>
     </div>
+	<div class="row clearfix">
+		<%= f.label :description, "Description" %>
+ 		<%= ckeditor_textarea("topic", "description", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
+    </div>
+	<div class="row add_media">
+      <label>Add Media<br/>
+         <span class="small">
+            Optional: Upload A Featured Image
+         </span>       
+      </label>
+      <%= f.file_field :featured_image %><br/>
+      <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+    </div>
 	<div class="row">
-	<label> </label>
-	<% if @topic.new_record? %>
-		<%= image_submit_tag image_path('save.png'), :alt => 'Create the help topic' %>
-	<% else %>
-		<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
-		<%= image_submit_tag image_path('save.png') %>
-	<% end %>
+		<label> </label>
+		<% if @topic.new_record? %>
+			<%= image_submit_tag image_path('save.png'), :alt => 'Create the topic' %>
+		<% else %>
+			<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+			<%= image_submit_tag image_path('save.png') %>
+		<% end %>
 	</div>
 <% end %>
 
