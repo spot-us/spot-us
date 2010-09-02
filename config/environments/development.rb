@@ -50,3 +50,5 @@ TWITTER_CONSUMER_KEY    	= APP_CONFIG[:twitter][:consumer_key]
 TWITTER_CONSUMER_SECRET 	= APP_CONFIG[:twitter][:consumer_secret]
 GS_APP						= APP_CONFIG[:get_satisfaction] && APP_CONFIG[:get_satisfaction][:app_name] ? APP_CONFIG[:get_satisfaction][:app_name]: nil
 
+Paperclip.options[:command_path] = "/opt/local/bin"
+

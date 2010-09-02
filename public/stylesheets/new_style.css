@@ -94,7 +94,9 @@ h2.section{border-bottom: dashed 1px #ddd;}
 #browse_stories #sub_nav span.topics strong {color:#777;font-weight:normal;margin-right:1px;}
 #browse_stories #sub_nav span.topics a {text-decoration:none;text-transform:uppercase;padding:3px 5px;color:#11363E;}
 #browse_stories #sub_nav span.topics a.active, #browse_stories #sub_nav span.topics a:hover {-moz-border-radius:2px;-webkit-border-radius:2px;background:#eee;color:#000;}
-
+#browse_stories #topic_description {text-align:left;width:972px;margin: 10px 30px;padding-bottom:10px;color:#888;border-bottom: solid 1px #ddd;font-size:12px;}
+#browse_stories #topic_description img {border: solid 1px #ddd;float:left; }
+#browse_stories #topic_description p { padding-left: 10px; float:left; color:#666;}
 
 #story_listing {width:992px;padding:20px 20px;}
 #story_listing .pitch {width:300px;float:left;margin:0 0px 10px;padding:0 15px;height:365px;overflow:hidden;color:#888;font-size:12px;

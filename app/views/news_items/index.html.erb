@@ -16,6 +16,12 @@
 		<%= channels_filter %>
 		<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
 	</div>
+	<%if @topic && @topic.description && !@topic.description.blank?%>
+		<div id="topic_description" class="clearfix">
+			<%= image_tag @topic.featured_image.url(:thumb) %>
+			<%= @topic.description%>
+		</div>
+	<%end%>
 	<div id="story_listing">
 		
 		<%= render :partial => "shared/lists", 
