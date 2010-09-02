@@ -7,7 +7,7 @@
    <% form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true, :class => "form" } do |f| %>
       <h4>Edit Your Profile</h4>
       <%= render :partial => "myspot/profile_nav" %>
-        <% if @profile.is_a?(Organization) %>
+        <% if @profile.is_a?(Organization) || @profile.is_a?(Sponsor) %>
              <%= render :partial => "news_org_profile", :locals => {:f => f} %>
         <% else %>
              <div class="row">
