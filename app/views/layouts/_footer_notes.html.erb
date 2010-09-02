@@ -1,52 +1,57 @@
 <div id="footer-notes" class="clearfix">
-   <div class="left-column">
-	<div class="float-right">
-         <a href="/stories/almost-funded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
-      </div>
-      <h3>Almost Funded Stories</h3>
-      <ul>
-         <% Pitch.almost_funded.unfunded.top_four.each do |pitch| %>
-			<% apply_fragment ['almost_funded_pitches_footer_', pitch] do %>
-	            <li class="clear">
-	               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-	               <%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
-	            </li>
-			<%end%>
-         <% end %>
-		<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/almost-funded" title="Almost Funded Stories">See all almost funded stories &raquo;</a></li>
-      </ul>
-               
-   </div>
-   <div class="middle-column">
-      <div class="float-right">
-         <a href="/stories/unfunded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
-      </div>
-      <h3>Unfunded Stories</h3>
-      <ul>
-         <% NewsItem.newest.approved.pitch_or_tip.top_four.each do |pitch| %>
-            <% apply_fragment ['recently_created_pitches_footer_', pitch] do %>
+	<div class="left-column">
+		<div class="float-right">
+			<a href="/stories/almost-funded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
+		</div>
+		<h3>Almost Funded Stories</h3>
+		<ul>
+			<% Pitch.almost_funded.unfunded.top_four.each do |pitch| %>
+				<% apply_fragment ['almost_funded_pitches_footer_', pitch] do %>
 				<li class="clear">
-	               <%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-	               <%= link_to pitch.headline, pitch %>
-	            </li>
-			<%end%>
-         <% end %>
-		<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/unfunded" title="Newest Items">See all unfunded stories &raquo;</a></li>
-      </ul>
-   </div>   
-   <div class="right-column">
-      <h3>What is Spot.Us</h3>
-      <p>
-        Spot.Us is an open source project to pioneer “community powered reporting.” Through
-        Spot.Us the public can commission and participate with journalists to do reporting on
-        important and perhaps overlooked topics. Contributions are tax deductible and we partner
-        with news organizations to distribute content under appropriate licenses.<br/>
-        <span class="clear"><%= link_to 'READ MORE &raquo;', page_path("about"), :style=>"float:right;padding-bottom:10px;padding-right:2px;"%></span>
-      </p>
-	<% unless params[:controller] == "homes" %>
+					<%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+					<%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
+				</li>
+				<%end%>
+			<% end %>
+			<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/almost-funded" title="Almost Funded Stories">See all almost funded stories &raquo;</a></li>
+		</ul>
+
+	</div>
+	<div class="middle-column">
+		<div class="float-right">
+			<a href="/stories/unfunded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
+		</div>
+		<h3>Unfunded Stories</h3>
+		<ul>
+			<% NewsItem.newest.approved.pitch_or_tip.top_four.each do |pitch| %>
+				<% apply_fragment ['recently_created_pitches_footer_', pitch] do %>
+				<li class="clear">
+					<%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
+					<%= link_to pitch.headline, pitch %>
+				</li>
+				<%end%>
+			<% end %>
+			<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/unfunded" title="Newest Items">See all unfunded stories &raquo;</a></li>
+		</ul>
+	</div>   
+	<div class="right-column">
+		<h3>What is Spot.Us</h3>
+		<p>
+			Spot.Us is an open source project to pioneer “community powered reporting.” Through
+			Spot.Us the public can commission and participate with journalists to do reporting on
+			important and perhaps overlooked topics. Contributions are tax deductible and we partner
+			with news organizations to distribute content under appropriate licenses.<br/>
+			<span class="clear"><%= link_to 'READ MORE &raquo;', page_path("about"), :style=>"float:right;padding-bottom:10px;padding-right:2px;"%></span>
+		</p>
 		<hr/>
-      	<h4>Connect with Spot.us</h4>
-		<%= render :partial => "/shared/connect_buttons" %>
-	<% end %>
-   </div>
+		<h4>Partner Networks</h4>
+		<p>
+			<a href="http://la.spot.us" title="Los Angeles Spot.Us with USC Annenberg School">Los Angeles Spot.Us with USC Annenberg School</a>
+		</p>
+		<% unless params[:controller] == "homes" %>
+			<hr/>
+			<h4>Connect with Spot.us</h4>
+			<%= render :partial => "/shared/connect_buttons" %>
+		<% end %>
+	</div>
 </div>
