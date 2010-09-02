@@ -2,6 +2,18 @@ jQuery(document).ready(function($){
   	var jump_to;
 	$.fn.authguard = function(callback) {
 		jump_to = $(this);
+		
+		// making sure the return path is set as it should.
+		href = jump_to.attr("href");
+		query = href.split('?');
+		if (query.length > 1){
+			return_to_query = query[1].split('&');
+			return_to = return_to_query[0].split('=');
+			if (return_to[0] == 'return_to'){
+				jQuery.cookie('return_to', return_to[1], { 'path': "/" });
+			};
+		}
+		
 		if ($("#not_logged_in:visible a#sign_in").click().length == 0) {
 			if (callback == "facebox"){
 				$.facebox({"ajax": jump_to.attr("href")});
