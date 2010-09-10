@@ -3,7 +3,7 @@
   = f.hidden_field :pitch_id
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :donation_type, :value => "credit"
-  = f.submit "Apply Credits", :class => "donate"
+  = f.submit "Apply Credits", :class => "donate", :style => 'margin-left:-25px;margin-top:-10px;margin-bottom:-10px;'
   =# image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
 .double_content_border
-= render :partial => "shared/progress_bar", :locals => {:pitch => news_item} unless params[:controller] == "pitches"
+= render :partial => 'donations/donate_default_text', :locals => {:news_item => news_item, :only_progress => true } unless params[:controller] == "pitches"

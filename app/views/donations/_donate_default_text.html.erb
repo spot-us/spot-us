@@ -1,9 +1,11 @@
 <div class="clearfix">
-   	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
-		  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
-		  <%= f.hidden_field :pitch_id %>
-		  <%= submit_tag "Fund This Story", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}" %>
-	<% end %>
+	<%if !defined?(only_progress) || !only_progress%>
+	   	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
+			  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
+			  <%= f.hidden_field :pitch_id %>
+			  <%= submit_tag "Fund This Story", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}" %>
+		<% end %>
+	<%end%>
 	<div class="funding">
 		<strong><%= number_to_currency(news_item.current_funding) %></strong>
 		raised
