@@ -98,7 +98,7 @@ class Cca < ActiveRecord::Base
 				if question.question_type=='radio' || question.question_type=='checkbox'
 				  csv << ['', '', '']
 			    csv << [question.question, 'Answer', 'Nr Of Answers']
-			    answers = question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers').first
+			    answers = question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers')
 			    answers.each do |answer|
 		        csv << ['', answer.answer, answer.nr_of_answers]
 		      end
