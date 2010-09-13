@@ -84,7 +84,7 @@ class Post < ActiveRecord::Base
   end
   
   def blog_posted_notification
-    emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
+    emails = BlacklistEmail.all.map{ |be| "'#{be.email}'"}
     conditions = ""
     
     #email supporters

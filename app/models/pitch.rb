@@ -367,7 +367,7 @@ class Pitch < NewsItem
   end
 
   def send_fund_notification
-    emails = BlacklistEmail.all.map{ |email| "'#{email}'"}
+    emails = BlacklistEmail.all.map{ |be| "'#{be.email}'"}
     conditions = ""
     
     #email supporters
