@@ -13,3 +13,41 @@
 	</td>
 </tr>
 <%= render :partial => "cca/cca_answer", :collection => cca_question.cca_answers, :spacer_template => "cca/cca_spacer" %>
+<%if cca_question.question_type=='radio' || cca_question.question_type=='checkbox'%>
+	<%= render :partial =>  => "cca/cca_spacer" %>
+	<tr>
+		<td class="pitch">    
+		</td>
+		<td class="donated">
+			Answer
+		</td>
+		<td colspan='2'>
+			Nr Of Answers
+		</td>
+	</tr>
+	<%= render :partial =>  => "cca/cca_spacer" %>
+	<%cca_question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers').each do |answer|%>
+		<tr>
+			<td class="pitch">    
+			</td>
+			<td class="donated">
+				<%=answer.answer%>
+			</td>
+			<td colspan='2'>
+				<%=answer.nr_of_answers%>
+			</td>
+		</tr>
+		<%= render :partial =>  => "cca/cca_spacer" %>
+	<%end%>
+	<tr>
+		<td class="pitch">    
+		</td>
+		<td class="donated">
+			Total Answers
+		</td>
+		<td colspan='2'>
+			<%=cca_question.cca_answers.count%>
+		</td>
+	</tr>
+	<%= render :partial =>  => "cca/cca_spacer" %>
+<%end%>
