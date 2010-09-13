@@ -95,6 +95,16 @@ class Cca < ActiveRecord::Base
 				question.cca_answers.each do |answer|
 					csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer]
 				end
+				if question.question_type=='radio' || question.question_type=='checkbox'
+				  csv << ['', '', '']
+			    csv << [question.question, 'Answer', 'Nr Of Answers']
+			    answers = question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers').first
+			    answers.each do |answer|
+		        csv << ['', answer.answer, answer.nr_of_answers]
+		      end
+		      csv << ['', 'Total Answers', question.cca_answers.count]
+			  end
+			  csv << ['', '', '']
 			end
 		end
 	end
