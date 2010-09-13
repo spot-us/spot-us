@@ -165,21 +165,21 @@ class Story < NewsItem
     self.pitch.supporters.find(:all,:conditions=>conditions).each do |supporter|
       Mailer.deliver_story_published_notification(self, supporter.first_name, supporter.email)
     end
-    emails = emails.concat(self.pitch.supporters.map{ |email| "'#{email}'"})
+    emails = emails.concat(self.pitch.supporters.map{ |s| "'#{s.email}'"})
     
     #email admins
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
     Admin.find(:all,:conditions=>conditions).each do |admin|
       Mailer.deliver_story_published_notification(self, admin.first_name, admin.email)
     end
-    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    emails = emails.concat(Admin.all.map{ |admin| "'#{admin.email}'"}).uniq
     
     #email subscribers
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
     self.pitch.subscribers.find(:all,:conditions=>conditions).each do |subscriber|
       Mailer.deliver_story_published_notification(self, "Subscriber", subscriber.email, subscriber)
     end
-    emails = emails.concat(self.pitch.subscribers.map{ |email| "'#{email}'"}).uniq
+    emails = emails.concat(self.pitch.subscribers.map{ |s| "'#{s.email}'"}).uniq
     
     #email fact checker if not already covered...
     if self.pitch && self.pitch.fact_checker_id

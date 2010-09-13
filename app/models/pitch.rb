@@ -375,14 +375,14 @@ class Pitch < NewsItem
     self.supporters.find(:all,:conditions=>conditions).each do |supporter|
       Mailer.deliver_pitch_accepted_notification(self, supporter.first_name, supporter.email)
     end
-    emails = emails.concat(self.supporters.map{ |email| "'#{email}'"})
+    emails = emails.concat(self.supporters.map{ |s| "'#{s.email}'"})
     
     #email admins
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
     Admin.find(:all,:conditions=>conditions).each do |admin|
       Mailer.deliver_pitch_accepted_notification(self, admin.first_name, admin.email)
     end
-    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    emails = emails.concat(Admin.all.map{ |admin| "'#{admin.email}'"}).uniq
     
     #email subscribers
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?

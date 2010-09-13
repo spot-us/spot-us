@@ -92,14 +92,14 @@ class Post < ActiveRecord::Base
     self.pitch.supporters.find(:all,:conditions=>conditions).each do |supporter|
       Mailer.deliver_blog_posted_notification(self, supporter.first_name, supporter.email) if supporter.notify_blog_posts
     end
-    emails = emails.concat(self.pitch.supporters.map{ |email| "'#{email}'"})
+    emails = emails.concat(self.pitch.supporters.map{ |s| "'#{s.email}'"})
     
     #email admins
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
     Admin.find(:all,:conditions=>"email!='kara@spot.us' and email not in (#{emails.join(',')})").each do |admin|
       Mailer.deliver_blog_posted_notification(self, admin.first_name, admin.email)
     end
-    emails = emails.concat(Admin.all.map{ |email| "'#{email}'"}).uniq
+    emails = emails.concat(Admin.all.map{ |admin| "'#{admin.email}'"}).uniq
     
     #email subscribers
     conditions = "email not in (#{emails.join(',')})" if emails && !emails.empty?
