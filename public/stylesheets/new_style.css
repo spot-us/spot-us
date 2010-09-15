@@ -263,6 +263,7 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #news_item #news_item_info .tab_panel li .comment{margin-left:60px;width:400px;}
 #news_item #news_item_info .description_tab {font-size:1.1em;font-family:Georgia, Times;}
+.pitch_left p embed, .pitch_left p object {clear:both;}
 .pitch_left .description_tab object, .pitch_left .description_tab embed {clear:both;}
 #news_item .right-panel-box{background-color:#11363E;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:12pt;font-weight:normal;
 			padding:15px;width:350px;margin-bottom:10px;}

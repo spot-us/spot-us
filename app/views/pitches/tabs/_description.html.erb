@@ -10,7 +10,7 @@
 	<div class="description_tab tab_panel clearfix">
 	  	<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
 		<div class="short_description">
-	  		<%= @pitch.short_description %>
+	  		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
 		</div>
 		<% unless @pitch.extended_description.blank? %>
 			<div class="extended_description">
