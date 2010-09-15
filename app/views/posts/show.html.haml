@@ -20,9 +20,9 @@
         = link_to @post.pitch.headline, pitch_url(@post.pitch)
     .block-spacer-negative
     .double_content_border
-    = @post.body
+    = transform_embed_code(@post.body, 520, 320) 
     .double_content_border
-    = @post.media_embed
+    = transform_embed_code(@post.media_embed, 520, 320)
   .span-220.column_v.box_white
     = render :partial => "donations/button", :locals => { :news_item => @post.pitch }
     .block-spacer-negative
