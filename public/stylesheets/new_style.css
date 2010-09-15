@@ -97,6 +97,7 @@ h2.section{border-bottom: dashed 1px #ddd;}
 #browse_stories #topic_description {text-align:left;width:972px;margin: 10px 30px;padding-bottom:10px;color:#888;border-bottom: solid 1px #ddd;font-size:12px;}
 #browse_stories #topic_description img {border: solid 1px #ddd;float:left; }
 #browse_stories #topic_description p { padding-left: 10px; float:left; color:#666;}
+#browse_stories .apply_credits {.margin-left:-25px;margin-top:-10px;margin-bottom:-10px;}
 
 #story_listing {width:992px;padding:20px 20px;}
 #story_listing .pitch {width:300px;float:left;margin:0 0px 10px;padding:0 15px;height:365px;overflow:hidden;color:#888;font-size:12px;
