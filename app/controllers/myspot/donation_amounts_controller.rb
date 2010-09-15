@@ -71,18 +71,14 @@ class Myspot::DonationAmountsController < ApplicationController
         spotus_donation.update_attribute(:amount, params[:spotus_donation_amount])
         spotus_donation_valid = true
         if available_credits>0
-          logger.info("You have credits")
           if spotus_donation.amount.to_f > available_credits
-            logger.info("Donation is larger than the available credits")
             if credits && !credits.empty?
               spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
               spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
             end
           else
-            logger.info("Donation is less than the available credits")
             if credits && !credits.empty?
-              logger.info("Applyting credits")
               spotus_donation = apply_credits_for_spotus_donation(credits, spotus_donation.id, spotus_donation.amount.to_f, "Donated to SpotUs")
             else
               spotus_donation = SpotusDonation.update(spotus_donation.id, { :amount => spotus_donation.amount.to_f })             # should never happen but you never know. :-)
@@ -119,7 +115,6 @@ class Myspot::DonationAmountsController < ApplicationController
       
       # if the credit is larger than the donation amount, slice off the remainer...
       if credit.amount > donation_amount
-        logger.info("test")
         sliced_off_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",
                         :amount => (credit.amount-donation_amount), :cca_id => credit.cca_id)
         credit.update_attributes(:amount => donation_amount)
