@@ -21,6 +21,8 @@ class Myspot::DonationAmountsController < ApplicationController
 
   def update
     
+    SpotusDonation.delete_all(['purchase_id is null and credit_id is null and user_id=?', current_user.id])
+    
     donation_amounts = params[:donation_amounts]
     credit_pitch_amounts = params[:credit_pitch_amounts]
     available_credits = current_user.total_credits
