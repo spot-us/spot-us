@@ -27,7 +27,8 @@
     - if (!pitch.fully_funded? && current_user == pitch.user)
       = link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"
     = link_to image_tag('delete.png'), pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"
-    %h3 Public Support
-    = pitch.supporters.map{ |supporter| link_to(supporter.email, "mailto:#{supporter.email}", :alt => supporter.email) }.join(", ")
-    %h3 Subscribers
-    = pitch.subscribers.map{ |subscriber| link_to(subscriber.email, "mailto:#{subscriber.email}", :alt => subscriber.email) }.join(", ")
+    - if current_user.admin?
+      %h3 Public Support
+      = pitch.supporters.map{ |supporter| link_to(supporter.email, "mailto:#{supporter.email}", :alt => supporter.email) }.join(", ")
+      %h3 Subscribers
+      = pitch.subscribers.map{ |subscriber| link_to(subscriber.email, "mailto:#{subscriber.email}", :alt => subscriber.email) }.join(", ")
