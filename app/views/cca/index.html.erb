@@ -1,0 +1,22 @@
+<% content_for :head do %>
+<% end %>
+
+<% @title = "Spot.us - Fund A Story - CCA" %>
+
+<div id="browse_stories">
+	<div id="browsing_header" class="clearfix">
+		<%= link_to "CCA", "/cca", :class => "blue_button active" %>
+	</div>
+	<div id="sub_nav" class="clearfix">
+		
+	</div>
+	<div id="story_listing">
+		<%= render :partial => "shared/lists", 
+			:locals => {:items => @ccas, :template_name => "cca/cca", :no_items_message => "There are no active CCAs. Try again later."} %>
+	</div>
+</div>
+
+
+
+
+

@@ -1,8 +1,11 @@
 class CcaController < ApplicationController
-  before_filter :login_required, :except=>[:show]
+  before_filter :login_required, :except=>[:show, :index]
   before_filter :load_cca, :only => [:show]
   resources_controller_for :cca
 
+  def index
+    @ccas = Cca.live.paginate(:page => params[:page_id])
+  end
   
   def show
 	@pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
