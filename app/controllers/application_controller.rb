@@ -87,7 +87,9 @@ class ApplicationController < ActionController::Base
   end
   
   def set_cca
-	@cca_header = Cca.cca_home.first
+    ccas = Cca.live
+    @show_cca = !ccas.empty?
+	  @cca_link = ccas && ccas.length==1 ? cca_path(ccas.first) : "/cca"
   end
   
   # minify the html

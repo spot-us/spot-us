@@ -21,9 +21,9 @@
 		<li class="read_story">
 			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Read A Published Spot Us Story", :class => "primary_button", :id => "about_read_story"), "/stories/published", :title=>"" %>
 		</li>
-		<%if @cca_header%>
+		<%if @show_cca%>
 			<li class="start_story">
-				<%= link_to image_tag("/images/new_design/earn_spot_credit.png", :width=>"111", :height=>"98", :alt=>"earn credits to help fund a story", :class => "primary_button", :id => "about_earn_credits"),  cca_path(@cca_header)%>
+				<%= link_to image_tag("/images/new_design/earn_spot_credit.png", :width=>"111", :height=>"98", :alt=>"earn credits to help fund a story", :class => "primary_button", :id => "about_earn_credits"),  @cca_link%>
 			</li>
 		<%end%>
 	</ul>
