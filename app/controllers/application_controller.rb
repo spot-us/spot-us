@@ -89,8 +89,15 @@ class ApplicationController < ActionController::Base
   def set_cca
     ccas = Cca.live
     @show_cca = !ccas.empty?
-    @first_cca = @show_cca ? ccas.first : nil
-	  @cca_link = ccas && ccas.length==1 ? cca_path(ccas.first) : "/cca"
+    unless current_user
+      @first_cca = @show_cca ? ccas.first : nil
+    else
+      @first_cca = nil
+      ccas.each do |cca|
+        @first_cca = cca unless @first_cca || cca.survey_completed?(current_user)
+      end
+    end
+	  @cca_link = @first_cca && ccas && ccas.length==1 ? cca_path(@first_cca) : "/cca"
   end
   
   # minify the html
