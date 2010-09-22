@@ -89,6 +89,7 @@ class ApplicationController < ActionController::Base
   def set_cca
     ccas = Cca.live
     @show_cca = !ccas.empty?
+    @first_cca = @show_cca ? ccas.first : nil
 	  @cca_link = ccas && ccas.length==1 ? cca_path(ccas.first) : "/cca"
   end
   
