@@ -3,7 +3,7 @@
 		<%= render :partial => 'news_items/news_item', :object => pitch %>
 	
 	<% end %>
-	<% if @show_cca and !pitch.fully_funded? %>
+	<% if @show_cca && @first_cca && !pitch.fully_funded? %>
 		<% if current_user %>
 			<%= link_to "Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
 		<% else %>
