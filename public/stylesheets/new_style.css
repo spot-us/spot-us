@@ -263,7 +263,7 @@ div#stories_carousel li {width:273px;padding:5px 5px 0 10px; margin:2px 5px 2px 
 
 #news_item #news_item_info .tab_panel li img.avatar{float:left;margin-right:10px;}
 #news_item #news_item_info .tab_panel li .comment{margin-left:60px;width:400px;}
-#news_item #news_item_info .description_tab {font-size:1.1em;font-family:Georgia, Times;}
+#news_item #news_item_info .description_tab, #news_item #news_item_info .description_tab a {font-size:1.1em;font-family:Georgia, Times;}
 .pitch_left p embed, .pitch_left p object, p embed, p object {clear:both;}
 .pitch_left .description_tab object, .pitch_left .description_tab embed {clear:both;}
 #news_item .right-panel-box{background-color:#11363E;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:12pt;font-weight:normal;
@@ -372,7 +372,7 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 .pitch_left .story_content p img {max-width:490px;max-height:500px;}
 .pitch_left .story_content p {font-size:1.1em;margin-bottom:14px;}
 .pitch_left .story_content ul {margin-top:15px;}
-.pitch_left .story_content ul li {font-style:Verdana;}
+.pitch_left .story_content ul li, .pitch_left .story_content ul li a, .pitch_left .story_content p ul li {font-size:1.1em;font-style:Verdana;}
 .pitch_left .story_content h2 {font-weight:normal;}
 .pitch_left .media_embed object, .pitch_left .media_embed embed {margin: 6px 0 2px;}
 .pitch_left .post_comment  h5, .pitch_left #comments h5, .pitch_left h5.generic {font-family:Verdana;color:#555;font-size:1em;margin-bottom:1px;margin-top:10px;}
