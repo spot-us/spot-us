@@ -1,6 +1,6 @@
 <div class="row">
     <%= f.label :title %>
-    <%= f.text_area :title, :rows => 2, :value => TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => "gray_text", :id => "title" %>
+    <%= f.text_area :title, :rows => 2, :value => @post && @post.title ? @post.title : TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => @post && @post.title ? "" : "gray_text", :id => "title" %>
 </div>
 <div class="row">
     <%= f.label :body %>

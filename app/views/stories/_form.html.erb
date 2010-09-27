@@ -1,7 +1,8 @@
 <% form_for(@story, :html => { :multipart => true }) do |f| %>
     <div class="row">
       <%= f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>" %>
-      <%= f.text_area :headline, :rows => 2 %>
+      <%= f.text_area :headline, :rows => 2	, :value => @story && @story.headline ? @story.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
+				:class => @story && @story.headline ? "" : "gray_text", :id => "headline" %>
     </div>
     <div class="row">
       <%= f.label :extended_description, "This is your story body." %>
