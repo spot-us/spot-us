@@ -11,7 +11,7 @@
 <% form_for(@pitch, :html => { :multipart => true }) do |f| %>
     <div class="row">
         <%= f.label     :headline, "Your Pitch's Headline <br />Catch our attention<br /><span class='small quieter'>Required</span>" %>
-        <%= f.text_area :headline, :rows => 2 %>
+        <%= f.text_area :headline, :rows => 2, :value => TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", :class => "gray_text", :id => "headline" %>
     </div>
     <div class="row clearfix">
 		<%= f.label :short_description, "Why would someone care? What are the details?<br /> Sell the story! <br /><span class='small quieter'>Required</span>" %>

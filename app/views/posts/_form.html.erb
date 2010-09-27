@@ -1,6 +1,6 @@
 <div class="row">
     <%= f.label :title %>
-    <%= f.text_area :title, :rows => 2 %>
+    <%= f.text_area :title, :rows => 2, :value => TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => "gray_text", :id => "title" %>
 </div>
 <div class="row">
     <%= f.label :body %>

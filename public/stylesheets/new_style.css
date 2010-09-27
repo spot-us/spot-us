@@ -540,6 +540,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #spotus_form .row.media label {padding-top:0;}
 #spotus_form select {width:200px;}
 #spotus_form input, #spotus_form select, #spotus_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
+#spotus_form textarea.gray_text {color:#999;}
 #spotus_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
 #spotus_form textarea#tip_video_embed, #spotus_form textarea#tip_widget_embed, #spotus_form textarea#post_media_embed, 
 		  {font-size:12px;padding:6px;width:670px;border:1px solid #777;font-family:arial, helvetica;}

@@ -33,3 +33,7 @@ FILTERS_CONTRIBUTORS["donated-most"]="Donated Most"
 FILTERS_CONTRIBUTORS["organizations"]="Organizations"
 FILTERS_CONTRIBUTORS["reporters"]="Reporters"
 FILTERS_CONTRIBUTORS_STRING = FILTERS_CONTRIBUTORS.collect{ |key, value| key}.join('|')
+
+TEXT = {}
+TEXT[:headline] = "Write a short, enticing and descriptive headline"
+TEXT[:title] = "Write a short, enticing and descriptive title"
