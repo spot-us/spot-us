@@ -9,8 +9,9 @@
 		<% else %>
 			<%= facebox_login_link_to("Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
 		<% end %>
-	<% end %>
-	<%= render :partial => "donations/text_button", :locals => { :news_item => pitch } %>
+	<% else %>
+		<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
+	<%end%>
 	<% if pitch.story && pitch.story.published? %>
 		| <%= link_to "READ STORY", story_path(pitch.story) %>
 	<% end %>
