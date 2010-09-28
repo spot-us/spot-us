@@ -12,7 +12,8 @@ class PagesController < ApplicationController
     quick_donate
     reporter_agreement
     reporter_contract
-	support
+    sponsors
+  	support
     terms
     who
   ).freeze
