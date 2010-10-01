@@ -3,15 +3,14 @@
 		<%= render :partial => 'news_items/news_item', :object => pitch %>
 	
 	<% end %>
-	<% if @show_cca && @first_cca && !pitch.fully_funded? %>
+	<% if @show_cca && !pitch.fully_funded? %>
 		<% if current_user %>
 			<%= link_to "Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
 		<% else %>
 			<%= facebox_login_link_to("Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
 		<% end %>
-	<% else %>
-		<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
-	<%end%>
+	<% end %>
+	<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
 	<% if pitch.story && pitch.story.published? %>
 		| <%= link_to "READ STORY", story_path(pitch.story) %>
 	<% end %>
