@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
     ccas = Cca.live
     @first_cca = nil
     unless current_user
-      @first_cca = ccas.first if @show_cca
+      @first_cca = ccas.first unless @ccas.empty?
     else
       ccas.each { |cca| @first_cca = cca unless @first_cca || cca.survey_completed?(current_user) }
     end
