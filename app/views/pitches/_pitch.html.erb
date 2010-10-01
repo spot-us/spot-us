@@ -1,5 +1,5 @@
 <% div_for(pitch, :class => "clearfix") do %>			
-	<% apply_fragment ['pitch_listing_bottom_alt1_', pitch] do %>				
+	<% apply_fragment ['pitch_listing_bottom_alt1_', pitch, @show_cca] do %>				
 		<%= render :partial => 'news_items/news_item', :object => pitch %>
 	
 	<% end %>

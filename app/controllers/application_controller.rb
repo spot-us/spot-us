@@ -88,13 +88,13 @@ class ApplicationController < ActionController::Base
   
   def set_cca
     ccas = Cca.live
-    @show_cca = !ccas.empty?
     @first_cca = nil
     unless current_user
       @first_cca = ccas.first if @show_cca
     else
       ccas.each { |cca| @first_cca = cca unless @first_cca || cca.survey_completed?(current_user) }
     end
+    @show_cca = !@first_cca.nil?
 	  @cca_link = @first_cca && ccas && ccas.length==1 ? cca_path(@first_cca) : "/cca"
   end
   
