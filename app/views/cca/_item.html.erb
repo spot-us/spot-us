@@ -10,6 +10,8 @@
 			<br/>
 			<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
 			<%= hidden_field_tag "id", @cca.id %>
+			<h5>Terms of Service. <span class="deep-red">*</span></h5> 
+			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
 			<% @cca.cca_questions.each_with_index do |question, index| %>
 				<%= survey_section(question, index) %>
 				<h5><%= question.question %> <%= is_required(question.required) %></h5>
@@ -25,8 +27,6 @@
 				<input type="hidden" name="pitch_id" value="<%= params[:pitch_id]  %>">
 			<% end %>
 			<br/><br/>
-			<h5>Terms of Service. <span class="deep-red">*</span></h5> 
-			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
 			<%= image_submit_tag image_path('submit.png') %>
 		<% end %>
 	<% end %>

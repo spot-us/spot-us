@@ -1,5 +1,5 @@
 <div class="clearfix">
-	<%if !defined?(only_progress) || !only_progress%>
+	<%if !@show_cca && (!defined?(only_progress) || !only_progress)%>
 	   	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
 			  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
 			  <%= f.hidden_field :pitch_id %>

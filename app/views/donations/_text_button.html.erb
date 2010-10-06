@@ -4,6 +4,6 @@
     <%= render :partial => 'credits/credit_pitch', :locals => {:news_item => news_item} %>
 <% elsif !@show_cca && (news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT)) %>
     <%= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item, :spotus_lite=>false} %>
-<% elsif !@show_cca && (!current_user || (current_user && current_user.can_donate_to?(news_item))) %>
+<% elsif (!current_user || (current_user && current_user.can_donate_to?(news_item))) %>
     <%= render :partial => 'donations/donate_default_text', :locals => {:news_item => news_item} %>
 <% end %>

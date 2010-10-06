@@ -54,5 +54,14 @@
 		<%= render :partial => 'layouts/get_satisfaction' if GS_APP && !defined?(@hide_gs)  %>
 		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
 		
+		<% #session[:default_answers] = 1%>
+		<% if session[:default_answers] %>
+			<script>
+				jQuery(document).ready(function($){
+					jQuery.facebox({ajax: '<%= default_answers_cca_path(Cca.find_by_id(session[:default_answers]))%>'});
+				});
+			</script>
+		<% end %>
+		
 	 </body>
 </html>

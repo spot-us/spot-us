@@ -3,11 +3,44 @@ class Cca < ActiveRecord::Base
 	validate :check_credit_settings, :on => [:update, :new]
 	belongs_to :user, :foreign_key => :sponsor_id
 	has_many :cca_questions, :order => "position"
-	has_many :cca_answers
-  	has_many :credits, :foreign_key=>'cca_id'
+	has_many :cca_answers, :conditions => 'cca_answers.default_answer=0'
+	has_many :default_cca_answers, :class_name=>"CcaAnswer", :conditions => 'cca_answers.default_answer=1', :foreign_key => "cca_id"
+  has_many :credits, :foreign_key=>'cca_id'
+  
+  attr_accessor :providing_default_answer
+  @@providing_default_answers = false
+  
+  has_attached_file :banner,
+                    :styles => { :thumb => '99x8#', 
+                        :large_banner => "992x78#", 
+                        :small_banner => "496x39#"},
+                    :storage => :s3,
+                    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+                    :bucket =>   S3_BUCKET,
+                    :path => "cca-banners/" <<
+                             ":attachment/:id_partition/" <<
+                             ":basename_:style.:extension",
+                    :url =>  "cca-banners/:attachment/:id_partition/" <<
+                             ":basename_:style.:extension"
+
+  validates_presence_of :headline, :user_id
+
+  unless Rails.env.development?
+    validates_attachment_content_type :banner,
+      :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
+                        'image/x-png', 'image/jpg'],
+      :message      => "Oops! Make sure you are uploading an image file.",
+      :unless => :banner_name
+
+    validates_attachment_size :banner, :in => 1..5.megabytes, :unless => :banner_name
+  end
   
 	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
 	named_scope :live, :conditions=>'status=1', :order => 'created_at desc'
+	
+	def banner_name
+    banner_file_name.blank?
+  end
 	
 	def self.STATUS_VALUES
 		["Pending","Live","Finished"]
@@ -124,11 +157,11 @@ class Cca < ActiveRecord::Base
 			# insert/update db for items that are completed
 			if answer_incomplete == false
 				answer = answer.join("\n") if question.question_type == "checkbox"
-				existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id(question.id,user.id)
+				existing_answer = CcaAnswer.find_by_cca_question_id_and_user_id_and_default_answer(question.id,user.id,providing_default_answer)
 				if existing_answer
-					CcaAnswer.update(existing_answer.id, :answer => answer, :pitch_id => pitch_id)
+					CcaAnswer.update(existing_answer.id, :answer => answer, :pitch_id => pitch_id, :default_answer=>providing_default_answer)
 				else
-					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer, :pitch_id => pitch_id)
+					CcaAnswer.create(:cca_id => self.id, :user_id => user.id, :cca_question_id => question.id, :answer => answer, :pitch_id => pitch_id, :default_answer=>providing_default_answer)
 				end
 			end
 		end
@@ -137,7 +170,7 @@ class Cca < ActiveRecord::Base
 	end
 	
 	def already_submitted?(user)
-		answer = CcaAnswer.find_by_user_id_and_cca_id_and_status(user,self.id,1)
+		answer = CcaAnswer.find_by_user_id_and_cca_id_and_status_and_default_answer(user,self.id,1,false)
 		answer ? true : false
 	end
     

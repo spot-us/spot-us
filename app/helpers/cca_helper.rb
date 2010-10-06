@@ -1,15 +1,15 @@
 module CcaHelper
-	def survey_element(question, user, show_answer)
+	def survey_element(question, user, show_answer, default_answer=false, highlight=false)
 		text = ""
 		case
 		when question.question_type == "text_small"
 			text << '<input type="text" name="answers[question_' << question.id.to_s << ']"'
-			answer = question.answer_by_user(user)
+			answer = question.answer_by_user(user, default_answer)
 			text << 'value="' << answer.answer << '"' if show_answer && answer
 			text << ' />'
 		when question.question_type == "text_big"
 			text << '<textarea name="answers[question_' << question.id.to_s << ']">'
-			answer = question.answer_by_user(user)
+			answer = question.answer_by_user(user, default_answer)
 			text << answer.answer if show_answer && answer
 			text << '</textarea>'
 		when question.question_type == "radio"
@@ -17,7 +17,7 @@ module CcaHelper
 			items.each do |item|
 				item = item.strip
 				text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
-				answer = question.answer_by_user(user)
+				answer = question.answer_by_user(user, default_answer)
 				text << 'value="' << item << '"'
 				text << ' checked' if show_answer && answer && answer.answer == item
 				text << '> '
@@ -29,7 +29,7 @@ module CcaHelper
 			items.each do |item|
 				item = item.strip
 				text << '<input type="checkbox" name="answers[question_' << question.id.to_s << '][]"'
-				answer = question.answer_by_user(user)
+				answer = question.answer_by_user(user, default_answer)
 				text << 'value="' << item << '"'
 				text << ' checked="yes"' if show_answer && answer && answer.answer.split("\n").include?(item)
 				text << '> '

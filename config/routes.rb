@@ -53,7 +53,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect "/cca/submit_answers", :controller => "cca", :action => "submit_answers"
   #map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
   #map.connect "/cca/:id", :controller => "cca", :action => "show"
-  map.resources :cca, :only=>[:show, :index], :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get}
+  map.resources :cca, :only=>[:show, :index], :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get, :default_answers => :get}
   map.connect "/cca/:id/:pitch_id", :controller => "cca", :action => "show"
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
@@ -105,7 +105,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :channels
     admin.resources :topics
     admin.resources :sections
-    admin.resources :ccas, :member => { :credits => :get }
+    admin.resources :ccas, :member => { :credits => :get, :default_answers => :get, :save_default_answers => :put }
     admin.resources :cca_questions
     admin.resources :feedbacks
     admin.resources :blacklist_emails

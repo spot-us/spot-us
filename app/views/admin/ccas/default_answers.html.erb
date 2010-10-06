@@ -1,0 +1,25 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#ccas_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+<div id="survey_form">
+	<% form_tag(save_default_answers_admin_cca_path(@cca), :method => "put", :class=>'auth') do %>
+		Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.
+		<br/><br/>
+		<input name="tos" value="yes" type="checkbox" checked style="display:none" />
+		<% @cca.cca_questions.each_with_index do |question, index| %>
+			<%= survey_section(question, index) %>
+			<h5><%= question.question %> <%= is_required(question.required) %></h5>
+			<%= "<div class='description'>#{question.description}</div>" if !question.description.blank? %>
+			<%= survey_element(question, current_user, true, true) %><br/>
+		<% end %>
+		<%= end_survey_sections %>
+		<br/><br/>
+		<%= image_submit_tag image_path('submit.png') %>
+	<% end %>
+</div>

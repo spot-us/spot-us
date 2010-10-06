@@ -8,7 +8,7 @@ class CcaController < ApplicationController
   end
   
   def show
-	@pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
+	  @pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
   	if current_user
   		latest_answer = CcaAnswer.latest_answer(@cca,current_user)
   		@cache_form = latest_answer ? latest_answer : nil
@@ -34,34 +34,39 @@ class CcaController < ApplicationController
     end
   end
   
+  def default_answers
+    @cca = find_resource
+    render :layout=>false
+  end
+  
   def submit_answers
-	@cca = Cca.find_by_id(params[:id])
+    @cca = Cca.find_by_id(params[:id])
     tos = params[:tos] || false
     Feedback.sponsor_interest(current_user) if params[:sponsor_interest] # process user signup for being a sponsor
     is_completed = @cca.process_answers(params[:answers], current_user, params[:pitch_id])  # process the survey answers
-	if @cca.already_submitted?(current_user)
-		# if the user has nav'd back in the browser they could try and submit again -- so we just bring them to the apply credits page
-		if params[:pitch_id]
-			redirect_to edit_myspot_donations_amounts_path
-		else
-			redirect_to apply_credits_cca_path(@cca)
-		end
-	elsif is_completed && tos
-		@cca.award_credit(current_user)
-		if credit_to_pitch?
-			update_balance_cookie
-			redirect_to edit_myspot_donations_amounts_path
-		else
-			update_balance_cookie
-			redirect_to apply_credits_cca_path(@cca)
-		end
-
-	elsif !tos                                                           # they need to check the TOS box on form
-		flash[:error] = "You have to accept the terms of service to complete this survey."
-		redirect_to :back
+    if @cca.already_submitted?(current_user)
+      # if the user has nav'd back in the browser they could try and submit again -- so we just bring them to the apply credits page
+      if params[:pitch_id]
+        redirect_to edit_myspot_donations_amounts_path
+      else
+        redirect_to apply_credits_cca_path(@cca)
+      end
+    elsif is_completed && tos
+      @cca.award_credit(current_user)
+      session[:show_default_answers] = @cca.id unless @cca.default_cca_answers.empy?
+      if credit_to_pitch?
+        update_balance_cookie
+        redirect_to edit_myspot_donations_amounts_path
+      else
+        update_balance_cookie
+        redirect_to apply_credits_cca_path(@cca)
+      end
+    elsif !tos                                                           # they need to check the TOS box on form
+      flash[:error] = "You have to accept the terms of service to complete this survey."
+      redirect_to :back
     else
-		flash[:error] = "Please answer all questions to earn your credits."
-		redirect_to :back
+      flash[:error] = "Please answer all questions to earn your credits."
+      redirect_to :back
     end
   end 
   

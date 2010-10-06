@@ -11,6 +11,7 @@
 <div id="survey">
 	<% if @cca %>
 		<% apply_fragment ['cca_', @cca] do %>
+			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
 			<div id="survey_header">
 				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
 				<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
@@ -19,7 +20,7 @@
 				<div id="survey_info">
 					<%= render :partial => "sponsor_info" %>
 				</div>
-			
+
 				<div id="survey_main">
 					<h1><%= @cca.title %></h1>
 					<div id="survey_description">
@@ -27,17 +28,16 @@
 					</div>
 					<div id="q_header">Questionnaire</div>
 		<% end %> <!-- end of cached fragment --> 
-				<div id="survey_form_wrapper">
-				  <% if current_user && @cca.survey_completed?(current_user) %>
-				    <h2>You have completed this survey. Thank you.</h2>
-				  <% elsif @cca.is_maxed_out? %>
-				    <h2>This survey has finished.</h2>
-				  <% else %>
-					  <%= render :partial=>'item' %>
-				  <% end %>
+					<div id="survey_form_wrapper">
+						<% if current_user && @cca.survey_completed?(current_user) %>
+							<h2>You have completed this survey. Thank you.</h2>
+						<% elsif @cca.is_maxed_out? %>
+							<h2>This survey has finished.</h2>
+						<% else %>
+							<%= render :partial=>'item' %>
+						<% end %>
+					</div>
 				</div>
-			</div>
-			
 		</div>
 	<% else %>
 		<div id="survey_header">
@@ -49,9 +49,8 @@
 </div>
 <%unless current_user%>
 	<script>
-	    jQuery(document).ready(function($){
+		jQuery(document).ready(function($){
 			jQuery.facebox({ajax:"/sections/cca"});
-	    });
+		});
 	</script>
-  	
 <%end%>
