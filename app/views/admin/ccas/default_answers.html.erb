@@ -9,7 +9,7 @@
 <%= render :partial => "/admin/admin_header"%>
 <div id="survey_form">
 	<% form_tag(save_default_answers_admin_cca_path(@cca), :method => "put", :class=>'auth') do %>
-		Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.
+		Fill out the survey below to provide all default answers. 
 		<br/><br/>
 		<input name="tos" value="yes" type="checkbox" checked style="display:none" />
 		<% @cca.cca_questions.each_with_index do |question, index| %>

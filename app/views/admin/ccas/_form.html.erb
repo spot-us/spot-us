@@ -28,5 +28,14 @@
         <%= f.label     :award_amount, "Award amount" %>
         <%= f.text_field :award_amount %>
     </div>
+	<div class="row add_media">
+      <label>Add Banner<br/>
+         <span class="small">
+            Required: Upload A Banner
+         </span>       
+      </label>
+      <%= f.file_field :banner %><br/>
+      <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+    </div>
     <%= image_submit_tag image_path('save.png'), :alt => 'Edit the CCA' %>
 <% end %>
