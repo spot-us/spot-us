@@ -23,8 +23,6 @@ class Cca < ActiveRecord::Base
                     :url =>  "cca-banners/:attachment/:id_partition/" <<
                              ":basename_:style.:extension"
 
-  validates_presence_of :headline, :user_id
-
   unless Rails.env.development?
     validates_attachment_content_type :banner,
       :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
