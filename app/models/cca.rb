@@ -3,12 +3,12 @@ class Cca < ActiveRecord::Base
 	validate :check_credit_settings, :on => [:update, :new]
 	belongs_to :user, :foreign_key => :sponsor_id
 	has_many :cca_questions, :order => "position"
-	has_many :cca_answers, :conditions => 'cca_answers.default_answer=0'
+	has_many :cca_answers, :conditions => 'cca_answers.default_answer=0 OR cca_answers.default_answer is null'
 	has_many :default_cca_answers, :class_name=>"CcaAnswer", :conditions => 'cca_answers.default_answer=1', :foreign_key => "cca_id"
   has_many :credits, :foreign_key=>'cca_id'
   
   attr_accessor :providing_default_answer
-  @@providing_default_answers = false
+  @@providing_default_answer = false
   
   has_attached_file :banner,
                     :styles => { :thumb => '99x8#', 

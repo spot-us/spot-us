@@ -1,6 +1,6 @@
 class CcaQuestion < ActiveRecord::Base
   belongs_to :cca
-  has_many :cca_answers, :conditions => 'default_answer=0'
+  has_many :cca_answers, :conditions => 'default_answer=0 OR default_answer is null'
   has_many :default_cca_answers, :class_name=>"CcaAnswer", :conditions => 'default_answer=1', :foreign_key => "cca_question_id"
   validates_presence_of   :cca_id, :question, :question_type, :position
   
