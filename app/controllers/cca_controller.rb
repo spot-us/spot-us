@@ -53,7 +53,7 @@ class CcaController < ApplicationController
       end
     elsif is_completed && tos
       @cca.award_credit(current_user)
-      session[:show_default_answers] = @cca.id unless @cca.default_cca_answers.empy?
+      session[:show_default_answers] = @cca.id unless @cca.default_cca_answers.empty?
       if credit_to_pitch?
         update_balance_cookie
         redirect_to edit_myspot_donations_amounts_path
