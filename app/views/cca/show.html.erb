@@ -18,6 +18,7 @@
 			</div>
 			<div id="survey_wrapper" class="clearfix">
 				<div id="survey_info">
+					<%= render :partial => "fund_this" if params[:pitch_id]%>
 					<%= render :partial => "sponsor_info" %>
 				</div>
 
