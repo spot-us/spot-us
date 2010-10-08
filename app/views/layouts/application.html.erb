@@ -58,7 +58,7 @@
 		<% if session[:show_default_answers] %>
 			<script>
 				jQuery(document).ready(function($){
-					jQuery.facebox({ajax: '<%= default_answers_cca_path(Cca.find_by_id(session[:show_default_answers]))%>'});
+					jQuery.facebox({ajax: '<%= default_answers_cca_path(Cca.find_by_id(session[:show_default_answers]), {:only_path=>false})%>'});
 				});
 			</script>
 		<% end %>
