@@ -1,4 +1,4 @@
-<h2>Default Answers for CCA: <%=@cca.title%></h2>
+<h2>Thanks for taking the quiz - the correct answers from <%=@cca.title%> are below</h2>
 <div id="survey_form">
 	<% @cca.cca_questions.each_with_index do |question, index| %>
 		<%= survey_section(question, index) %>
