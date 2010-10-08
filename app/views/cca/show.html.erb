@@ -10,7 +10,7 @@
 
 <div id="survey">
 	<% if @cca %>
-		<% apply_fragment ['cca_', @cca] do %>
+		<% apply_fragment ['cca_', @cca, params[:pitch_id]] do %>
 			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
 			<div id="survey_header">
 				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
