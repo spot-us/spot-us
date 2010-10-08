@@ -1,0 +1,29 @@
+= content_for :head do
+  :javascript
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#users_tab").addClass("hilited");
+    });
+
+= render :partial => "/admin/admin_header"
+
+%h2 User With Unused Credits
+%hr
+
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Amount
+    %th Profile page
+  - if @credits.empty?
+    %tr.notice
+      %td{:colspan => 3} No records found
+  - @credits.each do |credit|
+    - unless credit.user.blank?
+      %tr
+        %td= credit.user.full_name
+        %td= link_to (credit.user.email, "mailto:#{credit.user.email}")
+        %td= number_to_currency(credit.user.total_credits)
+        %td= link_to (credit.user.full_name, profile_path(credit.user))
+= will_paginate @credits

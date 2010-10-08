@@ -25,6 +25,3 @@ class Credit < ActiveRecord::Base
     amount
   end
 end
-
-
-
