@@ -19,7 +19,7 @@ class Admin::CreditsController < ApplicationController
   end
   
   def unused
-    @credits = Credit.paginate(:page => params[:page], :joins => "LEFT JOIN donations ON donations.credit_id = credits.id", :conditions => "donations.id is null", :group => "credits.user_id")
+    @credits = Credit.paginate(:page => params[:page], :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", :conditions => "donations.id is not null or spotus_donations.id is not  null", :group => "credits.user_id")
   end
   
   private
