@@ -26,4 +26,3 @@
         %td= link_to (credit.user.email, "mailto:#{credit.user.email}")
         %td= number_to_currency(credit.user.total_credits)
         %td= link_to (credit.user.full_name, profile_path(credit.user))
-= will_paginate @credits
