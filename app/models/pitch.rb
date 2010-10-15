@@ -141,6 +141,10 @@ class Pitch < NewsItem
   
   MAX_PER_USER_DONATION_PERCENTAGE = 0.20
 
+  def self.all_active_reporters
+    self.active.find(:all, :include=>:user, :group=>"user_id").map(&:user)
+  end
+
   def self.featured_by_network(network=nil)
     return network.featured_pitches if network
     featured
