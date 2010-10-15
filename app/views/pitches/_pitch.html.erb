@@ -5,9 +5,9 @@
 	<% end %>
 	<% if @show_cca && !pitch.fully_funded? %>
 		<% if current_user %>
-			<%= link_to "Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
+			<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
 		<% else %>
-			<%= facebox_login_link_to("Earn Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
+			<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
 		<% end %>
 	<% end %>
 	<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
