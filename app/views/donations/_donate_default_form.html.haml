@@ -4,4 +4,4 @@
   - unless @show_cca && !defined?(force_fund_this)
     = image_submit_tag "/images/new_design/fund.png", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}"
   - else
-    = link_to "Earn Credits", cca_path(@first_cca) + "/#{news_item.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status"
+    = link_to "Free Credits", cca_path(@first_cca) + "/#{news_item.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status"

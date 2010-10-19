@@ -15,6 +15,7 @@ class NewsItemsController < ApplicationController
         get_news_items
       end
       format.xml do
+        @ids_only = params[:id_list].to_s=='true'
         get_news_items
       end
       format.rss do
