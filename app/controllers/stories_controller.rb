@@ -9,6 +9,16 @@ class StoriesController < ApplicationController
     redirect_to "/stories/published", :status=>301
     return
   end
+  
+  def show
+    @story = find_resource
+    respond_to do |format|
+      format.html do
+      end
+      format.xml do
+      end
+    end
+  end
 
   def accept
     story = find_resource
