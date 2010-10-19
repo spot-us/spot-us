@@ -98,7 +98,7 @@ xml.pitch {
             xml.groupName group.name 
             xml.permaLink group_path(group, { :only_path => false })
             xml.avatar group.image.url(:thumb)
-            xml.donationAmount number_to_currency(group.donations_for_@pitch(@pitch))
+            xml.donationAmount number_to_currency(group.donations_for_pitch(@pitch))
           }
         end
       end
