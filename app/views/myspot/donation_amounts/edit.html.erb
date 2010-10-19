@@ -120,9 +120,9 @@
                   </p>
                </div>
                <div class="donater">
-                  $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;" %>
+                  $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;", :disabled=>true %>
                   <div class="action">
-                     <%= link_to "Remove", '#', :id => 'remove_spotus_donation' %>
+                     <%#= link_to "Remove", '#', :id => 'remove_spotus_donation' %>
                   </div>
                </div>
             </li>
