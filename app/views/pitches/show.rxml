@@ -6,7 +6,7 @@ xml.pitch {
     xml.headline @pitch.headline
     xml.createdAt @pitch.created_at
     xml.updatedAt @pitch.updated_at
-    xml.permaLink @pitch_path(@pitch, {:only_path => false})
+    xml.permaLink pitch_path(@pitch, {:only_path => false})
     xml.featuredImage @pitch.featured_image.url(:thumb)
 
     apply_fragment ['pitch_reporter_api_', @pitch.user] do

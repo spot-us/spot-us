@@ -3,7 +3,7 @@ xml.pitch {
   if @ids_only
     apply_fragment ['pitch_header_api_id_only_', news_item] do
       xml.id news_item.id
-      xml.permaLink news_item_path(news_item, {:only_path => false})
+      xml.permaLink pitch_path(news_item, {:only_path => false})
       xml.updatedAt news_item.updated_at
     end
   else
@@ -11,7 +11,7 @@ xml.pitch {
       xml.headline news_item.headline
       xml.createdAt news_item.created_at
       xml.updatedAt news_item.updated_at
-      xml.permaLink news_item_path(news_item, {:only_path => false})
+      xml.permaLink pitch_path(news_item, {:only_path => false})
       xml.featuredImage news_item.featured_image.url(:thumb)
   
       apply_fragment ['pitch_reporter_api_', news_item.user] do

@@ -3,14 +3,14 @@ xml.story {
   if @ids_only
     apply_fragment ['story_header_api_id_only_', news_item] do
       xml.id news_item.id
-      xml.permaLink news_item_path(news_item, {:only_path => false})
+      xml.permaLink story_path(news_item, {:only_path => false})
       xml.updatedAt news_item.updated_at
     end
   else
     apply_fragment ['story_header_api_', news_item] do
       xml.headline news_item.headline
       xml.createdAt news_item.created_at
-      xml.permaLink news_item_path(news_item, {:only_path => false})
+      xml.permaLink story_path(news_item, {:only_path => false})
       xml.featuredImage news_item.featured_image.url(:thumb)
 
       apply_fragment ['story_reporter_api_', news_item.user] do

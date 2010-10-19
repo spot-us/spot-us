@@ -5,7 +5,7 @@ xml.story {
   apply_fragment ['story_header_api_', @story] do
     xml.headline @story.headline
     xml.createdAt @story.created_at
-    xml.permaLink @story_path(@story, {:only_path => false})
+    xml.permaLink story_path(@story, {:only_path => false})
     xml.featuredImage @story.featured_image.url(:thumb)
 
     apply_fragment ['story_reporter_api_', @story.user] do
