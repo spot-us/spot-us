@@ -2,19 +2,18 @@
 <%= render :partial => 'credits/credit_pitch', :locals => {:news_item => news_item} if current_user && (current_user.remaining_credits > 0) && (news_item.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(news_item))%>
 <%#= render :partial => 'donations/can_not_donate', :locals => {:news_item => news_item} if current_user && (!current_user.can_donate_to?(news_item) || (news_item.total_amount_allocated_by_user(current_user) >= current_user.max_donation_for(news_item))) %>
 <%#= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item, :spotus_lite=>false} if  news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT) %>
+<% if @show_cca && @first_cca && !@pitch.fully_funded? %>
+	<% if current_user %>
+		<%= link_to "Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" %>
+	<% else %>
+		<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", {:return_to => cca_path(@first_cca) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
+	<% end %>
+<% end %>
 
 <% if show_cca?(@show_cca) && (!current_user || (current_user && current_user.can_donate_to?(news_item) && current_user.remaining_credits <= 0 && !news_item.fully_funded?)) %>
 	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
 		  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
 		  <%= f.hidden_field :pitch_id %>
 		  <%= f.submit "Fund Story", :alt => "help this story get produced by making a donation", :class => "donate show_status" %>
-	<% end %>
-<% end %>
-
-<% if @show_cca && @first_cca && !@pitch.fully_funded? %>
-	<% if current_user %>
-		<%= link_to "Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits show_status" %>
-	<% else %>
-		<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", {:return_to => cca_path(@first_cca) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
 	<% end %>
 <% end %>
