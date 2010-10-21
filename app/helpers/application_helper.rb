@@ -9,6 +9,11 @@ module ApplicationHelper
     link_to args.first, new_session_path(:return_to => url), options
   end
   
+  def show_cca?(show_cca)
+    return true
+    return !show_cca
+  end
+  
   def get_network_name?(pre_text=" inside ")
     "#{pre_text}#{@current_network.nil? ? "All Networks" : @current_network.display_name}"
   end
