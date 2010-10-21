@@ -395,7 +395,8 @@ div.featured_image {float:left;padding:0 15px 0 0;width:210px;}
 input[type="submit"].donate,a.earn_credits, .donate_buttons a.authbox {background:#107a35;border:0;line-height:40px;height:40px;width:150px;
 		-moz-border-radius:8px;-webkit-border-radius:8px;font-size:22px;color:#fff;cursor:pointer;font-family:Helvetica, Verdana;}
 .pitch_right form.donate {float:left;margin-right:10px;}
-a.earn_credits, .donate_buttons a.authbox {display:block;float:left;height:30px;padding:3px 0 8px;width:165px;text-align:center;}
+.pitch_right .show_status {display:block;float:left;height:35px;padding:3px 0 8px;width:165px;text-align:center;}
+a.earn_credits, .donate_buttons a.authbox {display:block;float:left;height:30px;padding:3px 0 8px;width:165px;text-align:center;margin-right:10px;}
 input[type="submit"].donate:hover {background:#1F5929;}
 a.earn_credits:hover, .donate_buttons a.authbox:hover {text-decoration:none;background:#1F5929;}
 #button_status {color:#688549;font-size:12px;line-height:12px;font-family:Verdana;margin-left:7px;}
