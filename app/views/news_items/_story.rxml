@@ -56,7 +56,7 @@ xml.story {
           } if news_item.peer_reviewer
         end
 
-        xml.shortDescription h(news_item.short_description)
+        xml.shortDescription h(news_item.pitch.short_description)
 
       } if news_item.pitch
     end

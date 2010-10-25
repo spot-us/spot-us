@@ -62,7 +62,7 @@ xml.pitch {
           } if news_item.peer_reviewer
         end
         
-        xml.shortDescription h(news_item.short_description)
+        xml.shortDescription h(news_item.story.short_description)
 
       } if news_item.story
     end
