@@ -145,7 +145,7 @@ class NewsItem < ActiveRecord::Base
   end
 
   def excerpt?
-    return (self.short_description ? self.short_description : self.extended_description).strip_html.truncate_words
+    return (self.short_description ? self.short_description : self.extended_description).strip_and_shorten
   end
 
 	# def network_id
