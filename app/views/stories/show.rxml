@@ -24,7 +24,7 @@ xml.story {
       } if @story.peer_reviewer
     end
     
-    xml.shortDescription h(@story.short_description)
+    xml.shortDescription h(@story.excerpt?)
     
   end
 
@@ -56,7 +56,7 @@ xml.story {
         } if @story.peer_reviewer
       end
 
-      xml.shortDescription h(@story.short_description)
+      xml.shortDescription h(@story.pitch.excerpt?)
 
     } if @story.pitch
   end

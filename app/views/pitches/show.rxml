@@ -31,7 +31,7 @@ xml.pitch {
       xml.fundingNeeded number_to_currency(@pitch.funding_needed)
     end
 
-    xml.shortDescription h(@pitch.short_description)
+    xml.shortDescription h(@pitch.excerpt?)
     
   end
   
@@ -62,7 +62,7 @@ xml.pitch {
         } if @pitch.peer_reviewer
       end
       
-      xml.shortDescription h(@pitch.short_description)
+      xml.shortDescription h(@pitch.story.excerpt?)
 
     } if @pitch.story
   end

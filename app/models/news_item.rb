@@ -144,6 +144,13 @@ class NewsItem < ActiveRecord::Base
     featured_image_file_name.blank? && (type.to_s=='Story' || type.to_s=='Tip')
   end
 
+  def excerpt?
+    decription = ""
+    description = truncate_words(strip_tags(self.short_description), 50) if self.short_description
+    description = truncate_words(strip_tags(self.extended_description), 50) if self.extended_description && description.blank?
+    return description
+  end
+
 	# def network_id
 	# 	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
 	# end
