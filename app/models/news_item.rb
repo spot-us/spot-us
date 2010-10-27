@@ -145,10 +145,7 @@ class NewsItem < ActiveRecord::Base
   end
 
   def excerpt?
-    decription = ""
-    description = truncate_words(self.short_description, 50) if self.short_description
-    description = truncate_words(self.extended_description, 50) if self.extended_description && description.blank?
-    return description
+    return self.short_description ? self.short_description : self.extended_description
   end
 
 	# def network_id
