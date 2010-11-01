@@ -187,10 +187,11 @@ namespace :credits do
       user_credits = Credit.find(:all,
           :select => "credits.*", 
           :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", 
-          :conditions => "donations.id is null and spotus_donations.id is null and credits.user_id=#{params[:user_id]}")
+          :conditions => "donations.id is null and spotus_donations.id is null and credits.user_id=#{c.user_id}")
 
       user_credits.each do |credit|
-        spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => credit.user_id, :credit_id => credit.id  })
+        puts %|       Transferring funds for #{credit.user.full_name} with the credit amount #{credit.amount} |
+        #spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => credit.user_id, :credit_id => credit.id  })
       end
     end
     
