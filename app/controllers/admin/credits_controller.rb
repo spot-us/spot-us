@@ -26,6 +26,13 @@ class Admin::CreditsController < ApplicationController
       :group => "credits.user_id having total_amount>0")
   end
   
+  def transfer
+    user = User.find_by_id(params[:user_id])
+    credit = user.credits.last
+    spotus_donation = SpotusDonation.create({ :amount => params[:spotus_donation_amount], :user_id => user.id, :credit_id => credit.id  })
+    redirect_to :back
+  end
+  
   private
   
     def load_users_and_credits
