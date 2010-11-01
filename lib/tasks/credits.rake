@@ -191,7 +191,7 @@ namespace :credits do
 
       user_credits.each do |credit|
         puts %|       Transferring funds for #{credit.user.full_name} with the credit amount #{credit.amount} |
-        #spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => credit.user_id, :credit_id => credit.id  })
+        spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => credit.user_id, :credit_id => credit.id  })
       end
     end
     
