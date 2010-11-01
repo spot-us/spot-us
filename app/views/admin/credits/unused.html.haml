@@ -27,4 +27,4 @@
         %td= link_to (credit.user.email, "mailto:#{credit.user.email}")
         %td= number_to_currency(credit.user.total_credits)
         %td= link_to (credit.user.full_name, profile_path(credit.user))
-        %td= link_to "/admin/credits/transfer/#{credit.user.id}", "Transfer back funds"
+        %td= link_to "Transfer back funds", "/admin/credits/transfer/#{credit.user.id}" if user.total_credits.to_f<1
