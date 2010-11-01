@@ -117,6 +117,10 @@ class Donation < ActiveRecord::Base
     shorten.urls
   end
 
+  def self.old_donors
+    find(:all, :order=>'created_at asc', :limit=>100).map(&:user).uniq.map(&:email).join(",")
+  end
+
   protected
 
   def send_thank_you
