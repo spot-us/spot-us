@@ -31,7 +31,7 @@ class Admin::CreditsController < ApplicationController
     credits = Credit.find(:all,
         :select => "credits.*", 
         :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", 
-        :conditions => "donations.id is null and spotus_donations.id is null and user_id=#{params[:user_id]}")
+        :conditions => "donations.id is null and spotus_donations.id is null and credits.user_id=#{params[:user_id]}")
         
     credits.each do |credit|
       spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => user.id, :credit_id => credit.id  })

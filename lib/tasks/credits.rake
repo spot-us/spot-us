@@ -173,6 +173,26 @@ namespace :credits do
       end
     end
     
+  end
+  
+  task :transfer => :environment do
+  
+    credits = Credit.find(:all,
+      :select => "credits.*, SUM(credits.amount) as total_amount", 
+      :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", 
+      :conditions => "donations.id is null and spotus_donations.id is null", 
+      :group => "credits.user_id having total_amount>0 and total_amount<=1")
+    
+    credits.each do |c|
+      user_credits = Credit.find(:all,
+          :select => "credits.*", 
+          :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", 
+          :conditions => "donations.id is null and spotus_donations.id is null and credits.user_id=#{params[:user_id]}")
+
+      user_credits.each do |credit|
+        spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => credit.user_id, :credit_id => credit.id  })
+      end
+    end
     
   end
   
