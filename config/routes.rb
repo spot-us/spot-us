@@ -111,7 +111,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :blacklist_emails
   end
 
-  map.connect "/admin/credits/payback/:user.id", :controller => "admin/credits", :action => "transfer"
+  map.connect "/admin/credits/transfer/:user_id", :controller => "admin/credits", :action => "transfer"
 
   map.connect "/myspot/purchases/paypal_return", :controller => "myspot/purchases", :action => "paypal_return"
   map.connect "/myspot/purchases/paypal_ipn", :controller => "myspot/purchases", :action => "paypal_ipn"

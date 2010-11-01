@@ -28,8 +28,15 @@ class Admin::CreditsController < ApplicationController
   
   def transfer
     user = User.find_by_id(params[:user_id])
-    credit = user.credits.last
-    spotus_donation = SpotusDonation.create({ :amount => params[:spotus_donation_amount], :user_id => user.id, :credit_id => credit.id  })
+    credits = Credit.find(:all,
+        :select => "credits.*", 
+        :joins => "LEFT JOIN donations ON donations.credit_id = credits.id LEFT JOIN spotus_donations ON spotus_donations.credit_id = credits.id", 
+        :conditions => "donations.id is null and spotus_donations.id is null and user_id=#{params[:user_id]}")
+        
+    credits.each do |credit|
+      spotus_donation = SpotusDonation.create({ :amount => credit.amount, :user_id => user.id, :credit_id => credit.id  })
+    end
+    
     redirect_to :back
   end
   
