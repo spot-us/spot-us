@@ -1,6 +1,6 @@
 %p= image_tag user.photo.url(:thumb)
 %h4.reg-line-height= h user.full_name
-%p.reg-line-height= h user.category.name
+%p.reg-line-height= h user.category.name if user.category
 .date.quiet.reg-line-height
   member since
   = user.created_at.to_s(:date)
