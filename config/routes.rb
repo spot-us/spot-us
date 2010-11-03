@@ -109,6 +109,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :cca_questions
     admin.resources :feedbacks
     admin.resources :blacklist_emails
+    admin.resources :notification_emails, :member => { :mark_to_send => :get, :mark_as_draft => :get }
   end
 
   map.connect "/admin/credits/transfer/:user_id", :controller => "admin/credits", :action => "transfer"

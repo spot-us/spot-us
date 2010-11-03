@@ -1,0 +1,11 @@
+<% form_for([:admin, @notification_email], :html => { :multipart => true }) do |f| %>
+    <div class="row">
+        <%= f.label     :subject, "Subject" %>
+        <%= f.text_field :subject %>
+    </div>
+    <div class="row">
+        <%= f.label     :body, "Body (use USERNAME to customize the email)" %>
+		<%= ckeditor_textarea("notification_email", "body", :toolbar => 'Basic', :width => '480px', :height => '180px') %>
+    </div>
+    <%= image_submit_tag image_path('save.png'), :alt => 'Save' %>
+<% end %>

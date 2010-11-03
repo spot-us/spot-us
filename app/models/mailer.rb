@@ -224,4 +224,11 @@ class Mailer < ActionMailer::Base
     body        :subscriber => subscriber
   end
   
+  def notification_mass_email(ne, user)
+    recipients  user.email
+    from        MAIL_FROM_INFO
+    subject     ne.subject
+    body        :ne => ne, :user => user
+  end
+  
 end

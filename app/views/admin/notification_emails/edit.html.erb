@@ -1,0 +1,16 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#notification_emails_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+
+<%= render :partial => "/admin/admin_header" %>
+
+<h2>Edit Notification Email - <%= @notification_email.subject%></h2>
+<div class="flash error">
+  <%= error_messages_for :notification_email %>
+</div>
+<%= render :partial => "form" %>

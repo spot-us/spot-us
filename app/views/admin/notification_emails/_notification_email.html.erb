@@ -1,0 +1,5 @@
+<strong>User:</strong> <%=credit.user ? link_to(credit.user.full_name, profile_path(credit.user)) : 'Unknown user'%><br/>
+<strong>Credit:</strong> <%=credit.amount%><br/>
+<!-- Commented out now as the credits cannot easily be linked to a donation. -->
+<%#=!credit.donation || credit.donation.unpaid? ? "<strong style='color:red;'>Credits not applied yet!</strong>" : "<strong>Donated to pitch:</strong> " + link_to(credit.donation.pitch, credit.donation.pitch.headline)%>
+<hr/>

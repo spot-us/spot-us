@@ -1,0 +1,2 @@
+<%=@ne.body.gsub('USERNAME', @user.full_name).gsub('USER_NAME', @user.full_name)%>
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

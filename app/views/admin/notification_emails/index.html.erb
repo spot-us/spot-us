@@ -1,0 +1,34 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#notifications_emails_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>Notification Emails</h2>
+<%= link_to "Create a new notification email", new_admin_notification_email_path %>
+<div class="box">
+	<table class="admin_notification_emails">
+	  <tr>
+		<th>Subject</th>
+		<th>Status</th>
+		<th>Actions</th>
+		</tr>
+		<% @notification_emails.each do |notification_email| %>
+			<tr class="quiet">
+				<td><%=notification_email.subject%></td>
+				<td><%=notification_email.status?%></td>
+				<td>
+			    	<%= link_to 'edit', edit_admin_notification_email_url(notification_email)%><br/>
+					<%= link_to 'mark to send', mark_to_send_admin_notification_email_url(notification_email) if notification_email.draft?%>
+					<%= link_to 'mark as draft', mark_as_draft_admin_notification_email_url(notification_email) if notification_email.not_sent?%>
+					<br/>
+					<%= link_to 'delete', admin_notification_email_url(notification_email), :method => :delete, :confirm => 'Are you sure you want to delete this notification email?'%>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

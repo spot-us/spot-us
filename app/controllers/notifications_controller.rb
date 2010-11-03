@@ -9,6 +9,7 @@ class NotificationsController < ApplicationController
     end
     notify_pitch_owners if params[:notification]=='pitch_owners'
     notify_unpaid_donations if params[:notification]=='unpaid_donations'
+    send_notification_emails if params[:notification]=='send_notification_emails'
     render :text=>"ok!" 
   end
   
@@ -30,6 +31,21 @@ class NotificationsController < ApplicationController
   def notify_unpaid_donations
     Donation.unpaid.all({:conditions=>["donations.created_at>?", 3.weeks.ago]}).map(&:user).uniq.each do |user|
       Mailer.deliver_unpaid_donations(user)
+    end
+    return
+  end
+  
+  def send_notification_emails
+    NotificationEmail.to_send.all.each do |ne|
+      ne.update_attributes({ :status => 2 })
+      users = Pitch.all_active_reporters.all
+      users.each do |user|
+        Mailer.deliver_notification_mass_email(ne, user)
+      end
+      conditions = "email not in (#{users.map(&:email).join(',')})"
+      Admin.find(:all,:conditions => conditions).each do |admin|
+        Mailer.deliver_notification_mass_email(ne, admin)
+      end 
     end
     return
   end
