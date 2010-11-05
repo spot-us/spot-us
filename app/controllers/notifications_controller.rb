@@ -38,14 +38,16 @@ class NotificationsController < ApplicationController
   def send_notification_emails
     NotificationEmail.to_send.all.each do |ne|
       ne.update_attributes({ :status => 2 })
-      users = Pitch.all_active_reporters
-      users.each do |user|
-        Mailer.deliver_notification_mass_email(ne, user)
+      users = ne.users?
+      if users && !users.empty?
+        users.each do |user|
+          Mailer.deliver_notification_mass_email(ne, user)
+        end
+        conditions = "email not in (#{users.map{ |u| "'#{u.email}'"}.join(',')})"
+        Admin.find(:all,:conditions => conditions).each do |admin|
+          Mailer.deliver_notification_mass_email(ne, admin)
+        end 
       end
-      conditions = "email not in (#{users.map{ |u| "'#{u.email}'"}.join(',')})"
-      Admin.find(:all,:conditions => conditions).each do |admin|
-        Mailer.deliver_notification_mass_email(ne, admin)
-      end 
     end
     return
   end
