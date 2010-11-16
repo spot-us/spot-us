@@ -5,7 +5,11 @@ jQuery(document).ready(function($){
 		
 		// making sure the return path is set as it should.
 		href = jump_to.attr("href");
-		query = href.split('?');
+		if (typeof (href) == "undefined"){
+			query = "";
+		}else{
+			query = href.split('?');
+		}
 		if (query.length > 1){
 			return_to_query = query[1].split('&');
 			return_to = return_to_query[0].split('=');
