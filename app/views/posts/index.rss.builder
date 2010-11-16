@@ -1,6 +1,10 @@
 xml.instruct! :xml, :version => "1.0" 
 xml.rss :version => "2.0" do
   xml.channel do
+    xml.title "Spot.Us Pitch :: #{@pitch.headline} :: Blog Posts"
+    xml.link "#{pitch_url(@pitch)}/posts"
+    xml.description @pitch.short_description
+    xml.language "en-us"
     @pitch.posts.each do |post|
       xml.item do
         xml.title post.title
