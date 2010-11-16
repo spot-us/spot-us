@@ -234,10 +234,12 @@ function getTotalAmounts(recalc_spot_donation){
 	amount_to_pay = 1.05*owe_amount - credit;
 	if(recalc_spot_donation && owe_amount > 0){
 		jQuery('#spotus_donation').attr("value",formatAsMoney(owe_amount/20));
+		jQuery('#spotus_donation_hidden').attr("value",formatAsMoney(owe_amount/20));
 	}
 	else if (recalc_spot_donation)
 	{
 		jQuery('#spotus_donation').attr("value","0.00");
+		jQuery('#spotus_donation_hidden').attr("value","0.00");
 	}
 
 	spot_us_support = parseFloat(jQuery('#spotus_donation').val()) || 0;
