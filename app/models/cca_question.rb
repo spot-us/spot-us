@@ -15,6 +15,6 @@ class CcaQuestion < ActiveRecord::Base
   end
   
   def answer_by_user(user, default_answer)
-    default_answer ? CcaAnswer.find_by_cca_question_id_and_default_answer(self,default_answer) : CcaAnswer.find_by_cca_question_id_and_user_id_and_default_answer(self,user.id,false)
+    default_answer ? CcaAnswer.find_by_cca_question_id_and_default_answer(self.id,default_answer) : CcaAnswer.find(:first, :conditions => ["cca_question_id=? and user_id=? and (default_answer=0 OR default_answer is null)",self.id,user.id])
   end
 end
