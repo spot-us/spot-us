@@ -1,5 +1,5 @@
 <div id="survey_form">
-	<% apply_fragment ['cca_form_', @cca, @cache_form, params[:pitch_id]] do %>
+	<% apply_fragment ['cca_form_1_', @cca, @cache_form, params[:pitch_id]] do %>
 		<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
 			<% if @pitch %>
 				Fill out the survey below. Once complete, your credit will be applied to the pitch:<br/>
