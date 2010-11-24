@@ -14,17 +14,17 @@ Leave a comment on the pitch and explain why you funded it!
 Contact other people that you know who might be passionate about this pitch? If we distribute 
 the cost amongst a lot of people - together we can make a difference.
 <%if @donation.credit && @donation.credit.amount<@donation.amount %>
-
 	Keep this email as proof of your tax-deductible donation of <%=number_to_currency(@donation.amount.to_f-@donation.credit.amount.to_f)%>
 <%else%>
-
 	Keep this email as proof of your tax-deductible donation of <%=number_to_currency(@donation.amount)%>
 <%end%>
 
+<%if !@donation.credit || @donation.credit.amount<@donation.amount%>
 ----
 
 Your gift is deductible to the extent allowed by law and no goods or services were received in
 return. The Center for Media Change, Inc. is a 501(c)3 public benefit corporation. ID #68-0632366
+<%end%>
 
 Sincerely,
 David Cohn
