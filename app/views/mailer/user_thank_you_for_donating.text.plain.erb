@@ -15,7 +15,7 @@ Contact other people that you know who might be passionate about this pitch? If 
 the cost amongst a lot of people - together we can make a difference.
 <%if @donation.credit && @donation.credit.amount<@donation.amount %>
 	Keep this email as proof of your tax-deductible donation of <%=number_to_currency(@donation.amount.to_f-@donation.credit.amount.to_f)%>
-<%else%>
+<%elsif !@donation.credit%>
 	Keep this email as proof of your tax-deductible donation of <%=number_to_currency(@donation.amount)%>
 <%end%>
 
