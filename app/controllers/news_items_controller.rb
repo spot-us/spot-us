@@ -60,10 +60,13 @@ class NewsItemsController < ApplicationController
 
   def get_news_items(limit=nil)
     @requested_page = params[:page] || 1
+    @topic_id = params[:topic_id] || -1                # for simplicity for the API
+    @grouping_id = params[:grouping_id] || -1           # for simplicity for the API
+    
     unless limit
-      @news_items = NewsItem.constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
+      @news_items = NewsItem.constrain_topic_id(@topic_id).constrain_grouping_id(@grouping_id).constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
     else
-      @news_items = NewsItem.constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).find(:all,:limit=>limit)
+      @news_items = NewsItem.constrain_topic_id(@topic_id).constrain_grouping_id(@grouping_id).constrain_type(@filter).constrain_topic(@topic).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).find(:all,:limit=>limit)
     end
   end
 

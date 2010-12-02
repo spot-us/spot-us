@@ -36,7 +36,7 @@ class NotificationEmail < ActiveRecord::Base
   end
   
   def sent?
-    status==0
+    status==2
   end
   
 end
