@@ -1,3 +1,14 @@
+<% if (@cca && !@cca.errors.empty?) %>
+	<div class="formErrors">
+		<h3 class="formErrorHeading">Ooops, something went wrong!</h3>
+		<ul class="formErrorsList">
+			<%@cca.errors.each do |error|%>
+				<li><%=error[1]%></li>
+			<%end%>
+		</ul>
+	</div>
+<%end%>
+
 <% form_for([:admin, @cca], :html => { :multipart => true }) do |f| %>
     <div class="row">
         <%= f.label     :sponsor_id, "Sponsor" %>
@@ -36,6 +47,18 @@
       </label>
       <%= f.file_field :banner %><br/>
       <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+    </div>
+	<div class="row">
+        <%= f.label     :embed_code, "Add embed code for before video or audio" %>
+        <%= f.text_area :embed_code, :rows => 10, :cols => 60 %>
+    </div>
+	<div class="row">
+        <%= f.label     :length_of_video, "Specify the number of seconds the pre-ad should be hidden for" %>
+		<select name="cca[length_of_video]">        
+			<%120.times do |n| %>
+				<option value="<%=n%>" <%if @cca.length_of_video.to_i==n%>selected<%end%>><%=n%> s</option> 
+			<%end%>
+		</select>
     </div>
     <%= image_submit_tag image_path('save.png'), :alt => 'Edit the CCA' %>
 <% end %>
