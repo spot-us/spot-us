@@ -33,6 +33,3 @@ class ActiveRecord::Base
     record    
   end
 end
-
-ActiveRecord::Base.send :include, CacheConcerns::ModelMethods
-ActionMailer::Base.send :include, CacheConcerns::ModelMethods

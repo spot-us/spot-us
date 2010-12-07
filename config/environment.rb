@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
     SpotUs::Cache.initialize!
   end
   
-  config.load_paths += ["#{Rails.root}/app/concerns"]
+  config.load_paths += %W( #{RAILS_ROOT}/app/concerns )
   
   # need to update this list soon :-)
   config.gem "haml", :version => '>=2.0.6'
@@ -66,3 +66,15 @@ SubdomainFu.mirrors = %w(www spotus spotreporting)
 
 # define constant to see if it is in a production mode...
 REAL_PRODUCTION_MODE = (RAILS_ENV=="production")
+
+begin
+   PhusionPassenger.on_event(:starting_worker_process) do |forked|
+     if forked
+       # We're in smart spawning mode, so...
+       # Close duplicated memcached connections - they will open themselves
+       CACHE.reset
+     end
+   end
+# In case you're not running under Passenger (i.e. devmode with mongrel)
+rescue NameError => error
+end
