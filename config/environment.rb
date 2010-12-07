@@ -21,6 +21,8 @@ Rails::Initializer.run do |config|
     SpotUs::Cache.initialize!
   end
   
+  config.load_paths += ["#{Rails.root}/app/concerns"]
+  
   # need to update this list soon :-)
   config.gem "haml", :version => '>=2.0.6'
   config.gem "fastercsv"
@@ -34,7 +36,6 @@ Rails::Initializer.run do |config|
   config.gem "oauth2"
   config.gem "json"
   config.gem "twitter_oauth"
-
 
   config.time_zone = 'UTC'
 

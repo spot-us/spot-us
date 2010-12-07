@@ -8,6 +8,7 @@ class ActiveRecord::Base
   # Returns the record.
   #
   # http://railspikes.com/2008/2/1/loading-seed-data
+  
   def self.create_or_update(options = {})
     id = options.delete(:id)
     record = find_by_id(id) || new
@@ -32,3 +33,6 @@ class ActiveRecord::Base
     record    
   end
 end
+
+ActiveRecord::Base.send :include, CacheConcerns::ModelMethods
+ActionMailer::Base.send :include, CacheConcerns::ModelMethods

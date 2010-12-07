@@ -176,6 +176,17 @@ class NewsItem < ActiveRecord::Base
     %w(desc asc most_pledged most_funded almost_funded).include?(sort) ? sort : 'desc'
   end
   
+  def self.get_stories(page, topic_id, grouping_id, topic, selected_filter, current_network, limit=nil)
+    having_cache ["news_items_stories", page, topic_id, grouping_id, topic, selected_filter, current_network, limit], {:expires_in => CACHE_TIMEOUT }  do
+      unless limit
+        self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).paginate(:page => page)
+      else
+        self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).find(:all,:limit=>limit)
+      end
+    end
+  end
+  
+  
   def peer_reviewer
     #fact_checker || (parent && parent.fact_checker)
     return nil if !["Pitch","Story"].include?(self.class.to_s)
