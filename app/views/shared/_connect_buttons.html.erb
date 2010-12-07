@@ -4,5 +4,5 @@
 	<li><a href="http://twitter.com/spotus" title="SpotUs on Twitter"><img width="61" height="57" alt="Twitter" src="/images/new_design/twittericon.png" alt="SpotUs on Twitter"/></a></li>
 	<li><a href="http://www.flickr.com/photos/29792566@N08/" title="SpotUs on Flickr"><img width="61" height="57" alt="Flickr" src="/images/new_design/flickrlogo.png" alt="SpotUs on Flickr" /></a></li>
 	<li><a href="http://blog.spot.us" title="SpotUs - The Blog"><img width="61" height="57" alt="rss" src="/images/new_design/rssicon.png" alt="SpotUs - The Blog" /></a></li>
-	<li><%= link_to(image_tag("/images/new_design/become_sponsor.png"), "/pages/sponsors") if params[:controller] == "homes"%></li>
+	<li class="becomeSponsor"><%= link_to(image_tag("/images/new_design/become_sponsor.png"), "/pages/sponsors") if defined?(show_header) && show_header %></li>
 </ul>

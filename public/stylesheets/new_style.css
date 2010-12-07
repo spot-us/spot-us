@@ -860,10 +860,13 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 }
 
 .socialHelpButtons li{
-	width:47%;
 	display:inline;
 	float:left;
-	padding-left:30px;
+	width:60%;
+}
+
+.socialHelpButtons li.howTo{
+	width:38%;
 }
 
 .socialHelpButtons li ul{
@@ -875,11 +878,15 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 	display:inline;
 	padding: 5px 10px;
 	margin-bottom:10px;
-	width:120px;
+	width:90px;
 }
 
 .socialHelpButtons li ul.smaller li{
 	width:60px;
+}
+
+.socialHelpButtons li ul .becomeSponsor{
+	width:200px;
 }
 
 .socialHelpButtons li ul li.sectionHeader{
@@ -891,4 +898,8 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 	width:100%;
 	float:none;
 	display:block;
+}
+
+.socialHelpButtons li ul li a img{
+	height:50px;
 }
