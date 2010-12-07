@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'homes', :action => 'show'
+  #map.root :controller => 'homes', :action => 'show'
   map.start_story 'start_story', :controller => 'homes', :action => "start_story"
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 
@@ -11,9 +11,10 @@ ActionController::Routing::Routes.draw do |map|
 
   #better route support for the search page
   map.connect "stories.:format", :controller => "news_items", :action => "index", :filter=>'unfunded'
-  map.connect "stories/:filter.:format", :controller => "news_items", :action => "index", :filter=>nil, :length=>"short", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
-  map.connect "stories/:filter/:topic.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :topic=>/#{Topic.all.map(&:seo_name).join('|').to_s}/}
-  map.connect "stories/:filter/:length.:format", :controller => "news_items", :action => "index", :filter=>nil, :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :length=>/full|short/}
+  map.root :controller => "news_items", :action => "index", :filter=>'unfunded'
+  map.connect ":filter.:format", :controller => "news_items", :action => "index", :length=>"short", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
+  map.connect ":filter/:topic.:format", :controller => "news_items", :action => "index", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :topic=>/#{Topic.all.map(&:seo_name).join('|').to_s}/}
+  map.connect ":filter/:length.:format", :controller => "news_items", :action => "index", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/, :length=>/full|short/}
   map.connnect "news_items", :controller => "news_items", :action => "search", :sort_by=>'asc'
   
   map.connect '/auth/facebook', :controller => "sessions", :action => "facebook_login"

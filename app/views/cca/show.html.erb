@@ -43,10 +43,10 @@
 					</div>
 					<%if @cca.embed_code && @cca.length_of_video.to_i>0%>
 						<div id="survey_description">
-							<%= transform_embed_code(@cca.embed_code, 590, 320) %> 
 							<div style="width:590px;margin-right:10px; font-style:bold; color:#333;text-align:right; padding:4px;" id="countDownWrapper">
 								<span id="countDownCca" ></span> seconds left of the video
 							</div>
+							<%= transform_embed_code(@cca.embed_code, 590, 320) %> 
 						</div>
 					<%end%>
 		<% end %> <!-- end of cached fragment --> 
