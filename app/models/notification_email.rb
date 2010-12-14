@@ -14,12 +14,21 @@ class NotificationEmail < ActiveRecord::Base
     "Approved News Organizations" => 2
   }
   
+  CCA_OFFSET = 50
+  
   named_scope :to_send, :conditions => 'status=1'
   
   def users?
     return Pitch.all_active_reporters if list_id == 0
     return Credit.users_with_unused_credits if list_id == 1
     return Organization.approved.all if list_id == 2
+    return Cca.find_by_id(list_id-CCA_OFFSET).cca_answers.find(:all, :group => "user_id") if list_id > CCA_OFFSET
+  end
+  
+  def self.lists?
+    arr = []
+    tmp = Cca.all.map{ |cca| arr << [cca.title, cca.id+CCA_OFFSET] }
+    return NotificationEmail::LISTS.collect {|key, l| [key, l]}.concat(arr)
   end
   
   def status?

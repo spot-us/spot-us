@@ -1,7 +1,7 @@
 <% form_for([:admin, @notification_email], :html => { :multipart => true }) do |f| %>
     <div class="row">
         <%= f.label     :list_id, "List" %>
-		<%= f.select(:list_id, NotificationEmail::LISTS.collect {|key,l| [key, l]}, {}, :id=>"list_id") %>
+		<%= f.select(:list_id, NotificationEmail.lists?, {}, :id=>"list_id") %>
     </div>
 	<div class="row">
         <%= f.label     :subject, "Subject" %>
