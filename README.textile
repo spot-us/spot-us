@@ -2,54 +2,39 @@ h1. Spot.Us
 
 h2. Community Funded Reporting
 
-"Spot Us" is a project of the nonprofit "Center for Media
-Change":http://www.centerformediachange.com/ that allows an individual or group to take control of
-news by sharing the cost ("crowdfunding":http://crowdfunding.pbwiki.com/) to commission freelance
-journalists. Spot.Us is "made possible":http://newschallenge.org/spot_journalism by the Knight
-Foundation. "Read more":http://blog.spot.us/about-spot-us/.
+"Spot Us" is a project of the nonprofit "Center for Media Change":http://www.centerformediachange.com/ that allows an individual or group to take control of news by sharing the cost ("crowdfunding":http://crowdfunding.pbwiki.com/) to commission freelance journalists. Spot.Us is "made possible":http://newschallenge.org/spot_journalism by the Knight Foundation. "Read more":http://blog.spot.us/about-spot-us/.
 
-Spot.Us won't be ready until the Fall - but we've received lots of interest. So we've
-"launched a wiki":http://wiki.spot.us/ to capture ideas and test the concept of
-"community funded reporting" in Northern California's Bay Area.
+Spot.Us won't be ready until the Fall - but we've received lots of interest. So we've "launched a wiki":http://wiki.spot.us/ to capture ideas and test the concept of "community funded reporting" in Northern California's Bay Area.
 
-We are looking to partner with news organizations, freelance journalists and civic leaders in the
-Bay Area. Don't hesitate to "contact us":http://spot.us/contact.
+We are looking to partner with news organizations, freelance journalists and civic leaders in the Bay Area. Don't hesitate to "contact us":http://spot.us/contact.
 
 
 h2.  How does Spot.Us work?
 
 # An individual or journalist creates a pitch that outlines an untold story in a local community.
 # Members of your community vote, with their money, on what stories are most important to them.
-# A journalist researches the facts and puts together an article. Editors provide check-and-balance
-on the story.
-# Spot.Us publishes the story in its news feeds and works with local media outlets to have the
-articles published more widely.
+# A journalist researches the facts and puts together an article. Editors provide check-and-balance on the story.
+# Spot.Us publishes the story in its news feeds and works with local media outlets to have the articles published more widely.
 
 "http://www.spot.us/":http://www.spot.us/
 
 h2. Setting Up Spot.Us
 
-h3. setup configuration files - make any necessary edits to these if the defaults don't work for you. Spot.Us is dependent on MySQL because it uses the rand() function.
+h3. Setup configuration files
+
+Make any necessary edits to these if the defaults don't work for you. Spot.Us is dependent on MySQL because it uses the rand() function.
 
 # cp config/database.example.yml config/database.yml
 # cp config/newrelic.example.yml config/newrelic.yml
 # cp config/settings.example.yml config/settings.yml
 
-h3. run basic setup tasks
+h3. Run basic setup tasks
 
 # rake db:create:all
 # rake db:migrate
+# rake db:populate
 
-h3. setup your local domains
-
-Spot.Us relies on subdomain_fu to route requests to various networks.  To use the site locally, you'll need to add these entries to your /etc/hosts file.  spotus.local will become the main Spot.Us site. Any subdomains you create will need to be added to the file also (in this example, we've added an sfbay network).
-
-# sudo $EDITOR /etc/hosts
-# Add these lines:
-## 127.0.0.1       spotus.local
-## 127.0.0.1       sfbay.spotus.local
-
-h3. start your local server
+h3. Start your local server
 
 # ./script/server
 
