@@ -43,7 +43,7 @@ class NotificationsController < ApplicationController
         users.compact.each do |user|
           Mailer.deliver_notification_mass_email(ne, user) if user
         end
-        conditions = "email not in (#{users.map{ |u| "'#{u.email}'"}.join(',')})"
+        conditions = "email not in (#{users.compact.map{ |u| "'#{u.email}'"}.join(',')})"
         Admin.find(:all,:conditions => conditions).compact.each do |admin|
           Mailer.deliver_notification_mass_email(ne, admin) if admin
         end 
