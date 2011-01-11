@@ -1,6 +1,6 @@
 class Myspot::TwitterCredentialsController < ApplicationController
   resources_controller_for :twitter_credentials
-  # before_filter :login_required, :only => [:twitter_login, :twitter_callback]
+  before_filter :login_required, :only => [:twitter_login, :twitter_callback]
   
   # require "twitter"
 	include OauthConnect
