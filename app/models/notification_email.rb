@@ -19,10 +19,10 @@ class NotificationEmail < ActiveRecord::Base
   named_scope :to_send, :conditions => 'status=1'
   
   def users?
-    return Pitch.all_active_reporters if list_id == 0
-    return Credit.users_with_unused_credits if list_id == 1
-    return Organization.approved.all if list_id == 2
-    return Cca.find_by_id(list_id-CCA_OFFSET).cca_answers.find(:all, :group => "user_id").map(&:user) if list_id > CCA_OFFSET
+    return Pitch.all_active_reporters.compact if list_id == 0
+    return Credit.users_with_unused_credits.compact if list_id == 1
+    return Organization.approved.all.compact if list_id == 2
+    return Cca.find_by_id(list_id-CCA_OFFSET).cca_answers.find(:all, :group => "user_id").map(&:user).compact if list_id > CCA_OFFSET
   end
   
   def self.lists?
