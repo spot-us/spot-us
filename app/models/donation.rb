@@ -148,7 +148,7 @@ class Donation < ActiveRecord::Base
   end
   
   def update_pitch_funding
-    pitch.current_funding += amount.to_f
+    pitch.current_funding = pitch.total_amount_donated.to_f       # make sure the proper donation amounts are always used
     pitch.save
   end
 
