@@ -4,7 +4,7 @@ class AffiliationsController < ApplicationController
   response_for :create do |format|
     format.html do
       if resource_saved?
-        flash[:success] = "Successfully attached your pitch to this tip"
+        flash[:success] = "Successfully attached your pitch to this tip" 
       else
         flash[:error] = "There was an error attaching your pitch to this tip.  Contact David if you have questions"
       end
