@@ -5,6 +5,7 @@ class PitchesController < ApplicationController
   before_filter :set_meta_tags, :only => [:show]
   # before_filter :select_tab, :only => [:new]
   after_filter :send_edited_notification, :only => [:update]
+  before_filter :admin_required, :only => :reset_funding
 
   resources_controller_for :pitch
 
@@ -26,6 +27,13 @@ class PitchesController < ApplicationController
       end
     end
     return
+  end
+  
+  def reset_funding
+    pitch = find_resource
+    pitch.current_funding = pitch.total_amount_donated.to_f
+    pitch.save
+    redirect_to :back
   end
   
   def show
