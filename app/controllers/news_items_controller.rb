@@ -25,10 +25,6 @@ class NewsItemsController < ApplicationController
     end
   end
   
-  def get_filter
-    @filter = params[:filter] ? params[:filter] : 'unfunded'
-  end
-  protected :get_filter
   
   def sort_options
     render :text => options_for_sorting(
@@ -68,8 +64,9 @@ class NewsItemsController < ApplicationController
   def load_networks
     @networks = Network.all
   end
-  # 
-  # def select_tab
-  #   @selected_tab = "pitches"
-  # end
+  
+  def get_filter
+    @filter = params[:filter] ? params[:filter] : 'unfunded'
+  end
+  
 end

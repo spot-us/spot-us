@@ -1,0 +1,57 @@
+body{font-size:.7em !important;}
+table.admin_pitches, table.admin_comments {
+  font-size:0.9em;
+  line-height: 1.4em;
+  border: 0 solid;
+  border-collapse: collapse;
+}
+table.admin_pitches tr th {
+  font-size: 1.3em;
+}
+table.admin_pitches tr, table.admin_comments tr {
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+table.admin_pitches tr td, table.admin_comments tr td {
+  vertical-align: top;
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+table.admin_pitches tr td.fact_checker {
+  min-width: 220px;
+  padding: 5px;
+}
+table.admin_pitches tr td.fact_checker form select {
+  width: 120px;
+}
+table.admin_pitches tr td form input[type=submit], table.admin_pitches tr td form input[type=button] {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 1px;
+  text-transform: uppercase;
+}
+table.admin_pitches tr td form input.approve_button {
+  color: #009900;
+  border: 1px solid #009900;
+}
+table.admin_pitches tr td form input.delete_button {
+  color: #990000;
+  border: 1px solid #990000;
+  text-transform: uppercase;
+}
+table tr, table td {vertical-align:top;border-bottom:dotted 1px #bbb;}
+#admin_header{
+	border-bottom:solid 1px #ddd;
+	margin: 20px 0;
+}
+#question_form .row{border-bottom:dotted 1px #aaa;margin-bottom:10px;padding-bottom:10px;}
+#question_form input[type="text"]{width:350px;}
+h5{margin-bottom:5px !important;}
+hr {border: solid 1px #555 !important;margin-top:10px !important;}
+.widen{margin:0 10px;color:#999;}
+.admin_tab{padding:4px 8px 2px;background:#f3f3f3;}
+a.admin_tab{text-decoration:none;color:darkred;}
+.hilited{background:#ddd;}
+.inline{display:inline;}
+label{display:block;margin-bottom:20px;}
+input[type="text"]{margin:3px 0 15px;}

@@ -1,13 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
-	<%= render :partial => 'layouts/head' %>
-	 <body class="<%= body_class %>">
-	    <div id="user-header">
-	       <%= render :partial => 'layouts/user_header' %>
-	    </div>
-	    <div id="header" class="clearfix">
-	       <%= render :partial => "layouts/header" %>
-	    </div>
+	
+	<head>
+		<%= render :partial => 'layouts/head' %>
+	</head>
+	
+	 <body>
+		
+		<!-- START HEADERS -->
+		<%#=render :partial => 'layouts/embed_admin_menu'%>
+		<%= render :partial => 'layouts/login' %>
+		<%= render :partial => "layouts/header" %>
+		<!-- END HEADER -->
+
 	   <div id="networks-nav">
 	      <div class="inner">
 	         <ul id="tabnav">

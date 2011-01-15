@@ -1,0 +1,3 @@
+h1. Stylesheet Caching
+
+Simple Blog makes heavy use of caching and concatenation of stylesheets to further improve the performance.

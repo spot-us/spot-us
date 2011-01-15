@@ -179,5 +179,22 @@ module ApplicationHelper
   def medium_date(dt)
     dt.strftime("%B %d, %Y")
   end
+  
+  def is_admin?
+    current_user && current_user.admin?
+  end
+  
+  # get the stylesheets...
+  def get_stylesheets(is_admin=false)
+    stylesheets = ['base', 'main', 'style']
+    stylesheets << 'admin' if is_admin
+    stylesheet_link_tag stylesheets, :media => "all", :concat => stylesheet_name?(stylesheets), :cache => true
+  end
+  
+  def stylesheet_name?(stylesheets)
+    names = ['global']
+    names << "admin" if stylesheets.detect { |s| s =~ /(?:admin)/i }  
+    "cache/#{names.join('_')}"
+  end
 
 end

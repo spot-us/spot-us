@@ -1,17 +1,15 @@
-<div class="container">
+<div class="headerContainer">
 	
-	<div class="logo">
-		<p>
-			<a href="/" class="logo-link" title="Spot.us - Community Funded Reporting">
-				<span class="hide">Spot.us - Community Powered Reporting</span>
-				<%if @current_network && @current_network.name=="la"%>
-					<br /><img src="/images/new_design/usc.png" />
-				<%end%>
-			</a>
-		</p>
+	<div class="logoContainer">=
+		<a href="/" class="logo-link" title="Spot.us - Community Funded Reporting">
+			<span class="hide">Spot.us - Community Powered Reporting</span>
+			<%if @current_network && @current_network.name=="la"%>
+				<img src="/images/new_design/usc.png" alt="USC Annenberg Center" />
+			<%end%>
+		</a>
 	</div>
 	
-	<ul id="main-nav">
+	<ul >
 		<li class="start_story">
 			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Start a Story by Creating your own Pitch", :class => "primary_button", :id => "about_start_story"), new_pitch_path %>
 		</li>

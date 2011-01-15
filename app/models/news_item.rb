@@ -186,7 +186,6 @@ class NewsItem < ActiveRecord::Base
     end
   end
   
-  
   def peer_reviewer
     #fact_checker || (parent && parent.fact_checker)
     return nil if !["Pitch","Story"].include?(self.class.to_s)

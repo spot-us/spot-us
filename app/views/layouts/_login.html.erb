@@ -1,0 +1,40 @@
+<ul class="user-header-nav">
+  <div class="hide" id="logged_in">
+    <li class="no-pipe">
+      Hello,
+      <span class="current_user_full_name"></span>
+    </li>
+    <li id="current_balance_line"></li>
+    <li>
+      <%= link_to "My Spot", myspot_profile_path %>
+    </li>
+     <li>
+       <%= link_to 'Logout', destroy_session_path %>
+	</li>
+    <li class="small italic">
+	<% if fb_session.blank? %>
+		<%= fb_login_link  %>
+	<% else %>
+		<%= fb_logged_in %>
+	<% end %>
+    </li>
+  </div>
+</ul>
+<ul class="user-header-nav">
+  <div id="not_logged_in" class="hide">
+    <li>
+      <%= link_to "Register", new_session_path + "?register=true", :rel => 'facebox', :id => "sign_up" %>
+    </li>
+    <li>
+      <%= link_to "Login", new_session_path, :rel => 'facebox', :id => "sign_in" %>
+    </li>
+    <li class="no-pipe small italic">
+      <%= fb_login_link %>
+    </li>
+  </div>
+</ul>
+<div class="slogan">
+   <span class="pink">Community</span>
+   <span class="moss-green">Funded Reporting</span>
+</div>
+<div class="clear"></div>

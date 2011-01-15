@@ -1,0 +1,127 @@
+/* Fundamental styles */
+
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+    background:#fff;
+	color:#444;
+	font:12px/18px Arial, Arial, sans-serif;
+	margin:0px auto;
+}
+
+a:link, a:visited{
+    color:#333;
+	text-decoration:underline;
+}
+
+a:hover{
+    color: #999;
+	text-decoration:none;
+}
+	
+acronym,abbr{
+    border-bottom:1px dotted;
+	cursor:help;
+}
+
+blockquote{
+    font:14px/21px Arial, Helvetica, sans-serif;
+	padding:12px;
+	background:#eee;
+}
+
+code,pre{
+    overflow:auto;
+	padding:4px;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: Garamond;
+    font-weight:400;
+	padding:10px 10px 10px 10px;
+	width:100%;
+	color:000;
+	border-bottom:1px solid #ccc;
+	text-transform:uppercase;
+}
+
+
+h1{
+    font-size:36px;
+	line-height:40px;
+}
+
+h2{
+    font-size:24px;
+	line-height:30px;
+	margin-bottom: 10px;;
+}
+
+h2 img {
+	border: none;
+}
+	
+img, embed, object{
+	margin:10px;
+	border: 1px solid #ddd;
+}
+
+a img {
+	border:none;
+}
+
+label{
+    cursor:pointer;
+}
+	
+*html .logoContainer{
+	clear: right;
+}
+
+
+li#categories ul li{
+	border-bottom:1px solid silver;
+	display:inline;
+	float:right;
+	font-size:18px;
+	margin-right:15px;
+	width:145px;
+	
+}
+	
+p{
+    padding:0 0 14px;
+    line-height:18px;
+	font-family: Arial, sans-serif;
+	}
+
+small{
+    font-size:0.85em;
+	}
+	
+strong{
+    font-weight:700;
+	}
+	
+sub{
+    bottom:-0.2em;
+	position:relative;
+	vertical-align:baseline;
+}
+
+sup{
+    bottom:0.3em;
+	position:relative;
+	vertical-align:baseline;
+}
+
+pre {
+	background:#EBEBEB none repeat scroll 0%;
+	border:1px dashed #646464;
+	margin:0pt 0pt 0.9em;
+	overflow:auto;
+	padding:1em;
+}
