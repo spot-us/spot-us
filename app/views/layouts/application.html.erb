@@ -10,10 +10,28 @@
 		<!-- START HEADERS -->
 		<%#=render :partial => 'layouts/embed_admin_menu'%>
 		<%= render :partial => 'layouts/login' %>
-		<%= render :partial => "layouts/header" %>
+		
+		<div class='upperWapper'>
+			<div class='innerWrapper'>
+				<%= render :partial => "layouts/header" %>
+			</div>
+		</div>
 		<!-- END HEADER -->
 
-	   <div id="networks-nav">
+		<div class='middleWapper'>
+			<div class='innerWrapper'>
+				<%#= render :partial => "layouts/header" %>
+			</div>
+		</div>
+		
+		<div class='lowerWapper'>
+			<div class='innerWrapper'>
+				<%= yield %>
+			</div>
+		</div>
+		
+		
+		<div id="networks-nav">
 	      <div class="inner">
 	         <ul id="tabnav">
 				<% if APP_CONFIG[:has_networks] %>

@@ -1,13 +1,15 @@
 /* wrappers */
-.outerWrapper{
-	background:#fff;
-	border-top: 10px solid #ddd;
+.upperWrapper{
 }
 
-.innerWrapper{
-	margin-top:5px;
-	border-top: 25px solid #ddd;
-	background:#fff;
+.middleWrapper{
+}
+
+.lowerWrapper{
+}
+
+.innerWrapper {
+	margin: 0px auto;
 }
 
 .contentContainer{
