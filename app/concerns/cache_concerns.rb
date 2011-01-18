@@ -32,7 +32,7 @@ module CacheConcerns
       klass.extend self
     end
     
-    def self.reduce_key(key)
+    def reduce_key(key)
       final_key = ActiveSupport::Cache.expand_cache_key(key)
       #final_key = convert_to_ascii(final_key.gsub(" ",""))
       Digest::SHA1.hexdigest(final_key)
@@ -42,7 +42,8 @@ module CacheConcerns
       options.assert_valid_keys(:using, :expires_in, :force)
       options.reverse_merge! :using => {}
       key_options = options[:using].stringify_keys!.keys.map(&:to_s).sort.map { |k| [k, options[:using][k]] * '=' } * '&'
-      compressed_key = self.reduce_key "#{key}:#{key_options}"
+      
+      compressed_key = reduce_key "#{key}:#{key_options}"
       val = nil
       if Rails.cache.exist?(compressed_key) && !options[:force]
         #val = Rails.cache.fetch(compressed_key, options, &block)
