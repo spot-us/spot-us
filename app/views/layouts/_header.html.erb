@@ -1,47 +1,33 @@
 <div class="headerContainer">
-	
-	
-	<div class="logoContainer">=
+	<div class="logoContainer">
 		<a href="/" title="Spot.us - Community Funded Reporting">
 			<span>Spot.us - Community Powered Reporting</span>
 			<%if @current_network && @current_network.name=="la"%>
-				<img src="/images/new_design/usc.png" alt="USC Annenberg Center" />
+			<span><img src="/images/new_design/usc.png" alt="USC Annenberg Center" /></span>
 			<%end%>
 		</a>
-	</div>
-	
-	<ul>
-		<li class="start_story">
-			<%= facebox_login_link_to image_tag("/images/new_design/start-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Start a Story by Creating your own Pitch", :class => "primary_button", :id => "about_start_story"), new_pitch_path %>
-		</li>
-		<li class="fund_story">
-			<%= link_to image_tag("/images/new_design/fund-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Find a Story to Fund", :class => "primary_button", :id => "about_fund_story"), "/stories/unfunded", :title=>"" %>
-		</li>
-		<li class="read_story">
-			<%= link_to image_tag("/images/new_design/read-a-story.jpg", :width=>"111", :height=>"98", :alt=>"Read A Published Spot Us Story", :class => "primary_button", :id => "about_read_story"), "/stories/published", :title=>"" %>
-		</li>
-		<%if @show_cca%>
-			<li class="start_story">
-				<%= link_to image_tag("/images/new_design/earn_spot_credit.png", :width=>"111", :height=>"98", :alt=>"earn credits to help fund a story", :class => "primary_button", :id => "about_earn_credits"),  @cca_link%>
-			</li>
-		<%end%>
-	</ul>
-	<div id="about_start_story_status" class="hide">start your story by creating a pitch</div>
-	<div id="about_fund_story_status" class="hide">contribute to stories that need funding</div>
-	<div id="about_read_story_status" class="hide">browse published stories</div>
-	<div id="about_earn_credits_status" class="hide">earn credits to help fund a story</div>
-	<div class="howtouse">
-		
-		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/pages/about" title="About Spot.Us">About Spot.Us</a>'}%>
-		
-		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href=""  id="help_newsletter" title="Newsletter" rel="nofollow">Newsletter</a> / <a href="http://blog.spot.us">Blog</a>'}%>
-		
-		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/pages/examples" title="Projects and Partners">Projects and Partners</a>'}%>
-		
-		<%=render :partial=>"layouts/howto", :locals=>{:link=>facebox_login_link_to("Suggest a Story", "/tips/new")}%>
-
-		<%=render :partial=>"layouts/howto", :locals=>{:link=>'<a href="/contributors" title="Spot.Us Community">Spot.Us Community</a>'}%>
-		
- 	</div>
-
+	</div><!--end logo container-->
+	<div class="rightheaderContainer">
+		<div class="loginMenu">
+			<ul>
+				<li><a href="#">Join</a> or <a href="#">Login</a></li>
+				<li>| <a href="#">Learn More</a></li>
+			</ul>
+		</div><!--end loginMenu-->
+		<div class="socialMenu">
+			<ul>
+				<li><a href="#"><img src="/images/new/facebook_w18.png"></a></li>
+				<li><a href="#"><img src="/images/new/twitter_w18.png"></a></li>
+				<li><a href="#"><img src="/images/new/flickr_w18.png"></a></li>
+				<li><a href="#"><img src="/images/new/rss_w18.png"></a></li>
+			</ul>
+		</div><!--end socialMenu-->
+		<div class="headerMenu">
+			<ul>
+				<li><a href="#">Create a story</a></li>
+				<li><a href="#">Fund a story</a></li>
+				<li class="last"><a href="#">Earn Credits</a></li>
+			</ul>
+		</div><!--end header menu-->
+	</div><!--end rightContainer-->
 </div>

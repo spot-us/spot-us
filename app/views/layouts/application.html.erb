@@ -11,7 +11,7 @@
 		<%#=render :partial => 'layouts/embed_admin_menu'%>
 		<%= render :partial => 'layouts/login' %>
 		
-		<div class='upperWapper'>
+		<div class='upperWrapper'>
 			<div class='innerWrapper'>
 				<%= render :partial => "layouts/header" %>
 			</div>
@@ -24,11 +24,11 @@
 			</div>
 		</div>
 		
-		<div class='lowerWapper'>
+	<!--<div class='lowerWapper'>
 			<div class='innerWrapper'>
 				<%= yield %>
 			</div>
-		</div>
+		</div>-->
 		
 		
 		<div id="networks-nav">
@@ -51,7 +51,7 @@
 	      </div>
 	    </div>
 	    <div id="header-bar"> </div>
-	    <div class="body-content">
+	    <div class="innerWrapper">
 	       <% if yield(:error) %>
 	         <div class="error">
 	            <span class="dismiss"><%= link_to image_tag('/images/close_square.png'), @close_flash_link || '' %></span>
