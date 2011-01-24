@@ -351,21 +351,18 @@
 /*story grid styles*/
 .storyGrid {
 	margin: 0px auto;
-	width:980px;
+	border:1px solid red;
 }
 
 .storyGrid li{
 	list-style-type:none;
-	display:block;
+	display:inline;
 	float:left;
-	margin:0px auto;
-	width:33.3%;
+	width:33.2%;
 }
 
 .storyGrid li img{
-	width:300px;
-	height:163px;
-	border:3px solid #ccc;
+	border:3px solid #333;
 }
 
 .storyGrid li h3 a{
