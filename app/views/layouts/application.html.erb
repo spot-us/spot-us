@@ -20,15 +20,17 @@
 
 		<div class='middleWapper'>
 			<div class='innerWrapper'>
-				<%#= render :partial => "layouts/header" %>
+				<%= render :partial => "layouts/static_middle" %>
 			</div>
 		</div>
 		
-	<!--<div class='lowerWapper'>
+		<div class='lowerWapper'>
 			<div class='innerWrapper'>
-				<%= yield %>
+				<div class="contentContainer">
+					<%= yield %>
+				</div>
 			</div>
-		</div>-->
+		</div>
 		
 		
 		<div id="networks-nav">
@@ -50,7 +52,6 @@
 	         <%= render :partial => "shared/google_search" %>
 	      </div>
 	    </div>
-	    <div id="header-bar"> </div>
 	    <div class="innerWrapper">
 	       <% if yield(:error) %>
 	         <div class="error">
@@ -66,7 +67,7 @@
 	            </div>
 	          <% end %>
 	       </div>
-	      <%= yield %>
+	      <%#= yield %>
 	       <div class="clear"></div>
 	       <div id="footer">
 	         <%= render :partial => 'layouts/footer' %>

@@ -4,24 +4,23 @@
 	background-image:url('/images/new/headerbg.png');
 	background-repeat:repeat-x;
 	width:100%;
+
 }
 
 .middleWrapper{
-	clear:both;
 	background-image:url('/images/new/bgstripe.png');
 	height:100px;
 	padding-top:10px;
 }
 
 .lowerWrapper{
-	width:980px;
-	background-repeat:repeat-y;
-	height:1000px;
+	width:100%;
 }
 
 .innerWrapper {
 	margin:0px auto;
 	width:980px;
+	clear:both;
 }
 
 .bottomWrapper{
@@ -31,7 +30,8 @@
 
 .contentContainer{
 	margin:0px auto;
-	width:980px;
+	border:1px solid red;
+	height:1000px;
 }
 
 /* end wrapper */
@@ -43,9 +43,9 @@
 }
 
 .headerContainer img {
-    margin:0px;
+	margin:0px;
 }
-	
+
 .headerContainer a img {
 	border:none;
 	padding:0px;
@@ -77,7 +77,7 @@
 }
 
 .joinContainer{
-	
+
 }
 
 .joinContainer a{
@@ -104,7 +104,7 @@
 }
 
 .loginContainer li{
-    float:right;
+	float:right;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:10px;
 	font-weight:700;
@@ -115,11 +115,11 @@
 }
 
 .loginContainer .actionLink, .loginContainer .actionLinkInbox{
-    padding-left:7px;
+	padding-left:7px;
 }
 
 .loginContainer .actionLink .submitArticle{
-    color: #666;
+	color: #666;
 	margin-left:12px;
 }
 
@@ -143,13 +143,13 @@
 }
 
 .loginContainer .actionSeparator{
-    padding-left:0px;
+	padding-left:0px;
 	color:#666;
 	display:none;
 }
 
 .loginContainer .actionSeparatorFacebookConnect{
-    padding-left:0px;
+	padding-left:0px;
 	margin-left:5px;
 	margin-top:-1px;
 	color:#666;
@@ -172,9 +172,9 @@
 	padding:0px;
 	color: red;
 }
-	
+
 .loginContainer li a:hover{
-    color: #ED2528;
+	color: #ED2528;
 	padding:0px;
 }
 
@@ -190,7 +190,7 @@
 /* end login and registration links */
 
 /* Logo container */
-	
+
 .logoContainer {
 	float: left;
 	padding:0px;
@@ -200,16 +200,16 @@
 }
 
 .logoContainer a{
-font-size:30px;
-text-transform:uppercase;
-text-decoration:none;
-display:block;
-width:282px;
-height:105px;
-background-image:url('/images/new/spotuslogo.png');
-background-repeat:no-repeat;
-text-indent:-3000px;
-margin-top:0px;
+	font-size:30px;
+	text-transform:uppercase;
+	text-decoration:none;
+	display:block;
+	width:282px;
+	height:105px;
+	background-image:url('/images/new/spotuslogo.png');
+	background-repeat:no-repeat;
+	text-indent:-3000px;
+	margin-top:0px;
 }
 
 
@@ -308,7 +308,7 @@ margin-top:0px;
 }
 
 .navigationContainer li a:link, .navigationContainer li a:visited, .navigationContainer li.languageLink a:link, .navigationContainer li.languageLink a:visited{
-    color:#666;
+	color:#666;
 	text-decoration:none;
 }
 
@@ -318,9 +318,9 @@ margin-top:0px;
 	padding-left:10px;
 	padding-right:10px;
 }
-	
+
 .navigationContainer li a:hover, .navigationContainer li.languageLink a:hover{
-    color:#fff;
+	color:#fff;
 	text-decoration:underline;
 }
 
@@ -349,29 +349,26 @@ margin-top:0px;
 /* end search container */
 
 /*story grid styles*/
-.storyGrid ul{
+.storyGrid {
 	margin: 0px auto;
 	width:980px;
 }
 
-.storyGrid ul li{
+.storyGrid li{
 	list-style-type:none;
-	display:inline;
+	display:block;
+	float:left;
 	margin:0px auto;
 	width:33.3%;
 }
 
-.storyGrid ul li img{
+.storyGrid li img{
 	width:300px;
 	height:163px;
 	border:3px solid #ccc;
 }
 
-.storyGrid ul li span{
-	display:block;
-}
-
-.storyGrid ul li h3 a{
+.storyGrid li h3 a{
 	text-transform:none;
 	font-family:Helvetica,arial,sans-serif;
 	background-color:transparent;
@@ -381,12 +378,12 @@ margin-top:0px;
 	padding:0;
 }
 
-.storyGrid ul li a{
+.storyGrid li a{
 	text-decoration:none;
 	font-weight:bold;
 }
 
-.storyGrid a.fundButton, .storyGrid a.creditsButton{
+.storyGrid li a.fundButton, .storyGrid li a.creditsButton{
 	padding:5px;
 	-webkit-border-radius:3px;
 	-moz-border-radis:3px;	
@@ -396,19 +393,19 @@ margin-top:0px;
 	line-height:30px;
 }
 
-.storyGrid a.fundButton{
+.storyGrid li a.fundButton{
 	background-color:#7a9e53;
 }
 
-.storyGrid a.fundButton:hover{
+.storyGrid li a.fundButton:hover{
 	background-color:#71964a;
 }
 
-.storyGrid a.creditsButton{
+.storyGrid li a.creditsButton{
 	background-color:#24454f;
 }
 
-.storyGrid a.creditsButton:hover{
+.storyGrid li a.creditsButton:hover{
 	background-color:#1c3942;
 }
 
