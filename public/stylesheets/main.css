@@ -325,6 +325,11 @@
 	border-bottom:1px solid #fff;
 }
 
+.learnMore{
+	padding:10px 20px 10px 10px;
+	list-style-type:none;
+}
+
 /*end right header styles*/
 
 /* page navigation */
@@ -425,6 +430,8 @@
 
 .storyGrid div{
 	margin:5px 0px 0px 10px;
+	display:block;
+	clear:both;
 }
 
 .storyGrid li h3 a{
@@ -447,21 +454,28 @@
 }
 
 .storyGrid li a, .storyGrid li input{
+	height:auto;
 	text-decoration:none;
+	font-family:Helvetica,arial,sans-serif;
 	font-weight:bold;
 }
 
+.storyGrid .donateButtons {
+	margin-left:0px;
+}
+
 .storyGrid li .fundButton, .storyGrid li .creditsButton{
-	padding:5px;
+	float:left;
+	padding:5px 10px;
 	border:1px solid #ccc;
-	border-left:1px solid #999;
-	border-bottom:1px solid #999;
+	border-right:2px solid #666;
+	border-bottom:2px solid #666;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;	
 	color:#fff;
 	font-size:12px;
 	line-height:14px;
-	margin:5px 0px 0px 10px;
+	margin:0px 0px 5px 10px;
 }
 
 .storyGrid li .fundButton{
@@ -771,7 +785,7 @@
 /* Leave in for hover control */
 .hoverContainer{
 	background:#f9f9f9;
-	border: 1px solid #fff;
+	border: 1px solid #666;
 	position:absolute;
 	z-index:1000;
 }

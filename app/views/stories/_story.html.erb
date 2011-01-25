@@ -1,19 +1,8 @@
-<% apply_fragment ['story_new_alt_', story] do %>
-	<% div_for story, :class => "pitch" do %>
-	     <%= link_to image_tag(story.featured_image.url(:front_story), :class => "story_image"), story %>
-	  <div class="clearfix">	
-			<%= link_to image_tag(story.user.photo(:thumb), :class => "avatar", :alt => ""), profile_path(story.user) %>	
-			<div class="info">
-				<h5><%= link_to story.headline, story %></h5>
-				<%= short_date(story.created_at) %>
-				by
-				<%= link_to h(story.user.full_name), profile_path(story.user) %>
-			</div>
-		</div>
-		<div class="story description">
-			<%= truncate_words(strip_tags(story.extended_description), 38) if story.extended_description %>
-			<%= link_to "Read More &raquo;", story %>
-		</div>
-
-	<% end %>
-<% end %>
+<% apply_fragment ['story_', s] do %>
+	<li>
+		<%=image_tag s.featured_image(:medium), {:alt => h(s.headline)}%>
+		<h3><%=link_to s.headline[0..30], story_path(s)%></h3>
+		<div><%=pitch_date(s.created_at)%> by <%=link_to s.user, profile_path(s.user)%></div>
+		<div>Published under Pitch <%= link_to s.pitch.headline, pitch_url(s.pitch)%></div>
+	</li>
+<%end%>

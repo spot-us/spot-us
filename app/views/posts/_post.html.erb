@@ -1,12 +1,8 @@
-<% apply_fragment ['blogs_', post] do %>
-	<li class="story clearfix" style="clear:both;">
-		<h2 class="link"><%=link_to post.title, pitch_post_path(post.pitch, post) %></h2>
-		<div class="featured_image">
-		   <%= image_tag(post.blog_image_display(:medium)) %>
-		</div>
-		<p class="post_body">
-			<%= truncate_words(strip_html(post.body), 35)%> <%= link_to "Read more &raquo", pitch_post_path(post.pitch, post) %>
-		</p>
-		<p class="byline"><%= short_date(post.created_at)%> by <%= post.user.full_name %> | Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></p>
+<% apply_fragment ['post_', p] do %>
+	<li>
+		<%=image_tag p.blog_image_display(:medium), {:alt => h(p.title)}%>
+		<h3><%=link_to p.title[0..30], pitch_post_path(p.pitch, p)%></h3>
+		<div><%=pitch_date(p.created_at)%> by <%=link_to p.user, profile_path(p.user)%></div>
+		<div>Posted under Pitch <%= link_to p.pitch.headline, pitch_url(p.pitch)%></div>
 	</li>
 <%end%>
