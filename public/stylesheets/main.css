@@ -269,8 +269,9 @@
 }
 
 .loginMenu {
-	width:180px;
-	margin-right:20px;
+	width:170px;
+	margin-top:1px;
+	margin-right:17px;
 	color:#fff;
 	text-align:left;
 }
