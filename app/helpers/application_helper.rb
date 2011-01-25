@@ -189,7 +189,7 @@ module ApplicationHelper
     stylesheets = ['base', 'main', 'facebox']
     stylesheets.concat(['screen','new_style','widget']) if params[:controller]!='homes'
     stylesheets << 'admin' if is_admin
-    stylesheet_link_tag stylesheets, :media => "all", :concat => stylesheet_name?(stylesheets), :cache => true
+    stylesheet_link_tag stylesheets, :concat => stylesheet_name?(stylesheets), :cache => true
   end
   
   def stylesheet_name?(stylesheets)

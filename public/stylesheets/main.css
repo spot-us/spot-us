@@ -17,6 +17,7 @@
 
 .lowerWrapper{
 	width:100%;
+	clear:both;
 }
 
 .innerWrapper {
@@ -29,11 +30,12 @@
 	margin:0px auto;
 	width:100%;
 	background-color:#24454f;
+	clear:both;
 }
 
 .contentContainer{
 	margin:0px auto;
-	height:1000px;
+	display:block;
 }
 
 /* end wrapper */
@@ -418,6 +420,8 @@
 .storyGrid li img{
 	border:3px solid #ccc;
 	margin-bottom:10px;
+	width:300px;
+	height:165px;
 }
 
 .storyGrid li h3 a{
