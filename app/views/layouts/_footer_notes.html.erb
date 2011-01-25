@@ -1,73 +1,24 @@
-<div class="bottomWrapper">
-	<div class="footerContainer">
-		<div class="footerNotes">
-			<h3>Content Column 1</h3>
-			<p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus. Maecenas erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-		</div><!--end footernotes-->
-			<div class="footerNotes">
-				<h3>Content Column 2</h3>
-				<p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus. Maecenas erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-			</div><!--end footernotes-->
-				<div class="footerNotes">
-					<h3>Content Column 3</h3>
-					<p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus. Maecenas erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-				</div><!--end footernotes-->	
-	</div>
-</div>
-
-<!--	<div class="left-column">
-		<div class="float-right">
-			<a href="/stories/almost-funded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
-		</div>
+<div class="footerContainer">
+	<div class="footerNotes">
 		<h3>Almost Funded Stories</h3>
 		<ul>
-			<% Pitch.almost_funded.unfunded.top_four.each do |pitch| %>
-				<% apply_fragment ['almost_funded_pitches_footer_', pitch] do %>
-				<li class="clear">
-					<%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-					<%= link_to pitch.headline, pitch %> <span class="fund"><%= number_to_currency(pitch.funding_needed) %> to go</span>
-				</li>
-				<%end%>
-			<% end %>
-			<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/almost-funded" title="Almost Funded Stories">See all almost funded stories &raquo;</a></li>
+			<li><a href="#">Saguache County: A test case in Colorado election integrity</a> <span>$100.00 to go</span></li>
+			<li><a href="#">Downtown LA's Transit-Oriented Stadium</a> <span>$100.00 to go</span></li>
+			<li><a href="#">Across L.A., blurring lines between commercial and residential</a> <span>$100.00 to go</span></li>
+			<li><a href="#">Most California Exonorees Denied Compensation for Imprisonment</a> <span>$100.00 to go</span></li>
 		</ul>
-
-	</div>
-	<div class="middle-column">
-		<div class="float-right">
-			<a href="/stories/unfunded.rss"><img src="/images/new_design/rss_16.png" alt="Rss_16"/></a>
-		</div>
+	</div><!--end footernotes-->
+	<div class="footerNotes">
 		<h3>Unfunded Stories</h3>
 		<ul>
-			<% NewsItem.newest.approved.pitch_or_tip.top_four.each do |pitch| %>
-				<% apply_fragment ['recently_created_pitches_footer_', pitch] do %>
-				<li class="clear">
-					<%= link_to image_tag(pitch.featured_image.url(:thumb)), pitch %>
-					<%= link_to pitch.headline, pitch %>
-				</li>
-				<%end%>
-			<% end %>
-			<li class="clear" style="text-align:right;padding-top:5px;"><a href="/stories/unfunded" title="Newest Items">See all unfunded stories &raquo;</a></li>
+			<li><a href="#">Saguache County: A test case in Colorado election integrity</a></li>
+			<li><a href="#">Downtown LA's Transit-Oriented Stadium</a></li>
+			<li><a href="#">Across L.A., blurring lines between commercial and residential</a></li>
+			<li><a href="#">Most California Exonorees Denied Compensation for Imprisonment</a></li>
 		</ul>
-	</div>   
-	<div class="right-column">
-		<h3>What is Spot.Us</h3>
-		<p>
-			Spot.Us is an open source project to pioneer “community powered reporting.” Through
-			Spot.Us the public can commission and participate with journalists to do reporting on
-			important and perhaps overlooked topics. Contributions are tax deductible and we partner
-			with news organizations to distribute content under appropriate licenses.<br/>
-			<span class="clear"><%= link_to 'READ MORE &raquo;', page_path("about"), :style=>"float:right;padding-bottom:10px;padding-right:2px;"%></span>
-		</p>
-		<hr/>
-		<h4>Partner Networks</h4>
-		<p>
-			<a href="http://la.spot.us" title="Los Angeles Spot.Us with USC Annenberg School">Los Angeles Spot.Us with USC Annenberg School</a>
-		</p>
-		<% unless params[:controller] == "homes" %>
-			<hr/>
-			<h4>Connect with Spot.us</h4>
-			<%= render :partial => "/shared/connect_buttons" %>
-		<% end %>
-	</div>
-</div>-->
+	</div><!--end footernotes-->
+	<div class="footerNotes">
+		<h3>What is Spot.us?</h3>
+		<p>Spot.Us is an open source project to pioneer “community powered reporting.” Through Spot.Us the public can commission and participate with journalists to do reporting on important and perhaps overlooked topics. Contributions are tax deductible and we partner with news organizations to distribute content under appropriate licenses.</p>
+	</div><!--end footernotes-->	
+</div>
