@@ -10,7 +10,7 @@
 	background-image:url('/images/new/bgstripe.png');
 	background-repeat:repeat;
 	height:100px;
-	padding-top:20px;
+	padding-top:10px;
 	border-bottom:1px solid #ccc;
 }
 
@@ -61,6 +61,7 @@
 	width:35%;
 	float:left;
 	margin-right:40px;
+	margin-top:-10px;
 }
 
 .introContainer p span a{
@@ -95,6 +96,7 @@
 }
 
 .joinContainer{
+	margin-top:20px;
 	text-align:right;
 }
 
@@ -102,7 +104,7 @@
 	background-color:#e15205;
 	background-image:url('/images/new/joinBG.png');
 	background-repeat:repeat-x;
-	padding:5px 20px;
+	padding:8px 20px;
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
 	color:#fff;
@@ -255,23 +257,28 @@
 /* end Logo container */
 
 /*Right header styles*/
-.rightheaderContainer {
+.rightHeaderContainer {
 	width:50%;
 	float:right;
 	padding-top:25px;
-	
 }
 
-.rightheaderContainer li {
+.rightHeaderContainer li {
 	list-style-type:none;
-	display:inline;
+	float:right;
 }
 
 .loginMenu {
-	width:200px;
-	display:inline;
+	width:180px;
 	margin-right:20px;
+	color:#fff;
+	text-align:left;
 }
+
+.loginMenu .menuSeparator{
+	padding:0px 2px;
+}
+
 .loginMenu li a{
 	color:#fff;
 	font-size:12px;
@@ -283,17 +290,21 @@
 }
 
 .socialMenu{
-	width:85px;
-	display:inline;
+	width:90px;
+	margin-right:4px;
 }
 
 .socialMenu li {
+	display:inline;
 	line-height:30px;
 }
 
+.socialMenu li img{
+	margin-left:4px;
+}
+
 .searchBox {
-	display:inline;
-	margin-left:20px;
+	top:-3px;
 }
 
 .searchBox input{
@@ -304,15 +315,16 @@
 	background-image:url('/images/new/search.png');
 	background-repeat:no-repeat;
 	background-position: right;
-	margin-top:-15px;
+	margin-top:-2px;
 }
 
 .headerMenu {
 	text-align:right;
+	display:inline;
 }
 
 .headerMenu li{
-	padding-right:30px;
+	padding-left:30px;
 }
 
 .headerMenu li.last {
@@ -436,7 +448,7 @@
 }
 
 .storyGrid div{
-	margin:5px 0px 0px 10px;
+	margin:5px 0px 0px 0px;
 	display:block;
 	clear:both;
 }
@@ -484,7 +496,7 @@
 	color:#fff;
 	font-size:12px;
 	line-height:14px;
-	margin:0px 0px 5px 10px;
+	margin:0px 10px 5px 0px;
 }
 
 .storyGrid li .fundButton{
