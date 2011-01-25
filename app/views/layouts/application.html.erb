@@ -20,7 +20,8 @@
 
 		<div class='middleWrapper'>
 			<div class='innerWrapper'>
-				<%= render :partial => "layouts/static_middle" %>
+				<%= render :partial => "layouts/static_middle" if params[:controller]=='homes' %>
+				<%= render :partial => "pitches/header" if params[:controller]=='pitches' %>
 			</div>
 		</div>
 

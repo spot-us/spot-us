@@ -187,7 +187,7 @@ module ApplicationHelper
   # get the stylesheets...
   def get_stylesheets(is_admin=false)
     stylesheets = ['base', 'main', 'facebox']
-    stylesheets.concat(['screen','new_style','widget']) if params[:controller]!='homes'
+    stylesheets.concat(['screen','new_style','widget']) if params[:controller]!='homes' && params[:controller]!='pitches'
     stylesheets << 'admin' if is_admin
     stylesheet_link_tag stylesheets, :concat => stylesheet_name?(stylesheets), :cache => true
   end

@@ -1,17 +1,14 @@
-<% div_for(pitch, :class => "clearfix") do %>			
-	<% apply_fragment ['pitch_listing_bottom_alt1_', pitch, @show_cca] do %>				
-		<%= render :partial => 'news_items/news_item', :object => pitch %>
-	
-	<% end %>
-	<% if @show_cca && !pitch.fully_funded? %>
+<li>
+	<%=image_tag p.featured_image(:medium), {:alt => h(p.headline)}%>
+	<h3><%=link_to p.headline[0..30], pitch_path(p)%></h3>
+	<div><%=pitch_date(p.created_at)%> by <%=link_to p.user, profile_path(p.user)%></div>
+	<%= render :partial => "donations/text_button", :locals => { :news_item => p }%>
+	<% if @show_cca && !p.fully_funded? %>
 		<% if current_user %>
-			<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "earn_credits_listing" 	%>
+			<%= link_to "Free Credits", cca_path(@first_cca) + "/#{p.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
 		<% else %>
-			<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "authbox"}) %>
+			<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{p.id}", {:return_to => cca_path(@first_cca) + "/#{p.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
 		<% end %>
 	<% end %>
-	<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
-	<% if pitch.story && pitch.story.published? %>
-		| <%= link_to "READ STORY", story_path(pitch.story) %>
-	<% end %>
-<% end %>
+	<div><%=number_to_currency(p.current_funding)%> raised and <%=number_to_currency(p.funding_needed)%> to go</div>
+</li>

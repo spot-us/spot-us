@@ -2,19 +2,17 @@
 	<div class="footerNotes">
 		<h3>Almost Funded Stories</h3>
 		<ul>
-			<li><a href="#">Saguache County: A test case in Colorado election integrity</a> <span>$100.00 to go</span></li>
-			<li><a href="#">Downtown LA's Transit-Oriented Stadium</a> <span>$100.00 to go</span></li>
-			<li><a href="#">Across L.A., blurring lines between commercial and residential</a> <span>$100.00 to go</span></li>
-			<li><a href="#">Most California Exonorees Denied Compensation for Imprisonment</a> <span>$100.00 to go</span></li>
+			<% Pitch.almost_funded.unfunded.top_four.each do |p| %>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
+			<%end%>
 		</ul>
 	</div><!--end footernotes-->
 	<div class="footerNotes">
 		<h3>Unfunded Stories</h3>
 		<ul>
-			<li><a href="#">Saguache County: A test case in Colorado election integrity</a></li>
-			<li><a href="#">Downtown LA's Transit-Oriented Stadium</a></li>
-			<li><a href="#">Across L.A., blurring lines between commercial and residential</a></li>
-			<li><a href="#">Most California Exonorees Denied Compensation for Imprisonment</a></li>
+			<% Pitch.unfunded.top_four.each do |p| %>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
+			<%end%>
 		</ul>
 	</div><!--end footernotes-->
 	<div class="footerNotes">

@@ -1,4 +1,4 @@
-<% apply_fragment ['text_button_', news_item, current_user] do %>
+<%# apply_fragment ['text_button_', news_item, current_user] do %>
 	<% if news_item.fully_funded? %>
 	    <strong>FULLY FUNDED</strong>
 	<% elsif current_user && (current_user.remaining_credits > 0) && (news_item.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(news_item)) %>
@@ -8,4 +8,4 @@
 	<% elsif (!current_user || (current_user && current_user.can_donate_to?(news_item))) %>
 	    <%= render :partial => 'donations/donate_default_text', :locals => {:news_item => news_item} %>
 	<% end %>
-<%end%>
+<%#end%>

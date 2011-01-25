@@ -4,7 +4,6 @@
 	background-image:url('/images/new/headerbg.png');
 	background-repeat:repeat-x;
 	width:100%;
-
 }
 
 .middleWrapper{
@@ -431,6 +430,10 @@
 	height:165px;
 }
 
+.storyGrid div{
+	margin:5px 0px 0px 10px;
+}
+
 .storyGrid li h3 a{
 	text-transform:none;
 	font-family:Helvetica,arial,sans-serif;
@@ -466,7 +469,7 @@
 	color:#fff;
 	font-size:12px;
 	line-height:14px;
-	margin:5px 0px;
+	margin:5px 0px 0px 10px;
 }
 
 .storyGrid li .fundButton{
@@ -479,6 +482,7 @@
 }
 
 .storyGrid li .creditsButton{
+	margin-top:10px;
 	background-color:#24454f;
 }
 
@@ -562,7 +566,8 @@
 	color:#fff;
 	border-bottom:1px dotted #416871;
 	margin-bottom:10px;
-	padding:bottom:10px;
+	padding-left:0px;
+	padding-bottom:10px;
 }
 
 .footerNotes ul li{
