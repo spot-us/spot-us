@@ -1,5 +1,5 @@
 <div class="introContainer">
-	<p>You can use Spot.us to <a href="#">support reporting</a>, to <a href="#">start a story</a>, or as a <a href="#">news publisher.</a></p>
+	<p>You can use Spot.us to <a href="/stories/unfunded" title='support reporting'>support reporting</a>, to <%= facebox_login_link_to("start a story", new_pitch_path) %>, or as a <a href="" title='news publisher'>news publisher.</a></p>
 	<p>Want to be a Sponsor? <span><a href="#">Let us know</a></span>.</p>
 </div>
 <div class="statsContainer">
@@ -7,10 +7,10 @@
 	<h2>85+ Publishing Partners</h2>
 </div>
 <div class="joinContainer">
-	<a href="join">Join Us &rsaquo;</a>
+	<a href="/user/new" title='Join Us'>Join Us &rsaquo;</a>
 </div>
 <ul class="tabs">
-	<li class="current"><a href="#">Unfunded</a></li>
-	<li><a href="#">Published</a></li>
-	<li><a href="#">Updates</a></li>
+	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/unfunded">Unfunded</a></li>
+	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
+	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/blogs">Updates</a></li>
 </ul>

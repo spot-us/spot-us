@@ -3,28 +3,28 @@
 		<a href="/" title="Spot.us - Community Funded Reporting">
 			<span>Spot.us - Community Powered Reporting</span>
 			<%if @current_network && @current_network.name=="la"%>
-			<span><img src="/images/new_design/usc.png" alt="USC Annenberg Center" /></span>
+				<span><img src="/images/new_design/usc.png" alt="USC Annenberg Center" /></span>
 			<%end%>
 		</a>
 	</div><!--end logo container-->
 	<div class="rightheaderContainer">
 		<ul class="loginMenu">
-			<li><a href="#">Join</a> or <a href="#">Login</a></li>
+			<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
 			<li>| <a href="#">Learn More</a></li>
 		</ul><!--end loginMenu-->
 		<ul class="socialMenu">
-			<li><a href="#"><img src="/images/new/facebook_w18.png"></a></li>
-			<li><a href="#"><img src="/images/new/twitter_w18.png"></a></li>
-			<li><a href="#"><img src="/images/new/flickr_w18.png"></a></li>
-			<li><a href="#"><img src="/images/new/rss_w18.png"></a></li>
+			<li><a href="http://www.facebook.com/pages/SpotUs/74947774190"><img src="/images/new/facebook_w18.png"></a></li>
+			<li><a href="http://www.twitter.com/spotus"><img src="/images/new/twitter_w18.png"></a></li>
+			<li><a href="hhttp://www.flickr.com/photos/29792566@N08/"><img src="/images/new/flickr_w18.png"></a></li>
+			<li><a href="/stories.rss"><img src="/images/new/rss_w18.png"></a></li>
 		</ul><!--end socialMenu-->
 	<div class="searchBox">
 		<input type="text">
 	</div><!--end searchBox-->
 		<ul class="headerMenu">
-			<li><a href="#">Create a story</a></li>
-			<li><a href="#">Fund a story</a></li>
-			<li class="last"><a href="#">Earn Credits</a></li>
+			<li><%= facebox_login_link_to("Create a story", new_pitch_path) %></li>
+			<li><a href="/stories/unfunded">Fund a story</a></li>
+			<li class="last"><a href="/ccas">Earn Credits</a></li>
 		</ul><!--end header menu-->
 	</div><!--end rightContainer-->
 </div>

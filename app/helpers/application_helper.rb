@@ -5,7 +5,7 @@ module ApplicationHelper
     url = url_for(args.second)
     cookies[:return_to] = args.third[:return_to] if args.third && args.third[:return_to]
     options = args.third || {}
-    options.merge!({:class => 'authbox', :return_to => url, :rel=>"nofollow"})
+    options.merge!({:return_to => url, :rel=>"nofollow"})
     link_to args.first, new_session_path(:return_to => url), options
   end
   

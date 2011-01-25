@@ -80,7 +80,7 @@ jQuery(document).ready(function($){
 					} else{
 						$(document).trigger('close.facebox');
 					}
-					renderUserHeader();
+					//renderUserHeader();
 					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
 					$("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
 					if(("#assignment_admin").length > 0)
