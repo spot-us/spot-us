@@ -557,7 +557,8 @@
 	color:#fff;
 	border-bottom:1px dotted #416871;
 	margin-bottom:10px;
-	padding:bottom:10px;
+	padding-left:0px;
+	padding-bottom:10px;
 }
 
 .footerNotes ul li{
