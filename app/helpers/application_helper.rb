@@ -160,7 +160,7 @@ module ApplicationHelper
   end
 
   def pitch_date(dt)
-	  dt.strftime("%d %b %Y")
+	  dt.strftime("%d/%m/%y")
   end
   
   def report_an_error_date(dt)
@@ -186,13 +186,15 @@ module ApplicationHelper
   
   # get the stylesheets...
   def get_stylesheets(is_admin=false)
-    stylesheets = ['base', 'main', 'style']
+    stylesheets = ['base', 'main', 'facebox']
+    stylesheets.concat(['screen','new_style','widget']) if params[:controller]!='homes'
     stylesheets << 'admin' if is_admin
     stylesheet_link_tag stylesheets, :media => "all", :concat => stylesheet_name?(stylesheets), :cache => true
   end
   
   def stylesheet_name?(stylesheets)
     names = ['global']
+    names << 'styles' if stylesheets.detect { |s| s =~ /(?:new_style)/i }
     names << "admin" if stylesheets.detect { |s| s =~ /(?:admin)/i }  
     "cache/#{names.join('_')}"
   end

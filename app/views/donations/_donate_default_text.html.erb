@@ -1,19 +1,7 @@
-<div class="clearfix">
-	<%if show_cca?(@show_cca) && (!defined?(only_progress) || !only_progress)%>
-	   	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT/1.05), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f| %>
-			  <%= f.hidden_field :amount, :id => "donation_default_amount" %>
-			  <%= f.hidden_field :pitch_id %>
-			  <%= submit_tag "Fund This Story", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}", :class=>"submit_button" %>
-		<% end %>
-	<%end%>
-	<div class="funding">
-		<strong><%= number_to_currency(news_item.current_funding) %></strong>
-		raised
-		|
-		<% if news_item.fully_funded? %>
-		<%= "#{number_to_currency(0)} to go" %>
-		<% else %>
-		<%= "#{number_to_currency(news_item.funding_needed)} to go" %>
-		<% end %>
-	</div>
-</div>
+<%if show_cca?(@show_cca) && (!defined?(only_progress) || !only_progress)%>
+	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT/1.05), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "auth"} do |f| %>
+		<%= f.hidden_field :amount, :id => "donation_default_amount" %>
+		<%= f.hidden_field :pitch_id %>
+		<%= submit_tag "Fund This Story", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}", :class=>"fundButton" %>
+	<% end %>
+<%end%>

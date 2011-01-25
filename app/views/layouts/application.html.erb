@@ -1,53 +1,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
 
-<head>
-	<%= render :partial => 'layouts/head' %>
-</head>
+	<head>
+		<%= render :partial => 'layouts/head' %>
+	</head>
 
-<body>
+	<body>
 
-	<!-- START HEADERS -->
-	<%#=render :partial => 'layouts/embed_admin_menu'%>
-	<%= render :partial => 'layouts/login' %>
+		<!-- START HEADERS -->
+		<%#=render :partial => 'layouts/embed_admin_menu'%>
+		<%#= render :partial => 'layouts/login' %>
 
-	<div class='upperWrapper'>
-		<div class='innerWrapper'>
-			<%= render :partial => "layouts/header" %>
-		</div>
-	</div>
-	<!-- END HEADER -->
-
-	<div class='middleWrapper'>
-		<div class='innerWrapper'>
-			<%= render :partial => "layouts/static_middle" %>
-		</div>
-	</div>
-
-	<div class='lowerWapper'>
-		<div class='innerWrapper'>
-			<div class="contentContainer">
-				<%= yield %>
+		<div class='upperWrapper'>
+			<div class='innerWrapper'>
+				<%= render :partial => "layouts/header" %>
 			</div>
 		</div>
-	</div>
+		<!-- END HEADER -->
 
-	<div class="bottomWrapper">
-		<%= render :partial => 'layouts/footer' %>
-	</div>
-</div>
-<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
-<%= render :partial => 'layouts/splash' %>
-<%= render :partial => 'layouts/get_satisfaction' if GS_APP && !defined?(@hide_gs)  %>
-<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
+		<div class='middleWrapper'>
+			<div class='innerWrapper'>
+				<%= render :partial => "layouts/static_middle" %>
+			</div>
+		</div>
 
-<% if session[:show_default_answers] %>
-<script>
-jQuery(document).ready(function($){
-	jQuery.facebox({ajax: '<%= default_answers_cca_path(Cca.find_by_id(session[:show_default_answers]), {:only_path=>false}).gsub("https", "http")%>'});
-});
-</script>
-<% end %>
+		<div class='lowerWapper'>
+			<div class='innerWrapper'>
+				<div class="contentContainer">
+					<%= yield %>
+				</div>
+			</div>
+		</div>
 
-</body>
+		<div class="bottomWrapper">
+			<%= render :partial => 'layouts/footer' %>
+		</div>
+
+		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
+		<%= render :partial => 'layouts/splash' %>
+		<%= render :partial => 'layouts/get_satisfaction' if GS_APP && !defined?(@hide_gs)  %>
+		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
+
+		<% if session[:show_default_answers] %>
+			<script>
+				jQuery(document).ready(function($){
+					jQuery.facebox({ajax: '<%= default_answers_cca_path(Cca.find_by_id(session[:show_default_answers]), {:only_path=>false}).gsub("https", "http")%>'});
+				});
+			</script>
+		<% end %>
+
+	</body>
 </html>

@@ -3,7 +3,4 @@
   = f.hidden_field :pitch_id
   = f.hidden_field :user_id, :value => current_user.id
   = f.hidden_field :donation_type, :value => "credit"
-  = f.submit "Apply Credits", :class => "donate apply_credits"
-  =# image_submit_tag "apply_credits.png", :alt => "Apply credits", :title => "Apply credits"
-.double_content_border
-= render :partial => 'donations/donate_default_text', :locals => {:news_item => news_item, :only_progress => true } unless params[:controller] == "pitches"
+  = f.submit "Apply Credits", :class => "creditsButton"

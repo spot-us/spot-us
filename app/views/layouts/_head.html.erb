@@ -18,15 +18,7 @@
 	<title><%= @title || "Spot.us"%></title>
 
 	<%=get_stylesheets(is_admin?)%>
-
-	<!--[if IE 6]> 
-    	<%= stylesheet_link_tag 'ie_spotus.css'%>
- 	<![endif]-->
-
-  	<%= stylesheet_link_tag 'screen','new_style','widget','facebox', :media => "screen", :cache => "styles_all" %>
   	<%= stylesheet_link_tag 'print', :media => "print"%>
-
-	<%= stylesheet_link_tag 'facebox', :media => "screen"%>
 	
 	<%= javascript_include_tag 'jquery-1.4.1.min'%>
   	<script type='text/javascript'>

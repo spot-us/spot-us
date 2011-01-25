@@ -400,7 +400,8 @@
 /*story grid styles*/
 .storyGrid {
 	margin: 0px auto;
-	padding-top:20px;
+	padding-top:0px;
+	clear:both;
 }
 
 
@@ -433,34 +434,44 @@
 	color:#333;
 }
 
-.storyGrid li a{
+.storyGrid li form{
+	height:auto;
+	padding:0px;
+}
+
+.storyGrid li a, .storyGrid li input{
 	text-decoration:none;
 	font-weight:bold;
 }
 
-.storyGrid li a.fundButton, .storyGrid li a.creditsButton{
+.storyGrid li .fundButton, .storyGrid li .creditsButton{
 	padding:5px;
+	border:1px solid #ccc;
+	border-left:1px solid #999;
+	border-bottom:1px solid #999;
 	-webkit-border-radius:3px;
-	-moz-border-radis:3px;	
+	-moz-border-radius:3px;	
 	color:#fff;
 	font-size:12px;
-	margin:10px 0px;
-	line-height:30px;
+	line-height:14px;
+	margin:5px 0px;
 }
 
-.storyGrid li a.fundButton{
+.storyGrid li .fundButton{
 	background-color:#7a9e53;
 }
 
-.storyGrid li a.fundButton:hover{
+.storyGrid li .fundButton:hover{
+	cursor:pointer;
 	background-color:#71964a;
 }
 
-.storyGrid li a.creditsButton{
+.storyGrid li .creditsButton{
 	background-color:#24454f;
 }
 
-.storyGrid li a.creditsButton:hover{
+.storyGrid li .creditsButton:hover{
+	cursor:pointer;
 	background-color:#1c3942;
 }
 
@@ -469,33 +480,38 @@
 /* static middle tabs*/
 
 .tabs{
-	display:block;
+	list-style-type:none;
+	position:relative;
+	z-index:1000;
+	top:-29px;
+	width:100%;
+	margin: 0px 0 3px 0;
 	clear:both;
-	text-align:right;
-	margin-top:-30px;
 }
 
-.tabs li, .tabs li.current{
-	padding:5px;
+.tabs li {
+	float:right;
+	background-color:#e3eeef;
+	color:#626262;
+	font-size:12px;
+	padding:3px 7px;
+	margin-left:4px;
+	text-decoration:none;
+	border:1px solid #ddd;
+	border-bottom:1px solid #C7D9DB;
+}
+
+.tabs li.current{
+	background-color:#fff;
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+	border-bottom: 1px solid #fff;
 }
 
 .tabs li a, .tabs li.current a{
 	color:#666;
 	text-decoration:none;
-}
-
-.tabs li{
-	background-color:#e3eeef;
-	border-left:1px solid #e3eeef;
-	border-top:1px solid #e3eeef;
-	border-right:1px solid #e3eeef;
-}
-
-.tabs li.current, .tabs li:hover{
-	background-color:#fff;
-	border-left:1px solid #ccc;
-	border-top:1px solid #ccc;
-	border-right:1px solid #ccc;
 }
 
 /*end static middle tabs*/
