@@ -6,12 +6,6 @@
 </ul>
 <ul class="storyGrid">
 	<%@news_items.each do |ni|%>
-		<li>
-			<%=image_tag ni.featured_image(:medium), {:alt => h(ni.headline)}%>
-			<h3><%=link_to ni.headline[0..30], pitch_path(ni)%></h3>
-			<div><%=pitch_date(ni.created_at)%> by <%=link_to ni.user, profile_path(ni.user)%></div>
-			<%= render :partial => "donations/text_button", :locals => { :news_item => ni }%>
-			<div><%=number_to_currency(ni.current_funding)%> raised and <%=number_to_currency(ni.funding_needed)%> to go</div>
-		</li>
+		<%=render :partial => "pitches/pitch", :locals => {:p => ni}%>
 	<%end%>
 </ul>
