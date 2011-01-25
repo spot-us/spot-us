@@ -2,13 +2,15 @@
 	<%=image_tag p.featured_image(:medium), {:alt => h(p.headline)}%>
 	<h3><%=link_to p.headline[0..30], pitch_path(p)%></h3>
 	<div><%=pitch_date(p.created_at)%> by <%=link_to p.user, profile_path(p.user)%></div>
-	<%= render :partial => "donations/text_button", :locals => { :news_item => p }%>
-	<% if @show_cca && !p.fully_funded? %>
-		<% if current_user %>
-			<%= link_to "Free Credits", cca_path(@first_cca) + "/#{p.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
-		<% else %>
-			<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{p.id}", {:return_to => cca_path(@first_cca) + "/#{p.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
+	<div class="donateButtons">
+		<% if @show_cca && !p.fully_funded? %>
+			<% if current_user %>
+				<%= link_to "Free Credits", cca_path(@first_cca) + "/#{p.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
+			<% else %>
+				<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{p.id}", {:return_to => cca_path(@first_cca) + "/#{p.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
+			<% end %>
 		<% end %>
-	<% end %>
+	</div>
+	<%= render :partial => "donations/text_button", :locals => { :news_item => p }%>
 	<div><%=number_to_currency(p.current_funding)%> raised and <%=number_to_currency(p.funding_needed)%> to go</div>
 </li>
