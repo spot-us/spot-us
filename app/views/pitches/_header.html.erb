@@ -1,0 +1,10 @@
+<div class="headlineByline">
+	<h1><%= h @pitch.headline %></h1>
+	<ul class="bylines">
+		<li>By 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+		<li>Peer edited by 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+	</ul>
+</div>
+<div class="fundingStatus">
+	Funded
+</div>

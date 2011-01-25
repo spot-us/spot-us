@@ -72,6 +72,10 @@
 	color:#24535e;
 }
 
+.introContainer a:hover{
+	color:#e15205;
+}
+
 .introContainer p{
 	font-family:Georgia, Times, serif;
 	font-size:16px;
@@ -86,6 +90,8 @@
 	color:#000;
 	padding:0;
 	margin:0px 0px 9px 0px;
+	font-weight:normal;
+	text-shadow: #ccc 1px 1px 1px;
 }
 
 .joinContainer{
@@ -319,10 +325,11 @@
 	text-decoration:none;
 	font-weight:bold;
 	line-height:44px;
+	text-shadow: #000 1px 1px 1px;
 }
 
 .headerMenu li a:hover{
-	border-bottom:1px solid #fff;
+	color:#ccc;
 }
 
 .learnMore{
@@ -445,7 +452,7 @@
 }
 
 .storyGrid li h3 a:hover{
-	color:#333;
+	color:#e15205;
 }
 
 .storyGrid li form{
@@ -465,6 +472,8 @@
 }
 
 .storyGrid li .fundButton, .storyGrid li .creditsButton{
+	font-family:Helvetica, Arial, sans-serif;
+	padding:5px;
 	float:left;
 	padding:5px 10px;
 	border:1px solid #ccc;
@@ -484,7 +493,7 @@
 
 .storyGrid li .fundButton:hover{
 	cursor:pointer;
-	background-color:#71964a;
+	background-color:#6e9149;
 }
 
 .storyGrid li .creditsButton{
@@ -601,11 +610,17 @@
 	list-style-type:none;
 	display:inline;
 	font-size:14px;
+	color:#506c75;
 }
 
 .copyrightContainer ul li a{
 	padding:5px;
 	color:#fff;
+	text-decoration:none;
+}
+
+.copyrightContainer ul li a:hover{
+	color:#ccc;
 }
 
 /* end footer styles */

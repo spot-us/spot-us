@@ -8,18 +8,16 @@
 body{
     background:#fff;
 	color:#444;
-	font:12px/18px Arial, Arial, sans-serif;
+	font:12px/18px Helvetica, Arial, sans-serif;
 	margin:0px auto;
 }
 
 a:link, a:visited{
-    color:#333;
-	text-decoration:underline;
+    color:#666;
 }
 
 a:hover{
-    color: #999;
-	text-decoration:none;
+    color: #e15205;
 }
 	
 acronym,abbr{
@@ -41,10 +39,9 @@ code,pre{
 h1,h2,h3,h4,h5,h6{
 	font-family: Garamond;
     font-weight:400;
-	padding:10px 10px 10px 10px;
+	padding:10px 10px 10px 0px;
 	width:100%;
 	color:000;
-	border-bottom:1px solid #ccc;
 	text-transform:uppercase;
 }
 
@@ -65,7 +62,6 @@ h2 img {
 }
 	
 img, embed, object{
-	margin:10px;
 	border: 1px solid #ddd;
 }
 
