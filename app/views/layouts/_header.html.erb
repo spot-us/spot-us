@@ -25,10 +25,17 @@
 			<ul class="loginMenu">
 				<li><a href="#" rel='nofollow' id='hoverAnchorLearnMore'>Learn More</a></li>
 				<li class="menuSeparator">&nbsp;</li>
-				<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
+				<%unless current_user%>
+					<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
+				<%else%>
+					<li class="menuSeparator">&nbsp;</li>
+					<li><%=link_to 'Logout', '/logout', {:class=>'logoutLink'}%></li>
+					<li class="menuSeparator">&nbsp;</li>
+					<li>Welcome back <%=link_to current_user.full_name, profile_path(current_user)%></li>
+				<%end%>
 			</ul><!--end loginMenu-->
 		</li>
-		<li>
+		<li class='headerMenuContainer'>
 			<ul class="headerMenu">
 				<li><%= facebox_login_link_to("Start a story", new_pitch_path) %></li>
 				<li><a href="/stories/unfunded">Fund a story</a></li>
@@ -38,12 +45,14 @@
 	</ul><!--end rightContainer-->
 </div>
 
-<!-- START - hover list of projects -->
-<ul class='hoverContainer learnMore' id='hoverContainerLearnMore' style="display:none;">
-	<li><a href="/pages/about" title="About Spot.Us">About Spot.Us</a></li>
-	<li><a href="" id="help_newsletter" title="Newsletter" rel="nofollow">Newsletter</a> / <a href="http://blog.spot.us">Blog</a></li>
-	<li><a href="/pages/examples" title="Projects and Partners">Projects and Partners</a></li>
-	<li><%=facebox_login_link_to("Suggest a Story", "/tips/new")%></li>
-	<li><a href="/contributors" title="Spot.Us Community">Spot.Us Community</a></li>
-</ul>
-<!-- END - hover list of projects -->
+<% content_for :bottom do %>
+	<!-- START - hover list of learn more -->
+	<ul class='hoverContainer learnMore' id='hoverContainerLearnMore' style="display:none;">
+		<li><a href="/pages/about" title="About Spot.Us">About Spot.Us</a></li>
+		<li><a href="" id="help_newsletter" title="Newsletter" rel="nofollow">Newsletter</a> / <a href="http://blog.spot.us">Blog</a></li>
+		<li><a href="/pages/examples" title="Projects and Partners">Projects and Partners</a></li>
+		<li><%=facebox_login_link_to("Suggest a Story", "/tips/new")%></li>
+		<li><a href="/contributors" title="Spot.Us Community">Spot.Us Community</a></li>
+	</ul>
+	<!-- END - hover list of learn more -->
+<% end %>

@@ -258,7 +258,7 @@
 
 /*Right header styles*/
 .rightHeaderContainer {
-	width:50%;
+	width:68%;
 	float:right;
 	padding-top:25px;
 }
@@ -269,7 +269,6 @@
 }
 
 .loginMenu {
-	width:170px;
 	margin-top:1px;
 	margin-right:17px;
 	color:#fff;
@@ -278,6 +277,10 @@
 
 .loginMenu .menuSeparator{
 	padding:0px 2px;
+}
+
+.loginMenu .logoutLink{
+	color:red;
 }
 
 .loginMenu li a{
@@ -319,9 +322,12 @@
 	margin-top:-2px;
 }
 
+.headerMenuContainer{
+	width:100%;
+}
+
 .headerMenu {
 	text-align:right;
-	display:inline;
 }
 
 .headerMenu li{
