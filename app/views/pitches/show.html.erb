@@ -54,17 +54,54 @@
 			</ul>
 		</div>
 			<ul class="donorsBox">
-				<li><h3>Individual Donors</h3></li>
+				<h3>Individual Donors</h3>
 				<li><h5>$1,000</h5></li>
-				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
+				<li>
+					<ul>
+						<% apply_fragment ['pitch_supporters_2_', @pitch] do %>
+						<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+					</ul>
+				</li>
 			</ul>
 			<ul class="donorsBox">
-				<li><h3>Organizational Support</h3></li>
+				<h3>Organizational Support</h3>
 				<li><h5>$450</h5></li>
-				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
+				<li>
+					<ul>
+						<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+					</ul>
+				</li>
+			</ul>
+			<ul class="donorsBox">
+				<h3>Organizational Support</h3>
+				<li><h5>$450</h5></li>
+				<li>
+					<ul>
+						<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+					</ul>
+				</li>
+			</ul>
+			<ul class="donorsBox">
+				<h3>Group Supporters</h3>
+				<li><h5>$450</h5></li>
+				<li>
+					<ul>
+						<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+					</ul>
+				</li>
+			</ul>
+			<ul class="donorsBox">
+				<h3>Community Centered Advertising</h3>
+				<li><h5>$450</h5></li>
+				<li>
+					<ul>
+						<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
+						<%end%>
+					</ul>
+				</li>
 			</ul>
 			<ul class="getInvolved">
-				<li><h3>Get Involved</h3></li>
+				<h3>Get Involved</h3>
 				<li><h4>Donate Talent</h4></li>
 				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
 			</ul>
