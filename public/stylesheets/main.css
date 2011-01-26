@@ -642,7 +642,7 @@
 .summaryContent{
 	width:60%;
 	float:left;
-	padding:20px 0px;
+	padding:0px;
 }
 
 .summaryContent h2{
@@ -670,20 +670,22 @@
 	/*erik, i can never get display:inline to work for divs.
 	 so i keep floating things left and right. remind me to ask you about this.*/
 	border-left:1px solid #ccc;
-	position:relative;
-	top:20px;
 	min-height:800px;
 }
 
 .fundBox{
 	background-color:#f6f8f6;
 	padding:20px;
-	height:110px;
+	display:block;
+	height:130px;
 }
 
 .fundBox ul{
-	position:relative;
-	top:30px;
+	padding-top:30px;
+}
+
+.donorsBox{
+	padding:0px 20px;
 }
 
 .fundBox ul li.creditsButton, .fundBox ul li.fundButton {
@@ -704,6 +706,7 @@
 	display:block;
 	text-align:center;
 	text-shadow: #000 1px 1px 0px;
+	line-height:30px;
 }
 
 .fundBox ul li.creditsButton a{
@@ -717,9 +720,10 @@
 
 .getInvolved{
 	clear:both;
+	padding:20px;
 }
 
-.getInvolved li{
+.getInvolved li, .donorsBox li{
 	display:block;
 	list-style-type:none;
 	font-size:13px; 
@@ -729,7 +733,7 @@
 	padding:10px 0px 0px 0px;
 }
 
-.getInvolved h3{
+.getInvolved h3, .donorsBox h3{
 	text-transform:uppercase;
 	font-family:Helvetica, arial, sans-serif;
 	font-weight:bold;
@@ -737,6 +741,13 @@
 	font-size:13px;
 	padding:15px 0px 0px 0px;
 	border-top:1px solid #ccc;
+}
+
+.donorsBox h5{
+	font-family:Helvetica, arial, sans-serif;
+	font-size:24px;
+	font-weight:normal;
+	color:#000;
 }
 
 .getInvolved h4{

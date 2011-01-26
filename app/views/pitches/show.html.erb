@@ -1,13 +1,13 @@
 <%= render :partial => "pitch_head" %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 <ul class="tabs">
-	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/unfunded">Summary</a></li>
-	<li <%if @filter=='published'%>class="current" style="display:none;"<%end%>><a href="/published">Story</a></li>
+	<li <%if @filter=='summary'%>class="current"<%end%>><a href="/unfunded">Summary</a></li>
+	<li <%if @filter=='story'%>class="current" style="display:none;"<%end%>><a href="/published">Story</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
-	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/unfunded">Discussion</a></li>
-	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Assignments</a></li>
-	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Donors</a></li>
-	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Details</a></li>
+	<li <%if @filter=='discussion'%>class="current"<%end%>><a href="/unfunded">Discussion</a></li>
+	<li <%if @filter=='assignments'%>class="current"<%end%>><a href="/published">Assignments</a></li>
+	<li <%if @filter=='donors'%>class="current"<%end%>><a href="/updates">Donors</a></li>
+	<li <%if @filter=='details'%>class="current"<%end%>><a href="/updates">Details</a></li>
 </ul>
 
 <% if @subscriber && @subscriber.errors.any? %>
@@ -51,6 +51,17 @@
 			<ul>
 				<li class="creditsButton"><a href="#">Free Credits</a></li>
 				<li class="fundButton"><a href="#">Fund It</a></li>
+			</ul>
+		</div>
+			<ul class="donorsBox">
+				<li><h3>Individual Donors</h3></li>
+				<li><h5>$1,000</h5></li>
+				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
+			</ul>
+			<ul class="donorsBox">
+				<li><h3>Organizational Support</h3></li>
+				<li><h5>$450</h5></li>
+				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
 			</ul>
 			<ul class="getInvolved">
 				<li><h3>Get Involved</h3></li>
