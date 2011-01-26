@@ -4,10 +4,4 @@
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
-<ul class="storyGrid">
-	<%@items.each do |item|%>
-		<%=render :partial => "pitches/pitch", :locals => {:p => item} if @filter == 'unfunded'%>
-		<%=render :partial => "stories/story", :locals => {:s => item} if @filter == 'published'%>
-		<%=render :partial => "posts/post", :locals => {:p => item} if @filter == 'updates'%>
-	<%end%>
-</ul>
+<%= render :partial => "shared/lists", :locals => {:items => @items} %>

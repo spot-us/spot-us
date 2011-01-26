@@ -8,18 +8,7 @@ margin:0;
 padding:0;
 vertical-align:baseline;
 }*/
-body{margin:0;}
-p + p {margin:0;text-indent:0;}
-a{text-decoration:underline;color:#3B686F;}  /*#398C9F;}*/
-a:focus, a:hover {color:#375C98;}
-ul#main-nav, ul#tabnav, ul.tabs{list-style-image: none;list-style-position: outside;list-style-type: none;}
-h1, h2, h3, h4, h5, h6 {color:#11363E;font-weight:bold;letter-spacing:0px;margin-bottom:0;font-family:georgia;}
-h3 {line-height:1.3em;}
-h2 {font-size:2em;margin-bottom:0.75em;}
-h2.link{font-family:Georgia,Geneva,sans-serif;font-size:1.5em;font-weight:bold;margin-bottom:5px;padding-bottom:0px;}
-tr, th, td {vertical-align:top;}
-th {background:#E3EEEF;border-bottom:solid 1px #999;}
-a.arrow {display:block;height:80px;line-height:80px;margin-top:82px;}
+
 div.dotted {border-top: 2px dotted #bbb;height:3px;}
 object embed {display:block;}
 .float-left{float:left;}
@@ -53,19 +42,7 @@ a.admin_button  {color:white !important;}
 #cse-search-box { text-align:right; margin-bottom:6px; }
 #cse-search-box input[type="text"] {}
 h2.section{border-bottom: dashed 1px #ddd;}
-/*rounded courners*/
-.roundedcornr_box_807323 {background: #a2bbc3;margin:0px;padding:0px;}
-.roundedcornr_top_807323 div {background: url(/images/new_design/roundedcornr_807323_tl.png) no-repeat top left;   
-			margin:0px;padding:0px;}
-.roundedcornr_top_807323 {background: url(/images/new_design/roundedcornr_807323_tr.png) no-repeat top right;   
-			margin:0px;padding:0px;}
-.roundedcornr_bottom_807323 div {background: url(/images/new_design/roundedcornr_807323_bl.png) no-repeat bottom left;
-			margin:0px;padding:0px;}
-.roundedcornr_bottom_807323 {background: url(/images/new_design/roundedcornr_807323_br.png) no-repeat bottom right;
-			margin:0px;padding:0px;}
-.roundedcornr_top_807323 div,.roundedcornr_top_807323,.roundedcornr_bottom_807323 div,.roundedcornr_bottom_807323 
-			{width: 100%;height: 5px;font-size: 1px;}
-.roundedcornr_content_807323 {margin: 0 5px;}
+
 
 .pink { color: #ce859d;}
 .moss-green { color: #909a9d;}
@@ -199,7 +176,6 @@ p.byline {color:#333333;font-family:Verdana,Geneva,sans-serif;font-size:8pt;lett
 			margin-left:-38px;padding:10px 10px 0;	position:relative;}
 .home-boxer #main-area .connect_buttons img {margin-top:0px;}
 
-#header-container {margin-left:43px;}
 #header-container-short {margin-left:40px;}			
 #help-images{margin-top:2px;}
 #help-images a {padding-right:6px;}
@@ -435,11 +411,6 @@ a.earn_credits:hover, .donate_buttons a.authbox:hover {text-decoration:none;back
 .pitch_right .light_panel {margin:5px 0 10px;padding: 5px 12px;border:1px solid #E7E7E7;}
 .pitch_right .light_panel h5 a {color:#107a35;}
 
-ul.tabs{margin:0 0 4px 0;}
-ul.tabs li {display:inline;}
-ul.tabs li a.tab, ul.tabs li a.myspot_tab{background-color:#eee;color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:1.1em;
-			font-weight:normal;letter-spacing:0.03em;padding:8px 8px 7px 8px;text-decoration:none;border-bottom:1px solid #C7D9DB;border-right:1px solid #ddd;border-left:1px solid #ddd;border-top:1px solid #ddd;}
-ul.tabs li a.tab.active, ul.tabs li a.myspot_tab.active{text-decoration:none;background-color:#fff;font-weight:bold;color:#000000;border-bottom:1px solid #fff;z-index:100;}
 .tab_panel {background-color:#fff;border:solid 1px #C7D9DB;padding:30px 30px 30px 30px;}
 .pitch_left .tab_panel {border: none;padding: 10px 0px 20px 0;}
 

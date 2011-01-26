@@ -22,7 +22,7 @@
 	</div>
 <% end %>
 
-<div id="survey">
+<div id="survey" style="padding-top:10px;">
 	<% if @cca %>
 		<% apply_fragment ['cca_', @cca, params[:pitch_id]] do %>
 			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
@@ -37,7 +37,6 @@
 				</div>
 
 				<div id="survey_main">
-					<h1><%= @cca.title %></h1>
 					<div id="survey_description">
 						<%= @cca.description %> 
 					</div>

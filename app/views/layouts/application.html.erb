@@ -17,13 +17,15 @@
 			</div>
 		</div>
 		<!-- END HEADER -->
-
-		<div class='middleWrapper'>
-			<div class='innerWrapper'>
-				<%= render :partial => "layouts/static_middle" if params[:controller]=='homes' %>
-				<%= render :partial => "pitches/header" if params[:controller]=='pitches' %>
+		
+		<!-- Only show middle header if a partial is defined for the particular controller... -->
+		<%if File.exists?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_header.html.erb")%>
+			<div class='middleWrapper'>
+				<div class='innerWrapper'>
+					<%= render :partial => "header" %>
+				</div>
 			</div>
-		</div>
+		<%end%>
 
 		<div class='lowerWapper'>
 			<div class='innerWrapper'>

@@ -1,18 +1,18 @@
-<% apply_fragment ['pitch_', p, current_user, @show_cca, @first_cca] do %>
+<% apply_fragment ['pitch_', pitch, current_user, @show_cca, @first_cca] do %>
 	<li>
-		<%=image_tag p.featured_image(:medium), {:alt => h(p.headline)}%>
-		<h3><%=link_to p.headline[0..30], pitch_path(p)%></h3>
-		<div><%=pitch_date(p.created_at)%> by <%=link_to p.user, profile_path(p.user)%></div>
+		<%=image_tag pitch.featured_image(:medium), {:alt => h(pitch.headline)}%>
+		<h3><%=link_to pitch.headline[0..30], pitch_path(pitch)%></h3>
+		<div><%=pitch_date(pitch.created_at)%> by <%=link_to pitch.user, profile_path(pitch.user)%></div>
 		<div class="donateButtons">
-			<% if @show_cca && !p.fully_funded? %>
+			<% if @show_cca && !pitch.fully_funded? %>
 				<% if current_user %>
-					<%= link_to "Free Credits", cca_path(@first_cca) + "/#{p.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
+					<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
 				<% else %>
-					<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{p.id}", {:return_to => cca_path(@first_cca) + "/#{p.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
+					<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
 				<% end %>
 			<% end %>
 		</div>
-		<%= render :partial => "donations/text_button", :locals => { :news_item => p }%>
-		<div><%=number_to_currency(p.current_funding)%> raised and <%=number_to_currency(p.funding_needed)%> to go</div>
+		<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
+		<div><%=number_to_currency(pitch.current_funding)%> raised and <%=number_to_currency(pitch.funding_needed)%> to go</div>
 	</li>
 <%end%>
