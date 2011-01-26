@@ -690,20 +690,31 @@
 	padding-top:30px;
 }
 
-.donorsBox{
-	padding:0px 20px;
+.donorsBox, .getInvolved{
+	padding:15px 20px 0px 20px;
+	border-top:1px solid #ccc;
+	margin-top:20px;
+	height:80px;
 }
 
-.donorsBox li{
+.donorsBox ul.total, .donorsBox ul.supporters{
 	width:50%;
 	display:inline;
-		display:inline;
+	float:left;
 }
 
-.donorsBox li ul{
+.donorsBox ul.total li{
+	display:block;
+	position:normal;
 	width:100%;
 }
-.donorsBox li ul li{
+
+.donorsBox ul.total li span{
+	
+}
+
+
+.donorsBox ul.supporters li{
 	width:25px;
 	display:inline;
 	position:normal;
@@ -711,8 +722,21 @@
 	float:right;
 }
 
-.donorsBox li ul li img{
+.donorsBox ul li img{
 	width:25px;
+}
+
+.donorsBox ul.total li span{
+	float:left;
+}
+
+.donorsBox ul.supporters span{
+	float:right;
+	display:block;
+}
+
+.donorsBox span a{
+	color:#11363e;
 }
 
 .fundBox ul li.creditsButton, .fundBox ul li.fundButton {
@@ -755,7 +779,7 @@
 	font-size:13px; 
 	color:#000;
 	float:left;
-	padding:10px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
 }
 
 .getInvolved li{
@@ -768,8 +792,6 @@
 	font-weight:bold;
 	color:#777;
 	font-size:13px;
-	padding:15px 0px 0px 0px;
-	border-top:1px solid #ccc;
 	clear:both;
 }
 
@@ -778,6 +800,7 @@
 	font-size:24px;
 	font-weight:normal;
 	color:#000;
+	padding:0;
 }
 
 .getInvolved h4{
