@@ -672,13 +672,82 @@
 	border-left:1px solid #ccc;
 	position:relative;
 	top:20px;
+	min-height:800px;
 }
 
 .fundBox{
 	background-color:#f6f8f6;
 	padding:20px;
-	height:200px;
+	height:110px;
 }
+
+.fundBox ul{
+	position:relative;
+	top:30px;
+}
+
+.fundBox ul li.creditsButton, .fundBox ul li.fundButton {
+	list-style-type:none;
+	display:inline;
+	width:155px;
+	float:left;
+}
+
+.fundBox ul li.creditsButton a, .fundBox ul li.fundButton a{
+	font-weight:bold;
+	color:#fff;
+	padding:15px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	text-decoration:none;
+	font-size:16px;
+	display:block;
+	text-align:center;
+	text-shadow: #000 1px 1px 0px;
+}
+
+.fundBox ul li.creditsButton a{
+	background-color:#11363e;
+	margin-right:10px;
+}
+
+.fundBox ul li.fundButton a{
+	background-color:#59933e;
+}
+
+.getInvolved{
+	clear:both;
+}
+
+.getInvolved li{
+	display:block;
+	list-style-type:none;
+	font-size:13px; 
+	position:relative;
+	top:20px;
+	color:#000;
+	padding:10px 0px 0px 0px;
+}
+
+.getInvolved h3{
+	text-transform:uppercase;
+	font-family:Helvetica, arial, sans-serif;
+	font-weight:bold;
+	color:#777;
+	font-size:13px;
+	padding:15px 0px 0px 0px;
+	border-top:1px solid #ccc;
+}
+
+.getInvolved h4{
+	text-transform:none;
+	font-family:Helvetica, arial, sans-serif;
+	font-weight:bold;
+	color:#11363e;
+	font-size:17px;
+	padding:0px;
+}
+
 
 /*end pitch page*/
 

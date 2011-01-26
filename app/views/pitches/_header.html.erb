@@ -5,9 +5,8 @@
 				<%= link_to image_tag(@pitch.user.photo(:thumb)), profile_path(@pitch.user) %>
 				<% end %>
 				By 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
-		<!--Erik, need a conditional here that says only display this list item if there is a peer reviewer-->
 		<% if @pitch.peer_reviewer %>
-		<li>Peer reviewed by <%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+		<li>Peer review by <%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
 		<%end%>
 	</ul>
 </div>
