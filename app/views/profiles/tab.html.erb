@@ -1,9 +1,7 @@
 <% @title = "Spot.us - Member Profile" %>
-<%= render :partial => 'layouts/common_questions' %>
-<div id="public_profile">
-   <h3>User Profile: <%= @profile.full_name %></h3>
+<div>
    <%= render :partial =>'user_dashboard_nav', :locals => {:selected_tab => @tab} %>
-   <div id="content_wrapper">
+   <div>
       <%= render :partial =>  @tab %>
    </div>
 </div>

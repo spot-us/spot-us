@@ -1,12 +1,10 @@
-<div id="dashboard_tab_container">
-  <ul class="dashboard_tabs tabs">
-     <li><%= link_to "PROFILE", profile_path(@profile), :class => selected_tab=="show" ? "profiles_tab active" : "profiles_tab", :id => "profile_tab" %></li>
-    <li><%= link_to "Donations (#{@profile.all_donations.paid.count})", "/profiles/#{@profile.id}/donations", :class => selected_tab=="donations" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_donations_tab" %></li>
-    <li><%= link_to "Pledges (#{@profile.pledges.count})", "/profiles/#{@profile.id}/pledges", :class => selected_tab=="pledges" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_pledges_tab" %></li>
-    <li><%= link_to "Pitches (#{@profile.pitches.count})", "/profiles/#{@profile.id}/pitches", :class => selected_tab=="pitches" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_pitches_tab" %></li>
-    <li><%= link_to "Blog Posts (#{@profile.posts.count})", "/profiles/#{@profile.id}/posts", :class => selected_tab=="posts" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_posts_tab" %></li>
-    <li><%= link_to "Tips (#{@profile.tips.count})", "/profiles/#{@profile.id}/tips", :class => selected_tab=="tips" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_tips_tab" %></li>
-    <li><%= link_to "Comments (#{@profile.comments.count})", "/profiles/#{@profile.id}/comments", :class => selected_tab=="comments" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_comments_tab" %></li>
-    <li><%= link_to "Assignments (#{@profile.assignments.count})", "/profiles/#{@profile.id}/assignments", :class => selected_tab=="assignments" ? "profiles_tab active" : "profiles_tab", :id => "dashboard_assignments_tab" %></li>
-  </ul>
-</div>
+<ul class="tabs">
+	<li class="<%=(selected_tab=="show" ? "active" : "")%>"><%= link_to "PROFILE", profile_path(@profile), :id => "profile_tab" %></li>
+	<li class="<%=(selected_tab=="donations" ? "active" : "")%>"><%= link_to "Donations (#{@profile.all_donations.paid.count})", "/profiles/#{@profile.id}/donations", :id => "dashboard_donations_tab" %></li>
+	<li class="<%=(selected_tab=="pledges" ? "active" : "")%>"><%= link_to "Pledges (#{@profile.pledges.count})", "/profiles/#{@profile.id}/pledges", :id => "dashboard_pledges_tab" %></li>
+	<li class="<%=(selected_tab=="pitches" ? "active" : "")%>"><%= link_to "Pitches (#{@profile.pitches.count})", "/profiles/#{@profile.id}/pitches", :id => "dashboard_pitches_tab" %></li>
+	<li class="<%=(selected_tab=="posts" ? "active" : "")%>"><%= link_to "Blog Posts (#{@profile.posts.count})", "/profiles/#{@profile.id}/posts", :id => "dashboard_posts_tab" %></li>
+	<li class="<%=(selected_tab=="tips" ? "active" : "")%>"><%= link_to "Tips (#{@profile.tips.count})", "/profiles/#{@profile.id}/tips", :id => "dashboard_tips_tab" %></li>
+	<li class="<%=(selected_tab=="comments" ? "active" : "")%>"><%= link_to "Comments (#{@profile.comments.count})", "/profiles/#{@profile.id}/comments", :id => "dashboard_comments_tab" %></li>
+	<li class="<%=(selected_tab=="assignments" ? "active" : "")%>"><%= link_to "Assignments (#{@profile.assignments.count})", "/profiles/#{@profile.id}/assignments", :id => "dashboard_assignments_tab" %></li>
+</ul>

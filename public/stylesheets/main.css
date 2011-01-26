@@ -258,7 +258,7 @@
 
 /*Right header styles*/
 .rightHeaderContainer {
-	width:50%;
+	width:68%;
 	float:right;
 	padding-top:25px;
 }
@@ -269,7 +269,6 @@
 }
 
 .loginMenu {
-	width:170px;
 	margin-top:1px;
 	margin-right:17px;
 	color:#fff;
@@ -278,6 +277,10 @@
 
 .loginMenu .menuSeparator{
 	padding:0px 2px;
+}
+
+.loginMenu .logoutLink{
+	color:red;
 }
 
 .loginMenu li a{
@@ -319,9 +322,12 @@
 	margin-top:-2px;
 }
 
+.headerMenuContainer{
+	width:100%;
+}
+
 .headerMenu {
 	text-align:right;
-	display:inline;
 }
 
 .headerMenu li{
@@ -552,7 +558,7 @@
 	border-bottom:1px solid #C7D9DB;
 }
 
-.tabs li.current{
+.tabs li.current, .tabs li.active{
 	background-color:#fff;
 	border-left:1px solid #ccc;
 	border-top:1px solid #ccc;
@@ -560,7 +566,7 @@
 	border-bottom: 1px solid #fff;
 }
 
-.tabs li a, .tabs li.current a{
+.tabs li a, .tabs li.current a, .tabs li.active a{
 	color:#666;
 	text-decoration:none;
 }

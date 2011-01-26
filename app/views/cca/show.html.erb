@@ -24,7 +24,7 @@
 
 <div id="survey" style="padding-top:10px;">
 	<% if @cca %>
-		<% apply_fragment ['cca_', @cca, params[:pitch_id]] do %>
+		<% apply_fragment ['cca_detail_', @cca, params[:pitch_id]] do %>
 			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
 			<div id="survey_header">
 				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
