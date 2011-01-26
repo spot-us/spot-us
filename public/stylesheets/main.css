@@ -531,6 +531,90 @@
 
 /*end static middle tabs*/
 
+/*pitch header*/
+
+.headlineByline {
+	width:70%;
+	float:left;
+	color:#000;
+}
+
+.headlineByline h1{
+	font-size:25px;
+	line-height:27px;
+	font-weight:bold;
+	font-family:Helvetica, Arial, Verdana, sans-serif;
+	text-transform:none;
+	margin-top:0px;
+}
+
+.headlineByline ul li{
+	list-style-type:none;
+	display:inline;
+	margin-right:20px;
+	font-family:Georgia, Times, serif;
+	font-style:italic;
+	font-size:14px;
+}
+
+.headlineByline ul li a{
+	color:#11363e;
+	text-decoration:none;
+}
+
+.headlineByline ul li img{
+	width:15px;
+	height:15px;
+	border:1px solid #ccc;
+}
+
+.fundingStatus {
+	text-align:right;
+	width:25%;
+	float:right;
+	position:relative;
+	top:9px;
+}
+
+.fundingStatus h3{
+	font-size
+	display:inline;
+	font-size:20px;
+	font-family:Helvetica, Arial, Verdana, sans-serif;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+.fundingStatus h3.published, .fundingStatus h3.funded{
+	color:#54859f;
+}
+
+.fundingStatus h3.needsFunding{
+	color:#59933e;
+}
+
+
+/*end pitch header*/
+
+/*pitch page*/
+.pitch_container{display:none;}
+
+.pitchContainer{
+	width:100%;
+}
+
+.summaryContent{
+	width:70%;
+	float:left;
+}
+
+.summarySidebar{
+	width:30%;
+	display:inline;
+}
+
+/*end pitch page*/
+
 
 /* Footer styles */
 
