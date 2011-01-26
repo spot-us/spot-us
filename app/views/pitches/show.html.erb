@@ -9,13 +9,51 @@
 
 <div class="pitchContainer">
 	<div class="summaryContent">
-		Pitch Content
+		<% apply_fragment ['pitch_detail_description_', @pitch] do %>
+			<% if !@pitch.video_embed.blank? %>
+				<div class="video_container">
+					<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+				</div>
+			<% end %>
+			<div class="description_tab tab_panel clearfix">
+			  	<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
+				<div class="short_description">
+			  		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
+				</div>
+				<% unless @pitch.extended_description.blank? %>
+					<div class="extended_description">
+						<h4>How will it help?</h4>
+						<%= @pitch.extended_description %>
+					</div>
+				<% end %>
+			</div>
+		<%end%>
 	</div>
 	<div class="summarySidebar">
-		Sidebar Content
+		<div class="fundBox">
+				<div class="progress_bar">
+					<div>
+						<% if @pitch.fully_funded? %>
+					      <%= static_progress_bar("pitch", 1) %>
+					    <% else %>
+					      <%= static_progress_bar("pitch", @pitch.current_funding_in_percentage) %>
+						<% end %>
+					</div>
+					<%= due_date_in_words(@pitch.expiration_date) %>
+				</div>
+			<ul>
+				<li class="creditsButton"><a href="#">Free Credits</a></li>
+				<li class="fundButton"><a href="#">Fund It</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
 
+
+
+
+
+<!--OLD STUFFF-->
 
 <div id="news_item" class="pitch_container clearfix">
 	<div class="pitch_left">
