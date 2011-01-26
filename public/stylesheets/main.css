@@ -692,7 +692,7 @@
 
 .donorsBox, .getInvolved{
 	padding:15px 20px 0px 20px;
-	border-top:1px solid #ccc;
+	border-top:1px dotted #eee;
 	margin-top:20px;
 	height:80px;
 }
@@ -728,11 +728,13 @@
 
 .donorsBox ul.total li span{
 	float:left;
+	margin-top:5px;
 }
 
 .donorsBox ul.supporters span{
 	float:right;
 	display:block;
+	margin-top:5px;
 }
 
 .donorsBox span a{
