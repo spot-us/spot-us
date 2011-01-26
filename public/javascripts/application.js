@@ -54,6 +54,29 @@ jQuery(document).ready(function($){
 		$(this).attr('src', '/images/default_avatar.png');
 	});
 	
+	/* Hover */
+	jQuery("a[id*=hoverAnchor]").hover(function(){
+        $(this).addClass("hover");
+        containerName = this.id.replace('hoverAnchor', '');
+		pos = $(this).position();
+		$("#hoverContainer"+containerName).css( { "left": (pos.left) + "px", "top": pos.top+14 + "px" } );
+		$("#hoverContainer"+containerName).fadeIn();
+    }, function(){
+		containerName = this.id.replace('hoverAnchor', '');
+        $(this).removeClass("hover");
+        $("#hoverContainer"+containerName).hide();
+    });
+
+	jQuery("ul[id*=hoverContainer]").hover(function(){
+        containerName = this.id.replace('hoverContainer', '');
+		$("#hoverAnchor"+containerName).addClass("hover");
+		$(this).show();
+    }, function(){
+		containerName = this.id.replace('hoverContainer', '');
+		$("#hoverAnchor"+containerName).removeClass("hover");
+        $(this).fadeOut();
+    });
+	
 });
 
 function socialNotifier(){

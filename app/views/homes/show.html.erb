@@ -2,10 +2,6 @@
 <ul class="tabs">
 	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/unfunded">Unfunded</a></li>
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
-	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/blogs">Updates</a></li>
+	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
-<ul class="storyGrid">
-	<%@news_items.each do |ni|%>
-		<%=render :partial => "pitches/pitch", :locals => {:p => ni}%>
-	<%end%>
-</ul>
+<%= render :partial => "shared/lists", :locals => {:items => @items} %>

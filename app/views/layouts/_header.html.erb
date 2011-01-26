@@ -7,24 +7,43 @@
 			<%end%>
 		</a>
 	</div><!--end logo container-->
-	<div class="rightheaderContainer">
-		<ul class="loginMenu">
-			<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
-			<li>| <a href="#">Learn More</a></li>
-		</ul><!--end loginMenu-->
-		<ul class="socialMenu">
-			<li><a href="http://www.facebook.com/pages/SpotUs/74947774190"><img src="/images/new/facebook_w18.png"></a></li>
-			<li><a href="http://www.twitter.com/spotus"><img src="/images/new/twitter_w18.png"></a></li>
-			<li><a href="hhttp://www.flickr.com/photos/29792566@N08/"><img src="/images/new/flickr_w18.png"></a></li>
-			<li><a href="/stories.rss"><img src="/images/new/rss_w18.png"></a></li>
-		</ul><!--end socialMenu-->
-	<div class="searchBox">
-		<input type="text">
-	</div><!--end searchBox-->
-		<ul class="headerMenu">
-			<li><%= facebox_login_link_to("Create a story", new_pitch_path) %></li>
-			<li><a href="/stories/unfunded">Fund a story</a></li>
-			<li class="last"><a href="/ccas">Earn Credits</a></li>
-		</ul><!--end header menu-->
-	</div><!--end rightContainer-->
+	<ul class="rightHeaderContainer">
+		<li>
+			<div class="searchBox">
+				<input type="text" />
+			</div>
+		</li><!--end searchBox-->
+		<li>	
+			<ul class="socialMenu">
+				<li><a href="/stories.rss"><img src="/images/new/rss_w18.png"></a></li>
+				<li><a href="hhttp://www.flickr.com/photos/29792566@N08/"><img src="/images/new/flickr_w18.png"></a></li>
+				<li><a href="http://www.twitter.com/spotus"><img src="/images/new/twitter_w18.png"></a></li>
+				<li><a href="http://www.facebook.com/pages/SpotUs/74947774190"><img src="/images/new/facebook_w18.png"></a></li>
+			</ul><!--end socialMenu-->
+		</li>
+		<li>
+			<ul class="loginMenu">
+				<li><a href="#" rel='nofollow' id='hoverAnchorLearnMore'>Learn More</a></li>
+				<li class="menuSeparator">&nbsp;</li>
+				<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
+			</ul><!--end loginMenu-->
+		</li>
+		<li>
+			<ul class="headerMenu">
+				<li><%= facebox_login_link_to("Start a story", new_pitch_path) %></li>
+				<li><a href="/stories/unfunded">Fund a story</a></li>
+				<li class="last"><%=link_to "Earn Credits", @cca_link%></li>
+			</ul><!--end header menu-->
+		</li>
+	</ul><!--end rightContainer-->
 </div>
+
+<!-- START - hover list of projects -->
+<ul class='hoverContainer learnMore' id='hoverContainerLearnMore' style="display:none;">
+	<li><a href="/pages/about" title="About Spot.Us">About Spot.Us</a></li>
+	<li><a href="" id="help_newsletter" title="Newsletter" rel="nofollow">Newsletter</a> / <a href="http://blog.spot.us">Blog</a></li>
+	<li><a href="/pages/examples" title="Projects and Partners">Projects and Partners</a></li>
+	<li><%=facebox_login_link_to("Suggest a Story", "/tips/new")%></li>
+	<li><a href="/contributors" title="Spot.Us Community">Spot.Us Community</a></li>
+</ul>
+<!-- END - hover list of projects -->

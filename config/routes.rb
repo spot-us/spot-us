@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'homes', :action => 'show'
+  map.connect ":filter.:format", :controller => "homes", :action => "show", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}/}
   map.start_story 'start_story', :controller => 'homes', :action => "start_story"
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
 

@@ -3,16 +3,12 @@
 		<%= no_items_message %>
 	</div>
 <% else %>
-	<% unless defined?(template_name) %>
-		
-		<%= render :partial => items %>
-	
-	<% else %>
-		
-		<%= render :collection => items, :partial => template_name %>
-		
-	<% end %>
-	<br clear="all">
+	<ul class="storyGrid">
+		<% unless defined?(template_name) %>
+			<%= render :partial => items %>
+		<% else %>
+			<%= render :collection => items, :partial => template_name %>
+		<% end %>
+	</ul>
 	<%= will_paginate items %>
-	
 <%end%>
