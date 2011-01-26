@@ -1,10 +1,18 @@
 <div class="headlineByline">
 	<h1><%= h @pitch.headline %></h1>
-	<ul class="bylines">
-		<li>By 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
-		<li>Peer edited by 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+	<ul>
+		<li>	<% apply_fragment ['pitch_author_top_alt_', @pitch, @pitch.user] do %>
+				<%= link_to image_tag(@pitch.user.photo(:thumb)), profile_path(@pitch.user) %>
+				<% end %>
+				By 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+		<% if @pitch.peer_reviewer %>
+		<li>Peer review by <%= link_to @pitch.user.full_name, profile_path(@pitch.user) %></li>
+		<%end%>
 	</ul>
 </div>
 <div class="fundingStatus">
-	Funded
+	<h3 class="funded" style="display:none;">Funded</h3>
+	<h3 class="published" style="display:none;">Published</h3>
+	<!--Erik, apply conditional here that determines whether story is funded or not :) you rock -->
+	<h3 class="needsFunding">Needs Funding</h3>
 </div>
