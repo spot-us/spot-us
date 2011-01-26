@@ -646,7 +646,7 @@
 }
 
 .summaryContent{
-	width:60%;
+	width:55%;
 	float:left;
 	padding:0px;
 }
@@ -671,7 +671,7 @@
 }
 
 .summarySidebar{
-	width:38%;
+	width:44%;
 	float:right;
 	/*erik, i can never get display:inline to work for divs.
 	 so i keep floating things left and right. remind me to ask you about this.*/
@@ -692,6 +692,27 @@
 
 .donorsBox{
 	padding:0px 20px;
+}
+
+.donorsBox li{
+	width:50%;
+	display:inline;
+		display:inline;
+}
+
+.donorsBox li ul{
+	width:100%;
+}
+.donorsBox li ul li{
+	width:25px;
+	display:inline;
+	position:normal;
+	margin-right:3px;
+	float:right;
+}
+
+.donorsBox li ul li img{
+	width:25px;
 }
 
 .fundBox ul li.creditsButton, .fundBox ul li.fundButton {
@@ -730,13 +751,15 @@
 }
 
 .getInvolved li, .donorsBox li{
-	display:block;
 	list-style-type:none;
 	font-size:13px; 
-	position:relative;
-	top:20px;
 	color:#000;
+	float:left;
 	padding:10px 0px 0px 0px;
+}
+
+.getInvolved li{
+	display:block;
 }
 
 .getInvolved h3, .donorsBox h3{
@@ -747,6 +770,7 @@
 	font-size:13px;
 	padding:15px 0px 0px 0px;
 	border-top:1px solid #ccc;
+	clear:both;
 }
 
 .donorsBox h5{
