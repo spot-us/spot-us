@@ -518,7 +518,7 @@
 	background-color:#7a9e53;
 }
 
-.storyGrid li .fundButton:hover{
+.storyGrid li .fundButton:hover, .donateButtons li.fundButton form input:hover{
 	cursor:pointer;
 	background-color:#6e9149;
 }
@@ -533,6 +533,24 @@
 }
 
 /*end story grid styles*/
+
+/* donate button styles*/
+
+.donateButtons li.creditsButton, .donateButtons li.fundButton form {
+	text-align:center;
+}
+
+.donateButtons li.fundButton form input{
+	background-color:#7a9e53;
+	border:none;
+	font-size:12px;
+}
+
+.donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
+	color:#fff;
+}
+
+/*end donate button styles*/
 
 /* static middle tabs*/
 
