@@ -94,7 +94,7 @@
 		<%if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any?%>	
 			<%supporters = []%>
 			<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
-			<%supporters.concat(@pitch.donations_and_credits.from_organizations) if @pitch.donations_and_credits.from_organizations.any?%>
+			<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
 			<div class="donorsBox">
 				<h3>Group Supporters</h3>
 				<ul class="total">
@@ -105,7 +105,6 @@
 					<%nrs = supporters.length>6 ? 6 : supporters.length%>
 					<%nrs.times do |ind|%>
 						<%supporter = supporters[ind]%>
-						<%supporter = supporter.user if supporter.is_a?(Donation) || supporter.is_a?(Credit) %>
 						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 					<%end%>
 					<%unless nrs<6%>
