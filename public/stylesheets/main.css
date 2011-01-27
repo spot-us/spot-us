@@ -683,20 +683,30 @@
 	background-color:#f6f8f6;
 	padding:20px;
 	display:block;
-	height:130px;
+	height:170px;
 }
 
 .fundBox ul{
 	padding-top:30px;
 }
 
-.fundbox .progress{
-	width:480px;
+.fundBox .progress{
+	width:390px;
 	height:50px;
 	border:3px solid #11363e;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	background-image:url('/images/new/percentageBG.png');
+}
+
+.fundBox .progress h5{
+	text-align:center;
+	color:#11363e;
+	font-family:Helvetica, arial, verdana, sans-serif;
+	font-weight:bold;
+	font-size:20px;
+	text-transform:uppercase;
+	line-height:32px;
 }
 
 .donorsBox, .getInvolved{
@@ -750,11 +760,16 @@
 	color:#11363e;
 }
 
-.fundBox ul li.creditsButton, .fundBox ul li.fundButton {
+.fundBox ul li.creditsButton,  .fundBox ul li.fundButton input{
 	list-style-type:none;
 	display:inline;
-	width:155px;
+	width:50%;
 	float:left;
+}
+
+.fundBox ul li.fundButton {
+	list-style-type:none;
+	display:inline;
 }
 
 .fundBox ul li.creditsButton a, .fundBox ul li.fundButton a, 
