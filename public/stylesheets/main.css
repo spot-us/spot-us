@@ -765,6 +765,7 @@
 	border:1px solid #ccc;
 	border-right:2px solid #666;
 	border-bottom:2px solid #666;
+	cursor:pointer;
 }
 
 .fundBox ul li.creditsButton a, .fundBox ul li.creditsButton input{
