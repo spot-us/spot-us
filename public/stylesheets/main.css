@@ -498,56 +498,82 @@
 	margin-left:0px;
 }
 
-.storyGrid li .fundButton, .storyGrid li .creditsButton{
-	font-family:Helvetica, Arial, sans-serif;
-	padding:5px;
-	float:left;
-	padding:5px 10px;
-	border:1px solid #ccc;
-	border-right:2px solid #666;
-	border-bottom:2px solid #666;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;	
-	color:#fff;
-	font-size:12px;
-	line-height:14px;
-	margin:0px 10px 5px 0px;
-}
-
-.storyGrid li .fundButton{
-	background-color:#7a9e53;
-}
-
-.storyGrid li .fundButton:hover, .donateButtons li.fundButton form input:hover{
-	cursor:pointer;
-	background-color:#6e9149;
-}
-
-.storyGrid li .creditsButton{
-	background-color:#24454f;
-}
-
-.storyGrid li .creditsButton:hover{
-	cursor:pointer;
-	background-color:#1c3942;
-}
 
 /*end story grid styles*/
 
 /* donate button styles*/
 
-.donateButtons li.creditsButton, .donateButtons li.fundButton form {
+.donateButtons li.fundButton, .donateButtons li.creditsButton{
+	float:left;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;	
+	color:#fff;
+	line-height:14px;
+	margin:0px 10px 5px 0px;
+	width:40%;
+	border:0px;
+	list-style-type:none;
+	display:inline;
 	text-align:center;
 }
 
-.donateButtons li.fundButton form input{
-	background-color:#7a9e53;
-	border:none;
-	font-size:12px;
-}
 
 .donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
 	color:#fff;
+	text-decoration:none;
+	font-weight:bold;
+	font-family:Helvetica, Arial, sans-serif;
+	font-size:1em;
+	padding:0;
+}
+
+.donateButtons li.fundButton form input, .donateButtons li.fundButton{
+	background-color:#7a9e53;
+	border:none;
+}
+
+.donateButtons li.fundButton:hover, .donateButtons li.fundButton form input:hover{
+	cursor:pointer;
+	background-color:#6e9149;
+}
+
+.donateButtons li.creditsButton{
+	background-color:#24454f;
+}
+
+.donateButtons li.creditsButton:hover{
+	cursor:pointer;
+	background-color:#1c3942;
+}
+
+	/*button styles only for list views*/
+
+.storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton{
+	padding:5px 10px;
+	color:#fff;
+	font-size:12px;
+	line-height:14px;
+	margin:0px 10px 5px 0px;
+	width:40%;
+	border:0px;
+	list-style-type:none;
+	display:inline;
+	float:left;
+}
+
+	/*button styles only for pitch views*/
+
+.fundBox .donateButtons li.fundButton, .fundBox .donateButtons li.creditsButton{
+	padding:10px;
+	color:#fff;
+	font-size:16px;
+	line-height:14px;
+	margin:0px 10px 5px 0px;
+	width:40%;
+	border:0px;
+	list-style-type:none;
+	display:inline;
+	float:left;
 }
 
 /*end donate button styles*/
@@ -790,7 +816,7 @@
 	color:#11363e;
 }
 
-.fundBox ul li.creditsButton,  .fundBox ul li.fundButton input{
+/*.fundBox ul li.creditsButton,  .fundBox ul li.fundButton input{
 	list-style-type:none;
 	display:inline;
 	width:50%;
@@ -830,7 +856,7 @@
 .fundBox ul li.fundButton a, .fundBox ul li.fundButton input{
 	background-color:#59933e;
 	font-family:Helvetica, arial, verdana, sans-serif;
-}
+}*/
 
 .getInvolved{
 	clear:both;
