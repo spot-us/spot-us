@@ -49,8 +49,18 @@
 				<%= due_date_in_words(@pitch.expiration_date) %>
 			</div>
 			<ul>
-				<li class="creditsButton"><a href="#">Free Credits</a></li>
-				<li class="fundButton"><a href="#">Fund It</a></li>
+				<li class='creditsButton'>
+					<% if @show_cca && !@pitch.fully_funded? %>
+						<% if current_user %>
+							<%= link_to "Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
+						<% else %>
+							<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", {:return_to => cca_path(@first_cca) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
+						<% end %>
+					<% end %>
+				</li>
+				<li class='fundButton'>	
+					<%= render :partial => "donations/text_button", :locals => { :news_item => @pitch }%>
+				</li>
 			</ul>
 		</div>
 		<%if @pitch.supporters.any?%>

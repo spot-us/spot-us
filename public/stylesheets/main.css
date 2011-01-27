@@ -748,7 +748,8 @@
 	float:left;
 }
 
-.fundBox ul li.creditsButton a, .fundBox ul li.fundButton a{
+.fundBox ul li.creditsButton a, .fundBox ul li.fundButton a, 
+	.fundBox ul li.creditsButton input, .fundBox ul li.fundButton input{
 	font-weight:bold;
 	color:#fff;
 	padding:15px;
@@ -760,14 +761,18 @@
 	text-align:center;
 	text-shadow: #000 1px 1px 0px;
 	line-height:30px;
+	margin:0px;
+	border:1px solid #ccc;
+	border-right:2px solid #666;
+	border-bottom:2px solid #666;
 }
 
-.fundBox ul li.creditsButton a{
+.fundBox ul li.creditsButton a, .fundBox ul li.creditsButton input{
 	background-color:#11363e;
 	margin-right:10px;
 }
 
-.fundBox ul li.fundButton a{
+.fundBox ul li.fundButton a, .fundBox ul li.fundButton input{
 	background-color:#59933e;
 }
 
