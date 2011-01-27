@@ -690,16 +690,23 @@
 	padding-top:30px;
 }
 
-.fundBox .progress{
+.fundBox .progressIncomplete, .fundBox .progressComplete {
 	width:390px;
 	height:50px;
-	border:3px solid #11363e;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
+	border:3px solid #11363e;
+}
+
+.fundBox .progressIncomplete{	
+	background-image:url('/images/new/percentageBG2.png');
+}
+
+.fundBox .progressComplete{
 	background-image:url('/images/new/percentageBG.png');
 }
 
-.fundBox .progress h5{
+.fundBox .progressIncomplete h5, .fundBox .progressComplete h5{
 	text-align:center;
 	color:#11363e;
 	font-family:Helvetica, arial, verdana, sans-serif;
