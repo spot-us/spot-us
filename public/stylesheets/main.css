@@ -994,23 +994,37 @@
 .pagination{
 	clear:both;
 	width:100%;
-	border-top:1px solid #ccc;
 	margin-top:10px;
 	padding-top:10px;
 	margin-bottom:10px;
 	padding-bottom:10px;
-	font-size:12px;
 	line-height:15px;
 	text-align:center;
+	font-size:14px;
 }
 
 .pagination a {
-	padding: 2px;
+	padding: 4px;
+	font-family:Helvetica, Arial, Verdana, sans-serif;
+	text-decoration:none;
 }
 
-.pagination .disabled, .pagination .current {
+.pagination .disabled {
 	color:#666;
 }
+
+.pagination .current{
+	padding:4px;
+	margin:0px 5px;
+}
+
+.pagination .current, .pagination a:hover{
+	background-color:#e3eeef;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	padding:4px;
+}
+
 /* end pagination */
 
 /* tag cloud */
