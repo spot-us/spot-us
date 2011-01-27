@@ -11,8 +11,8 @@
 					<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
 				<% end %>
 			<% end %>
+			<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
 		</div>
-		<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
 		<div><%=number_to_currency(pitch.current_funding)%> raised and <%=number_to_currency(pitch.funding_needed)%> to go</div>
 	</li>
 <%end%>
