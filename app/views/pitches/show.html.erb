@@ -45,8 +45,18 @@
 				<%= due_date_in_words(@pitch.expiration_date) %>
 			</div>
 			<ul>
-				<li class="creditsButton"><a href="#">Free Credits</a></li>
-				<li class="fundButton"><a href="#">Fund It</a></li>
+				<li class='creditsButton'>
+					<% if @show_cca && !@pitch.fully_funded? %>
+						<% if current_user %>
+							<%= link_to "Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
+						<% else %>
+							<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", {:return_to => cca_path(@first_cca) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash", :class => "creditsButton"}) %>
+						<% end %>
+					<% end %>
+				</li>
+				<li class='fundButton'>	
+					<%= render :partial => "donations/text_button", :locals => { :news_item => @pitch }%>
+				</li>
 			</ul>
 		</div>
 		<%if @pitch.supporters.any?%>
@@ -90,7 +100,7 @@
 		<%if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any?%>	
 			<%supporters = []%>
 			<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
-			<%supporters.concat(@pitch.donations_and_credits.from_organizations) if @pitch.donations_and_credits.from_organizations.any?%>
+			<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
 			<div class="donorsBox">
 				<h3>Group Supporters</h3>
 				<ul class="total">
@@ -98,13 +108,14 @@
 					<li><span>(<%=supporters.length%> supporters)</span></li>
 				</ul>
 				<ul class="supporters">
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<span><a href="#">and 27 others...</a></span>
+					<%nrs = supporters.length>6 ? 6 : supporters.length%>
+					<%nrs.times do |ind|%>
+						<%supporter = supporters[ind]%>
+						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+					<%end%>
+					<%unless nrs<6%>
+						<span><a href="#">and <%=supporters.length-nrs%> others...</a></span>
+					<%end%>
 				</ul>
 			</div>
 		<%end%>
@@ -125,7 +136,7 @@
 						<%end%>
 					<%end%>
 					<%unless nrs<6%>
-						<span><a href="#">and <%=donations-nrs%> others...</a></span>
+						<span><a href="#">and <%=donations.length-nrs%> others...</a></span>
 					<%end%>
 				</ul>
 			</div>
