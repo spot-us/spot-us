@@ -102,13 +102,15 @@
 					<li><span>(<%=supporters.length%> supporters)</span></li>
 				</ul>
 				<ul class="supporters">
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<span><a href="#">and 27 others...</a></span>
+					<%nrs = supporters.length>6 ? 6 : supporters.length%>
+					<%nrs.times do |ind|%>
+						<%supporter = supporters[ind]%>
+						<%supporter = supporter.user if supporter.is_a?(Donation) || supporter.is_a?(Credit) %>
+						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+					<%end%>
+					<%unless nrs<6%>
+						<span><a href="#">and <%=supporters.length-nrs%> others...</a></span>
+					<%end%>
 				</ul>
 			</div>
 		<%end%>
