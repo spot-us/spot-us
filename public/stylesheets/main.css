@@ -806,6 +806,7 @@
 
 .fundBox ul li.fundButton a, .fundBox ul li.fundButton input{
 	background-color:#59933e;
+	font-family:Helvetica, arial, verdana, sans-serif;
 }
 
 .getInvolved{
