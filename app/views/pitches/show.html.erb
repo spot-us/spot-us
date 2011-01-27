@@ -11,18 +11,17 @@
 </ul>
 
 <% if @subscriber && @subscriber.errors.any? %>
-<div class="error">
-	<%= error_messages_for :subscriber %>
-</div>
+	<div class="error">
+		<%= error_messages_for :subscriber %>
+	</div>
 <% end %>
 
 <div class="pitchContainer">
 	<div class="summaryContent">
-		<% apply_fragment ['pitch_detail_description_', @pitch] do %>
 		<% if !@pitch.video_embed.blank? %>
-		<div class="video_container">
-			<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
-		</div>
+			<div class="video_container">
+				<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+			</div>
 		<% end %>
 		<div class="description_tab tab_panel clearfix">
 			<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
@@ -36,111 +35,23 @@
 				</div>
 			<% end %>
 		</div>
-		<%end%>
 	</div>
 	<div class="summarySidebar">
 		<div class="fundBox">
-			<div class="progressIncomplete">
-				<h5>100% funded</h5>
-			</div>
-				<%= due_date_in_words(@pitch.expiration_date) %>
-			<ul class="donateButtons">
-				<li class='creditsButton'>
-					<% if @show_cca && !@pitch.fully_funded? %>
-						<% if current_user %>
-							<%= link_to "Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
-						<% else %>
-							<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{@pitch.id}", {:return_to => cca_path(@first_cca) + "/#{@pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
-						<% end %>
-					<% end %>
-				</li>
-				<li class='fundButton'>	
-					<%= render :partial => "donations/text_button", :locals => { :news_item => @pitch }%>
-				</li>
-			</ul>
+			<%unless @pitch.fully_funded?%>
+				<div class="progressIncomplete">
+					<div style="width: <%=@pitch.funding_in_percentage%>%;">&nbsp;</div>
+					<h5><%=@pitch.funding_in_percentage%>% funded</h5>
+				</div>
+			<%else%>
+				<div class="progressComplete">
+					<h5>100% funded</h5>
+				</div>			
+			<%end%>
+			<%= due_date_in_words(@pitch.expiration_date) %>
+			<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
 		</div>
-		<%if @pitch.supporters.any?%>
-			<div class="donorsBox">
-				<h3>Individual Donors</h3>
-				<ul class="total">
-					<li><h5><%=number_to_currency @pitch.total_amount_donated%></h5></li>
-					<li><span>(<%=@pitch.supporters.length%> supporters)</span></li>
-				</ul>
-				<ul class="supporters">
-					<%nrs = @pitch.supporters.length>6 ? 6 : @pitch.supporters.length%>
-					<%nrs.times do |ind|%>
-						<%supporter = @pitch.supporters[ind]%>
-						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
-					<%end%>
-					<%unless nrs<6%>
-						<span><a href="#">and <%=@pitch.supporters.length-nrs%> others...</a></span>
-					<%end%>
-				</ul>
-			</div>
-		<%end%>
-		<%if @pitch.donating_groups.any?%>
-			<div class="donorsBox">
-				<h3>Organizational Support</h3>
-				<ul class="total">
-					<li><h5><%=number_to_currency @pitch.total_amount_donated%></h5></li>
-					<li><span>(<%=@pitch.donating_groups.length%> supporters)</span></li>
-				</ul>
-				<ul class="supporters">
-					<%nrs = @pitch.donating_groups.length>6 ? 6 : @pitch.donating_groups.length%>
-					<%nrs.times do |ind|%>
-						<%supporter = @pitch.supporters[ind]%>
-						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
-					<%end%>
-					<%unless nrs<6%>
-						<span><a href="#">and <%=@pitch.donating_groups.length-nrs%> others...</a></span>
-					<%end%>
-				</ul>
-			</div>
-		<%end%>
-		<%if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any?%>	
-			<%supporters = []%>
-			<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
-			<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
-			<div class="donorsBox">
-				<h3>Group Supporters</h3>
-				<ul class="total">
-					<li><h5><%=number_to_currency @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%></h5></li>
-					<li><span>(<%=supporters.length%> supporters)</span></li>
-				</ul>
-				<ul class="supporters">
-					<%nrs = supporters.length>6 ? 6 : supporters.length%>
-					<%nrs.times do |ind|%>
-						<%supporter = supporters[ind]%>
-						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
-					<%end%>
-					<%unless nrs<6%>
-						<span><a href="#">and <%=supporters.length-nrs%> others...</a></span>
-					<%end%>
-				</ul>
-			</div>
-		<%end%>
-		<%unless Donation.cca_supporters(@pitch.id).all.empty?%>
-			<div class="donorsBox">
-				<%donations = via_cca_supporters_for(@pitch)%>
-				<h3>Community-Centered Advertising</h3>
-				<ul class="total">
-					<li><h5><%=number_to_currency Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum%></h5></li>
-					<li><span>(<%=donations.length%> supporters)</span></li>
-				</ul>
-				<ul class="supporters">
-					<%nrs = donations.length>6 ? 6 : donations.length%>
-					<%nrs.times do |ind|%>
-						<%cca = donations[ind].cca%>
-						<%if cca && cca.user%>
-							<li><%=link_to image_tag(cca.user.photo.url(:thumb), {:alt => cca.user.full_name}), cca_path(cca)%></li>
-						<%end%>
-					<%end%>
-					<%unless nrs<6%>
-						<span><a href="#">and <%=donations.length-nrs%> others...</a></span>
-					<%end%>
-				</ul>
-			</div>
-		<%end%>
+		<%= render :partial => "donors", :locals => { :pitch => @pitch }%>
 		<ul class="getInvolved">
 			<h3>Get Involved</h3>
 			<li><h4>Donate Talent</h4></li>

@@ -189,6 +189,10 @@ class Pitch < NewsItem
   def current_funding_in_percentage
     (current_funding/requested_amount)
   end
+  
+  def funding_in_percentage
+    (current_funding_in_percentage*100).to_i>100 ? 100 : (current_funding_in_percentage*100).to_i
+  end
 
   def check_if_funded_state
     if fully_funded? && active?

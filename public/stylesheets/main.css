@@ -698,12 +698,15 @@
 	border:3px solid #11363e;
 }
 
-.fundBox .progressIncomplete{	
+.fundBox .progressIncomplete div{	
 	background-image:url('/images/new/percentageBG2.png');
+	border-right: 1px solid #11363e;
+	height:100%;
 }
 
-.fundBox .progressComplete{
+.fundBox .progressComplete div{
 	background-image:url('/images/new/percentageBG.png');
+	height:100%;
 }
 
 .fundBox .progressIncomplete h5, .fundBox .progressComplete h5{
@@ -714,6 +717,8 @@
 	font-size:20px;
 	text-transform:uppercase;
 	line-height:32px;
+	width:100%`;
+	margin-top:-50px;
 }
 
 .donorsBox, .getInvolved{
