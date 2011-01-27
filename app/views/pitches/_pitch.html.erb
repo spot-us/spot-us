@@ -3,20 +3,7 @@
 		<%=image_tag pitch.featured_image(:medium), {:alt => h(pitch.headline)}%>
 		<h3><%=link_to pitch.headline[0..30], pitch_path(pitch)%></h3>
 		<div><%=pitch_date(pitch.created_at)%> by <%=link_to pitch.user, profile_path(pitch.user)%></div>
-		<ul class="donateButtons">
-			<li class="creditsButton">
-				<% if @show_cca && !pitch.fully_funded? %>
-					<% if current_user %>
-						<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash", :class => "creditsButton" 	%>
-					<% else %>
-						<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
-					<% end %>
-				<% end %>
-				</li>
-			<li class="fundButton">
-				<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
-			</li>
-		</ul>
+		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => pitch }%>
 		<div><%=number_to_currency(pitch.current_funding)%> raised and <%=number_to_currency(pitch.funding_needed)%> to go</div>
 	</li>
 <%end%>

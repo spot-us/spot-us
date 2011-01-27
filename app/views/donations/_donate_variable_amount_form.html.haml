@@ -1,13 +1,9 @@
 - form_for Donation.new(:pitch => news_item), :url => myspot_donations_path, :html => {:id => "custom_donation_#{news_item.id}", :class => "auth"} do |f|
-  .float_left
-    = f.label :amount, "Donate other amount", :class => "hide"
-    - if current_user && current_user.has_donated_to?(news_item)
-      = f.text_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
-    - else
-      = f.text_field :amount, :value => number_to_currency(news_item.default_donation_amount, :unit => '')
+  = f.label :amount, "Donate other amount", :class => "hide"
+  - if current_user && current_user.has_donated_to?(news_item)
+    = f.text_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
+  - else
+    = f.text_field :amount, :value => number_to_currency(news_item.default_donation_amount, :unit => '')
   = f.hidden_field :pitch_id
   = hidden_field_tag :spotus_lite, spotus_lite
-  .float_right
-    = image_submit_tag("donate.png", :title => "Donate another amount", :alt => "Donate another amount")
-
-  .clear
+  = submit_tag("Donate", :title => "Donate another amount", :alt => "Donate another amount")
