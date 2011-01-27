@@ -509,7 +509,7 @@
 	-moz-border-radius:3px;	
 	color:#fff;
 	line-height:14px;
-	margin:0px 10px 5px 0px;
+	margin:0px 0px 5px 0px;
 	width:40%;
 	border:0px;
 	list-style-type:none;
@@ -517,13 +517,18 @@
 	text-align:center;
 }
 
+.donateButtons li.fundButton{
+	margin-left:5px;
+}
+.donateButtons li.creditsButton{
+	margin-right:5px;
+}
 
 .donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
 	color:#fff;
 	text-decoration:none;
 	font-weight:bold;
 	font-family:Helvetica, Arial, sans-serif;
-	font-size:1em;
 	padding:0;
 }
 
@@ -550,30 +555,23 @@
 
 .storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton{
 	padding:5px 10px;
-	color:#fff;
-	font-size:12px;
-	line-height:14px;
-	margin:0px 10px 5px 0px;
-	width:40%;
-	border:0px;
-	list-style-type:none;
-	display:inline;
-	float:left;
 }
 
+.storyGrid .donateButtons li.fundButton form input, .storyGrid .donateButtons li.creditsButton a{
+	color:#fff;
+	line-height:14px;
+	font-size:12px;
+}
 	/*button styles only for pitch views*/
 
 .fundBox .donateButtons li.fundButton, .fundBox .donateButtons li.creditsButton{
-	padding:10px;
+	padding:15px;
+}
+
+.fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a {
 	color:#fff;
 	font-size:16px;
-	line-height:14px;
-	margin:0px 10px 5px 0px;
-	width:40%;
-	border:0px;
-	list-style-type:none;
-	display:inline;
-	float:left;
+	line-height:18px;
 }
 
 /*end donate button styles*/
@@ -735,7 +733,7 @@
 }
 
 .fundBox .progressIncomplete, .fundBox .progressComplete {
-	width:390px;
+	width:380px;
 	height:50px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
