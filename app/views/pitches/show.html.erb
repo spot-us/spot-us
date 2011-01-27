@@ -30,10 +30,10 @@
 				<%= transform_embed_code(@pitch.short_description, 520, 320) %>
 			</div>
 			<% unless @pitch.extended_description.blank? %>
-			<div class="extended_description">
-				<h4>How will it help?</h4>
-				<%= @pitch.extended_description %>
-			</div>
+				<div class="extended_description">
+					<h4>How will it help?</h4>
+					<%= @pitch.extended_description %>
+				</div>
 			<% end %>
 		</div>
 		<%end%>
@@ -53,27 +53,53 @@
 				<li class="fundButton"><a href="#">Fund It</a></li>
 			</ul>
 		</div>
-		<div class="donorsBox">
-			<h3>Individual Donors</h3>
-			<ul class="total">
-					<li><h5>$1,000</h5></li>
-					<li><span>(33 supporters)</span></li>
-			</ul>
-			<ul class="supporters">
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-					<span><a href="#">and 27 others...</a></span>
-			</ul>
-		</div>
+		<%if @pitch.supporters.any?%>
+			<div class="donorsBox">
+				<h3>Individual Donors</h3>
+				<ul class="total">
+					<li><h5><%=number_to_currency @pitch.total_amount_donated%></h5></li>
+					<li><span>(<%=@pitch.supporters.length%> supporters)</span></li>
+				</ul>
+				<ul class="supporters">
+					<%nrs = @pitch.supporters.length>6 ? 6 : @pitch.supporters.length%>
+					<%nrs.times do |ind|%>
+						<%supporter = @pitch.supporters[ind]%>
+						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+					<%end%>
+					<%unless nrs<6%>
+						<span><a href="#">and <%=@pitch.supporters.length-nrs%> others...</a></span>
+					<%end%>
+				</ul>
+			</div>
+		<%end%>
+		<%if @pitch.donating_groups.any?%>
 			<div class="donorsBox">
 				<h3>Organizational Support</h3>
 				<ul class="total">
-						<li><h5>$540</h5></li>
-						<li><span>(12 supporters)</span></li>
+					<li><h5><%=number_to_currency @pitch.total_amount_donated%></h5></li>
+					<li><span>(<%=@pitch.donating_groups.length%> supporters)</span></li>
+				</ul>
+				<ul class="supporters">
+					<%nrs = @pitch.donating_groups.length>6 ? 6 : @pitch.donating_groups.length%>
+					<%nrs.times do |ind|%>
+						<%supporter = @pitch.supporters[ind]%>
+						<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+					<%end%>
+					<%unless nrs<6%>
+						<span><a href="#">and <%=@pitch.donating_groups.length-nrs%> others...</a></span>
+					<%end%>
+				</ul>
+			</div>
+		<%end%>
+		<%if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any?%>	
+			<%supporters = []%>
+			<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
+			<%supporters.concat(@pitch.donations_and_credits.from_organizations) if @pitch.donations_and_credits.from_organizations.any?%>
+			<div class="donorsBox">
+				<h3>Group Supporters</h3>
+				<ul class="total">
+					<li><h5><%=number_to_currency @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%></h5></li>
+					<li><span>(<%=supporters.length%> supporters)</span></li>
 				</ul>
 				<ul class="supporters">
 						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
@@ -82,47 +108,37 @@
 						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
 						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
 						<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-						<span><a href="#">and 6 others...</a></span>
+						<span><a href="#">and 27 others...</a></span>
 				</ul>
 			</div>
-				<div class="donorsBox">
-					<h3>Group Supporters</h3>
-					<ul class="total">
-							<li><h5>$1,000</h5></li>
-							<li><span>(33 supporters)</span></li>
-					</ul>
-					<ul class="supporters">
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<span><a href="#">and 27 others...</a></span>
-					</ul>
-				</div>
-				<div class="donorsBox">
-					<h3>Community-Centered Advertising</h3>
-					<ul class="total">
-							<li><h5>$1,000</h5></li>
-							<li><span>(33 supporters)</span></li>
-					</ul>
-					<ul class="supporters">
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<li><a href="#"><img src="/images/default_avatar.png?1294965892"></a></li>
-							<span><a href="#">and 27 others...</a></span>
-					</ul>
-				</div>
-			<ul class="getInvolved">
-				<h3>Get Involved</h3>
-				<li><h4>Donate Talent</h4></li>
-				<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
-			</ul>
-		</div>
+		<%end%>
+		<%unless Donation.cca_supporters(@pitch.id).all.empty?%>
+			<div class="donorsBox">
+				<%donations = via_cca_supporters_for(@pitch)%>
+				<h3>Community-Centered Advertising</h3>
+				<ul class="total">
+					<li><h5><%=number_to_currency Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum%></h5></li>
+					<li><span>(<%=donations.length%> supporters)</span></li>
+				</ul>
+				<ul class="supporters">
+					<%nrs = donations.length>6 ? 6 : donations.length%>
+					<%nrs.times do |ind|%>
+						<%cca = donations[ind].cca%>
+						<%if cca && cca.user%>
+							<li><%=link_to image_tag(cca.user.photo.url(:thumb), {:alt => cca.user.full_name}), cca_path(cca)%></li>
+						<%end%>
+					<%end%>
+					<%unless nrs<6%>
+						<span><a href="#">and <%=donations-nrs%> others...</a></span>
+					<%end%>
+				</ul>
+			</div>
+		<%end%>
+		<ul class="getInvolved">
+			<h3>Get Involved</h3>
+			<li><h4>Donate Talent</h4></li>
+			<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
+		</ul>
 	</div>
 </div>
 
@@ -130,131 +146,132 @@
 
 
 
-<!--OLD STUFFF-->
-
-<div id="news_item" class="pitch_container clearfix">
-	<div class="pitch_left">
-		<% apply_fragment ['pitch_header_left', @pitch] do %>
-		<div class="small_header">
-			<div class="share_buttons">
-				<%= render :partial => "/shared/social_buttons" %>
+<!--OLD STUFF, added if false so that it is not run when you load the page...-->
+<%if false%>
+	<div id="news_item" class="pitch_container clearfix">
+		<div class="pitch_left">
+			<% apply_fragment ['pitch_header_left', @pitch] do %>
+			<div class="small_header">
+				<div class="share_buttons">
+					<%= render :partial => "/shared/social_buttons" %>
+				</div>
+				<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
 			</div>
-			<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
+			<h1><%= h @pitch.headline %></h1>
+			<%end%>
+			<%= render :partial => "tab_header" %>
+			<br class="clear"/>
+
+			<% unless @item %>
+			<%=render :partial=>'main' %>
+			<% else %>
+			<%=render :partial=>'item' %>
+			<% end %>
 		</div>
-		<h1><%= h @pitch.headline %></h1>
-		<%end%>
-		<%= render :partial => "tab_header" %>
-		<br class="clear"/>
-
-		<% unless @item %>
-		<%=render :partial=>'main' %>
-		<% else %>
-		<%=render :partial=>'item' %>
-		<% end %>
-	</div>
-	<div class="pitch_right">
-		<div class="blue_panel">
-			<div class="pitch_author clearfix">
-				<% apply_fragment ['pitch_author_top_alt_', @pitch, @pitch.user] do %>
-				<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
-				<em>Author</em><br/>
-				<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %><br/>
-				<% end %>
-				<% if @pitch.peer_reviewer %>
-				<% apply_fragment ['pitch_peer_reviewer_top_alt_', @pitch, @pitch.peer_reviewer] do %>
-				<em class="peer_reviewer">Peer review: 
-					<strong><%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer)) %></strong>
-				</em>
-				<% end %>
-				<% end %>
-			</div>
-		</div>
-		<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} if current_user%>
-		<div class="blue_panel">
-			<% unless @pitch.fully_funded? && @pitch.story && @pitch.story.published? %>
-			<h5 class="difference">Make a Difference!</h5>
-
-			<div class="donate_buttons clearfix">
-				<%= render :partial => "donations/new_button", :locals => { :news_item => @pitch } %>
-			</div>
-			<div id="button_status">&nbsp;</div>
-			<div class="funding clearfix">
-				<% unless @pitch.fully_funded? %>
-				<h6>Funding to date</h6>
-				<% else %>
-				<div class="dotted"></div>
-				<% end %>
-				<div class="funding_status">
-					<%= number_to_currency(@pitch.current_funding) %> raised
-					<% if @pitch.fully_funded? %>
-					<%= number_to_currency(0) %> to go
-					<% else %>
-					<%= number_to_currency(@pitch.funding_needed) %> to go
+		<div class="pitch_right">
+			<div class="blue_panel">
+				<div class="pitch_author clearfix">
+					<% apply_fragment ['pitch_author_top_alt_', @pitch, @pitch.user] do %>
+					<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
+					<em>Author</em><br/>
+					<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %><br/>
 					<% end %>
-					<br/>
+					<% if @pitch.peer_reviewer %>
+					<% apply_fragment ['pitch_peer_reviewer_top_alt_', @pitch, @pitch.peer_reviewer] do %>
+					<em class="peer_reviewer">Peer review: 
+						<strong><%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer)) %></strong>
+					</em>
+					<% end %>
+					<% end %>
 				</div>
-				<div class="progress_bar">
-					<div>
+			</div>
+			<%= render :partial => 'action_buttons', :locals => {:pitch => @pitch} if current_user%>
+			<div class="blue_panel">
+				<% unless @pitch.fully_funded? && @pitch.story && @pitch.story.published? %>
+				<h5 class="difference">Make a Difference!</h5>
+
+				<div class="donate_buttons clearfix">
+					<%= render :partial => "donations/new_button", :locals => { :news_item => @pitch } %>
+				</div>
+				<div id="button_status">&nbsp;</div>
+				<div class="funding clearfix">
+					<% unless @pitch.fully_funded? %>
+					<h6>Funding to date</h6>
+					<% else %>
+					<div class="dotted"></div>
+					<% end %>
+					<div class="funding_status">
+						<%= number_to_currency(@pitch.current_funding) %> raised
 						<% if @pitch.fully_funded? %>
-						<%= static_progress_bar("pitch", 1) %>
+						<%= number_to_currency(0) %> to go
 						<% else %>
-						<%= static_progress_bar("pitch", @pitch.current_funding_in_percentage) %>
+						<%= number_to_currency(@pitch.funding_needed) %> to go
 						<% end %>
+						<br/>
 					</div>
-					<%= due_date_in_words(@pitch.expiration_date) %>
+					<div class="progress_bar">
+						<div>
+							<% if @pitch.fully_funded? %>
+							<%= static_progress_bar("pitch", 1) %>
+							<% else %>
+							<%= static_progress_bar("pitch", @pitch.current_funding_in_percentage) %>
+							<% end %>
+						</div>
+						<%= due_date_in_words(@pitch.expiration_date) %>
+					</div>
 				</div>
+				<% if !@pitch.fully_funded? %>
+				<div class="light_panel">
+					<h6>Offer your skills to this story:</h6>
+
+					<h5><%= facebox_login_link_to("&raquo; Click here to donate talent", pitch_assignments_path(@pitch)) %></h5>
+
+				</div>
+				<% end %>
+				<% end %>
+				<% if @pitch.story && @pitch.story.published? %>
+				<% apply_fragment ['pitch_story_published_', @pitch, @pitch.story] do %>
+				<div class="published">
+					<h5>This story has been published:</h5>
+					<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %> </h4>
+
+					<div class="">
+						by
+						<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
+						|
+						<%= pitch_date(@pitch.story.created_at) %>
+						|
+						<%= @pitch.story.network.name %>
+					</div>
+					<div class="story_summary">
+						<%= truncate_words(strip_tags(@pitch.story.extended_description), 80) %><br/>
+					</div>
+					<%= link_to 'Read the published story', @pitch.story, :class => "read" %>
+				</div>
+				<%end%>
+				<% end %>
 			</div>
-			<% if !@pitch.fully_funded? %>
-			<div class="light_panel">
-				<h6>Offer your skills to this story:</h6>
-
-				<h5><%= facebox_login_link_to("&raquo; Click here to donate talent", pitch_assignments_path(@pitch)) %></h5>
-
-			</div>
-			<% end %>
-			<% end %>
-			<% if @pitch.story && @pitch.story.published? %>
-			<% apply_fragment ['pitch_story_published_', @pitch, @pitch.story] do %>
-			<div class="published">
-				<h5>This story has been published:</h5>
-				<h4 class="normal"><%= link_to @pitch.story.headline, @pitch.story %> </h4>
-
-				<div class="">
-					by
-					<%= link_to h(@pitch.story.user.full_name), profile_path(@pitch.story.user) %>
-					|
-					<%= pitch_date(@pitch.story.created_at) %>
-					|
-					<%= @pitch.story.network.name %>
-				</div>
-				<div class="story_summary">
-					<%= truncate_words(strip_tags(@pitch.story.extended_description), 80) %><br/>
-				</div>
-				<%= link_to 'Read the published story', @pitch.story, :class => "read" %>
+			<% apply_fragment ['pitch_widget_', @pitch, current_user] do %>
+			<div class="blue_panel widget">
+				<%= render :partial => "widget" %>
 			</div>
 			<%end%>
-			<% end %>
-		</div>
-		<% apply_fragment ['pitch_widget_', @pitch, current_user] do %>
-		<div class="blue_panel widget">
-			<%= render :partial => "widget" %>
-		</div>
-		<%end%>
-		<div class="blue_panel subscribe">
-			<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
-		</div>
-		<div id="supporters">
-			<% apply_fragment ['pitch_supporters_2_', @pitch] do %>
-			<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
-			<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
-			<div class="public_support">
-				<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
+			<div class="blue_panel subscribe">
+				<%= render :partial => 'subscriber_form', :locals => {:pitch => @pitch} %>
 			</div>
-			<div style="clear:both;"></div>
-			<div class="public_support">
-				<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+			<div id="supporters">
+				<% apply_fragment ['pitch_supporters_2_', @pitch] do %>
+				<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @pitch} %>
+				<%= render :partial => "group_supporters", :locals => {:news_item => @pitch} %>
+				<div class="public_support">
+					<%= render :partial => "cca_supporters", :locals => {:news_item => @pitch} %>
+				</div>
+				<div style="clear:both;"></div>
+				<div class="public_support">
+					<%= render :partial => "supporters", :locals => {:news_item => @pitch} %>
+				</div>
+				<%end%>
 			</div>
-			<%end%>
 		</div>
 	</div>
-</div>
+<%end%>

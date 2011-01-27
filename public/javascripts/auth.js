@@ -82,14 +82,16 @@ jQuery(document).ready(function($){
 					}
 					//renderUserHeader();
 					window.reload();
-					$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
+					
+					// not necessary when you reload the window...
+					/*$("li.start_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/pitches/new");
 					$("li.suggest_story a.authbox").removeClass("authbox").removeAttr("return_to").attr("href","/tips/new");
 					if(("#assignment_admin").length > 0)
 					{
 					}
 					if($("#flash").length > 0){
 						$("#flash").html("");
-					}
+					}*/
 				}
 			}
 		}); // end ajax form
