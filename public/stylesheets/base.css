@@ -37,12 +37,12 @@ code,pre{
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-family: Garamond;
+	font-family: Helvetica, Arial, Verdana, sans-serif;
     font-weight:400;
 	padding:10px 10px 10px 0px;
 	width:100%;
-	color:000;
-	text-transform:uppercase;
+	text-transform:none;
+	font-weight:bold;
 }
 
 
@@ -88,10 +88,12 @@ li#categories ul li{
 	
 }
 	
-p{
+p {
     padding:0 0 14px;
-    line-height:18px;
-	font-family: Arial, sans-serif;
+    font-family:Georgia, times, serif;
+	color:#000;
+	font-size:16px;
+	line-height:22px;
 	}
 
 small{

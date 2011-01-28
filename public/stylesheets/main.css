@@ -738,47 +738,73 @@
 	min-height:800px;
 }
 
-.fundBox{
+.fundBox, .smallFundBox{
 	background-color:#f6f8f6;
+}
+
+.fundBox {
 	padding:20px;
 	display:block;
 	height:170px;
+}
+
+.smallFundBox {
+	padding:10px;
 }
 
 .fundBox ul{
 	padding-top:30px;
 }
 
-.fundBox .progressIncomplete, .fundBox .progressComplete {
-	width:380px;
-	height:50px;
+.fundBox .progressIncomplete, .fundBox .progressComplete, .smallFundBox .progressIncomplete, .smallFundBox .progressComplete {
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border:3px solid #11363e;
 }
 
-.fundBox .progressIncomplete div{	
+.fundBox .progressIncomplete, .fundBox .progressComplete {
+	width:380px;
+	height:50px;
+}
+
+.smallFundBox .progressIncomplete, .smallFundBox .progressComplete {
+	width:250px;
+	height:35px;
+}
+
+.fundBox .progressIncomplete div, .smallFundBox .progressIncomplete div {	
 	background-image:url('/images/new/percentageBG2.png');
 	border-right: 1px solid #11363e;
 	height:100%;
 }
 
-.fundBox .progressComplete div{
+.fundBox .progressComplete div, .smallFundBox .progressComplete div {
 	background-image:url('/images/new/percentageBG.png');
 	height:100%;
 }
 
-.fundBox .progressIncomplete h5, .fundBox .progressComplete h5{
+.fundBox .progressIncomplete h5, .fundBox .progressComplete h5, .smallFundBox .progressIncomplete h5, .smallFundBox .progressComplete h5{
 	text-align:center;
 	color:#11363e;
 	font-family:Helvetica, arial, verdana, sans-serif;
 	font-weight:bold;
-	font-size:20px;
 	text-transform:uppercase;
-	line-height:32px;
 	width:100%`;
+}
+
+
+.fundBox .progressIncomplete h5, .fundBox .progressComplete h5{
+	font-size:20px;
+	line-height:32px;
 	margin-top:-50px;
 }
+
+.smallFundBox .progressIncomplete h5, .smallFundBox .progressComplete h5{
+	font-size:20px;
+	line-height:32px;
+	margin-top:-40px;
+}
+
 
 .donorsBox, .getInvolved{
 	padding:15px 20px 0px 20px;
@@ -831,48 +857,6 @@
 	color:#11363e;
 }
 
-/*.fundBox ul li.creditsButton,  .fundBox ul li.fundButton input{
-	list-style-type:none;
-	display:inline;
-	width:50%;
-	float:left;
-}
-
-.fundBox ul li.fundButton {
-	list-style-type:none;
-	display:inline;
-}
-
-.fundBox ul li.creditsButton a, .fundBox ul li.fundButton a, 
-	.fundBox ul li.creditsButton input, .fundBox ul li.fundButton input{
-	font-weight:bold;
-	color:#fff;
-	padding:15px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	text-decoration:none;
-	font-size:16px;
-	display:block;
-	text-align:center;
-	text-shadow: #000 1px 1px 0px;
-	line-height:30px;
-	margin:0px;
-	border:1px solid #ccc;
-	border-right:2px solid #666;
-	border-bottom:2px solid #666;
-	cursor:pointer;
-}
-
-.fundBox ul li.creditsButton a, .fundBox ul li.creditsButton input{
-	background-color:#11363e;
-	margin-right:10px;
-}
-
-.fundBox ul li.fundButton a, .fundBox ul li.fundButton input{
-	background-color:#59933e;
-	font-family:Helvetica, arial, verdana, sans-serif;
-}*/
-
 .getInvolved{
 	clear:both;
 	padding:20px;
@@ -918,6 +902,30 @@
 
 
 /*end pitch page*/
+
+/*pitch sub-pages (tabs)*/
+.pitchLeftContainer{
+	width:68%;
+	float:left;
+	border-right:1px solid #ccc;
+	padding-right:30px;
+}
+
+.pitchLeftContainer ul{
+	margin-left:40px;
+	font-family:Georgia, times, serif;
+	color:#000;
+	font-size:16px;
+	line-height:22px;
+	padding:0 0 14px;
+}
+
+.pitchRightContainer{
+	width:28.5%;
+	float:right;
+}
+
+/*end pitch sub-pages*/
 
 
 /* Footer styles */

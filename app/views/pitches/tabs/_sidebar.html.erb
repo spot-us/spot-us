@@ -1,1 +1,8 @@
-<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+<div class="pitchRightContainer">
+	<div class="smallFundBox">
+		<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
+	</div>
+	<%= render :partial => "donors", :locals => { :pitch => @pitch }%>
+	<%= render :partial => "get_involved"%>
+</div>
