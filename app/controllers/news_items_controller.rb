@@ -5,26 +5,20 @@ class NewsItemsController < ApplicationController
   # before_filter :select_tab, :only => [:index, :search]
 
   def index
-    @channels = Channel.by_network(current_network)
-    @network = current_network
-    @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil
-    @full = (params[:length]=='full')
-    get_filter
     respond_to do |format|
       format.html do
-        get_news_items
+        get_items
       end
       format.xml do
         @ids_only = params[:id_list].to_s=='true'
-        get_news_items
+        get_items
       end
       format.rss do
-        get_news_items(10)
+        get_items(10)
         render :layout => false
       end
     end
   end
-  
   
   def sort_options
     render :text => options_for_sorting(
@@ -54,19 +48,20 @@ class NewsItemsController < ApplicationController
 
   protected
 
-  def get_news_items(limit=nil)
-    @requested_page = params[:page] || 1
-    @topic_id = params[:topic_id] || -1                # for simplicity for the API
-    @grouping_id = params[:grouping_id] || -1           # for simplicity for the API
-    @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit)
+  def get_items(limit=nil)
+    @requested_page = params[:page] || 1                                          # allow pagination
+    @topic_id = params[:topic_id] || -1                                           # for simplicity for the API
+    @grouping_id = params[:grouping_id] || -1                                     # for simplicity for the API
+    @channels = Channel.by_network(current_network)                               # get the channels
+    @network = current_network                                                    # get the network
+    @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
+    @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
+    @items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) if @filter!='updates'
+    @items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>10) if @filter=='updates'
   end
 
   def load_networks
     @networks = Network.all
-  end
-  
-  def get_filter
-    @filter = params[:filter] ? params[:filter] : 'unfunded'
   end
   
 end
