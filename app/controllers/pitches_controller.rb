@@ -17,7 +17,8 @@ class PitchesController < ApplicationController
   end
   
   def blog_posts
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     respond_to do |format|
       format.html do
         redirect_to "#{pitch_url(pitch)}/posts"
@@ -30,45 +31,49 @@ class PitchesController < ApplicationController
   end
   
   def reset_funding
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     pitch.current_funding = pitch.total_amount_donated.to_f
     pitch.save
     redirect_to :back
   end
   
   def show
-    @pitch = find_resource
-    @tab = params[:tab] || ""
+    @pitch = Pitch.find_by_id(params[:id])
+    @pitch = Pitch.find_by_id(params[:pitch_id]) unless @pitch
+    @filter = params[:filter] || ""
     respond_to do |format|
       format.html do
-        if !@tab.blank? && params[:item_id]
-          @item = @pitch.send(@tab).find_by_id(params[:item_id])
-          redirect_to pitch_assignments_path(@pitch) if  @item.class.to_s == "Assignment" && @item.is_closed? && @item.user != current_user
-        end
+        #if !@tab.blank? && params[:item_id]
+        #  @item = @pitch.send(@tab).find_by_id(params[:item_id])
+        #  redirect_to pitch_assignments_path(@pitch) if  @item.class.to_s == "Assignment" && @item.is_closed? && @item.user != current_user
+        #end
       end
       format.xml do
-        if !@tab.blank? && params[:item_id]
-          @item = @pitch.send(@tab).find_by_id(params[:item_id])
-          redirect_to pitch_assignments_path(@pitch) if  @item.class.to_s == "Assignment" && @item.is_closed? && @item.user != current_user
-        end
+        #if !@tab.blank? && params[:item_id]
+        #  @item = @pitch.send(@tab).find_by_id(params[:item_id])
+        #  redirect_to pitch_assignments_path(@pitch) if @item.class.to_s == "Assignment" && @item.is_closed? && @item.user != current_user
+        #end
       end
-      unless @tab.blank?
-        format.rss do
-          render :layout => false
-        end
-      end
+      #unless @tab.blank?
+      #  format.rss do
+      #    render :layout => false
+      #  end
+      #end
     end
   end
   
   def apply_to_contribute
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     pitch.apply_to_contribute(current_user)
     flash[:success] = "You're signed up!  Thanks for applying to join the reporting team."
     redirect_to pitch_path(pitch)
   end
 
   def feature
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     if pitch.featureable_by?(current_user)
       pitch.feature!
     end
@@ -76,7 +81,8 @@ class PitchesController < ApplicationController
   end
 
   def unfeature
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     if pitch.featureable_by?(current_user)
       pitch.unfeature!
     end
@@ -84,26 +90,30 @@ class PitchesController < ApplicationController
   end
   
   def begin_story
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     redirect_to pitch_url(pitch) if !pitch || (current_user && current_user.id != pitch.user.id)
     pitch.create_associated_story 
     redirect_to edit_story_path(pitch.story)
   end
 
   def widget
-    @pitch = find_resource
+    @pitch = Pitch.find_by_id(params[:id])
+    @pitch = Pitch.find_by_id(params[:pitch_id]) unless @pitch
     render :layout => "widget"
   end
 
   def show_support
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     pitch.show_support!(current_user)
     flash[:success] = "Thanks for your support!"
     redirect_to pitch_path(pitch)
   end
 
   def fully_fund
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     if donation = pitch.fully_fund!(current_user)
       flash[:success] = "Your donation was successfully created"
       redirect_to edit_myspot_donations_amounts_path
@@ -114,7 +124,8 @@ class PitchesController < ApplicationController
   end
 
   def half_fund
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
     if donation = pitch.half_fund!(current_user)
       flash[:success] = "Your donation was successfully created"
       redirect_to edit_myspot_donations_amounts_path
@@ -137,7 +148,8 @@ class PitchesController < ApplicationController
 
   def can_edit?
 
-    pitch = find_resource
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
 
     if not pitch.editable_by?(current_user)
       #if pitch.user == current_user
@@ -169,8 +181,9 @@ class PitchesController < ApplicationController
   end
   
   def set_meta_tags
-      pitch = find_resource
-      html_meta_tags(pitch.short_description,pitch.keywords) if pitch
+    pitch = Pitch.find_by_id(params[:id])
+    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    html_meta_tags(pitch.short_description,pitch.keywords) if pitch
   end
   
   # def select_tab

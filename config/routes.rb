@@ -37,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :sections
   
   map.resources :pitches, :member => {:begin_story => :get, :feature => :get, :unfeature => :get, :half_fund => :put, :fully_fund => :put, :show_support => :put, :apply_to_contribute => :get, :assign_fact_checker => :put, :blog_posts => :get, :reset_funding => :get} do |pitch|
+    pitch.connect ":filter", :controller => "pitches", :action => "show", :requirements => { :tab => /summary|story|updates|discussion|assignments|donors|details/  }
     pitch.resources :posts, :except => [:index, :show]
     pitch.resources :comments, :except => [:index, :show]
     pitch.resources :assignments, :except => [:index, :show], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
