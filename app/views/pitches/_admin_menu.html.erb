@@ -3,37 +3,34 @@
 		<%if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
 			<%if pitch.approvable_by?(current_user)%>
 				<%if pitch.unapproved?%>
-					<%= link_to image_tag("approve.gif"), approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
+					<%= link_to "Apporove", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
 				<%elsif pitch.active?%>
-					<%= link_to image_tag("unapprove.gif"), unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"%>
+					<%= link_to "Unapprove", unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"%>
 				<%end%>
 			<%end%>
 			<%if pitch.editable_by?(current_user)%>
-				<%= link_to image_tag("edit_this_pitch_b.png"), edit_pitch_path(pitch), :title => "Edit This Pitch"%>
+				<%= link_to "Edit this pitch", edit_pitch_path(pitch), :title => "Edit This Pitch"%>
 			<%end%>
 			<%if pitch.featureable_by?(current_user)%>
 				<%if pitch.featured?%>
-					<%= link_to image_tag('un-feature.gif'), unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
+					<%= link_to "Feature", unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
 				<%else%>
-					<%= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
+					<%= link_to "Unfeature", feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
 				<%end%>
 			<%end%>
 			<%if pitch.postable_by?(current_user)%>
-				<%= link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"%>
+				<%= link_to "Write a story update", new_pitch_post_path(pitch), :title => "Make Blog Post"%>
 			<%end%>
 			<%if pitch.assignable_by?(current_user)%>
-				<%= link_to image_tag('make_assignment.gif'), new_pitch_assignment_path(pitch), :title => "Make Assignment"%>
+				<%= link_to "Create an assignment", new_pitch_assignment_path(pitch), :title => "Make Assignment"%>
 			<%end%>
 		<%end%>
-		<%if pitch.story%>
-			<%= link_to image_tag('go_to_story.gif'), story_path(pitch.story), :title => "Go To Story"%>
-		<%end%>
 		<%if (current_user == pitch.user && !pitch.story)%>
-			<%= link_to image_tag('report.gif'), begin_story_pitch_path(pitch), :title => "begin your story draft"%>
+			<%= link_to "Create the story", begin_story_pitch_path(pitch), :title => "begin your story draft"%>
 		<%end%>
 		<%if (!pitch.fully_funded? && current_user == pitch.user)%>
-			<%= link_to image_tag('accept_donations.gif'), accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"%>
-			<%= link_to image_tag('delete.png'), pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"%>
+			<%= link_to "Accept donations", accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"%>
+			<%= link_to "Delete", pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"%>
 		<%end%>
 		<%if current_user.admin?%>
 			<h3>Public Support</h3>
