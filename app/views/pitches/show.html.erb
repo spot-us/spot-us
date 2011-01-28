@@ -1,7 +1,7 @@
 <%= render :partial => "pitch_head" %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 <ul class="tabs">
-	<li <%if @filter=='summary'%>class="current"<%end%>><a href="/unfunded">Summary</a></li>
+	<li <%if @filter=='summary' || @filter.blank?%>class="current"<%end%>><a href="/unfunded">Summary</a></li>
 	<li <%if @filter=='story'%>class="current" style="display:none;"<%end%>><a href="/published">Story</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 	<li <%if @filter=='discussion'%>class="current"<%end%>><a href="/unfunded">Discussion</a></li>
@@ -19,17 +19,17 @@
 <div class="pitchContainer">
 	<div class="summaryContent">
 		<% if !@pitch.video_embed.blank? %>
-			<div class="video_container">
+			<div class="videoContainer">
 				<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
 			</div>
 		<% end %>
-		<div class="description_tab tab_panel clearfix">
+		<div class="descriptionContainer">
 			<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
-			<div class="short_description">
+			<div class="shortDescription">
 				<%= transform_embed_code(@pitch.short_description, 520, 320) %>
 			</div>
 			<% unless @pitch.extended_description.blank? %>
-				<div class="extended_description">
+				<div class="extendedDescription">
 					<h4>How will it help?</h4>
 					<%= @pitch.extended_description %>
 				</div>
