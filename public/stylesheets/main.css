@@ -511,10 +511,12 @@
 	line-height:14px;
 	margin:0px 0px 5px 0px;
 	width:40%;
-	border:0px;
 	list-style-type:none;
 	display:inline;
 	text-align:center;
+	border: 1px solid #ddd;
+	border-right:2px solid #666;
+	border-bottom:2px solid #666;
 }
 
 .donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
@@ -528,6 +530,12 @@
 .donateButtons li.fundButton form input, .donateButtons li.fundButton{
 	background-color:#7a9e53;
 	border:none;
+}
+
+.donateButtons li.fundButton{
+	border: 1px solid #ddd;
+	border-right:2px solid #666;
+	border-bottom:2px solid #666;
 }
 
 .donateButtons li.fundButton:hover, .donateButtons li.fundButton form input:hover{
