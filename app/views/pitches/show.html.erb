@@ -2,7 +2,9 @@
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 <ul class="tabs">
 	<li <%if @filter=='summary' || @filter.blank?%>class="current"<%end%>><a href="/unfunded">Summary</a></li>
-	<li <%if @filter=='story'%>class="current" style="display:none;"<%end%>><a href="/published">Story</a></li>
+	<%if @pitch.story && @pitch.story.published?%>
+		<li <%if @filter=='story'%>class="current"<%end%>><a href="/published">Story</a></li>
+	<%end%>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 	<li <%if @filter=='discussion'%>class="current"<%end%>><a href="/unfunded">Discussion</a></li>
 	<li <%if @filter=='assignments'%>class="current"<%end%>><a href="/published">Assignments</a></li>
