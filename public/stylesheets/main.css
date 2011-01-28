@@ -927,8 +927,7 @@
 .pitchLeftContainer{
 	width:68%;
 	float:left;
-	border-right:1px solid #ccc;
-	padding-right:30px;
+	margin-right:30px;
 }
 
 .pitchLeftContainer ul{
@@ -942,6 +941,7 @@
 
 .pitchRightContainer{
 	width:28.5%;
+	border-left:1px solid #ccc;
 	float:right;
 }
 
