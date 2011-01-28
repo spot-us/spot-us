@@ -554,7 +554,8 @@
 
 	/*button styles only for list (story grid) views*/
 
-.storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton{
+.storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton,
+.smallFundBox .donateButtons li.fundButton, .smallFundBox .donateButtons li.creditsButton{
 	padding:5px 10px;
 }
 
@@ -564,11 +565,11 @@
 	font-size:12px;
 }
 
-.storyGrid .donateButtons li.fundButton{
+.storyGrid .donateButtons li.fundButton, .smallFundBox .donateButtons li.fundButton{
 	margin-left:2px;
 }
 
-.storyGrid .donateButtons li.creditsButton{
+.storyGrid .donateButtons li.creditsButton, .smallFundBox .donateButtons li.creditsButton{
 	margin-right:2px;
 }
 	/*button styles only for pitch (fund box) views*/
@@ -750,6 +751,11 @@
 
 .smallFundBox {
 	padding:10px;
+	height:120px;
+}
+
+.smallFundBox .donateButtons{
+	margin-top:20px;
 }
 
 .fundBox ul{
@@ -760,6 +766,7 @@
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border:3px solid #11363e;
+	background-color:#fff;
 }
 
 .fundBox .progressIncomplete, .fundBox .progressComplete {
