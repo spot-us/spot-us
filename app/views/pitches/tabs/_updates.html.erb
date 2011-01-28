@@ -1,12 +1,22 @@
 <div class="pitchLeftContainer">
 	<h2>Updates</h2>
-	<% apply_fragment ['post_', post] do %>
-		<li>
-			<%=image_tag post.blog_image_display(:medium), {:alt => h(post.title)}%>
-			<h3><%=link_to post.title[0..30], pitch_post_path(post.pitch, post)%></h3>
-			<div><%=pitch_date(post.created_at)%> by <%=link_to post.user, profile_path(post.user)%></div>
-			<div>Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></div>
-		</li>
-	<%end%>
+	<div class="updateContainer">
+		<% if @pitch.posts.any? %>
+			<% @pitch.posts.each do |post| %>
+				<% apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
+				<li>	
+					<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
+					<span><%= link_to post.user.full_name, profile_path(post.user) %> | <%= pitch_date(post.created_at) %></span>
+					<p><%= truncate_words(strip_html(post.body), 30) %></p>
+					<%= link_to "read &rarr;", pitch_post_path(@pitch, post) %></li>
+				<% end %>
+			<% end %>
+
+		<% else %>
+			<p>
+				<em>This story has no updates yet.</em>
+			</p>
+		<% end %>
+	</div>
 </div>
 <%=render :partial => "pitches/tabs/sidebar"%>
