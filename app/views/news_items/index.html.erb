@@ -4,48 +4,71 @@
 
 <% @title = "Spot.us - Fund A Story" %>
 
-<div id="browse_stories">
-	<div id="browsing_header" class="clearfix">
-		<%= link_to "Pitches", "/stories/unfunded", :class => "blue_button" + active_button("pitches") %>
-		<%= link_to "Stories", "/stories/published", :class => "blue_button" + active_button("stories") %>
-		<%= link_to "Tips", "/stories/suggested", :class => "blue_button" + active_button("tips") %>
-		<%= link_to "Topics", "/stories/unfunded/" + Topic.first.seo_name, :class => "blue_button" + active_button("topics") %>
-		<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
-	</div>
-	<div id="sub_nav" class="clearfix">
-		<%= channels_filter %>
-		<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
-	</div>
-	<%if @topic && @topic.description && !@topic.description.blank?%>
-		<div id="topic_description" class="clearfix">
-			<%= image_tag @topic.featured_image.url(:thumb) %>
-			<%= @topic.description%>
-		</div>
-	<%end%>
-	<div id="story_listing">
-		
-		<%= render :partial => "shared/lists", 
-			:locals => {:items => @news_items, :no_items_message => "There were no results for your search.  Try different search terms."} %>
-			
-		
-	</div>
-</div>
-
-<ul class="socialHelpButtons">
-	<li>
-		<%= render :partial => "/shared/connect_buttons", :locals => { :show_header => true } %>
-	</li>
-	<li class="howTo">
-		<ul>
-			<li class="sectionHeader">how to</li>
-			<li><a href="" id="help_to-support-reporting"><%= image_tag("/images/new_design/support_reporting.png")%></a></li>
-			<li><a href="" id="help_to-start-a-story"><%= image_tag("/images/new_design/start_a_story.png") %></a></li>
-			<li><a href="" id="help_as-a-news-publisher"><%= image_tag("/images/new_design/news_publisher.png") %></a></li>
-		</ul>
-	</li>
+<ul class="tabs">
+	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/stories/unfunded">Unfunded</a></li>
+	<li <%if @filter=='published'%>class="current"<%end%>><a href="/stories/published">Published</a></li>
+	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/stories/updates">Updates</a></li>
 </ul>
 
+<div class="subFilterContainer">
+	<%= channels_filter %>
+	<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
+</div>
+<%= render :partial => "shared/lists", :locals => {:items => @items} %>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<%if false%>
+	<div id="browse_stories">
+		<div id="browsing_header" class="clearfix">
+			<%= link_to "Pitches", "/stories/unfunded", :class => "blue_button" + active_button("pitches") %>
+			<%= link_to "Stories", "/stories/published", :class => "blue_button" + active_button("stories") %>
+			<%= link_to "Tips", "/stories/suggested", :class => "blue_button" + active_button("tips") %>
+			<%= link_to "Topics", "/stories/unfunded/" + Topic.first.seo_name, :class => "blue_button" + active_button("topics") %>
+			<%= link_to image_tag("/images/new_design/rss_16.png"), "/stories/#{@filter}.rss", :class => "rss_button" %>
+		</div>
+		<div id="sub_nav" class="clearfix">
+			<%= channels_filter %>
+			<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
+		</div>
+		<%if @topic && @topic.description && !@topic.description.blank?%>
+			<div id="topic_description" class="clearfix">
+				<%= image_tag @topic.featured_image.url(:thumb) %>
+				<%= @topic.description%>
+			</div>
+		<%end%>
+		<div id="story_listing">
+		
+			<%= render :partial => "shared/lists", 
+				:locals => {:items => @news_items, :no_items_message => "There were no results for your search.  Try different search terms."} %>
+			
+		
+		</div>
+	</div>
+
+	<ul class="socialHelpButtons">
+		<li>
+			<%= render :partial => "/shared/connect_buttons", :locals => { :show_header => true } %>
+		</li>
+		<li class="howTo">
+			<ul>
+				<li class="sectionHeader">how to</li>
+				<li><a href="" id="help_to-support-reporting"><%= image_tag("/images/new_design/support_reporting.png")%></a></li>
+				<li><a href="" id="help_to-start-a-story"><%= image_tag("/images/new_design/start_a_story.png") %></a></li>
+				<li><a href="" id="help_as-a-news-publisher"><%= image_tag("/images/new_design/news_publisher.png") %></a></li>
+			</ul>
+		</li>
+	</ul>
+<%end%>

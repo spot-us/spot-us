@@ -430,6 +430,19 @@
 
 /* end search container */
 
+.subFilterContainer{
+	width:100%;
+	top:-10px;
+	margin:0px 20px 10px 0px;
+	text-align:right;
+	clear:both;
+}
+
+.subFilterContainer strong, .subFilterContainer span {
+	margin-left:10px;
+	margin-right: 10px;
+}
+
 /*story grid styles*/
 .storyGrid {
 	margin: 0px auto;
