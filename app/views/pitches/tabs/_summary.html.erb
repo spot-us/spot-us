@@ -19,26 +19,34 @@
 </div>
 <div class="summarySidebar">
 	<div class="fundBox">
-		<%unless @pitch.fully_funded?%>
-			<div class="progressIncomplete">
-				<div style="width: <%=@pitch.funding_in_percentage%>%;">&nbsp;</div>
-				<h5><%=@pitch.funding_in_percentage%>% funded</h5>
-			</div>
-		<%else%>
-			<div class="progressComplete">
-				<h5>100% funded</h5>
-			</div>			
-		<%end%>
-		<%= due_date_in_words(@pitch.expiration_date) %>
+		<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
 	</div>
 	<%= render :partial => "donors", :locals => { :pitch => @pitch }%>
-	<ul class="getInvolved">
-		<h3>Get Involved</h3>
-		<li><h4>Donate Talent</h4></li>
-		<li>Can you take photos, help report, sift through documents and records, or contribute to reporting in some other way? If so, <a href="#">get in touch with the authors</a>.</li>
-	</ul>
+	<%= render :partial => "get_involved"%>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- OLD STUFF -->
 <%if false%>

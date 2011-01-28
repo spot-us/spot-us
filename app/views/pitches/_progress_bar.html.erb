@@ -1,0 +1,11 @@
+<%unless pitch.fully_funded?%>
+	<div class="progressIncomplete">
+		<div style="width: <%=pitch.funding_in_percentage%>%;">&nbsp;</div>
+		<h5><%=pitch.funding_in_percentage%>% funded</h5>
+	</div>
+<%else%>
+	<div class="progressComplete">
+		<h5>100% funded</h5>
+	</div>			
+<%end%>
+<%= due_date_in_words(pitch.expiration_date) %>
