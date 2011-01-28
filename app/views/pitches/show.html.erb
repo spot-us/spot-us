@@ -22,7 +22,7 @@
 
 <div class="pitchContainer">
 	<%if @filter=='summary' || @filter.blank?%>
-		<%=render :partial=>'main' %>
+		<%=render :partial=>'pitches/tabs/summary' %>
 	<%elsif @filter=='story'%>
 		<%=render :partial=>'pitches/tabs/story' %>
 	<%elsif @filter=='updates'%>
