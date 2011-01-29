@@ -924,7 +924,7 @@
 /*end pitch page*/
 
 /*pitch sub-pages (tabs)*/
-.pitchLeftContainer{
+.pitchLeftContainer, .discussionContainer{
 	width:68%;
 	float:left;
 	margin-right:30px;
@@ -945,8 +945,54 @@
 	float:right;
 }
 
+	/*discussion styles*/
+.discussionContainer ul{
+	list-style-type:none;
+}
+
+.discussionContainer ul li{
+	border-bottom:1px dotted #ccc;
+	list-style-type:none;
+	padding:20px 0px 10px 0px;
+}
+
+.discussionContainer ul li p {
+	clear:both;
+	margin-left:60px;
+}
+
+.discussionContainer ul li img{
+	float:left;
+	width:40px;
+	height:40px;
+}
+
+.discussionContainer .date{
+	float:right;
+}
+
+.commentName{
+	width:500px;
+}
+
+.discussionContainer ul li div.commentName a{
+	text-decoration:none;
+	color:#3b686e;
+	font-weight:bold;
+	font-size:15px;
+	margin-left:20px;
+}
+
 /*end pitch sub-pages*/
 
+/*post comment*/
+
+.postComment input, .postComment textarea{
+	width:400px;
+	margin-left:50px;
+}
+
+/*end post comment*/
 
 /* Footer styles */
 

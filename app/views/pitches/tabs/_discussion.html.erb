@@ -1,1 +1,28 @@
-<%=render :partial => "pitches/tabs/sidebar"%>
+<div class="discussionContainer">
+	<h2>Discussion</h2>
+	<% if !@pitch.comments.any? %>
+	<p>There are no comments yet, be the first!</p>
+	<% else %>
+	<% @pitch.comments.each do |comment| %>
+	<% apply_fragment ['pitch_comments_alt_', @pitch, comment] do%>
+	<a name="<%=comment.id%>"/>
+		<ul>
+			<li>
+				<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
+				<div class="date"><%= medium_date(comment.created_at) %></div>
+				<div class="commentName"><%= link_to comment.user.full_name, profile_path(comment.user) %></div>
+				<p><%= comment.body %></p>
+			</li>
+		</ul>
+		<% end %>	
+		<% end %>
+		<% end %>
+		<div class="postComment">
+			<h3>Add to this discussion</h3>
+			<% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+				<%= render :partial => 'comments/form', :locals => {:f => f} %>
+				<% end %>	
+		</div>
+	</div>
+</div>
+	<%=render :partial => "pitches/tabs/sidebar"%>
