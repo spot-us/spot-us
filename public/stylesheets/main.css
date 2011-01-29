@@ -924,7 +924,7 @@
 /*end pitch page*/
 
 /*pitch sub-pages (tabs)*/
-.pitchLeftContainer, .discussionContainer{
+.pitchLeftContainer, .discussionContainer, .updateContainer{
 	width:68%;
 	float:left;
 	margin-right:30px;
@@ -984,6 +984,42 @@
 }
 
 /*end pitch sub-pages*/
+
+/*updates container*/
+
+.updateContainer li{
+	list-style-type:None;
+	border-bottom:1px dotted #ccc;
+	padding:0px 0px 10px 0px;
+	margin-bottom:20px;
+}
+
+.updateContainer h2 a{
+	text-decoration:none;
+	color:#24454f;
+}
+
+.updateContainer .dateCircle{
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	height:40px;
+	width:40px;
+	color:#fff;
+	background-color:#24454f;
+	margin-left:-70px;
+	margin-top:10px;
+	float:left;
+	text-align:center;
+	padding:5px;
+	font-weight:bold;
+}
+
+.updateContainer .dateCircle span{
+	position:relative;
+	top:10px;
+}
+
+/*end updates container*/
 
 /*post comment*/
 
