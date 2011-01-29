@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   resources_controller_for :assignment
   before_filter :login_required, :except => [:show, :index]
-
+  before_filter :select_tab
 
   response_for :create do |format|
     
@@ -126,4 +126,9 @@ class AssignmentsController < ApplicationController
   # def authorized?
   #   current_user && enclosing_resource.assignable_by?(current_user)
   # end
+  
+  def select_tab
+    @tab = "assignments"
+  end
+  
 end
