@@ -1,15 +1,15 @@
 <%= render :partial => "pitch_head" %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
 <ul class="tabs">
-	<li <%if @filter=='summary' || @filter.blank?%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>">Summary</a></li>
+	<li <%if @tab=='summary' || @tab.blank?%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>">Summary</a></li>
 	<%if @pitch.story && @pitch.story.published?%>
-		<li <%if @filter=='story'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/published">Story</a></li>
+		<li <%if @tab=='story'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/published">Story</a></li>
 	<%end%>
-	<li <%if @filter=='updates'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/updates">Updates</a></li>
-	<li <%if @filter=='discussion'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/discussion">Discussion</a></li>
-	<li <%if @filter=='assignments'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/assignments">Assignments</a></li>
-	<li <%if @filter=='donors'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/donors">Donors</a></li>
-	<li <%if @filter=='details'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/details">Details</a></li>
+	<li <%if @tab=='updates'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/updates">Updates</a></li>
+	<li <%if @tab=='discussion'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/discussion">Discussion</a></li>
+	<li <%if @tab=='assignments'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/assignments">Assignments</a></li>
+	<li <%if @tab=='donors'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/donors">Donors</a></li>
+	<li <%if @tab=='details'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/details">Details</a></li>
 </ul>
 
 <% if @subscriber && @subscriber.errors.any? %>
@@ -21,19 +21,19 @@
 <%#=render :partial => "admin_menu"%>
 
 <div class="pitchContainer">
-	<%if @filter=='summary' || @filter.blank?%>
+	<%if @tab=='summary' || @tab.blank?%>
 		<%=render :partial=>'pitches/tabs/summary' %>
-	<%elsif @filter=='story'%>
+	<%elsif @tab=='story'%>
 		<%=render :partial=>'pitches/tabs/story' %>
-	<%elsif @filter=='updates'%>
+	<%elsif @tab=='updates'%>
 		<%=render :partial=>'pitches/tabs/updates' %>
-	<%elsif @filter=='discussion'%>
+	<%elsif @tab=='discussion'%>
 		<%=render :partial=>'pitches/tabs/discussion' %>
-	<%elsif @filter=='assignments'%>
+	<%elsif @tab=='assignments'%>
 		<%=render :partial=>'pitches/tabs/assignments' %>
-	<%elsif @filter=='donors'%>
+	<%elsif @tab=='donors'%>
 		<%=render :partial=>'pitches/tabs/donors' %>
-	<%elsif @filter=='details'%>
+	<%elsif @tab=='details'%>
 		<%=render :partial=>'pitches/tabs/details' %>
 	<%end%>
 </div>

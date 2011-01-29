@@ -17,8 +17,7 @@ class PitchesController < ApplicationController
   end
   
   def blog_posts
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     respond_to do |format|
       format.html do
         redirect_to "#{pitch_url(pitch)}/posts"
@@ -31,17 +30,15 @@ class PitchesController < ApplicationController
   end
   
   def reset_funding
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     pitch.current_funding = pitch.total_amount_donated.to_f
     pitch.save
     redirect_to :back
   end
   
   def show
-    @pitch = Pitch.find_by_id(params[:id])
-    @pitch = Pitch.find_by_id(params[:pitch_id]) unless @pitch
-    @filter = params[:filter] || ""
+    @pitch = get_pitch
+    @tab = params[:tab] || ""
     respond_to do |format|
       format.html do
         #if !@tab.blank? && params[:item_id]
@@ -64,16 +61,14 @@ class PitchesController < ApplicationController
   end
   
   def apply_to_contribute
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     pitch.apply_to_contribute(current_user)
     flash[:success] = "You're signed up!  Thanks for applying to join the reporting team."
     redirect_to pitch_path(pitch)
   end
 
   def feature
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     if pitch.featureable_by?(current_user)
       pitch.feature!
     end
@@ -81,8 +76,7 @@ class PitchesController < ApplicationController
   end
 
   def unfeature
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     if pitch.featureable_by?(current_user)
       pitch.unfeature!
     end
@@ -90,30 +84,26 @@ class PitchesController < ApplicationController
   end
   
   def begin_story
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     redirect_to pitch_url(pitch) if !pitch || (current_user && current_user.id != pitch.user.id)
     pitch.create_associated_story 
     redirect_to edit_story_path(pitch.story)
   end
 
   def widget
-    @pitch = Pitch.find_by_id(params[:id])
-    @pitch = Pitch.find_by_id(params[:pitch_id]) unless @pitch
+    @pitch = get_pitch
     render :layout => "widget"
   end
 
   def show_support
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     pitch.show_support!(current_user)
     flash[:success] = "Thanks for your support!"
     redirect_to pitch_path(pitch)
   end
 
   def fully_fund
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     if donation = pitch.fully_fund!(current_user)
       flash[:success] = "Your donation was successfully created"
       redirect_to edit_myspot_donations_amounts_path
@@ -124,8 +114,7 @@ class PitchesController < ApplicationController
   end
 
   def half_fund
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     if donation = pitch.half_fund!(current_user)
       flash[:success] = "Your donation was successfully created"
       redirect_to edit_myspot_donations_amounts_path
@@ -148,8 +137,7 @@ class PitchesController < ApplicationController
 
   def can_edit?
 
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
 
     if not pitch.editable_by?(current_user)
       #if pitch.user == current_user
@@ -181,8 +169,7 @@ class PitchesController < ApplicationController
   end
   
   def set_meta_tags
-    pitch = Pitch.find_by_id(params[:id])
-    pitch = Pitch.find_by_id(params[:pitch_id]) unless pitch
+    pitch = get_pitch
     html_meta_tags(pitch.short_description,pitch.keywords) if pitch
   end
   
@@ -193,6 +180,13 @@ class PitchesController < ApplicationController
   def send_edited_notification
     pitch = find_resource
     pitch.send_edited_notification unless current_user.admin?
+  end
+  
+  def get_pitch
+    debugger
+    pitch = Pitch.find_by_id(params[:pitch_id])
+    pitch = Pitch.find_by_id(params[:id]) unless pitch
+    pitch
   end
 
 end
