@@ -6,12 +6,12 @@
 			<li><span>(<%=pitch.supporters.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
-			<%nrs = pitch.supporters.length>6 ? 6 : pitch.supporters.length%>
+			<%nrs = pitch.supporters.length>number_of_donors ? number_of_donors : pitch.supporters.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = pitch.supporters[ind]%>
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
-			<%unless nrs<6%>
+			<%unless nrs<number_of_donors%>
 				<span><a href="#">and <%=pitch.supporters.length-nrs%> others...</a></span>
 			<%end%>
 		</ul>
@@ -25,12 +25,12 @@
 			<li><span>(<%=pitch.donating_groups.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
-			<%nrs = pitch.donating_groups.length>6 ? 6 : pitch.donating_groups.length%>
+			<%nrs = pitch.donating_groups.length>number_of_donors ? number_of_donors : pitch.donating_groups.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = pitch.supporters[ind]%>
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
-			<%unless nrs<6%>
+			<%unless nrs<number_of_donors%>
 				<span><a href="#">and <%=pitch.donating_groups.length-nrs%> others...</a></span>
 			<%end%>
 		</ul>
@@ -47,12 +47,12 @@
 			<li><span>(<%=supporters.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
-			<%nrs = supporters.length>6 ? 6 : supporters.length%>
+			<%nrs = supporters.length>number_of_donors ? number_of_donors : supporters.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = supporters[ind]%>
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
-			<%unless nrs<6%>
+			<%unless nrs<number_of_donors%>
 				<span><a href="#">and <%=supporters.length-nrs%> others...</a></span>
 			<%end%>
 		</ul>
@@ -67,14 +67,14 @@
 			<li><span>(<%=donations.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
-			<%nrs = donations.length>6 ? 6 : donations.length%>
+			<%nrs = donations.length>number_of_donors ? number_of_donors : donations.length%>
 			<%nrs.times do |ind|%>
 				<%cca = donations[ind].cca%>
 				<%if cca && cca.user%>
 					<li><%=link_to image_tag(cca.user.photo.url(:thumb), {:alt => cca.user.full_name}), cca_path(cca)%></li>
 				<%end%>
 			<%end%>
-			<%unless nrs<6%>
+			<%unless nrs<number_of_donors%>
 				<span><a href="#">and <%=donations.length-nrs%> others...</a></span>
 			<%end%>
 		</ul>

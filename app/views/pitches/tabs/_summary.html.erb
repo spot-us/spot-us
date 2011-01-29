@@ -22,7 +22,7 @@
 		<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
 	</div>
-	<%= render :partial => "donors", :locals => { :pitch => @pitch }%>
+	<%= render :partial => "donors", :locals => { :pitch => @pitch, :number_of_donors => 6 }%>
 	<%= render :partial => "get_involved"%>
 </div>
 

@@ -6,13 +6,15 @@
 				<div class="dateCircle">
 					<span>1/2</span> <!-- #erik, I know we decided to get rid of the little date circle, but isn't it so cute? :) -->
 				</div>
-				<li>
-					<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
+				<ul>
+					<li>
+						<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
 					
-					<%=post.body%>
+						<%=post.body%>
 		
-					<span>Posted by <%= link_to post.user.full_name, profile_path(post.user) %> on <%= pitch_date(post.created_at) %></span>
-				</li>
+						<span>Posted by <%= link_to post.user.full_name, profile_path(post.user) %> on <%= pitch_date(post.created_at) %></span>
+					</li>
+				</ul>
 			<%# end %>
 		<% end %>
 
