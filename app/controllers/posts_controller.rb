@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   resources_controller_for :post
   before_filter :login_required, :except => [:show, :index]
+  before_filter :select_tab
 
   response_for :create do |format|
     format.html do
@@ -45,4 +46,9 @@ class PostsController < ApplicationController
   def authorized?
     current_user && enclosing_resource.postable_by?(current_user)
   end
+  
+  def select_tab
+    @tab = "updates"
+  end
+    
 end

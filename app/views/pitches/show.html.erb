@@ -1,16 +1,7 @@
 <%= render :partial => "pitch_head" %>
 <% @title = "Spot.us - Pitch: #{h @pitch.headline}" %>
-<ul class="tabs">
-	<li <%if @tab=='summary' || @tab.blank?%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>">Summary</a></li>
-	<%if @pitch.story && @pitch.story.published?%>
-		<li <%if @tab=='story'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/published">Story</a></li>
-	<%end%>
-	<li <%if @tab=='updates'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/updates">Updates</a></li>
-	<li <%if @tab=='discussion'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/discussion">Discussion</a></li>
-	<li <%if @tab=='assignments'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/assignments">Assignments</a></li>
-	<li <%if @tab=='donors'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/donors">Donors</a></li>
-	<li <%if @tab=='details'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/details">Details</a></li>
-</ul>
+
+<%=render :partial => "tabs"%>
 
 <% if @subscriber && @subscriber.errors.any? %>
 	<div class="error">

@@ -1,22 +1,11 @@
 <div class="updateContainer">
 	<% if @pitch.posts.any? %>
 	
-		<% @pitch.posts.each do |post| %>
-			<%# apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
-				<div class="dateCircle">
-					<span>1/2</span> <!-- #erik, I know we decided to get rid of the little date circle, but isn't it so cute? :) -->
-				</div>
-				<ul>
-					<li>
-						<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
-					
-						<%=post.body%>
-		
-						<span>Posted by <%= link_to post.user.full_name, profile_path(post.user) %> on <%= pitch_date(post.created_at) %></span>
-					</li>
-				</ul>
-			<%# end %>
-		<% end %>
+		<ul>
+			<% @pitch.posts.each do |post| %>
+				<%=render :partial => 'post_in_list', :locals => { :post => post }%>
+			<% end %>
+		</ul>
 
 	<% else %>
 		<p>

@@ -163,6 +163,10 @@ module ApplicationHelper
 	  dt.strftime("%d/%m/%y")
   end
   
+  def post_date(dt)
+	  "#{dt.day}/#{dt.month}/#{dt.year.to_s[2..3]}"
+  end
+  
   def report_an_error_date(dt)
 	  dt.strftime("%Y-%b-%d")
   end
