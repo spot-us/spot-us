@@ -13,7 +13,7 @@
 	</ul>
 </div>
 <div class="fundingStatus">
-	<%if @pitch.fully_funded? && @pitch..story && @pitch.story.published?%>
+	<%if @pitch.fully_funded? && @pitch.story && @pitch.story.published?%>
 		<h3 class="published">Published</h3>
 	<%elsif @pitch.fully_funded?%>
 		<h3 class="funded">Funded</h3>
