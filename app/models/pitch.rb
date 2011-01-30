@@ -268,6 +268,7 @@ class Pitch < NewsItem
   end
 
   def fully_funded?
+    return false if !total_amount_donated || !requested_amount
     return true if accepted? || funded?
     total_amount_donated >= requested_amount
   end
