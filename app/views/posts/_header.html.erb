@@ -3,7 +3,7 @@
 	<ul>
 		<li>	
 			<%= link_to image_tag(@pitch.user.photo(:thumb)), profile_path(@pitch.user) %>
-			By 	<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %>
+			By <%= link_to @pitch.user.full_name, profile_path(@pitch.user) %>
 		</li>
 		<% if @pitch.peer_reviewer %>
 			<li>
