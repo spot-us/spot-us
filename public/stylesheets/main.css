@@ -663,6 +663,16 @@
 	margin-top:0px;
 }
 
+.headlineByline h1 a{
+	text-decoration:none;
+	color:#000;
+}
+
+.headlineByline h1 a:hover{
+	color:#24454f;
+}
+
+
 .headlineByline ul li{
 	list-style-type:none;
 	display:inline;
@@ -1073,13 +1083,29 @@
 
 .postComment textarea{
 	width:100%;
-	height:100px;
+	height:100px˝;
 }
 
 .postComment input{
 	position:relative;
 	float:right;
 	margin:20px 0px	;
+}
+
+.submitButton{
+	background-color:#e3eeef;
+	padding:10px;
+	-webkit-border-radius:4px;
+	-moz-borer-radius:4px;
+	color:#24454f;
+	font-weight:bold;
+	font-family:helvetica, arial, sans-serif;
+	font-size:14px;
+}
+
+.submitButton:hover;{
+	background-color:#24454f;
+	color:#e3eeef;
 }
 
 /*end post comment*/
