@@ -8,9 +8,11 @@
 	<a name="<%=comment.id%>"/>
 		<ul>
 			<li>
-				<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
-				<div class="date"><%= medium_date(comment.created_at) %></div>
-				<div class="commentName"><%= link_to comment.user.full_name, profile_path(comment.user) %></div>
+				<div class="commentMetadata">
+					<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
+					<span class="date"><%= medium_date(comment.created_at) %></span>
+					<span><%= link_to comment.user.full_name, profile_path(comment.user) %></span>
+				</div>
 				<p><%= comment.body %></p>
 			</li>
 		</ul>

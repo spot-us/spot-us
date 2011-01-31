@@ -951,9 +951,8 @@
 }
 
 .discussionContainer ul li{
-	border-bottom:1px dotted #ccc;
 	list-style-type:none;
-	padding:20px 0px 10px 0px;
+	padding:0px 0px 20px 0px;
 }
 
 .discussionContainer ul li p {
@@ -965,17 +964,23 @@
 	float:left;
 	width:40px;
 	height:40px;
+	margin:-11px;
+	background-color:#fff;
 }
 
-.discussionContainer .date{
+.discussionContainer .commentMetadata{
+	background-color:#eee;
+	padding:20px;
+	border-top:1px dotted #ccc;
+	margin-bottom:10px;
+}
+
+.discussionContainer .commentMetadata .date{
 	float:right;
 }
 
-.commentName{
+.discussionContainer .commentMetadata span a{
 	width:500px;
-}
-
-.discussionContainer ul li div.commentName a{
 	text-decoration:none;
 	color:#3b686e;
 	font-weight:bold;
