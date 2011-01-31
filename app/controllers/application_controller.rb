@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_cca
   before_filter :set_default_html_meta_tags
   before_filter :social_notifier
+  before_filter :load_classes, :if => Proc.new { Rails.env.development? }
   
   after_filter  :async_posts
 
@@ -34,6 +35,13 @@ class ApplicationController < ActionController::Base
   helper_method :fb_session
   def fb_session
     session[:fb_session]
+  end
+  
+  def load_classes
+    Pitch
+    NewsItem
+    Story
+    User
   end
   
   def social_notifier
