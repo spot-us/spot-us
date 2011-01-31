@@ -924,7 +924,7 @@
 /*end pitch page*/
 
 /*pitch sub-pages (tabs)*/
-.pitchLeftContainer, .discussionContainer, .updateContainer{
+.pitchLeftContainer, .discussionContainer, .updateContainer, .donorsContainer{
 	width:68%;
 	float:left;
 	margin-right:30px;
@@ -985,6 +985,45 @@
 
 /*end pitch sub-pages*/
 
+.donorsContainer ul {
+	margin:0;
+	padding:0;
+}
+
+.donorsContainer ul li{
+	list-style-type:none;
+	width:45%; 
+	display:inline;
+	float:left;
+	border-bottom:1px dotted #ccc;
+	padding:0px 20px 20px 0px;
+	margin-top:10px;
+}
+
+.donorsContainer ul li img{
+	float:left;
+	margin:0px 10px 10px 0px;
+	position:relative;
+	top:10px;
+}
+
+.donorsContainer ul li h3{
+	font-size:24px;
+	color:#000;
+	font-weight:normal;
+	line-height:24px;
+}
+
+.donorsContainer ul li h4{
+	font-size:18px;
+	font-weight:bold;
+	color:#002a30;
+}
+
+.donorsContainer ul li span{
+	display:block;
+}
+
 /*updates container*/
 
 .updateContainer li{
@@ -1020,6 +1059,12 @@
 }
 
 /*end updates container*/
+
+/*donors container*/
+
+
+
+/*end donors container*/
 
 /*post comment*/
 
