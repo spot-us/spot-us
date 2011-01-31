@@ -551,9 +551,14 @@
 	border-bottom:2px solid #666;
 }
 
-.donateButtons li.fundButton:hover, .donateButtons li.fundButton form input:hover{
+.donateButtons li.fundButton:hover{
 	cursor:pointer;
 	background-color:#6e9149;
+}
+
+.donateButtons li.fundButton form input:hover{
+	background-color:transparent;
+	cursor:pointer;
 }
 
 .donateButtons li.creditsButton{
@@ -1095,19 +1100,18 @@
 }
 
 .submitButton{
-	background-color:#e3eeef;
+	background-color:#e15205;
+	color:#fff;
 	padding:10px;
 	-webkit-border-radius:4px;
 	-moz-borer-radius:4px;
-	color:#24454f;
 	font-weight:bold;
 	font-family:helvetica, arial, sans-serif;
 	font-size:14px;
 }
 
 .submitButton:hover;{
-	background-color:#24454f;
-	color:#e3eeef;
+	
 }
 
 /*end post comment*/
