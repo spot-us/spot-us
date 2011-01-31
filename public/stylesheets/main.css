@@ -345,7 +345,7 @@
 	text-decoration:none;
 	font-weight:bold;
 	line-height:44px;
-	text-shadow: #000 1px 1px 1px;
+	text-shadow: #000 1px 1px 0px;
 }
 
 .headerMenu li a:hover{
@@ -661,6 +661,7 @@
 	font-family:Helvetica, Arial, Verdana, sans-serif;
 	text-transform:none;
 	margin-top:0px;
+	text-shadow: white 1px 1px 0px;
 }
 
 .headlineByline h1 a{
@@ -712,6 +713,7 @@
 
 .fundingStatus h3.published, .fundingStatus h3.funded{
 	color:#54859f;
+	text-shadow: black 1px 1px 0px;
 }
 
 .fundingStatus h3.needsFunding{
