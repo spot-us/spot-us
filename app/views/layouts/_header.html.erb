@@ -26,7 +26,7 @@
 				<li><a href="#" rel='nofollow' id='hoverAnchorLearnMore'>Learn More</a></li>
 				<li class="menuSeparator">&nbsp;</li>
 				<%unless current_user%>
-					<li><a href="/user/new">Join</a> or <a href="/session/new">Login</a></li>
+					<li><a href="/user/new">Join</a> or <a href="/session/new">Log in</a></li>
 				<%else%>
 					<li class="menuSeparator">&nbsp;</li>
 					<li><%=link_to 'Logout', '/logout', {:class=>'logoutLink'}%></li>

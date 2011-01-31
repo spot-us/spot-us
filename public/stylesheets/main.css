@@ -345,7 +345,7 @@
 	text-decoration:none;
 	font-weight:bold;
 	line-height:44px;
-	text-shadow: #000 1px 1px 1px;
+	text-shadow: #000 1px 1px 0px;
 }
 
 .headerMenu li a:hover{
@@ -551,9 +551,14 @@
 	border-bottom:2px solid #666;
 }
 
-.donateButtons li.fundButton:hover, .donateButtons li.fundButton form input:hover{
+.donateButtons li.fundButton:hover{
 	cursor:pointer;
 	background-color:#6e9149;
+}
+
+.donateButtons li.fundButton form input:hover{
+	background-color:transparent;
+	cursor:pointer;
 }
 
 .donateButtons li.creditsButton{
@@ -661,6 +666,7 @@
 	font-family:Helvetica, Arial, Verdana, sans-serif;
 	text-transform:none;
 	margin-top:0px;
+	text-shadow: white 1px 1px 0px;
 }
 
 .headlineByline h1 a{
@@ -712,6 +718,7 @@
 
 .fundingStatus h3.published, .fundingStatus h3.funded{
 	color:#54859f;
+	text-shadow: black 1px 1px 0px;
 }
 
 .fundingStatus h3.needsFunding{
@@ -1093,19 +1100,18 @@
 }
 
 .submitButton{
-	background-color:#e3eeef;
+	background-color:#e15205;
+	color:#fff;
 	padding:10px;
 	-webkit-border-radius:4px;
 	-moz-borer-radius:4px;
-	color:#24454f;
 	font-weight:bold;
 	font-family:helvetica, arial, sans-serif;
 	font-size:14px;
 }
 
 .submitButton:hover;{
-	background-color:#24454f;
-	color:#e3eeef;
+	
 }
 
 /*end post comment*/
