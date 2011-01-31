@@ -1,6 +1,6 @@
 <%if @pitch.requested_amount%>
 	<div class="headlineByline">
-		<h1><%= h @pitch.headline %></h1>
+		<h1><%=link_to h @pitch.headline %><!--erik, this needs to link to the summary tab. help?--></h1>
 		<ul>
 			<li>	
 				<%= link_to image_tag(@pitch.user.photo(:thumb)), profile_path(@pitch.user) %>
