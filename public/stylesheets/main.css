@@ -842,14 +842,15 @@
 .smallFundBox .progressIncomplete h5, .smallFundBox .progressComplete h5{
 	font-size:20px;
 	line-height:32px;
-	margin-top:-40px;
+	margin-top:-42px;
+	font-size:18px;
 }
 
 
 .donorsBox, .getInvolved{
-	padding:15px 20px 0px 20px;
+	padding:10px 20px 0px 20px;
 	border-top:1px dotted #eee;
-	margin-top:20px;
+	margin-bottom:20px;
 	height:80px;
 }
 
@@ -899,7 +900,6 @@
 
 .getInvolved{
 	clear:both;
-	padding:20px;
 }
 
 .getInvolved li, .donorsBox li{
