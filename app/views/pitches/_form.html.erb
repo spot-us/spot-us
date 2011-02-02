@@ -114,7 +114,7 @@ jQuery(document).ready(function($){
 		</div>
 		<div class="row">
 			<% if @pitch.new_record? %>
-			<%= submit_tag "Create a Pitch", {:class => 'submitButton'} %>
+			<%= get_button("Create a Pitch") %>
 			<% else %>
 			<%= image_submit_tag image_path('save.png') %>
 			<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>

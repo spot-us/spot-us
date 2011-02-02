@@ -202,5 +202,9 @@ module ApplicationHelper
     names << "admin" if stylesheets.detect { |s| s =~ /(?:admin)/i }  
     "cache/#{names.join('_')}"
   end
+  
+  def get_button(button_text)
+    submit_tag button_text, {:class => 'submitButton'}
+  end  
 
 end
