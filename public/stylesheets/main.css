@@ -74,7 +74,7 @@
 }
 
 .introContainer a:hover{
-	color:#e15205;
+	color:#ea2d65;
 }
 
 .introContainer p{
@@ -101,7 +101,7 @@
 }
 
 .joinContainer a{
-	background-color:#e15205;
+	background-color:#ea2d65;
 	background-image:url('/images/new/joinBG.png');
 	background-repeat:repeat-x;
 	padding:8px 20px;
@@ -111,7 +111,7 @@
 	font-weight:bold;
 	text-decoration:none;
 	font-size:25px;
-	text-shadow: #e15205 1px 1px 1px;
+	text-shadow: #ea2d65 1px 1px 1px;
 }
 
 .joinContainer a:hover{
@@ -501,7 +501,7 @@
 }
 
 .storyGrid li h3 a:hover{
-	color:#e15205;
+	color:#ea2d65;
 }
 
 .storyGrid li form{
@@ -531,8 +531,8 @@
 	-moz-border-radius:3px;	
 	color:#fff;
 	line-height:14px;
-	margin:0px 0px 5px 0px;
-	width:40%;
+	margin:5px 0px 5px 0px;
+	width:39%;
 	list-style-type:none;
 	display:inline;
 	text-align:center;
@@ -1184,22 +1184,26 @@
 	padding-left:50px;
 }
 
-.formContainer .formBody .row{
-	display:block;
-	clear:both;
-	padding-bottom:30px;
-	width:980px;
+.formContainer .formBody .row {
+	clear: both;
+	display: block;
+	padding-bottom: 20px;
+	width: 980px;
 }
 
-.formContainer .formBody .row h2{
-	border-top:3px solid #ccc;
+.formContainer .formBody .row.top{
+	border-top:0px;
+	padding-top:0px;
+} 
+
+.formContainer .formBody h2{
 	margin:20px 0px 0px 0px;
 	padding:20px 0px;
-	color:#000;
+	color:#24454f;
 	display:block;
 }
 
-.formContainer .formBody .row h2.top{
+.formContainer .formBody h2.top{
 	border-top:0px;
 	margin:0px;
 }
@@ -1246,10 +1250,10 @@
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	margin-left:30px;
-	font-size:20px;
+	font-size:14px;
 	font-family:georgia;
 	line-height:24px;
-	padding:10px;
+	padding:5px;
 }
 
 
@@ -1354,6 +1358,10 @@
 	color:#fff;
 	line-height:16px;
 	text-decoration:none;
+}
+
+.footerNotes ul li a:hover{
+	color:#ccc;
 }
 
 .footerNotes ul li span{
