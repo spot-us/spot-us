@@ -283,6 +283,10 @@
 	color:red;
 }
 
+.loginMenu li{
+	color:#ccc;
+}
+
 .loginMenu li a{
 	color:#fff;
 	font-size:12px;
@@ -291,6 +295,11 @@
 	text-transform:uppercase;
 	margin:0;
 	padding-bottom:10px;	
+}
+
+
+.loginMenu li a:hover{
+	color:#e3eeef;	
 }
 
 .socialMenu{
@@ -1567,8 +1576,19 @@
 
 /* Leave in for hover control */
 .hoverContainer{
-	background:#f9f9f9;
+	background:#e3eeef;
 	border: 1px solid #666;
 	position:absolute;
 	z-index:1000;
+	-webkit-box-shadow: black 0px 0px 40px;
+}
+
+.hoverContainer li{
+	border-bottom:1px solid #ccc;
+	display:block;
+	padding:3px 0px;
+}
+
+.hoverContainer li a{
+	text-decoration:none;
 }
