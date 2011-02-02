@@ -42,6 +42,9 @@ class ApplicationController < ActionController::Base
     NewsItem
     Story
     User
+    Organization
+    Reporter
+    Citizen
   end
   
   def social_notifier

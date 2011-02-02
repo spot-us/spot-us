@@ -1099,22 +1099,204 @@
 	margin:20px 0px	;
 }
 
-.submitButton{
-	background-color:#e15205;
-	color:#fff;
+/*end post comment*/
+
+
+/*new form styles*/
+.formContainer{
+	margin-top:10px;
+	width:920px;
+}
+
+.profileSettings .formContainer {
+	width:900px;
+}
+
+.formContainer .formHeading, .comments .formHeading{
+	text-transform:capitalize;
+}
+
+.formContainer .formHeading h1, .comments .formHeading h1{
+	border-bottom:1px solid #ddd;
+	margin-bottom:5px;
+	padding-bottom:5px;
+}
+
+.formContainer .formDescription{
+	float:right;
+	font-size:11px;
+	width:20%;
+	margin: 10px 0px 10px 10px;
+}
+
+.formContainer .formDescription .required, .comments .formDescription .required{
+	font-size:12px;
+	border-bottom:1px dotted #ddd;
+	padding-bottom:15px;
+}
+
+.formContainer .formDescription .required span, .comments .formDescription .required span{
+	padding-right:3px;
+	font-weight:bold;
+	color:red;
+}
+
+.formContainer .formDescription .actionLinks{
+	text-transform:capitalize;
+	font-size:14px;
+}
+
+.formContainer .formBody, .comments .formBody{
+	float:left;
+	width:100%;
+}
+
+.comments .formBody h3{
+	background:none;
+	border:none;
+	border-bottom:1px solid #eee;
+}
+
+.formContainer .formBody .formErrors{
+	padding:10px;
+	border:1px solid #ddd;
+}
+
+.formContainer .formBody .formErrorHeading{
+	text-transform:uppercase;
+	background:none;
+	border:none;
+}
+
+.formContainer .formBody .formErrorsList{
+	padding-left:50px;
+}
+
+.formContainer .formBody .row{
+	display:block;
+	clear:both;
+	padding-bottom:30px;
+	width:980px;
+}
+
+.formContainer .formBody .row h2{
+	border-top:3px solid #ccc;
+	margin:20px 0px 0px 0px;
+	padding:20px 0px;
+	color:#000;
+	display:block;
+}
+
+.formContainer .formBody .row h2.top{
+	border-top:0px;
+	margin:0px;
+}
+
+.formContainer .formBody .row .heading{
+	background:none;
+	border:none;
+	border-bottom:1px solid #ddd;
+}
+
+.formContainer .formBody .row label{
+	clear:both;
+	display:block;
+	cursor:arrow;
+	font-weight:bold;
+	text-align: left;
+	float:left;
+	width:200px;
+	text-transform:capitalize;
+	font-size:15px;
+	color:#333;
+}
+
+.formContainer .formBody .row label .required {
+	color:#ea2d65!important;
+	float:left;
+	font-weight:bold;
+}
+
+.formContainer .formBody .row label .small{
+	float:left;
+	font-size:10px;
+	text-transform:uppercase;
+	color:#666;
+}
+
+.profileSettings .formContainer .formBody .row .label, .profileSettings .formContainer .formBody .row label .small{
+	width:150px;
+}
+
+.formContainer .formBody .row input, .formContainer .formBody .row textarea, .formContainer .formBody .row select{
+	width:350px;
+	border:1px solid #ccc;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	margin-left:30px;
+	font-size:20px;
+	font-family:georgia;
+	line-height:24px;
+	padding:10px;
+}
+
+
+.formContainer .formBody .row input#termsOfService, .formContainer .formBody .row input.normalCheckbox{
+	margin-top:3px;
+	width:20px;
+}
+
+.formContainer .formBody .row .sites{
+	margin-left:210px;
+}
+
+.formContainer .formBody .row .sites input{
+	display:inline;
+	width:20px;
+	padding:20px;
+}
+
+.formContainer .formBody .row .radioButton{
+	width:10px;
+}
+
+.formContainer .formBody .row .radioButtonText{
+	display:inline;
+	text-transform:capitalize;
+	padding-right:10px;
+	padding-left:5px;
+}
+
+
+.formContainer .formBody .row .submitButton{
 	padding:10px;
 	-webkit-border-radius:4px;
 	-moz-borer-radius:4px;
 	font-weight:bold;
 	font-family:helvetica, arial, sans-serif;
 	font-size:14px;
+	background-color:#ea2d65;
+	color:#fff;
+	width:200px;
+	margin:20px 0px 0px 230px;
+	clear:both;
 }
 
-.submitButton:hover;{
+.submitButton:hover{
 	
 }
 
-/*end post comment*/
+
+span.small.required{
+	margin-left:30px;
+}
+
+#toggleDivs{
+	text-decoration:underline;
+}
+
+/*end form styles*/
+
 
 /* Footer styles */
 

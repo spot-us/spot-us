@@ -21,9 +21,12 @@
 		<% end %>
 		<div class="postComment">
 			<h3>Add to this discussion</h3>
-			<% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
-				<%= render :partial => 'comments/form', :locals => {:f => f} %>
-				<% end %>	
+			<div class="formContainer">
+				<div class="formBody">
+					<% form_for [@pitch, Comment.new(:commentable => @pitch)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+						<%= render :partial => 'comments/form', :locals => {:f => f} %>
+						<% end %>
+			</div>
 		</div>
 	</div>
 </div>
