@@ -697,6 +697,9 @@
 	width:15px;
 	height:15px;
 	border:1px solid #ccc;
+	position:relative;
+	top:3px;
+	margin-right:10px;
 }
 
 .fundingStatus {
