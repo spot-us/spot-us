@@ -1,40 +1,44 @@
+<div class="formContainer">
 <% if @user && @user.errors.any? %>
-  <div class="error">
-    <%= error_messages_for :user %>
-  </div>
+<div class="error">
+	<%= error_messages_for :user %>
+</div>
 <% end %>
-<h3>Register for Spot.Us</h3>
+<h2>Register for Spot.Us</h2>
 <% form_for(:user, @user, :url => user_path, :html => {:class => 'register'}) do |f| %>
-    <div class="row">
-      <%= f.label :first_name, "Your First Name" %>
-      <%= f.text_field :first_name, :class => "text", :tabindex => 1 %>
-    </div>
-    <div class="row">
-      <%= f.label :last_name, "Your Last Name" %>
-      <%= f.text_field :last_name, :class => "text", :tabindex => 2 %>
-    </div>
-    <div class="row">
-      <%= f.label :password %>
-      <%= f.password_field :password, :class => "text", :tabindex => 3 %>
-    </div>
-    <div class="row">
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation, :class => "text", :tabindex => 4 %>
-    </div>
-    <div class="row">
-      <%= f.label :email, "Your E-mail Address" %>
-      <%= f.text_field :email, :class => "text", :tabindex => 5 %>
-    </div>
-    <div class="row">
-      <%= f.label :type, "I am a" %>
-      <%= f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]] %>
-    </div>
-    <div class="row">
-      <%= f.check_box :terms_of_service, {}, '1', '0' %>
-      <label>Accept the</label>
-      <%= link_to 'Terms of Service', page_path('terms') %>
-      <div>
-        <input type="image" src="/images/register.png" value="Register">
-      </div>
-    </div>
+<div class="formBody">
+	<div class="row">
+		<%= f.label :first_name, "Your First Name" %>
+		<%= f.text_field :first_name, :class => "text", :tabindex => 1 %>
+	</div>
+	<div class="row">
+		<%= f.label :last_name, "Your Last Name" %>
+		<%= f.text_field :last_name, :class => "text", :tabindex => 2 %>
+	</div>
+	<div class="row">
+		<%= f.label :password %>
+		<%= f.password_field :password, :class => "text", :tabindex => 3 %>
+	</div>
+	<div class="row">
+		<%= f.label :password_confirmation, "Confirm Password" %>
+		<%= f.password_field :password_confirmation, :class => "text", :tabindex => 4 %>
+	</div>
+	<div class="row">
+		<%= f.label :email, "Your E-mail Address" %>
+		<%= f.text_field :email, :class => "text", :tabindex => 5 %>
+	</div>
+	<div class="row">
+		<%= f.label :type, "I am a" %>
+		<%= f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]] %>
+	</div>
+	<div class="row">
+		<%= f.check_box :terms_of_service, {}, '1', '0' %>
+		<label>Accept the</label>
+		<%= link_to 'Terms of Service', page_path('terms') %>
+		<div>
+			<%= submit_tag "Register", {:class => 'submitButton'} %>
+		</div>
+	</div>
+</div>
+</div>
 <% end %>

@@ -1184,22 +1184,26 @@
 	padding-left:50px;
 }
 
-.formContainer .formBody .row{
-	display:block;
-	clear:both;
-	padding-bottom:30px;
-	width:980px;
+.formContainer .formBody .row {
+	clear: both;
+	display: block;
+	padding-bottom: 20px;
+	width: 980px;
 }
 
-.formContainer .formBody .row h2{
-	border-top:3px solid #ccc;
+.formContainer .formBody .row.top{
+	border-top:0px;
+	padding-top:0px;
+} 
+
+.formContainer .formBody h2{
 	margin:20px 0px 0px 0px;
 	padding:20px 0px;
-	color:#000;
+	color:#24454f;
 	display:block;
 }
 
-.formContainer .formBody .row h2.top{
+.formContainer .formBody h2.top{
 	border-top:0px;
 	margin:0px;
 }
@@ -1246,10 +1250,10 @@
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	margin-left:30px;
-	font-size:20px;
+	font-size:14px;
 	font-family:georgia;
 	line-height:24px;
-	padding:10px;
+	padding:5px;
 }
 
 

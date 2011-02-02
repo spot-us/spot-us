@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 <% form_for(@pitch, :html => { :multipart => true }) do |f| %>
 <div class="formContainer">
 	<div class="formBody">
-		<div class="row">
+		<div class="row top">
 			<h2 class="top">Basics</h2>
 			<%= f.label     :headline, "Your Pitch's Headline<br /><span class='small required'>Required</span>" %>
 			<%= f.text_area :headline, :rows => 2, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
@@ -32,13 +32,13 @@ jQuery(document).ready(function($){
 				<%= topic_check_boxes(@pitch) %>
 			</div>    
 		</div>
+		<h2>Qualifications</h2>
 		<div class="row">
-			<h2>Qualifications</h2>
 			<%= f.label :skills, "Do you have the skills/access to report this story? <br /><span class='small required'>Tell us who you are and why we should support you.</span>" %>
 			<%= ckeditor_textarea("pitch", "skills", :toolbar => 'Medium', :width => '683px', :height => '200px') %>
 		</div>
+		<h2>Costs &amp; Deliverables</h2>
 		<div class="row">
-			<h2>Costs &amp; Deliverables</h2>
 			<label>Requested Amount<br/>
 				<span class="small required">
 					<a href="" id="help_pricing-for-stories">Suggested pricings for work!</a>
@@ -66,8 +66,8 @@ jQuery(document).ready(function($){
 				<%= ckeditor_textarea("pitch", "delivery_description", :toolbar => 'Medium', :width => '683px', :height => '150px') %>
 			</div>
 		</div>
+		<h2>Media</h2>
 		<div class="row add_media">
-			<h2>Media</h2>
 			<label>Upload Media<br/>
 				<span class="small required">
 					Required: Upload A Featured Image
@@ -86,8 +86,8 @@ jQuery(document).ready(function($){
 		</div>
 
 		<!-- START OPTIONAL FIELDS -->
+		<h2>Optional</h2>
 		<div class="row optional">
-			<h2>Optional</h2>
 			<span id='toggleDivs'>Toggle here to hide/show the optional fields</span>  
 		</div>
 		<div class="row" id="toggle_div_how_will_it_help">

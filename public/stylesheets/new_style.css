@@ -500,20 +500,20 @@ ul.filter li div {width:180px;}
 ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.laurenmichell.com/spotus/images/filter-bg2.jpg);height:54px;background-repeat:no-repeat;
 			color: #ffffff;margin-bottom:0px;}*/
 
-#spotus_form {padding:20px;}
+/*#spotus_form {padding:20px;}*/
 #spotus_form select {font-size:20px;padding:5px;}
 #spotus_form label {float:left;width:200px;margin-right:25px;text-align:right;padding:5px;color:#555;}
 #spotus_form .users {margin:0 0 20px 235px;}
 #spotus_form .person_avatar {float:left;margin: 0 20px 10px 0;}
 .form label {float:left;width:160px;margin-right:25px;text-align:right;padding:0px;color:#555;font-size:.9em;}
-#spotus_form .row, .form .row {clear:both;margin-bottom: 20px;}
+/*#spotus_form .row, .form .row {clear:both;margin-bottom: 20px;}*/
 .form .row {margin-top:5px;}
 .row .form_topic_box {float:left;width:200px;margin:0 10px 3px 0;}
 .row .tip_topics {margin-left:235px;width:440px;}
 .row .profile_topics {margin-left:185px;width:440px;}
 .row .pitch_topics {width: 700px;margin-left:235px;}
 #spotus_form .row.media label {padding-top:0;}
-#spotus_form select {width:200px;}
+/*#spotus_form select {width:200px;}*/
 #spotus_form input, #spotus_form select, #spotus_form textarea {margin:0;font-family:Georgia, Times;color:#333;}
 #spotus_form textarea.gray_text {color:#999;}
 #spotus_form textarea {font-size:20px;padding:6px;width:670px;border:1px solid #777;}
