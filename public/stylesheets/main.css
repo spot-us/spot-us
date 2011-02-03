@@ -1199,7 +1199,7 @@
 .formContainer .formBody h2{
 	margin:20px 0px 0px 0px;
 	padding:20px 0px;
-	color:#24454f;
+	color:#000;
 	display:block;
 }
 
@@ -1219,7 +1219,7 @@
 	display:block;
 	cursor:arrow;
 	font-weight:bold;
-	text-align: left;
+	text-align: right;
 	float:left;
 	width:200px;
 	text-transform:capitalize;
@@ -1227,16 +1227,22 @@
 	color:#333;
 }
 
+.formContainer .formBody .row label a{
+	text-decoration:none;
+	color:#333;
+}
+
 .formContainer .formBody .row label .required {
-	color:#ea2d65!important;
+	color:red!important;
 	float:left;
 	font-weight:bold;
+	display:block;
+	width:100%;
 }
 
 .formContainer .formBody .row label .small{
 	float:left;
 	font-size:10px;
-	text-transform:uppercase;
 	color:#666;
 }
 
