@@ -26,17 +26,13 @@
 	<% if @cca %>
 		<% apply_fragment ['cca_detail_', @cca, params[:pitch_id]] do %>
 			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
-			<div id="survey_header">
-				<%= link_to "About Spot.Us Questionnaires", "#", :class=>"float-right", :id => "help_about-questionnaires" %>
-				<h2>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</h2>
-			</div>
-			<div id="survey_wrapper" class="clearfix">
+			<div class="surveyContainer" class="clearfix">
 				<div id="survey_info">
 					<%= render :partial => "fund_this" if params[:pitch_id]%>
 					<%= render :partial => "sponsor_info" %>
 				</div>
 
-				<div id="survey_main">
+				<div id="surveyContent">
 					<div id="survey_description">
 						<%= @cca.description %> 
 					</div>
@@ -49,15 +45,17 @@
 						</div>
 					<%end%>
 		<% end %> <!-- end of cached fragment --> 
-					<div id="q_header" <%if @cca.embed_code && @cca.length_of_video.to_i>0%>style="display:none;"<%end%>>Questionnaire</div>
-					<div id="survey_form_wrapper" <%if @cca.embed_code && @cca.length_of_video.to_i>0%>style="display:none;"<%end%>>
-						<% if current_user && @cca.survey_completed?(current_user) %>
+					<h2 <%if @cca.embed_code && @cca.length_of_video.to_i>0%>style="display:none;"<%end%>>Questionnaire</h2>
+					<div class="formContainer" <%if @cca.embed_code && @cca.length_of_video.to_i>0%>style="display:none;"<%end%>>
+					<div class="formBody">
+					<% if current_user && @cca.survey_completed?(current_user) %>
 							<h2>You have completed this survey. Thank you.</h2>
 						<% elsif @cca.is_maxed_out? %>
 							<h2>This survey has finished.</h2>
 						<% else %>
 							<%= render :partial=>'item' %>
 						<% end %>
+					</div>
 					</div>
 				</div>
 		</div>

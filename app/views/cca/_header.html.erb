@@ -1,3 +1,7 @@
-<div>
+<div style="width:500px; float:left">
 	<h1>CCA<%if @cca%>: <%= @cca.title %><%end%></h1>
+	<p>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</p>
+</div>
+<div class="joinContainer">
+	<%= link_to "About Spot.Us Questionnaires", "#", :id => "help_about-questionnaires" %>
 </div>
