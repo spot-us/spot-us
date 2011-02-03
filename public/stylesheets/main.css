@@ -1117,11 +1117,7 @@
 /*new form styles*/
 .formContainer{
 	margin-top:10px;
-	width:920px;
-}
-
-.profileSettings .formContainer {
-	width:900px;
+	width:500px;
 }
 
 .formContainer .formHeading, .comments .formHeading{
@@ -1188,7 +1184,6 @@
 	clear: both;
 	display: block;
 	padding-bottom: 20px;
-	width: 980px;
 }
 
 .formContainer .formBody .row.top{
@@ -1219,8 +1214,8 @@
 	display:block;
 	cursor:arrow;
 	font-weight:bold;
-	text-align: right;
-	float:left;
+	text-align: left;
+	margin-bottom:10px!important;
 	width:200px;
 	text-transform:capitalize;
 	font-size:15px;
@@ -1234,10 +1229,8 @@
 
 .formContainer .formBody .row label .required {
 	color:red!important;
-	float:left;
 	font-weight:bold;
-	display:block;
-	width:100%;
+	display:inline;
 }
 
 .formContainer .formBody .row label .small{
@@ -1255,7 +1248,7 @@
 	border:1px solid #ccc;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	margin-left:30px;
+	/*margin-left:30px;*/
 	font-size:14px;
 	font-family:georgia;
 	line-height:24px;
@@ -1269,13 +1262,17 @@
 }
 
 .formContainer .formBody .row .sites{
-	margin-left:210px;
+	margin-left:10px;
 }
 
 .formContainer .formBody .row .sites input{
 	display:inline;
 	width:20px;
 	padding:20px;
+}
+
+.cke_wrapper.cke_ltr{
+	background-color:#fff!important;
 }
 
 .formContainer .formBody .row .radioButton{
@@ -1595,6 +1592,15 @@
 	position:absolute;
 	z-index:1000;
 	-webkit-box-shadow: black 0px 0px 40px;
+}
+
+.hoverContainer.helper{
+	padding:20px;
+	max-width:200px;
+}
+
+.hoverContainer.helper h3{
+	padding:0px 0px 5px 0px;
 }
 
 .hoverContainer li{
