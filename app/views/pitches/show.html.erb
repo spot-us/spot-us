@@ -9,8 +9,6 @@
 	</div>
 <% end %>
 
-<%=render :partial => "admin_menu",:locals => {:pitch=>@pitch} %>
-
 <div class="pitchContainer">
 	<%if @tab=='summary' || @tab.blank?%>
 		<%=render :partial=>'pitches/tabs/summary' %>

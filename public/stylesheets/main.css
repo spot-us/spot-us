@@ -354,7 +354,7 @@
 	text-decoration:none;
 	font-weight:bold;
 	line-height:44px;
-	text-shadow: #000 1px 1px 0px;
+	text-shadow: #000 0px 0px 1px;
 }
 
 .headerMenu li a:hover{
@@ -675,7 +675,7 @@
 	font-family:Helvetica, Arial, Verdana, sans-serif;
 	text-transform:none;
 	margin-top:0px;
-	text-shadow: white 1px 1px 0px;
+	text-shadow: white 0px 0px 1px;
 }
 
 .headlineByline h1 a{
@@ -730,7 +730,7 @@
 
 .fundingStatus h3.published, .fundingStatus h3.funded{
 	color:#54859f;
-	text-shadow: black 1px 1px 0px;
+	text-shadow: black 0px 0px 1px;
 }
 
 .fundingStatus h3.needsFunding{
@@ -758,7 +758,7 @@
 	color:#11363e;
 	font-weight:bold;
 	text-transform:none;
-	text-shadow: #fff 1px 1px 0px;
+	text-shadow: #fff 0px 0px 1px;
 	font-size:20px;
 }
 
@@ -768,7 +768,7 @@
 	font-size:18px;
 	line-height:24px;
 	margin-bottom:10px;
-	text-shadow: #fff 1px 1px 0px;
+	text-shadow: #fff 0px 0px 1px;
 	
 }
 
@@ -779,6 +779,38 @@
 	 so i keep floating things left and right. remind me to ask you about this.*/
 	border-left:1px solid #ccc;
 	min-height:800px;
+}
+
+.adminMenu{
+	border-top:1px dotted #ccc;
+	background-color:#f6e8e8;
+	padding:20px;
+	/*background-image:url('/images/new/adminBG.png');*/
+}
+
+.adminMenu h3{
+	padding:0px 0px 10px 0px;
+}
+
+.adminMenu a{
+	display:block;
+	color:#fff;
+	font-weight:bold;
+	padding:5px;
+	background-color:#b15b5b;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
+	text-decoration:none;
+	text-align:center;
+	font-size:14px;
+	margin-bottom:4px;
+	text-shadow: #333 0px 0px 1px;
+}
+
+.adminMenu a:hover{
+	background-color:#983939;
+	background-image:none;
+	text-shadow: #000 0px 0px 1px;
 }
 
 .fundBox, .smallFundBox{
