@@ -74,7 +74,7 @@
 }
 
 .introContainer a:hover{
-	color:#ea2d65;
+	color:#336e80;
 }
 
 .introContainer p{
@@ -92,7 +92,7 @@
 	padding:0;
 	margin:0px 0px 9px 0px;
 	font-weight:normal;
-	text-shadow: #ccc 1px 1px 1px;
+	text-shadow: #ccc 0px 0px 1px;
 }
 
 .joinContainer{
@@ -101,7 +101,7 @@
 }
 
 .joinContainer a{
-	background-color:#ea2d65;
+	background-color:#336e80;
 	background-image:url('/images/new/joinBG.png');
 	background-repeat:repeat-x;
 	padding:8px 20px;
@@ -111,12 +111,12 @@
 	font-weight:bold;
 	text-decoration:none;
 	font-size:25px;
-	text-shadow: #ea2d65 1px 1px 1px;
+	text-shadow: #336e80 0px 0px 1px;
 }
 
 .joinContainer a:hover{
 	color:#fff;
-	text-shadow: #993905 2px 2px 2px;
+	text-shadow: #993905 0px 0px 1px;
 }
 
 /*end middle wrapper styles*/
@@ -501,7 +501,7 @@
 }
 
 .storyGrid li h3 a:hover{
-	color:#ea2d65;
+	color:#336e80;
 }
 
 .storyGrid li form{
@@ -537,8 +537,7 @@
 	display:inline;
 	text-align:center;
 	border: 1px solid #ddd;
-	border-right:2px solid #666;
-	border-bottom:2px solid #666;
+	text-shadow: #666 0px 0px 1px;
 }
 
 .donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
@@ -558,11 +557,15 @@
 	border: 1px solid #ddd;
 	border-right:2px solid #666;
 	border-bottom:2px solid #666;
+	border-right:2px solid #3e5d1c;
+	border-bottom:2px solid #556742;
 }
 
 .donateButtons li.fundButton:hover{
 	cursor:pointer;
 	background-color:#6e9149;
+	border-right:2px solid #b0cc92;
+	border-bottom:2px solid #b0cc92;
 }
 
 .donateButtons li.fundButton form input:hover{
@@ -572,11 +575,15 @@
 
 .donateButtons li.creditsButton{
 	background-color:#24454f;
+	border-right:2px solid #123039;
+	border-bottom:2px solid #08323f;
 }
 
 .donateButtons li.creditsButton:hover{
 	cursor:pointer;
 	background-color:#1c3942;
+	border-right:2px solid #516a72;
+	border-bottom:2px solid #516a72;
 }
 
 	/*button styles only for list (story grid) views*/
@@ -645,12 +652,15 @@
 	border-bottom:1px solid #C7D9DB;
 }
 
-.tabs li.current, .tabs li.active{
-	background-color:#fff;
+.tabs li.current{
 	border-left:1px solid #ccc;
 	border-top:1px solid #ccc;
 	border-right:1px solid #ccc;
 	border-bottom: 1px solid #fff;
+}
+
+.tabs li:hover, .tabs li.current{
+	background-color:#fff;
 }
 
 .tabs li a, .tabs li.current a, .tabs li.active a{
@@ -1189,6 +1199,10 @@
 .formContainer .formBody, .comments .formBody{
 	float:left;
 	width:100%;
+	border:3px solid #ccc;
+	padding:20px;
+	background-color:#eaeaea;
+	margin-bottom:20px;
 }
 
 .comments .formBody h3{
@@ -1326,7 +1340,7 @@
 	font-weight:bold;
 	font-family:helvetica, arial, sans-serif;
 	font-size:14px;
-	background-color:#ea2d65;
+	background-color:#336e80;
 	color:#fff;
 	width:200px;
 	margin:20px 0px 0px 230px;
@@ -1347,12 +1361,10 @@
 
 /*create or edit a pitch sidebar*/
 .createPitchSidebar{
-	width:400px;
+	width:350px;
 	float:right;
-	border-left:1px solid #ccc;
 	margin-left:20px;
 	padding:20px;
-	background-color:#f6f8f6;
 }
 
 .createPitchSidebar p{

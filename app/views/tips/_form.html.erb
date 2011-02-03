@@ -1,59 +1,102 @@
 <% form_for(@tip, :html => { :multipart => true }) do |f| %>
+<div class="formContainer">
+	<div class="formBody">
+		<div class="row">
+			<%= f.label     :headline, "Headline <span class='required'>*</span> <a href='#' rel='nofollow' id='hoverAnchorHeadline'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_area :headline, :rows => 2 %>
+			<%#= text_field_tag 'tip[blog_url]', '', :class => 'highlight_required', :id => 'tip_blog_url' %>
+		</div>
+		<div class="row">
+			<%= f.label :short_description, "Description <span class='required'>*</span> <a href='#' rel='nofollow' id='hoverAnchorDescription'><img src='/images/new/help.png'></a>" %>
+			<%= ckeditor_textarea("tip", "short_description", :toolbar => 'Medium', :width => '680px', :height => '200px') %>
+		</div>
+		<% if APP_CONFIG[:has_networks] %>
+		<div class="row">
+			<%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
+		</div>
+		<% end %>
+		<div class="row">
+			<%= f.label :topics, "Topics <span class='required'>
+			*
+			</span> <a href='#' rel='nofollow' id='hoverAnchorTopics'><img src='/images/new/help.png'></a>" %>
+			<div class="tip_topics sites">
+				<%= topic_check_boxes(@tip) %>
+			</div>
+		</div>
+		<div class="row">
+			<%= f.label :pledge_amount, "My Pledge <a href='#' rel='nofollow' id='hoverAnchorPledge'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_field :pledge_amount %>
+		</div>
+		<div class="row">
+			<%= f.label :keyword, "Keywords <a href='#' rel='nofollow' id='hoverAnchorKeywords'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_area :keywords, :rows => 3 %>
+		</div>
+		<div class="row">
+			<label>Add Image <a href='#' rel='nofollow' id='hoverAnchorUploadMedia'><img src='/images/new/help.png'></a>
+			</label>
+			<%= f.file_field :featured_image %><br>
+			<span class="small"> Optional, but highly recommended <br />JPEG, PNG and GIF's less than 5 MB.</span>
+		</div>
+		<!-- <div class="row media">
+		<%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='required'>200 Characters Max</span>", :class => "small" %>
+		<%#= f.text_area :featured_image_caption, :rows => 2 %>
+		</div> -->
+		<div class="row"> 
+			<%= f.label :video_embed, "Embed a Video <a href='#' rel='nofollow' id='hoverAnchorVideoEmbed'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_area :video_embed, :rows => 4 %>
+		</div>
+		<div class="row">
+			<%= f.label :video_embed, "Embed a Widget <a href='#' rel='nofollow' id='hoverAnchorWidgetEmbed'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_area :widget_embed, :rows => 4 %>
+		</div>
+		<div class="row">
+			<label> </label>
+			<% if @tip.new_record? %>
+			<%= get_button("Suggest this story") %>
+			<% else %>
+			<%= get_button("Save") %>
+			<%= get_button("Cancel") %>
+			<% end %>
+		</div>
+	</div>
+</div>
 
-   <div class="row">
-        <%= f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>" %>
-        <%= f.text_area :headline, :rows => 2 %>
-        <%#= text_field_tag 'tip[blog_url]', '', :class => 'highlight_required', :id => 'tip_blog_url' %>
-   </div>
-    <div class="row">
-       <%= f.label :short_description, "Why would someone care?<br />Explain the story! <br /><span class='small quieter'>This is your chance to explain what the story is about. Get people to pledge and join you!</span>" %>
-       <%= ckeditor_textarea("tip", "short_description", :toolbar => 'Medium', :width => '680px', :height => '200px') %>
-    </div>
-	<% if APP_CONFIG[:has_networks] %>
-	   <div class="row">
-	      <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @tip} %>
-	   </div>
-	<% end %>
-   <div class="row  clearfix">
-      <label>Topics</label>
-      <div class="tip_topics">
-         <%= topic_check_boxes(@tip) %>
-      </div>
-   </div>
-    <div class="row">
-      <%= f.label :pledge_amount, "I would like to pledge $<br /><span class='small quieter'>This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a></span>" %>
-      <%= f.text_field :pledge_amount %>
-   </div>
-   <div class="row">
-      <%= f.label :keyword, "Keywords<br /><span class='small quieter'>Optional.<br />Keywords, or tags, should be separate by commas, for example: &quot;car, automobile&quot;</span>" %>
-   
-      <%= f.text_area :keywords, :rows => 3 %>
-   </div>
-   <div class="row">
-      <label>Add Media<br/>
-      Upload A Featured Image</label><%= f.file_field :featured_image %><br>
-        <span class="small"> Optional, but highly recomended <br />JPEG, PNG and GIF's less than 5 MB.</span>
-      
-   </div>
-   <!-- <div class="row media">
-      <%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>", :class => "small" %>
-      <%#= f.text_area :featured_image_caption, :rows => 2 %>
-   </div> -->
-   <div class="row"> 
-      <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here.</span>" %>
-      <%= f.text_area :video_embed, :rows => 4 %>
-   </div>
-   <div class="row">
-      <%= f.label :widget_embed, "Embed a Widget" + "<br/><span class='quieter small'>Paste your third-party widget embeded code (e.g. Sprout) here.</span>" %>
-      <%= f.text_area :widget_embed, :rows => 4 %>
-   </div>
-   <div class="row">
-       <label> </label>
-       <% if @tip.new_record? %>
-         <%= image_submit_tag image_path('post_this_tip.png') %>
-       <% else %>
-         <%= image_submit_tag image_path('save.png') %>
-         <%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
-       <% end %>
-    </div>
+<% end %>
+
+<% content_for :bottom do %>
+<!-- START - hover list of helpers -->
+<ul class='hoverContainer helper' id='hoverContainerHeadline' style="display:none;">
+	<h3>Keep it concise</h3>
+	In a few words, tell us what your pitch is about.
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerDescription' style="display:none;">
+	<h3>Why Would Someone Care?</h3>
+	Explain The Story! This is your chance to explain what the story is about. Get people to pledge and join you!
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerTopics' style="display:none;">
+	<h3>What's it all about?</h3>
+	Help us categorize your story by signifying which categories it falls into. 
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerPledge' style="display:none;">
+	<h3>I would like to pledge $</h3>
+	This is not a transaction. It gauges interest to elicit a pitch. <a href='../pages/about#faq'>See our FAQ.</a>
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerKeywords' style="display:none;">
+	<h3>Tag it up, yo!</h3>
+	Please include keywords, or tags. They should be separated by commas. For example: "car, automobile, suvs."
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerUploadMedia' style="display:none;">
+	<h3>Convey it visually</h3>
+	A picture's worth a thousand words! Please upload a featured image for your post.
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerVideoEmbed' style="display:none;">
+	<h3>Multimedia goodness</h3>
+	If you want, you can include a video. Just paste your third-party embedded code here.
+	We can only take Vimeo or YouTube at this time.
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerWidgetEmbed' style="display:none;">
+	<h3>Widgetize</h3>
+	Paste your third-party widget embedded code (e.g. Sprout) here.
+</ul>
+<!-- END - hover list of helpers -->
 <% end %>

@@ -1,4 +1,3 @@
-<div id="spotus_form">
    <% unless @tip.errors.empty? %>
      <% content_for :error do %>
        <%= error_messages_for :tip %>
@@ -9,4 +8,3 @@
 
    <h2>Suggest a Story</h2>
    <%= render :partial => 'form' %>
-</div>
