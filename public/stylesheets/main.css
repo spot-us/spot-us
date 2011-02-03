@@ -747,6 +747,19 @@
 	color:#59933e;
 }
 
+.headerTitle {
+	width:50%;
+	float:left;
+	color:#000;
+	padding:0px;
+}
+
+.headerTitle h1{
+	padding:0px;
+	position:relative;
+	top:-10px;
+}
+
 
 /*end pitch header*/
 
