@@ -1313,6 +1313,23 @@
 /*end form styles*/
 
 
+/*create or edit a pitch sidebar*/
+.createPitchSidebar{
+	width:400px;
+	float:right;
+	border-left:1px solid #ccc;
+	margin-left:20px;
+	padding:20px;
+	background-color:#f6f8f6;
+}
+
+.createPitchSidebar p{
+	font-family:helvetica,arial,verdana,sans-serif;
+	font-size:14px;
+}
+/*end create or edit a pitch sidebar*/
+
+
 /* Footer styles */
 
 .footerContainer, .copyrightContainer {
