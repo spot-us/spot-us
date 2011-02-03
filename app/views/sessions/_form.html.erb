@@ -14,12 +14,15 @@
 			</div>
 		</div>
 		<div class="row">
-				<label> </label>
-				<div class="sites"><%= check_box_tag 'remember_me', '1' %> </div>
-				<span class="small">Remember Me</span> &nbsp;&nbsp;|&nbsp;&nbsp;
-				<%= link_to "Forgot Password?", password_user_path, :class => "forgot_password" %>
-			</div>
+			<label> </label>
+			<div class="sites"><%= check_box_tag 'remember_me', '1' %> </div>
+			<span class="small">Remember Me</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+			<%= link_to "Forgot Password?", password_user_path, :class => "forgot_password" %>
+		</div>
+		<div class="row">
+			<%= get_button("Log in") %>
 		</div>
 	</div>
+</div>
 </div>
 

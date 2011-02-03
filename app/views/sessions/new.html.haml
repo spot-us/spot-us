@@ -1,5 +1,5 @@
 - @title = "Spot.us - Login"
-#login
+#loginNull
   - if login_failed?
     - content_for :error do
       %h2 Sorry about that.
@@ -16,15 +16,7 @@
         Seriously, this guy doesn't sleep and he wants the site to work for you!!!
   #spotusForm
     - form_tag session_url do
-      = link_to "&raquo; NEW USERS: REGISTER HERE", new_user_path, :class => "float-right"
-      %h3 Thanks for joining us!
-      %br
-      %span.small.quieter
-        If we already know you - login below.
-      %br
       .double_content_border
       = render :partial => 'sessions/form'
-      .float-right.clearfix
-        %input{:type => 'image', :src=>'/images/login.png', :alt => "Login", :onclick=>"processLoginForm();"}
 
 
