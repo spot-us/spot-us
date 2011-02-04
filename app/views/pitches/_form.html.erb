@@ -19,6 +19,18 @@ jQuery(document).ready(function($){
 			<%= f.text_field :headline, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
 			:class => @pitch && @pitch.headline ? "" : "gray_text", :id => "headline" %>
 		</div>
+		<div class="row top">
+			<%= f.label     :slug, "Slug <span class='required'>
+					*
+				</span> <a href='#' rel='nofollow' id='hoverAnchorSlug'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_field :slug %>
+		</div>
+		<div class="row">
+			<%= f.label :excerpt, "Summary <span class='required'>
+					*
+				</span> <a href='#' rel='nofollow' id='hoverAnchorSummary'><img src='/images/new/help.png'></a>" %>
+			<%= ckeditor_textarea("pitch", "excerpt", :toolbar => 'Simple', :width => '450px', :height => '75px') %>
+		</div>
 		<div class="row">
 			<%= f.label :short_description, "Short Description <span class='required'>
 					*
@@ -134,6 +146,16 @@ jQuery(document).ready(function($){
 <ul class='hoverContainer helper' id='hoverContainerHeadline' style="display:none;">
 	<h3>Keep it concise</h3>
 	In a few words, tell us what your pitch is about
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerSlug' style="display:none;">
+	<h3>Keep it very concise</h3>
+	In a few words selling words with a maximum of 30 characters, tell us what your pitch is about. 
+	We will use this slug for all list views instead of the headline.
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerSummary' style="display:none;">
+	<h3>Sell the story with a 500 character summary!</h3>
+	Why would someone care? What are the details? Be concise and sell the story. 
+	We use this summary for the Summary page for all stories.
 </ul>
 <ul class='hoverContainer helper' id='hoverContainerShortDescription' style="display:none;">
 	<h3>Sell the story!</h3>

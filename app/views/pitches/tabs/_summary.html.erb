@@ -7,7 +7,7 @@
 	<div class="descriptionContainer">
 		<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
 		<div class="shortDescription">
-			<%= transform_embed_code(@pitch.short_description, 520, 320) %>
+			<%= transform_embed_code(@pitch.excerpt?, 520, 320) %>
 		</div>
 		<% unless @pitch.extended_description.blank? %>
 			<div class="extendedDescription">

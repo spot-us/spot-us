@@ -1,7 +1,7 @@
 <% apply_fragment ['pitch_', pitch, current_user, @show_cca, @first_cca] do %>
 	<li>
 		<%=image_tag pitch.featured_image(:medium), {:alt => h(pitch.headline)}%>
-		<h3><%=link_to pitch.headline[0..30], pitch_path(pitch)%></h3>
+		<h3><%=link_to pitch.slug?, pitch_path(pitch)%></h3>
 		<div><%=pitch_date(pitch.created_at)%> by <%=link_to pitch.user, profile_path(pitch.user)%></div>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => pitch }%>
 		<div><%=number_to_currency(pitch.current_funding)%> raised and <%=number_to_currency(pitch.funding_needed)%> to go</div>

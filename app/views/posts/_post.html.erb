@@ -1,8 +1,8 @@
 <% apply_fragment ['post_', post] do %>
 	<li>
 		<%=image_tag post.blog_image_display(:medium), {:alt => h(post.title)}%>
-		<h3><%=link_to post.title[0..30], pitch_post_path(post.pitch, post)%></h3>
+		<h3><%=link_to post.slug?, pitch_post_path(post.pitch, post)%></h3>
 		<div><%=pitch_date(post.created_at)%> by <%=link_to post.user, profile_path(post.user)%></div>
-		<div>Posted under Pitch <%= link_to post.pitch.headline, pitch_url(post.pitch)%></div>
+		<div>Posted under Pitch <%= link_to post.pitch.slug?, pitch_url(post.pitch)%></div>
 	</li>
 <%end%>
