@@ -1,6 +1,9 @@
 <div class="formContainer">
 	<div class="formBody">
 		<div class="row">
+			<%=yield :error%>
+		</div>
+		<div class="row">
 			<label>Your E-mail Address</label>
 			<div class="login">
 				<%= text_field_tag "email", nil, :class=>"text" %>
@@ -20,7 +23,7 @@
 			<%= link_to "Forgot Password?", password_user_path, :class => "forgot_password" %>
 		</div>
 		<div class="row">
-			<%= get_button("Log in") %>
+			<%= get_button("Log in", {:onclick => "processLoginForm();"}) %>
 		</div>
 	</div>
 </div>

@@ -16,8 +16,20 @@ jQuery(document).ready(function($){
 			<%= f.label     :headline, "Headline <span class='required'>
 					*
 				</span> <a href='#' rel='nofollow' id='hoverAnchorHeadline'><img src='/images/new/help.png'></a>" %>
-			<%= f.text_area :headline, :rows => 2, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
+			<%= f.text_field :headline, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
 			:class => @pitch && @pitch.headline ? "" : "gray_text", :id => "headline" %>
+		</div>
+		<div class="row top">
+			<%= f.label     :slug, "Slug <span class='required'>
+					*
+				</span> <a href='#' rel='nofollow' id='hoverAnchorSlug'><img src='/images/new/help.png'></a>" %>
+			<%= f.text_field :slug %>
+		</div>
+		<div class="row">
+			<%= f.label :excerpt, "Summary <span class='required'>
+					*
+				</span> <a href='#' rel='nofollow' id='hoverAnchorSummary'><img src='/images/new/help.png'></a>" %>
+			<%= ckeditor_textarea("pitch", "excerpt", :toolbar => 'Simple', :width => '450px', :height => '75px') %>
 		</div>
 		<div class="row">
 			<%= f.label :short_description, "Short Description <span class='required'>
@@ -93,21 +105,21 @@ jQuery(document).ready(function($){
 		<!-- START OPTIONAL FIELDS -->
 		<h2>Optional</h2>
 		<div class="row optional">
-			<span id='toggleDivs'>Toggle here to hide/show the optional fields</span>  
+			<span id='toggleDivs' class='spanLink'>Toggle here to hide/show the optional fields</span>  
 		</div>
-		<div class="row" id="toggle_div_how_will_it_help">
+		<div class="row" id="toggle_div_how_will_it_help" style="display:none;">
 			<%= f.label :extended_description, "Justification <a href='#' rel='nofollow' id='hoverAnchorJustification'><img src='/images/new/help.png'></a>" %>
 			<%= ckeditor_textarea("pitch", "extended_description", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
 		</div>
-		<div class="row" id="toggle_div_disclosure">
+		<div class="row" id="toggle_div_disclosure" style="display:none;">
 			<%= f.label :disclosure, "Disclosure <a href='#' rel='nofollow' id='hoverAnchorDisclosure'><img src='/images/new/help.png'></a>" %>
 			<%= ckeditor_textarea("pitch", "disclosure", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
 		</div>
-		<div class="row" id="toggle_div_caption">
+		<div class="row" id="toggle_div_caption" style="display:none;">
 			<%= f.label :featured_image_caption, "Image Caption <a href='#' rel='nofollow' id='hoverAnchorImageCaption'><img src='/images/new/help.png'></a>" %>
 			<%= f.text_area :featured_image_caption, :rows => 2 %>
 		</div>
-		<div class="row" id="toggle_div_keywords">
+		<div class="row" id="toggle_div_keywords" style="display:none;">
 			<%= f.label :keyword, "Keywords <a href='#' rel='nofollow' id='hoverAnchorKeywords'><img src='/images/new/help.png'></a>" %>
 			<%= f.text_area :keywords, :rows => 3 %>
 		</div>
@@ -119,10 +131,10 @@ jQuery(document).ready(function($){
 		</div>
 		<div class="row">
 			<% if @pitch.new_record? %>
-			<%= get_button("Create a Pitch") %>
+				<%= get_button("Create a Pitch") %>
 			<% else %>
-			<%= get_button("Save") %>
-			<%= get_button("Cancel") %>
+				<%= get_button("Save") %>
+				<%= get_button("Cancel") %>
 			<% end %>
 		</div>
 		<% end %>
@@ -134,6 +146,16 @@ jQuery(document).ready(function($){
 <ul class='hoverContainer helper' id='hoverContainerHeadline' style="display:none;">
 	<h3>Keep it concise</h3>
 	In a few words, tell us what your pitch is about
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerSlug' style="display:none;">
+	<h3>Keep it very concise</h3>
+	In a few words selling words with a maximum of 30 characters, tell us what your pitch is about. 
+	We will use this slug for all list views instead of the headline.
+</ul>
+<ul class='hoverContainer helper' id='hoverContainerSummary' style="display:none;">
+	<h3>Sell the story with a 500 character summary!</h3>
+	Why would someone care? What are the details? Be concise and sell the story. 
+	We use this summary for the Summary page for all stories.
 </ul>
 <ul class='hoverContainer helper' id='hoverContainerShortDescription' style="display:none;">
 	<h3>Sell the story!</h3>

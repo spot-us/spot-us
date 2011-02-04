@@ -72,6 +72,28 @@ class Post < ActiveRecord::Base
     #end
   end
   
+  def excerpt?
+    return excerpt unless excerpt.blank?
+    if body
+      short_body = body.gsub(/<\/?[^>]*>/, "")
+      short_body = body[0..500].gsub(/\w+$/, '')+"..." if short_body.length>500
+    else
+      short_body = ""
+    end
+    
+    return short_body
+  end
+  
+  def slug?
+    if title
+      short_headline = title.length>30 ? title[0..30].gsub(/\w+$/, '')+"..." : title
+    else
+      short_headline = ""
+    end
+    
+    return short_headline
+  end
+  
   def update_twitter
     #unless Rails.env.development?
     if user.notify_twitter

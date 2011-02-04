@@ -89,6 +89,12 @@ class User < ActiveRecord::Base
     def pitch_sum(pitch)
       self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
     end
+    def total_amount
+      self.paid.all.map(&:amount).sum
+    end
+    def nr_of_donations
+      self.paid.count
+    end 
   end
 
   has_many :spotus_donations
@@ -496,6 +502,10 @@ class User < ActiveRecord::Base
 
   def has_pledge_for?(tip)
     pledges.exists?(:tip_id => tip.id )
+  end
+  
+  def get_about_you
+    (about_you && !about_you.strip.blank? ? about_you : "<p>#{full_name} has not provided a short bio yet.</p>")
   end
   
   def to_s

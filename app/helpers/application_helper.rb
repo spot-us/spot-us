@@ -86,7 +86,7 @@ module ApplicationHelper
   end
 
   def truncate_words(text, length = 30, end_string = '&hellip; ')
-    words = text.split()
+    words = text.split(' ')
     words[0..(length-1)].join(' ') + (words.length > length ? end_string : '')
   end
 
@@ -174,7 +174,7 @@ module ApplicationHelper
   def short_date(dt)
       # tn = Time.now
       # if dt.day < tn.day or dt.month < tn.month or dt.year < tn.year #diff > 60  * 60 * (24 / 1.02)
-           dt.strftime("%m.%d.%y")
+           dt.strftime("%m/%d/%y")
       # else
       #    dt.strftime("%l:%M %p").downcase
       # end
@@ -191,7 +191,7 @@ module ApplicationHelper
   # get the stylesheets...
   def get_stylesheets(is_admin=false)
     stylesheets = ['base', 'main', 'facebox']
-    stylesheets.concat(['new_style','widget']) if params[:controller]!='homes' && params[:controller]!='pitches' && params[:controller]!='news_items'
+    stylesheets.concat(['new_style','widget']) if params[:controller]!='homes' && params[:controller]!='pitches' && params[:controller]!='news_items' && params[:controller]!='posts' && params[:controller]!='session' && params[:controller]!='pages'
     stylesheets << 'admin' if is_admin
     stylesheet_link_tag stylesheets, :media => "all", :cache => stylesheet_name?(stylesheets)
   end
@@ -203,8 +203,14 @@ module ApplicationHelper
     "cache/#{names.join('_')}"
   end
   
-  def get_button(button_text)
-    submit_tag button_text, {:class => 'submitButton'}
+  def get_button(button_text, options={})
+    options[:class] = "submitButton"
+    submit_tag button_text, options
   end  
+  
+  def excerpt?(text, strip_length=50)
+    text = strip_html(text)
+    text.length>strip_length ? text[0..strip_length].gsub(/\w+$/, '')+"..." : text
+  end
 
 end

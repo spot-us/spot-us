@@ -1,30 +1,36 @@
-<div class="row">
-    <%= f.label :title %>
-    <%= f.text_area :title, :rows => 2, :value => @post && @post.title ? @post.title : TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => @post && @post.title ? "" : "gray_text", :id => "title" %>
+<div class="formContainer">
+	<div class="formBody">
+		<div class="row">
+			<%=yield :error%>
+		</div>
+		<div class="row">
+		    <%= f.label :title %>
+		    <%= f.text_field :title, :value => @post && @post.title ? @post.title : TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => @post && @post.title ? "" : "gray_text", :id => "title" %>
+		</div>
+		<div class="row">
+		    <%= f.label :body %>
+		    <%= ckeditor_textarea("post", "body", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
+		</div>
+		<div class="row add_media">
+		   <label>Add Media<br/>
+		      <span class="small">
+		         Upload A Blog Image
+		      </span>       
+		   </label>
+		   <%= f.file_field :blog_image %><br/>
+		   <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+		 </div>
+		<div class="row">
+		    <%= f.label :media_embed %>
+		    <%= f.text_area :media_embed, :rows => 3 %>
+		</div>
+		<div class="row submit">
+		    <label> </label>
+		    <%= get_button("Save") %>
+		</div>
+		<div class="row">
+		   <label> </label>
+		   <%= link_to '&laquo; Back to my pitches', myspot_pitches_path %>
+		</div>
+	</div>
 </div>
-<div class="row">
-    <%= f.label :body %>
-    <%= ckeditor_textarea("post", "body", :toolbar => 'Spotus', :width => '683px', :height => '200px') %>
-</div>
-<div class="row add_media">
-   <label>Add Media<br/>
-      <span class="small">
-         Upload A Blog Image
-      </span>       
-   </label>
-   <%= f.file_field :blog_image %><br/>
-   <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
- </div>
-<div class="row">
-    <%= f.label :media_embed %>
-    <%= f.text_area :media_embed, :rows => 4 %>
-</div>
-<div class="row submit">
-    <label> </label>
-    <%= image_submit_tag image_path('save.png') %>
-</div>
-<div class="row">
-   <label> </label>
-   <%= link_to '&laquo; Back to my pitches', myspot_pitches_path %>
-</div>
-

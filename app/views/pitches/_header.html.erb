@@ -1,4 +1,4 @@
-<%if @pitch.requested_amount%>
+<%unless @pitch.new_record?%>
 	<div class="headlineByline">
 		<h1><%=link_to h @pitch.headline %><!--erik, this needs to link to the summary tab. help?--></h1>
 		<ul>

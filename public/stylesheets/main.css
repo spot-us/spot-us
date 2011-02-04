@@ -1114,9 +1114,15 @@
 
 /*donors container*/
 
+.donorsContainer h2{
+	clear:both;
+	width:100%;
+}
+
 .donorsContainer ul {
-	margin:0;
+	margin:0px 0px 15px 0px;
 	padding:0;
+	width:100%;
 }
 
 .donorsContainer ul li{
@@ -1134,10 +1140,12 @@
 	margin:0px 10px 10px 0px;
 	position:relative;
 	top:10px;
+	width:44px;
+	height:44px;
 }
 
 .donorsContainer ul li h3{
-	font-size:24px;
+	font-size:22px;
 	color:#000;
 	font-weight:normal;
 	line-height:24px;
@@ -1724,4 +1732,8 @@
 
 .hoverContainer li a{
 	text-decoration:none;
+}
+
+.spanLink{
+	cursor:pointer;
 }
