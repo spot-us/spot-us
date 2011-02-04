@@ -1,14 +1,14 @@
 <div class="pitchLeftContainer">
 	
-	<% if !@pitch.video_embed.blank? %>
+	<% unless @pitch.video_embed.blank? %>
 		<div class="videoContainer">
 			<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
 		</div>
-	<% end %>
-	
-	<div class="featuredImage">
-		<%= image_tag(@pitch.featured_image.url(:featured_image)) if @pitch.video_embed.blank? %>
-	</div>
+	<% else %>
+		<div class="featuredImage">
+			<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
+		</div>
+	<%end%>
 	
 	<div class="shortDescription">
 		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
