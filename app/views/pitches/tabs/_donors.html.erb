@@ -1,54 +1,77 @@
 <div class="donorsContainer">
-	<h2>Donors: $2,302 donated by 34 people</h2>
+
+	<a name="individuals"></a>
+	<%if @pitch.supporters.any?%>
+		<h2>Individual Donors: <%=number_to_currency @pitch.total_amount_donated%> donated by <%=@pitch.supporters.length%> supporters</h2>
 		<ul>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
-			<li><img src="/images/default_avatar.png">
-				<h3>Spot.us</h3>
-				<span>Joined  02.25.09</span>
-				<h4>Contributed $6,032 to 82 stories</h4>
-				Spot.us is an open source project to pioneer "community funded
-				journalism." Through Spot.us, the public can commission...
-				<a href="#">more &rarr;</a>
-			</li>
+			<%@pitch.supporters.each do |supporter|%>
+				<li>
+					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<%=excerpt?(supporter.get_about_you, 40)%>
+					<%=link_to "more &rarr;", profile_path(supporter)%>
+				
+				</li>
+			<%end%>
 		</ul>
+	<%end%>
+
+	<a name="groups"></a>
+	<%if @pitch.donating_groups.any?%>
+		<h2>Organizational Support: <%=number_to_currency @pitch.total_amount_donated%> donated by <%=@pitch.donating_groups.length%> groups</h2>
+		<ul>
+			<%@pitch.donating_groups.each do |supporter|%>
+				<li>
+					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<%=excerpt?(supporter.get_about_you, 40)%>
+					<%=link_to "more &rarr;", profile_path(supporter)%>
+
+				</li>
+			<%end%>
+		</ul>
+	<%end%>
+
+	<a name="organizations"></a>
+	<%if @pitch.supporting_organizations.any? || @pitch.donations_and_credits.from_organizations.any?%>	
+		<%supporters = []%>
+		<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
+		<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
+		<h2>Group Supporters: <%=number_to_currency @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%> donated by <%=supporters.length%> groups</h2>
+		<ul>
+			<%supporters.each do |supporter|%>
+				<li>
+					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<%=excerpt?(supporter.get_about_you, 40)%>
+					<%=link_to "more &rarr;", profile_path(supporter)%>
+
+				</li>
+			<%end%>
+		</ul>
+	<%end%>
+
+	<a name="cca"></a>
+	<%unless Donation.cca_supporters(@pitch.id).all.empty?%>
+		<%donations = via_cca_supporters_for(@pitch)%>
+		<h2>Community-Centered Advertising: <%=number_to_currency Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum%> donated by <%=donations.length%> groups</h2>
+		<ul>
+			<%donations.each do |donation|%>
+				<%cca = donation.cca%>
+				<%if cca && cca.user%>
+					<%supporter = cca.user%>
+					<li>
+						<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), cca_path(cca)%></h2>
+						<span>Joined <%=short_date(supporter.created_at)%></span>
+						<%=excerpt?(cca.description, 40)%>
+						<%=link_to "more &rarr;", cca_path(cca)%>
+
+					</li>
+				<%end%>
+			<%end%>
+		</ul>
+	<%end%>
+
 </div>
+
 <%=render :partial => "pitches/sidebars/narrow"%>

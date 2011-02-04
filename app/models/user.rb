@@ -498,6 +498,10 @@ class User < ActiveRecord::Base
     pledges.exists?(:tip_id => tip.id )
   end
   
+  def get_about_you
+    (about_you && !about_you.strip.blank? ? about_you : "<p>#{full_name} has not provided a short bio yet.</p>")
+  end
+  
   def to_s
     self.full_name
   end
