@@ -16,7 +16,7 @@ jQuery(document).ready(function($){
 			<%= f.label     :headline, "Headline <span class='required'>
 					*
 				</span> <a href='#' rel='nofollow' id='hoverAnchorHeadline'><img src='/images/new/help.png'></a>" %>
-			<%= f.text_area :headline, :rows => 2, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
+			<%= f.text_field :headline, :value => @pitch && @pitch.headline ? @pitch.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
 			:class => @pitch && @pitch.headline ? "" : "gray_text", :id => "headline" %>
 		</div>
 		<div class="row">
@@ -93,21 +93,21 @@ jQuery(document).ready(function($){
 		<!-- START OPTIONAL FIELDS -->
 		<h2>Optional</h2>
 		<div class="row optional">
-			<span id='toggleDivs'>Toggle here to hide/show the optional fields</span>  
+			<span id='toggleDivs' class='spanLink'>Toggle here to hide/show the optional fields</span>  
 		</div>
-		<div class="row" id="toggle_div_how_will_it_help">
+		<div class="row" id="toggle_div_how_will_it_help" style="display:none;">
 			<%= f.label :extended_description, "Justification <a href='#' rel='nofollow' id='hoverAnchorJustification'><img src='/images/new/help.png'></a>" %>
 			<%= ckeditor_textarea("pitch", "extended_description", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
 		</div>
-		<div class="row" id="toggle_div_disclosure">
+		<div class="row" id="toggle_div_disclosure" style="display:none;">
 			<%= f.label :disclosure, "Disclosure <a href='#' rel='nofollow' id='hoverAnchorDisclosure'><img src='/images/new/help.png'></a>" %>
 			<%= ckeditor_textarea("pitch", "disclosure", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
 		</div>
-		<div class="row" id="toggle_div_caption">
+		<div class="row" id="toggle_div_caption" style="display:none;">
 			<%= f.label :featured_image_caption, "Image Caption <a href='#' rel='nofollow' id='hoverAnchorImageCaption'><img src='/images/new/help.png'></a>" %>
 			<%= f.text_area :featured_image_caption, :rows => 2 %>
 		</div>
-		<div class="row" id="toggle_div_keywords">
+		<div class="row" id="toggle_div_keywords" style="display:none;">
 			<%= f.label :keyword, "Keywords <a href='#' rel='nofollow' id='hoverAnchorKeywords'><img src='/images/new/help.png'></a>" %>
 			<%= f.text_area :keywords, :rows => 3 %>
 		</div>
@@ -119,10 +119,10 @@ jQuery(document).ready(function($){
 		</div>
 		<div class="row">
 			<% if @pitch.new_record? %>
-			<%= get_button("Create a Pitch") %>
+				<%= get_button("Create a Pitch") %>
 			<% else %>
-			<%= get_button("Save") %>
-			<%= get_button("Cancel") %>
+				<%= get_button("Save") %>
+				<%= get_button("Cancel") %>
 			<% end %>
 		</div>
 		<% end %>

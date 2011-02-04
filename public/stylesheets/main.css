@@ -1725,3 +1725,7 @@
 .hoverContainer li a{
 	text-decoration:none;
 }
+
+.spanLink{
+	cursor:pointer;
+}
