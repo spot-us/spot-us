@@ -6,7 +6,8 @@
 		<ul>
 			<%@pitch.supporters.each do |supporter|%>
 				<li>
-					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
@@ -22,7 +23,8 @@
 		<ul>
 			<%@pitch.donating_groups.each do |supporter|%>
 				<li>
-					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
@@ -41,7 +43,8 @@
 		<ul>
 			<%supporters.each do |supporter|%>
 				<li>
-					<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></h2>
+					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
@@ -61,7 +64,8 @@
 				<%if cca && cca.user%>
 					<%supporter = cca.user%>
 					<li>
-						<h2><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), cca_path(cca)%></h2>
+						<%=image_tag(supporter.photo.url(:thumb), {:alt => cca.title})%>
+						<h3><%=link_to cca.title, cca_path(cca)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
 						<%=excerpt?(cca.description, 40)%>
 						<%=link_to "more &rarr;", cca_path(cca)%>
