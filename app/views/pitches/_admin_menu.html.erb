@@ -3,7 +3,7 @@
 		<h3>Author Options</h3>
 		<%if pitch.approvable_by?(current_user)%>
 			<%if pitch.unapproved?%>
-				<%= link_to "Apporove", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
+				<%= link_to "Approve", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
 			<%elsif pitch.active?%>
 				<%= link_to "Unapprove", unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"%>
 			<%end%>
