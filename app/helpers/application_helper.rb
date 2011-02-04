@@ -86,7 +86,7 @@ module ApplicationHelper
   end
 
   def truncate_words(text, length = 30, end_string = '&hellip; ')
-    words = text.split()
+    words = text.split(' ')
     words[0..(length-1)].join(' ') + (words.length > length ? end_string : '')
   end
 
@@ -207,5 +207,10 @@ module ApplicationHelper
     options[:class] = "submitButton"
     submit_tag button_text, options
   end  
+  
+  def excerpt?(text, strip_length=50)
+    text = strip_html(text)
+    text.length>strip_length ? text[0..strip_length].gsub(/\w+$/, '')+"..." : text
+  end
 
 end

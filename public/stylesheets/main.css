@@ -1114,9 +1114,15 @@
 
 /*donors container*/
 
+.donorsContainer h2{
+	clear:both;
+	width:100%;
+}
+
 .donorsContainer ul {
-	margin:0;
+	margin:0px 0px 15px 0px;
 	padding:0;
+	width:100%;
 }
 
 .donorsContainer ul li{
