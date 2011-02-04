@@ -302,6 +302,14 @@
 	color:#e3eeef;	
 }
 
+.loginMenu li.fbConnect{
+	margin-left:5px;
+}
+
+.loginMenu li.fbConnect img{
+	border:0px;
+}
+
 .socialMenu{
 	width:90px;
 	margin-right:4px;
