@@ -1,6 +1,6 @@
 <% apply_fragment ['story_', story] do %>
 	<li>
-		<%=image_tag story.featured_image(:medium), {:alt => h(story.headline)}%>
+		<%=image_tag story.featured_image(:small_hero), {:alt => h(story.headline)}%>
 		<h3><%=link_to story.headline[0..30], story_path(story)%></h3>
 		<div><%=pitch_date(story.created_at)%> by <%=link_to story.user, profile_path(story.user)%></div>
 		<div>Published under Pitch <%= link_to story.pitch.slug?, pitch_url(story.pitch)%></div>

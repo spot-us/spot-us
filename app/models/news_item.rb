@@ -76,7 +76,7 @@ class NewsItem < ActiveRecord::Base
                         :medium => "200x150#", 
                         :front_story => "300x163#", 
                         :medium_alt=>"215x180#", 
-                        :medium_alt_1=>"268x210#" },
+                        :medium_alt_1=>"268x210#", :featured_image => '520x320', :small_hero => '300x165' },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,

@@ -1,6 +1,6 @@
 <% apply_fragment ['cca_list_', cca, current_user] do %>
 	<li>
-		<%=image_tag cca.user.photo(:medium), {:alt => h(cca.title)}%>
+		<%=image_tag cca.user.photo(:small_hero), {:alt => h(cca.title)}%>
 		<h3><%=link_to cca.title[0..30], cca_path(cca)%></h3>
 		<div><%=pitch_date(cca.created_at)%> by <%=link_to cca.user, profile_path(cca.user)%></div>
 		<ul class='donateButtons'>
