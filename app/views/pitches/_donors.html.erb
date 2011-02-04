@@ -12,7 +12,7 @@
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
 			<%unless nrs<number_of_donors%>
-				<span><a href="#">and <%=pitch.supporters.length-nrs%> others...</a></span>
+				<span><%= link_to "and #{pitch.supporters.length-nrs} others...", pitch_path(pitch)+"/donors#individuals"%></span>
 			<%end%>
 		</ul>
 	</div>
@@ -31,7 +31,7 @@
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
 			<%unless nrs<number_of_donors%>
-				<span><a href="#">and <%=pitch.donating_groups.length-nrs%> others...</a></span>
+				<span><%= link_to "and #{pitch.donating_groups.length-nrs} others...", pitch_path(pitch)+"/donors#organizations"%></span>
 			<%end%>
 		</ul>
 	</div>
@@ -53,7 +53,7 @@
 				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
 			<%end%>
 			<%unless nrs<number_of_donors%>
-				<span><a href="#">and <%=supporters.length-nrs%> others...</a></span>
+				<span><%= link_to "and #{supporters.length-nrs} others...", pitch_path(pitch)+"/donors#groups"%></span>
 			<%end%>
 		</ul>
 	</div>
@@ -75,7 +75,7 @@
 				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>
-				<span><a href="#">and <%=donations.length-nrs%> others...</a></span>
+				<span><%= link_to "and #{donations.length-nrs} others...", pitch_path(pitch)+"/donors#cca"%></span>
 			<%end%>
 		</ul>
 	</div>
