@@ -1,7 +1,5 @@
 <%# apply_fragment ['text_button_', news_item, current_user] do %>
-	<% if news_item.fully_funded? %>
-	    <strong>FULLY FUNDED</strong>
-	<% elsif current_user && (current_user.remaining_credits > 0) && (news_item.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(news_item)) %>
+	<% if current_user && (current_user.remaining_credits > 0) && (news_item.total_amount_allocated_by_user(current_user) < current_user.max_donation_for(news_item)) %>
 	    <%= render :partial => 'credits/credit_pitch', :locals => {:news_item => news_item} %>
 	<% elsif show_cca?(@show_cca) && (news_item.funding_needed < Donation::DEFAULT_AMOUNT || (current_user && current_user.max_donation_for(news_item) < Donation::DEFAULT_AMOUNT)) %>
 	    <%= render :partial => 'donations/donate_variable_amount', :locals => {:news_item => news_item, :spotus_lite=>false} %>
