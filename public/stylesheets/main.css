@@ -1028,6 +1028,8 @@
 .summaryContent .descriptionContainer .featuredImage{
 	width:520px;
 	height:320px;
+	border: 2px solid #ccc;
+	text-align:center;
 }
 
 .pitchRightContainer{
