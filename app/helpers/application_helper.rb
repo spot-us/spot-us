@@ -174,7 +174,7 @@ module ApplicationHelper
   def short_date(dt)
       # tn = Time.now
       # if dt.day < tn.day or dt.month < tn.month or dt.year < tn.year #diff > 60  * 60 * (24 / 1.02)
-           dt.strftime("%m.%d.%y")
+           dt.strftime("%m/%d/%y")
       # else
       #    dt.strftime("%l:%M %p").downcase
       # end
