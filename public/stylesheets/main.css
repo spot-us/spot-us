@@ -548,9 +548,14 @@
 	padding:0;
 }
 
-.donateButtons li.fundButton form input, .donateButtons li.fundButton{
+.donateButtons li.fundButton, .donateButtons li.fundButton form input{
 	background-color:#7a9e53;
 	border:none;
+}
+
+.donateButtons li.fundButton form input{
+	width:100%;
+	height:100%;
 }
 
 .donateButtons li.fundButton{
@@ -588,9 +593,13 @@
 
 	/*button styles only for list (story grid) views*/
 
-.storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton,
-.smallFundBox .donateButtons li.fundButton, .smallFundBox .donateButtons li.creditsButton{
+.storyGrid .donateButtons li.creditsButton, .smallFundBox .donateButtons li.creditsButton,
+.storyGrid .donateButtons li.fundButton input, .smallFundBox .donateButtons li.fundButton input{
 	padding:5px 10px;
+}
+
+.storyGrid .donateButtons li.fundButton, .smallFundBox .donateButtons li.fundButton {
+	padding:0px;
 }
 
 .storyGrid .donateButtons li.fundButton form input, .storyGrid .donateButtons li.creditsButton a{
@@ -608,8 +617,12 @@
 }
 	/*button styles only for pitch (fund box) views*/
 
-.fundBox .donateButtons li.fundButton, .fundBox .donateButtons li.creditsButton{
+.fundBox .donateButtons li.creditsButton, .fundBox .donateButtons li.fundButton input{
 	padding:15px;
+}
+
+.fundBox .donateButtons li.fundButton{
+	padding:0px;
 }
 
 .fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a {
