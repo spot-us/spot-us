@@ -818,6 +818,29 @@
 	
 }
 
+.socialSharing ul{
+	width:50%;
+	float:left;
+	position:relative;
+	top:20px;
+}
+
+.socialSharing ul li{
+	display:inline;
+	list-style-type:none;
+	font-size:15px;
+	margin-right:10px;
+}
+
+.socialSharing ul li a{
+	color:#24454f;
+}
+
+.socialSharing ul li a:hover{
+	color:#336e80;
+	cursor:pointer;
+}
+
 .summarySidebar{
 	width:44%;
 	float:right;
