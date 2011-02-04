@@ -89,6 +89,12 @@ class User < ActiveRecord::Base
     def pitch_sum(pitch)
       self.paid.all(:conditions => {:pitch_id => pitch}).map(&:amount).sum
     end
+    def total_amount
+      self.paid.all.map(&:amount).sum
+    end
+    def nr_of_donations
+      self.paid.count
+    end 
   end
 
   has_many :spotus_donations

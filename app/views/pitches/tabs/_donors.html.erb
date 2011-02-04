@@ -9,6 +9,7 @@
 					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
 				
@@ -26,6 +27,7 @@
 					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
 
@@ -46,6 +48,7 @@
 					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 					<span>Joined <%=short_date(supporter.created_at)%></span>
+					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
 					<%=excerpt?(supporter.get_about_you, 40)%>
 					<%=link_to "more &rarr;", profile_path(supporter)%>
 
@@ -67,6 +70,7 @@
 						<%=image_tag(supporter.photo.url(:thumb), {:alt => cca.title})%>
 						<h3><%=link_to cca.title, cca_path(cca)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
+						<h4>Contributed <%=number_to_currency(donation.cca_total_amount)%></h4>
 						<%=excerpt?(cca.description, 40)%>
 						<%=link_to "more &rarr;", cca_path(cca)%>
 
