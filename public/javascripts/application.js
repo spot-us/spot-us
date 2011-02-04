@@ -328,7 +328,6 @@ jQuery(document).ajaxComplete(function(options, r) {
 function processLoginForm(){
 	pw   = jQuery('#passwordField').val();
 	pw_e = encode64(pw);
-	alert(pw);
 	jQuery('#passwordHiddenField').val(pw_e);
 }
 
