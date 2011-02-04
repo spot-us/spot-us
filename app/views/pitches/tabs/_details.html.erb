@@ -6,8 +6,10 @@
 		</div>
 	<% end %>
 	
-	<%= image_tag(@pitch.featured_image.url(:featured_image), :class => "featuredImage") if @pitch.video_embed.blank? %>
-
+	<div class="featuredImage">
+		<%= image_tag(@pitch.featured_image.url(:featured_image)) if @pitch.video_embed.blank? %>
+	</div>
+	
 	<div class="shortDescription">
 		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
 	</div>
