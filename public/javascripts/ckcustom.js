@@ -54,7 +54,7 @@ CKEDITOR.editorConfig = function( config )
     [
         ['PasteText','PasteFromWord','Bold','Italic','Underline',
         'NumberedList','BulletedList','Image','Embed'], 
-        ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image']
+        ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image','Source']
     ];
   config.toolbar_Basic =
     [
