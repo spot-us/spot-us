@@ -1,34 +1,32 @@
-<%if is_admin?%>
+<%if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
 	<div class='adminMenu'>
 		<h3>Author Options</h3>
-		<%if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
-			<%if pitch.approvable_by?(current_user)%>
-				<%if pitch.unapproved?%>
-					<%= link_to "Apporove", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
-				<%elsif pitch.active?%>
-					<%= link_to "Unapprove", unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"%>
-				<%end%>
+		<%if pitch.approvable_by?(current_user)%>
+			<%if pitch.unapproved?%>
+				<%= link_to "Apporove", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>
+			<%elsif pitch.active?%>
+				<%= link_to "Unapprove", unapprove_admin_pitch_path(pitch), :method => :put, :title => "Un-approve This Pitch"%>
 			<%end%>
-			<%if pitch.editable_by?(current_user)%>
-				<%= link_to "Edit this pitch", edit_pitch_path(pitch), :title => "Edit This Pitch"%>
+		<%end%>
+		<%if pitch.editable_by?(current_user)%>
+			<%= link_to "Edit this pitch", edit_pitch_path(pitch), :title => "Edit This Pitch"%>
+		<%end%>
+		<%if pitch.featureable_by?(current_user)%>
+			<%if pitch.featured?%>
+				<%= link_to "Feature", unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
+			<%else%>
+				<%= link_to "Unfeature", feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
 			<%end%>
-			<%if pitch.featureable_by?(current_user)%>
-				<%if pitch.featured?%>
-					<%= link_to "Feature", unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
-				<%else%>
-					<%= link_to "Unfeature", feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
-				<%end%>
+		<%end%>
+		<%if pitch.postable_by?(current_user)%>
+			<%if !defined?(post) || !post%>
+				<%= link_to "Write a story update", new_pitch_post_path(pitch), :title => "Make Story Update" %>
+			<%else%>
+				<%= link_to "Edit story update", edit_pitch_post_path(pitch, post), :title => "Edit Story Update" %>
 			<%end%>
-			<%if pitch.postable_by?(current_user)%>
-				<%if !defined?(post) || !post%>
-					<%= link_to "Write a story update", new_pitch_post_path(pitch), :title => "Make Story Update" %>
-				<%else%>
-					<%= link_to "Edit story update", edit_pitch_post_path(pitch, post), :title => "Edit Story Update" %>
-				<%end%>
-			<%end%>
-			<%if pitch.assignable_by?(current_user)%>
-				<%= link_to "Create an assignment", new_pitch_assignment_path(pitch), :title => "Make Assignment"%>
-			<%end%>
+		<%end%>
+		<%if pitch.assignable_by?(current_user)%>
+			<%= link_to "Create an assignment", new_pitch_assignment_path(pitch), :title => "Make Assignment"%>
 		<%end%>
 		<%if (current_user == pitch.user && !pitch.story)%>
 			<%= link_to "Create the story", begin_story_pitch_path(pitch), :title => "begin your story draft"%>
