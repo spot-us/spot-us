@@ -62,6 +62,12 @@ CKEDITOR.editorConfig = function( config )
         'NumberedList','BulletedList'], 
         ['JustifyLeft','JustifyCenter','JustifyRight','Link','Unlink','Image']
     ];
+
+	config.toolbar_Simple =
+	    [
+	        ['Bold','Italic','Underline','NumberedList','BulletedList', 'Link','Unlink']
+	    ];
+	
 	config.linkShowAdvancedTab = false;
 	// config.resize_maxWidth = 500;
 	// config.resize_minWidth = 500;

@@ -88,6 +88,7 @@ class NewsItem < ActiveRecord::Base
                     :default_url => "/images/featured_images/missing_:style.png"
 
   validates_presence_of :headline, :user_id
+  validates_length_of :slug, :within => 15..30, :message => "Your slug has to be between 15-30 characters long"
 
   unless Rails.env.development?
     validates_attachment_content_type :featured_image,
@@ -283,12 +284,34 @@ class NewsItem < ActiveRecord::Base
   end
 
   def clean_columns
-	options = {}
-	self.extended_description 		= self.extended_description.sanitize(options) if self.extended_description
-	self.short_description 			  = self.short_description.sanitize(options) if self.short_description
-	self.skills 					        = self.skills.sanitize(options) if self.skills
-	self.delivery_description 		= self.delivery_description.sanitize(options) if self.delivery_description
-
+  	options = {}
+  	self.extended_description 		= self.extended_description.sanitize(options) if self.extended_description
+  	self.short_description 			  = self.short_description.sanitize(options) if self.short_description
+  	self.skills 					        = self.skills.sanitize(options) if self.skills
+  	self.delivery_description 		= self.delivery_description.sanitize(options) if self.delivery_description
+  end
+  
+  def excerpt?
+    return excerpt unless excerpt.blank?
+    if short_description
+      short_body = short_description.gsub(/<\/?[^>]*>/, "")
+      short_body = body[0..500].gsub(/\w+$/, '')+"..." if short_body.length>500
+    else
+      short_body = ""
+    end
+    
+    return short_body
+  end
+  
+  def slug?
+    return slug unless slug.blank?
+    if headline
+      short_headline = headline.length>30 ? headline[0..30].gsub(/\w+$/, '')+"..." : headline
+    else
+      short_headline = ""
+    end
+    
+    return short_headline
   end
 
 end
