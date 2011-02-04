@@ -758,6 +758,8 @@
 	padding:0px;
 	position:relative;
 	top:-10px;
+	color:#000;
+	text-shadow:#fff 0px 0px 1px;
 }
 
 
@@ -1374,10 +1376,9 @@
 
 /*create or edit a pitch sidebar*/
 .createPitchSidebar{
-	width:350px;
+	width:38%;
 	float:right;
-	margin-left:20px;
-	padding:20px;
+	padding:10px;
 }
 
 .createPitchSidebar p{
