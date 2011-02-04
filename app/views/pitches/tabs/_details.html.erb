@@ -1,9 +1,37 @@
 <div class="pitchLeftContainer">
-	<h2>Qualifications</h2>
+	
+	<% if !@pitch.video_embed.blank? %>
+		<div class="videoContainer">
+			<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+		</div>
+	<% end %>
+	
+	<div class="featuredImage">
+		<%= image_tag(@pitch.featured_image.url(:featured_image)) if @pitch.video_embed.blank? %>
+	</div>
+	
+	<div class="shortDescription">
+		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
+	</div>
+
+	<% unless @pitch.extended_description.blank? %>
+		<h2>How will it help?</h2>
+		<%= @pitch.extended_description %>
+	<% end %>
+	
+	<%if @pitch.skills%>
+		<h2>Qualifications</h2>
 		<%= @pitch.skills %>
-	<h2>Delilverables</h2>
+	<%end%>
+	
+	<%if @pitch.delivery_description%>
+		<h2>Deliverables</h2>
 		<%= @pitch.delivery_description %>
-	<h2>Disclaimers</h2>
-	<%= @pitch.disclosure %>
+	<%end%>
+	
+	<%if @pitch.disclosure%>	
+		<h2>Disclaimers</h2>
+		<%= @pitch.disclosure %>
+	<%end%>
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>

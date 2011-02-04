@@ -5,7 +5,9 @@
 		</div>
 	<% end %>
 	<div class="descriptionContainer">
-		<%= image_tag(@pitch.featured_image.url(:medium), :class => "featured_image") %>
+		<div class="featuredImage">
+			<%= image_tag(@pitch.featured_image.url(:featured_image)) if @pitch.video_embed.blank? %>
+		</div>
 		<div class="shortDescription">
 			<%= transform_embed_code(@pitch.excerpt?, 520, 320) %>
 		</div>

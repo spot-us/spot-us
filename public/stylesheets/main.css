@@ -1025,6 +1025,14 @@
 	padding:0 0 14px;
 }
 
+.summaryContent .descriptionContainer .featuredImage{
+	width:520px;
+	height:320px;
+	border: 2px solid #ccc;
+	background:#eee;
+	text-align:center;
+}
+
 .pitchRightContainer{
 	width:28.5%;
 	border-left:1px solid #ccc;
