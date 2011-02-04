@@ -808,7 +808,7 @@
 	font-size:20px;
 }
 
-.summaryContent p{
+.summaryContent p, .shortDescription, .extendedDescription{
 	font-family:Georgia, times, serif;
 	color:#000;
 	font-size:18px;
