@@ -1,6 +1,6 @@
 <% apply_fragment ['post_', post] do %>
 	<li>
-		<%=image_tag post.blog_image_display(:small_hero), {:alt => h(post.title)}%>
+		<%=link_to image_tag(post.blog_image_display(:small_hero), {:alt => h(post.title)}), pitch_post_path(post.pitch, post), {:rel=>"nofollow"}%>
 		<h3><%=link_to post.slug?, pitch_post_path(post.pitch, post)%></h3>
 		<div><%=pitch_date(post.created_at)%> by <%=link_to post.user, profile_path(post.user)%></div>
 		<div>Posted under Pitch <%= link_to post.pitch.slug?, pitch_url(post.pitch)%></div>

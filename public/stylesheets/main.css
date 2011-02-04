@@ -1025,7 +1025,7 @@
 	padding:0 0 14px;
 }
 
-.summaryContent .descriptionContainer .featuredImage{
+.featuredImage{
 	width:520px;
 	height:320px;
 	border: 2px solid #ccc;
