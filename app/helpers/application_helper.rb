@@ -203,8 +203,9 @@ module ApplicationHelper
     "cache/#{names.join('_')}"
   end
   
-  def get_button(button_text)
-    submit_tag button_text, {:class => 'submitButton'}
+  def get_button(button_text, options={})
+    options[:class] = "submitButton"
+    submit_tag button_text, options
   end  
 
 end
