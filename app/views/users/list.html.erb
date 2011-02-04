@@ -4,25 +4,29 @@
 
 <% @title = "Spot.us - Fund A Story" %>
 
-<div id="fund_a_story">
-	<div id="navigation">
-		<%=render :partial=>"shared/filters", :locals=>{
-			:title=>"Browse Contributors",
-			:url_base=>"/contributors",
-			:filters=>FILTERS_CONTRIBUTORS
-		}%>
-	</div>
-	<div id="stories">
-		<%= link_to image_tag("/images/new_design/rss_16.png"), "/donors.rss", :class => "rss_button" %>
-		<h3 class="display_inline">NOW VIEWING:</h3> 
-		<h4 class="display_inline">Spot.Us <%= @filter.gsub("_", " ").gsub("-", " ").titleize %> <%=get_inside_network_text(@network).titleize%></h4>
-		<div style="height: 5px; background-color: rgb(204, 204, 204); margin-bottom: 10px;">
-			&nbsp;
-		</div>
-		<%=render :partial=>"shared/lists", :locals=>{ 
-			:items=>@items, 
-			:template_name=>'item',
-			:no_items_message=>"There were no results for your search.  Try different search terms." 
-		}%>
-	</div>
+<ul class="tabs">
+	<li <%if @filter=='donated' || @filter.blank?%>class="current"<%end%>><a href="/contributors/contributors/">Donors</a></li>
+	<li <%if @filter=='donated-most'%>class="current"<%end%>><a href="/contributors/donated-most">Donated Most</a></li>
+	<li <%if @filter=='organizations'%>class="current"<%end%>><a href="/contributors/organizations">Organizations</a></li>
+	<li <%if @filter=='reporters'%>class="current"<%end%>><a href="/contributors/reporters">Reporters</a></li>
+</ul>
+
+<div class="donorsContainer">
+
+	<ul>
+		<%@items.each do |donation|%>
+			<%supporter = donation.user%>
+			<li>
+				<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+				<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
+				<span>Joined <%=short_date(supporter.created_at)%></span>
+				<%=excerpt?(supporter.get_about_you, 40)%>
+				<%=link_to "more &rarr;", profile_path(supporter)%>
+			
+			</li>
+		<%end%>
+	</ul>
+
+	<%=will_paginate @items%>
+		
 </div>
