@@ -1,3 +1,3 @@
-#run "cd #{current_path} && rake ts:stop"
-#run "cd #{current_path} && rake ts:index"
-#run "cd #{current_path} && rake ts:start"
+run "cd #{latest_release} && rake ts:stop"
+run "cd #{latest_release} && rake ts:index"
+run "cd #{latest_release} && rake ts:start"
