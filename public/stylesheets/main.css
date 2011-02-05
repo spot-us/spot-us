@@ -1562,6 +1562,11 @@
 	float:right;
 }
 
+.loginForms .formContainer.login .formBody{
+	background-color:#fff;
+	border:none;
+}
+
 .loginForms .formContainer.register{
 	float:left;
 }
