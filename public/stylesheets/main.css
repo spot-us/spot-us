@@ -1100,6 +1100,10 @@
 	margin-right:30px;
 }
 
+.donorsContainer.community{
+	width:100%;
+}
+
 .pitchLeftContainer ul{
 	margin-left:40px;
 	font-family:Georgia, times, serif;
@@ -1225,6 +1229,10 @@
 	border-bottom:1px dotted #ccc;
 	padding:0px 20px 20px 0px;
 	margin-top:10px;
+}
+
+.donorsContainer.community ul li {
+	width:30%;
 }
 
 .donorsContainer ul li img{
