@@ -12,6 +12,7 @@ class StoriesController < ApplicationController
   
   def show
     @story = find_resource
+    @pitch = @story.pitch
     respond_to do |format|
       format.html do
       end

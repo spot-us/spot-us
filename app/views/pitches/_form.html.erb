@@ -11,6 +11,7 @@ jQuery(document).ready(function($){
 <% form_for(@pitch, :html => { :multipart => true }) do |f| %>
 <div class="formContainer">
 	<div class="formBody">
+		<%=yield :error%>
 		<div class="row top">
 			<h2 class="top">Basics</h2>
 			<%= f.label     :headline, "Headline <span class='required'>

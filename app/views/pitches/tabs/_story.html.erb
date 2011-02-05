@@ -1,13 +1,41 @@
 <%= render :partial => "/pitches/pitch_head" %>
 <div class="pitchLeftContainer">
 	<h2>Story</h2>
-	<%# apply_fragment ['story_', @pitch.story] do %>
-		<li>
-			<%=image_tag @pitch.story.featured_image(:medium), {:alt => h(@pitch.story.headline)}%>
-			<h3><%=link_to @pitch.story.headline[0..30], story_path(@pitch.story)%></h3>
-			<div><%=pitch_date(@pitch.story.created_at)%> by <%=link_to @pitch.story.user, profile_path(@pitch.story.user)%></div>
-			<div>Published under Pitch <%= link_to @pitch.headline, pitch_url(@pitch)%></div>
-		</li>
-	<%#end%>
+	
+	<% unless @story.video_embed.blank? %>
+		<div class="videoContainer">
+			<%= transform_embed_code(@story.video_embed, 520, 320) %>
+		</div>
+	<% else %>
+		<div class="featuredImage">
+			<%= image_tag(@story.featured_image.url(:featured_image)) %>
+		</div>
+	<%end%>
+
+	<div class="shortDescription">
+		<%= transform_embed_code(@story.extended_description, 520, 320) %>
+	</div>
+
+	<%unless @story.external_links.blank?%>
+		<h2>External Links</h2>
+		<%= @story.external_links %>
+	<%end%>
+
+	<%unless @pitch.keywords.blank? %>
+		<h2>Keywords</h2>
+		<%= @pitch.keywords %>
+	<%end%>
+
+	<%unless @story.license.blank?%>	
+		<h2>License</h2>
+		<%= @story.license %>
+	<%end%>
+
+	<% if logged_in? %>
+		<div class="publishingButtons"> <!-- My guess is that this will become a ul but for now... -->
+			<%= publishing_workflow_buttons_for(current_user) %>
+		</div>
+	<% end %>
+	
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>

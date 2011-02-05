@@ -1,115 +1,160 @@
 <!-- SHOW STORY -->
 <% @title = "Spot.us - Story: #{h @story.headline}" %>
+<%= render :partial => "pitches/tabs"%>
 
-<div id="news_item" class="pitch_container clearfix">
-	<div class="pitch_left">
-		<div class="small_header">
-			<div class="share_buttons">
-				<%= render :partial => "/shared/social_buttons" %>
-			</div>
-			<%= link_to @story.pitch.user.full_name, profile_path(@story.pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@story.created_at) %>
-		</div>
-		<h1><%= h @story.headline %></h1>
+<div class="pitchContainer">
 
-		<br class="clear"/>
+	<div class="pitchLeftContainer">
+	
 		<% unless @story.video_embed.blank? %>
-			<div class="media_embed">
+			<div class="videoContainer">
 				<%= transform_embed_code(@story.video_embed, 520, 320) %>
 			</div>
-		<% end %>
-		<div class="clearfix story_content">
-			<%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
-			<%= @story.extended_description %>
+		<% else %>
+			<div class="featuredImage">
+				<%= image_tag(@story.featured_image.url(:featured_image)) %>
+			</div>
+		<%end%>
+	
+		<div class="shortDescription">
+			<%= transform_embed_code(@story.extended_description, 520, 320) %>
 		</div>
-		<h5 class="generic">Comments</h5>
-		<div id="comments">
-			<% if @story.comments.any? %>							
-					<% @story.comments.each do |comment| %>
-						<a name="<%=comment.id%>"/>
-						<div class="comment clearfix <%=cycle(' even',' odd')%>">
-							<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
-							<div class="contents">
-								<h5><%= comment.title %></h5>
-								<%= link_to comment.user.full_name, profile_path(comment.user), :class => "author" %>
-								<div class="comment_body">
-									<div class="date"><%= medium_date(comment.created_at) %></div>
-									<%= comment.body %>
+	
+		<%unless @story.external_links.blank?%>
+			<h2>External Links</h2>
+			<%= @story.external_links %>
+		<%end%>
+	
+		<%unless @pitch.keywords.blank? %>
+			<h2>Keywords</h2>
+			<%= @pitch.keywords %>
+		<%end%>
+	
+		<%unless @story.license.blank?%>	
+			<h2>License</h2>
+			<%= @story.license %>
+		<%end%>
+	
+		<% if logged_in? %>
+			<div class="publishingButtons"> <!-- My guess is that this will become a ul but for now... -->
+				<%= publishing_workflow_buttons_for(current_user) %>
+			</div>
+		<% end %>
+	</div>
+	<%#=render :partial => "pitches/sidebars/wide"%>
+</div>
+
+<%if false%>
+	<div id="news_item" class="pitch_container clearfix">
+		<div class="pitch_left">
+			<div class="small_header">
+				<div class="share_buttons">
+					<%= render :partial => "/shared/social_buttons" %>
+				</div>
+				<%= link_to @story.pitch.user.full_name, profile_path(@story.pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@story.created_at) %>
+			</div>
+			<h1><%= h @story.headline %></h1>
+
+			<br class="clear"/>
+			<% unless @story.video_embed.blank? %>
+				<div class="media_embed">
+					<%= transform_embed_code(@story.video_embed, 520, 320) %>
+				</div>
+			<% end %>
+			<div class="clearfix story_content">
+				<%= render :partial => 'news_items/featured_image', :locals => {:news_item => @story} %>
+				<%= @story.extended_description %>
+			</div>
+			<h5 class="generic">Comments</h5>
+			<div id="comments">
+				<% if @story.comments.any? %>							
+						<% @story.comments.each do |comment| %>
+							<a name="<%=comment.id%>"/>
+							<div class="comment clearfix <%=cycle(' even',' odd')%>">
+								<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
+								<div class="contents">
+									<h5><%= comment.title %></h5>
+									<%= link_to comment.user.full_name, profile_path(comment.user), :class => "author" %>
+									<div class="comment_body">
+										<div class="date"><%= medium_date(comment.created_at) %></div>
+										<%= comment.body %>
+									</div>
 								</div>
 							</div>
-						</div>
+						<% end %>
+						<% if !@story.comments.any? %>
+							<div>There are no comments yet, be the first!</div>
+						<% end %>
+				<% end %>
+				<div class="post_comment">
+					<h5>Post A Comment</h5>
+					<% form_for [@story, Comment.new(:commentable => @story)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
+						<%= render :partial => 'comments/form', :locals => {:f => f} %>
 					<% end %>
-					<% if !@story.comments.any? %>
-						<div>There are no comments yet, be the first!</div>
-					<% end %>
-			<% end %>
-			<div class="post_comment">
-				<h5>Post A Comment</h5>
-				<% form_for [@story, Comment.new(:commentable => @story)], :html => { :id => 'comments_form', :class => "auth" } do |f| %>
-					<%= render :partial => 'comments/form', :locals => {:f => f} %>
+				</div>
+			</div>
+			<div class="story_info">
+				<% unless @story.external_links.blank? %>
+					<h5 class="generic">External Links</h5>
+					<div>
+						<%= @story.external_links %>
+					</div>
+				<% end %>
+				<% unless @story.pitch.keywords.blank? %>
+					<h5 class="generic">Keywords</h5>
+					<div class="keywords">
+						<%= h @story.pitch.keywords %>
+					</div>
+				<% end %>
+				<% unless @story.license.blank? %>
+					<h5 class="generic">License</h5>
+					<div>
+						<%= @story.license %>
+					</div>
+				<% end %>
+				<% if logged_in? %>
+					<br/>
+					<%= publishing_workflow_buttons_for(current_user) %>
 				<% end %>
 			</div>
 		</div>
-		<div class="story_info">
-			<% unless @story.external_links.blank? %>
-				<h5 class="generic">External Links</h5>
-				<div>
-					<%= @story.external_links %>
-				</div>
-			<% end %>
-			<% unless @story.pitch.keywords.blank? %>
-				<h5 class="generic">Keywords</h5>
-				<div class="keywords">
-					<%= h @story.pitch.keywords %>
-				</div>
-			<% end %>
-			<% unless @story.license.blank? %>
-				<h5 class="generic">License</h5>
-				<div>
-					<%= @story.license %>
-				</div>
-			<% end %>
-			<% if logged_in? %>
-				<br/>
-				<%= publishing_workflow_buttons_for(current_user) %>
-			<% end %>
-		</div>
-	</div>
 	
-	<div class="pitch_right">
-		<div class="blue_panel">
-			<div class="pitch_author clearfix">
-				<%= link_to image_tag(@story.pitch.user.photo(:thumb), :class => "avatar"), profile_path(@story.pitch.user) %>
-				<em>Author</em><br/>
-				<%= link_to @story.pitch.user.full_name, profile_path(@story.pitch.user), :class => "username" %><br/>
-				<% if @story.pitch.peer_reviewer %>
-					<em class="peer_reviewer">Peer review: 
-						<strong><%= link_to(h(@story.pitch.peer_reviewer.full_name), profile_path(@story.pitch.peer_reviewer)) %></strong>
-					</em>
-				<% end %>
+		<div class="pitch_right">
+			<div class="blue_panel">
+				<div class="pitch_author clearfix">
+					<%= link_to image_tag(@story.pitch.user.photo(:thumb), :class => "avatar"), profile_path(@story.pitch.user) %>
+					<em>Author</em><br/>
+					<%= link_to @story.pitch.user.full_name, profile_path(@story.pitch.user), :class => "username" %><br/>
+					<% if @story.pitch.peer_reviewer %>
+						<em class="peer_reviewer">Peer review: 
+							<strong><%= link_to(h(@story.pitch.peer_reviewer.full_name), profile_path(@story.pitch.peer_reviewer)) %></strong>
+						</em>
+					<% end %>
+				</div>
 			</div>
-		</div>
-		<div class="blue_panel original_pitch">
-			<h5>Original pitch:</h5>
-			<h3><%= link_to h(@story.pitch.headline), @story.pitch %></h3>
-			<div class="date_published">posted <%= pitch_date(@story.pitch.created_at) %></div>
-			<h5>Excerpt:</h5>
-			<p class="pitch_description">
-				<%= truncate_words(strip_tags(@story.pitch.short_description), 30) %>
+			<div class="blue_panel original_pitch">
+				<h5>Original pitch:</h5>
+				<h3><%= link_to h(@story.pitch.headline), @story.pitch %></h3>
+				<div class="date_published">posted <%= pitch_date(@story.pitch.created_at) %></div>
+				<h5>Excerpt:</h5>
+				<p class="pitch_description">
+					<%= truncate_words(strip_tags(@story.pitch.short_description), 30) %>
 				
-			</p>
-			<strong><%= link_to 'Read the original pitch', @story.pitch %></strong>
-		</div>
-		<div id="supporters">
-			<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @story.pitch} %>
-			<%= render :partial => "pitches/group_supporters", :locals => {:news_item => @story.pitch} %>
-			<div class="public_support">
-				<%= render :partial => "pitches/supporters", :locals => {:news_item => @story.pitch} %>
+				</p>
+				<strong><%= link_to 'Read the original pitch', @story.pitch %></strong>
 			</div>
-		</div>
-		<div style="clear:both;"></div>
-		<div class="blue_panel original_pitch">
-			<h5>MediaBugs: Report An Error</h5>
-			<a href="#" onclick="reportMediaBug('<%=h @story.headline%>','Spot.Us','<%=h @story.pitch.user.full_name%>','<%=h report_an_error_date(@story.created_at)%>','<%=h story_path(@story, {:only_path=>false})%>');">Send your report</a>
+			<div id="supporters">
+				<%= render :partial => "news_items/organizational_supporters", :locals => {:news_item => @story.pitch} %>
+				<%= render :partial => "pitches/group_supporters", :locals => {:news_item => @story.pitch} %>
+				<div class="public_support">
+					<%= render :partial => "pitches/supporters", :locals => {:news_item => @story.pitch} %>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			<div class="blue_panel original_pitch">
+				<h5>MediaBugs: Report An Error</h5>
+				<a href="#" onclick="reportMediaBug('<%=h @story.headline%>','Spot.Us','<%=h @story.pitch.user.full_name%>','<%=h report_an_error_date(@story.created_at)%>','<%=h story_path(@story, {:only_path=>false})%>');">Send your report</a>
+			</div>
 		</div>
 	</div>
-</div>
+<%end%>

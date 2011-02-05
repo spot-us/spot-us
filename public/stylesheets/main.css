@@ -302,6 +302,14 @@
 	color:#e3eeef;	
 }
 
+.loginMenu li.fbConnect{
+	margin-left:5px;
+}
+
+.loginMenu li.fbConnect img{
+	border:0px;
+}
+
 .socialMenu{
 	width:90px;
 	margin-right:4px;
@@ -548,9 +556,14 @@
 	padding:0;
 }
 
-.donateButtons li.fundButton form input, .donateButtons li.fundButton{
+.donateButtons li.fundButton, .donateButtons li.fundButton form input{
 	background-color:#7a9e53;
 	border:none;
+}
+
+.donateButtons li.fundButton form input{
+	width:100%;
+	height:100%;
 }
 
 .donateButtons li.fundButton{
@@ -588,9 +601,13 @@
 
 	/*button styles only for list (story grid) views*/
 
-.storyGrid .donateButtons li.fundButton, .storyGrid .donateButtons li.creditsButton,
-.smallFundBox .donateButtons li.fundButton, .smallFundBox .donateButtons li.creditsButton{
+.storyGrid .donateButtons li.creditsButton, .smallFundBox .donateButtons li.creditsButton,
+.storyGrid .donateButtons li.fundButton input, .smallFundBox .donateButtons li.fundButton input{
 	padding:5px 10px;
+}
+
+.storyGrid .donateButtons li.fundButton, .smallFundBox .donateButtons li.fundButton {
+	padding:0px;
 }
 
 .storyGrid .donateButtons li.fundButton form input, .storyGrid .donateButtons li.creditsButton a{
@@ -608,8 +625,12 @@
 }
 	/*button styles only for pitch (fund box) views*/
 
-.fundBox .donateButtons li.fundButton, .fundBox .donateButtons li.creditsButton{
+.fundBox .donateButtons li.creditsButton, .fundBox .donateButtons li.fundButton input{
 	padding:15px;
+}
+
+.fundBox .donateButtons li.fundButton{
+	padding:0px;
 }
 
 .fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a {
@@ -787,7 +808,7 @@
 	font-size:20px;
 }
 
-.summaryContent p{
+.summaryContent p, .shortDescription, .extendedDescription{
 	font-family:Georgia, times, serif;
 	color:#000;
 	font-size:18px;
@@ -795,6 +816,29 @@
 	margin-bottom:10px;
 	text-shadow: #fff 0px 0px 1px;
 	
+}
+
+.socialSharing ul{
+	width:50%;
+	float:left;
+	position:relative;
+	top:20px;
+}
+
+.socialSharing ul li{
+	display:inline;
+	list-style-type:none;
+	font-size:15px;
+	margin-right:10px;
+}
+
+.socialSharing ul li a{
+	color:#24454f;
+}
+
+.socialSharing ul li a:hover{
+	color:#336e80;
+	cursor:pointer;
 }
 
 .summarySidebar{
@@ -1009,6 +1053,45 @@
 
 /*end pitch page*/
 
+/*widget*/
+
+.widget{
+	width:300px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	background-color:#24454f;
+}
+
+.widget h1{
+	text-indent:-2000px;
+	/*background-image:url('/images/new/headerbg.png');*/
+	background-repeat:x;
+	padding:10px;
+	height:30px;
+}
+
+.widget h1 a{
+	text-indent:-2000px;
+	background-image:url('/images/new/spotuslogosmall.png');
+	background-repeat:no-repeat;
+	width:100%;
+	display:block;
+}
+
+.widgetContent{
+	width:98%;
+	margin:0px auto;
+	background-color:#f6f8f6;
+}
+
+.widgetContent h2{
+	font-size:22px;
+	color:#000;
+	padding:10px;
+}
+
+/*end widget*/
+
 /*pitch sub-pages (tabs)*/
 .pitchLeftContainer, .discussionContainer, .updateContainer, .donorsContainer{
 	width:68%;
@@ -1025,7 +1108,7 @@
 	padding:0 0 14px;
 }
 
-.summaryContent .descriptionContainer .featuredImage{
+.featuredImage{
 	width:520px;
 	height:320px;
 	border: 2px solid #ccc;

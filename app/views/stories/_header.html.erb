@@ -1,0 +1,24 @@
+<%unless @story.new_record?%>
+	<div class="headlineByline">
+		<h1><%=link_to h(@story.headline), story_path(@story) %><!--erik, this needs to link to the summary tab. help?--></h1>
+		<ul>
+			<li>	
+				<%= link_to image_tag(@story.user.photo(:thumb)), profile_path(@story.user) %>
+				By <%= link_to @story.user.full_name, profile_path(@story.user) %>
+			</li>
+			<% if @story.peer_reviewer %>
+				<li>
+					Peer review by <%= link_to @story.user.full_name, profile_path(@story.user) %>
+				</li>
+			<%end%>
+		</ul>
+	</div>
+	<div class="fundingStatus">
+		<h3 class="published">Published</h3>
+	</div>
+<%else%>
+	<div class="headerTitle">
+		<h1>Publish A Story</h1>
+		<p>Getting started with a pitch is a piece of cake!</p>
+	</div>
+<%end%>

@@ -15,7 +15,7 @@
 		</li><!--end searchBox-->
 		<li>	
 			<ul class="socialMenu">
-				<li><a href="http://blog.spot.us"><img src="/images/new/rss_w18.png"></a></li>
+				<li><a href="http://blog.spot.us"><img src="/images/new/blog_w18.png"></a></li>
 				<li><a href="hhttp://www.flickr.com/photos/29792566@N08/"><img src="/images/new/flickr_w18.png"></a></li>
 				<li><a href="http://www.twitter.com/spotus"><img src="/images/new/twitter_w18.png"></a></li>
 				<li><a href="http://www.facebook.com/pages/SpotUs/74947774190"><img src="/images/new/facebook_w18.png"></a></li>
@@ -26,7 +26,8 @@
 				<li><a href="#" rel='nofollow' id='hoverAnchorLearnMore'>Learn More</a></li>
 				<li class="menuSeparator">&nbsp;</li>
 				<%unless current_user%>
-					<li><a href="/user/new">Join</a> or <a href="/session/new">Log in</a> <img src="/images/new_design/fb_icon.png?1294988243" width="12"> Connect </li>
+					<li class="fbConnect"><img src="/images/new/fbConnect.png"></li>
+					<li><a href="/user/new">Join</a> or <a href="/session/new">Log in</a></li>
 				<%else%>
 					<li class="menuSeparator">&nbsp;</li>
 					<li><%=link_to 'Logout', '/logout', {:class=>'logoutLink'}%></li>

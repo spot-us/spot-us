@@ -295,7 +295,7 @@ class NewsItem < ActiveRecord::Base
     return excerpt unless excerpt.blank?
     if short_description
       short_body = short_description.gsub(/<\/?[^>]*>/, "")
-      short_body = short_description[0..500].gsub(/\w+$/, '')+"..." if short_body.length>500
+      short_body = short_description[0..1000].gsub(/\w+$/, '')+"..." if short_body.length>1000
     else
       short_body = ""
     end

@@ -40,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
     pitch.connect ":tab", :controller => "pitches", :action => "show", :requirements => { :tab => /summary|story|updates|discussion|assignments|donors|details|story/  }
     pitch.resources :posts, :except => [:index], :as => 'updates'
     pitch.resources :comments, :except => [:index, :show]
+    pitch.resources :stories, :singleton => true
     pitch.resources :assignments, :except => [:index], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
   end
   map.connect "pitches/:id/blog_posts", :controller => "pitches", :action => "index", :tab=>'posts'
