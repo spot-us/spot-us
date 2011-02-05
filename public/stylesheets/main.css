@@ -474,6 +474,7 @@
 
 .subFilterContainer ul li.filterName{
 	font-weight:bold;
+	margin-right:20px;
 }
 
 .subFilterContainer ul li .currentFilter{
