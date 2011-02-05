@@ -26,6 +26,7 @@ FILTERS_STORIES["funded"]="Funded"
 FILTERS_STORIES["published"]="Published"
 FILTERS_STORIES["suggested"]="Suggested"
 FILTERS_STORIES["updates"]="Updates"
+FILTERS_STORIES["recent"]="Recent"
 FILTERS_STORIES_STRING = FILTERS_STORIES.collect{ |key, value| key}.join('|')
 
 FILTERS_CONTRIBUTORS = ActiveSupport::OrderedHash.new

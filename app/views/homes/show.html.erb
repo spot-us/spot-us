@@ -1,6 +1,7 @@
 <% @title = "Spot.us - Home" %>
 <ul class="tabs">
-	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/unfunded">Unfunded</a></li>
+	<li <%if @filter=='featured'%>class="current"<%end%>><a href="/">Featured</a></li>
+	<li <%if @filter=='recent'%>class="current"<%end%>><a href="/recent">Recent</a></li>
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>

@@ -133,8 +133,8 @@ class Pitch < NewsItem
   after_create :send_admin_notification, :create_peer_editor_assignment
   after_save :check_if_funded_state, :dispatch_fact_checker
 
+  
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
-  named_scope :featured, :conditions => {:feature => true}, :order => 'RAND()'
   named_scope :sorted, lambda {|direction| { :order => "news_items.created_at #{direction}" } }
   named_scope :without_a_story, :conditions => 'news_items.id NOT IN (SELECT news_item_id FROM news_items WHERE news_items.type = "Story" AND news_items.status = "published")'
   #named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
