@@ -50,6 +50,9 @@ class User < ActiveRecord::Base
   TYPES = ["Citizen", "Reporter", "Organization", "Admin", "Sponsor"]
   CREATABLE_TYPES = TYPES - ["Admin"]
 
+  cattr_accessor :per_page
+  @@per_page = 10
+  
   aasm_column :status
   aasm_state :inactive
   aasm_state :active
@@ -163,6 +166,15 @@ class User < ActiveRecord::Base
   named_scope :approved_news_orgs, :conditions => {:status => 'approved'}
   named_scope :unapproved_news_orgs, :conditions => {:status => 'needs_approval'}
   named_scope :sponsors_and_admins, :conditions => 'type="Admin" OR type="Sponsor"'
+  
+  define_index do
+    indexes about_you, :sortable => true
+    indexes first_name, :sortable => true
+    indexes last_name, :sortable => true
+    indexes organization_name, :sortable => true
+    
+    has created_at, updated_at
+  end
   
   def self.opt_in_defaults
     { :notify_blog_posts => true,

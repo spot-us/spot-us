@@ -132,7 +132,6 @@ class Pitch < NewsItem
 
   after_create :send_admin_notification, :create_peer_editor_assignment
   after_save :check_if_funded_state, :dispatch_fact_checker
-
   
   named_scope :most_funded, :order => 'news_items.current_funding DESC'
   named_scope :sorted, lambda {|direction| { :order => "news_items.created_at #{direction}" } }

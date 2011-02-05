@@ -1,0 +1,9 @@
+<div class="headerTitle">
+	<h1>You searched for<%if @search_term%>: <%= @search_term %><%end%></h1>
+	<%unless @items.empty?%>
+		<p>Your search return <%=@items.total_entries%> entries.</p>
+	<%end%>
+</div>
+<div class="joinContainer">
+	<a href="/user/new" title='Join Us'>Join Us &rsaquo;</a>
+</div>

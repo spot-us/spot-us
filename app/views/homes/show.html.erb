@@ -5,4 +5,4 @@
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
-<%= render :partial => "shared/lists", :locals => {:items => @items} %>
+<%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection.", :show_pagination => false} %>
