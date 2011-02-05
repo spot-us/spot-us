@@ -26,7 +26,8 @@
 				<li><a href="#" rel='nofollow' id='hoverAnchorLearnMore'>Learn More</a></li>
 				<li class="menuSeparator">&nbsp;</li>
 				<%unless current_user%>
-					<li class="fbConnect"><img src="/images/new/fbConnect.png"></li>
+					<li class="menuSeparator">&nbsp;</li>
+					<li class="fbConnect"><a href="/auth/facebook" title="Login or Register via Facebook"><img src="/images/new/fbConnect.png"/></a></li>
 					<li><a href="/user/new">Join</a> or <a href="/session/new">Log in</a></li>
 				<%else%>
 					<li class="menuSeparator">&nbsp;</li>
