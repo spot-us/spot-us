@@ -781,6 +781,7 @@
 	top:-10px;
 	color:#000;
 	text-shadow:#fff 0px 0px 1px;
+	text-transform:capitalize;
 }
 
 
