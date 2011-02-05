@@ -10,7 +10,9 @@
 	<ul class="rightHeaderContainer">
 		<li>
 			<div class="searchBox">
-				<input type="text" />
+				<% form_tag(search_path, :method => "post") do %>
+					<%= text_field_tag(:q) %>
+				<% end %>
 			</div>
 		</li><!--end searchBox-->
 		<li>	

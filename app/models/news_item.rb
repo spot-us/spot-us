@@ -102,7 +102,17 @@ class NewsItem < ActiveRecord::Base
 
     validates_attachment_size :featured_image, :in => 1..5.megabytes, :unless => :featured_image_name
   end
-
+  
+  define_index do
+    indexes headline, :sortable => true
+    indexes slug, :sortable => true
+    indexes excerpt, :sortable => true
+    indexes short_description, :sortable => true
+    indexes extended_description, :sortable => true
+    
+    has user_id, created_at, updated_at
+  end
+  
   named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
   
   named_scope :featured, :conditions => {:feature => true}, :order => "news_items.created_at desc"

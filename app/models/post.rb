@@ -5,6 +5,9 @@ class Post < ActiveRecord::Base
   include ActionController::UrlWriter
   include Utils
   
+  cattr_accessor :per_page
+  @@per_page = 10
+  
   belongs_to :pitch
   belongs_to :user
   
@@ -36,6 +39,13 @@ class Post < ActiveRecord::Base
     validates_attachment_size :blog_image, :in => 1..5.megabytes, :unless => :blog_image_name
   #end
   validates_presence_of :title, :body, :user, :pitch
+  
+  define_index do
+    indexes title, :sortable => true
+    indexes body, :sortable => true
+    
+    has user_id, created_at, updated_at
+  end
   
   def blog_image_name
     blog_image_file_name.blank?
