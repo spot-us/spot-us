@@ -1053,6 +1053,45 @@
 
 /*end pitch page*/
 
+/*widget*/
+
+.widget{
+	width:300px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	background-color:#24454f;
+}
+
+.widget h1{
+	text-indent:-2000px;
+	/*background-image:url('/images/new/headerbg.png');*/
+	background-repeat:x;
+	padding:10px;
+	height:30px;
+}
+
+.widget h1 a{
+	text-indent:-2000px;
+	background-image:url('/images/new/spotuslogosmall.png');
+	background-repeat:no-repeat;
+	width:100%;
+	display:block;
+}
+
+.widgetContent{
+	width:98%;
+	margin:0px auto;
+	background-color:#f6f8f6;
+}
+
+.widgetContent h2{
+	font-size:22px;
+	color:#000;
+	padding:10px;
+}
+
+/*end widget*/
+
 /*pitch sub-pages (tabs)*/
 .pitchLeftContainer, .discussionContainer, .updateContainer, .donorsContainer{
 	width:68%;
