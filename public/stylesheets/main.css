@@ -482,6 +482,22 @@
 	text-decoration:none;
 }
 
+/* publishing buttons*/
+
+.publishingButtons{
+	width:100%;
+	clear:both;
+	list-style-type:none;
+	text-align:right;
+}
+
+.publishingButtons ul li {
+	display:inline;
+}
+
+/* end publishing buttons*/
+
+
 /*story grid styles*/
 .storyGrid {
 	margin: 0px auto;

@@ -62,35 +62,23 @@ module StoriesHelper
   end
 
   def publishing_workflow_buttons_for(user)
-    out = ""
-    if (@story.draft? && @story.editable_by?(user)) || user.admin?
-      out << content_tag(:div, link_to(image_tag('edit_in_gray.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
+    if user.admin? || @story.fact_checkable_by?(user) || @story.publishable_by?(user) || @story.editable_by?(user)
+      out = '<ul class="publishingButtons">'
+        out << content_tag(:li, link_to(get_button("Edit"), edit_story_path(@story))) if (@story.draft? && @story.editable_by?(user)) || user.admin?
+        case @story.status
+          when 'draft' then
+            out << content_tag(:li, link_to(get_button("Send To Editor"), fact_check_story_path(@story), :method => :put)) if @story.editable_by?(user) && @story.peer_reviewer
+            out << content_tag(:li, link_to(get_button("Ready To Publish"), accept_story_path(@story), :method => :put)) if !@story.peer_reviewer
+          when 'fact_check' then
+            if @story.fact_checkable_by?(user)
+              out << content_tag(:li, link_to(get_button("Edit"), edit_story_path(@story)))
+              out << content_tag(:li, link_to(get_button("Send Back To Reporter"), reject_story_path(@story), :method => :put))
+              out << content_tag(:li, link_to(get_button("Ready To Publish"), accept_story_path(@story), :method => :put))
+            end
+          when 'ready' then
+            out << content_tag(:li, link_to(get_button("Publish Story"), publish_story_path(@story), :method => :put)) if @story.publishable_by?(user)
+        end
+      out << "</ul>"
     end
-    case @story.status
-    when 'draft' then
-      if @story.editable_by?(user) && @story.peer_reviewer
-        out << content_tag(:div, link_to(image_tag('send_to_editor.png', :class => 'send_to_editor'), 
-        fact_check_story_path(@story), :method => :put), :class => 'centered')
-      end
-      if !@story.peer_reviewer
-        out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
-        accept_story_path(@story), :method => :put), :class => 'centered')
-      end
-
-    when 'fact_check' then
-      if @story.fact_checkable_by?(user)
-        out << content_tag(:div, link_to(image_tag('edit_in_gray.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
-        out << content_tag(:div, link_to(image_tag('return_to_journalist.png', :class => 'return_to_journalist'), 
-        reject_story_path(@story), :method => :put), :class => 'centered')
-        out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
-        accept_story_path(@story), :method => :put), :class => 'centered')
-      end
-    when 'ready' then
-      if @story.publishable_by?(user)
-        out << content_tag(:div, link_to(image_tag('publish.png', :class => 'publish'), 
-        publish_story_path(@story), :method => :put), :class => 'centered')
-      end
-    end
-    out << ""
   end
 end
