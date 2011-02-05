@@ -11,10 +11,14 @@
 </ul>
 
 <div class="subFilterContainer">
-	<%= channels_filter %>
-	<%= @topic || @filter=='published' ? topics_filter : stories_filter("/stories",FILTERS_STORIES) %>
+	<ul>
+		<%= topics_filter if @topic || @filter=='published' || @filter=='unfunded'%>
+	</ul>
+	<ul>
+		<%= stories_filter("/stories",FILTERS_STORIES) if @filter=='published' || @filter=='unfunded' %>
+	</ul>
 </div>
-<%= render :partial => "shared/lists", :locals => {:items => @items} %>
+<%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection."} %>
 
 
 

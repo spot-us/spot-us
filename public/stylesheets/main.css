@@ -455,9 +455,30 @@
 	clear:both;
 }
 
-.subFilterContainer strong, .subFilterContainer span {
+.subFilterContainer ul{
+	width:100%;
+	clear:both;
+	list-style-type:none;
+	text-align:right;
+}
+
+
+.subFilterContainer ul li, .subFilterContainer ul li.filterName, .subFilterContainer ul .filterSeparator {
+	display:inline;
+}
+
+.subFilterContainer ul .filterSeparator {
 	margin-left:10px;
-	margin-right: 10px;
+	margin-right:10px;
+}
+
+.subFilterContainer ul li.filterName{
+	font-weight:bold;
+}
+
+.subFilterContainer ul li .currentFilter{
+	color:red;
+	text-decoration:none;
 }
 
 /*story grid styles*/
@@ -1831,4 +1852,11 @@
 
 .spanLink{
 	cursor:pointer;
+}
+
+.noItemsMessage{
+	margin:40px;
+	font-weight:bold;
+	font-size:24px;
+	clear:both;
 }

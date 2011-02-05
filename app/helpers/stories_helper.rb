@@ -1,60 +1,60 @@
 module StoriesHelper
   def display_filters 
-	  ["unfunded","almost-funded","funded"]
+    ["unfunded","almost-funded","funded"]
   end 
 
   def active_button(selected)
-  	result = ""
-  	if selected == "pitches"
-  		result = display_filters.include?(params[:filter]) && !@topic ? " selected" : ""
-  	elsif selected == "stories"
-  		result = params[:filter] == "published" ? " selected" : ""
-  	elsif selected == "tips"
-  		result = params[:filter] == "suggested" ? " selected" : ""
-  	elsif selected == "topics"
-  		result = @topic ? " selected" : ""
-  	end
-  	result
-  end
-
-  def channels_filter
-	if params[:controller] == "channels" && @channels.any?
-		results = []
-		@channels.each do |channel|
-			if channel == @channel    
-				results << ("<span>" + link_to(channel.title, channel_path(channel), :class => "active") + "</span>")
-			else
-				results << ("<span>" + link_to(channel.title, channel_path(channel)) + "</span>")
-			end
-		end
-		return "<strong>Browse By Topic:</strong>" + results.join("|")
-	end	
+    result = ""
+    if selected == "pitches"
+      result = display_filters.include?(params[:filter]) && !@topic ? " selected" : ""
+    elsif selected == "stories"
+      result = params[:filter] == "published" ? " selected" : ""
+    elsif selected == "tips"
+      result = params[:filter] == "suggested" ? " selected" : ""
+    elsif selected == "topics"
+      result = @topic ? " selected" : ""
+    end
+    result
   end
   
+  def channels_filter
+    if @channels.any?
+      results = []
+      @channels.each do |channel|
+        if channel == @channel    
+          results << ("<li>" + link_to(channel.title, channel_path(channel), :class => "currentFilter") + "</li>")
+        else
+          results << ("<li>" + link_to(channel.title, channel_path(channel)) + "</li>")
+        end
+      end
+      return "<li class='filterName'>Browse By Topic:</li>" + results.join("<li class='filterSeparator'>|<li>")
+    end	
+  end
+
   def topics_filter
-		results = []
-		Topic.all.each do |topic|
-			if topic == @topic    
-				results << ("<span class='topics'>" + link_to(topic.name, "/stories/#{@filter}/#{topic.seo_name}", :class => "active") + "</span>")
-			else
-				results << ("<span class='topics'>" + link_to(topic.name, "/stories/#{@filter}/#{topic.seo_name}") + "</span>")
-			end
-		end
-		return "<strong>Browse By Topic:</strong>" + results.join("|")
+    results = []
+    Topic.all.each do |topic|
+      if topic == @topic    
+        results << ("<li>" + link_to(topic.name, "/stories/#{@filter}/#{topic.seo_name}", :class => "currentFilter") + "</li>")
+      else
+        results << ("<li>" + link_to(topic.name, "/stories/#{@filter}/#{topic.seo_name}") + "</li>")
+      end
+    end
+    return "<li class='filterName'>Browse By Topic:</li>" + results.join("<li class='filterSeparator'>|<li>")
   end
 
   def stories_filter(url_base, filters)
-	if params[:controller] == "news_items" and display_filters.include?(params[:filter])
-		results = []
-		filters.each do |filter, name|
-			if display_filters.include?(filter) 
-				class_attr 	= 	@filter == filter ? ' class="active"' : ""
-				results 	<< 	('<span onclick="location.href=\'' + url_base + '/' +  filter + '\';"><a' + class_attr + ' href="' +
-				  				url_base + '/' + filter + '" title="' + name + '">' + name + '</a></span>')
-			end
-		end
-		return "<strong>Filter:</strong>" + results.join("|")
-	end
+    if params[:controller] == "news_items" and display_filters.include?(params[:filter])
+      results = []
+      filters.each do |filter, name|
+        if display_filters.include?(filter) 
+          class_attr 	= 	@filter == filter ? ' class="currentFilter"' : ""
+          results 	<< 	('<li><a' + class_attr + ' href="' +
+          url_base + '/' + filter + '" title="' + name + '">' + name + '</a></li>')
+        end
+      end
+      return "<strong>Filter:</strong>" + results.join("<span class='filterSeparator'>|<span>")
+    end
   end
 
   def supporters_count
@@ -74,21 +74,21 @@ module StoriesHelper
       end
       if !@story.peer_reviewer
         out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
-                                  accept_story_path(@story), :method => :put), :class => 'centered')
+        accept_story_path(@story), :method => :put), :class => 'centered')
       end
-        
+
     when 'fact_check' then
       if @story.fact_checkable_by?(user)
         out << content_tag(:div, link_to(image_tag('edit_in_gray.png', :class => 'edit'), edit_story_path(@story)), :class => 'centered')
         out << content_tag(:div, link_to(image_tag('return_to_journalist.png', :class => 'return_to_journalist'), 
-                                reject_story_path(@story), :method => :put), :class => 'centered')
+        reject_story_path(@story), :method => :put), :class => 'centered')
         out << content_tag(:div, link_to(image_tag('ready_for_publishing.png', :class => 'ready_for_publishing'), 
-                                  accept_story_path(@story), :method => :put), :class => 'centered')
+        accept_story_path(@story), :method => :put), :class => 'centered')
       end
     when 'ready' then
       if @story.publishable_by?(user)
         out << content_tag(:div, link_to(image_tag('publish.png', :class => 'publish'), 
-                                  publish_story_path(@story), :method => :put), :class => 'centered')
+        publish_story_path(@story), :method => :put), :class => 'centered')
       end
     end
     out << ""
