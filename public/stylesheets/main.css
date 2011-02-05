@@ -1572,8 +1572,14 @@
 	padding:5px 0px;
 }
 
-.loginForms .formContainer.register h2{
-	margin-bottom:15px;
+.joinBadge{
+	text-indent:-2000px;
+	width:76px;
+	height:76px;
+	background-image:url('/images/new/joinbadge.png');
+	background-repeat:no-repeat;
+	position:relative;
+	float:right;
 }
 
 /*end login form*/
