@@ -28,7 +28,7 @@
 				<%unless current_user%>
 					<li class="menuSeparator">&nbsp;</li>
 					<li class="fbConnect"><a href="/auth/facebook" title="Login or Register via Facebook"><img src="/images/new/fbConnect.png"/></a></li>
-					<li><a href="/user/new">Join</a> or <a href="/session/new">Log in</a></li>
+					<li><a href="/session/new">Join</a> or <a href="/session/new">Log in</a></li>
 				<%else%>
 					<li class="menuSeparator">&nbsp;</li>
 					<li><%=link_to 'Logout', '/logout', {:class=>'logoutLink'}%></li>

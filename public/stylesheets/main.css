@@ -1553,6 +1553,31 @@
 /*end form styles*/
 
 
+/*login form*/
+.loginForms .formContainer.login, .loginForms .formContainer.register{
+	width:46%;
+}
+
+.loginForms .formContainer.login{
+	float:right;
+}
+
+.loginForms .formContainer.register{
+	float:left;
+}
+
+.loginForms .formContainer.login h2,
+.loginForms .formContainer.register h2{
+	margin:0px;
+	padding:5px 0px;
+}
+
+.loginForms .formContainer.register h2{
+	margin-bottom:15px;
+}
+
+/*end login form*/
+
 /*create or edit a pitch sidebar*/
 .createPitchSidebar{
 	width:38%;
