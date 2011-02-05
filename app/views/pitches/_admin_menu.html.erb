@@ -13,9 +13,9 @@
 		<%end%>
 		<%if pitch.featureable_by?(current_user)%>
 			<%if pitch.featured?%>
-				<%= link_to "Feature", unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
+				<%= link_to "Unfeature", unfeature_pitch_path(pitch), :method => :get, :title => "Un-Feature"%>
 			<%else%>
-				<%= link_to "Unfeature", feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
+				<%= link_to "Feature", feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"%>
 			<%end%>
 		<%end%>
 		<%if pitch.postable_by?(current_user)%>
