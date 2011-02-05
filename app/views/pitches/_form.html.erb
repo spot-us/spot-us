@@ -135,7 +135,7 @@ jQuery(document).ready(function($){
 				<%= get_button("Create a Pitch") %>
 			<% else %>
 				<%= get_button("Save") %>
-				<%= get_button("Cancel") %>
+				<%= get_button("Cancel", {:onlick=>"document.href='/';"}) %>
 			<% end %>
 		</div>
 		<% end %>
@@ -143,73 +143,73 @@ jQuery(document).ready(function($){
 </div>
 
 <% content_for :bottom do %>
-<!-- START - hover list of helpers -->
-<ul class='hoverContainer helper' id='hoverContainerHeadline' style="display:none;">
-	<h3>Keep it concise</h3>
-	In a few words, tell us what your pitch is about
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerSlug' style="display:none;">
-	<h3>Keep it very concise</h3>
-	In a few words selling words with a maximum of 30 characters, tell us what your pitch is about. 
-	We will use this slug for all list views instead of the headline.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerSummary' style="display:none;">
-	<h3>Sell the story with a 1,000 character summary!</h3>
-	Why would someone care? What are the details? Be concise and sell the story. 
-	We use this summary for the Summary page for all stories.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerShortDescription' style="display:none;">
-	<h3>Sell the story!</h3>
-	Why would someone care? What are the details?
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerTopics' style="display:none;">
-	<h3>What's it all about?</h3>
-	Help us categorize your story by signifying which categories it falls into. 
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerQualifications' style="display:none;">
-	<h3>Do you have the skills/access to report this story?</h3>
-	Tell us who you are and why we should support you.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerUploadMedia' style="display:none;">
-	<h3>Convey it visually</h3>
-	A picture's worth a thousand words! Please upload a featured image for your post.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerVideoEmbed' style="display:none;">
-	<h3>Multimedia goodness</h3>
-	If you want, you can include a video. Just paste your third-party embedded code here.
-	We can only take Vimeo or YouTube at this time.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerDeadline' style="display:none;">
-	<h3>Name the date!</h3>
-	How much time do you want to give for fundraising? Set a deadline. 
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerJustification' style="display:none;">
-	<h3>How will your story help?</h3>
-	Is there a gap your coverage is filling? A greater cause you can serve? Tell us how. 
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerRequestedAmount' style="display:none;">
-	<h3>How much will this project cost?</h3>
-	<a href="" id="help_pricing-for-stories">Suggested pricings for work!</a> 
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerDelivery' style="display:none;">
-	<h3>What will be delivered?</h3>
-	Check the boxes for the kinds of content you'll be providing.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerDeliveryDescription' style="display:none;">
-	<h3>Tell us more.</h3>
-	Provide some details on what you will produce. Justify your pricing.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerDisclosure' style="display:none;">
-	<h3>Lay it all out</h3>
-	Here you may disclose any relationships or similar.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerImageCaption' style="display:none;">
-	<h3>Can we get some context?</h3>
-	Add a featured image caption with 200 character maximum.
-</ul>
-<ul class='hoverContainer helper' id='hoverContainerKeywords' style="display:none;">
-	<h3>Tag it up, yo!</h3>
-	Please include keywords, or tags. They should be separated by commas. For example: "car, automobile, suvs."
-</ul>
-<!-- END - hover list of helpers -->
+	<!-- START - hover list of helpers -->
+	<ul class='hoverContainer helper' id='hoverContainerHeadline' style="display:none;">
+		<h3>Keep it concise</h3>
+		In a few words, tell us what your pitch is about
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerSlug' style="display:none;">
+		<h3>Keep it very concise</h3>
+		In a few words selling words with a maximum of 30 characters, tell us what your pitch is about. 
+		We will use this slug for all list views instead of the headline.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerSummary' style="display:none;">
+		<h3>Sell the story with a 1,000 character summary!</h3>
+		Why would someone care? What are the details? Be concise and sell the story. 
+		We use this summary for the Summary page for all stories.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerShortDescription' style="display:none;">
+		<h3>Sell the story!</h3>
+		Why would someone care? What are the details?
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerTopics' style="display:none;">
+		<h3>What's it all about?</h3>
+		Help us categorize your story by signifying which categories it falls into. 
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerQualifications' style="display:none;">
+		<h3>Do you have the skills/access to report this story?</h3>
+		Tell us who you are and why we should support you.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerUploadMedia' style="display:none;">
+		<h3>Convey it visually</h3>
+		A picture's worth a thousand words! Please upload a featured image for your post.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerVideoEmbed' style="display:none;">
+		<h3>Multimedia goodness</h3>
+		If you want, you can include a video. Just paste your third-party embedded code here.
+		We can only take Vimeo or YouTube at this time.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerDeadline' style="display:none;">
+		<h3>Name the date!</h3>
+		How much time do you want to give for fundraising? Set a deadline. 
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerJustification' style="display:none;">
+		<h3>How will your story help?</h3>
+		Is there a gap your coverage is filling? A greater cause you can serve? Tell us how. 
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerRequestedAmount' style="display:none;">
+		<h3>How much will this project cost?</h3>
+		<a href="" id="help_pricing-for-stories">Suggested pricings for work!</a> 
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerDelivery' style="display:none;">
+		<h3>What will be delivered?</h3>
+		Check the boxes for the kinds of content you'll be providing.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerDeliveryDescription' style="display:none;">
+		<h3>Tell us more.</h3>
+		Provide some details on what you will produce. Justify your pricing.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerDisclosure' style="display:none;">
+		<h3>Lay it all out</h3>
+		Here you may disclose any relationships or similar.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerImageCaption' style="display:none;">
+		<h3>Can we get some context?</h3>
+		Add a featured image caption with 200 character maximum.
+	</ul>
+	<ul class='hoverContainer helper' id='hoverContainerKeywords' style="display:none;">
+		<h3>Tag it up, yo!</h3>
+		Please include keywords, or tags. They should be separated by commas. For example: "car, automobile, suvs."
+	</ul>
+	<!-- END - hover list of helpers -->
 <% end %>
