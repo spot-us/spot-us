@@ -1,3 +1,3 @@
-sudo "cd #{current_path} && rake ts:stop"
-sudo "cd #{current_path} && rake ts:index"
-sudo "cd #{current_path} && rake ts:start"
+run "cd #{current_path} && rake ts:stop"
+run "cd #{current_path} && rake ts:index"
+run "cd #{current_path} && rake ts:start"
