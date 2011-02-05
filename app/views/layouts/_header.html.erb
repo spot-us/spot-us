@@ -34,7 +34,7 @@
 					<li><%=link_to 'Logout', '/logout', {:class=>'logoutLink'}%></li>
 					<li class="menuSeparator">&nbsp;</li>
 					<%if current_balance>0%>
-						<li><%=link_to image_tag("/images/new/cart.gif"), edit_myspot_donations_amounts_path%></li>
+						<li>Purchase <%=link_to image_tag("/images/new/cart.gif"), edit_myspot_donations_amounts_path%></a></li>
 						<li class="menuSeparator">&nbsp;</li>
 					<%end%>
 					<li>Welcome back <%=link_to current_user.full_name, profile_path(current_user)%></li>
