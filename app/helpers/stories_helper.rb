@@ -53,7 +53,7 @@ module StoriesHelper
           url_base + '/' + filter + '" title="' + name + '">' + name + '</a></li>')
         end
       end
-      return "<strong>Filter:</strong>" + results.join("<span class='filterSeparator'>|<span>")
+      return "<li class='filterName'>Filter:</li>" + results.join("<li class='filterSeparator'>|<li>")
     end
   end
 
