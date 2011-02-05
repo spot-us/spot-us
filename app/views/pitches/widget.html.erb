@@ -1,51 +1,23 @@
 <% apply_fragment ['widget_tmp_alt_', @pitch] do %>
-<div class="spotus_widget">
-   <div class="spotus_widget_header">
-      <%= link_to image_tag("/images/new_design/spotus-logo-small.png"), root_url, :target => "_parent" %>
-      <%= link_to "about", root_url + "pages/about", :class => "spotus_about_us", :target => "_parent" %>
-   </div>
-  <div class="spotus_pitch">
-      	<% if @pitch.story && @pitch.story.published? %>
-      	<div class="spotus_spacer">
-      		<h3 class="spotus_pitch_title"><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h3>
-      		  <span class="spotus_dateline">Posted<%= @pitch.story.created_at.to_s(:long_date)%>
-      		    by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %> in <%= @pitch.story.network.name%></span>
-      		  <p class="short_description alt-spotus">
-      		    <%= truncate_words(@pitch.story.extended_description, 30) if @pitch.story.extended_description%>
-      		    <%= link_to 'Read More &raquo;', @pitch.story, :target => "_parent" %>
-      		  </p>
-      		</div>
-      	<% else %>
-      	   <h4 class="spotus_help_fund"><%= link_to "help fund this news story!", @pitch, :target => "_parent" %></h4>
-         	<div class="spotus_spacer">
-         	   <div class="spotus_pitch_info">
-      		   	<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %>
-         			<h3 class="spotus_pitch_title"><%= link_to h(@pitch.headline), pitch_url(@pitch), :target => "_parent" %></h3>
-         			<div class="spotus_dateline"><%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %> | <%= short_date(@pitch.created_at)%></div>
-         			<div class="spotus_description">
-         			   "<%= truncate_words(strip_html(@pitch.short_description), 14) unless @pitch.short_description.blank? %>"
-         			</div>
-		         </div>
-      		   <div class="spotus_progress">
-   				   <div class="spotus_funding">funding so far</div>
-   					<%= render :partial => "shared/progress_bar", :locals => {:pitch => @pitch}%>
-   					<div class="spotus_contribute">
-   					<% if @pitch.fully_funded? %>
-   					   <%= image_tag('/images/new_design/fully_funded_medium.png', :alt => 'This News Item is Fully Funded!')%>
-   					<% else %>
-   					   <%= link_to image_tag("/images/new_design/fund-widget.png"), @pitch, :target => "_parent" %>
-					   <% end %>
-   					</div>
-   				</div>
-      		</div>
-      	<% end %>
-         </div>
-		<div style="clear:both;"></div>
-         <div class="spotus_footer_simple">
-            <div class="spotus_slogan">
-               <span class="spotus_pink">Community</span>
-               <span class="spotus_moss-green">Funded Reporting</span>
-            </div>
-         </div>
-      </div>
+<div class="widget">
+	<h1><a href="http://spot.us" title="Spot.us">Spot.us</a></h1>
+	<div class="widgetContent">
+		<% if @pitch.story && @pitch.story.published? %>
+		<h2>This story has been published!</h2>
+		<%= #link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
+		 by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %>
+		<div class="smallFundBox">
+			<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+		</div>
+		<% else %>
+		<h2>Help fund this story!</h2>
+		<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
+		 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
+		<div class="smallFundBox">
+			<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+			<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
+		</div>
+		<% end %>
+	</div>
+</div>
 <% end %>
