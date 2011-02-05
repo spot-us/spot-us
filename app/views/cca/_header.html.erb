@@ -1,9 +1,9 @@
 <div class="headerTitle">
-	<h1>CCA<%if @cca%>: <%= @cca.title %><%end%></h1>
+	<h1>Sponsorship<%if @cca%>: <%= @cca.title %><%end%></h1>
 	<%if @cca%>
-		<p>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by filling out this questionnaire!</p>
+		<p>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by engaging with this sponsorship!</p>
 	<%end%>
 </div>
 <div class="joinContainer">
-	<%= link_to "About Spot.Us Questionnaires", "#", :id => "help_about-questionnaires" %>
+  <a href="/stories/unfunded" title='About Sponsorships' id='help_about-questionnaires'>About Sponsorships</a>
 </div>
