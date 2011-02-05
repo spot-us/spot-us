@@ -1568,6 +1568,18 @@
 	border:none;
 }
 
+.loginForms .formContainer.login .formBody .row .leftCheckbox,
+.loginForms .formContainer.register .formBody .row .leftCheckbox input
+{
+	width:20px;
+	float:left;
+}
+
+.loginForms .formContainer.register .formBody .row .leftCheckbox label{
+	width:auto;
+	display:inline;
+}
+
 .loginForms .formContainer.register{
 	float:left;
 }
