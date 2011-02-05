@@ -1553,6 +1553,42 @@
 /*end form styles*/
 
 
+/*login form*/
+.loginForms .formContainer.login, .loginForms .formContainer.register{
+	width:46%;
+}
+
+.loginForms .formContainer.login{
+	float:right;
+}
+
+.loginForms .formContainer.login .formBody{
+	background-color:#fff;
+	border:none;
+}
+
+.loginForms .formContainer.register{
+	float:left;
+}
+
+.loginForms .formContainer.login h2,
+.loginForms .formContainer.register h2{
+	margin:0px;
+	padding:5px 0px;
+}
+
+.joinBadge{
+	text-indent:-2000px;
+	width:76px;
+	height:76px;
+	background-image:url('/images/new/joinbadge.png');
+	background-repeat:no-repeat;
+	position:relative;
+	float:right;
+}
+
+/*end login form*/
+
 /*create or edit a pitch sidebar*/
 .createPitchSidebar{
 	width:38%;
