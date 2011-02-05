@@ -10,5 +10,5 @@
 			<%= render :collection => items, :partial => template_name %>
 		<% end %>
 	</ul>
-	<%= will_paginate items %>
+	<%= will_paginate items if defined?(show_pagination) && show_pagination%>
 <%end%>

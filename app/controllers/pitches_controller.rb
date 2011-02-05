@@ -39,6 +39,7 @@ class PitchesController < ApplicationController
   def show
     @pitch = get_pitch
     @tab = params[:tab] || ""
+    @story = @pitch.story if @tab=='story'
     respond_to do |format|
       format.html do
         #if !@tab.blank? && params[:item_id]

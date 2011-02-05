@@ -47,6 +47,9 @@ class NewsItem < ActiveRecord::Base
   include NetworkMethods
   include Utils
   
+  cattr_accessor :per_page
+  @@per_page = 10
+  
   cleanse_columns(:external_links) do |sanitizer|
     sanitizer.allowed_tags.delete('div')
   end
@@ -102,12 +105,14 @@ class NewsItem < ActiveRecord::Base
 
   named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
   
+  named_scope :featured, :conditions => {:feature => true}, :order => "news_items.created_at desc"
   named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded')"
   named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
   named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
   named_scope :published, :conditions => {:status => 'published'}
   named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft')"
   named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
+  named_scope :recent, :order => 'news_items.created_at DESC', :conditions => "news_items.status NOT IN ('unapproved','draft','')"
   
   named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','')"
   named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft')"
@@ -161,6 +166,26 @@ class NewsItem < ActiveRecord::Base
 
   def excerpt?
     return (self.short_description ? self.short_description : self.extended_description).to_s.strip_and_shorten
+  end
+
+
+  def validate
+    return valid_excerpt unless excerpt.blank?
+    return true
+  end
+  
+  def valid_excerpt
+    unless excerpt.blank?
+      excerpt_length = excerpt.gsub(/<\/?[^>]*>/, "").length
+      if excerpt_length<250 || excerpt_length>1000
+        errors.add("wrong_excerpt_length", "Your summary must be between 250 to 1000 characters") 
+        return false
+      else
+        return true
+      end
+    else
+      return true
+    end
   end
 
 	# def network_id
@@ -295,7 +320,7 @@ class NewsItem < ActiveRecord::Base
     return excerpt unless excerpt.blank?
     if short_description
       short_body = short_description.gsub(/<\/?[^>]*>/, "")
-      short_body = short_description[0..1000].gsub(/\w+$/, '')+"..." if short_body.length>1000
+      short_body = short_body.length>1000 ? (short_description[0..1000].gsub(/\w+$/, '')+"...").sanitize : short_description.sanitize
     else
       short_body = ""
     end
