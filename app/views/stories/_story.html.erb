@@ -1,8 +1,8 @@
-<% apply_fragment ['story_', story] do %>
+<%# apply_fragment ['story_', story] do %>
 	<li>
-		<%=link_to image_tag(story.featured_image(:small_hero), {:alt => h(story.headline)}), pitch_story_path(story.pitch, story), {:rel=>"nofollow"}%>
-		<h3><%=link_to story.slug?, pitch_story_path(story.pitch, story)%></h3>
+		<%=link_to image_tag(story.featured_image(:small_hero), {:alt => h(story.headline)}), "#{pitch_path(story.pitch)}/story", {:rel=>"nofollow"}%>
+		<h3><%=link_to story.slug?, "#{pitch_path(story.pitch)}/story"%></h3>
 		<div><%=pitch_date(story.created_at)%> by <%=link_to story.user, profile_path(story.user)%></div>
 		<div>Published under: <%= link_to story.pitch.slug?, pitch_url(story.pitch)%></div>
 	</li>
-<%end%>
+<%#end%>

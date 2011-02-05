@@ -25,7 +25,7 @@ class HomesController < ApplicationController
     @network = current_network                                                    # get the network
     @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
     @filter = params[:filter] ? params[:filter] : 'featured'                      # get the filter
-    NewsItem.per_page = 11
+    NewsItem.per_page = 9
     @items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) if @filter!='updates'
     @items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>9) if @filter=='updates'
   end

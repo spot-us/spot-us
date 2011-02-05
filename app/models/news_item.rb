@@ -168,6 +168,26 @@ class NewsItem < ActiveRecord::Base
     return (self.short_description ? self.short_description : self.extended_description).to_s.strip_and_shorten
   end
 
+
+  def validate
+    return valid_excerpt unless excerpt.blank?
+    return true
+  end
+  
+  def valid_excerpt
+    unless excerpt.blank?
+      excerpt_length = excerpt.gsub(/<\/?[^>]*>/, "").length
+      if excerpt_length<250 || excerpt_length>1000
+        errors.add("wrong_excerpt_length", "Your summary must be between 250 to 1000 characters") 
+        return false
+      else
+        return true
+      end
+    else
+      return true
+    end
+  end
+
 	# def network_id
 	# 	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
 	# end
@@ -300,7 +320,7 @@ class NewsItem < ActiveRecord::Base
     return excerpt unless excerpt.blank?
     if short_description
       short_body = short_description.gsub(/<\/?[^>]*>/, "")
-      short_body = short_description[0..1000].gsub(/\w+$/, '')+"..." if short_body.length>1000
+      short_body = short_body.length>1000 ? (short_description[0..1000].gsub(/\w+$/, '')+"...").sanitize : short_description.sanitize
     else
       short_body = ""
     end
