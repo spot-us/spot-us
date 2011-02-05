@@ -1,13 +1,14 @@
 <div class="summaryContent">
-	<% if !@pitch.video_embed.blank? %>
-		<div class="videoContainer">
-			<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
-		</div>
-	<% end %>
 	<div class="descriptionContainer">
-		<div class="featuredImage">
-			<%= image_tag(@pitch.featured_image.url(:featured_image)) if @pitch.video_embed.blank? %>
-		</div>
+		<% unless @pitch.video_embed.blank? %>
+			<div class="videoContainer">
+				<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+			</div>
+		<% else %>
+			<div class="featuredImage">
+				<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
+			</div>
+		<%end%>
 		<div class="shortDescription">
 			<%= transform_embed_code(@pitch.excerpt?, 520, 320) %>
 		</div>
@@ -20,56 +21,3 @@
 	</div>
 </div>
 <%=render :partial => "pitches/sidebars/wide"%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- OLD STUFF -->
-<%if false%>
-	<div>
-		<%=render :partial=>"pitches/tabs/#{@tab.blank? ? 'description' : @tab}"%>
-	</div>
-	<% apply_fragment ['pitch_footer_tab_', @pitch, @tab] do %>
-		<br/><br/>
-		<div id="tabContainer">
-			<ul class="pitch_nav" id="tabHeader">
-				<li class="qualifications active"><a href="" class="tab active" id="qualifications_tab" onclick="selectTab('tabContainer','qualifications');" rel="nofollow">Qualifications</a></li>
-				<li><a href="" class="tab" id="deliverables_tab" onclick="selectTab('tabContainer','deliverables');" rel="nofollow">Deliverables</a></li>
-				<% unless @pitch.disclosure.blank? %>
-					<li><a href="" class="tab" id="disclosure_tab" onclick="selectTab('tabContainer','disclosure');" rel="nofollow">Disclosure</a></li>
-				<% end %>
-			</ul>
-			<br clear="all"/>
-			<div class="qualifications_tab tab_panel" id="qualifications_content">
-				<%= @pitch.skills %>
-			</div>
-			<div class="deliverables_tab tab_panel hide" id="deliverables_content">
-				<%= @pitch.delivery_description %>
-			</div>
-			<% unless @pitch.disclosure.blank? %>
-				<div class="disclosure_tab tab_panel hide" id="disclosure_content">
-					<%= @pitch.disclosure %>
-				</div>
-			<% end %>
-		</div>
-	<%end%>
-<%end%>
