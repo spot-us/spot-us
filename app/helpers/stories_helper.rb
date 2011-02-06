@@ -65,19 +65,19 @@ module StoriesHelper
   def publishing_workflow_buttons_for(user)
     if user.admin? || @story.fact_checkable_by?(user) || @story.publishable_by?(user) || @story.editable_by?(user)
       out = '<ul class="publishingButtons">'
-        out << content_tag(:li, link_to(get_button("Edit"), edit_story_path(@story))) if (@story.draft? && @story.editable_by?(user)) || user.admin?
+        out << content_tag(:li, link_to("Edit", edit_story_path(@story))) if (@story.draft? && @story.editable_by?(user)) || user.admin?
         case @story.status
           when 'draft' then
-            out << content_tag(:li, link_to(get_button("Send To Editor"), fact_check_story_path(@story), :method => :put)) if @story.editable_by?(user) && @story.peer_reviewer
-            out << content_tag(:li, link_to(get_button("Ready To Publish"), accept_story_path(@story), :method => :put)) if !@story.peer_reviewer
+            out << content_tag(:li, link_to("Send To Editor", fact_check_story_path(@story), :method => :put)) if @story.editable_by?(user) && @story.peer_reviewer
+            out << content_tag(:li, link_to("Ready To Publish", accept_story_path(@story), :method => :put)) if !@story.peer_reviewer
           when 'fact_check' then
             if @story.fact_checkable_by?(user)
-              out << content_tag(:li, link_to(get_button("Edit"), edit_story_path(@story)))
-              out << content_tag(:li, link_to(get_button("Send Back To Reporter"), reject_story_path(@story), :method => :put))
-              out << content_tag(:li, link_to(get_button("Ready To Publish"), accept_story_path(@story), :method => :put))
+              out << content_tag(:li, link_to("Edit", edit_story_path(@story)))
+              out << content_tag(:li, link_to("Send Back To Reporter", reject_story_path(@story), :method => :put))
+              out << content_tag(:li, link_to("Ready To Publish", accept_story_path(@story), :method => :put))
             end
           when 'ready' then
-            out << content_tag(:li, link_to(get_button("Publish Story"), publish_story_path(@story), :method => :put)) if @story.publishable_by?(user)
+            out << content_tag(:li, link_to("Publish Story", publish_story_path(@story), :method => :put)) if @story.publishable_by?(user)
         end
       out << "</ul>"
     end

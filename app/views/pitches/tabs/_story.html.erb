@@ -30,7 +30,7 @@
 		<h2>License</h2>
 		<%= @story.license.strip_double_spaces %>
 	<%end%>
-
+	
 	<%= publishing_workflow_buttons_for(current_user) if logged_in? %>
 	
 	

@@ -499,11 +499,26 @@
 	width:100%;
 	clear:both;
 	list-style-type:none;
-	text-align:right;
+	text-align:left;
 }
 
-.publishingButtons ul li {
+.publishingButtons li {
 	display:inline;
+}
+
+.publishingButtons li a{
+	padding:10px;
+	-webkit-border-radius:4px;
+	-moz-borer-radius:4px;
+	font-weight:bold;
+	font-family:helvetica, arial, sans-serif;
+	text-decoration:none;
+	font-size:14px;
+	background-color:#336e80;
+	color:#fff;
+	width:200px;
+	margin:20px 0px 0px 230px;
+	clear:both;
 }
 
 /* end publishing buttons*/
