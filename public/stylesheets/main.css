@@ -1628,7 +1628,7 @@
 	margin-top:20px;
 }
 
-.donationAmounts h2{
+.donationAmounts h2, li.total h3{
 	font-size:24px;
 	font-family:Helvetica, arial, sans-serif;
 	font-weight:bold;
@@ -1709,6 +1709,12 @@
 	border:1px solid #ccc;
 	float:left;
 	clear:both;
+}
+
+li.total{
+	background-color:#eee;
+	border:1px solid #ccc;
+	padding:10px;
 }
 
 

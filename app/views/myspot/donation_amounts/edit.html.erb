@@ -70,7 +70,7 @@
 					<h5>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h5>
                   <p>
                      <%= strip_html truncate_words(donation.pitch.short_description,20) %>
-                     <%= link_to 'Read More &raquo;', donation.pitch %>
+                     <%= link_to 'Read More &rarr;', donation.pitch %>
                   </p>
 		</li>
             <% end %>
@@ -88,7 +88,7 @@
                         </h4>
                         <p>
                            <%= truncate_words(credit_pitch.pitch.short_description, 30) %>
-                           <%= link_to 'Read More &raquo;', credit_pitch.pitch %>
+                           <%= link_to 'Read More &rarr;', credit_pitch.pitch %>
                         </p>
                     </div>
                     <div>
@@ -127,7 +127,7 @@
          </ul>
 		<%end%>
 		<ul>
-            <li>
+            <li class="total">
                <div>
                   <span id="spotus_total_amount">-</span>
                </div>
