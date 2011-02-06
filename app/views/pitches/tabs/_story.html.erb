@@ -31,8 +31,8 @@
 		<%= @story.license %>
 	<%end%>
 
-	<% if logged_in? %>
-	<%= publishing_workflow_buttons_for(current_user) %>
+	<%= publishing_workflow_buttons_for(current_user) if logged_in? %>
+	
 	
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>
