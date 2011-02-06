@@ -279,6 +279,16 @@
 	padding:0px 2px;
 }
 
+.loginMenu li.purchase {
+	position:relative;
+	top:-3px;
+}
+
+.loginMenu li.purchase img{
+	position:relative;
+	top:3px;
+}
+
 .loginMenu .logoutLink{
 	color:red;
 }
