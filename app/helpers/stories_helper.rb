@@ -33,6 +33,7 @@ module StoriesHelper
 
   def topics_filter
     results = []
+    results << ("<li>" + link_to("All", "/stories/#{@filter}", :class => @topic ? "" : "currentFilter") + "</li>")
     Topic.all.each do |topic|
       if topic == @topic    
         results << ("<li>" + link_to(topic.name, "/stories/#{@filter}/#{topic.seo_name}", :class => "currentFilter") + "</li>")

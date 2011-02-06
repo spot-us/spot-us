@@ -5,18 +5,26 @@
 <% @title = "Spot.us - Fund A Story" %>
 
 <ul class="tabs">
-	<li <%if @filter=='unfunded'%>class="current"<%end%>><a href="/stories/unfunded">Unfunded</a></li>
+	<li <%if @filter=='almost-funded' || @filter=='unfunded'%>class="current"<%end%>><a href="/stories/unfunded">Unfunded</a></li>
+	<li <%if @filter=='funded'%>class="current"<%end%>><a href="/stories/funded">Funded</a></li>
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/stories/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/stories/updates">Updates</a></li>
 </ul>
 
 <div class="subFilterContainer">
-	<ul>
-		<%= topics_filter if @topic || @filter=='published' || @filter=='unfunded'%>
-	</ul>
-	<ul>
-		<%= stories_filter("/stories",FILTERS_STORIES) if @filter=='published' || @filter=='unfunded' %>
-	</ul>
+	<%if @filter=='almost-funded' || @filter=='unfunded' %>
+		<ul>
+			<li class='filterName'>Order by:</li>
+			<li><a href="/stories/unfunded<%= "/#{@topic.seo_name}" unless @topic.blank? %>" title="Recent" <%if @filter=='unfunded'%>class="currentFilter"<%end%>>Recent</a></li>
+			<li class='filterSeparator'>|<li>
+			<li><a href="/stories/almost-funded<%= "/#{@topic.seo_name}" unless @topic.blank? %>" title="Almost Funded" <%if @filter=='almost-funded'%>class="currentFilter"<%end%>>Almost Funded</a></li>
+		</ul
+	<%end%>
+	<%if @topic || @filter=='published' || @filter=='unfunded' || @filter=='funded' ||  @filter=='almost-funded'%>
+		<ul>
+			<%= topics_filter%>
+		</ul>
+	<%end%>
 </div>
 <%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection."} %>
 

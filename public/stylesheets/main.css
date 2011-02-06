@@ -459,7 +459,7 @@
 
 .subFilterContainer{
 	width:100%;
-	top:-10px;
+	top:-20px;
 	margin:0px 20px 10px 0px;
 	text-align:right;
 	clear:both;
@@ -470,6 +470,7 @@
 	clear:both;
 	list-style-type:none;
 	text-align:right;
+	margin-bottom:5px;
 }
 
 
