@@ -1578,12 +1578,14 @@
 
 .loginForms .formContainer.login{
 	float:left;
+	margin-right:30px;
 }
 
 
 .loginForms .formContainer.login .formBody{
 	background-color:#fff;
 	border:none;
+	padding:0px;
 }
 
 .loginForms .formContainer.login .formBody .row .leftCheckbox,
@@ -1712,9 +1714,16 @@
 }
 
 li.total{
-	background-color:#eee;
+	background-color:#c8f0b4;
 	border:1px solid #ccc;
 	padding:10px;
+}
+
+li.total div{
+	background-color:#c8f0b4;
+	font-weight:bold;
+	color:#000;
+	font-size:22px;
 }
 
 
