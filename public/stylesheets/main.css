@@ -867,9 +867,9 @@
 }
 
 .socialSharing ul{
-	width:50%;
 	float:left;
 	position:relative;
+	display:inline;
 }
 
 .socialSharing ul li{
