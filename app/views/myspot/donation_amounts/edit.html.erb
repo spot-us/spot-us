@@ -47,7 +47,7 @@
 	<% content_for :error do %>
 		<%= error_messages_for :donations, :object => @donations %>
 	<% end %>
-<% end %>
+<% end %>	
 <div id="donationAmounts" class="donationAmounts">
 	<h2> Almost done! One more step:</h2>
 	<h3>You can contribute more by adjusting the amounts below.</h3>
@@ -76,26 +76,24 @@
          <% end %>
          </ul>
         <% if unpaid_credits.any? %>
-          <h3>Apply Credits</h3>
+          <h4>Apply Credits</h4>
           <ul>
               <% unpaid_credits.each do |credit_pitch| %>
                 <% content_tag_for :li, credit_pitch, :class => 'unpaid' do %>
-                    <%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
-                    <div>
-                       <h4>PITCH:
+                   <li>
+ 					<%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
+                       <div>
+                        $ <%= text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 6, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount", :style => "text-align:right;", :class => "line_item" %>
+                           <%= link_to "Remove", myspot_donation_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?" %>
+                    </div>
+							<h5>PITCH:
                            <%= link_to credit_pitch.pitch.headline, credit_pitch.pitch %>
-                        </h4>
+                        </h5>
                         <p>
-                           <%= truncate_words(credit_pitch.pitch.short_description, 30) %>
+                           <%= strip_html truncate_words(credit_pitch.pitch.short_description, 20) %>
                            <%= link_to 'Read More &rarr;', credit_pitch.pitch %>
                         </p>
-                    </div>
-                    <div>
-                        $ <%= text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 6, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount", :style => "text-align:right;", :class => "line_item" %>
-                        <div class="action">
-                           <%= link_to "Remove", myspot_donation_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?" %>
-                        </div>
-                    </div>
+                    </li>
                <% end %> 
             <% end %>
             </ul>
@@ -116,9 +114,7 @@
 		<% if current_user.total_credits > 0 %>
          <ul>
             <li id="support_spotus">
-               <div>
-                  <h3>Your available credits</h3>
-               </div>
+                  <h4>Your available credits</h4>
                <div>
 				 - $<span id="spotus_credit_amount"><%=number_to_currency(current_user.total_credits, :unit => '')%></span>
                </div>
