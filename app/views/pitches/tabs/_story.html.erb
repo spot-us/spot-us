@@ -7,18 +7,18 @@
 			<%= transform_embed_code(@story.video_embed, 520, 320) %>
 		</div>
 	<% else %>
-		<div class="featuredImage">
-			<%= image_tag(@story.featured_image.url(:featured_image)) %>
+		<div class="largerFeaturedImage">
+			<%= image_tag(@story.featured_image.url(:larger_featured_image)) %>
 		</div>
 	<%end%>
 
 	<div class="shortDescription">
-		<%= transform_embed_code(@story.extended_description, 520, 320) %>
+		<%= transform_embed_code(@story.extended_description.strip_double_spaces, 520, 320) %>
 	</div>
 
 	<%unless @story.external_links.blank?%>
 		<h2>External Links</h2>
-		<%= @story.external_links %>
+		<%= @story.external_links.strip_double_spaces %>
 	<%end%>
 
 	<%unless @pitch.keywords.blank? %>
@@ -28,9 +28,9 @@
 
 	<%unless @story.license.blank?%>	
 		<h2>License</h2>
-		<%= @story.license %>
+		<%= @story.license.strip_double_spaces %>
 	<%end%>
-
+	
 	<%= publishing_workflow_buttons_for(current_user) if logged_in? %>
 	
 	

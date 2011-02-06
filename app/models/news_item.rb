@@ -79,7 +79,7 @@ class NewsItem < ActiveRecord::Base
                         :medium => "200x150#", 
                         :front_story => "300x163#", 
                         :medium_alt=>"215x180#", 
-                        :medium_alt_1=>"268x210#", :featured_image => '520x320', :small_hero => '300x165#' },
+                        :medium_alt_1=>"268x210#", :larger_featured_image => '670x320', :featured_image => '520x320', :small_hero => '300x165#' },
                     :storage => :s3,
                     :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                     :bucket =>   S3_BUCKET,
@@ -341,7 +341,7 @@ class NewsItem < ActiveRecord::Base
   def slug?
     return slug unless slug.blank?
     if headline
-      short_headline = headline.length>30 ? headline[0..30].gsub(/\w+$/, '')+"..." : headline
+      short_headline = headline.length>30 ? headline[0..26].gsub(/\w+$/, '')+"..." : headline
     else
       short_headline = ""
     end

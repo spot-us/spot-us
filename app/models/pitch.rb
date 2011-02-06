@@ -355,7 +355,7 @@ class Pitch < NewsItem
   end
   
   def create_associated_story
-    self.create_story(:headline => self.headline, :network => self.network, :category => self.category, :user => self.user, :featured_image_file_name => "")
+    self.create_story(:headline => self.headline, :slug => self.slug?, :network => self.network, :category => self.category, :user => self.user, :featured_image_file_name => "")
   end
   
   protected

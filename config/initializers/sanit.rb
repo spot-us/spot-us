@@ -9,6 +9,10 @@ class String
   def strip_html
     self.gsub(/<\/?[^>]*>/, "")
   end
+  
+  def strip_double_spaces
+    self.gsub("<p>&nbsp;</p>", "")
+  end
 
   def truncate_words(length = 30, end_string = '&hellip;')
     words = self.split()

@@ -184,7 +184,6 @@ class PitchesController < ApplicationController
   end
   
   def get_pitch
-    debugger
     pitch = Pitch.find_by_id(params[:pitch_id])
     pitch = Pitch.find_by_id(params[:id]) unless pitch
     pitch

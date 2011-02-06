@@ -1,51 +1,55 @@
-<% form_for(@story, :html => { :multipart => true }) do |f| %>
-    <div class="row">
-      <%= f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>" %>
-      <%= f.text_area :headline, :rows => 2	, :value => @story && @story.headline ? @story.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
-				:class => @story && @story.headline ? "" : "gray_text", :id => "headline" %>
-    </div>
-    <div class="row">
-      <%= f.label :extended_description, "This is your story body." %>
-      <%= ckeditor_textarea("story", "extended_description", :toolbar => 'Spotus', :width => '682px', :height => '400px') %>
-    </div>
-    <% if current_user.admin? %>
-      <div class="row">
-        <%= f.label :external_links %>
-        <%= ckeditor_textarea("story", "external_links", :toolbar => 'Basic', :width => '682px', :height => '200px') %>
-      </div>
-    <% end %>
-    <% if current_user.admin? %>
-      <div class="row">
-        <%= f.label :license %>
-        <%= ckeditor_textarea("story", "license", :toolbar => 'Basic', :width => '682px', :height => '200px') %>
-      </div>
-    <% end %>
-    <div class="row clearfix">
-       <label>Topics</label>
-       <div class="pitch_topics">
-          <%= topic_check_boxes(@story) %>
-       </div>    
-    </div>
-    <div class="row">
-      <label>Add Media</label>
-    </div>
-    <div class="row media">
-      <label>
-        Required: Upload A Featured Image
-        <br/>
-      </label>
-      <%= f.file_field :featured_image %><br/>
-      <span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
-    </div>
-    <!-- <div class="row media">
-      <%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>" %>
-      <%#= f.text_area :featured_image_caption, :rows => 2 %>
-    </div> -->
-    <div class="row media">
-      <%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>" %>
-      <%= f.text_area :video_embed, :rows => 4 %>
-    </div>
-    <div class="float-right">
-      <%= image_submit_tag image_path('save.png') %>
-    </div>
+	<% form_for(@story, :html => { :multipart => true }) do |f| %>
+	<div class="row">
+		<%= f.label     :headline, "Your Story's Headline <br /><span class='small quieter'>Required</span>" %>
+		<%= f.text_field :headline, :rows => 2	, :value => @story && @story.headline ? @story.headline : TEXT[:headline], :onclick => "clear_text('headline', '#{TEXT[:headline]}')", 
+		:class => @story && @story.headline ? "" : "gray_text", :id => "headline" %>
+	</div>
+	<div class="row">
+		<%= f.label     :slug, "Your Story's slug <br /><span class='small quieter'>Required</span>" %>
+		<%= f.text_field :slug, :rows => 2 %>
+	</div>
+	<div class="row">
+		<%= f.label :extended_description, "This is your story body." %>
+		<%= ckeditor_textarea("story", "extended_description", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
+	</div>
+	<% if current_user.admin? %>
+	<div class="row">
+		<%= f.label :external_links %>
+		<%= ckeditor_textarea("story", "external_links", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
+	</div>
+	<% end %>
+	<% if current_user.admin? %>
+	<div class="row">
+		<%= f.label :license %>
+		<%= ckeditor_textarea("story", "license", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
+	</div>
+	<% end %>
+	<div class="row clearfix">
+		<label>Topics</label>
+		<div class="pitch_topics">
+			<%= topic_check_boxes(@story) %>
+		</div>    
+	</div>
+	<div class="row">
+		<label>Add Media</label>
+	</div>
+	<div class="row media">
+		<label>
+			Required: Upload A Featured Image
+			<br/>
+		</label>
+		<%= f.file_field :featured_image %><br/>
+		<span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
+	</div>
+	<!-- <div class="row media">
+	<%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>" %>
+	<%#= f.text_area :featured_image_caption, :rows => 2 %>
+	</div> -->
+	<div class="row media">
+		<%= f.label :video_embed, "Embed a Video" + "<br/><span class='quieter small'>Paste your third-party embeded code here. <br/> We can only take Vimeo or YouTube at this time.</span>" %>
+		<%= f.text_area :video_embed, :rows => 4 %>
+	</div>
+	<div class="float-right">
+		<%= image_submit_tag image_path('save.png') %>
+	</div>
 <% end %>
