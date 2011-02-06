@@ -6,6 +6,6 @@
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
 <%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection.", :show_pagination => false} %>
-<div clas="seeMoreContainer">
+<div class="seeMoreContainer">
 	<%=get_more_link(@filter)%>
 </div>

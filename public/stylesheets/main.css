@@ -526,9 +526,11 @@
 
 /*story grid styles*/
 .storyGrid {
+	width:100%;
 	margin: 0px auto;
 	padding-top:10px;
 	clear:both;
+	display:block;
 }
 
 
@@ -2060,4 +2062,17 @@ li.total{
 	font-weight:bold;
 	font-size:24px;
 	clear:both;
+}
+
+.seeMoreContainer{
+	width:100%;
+	margin:10px;
+	clear:both;
+	text-align:right;
+	display:block;
+}
+
+.seeMoreContainer a{
+	font-size:14px;
+	text-transform:capitalize;
 }
