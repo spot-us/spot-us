@@ -10,7 +10,7 @@
 			</div>
 		<%end%>
 		<div class="shortDescription">
-			<%= transform_embed_code(@pitch.excerpt?.strip_double_spaces, 520, 320) %>
+			<%= @pitch.excerpt?.strip_double_spaces %>
 		</div>
 		<% unless @pitch.extended_description.blank? %>
 			<div class="extendedDescription">
