@@ -206,7 +206,13 @@ module ApplicationHelper
   def get_button(button_text, options={})
     options[:class] = "submitButton"
     submit_tag button_text, options
-  end  
+  end 
+  
+  def get_link_button(link_text, href, options={})
+    options[:class] = "submitButton"
+    options[:title] = link_text
+    link_to link_text, href, options
+  end 
   
   def excerpt?(text, strip_length=50)
     text = strip_html(text)

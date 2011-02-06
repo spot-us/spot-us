@@ -600,7 +600,7 @@
 
 /* donate button styles*/
 
-.donateButtons li.fundButton, .donateButtons li.creditsButton{
+.donateButtons li.fundButton, .donateButtons li.creditsButton, .donateButtons li .buttonLikeLink{
 	float:left;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;	
@@ -615,7 +615,7 @@
 	text-shadow: #666 0px 0px 1px;
 }
 
-.donateButtons li.creditsButton a, .donateButtons li.fundButton form input{
+.donateButtons li.creditsButton a, .donateButtons li.fundButton form input, .donateButtons li .buttonLikeLink{
 	color:#fff;
 	text-decoration:none;
 	font-weight:bold;
@@ -623,7 +623,7 @@
 	padding:0;
 }
 
-.donateButtons li.fundButton, .donateButtons li.fundButton form input{
+.donateButtons li.fundButton, .donateButtons li.fundButton form input, .donateButtons li .buttonLikeLink{
 	background-color:#7a9e53;
 	border:none;
 }
@@ -653,17 +653,22 @@
 	cursor:pointer;
 }
 
-.donateButtons li.creditsButton{
+.donateButtons li.creditsButton, .donateButtons li .buttonLikeLink{
 	background-color:#24454f;
 	border-right:2px solid #123039;
 	border-bottom:2px solid #08323f;
 }
 
-.donateButtons li.creditsButton:hover{
+.donateButtons li.creditsButton:hover, .donateButtons li .buttonLikeLink:hover{
 	cursor:pointer;
 	background-color:#1c3942;
 	border-right:2px solid #516a72;
 	border-bottom:2px solid #516a72;
+}
+
+.donateButtons li .buttonLikeLink{
+	padding:5px 10px;
+	width:120px;
 }
 
 	/*button styles only for list (story grid) views*/
@@ -2092,4 +2097,8 @@ li.total div{
 .seeMoreContainer a{
 	font-size:14px;
 	text-transform:capitalize;
+}
+
+.shortDescription{
+	margin-top:10px;
 }

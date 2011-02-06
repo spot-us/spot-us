@@ -4,7 +4,7 @@
 	
 	<% unless @story.video_embed.blank? %>
 		<div class="videoContainer">
-			<%= transform_embed_code(@story.video_embed, 520, 320) %>
+			<%= transform_embed_code(@story.video_embed, 670, 320) %>
 		</div>
 	<% else %>
 		<div class="largerFeaturedImage">
@@ -13,7 +13,7 @@
 	<%end%>
 
 	<div class="shortDescription">
-		<%= transform_embed_code(@story.extended_description.strip_double_spaces, 520, 320) %>
+		<%= @story.extended_description.strip_double_spaces %>
 	</div>
 
 	<%unless @story.external_links.blank?%>
