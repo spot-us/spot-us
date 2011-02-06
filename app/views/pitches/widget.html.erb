@@ -1,23 +1,21 @@
-<% apply_fragment ['widget_tmp_alt_', @pitch] do %>
-<div class="widget">
+<div class="widgetContainer">
 	<h1><a href="http://spot.us" title="Spot.us">Spot.us</a></h1>
 	<div class="widgetContent">
 		<% if @pitch.story && @pitch.story.published? %>
-		<h2>This story has been published!</h2>
-		<%= #link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
-		 by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %>
-		<div class="smallFundBox">
-			<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
-		</div>
+			<h2>This story has been published!</h2>
+			<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
+			 by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %>
+			<div class="smallFundBox">
+				<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+			</div>
 		<% else %>
-		<h2>Help fund this story!</h2>
-		<%= link_to image_tag(@pitch.featured_image.url(:medium), :class => "spotus_pitch_image"), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
-		 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
-		<div class="smallFundBox">
-			<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
-			<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
-		</div>
+			<h2>Help fund this story!</h2>
+			<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.headline), @pitch, :target => "_parent" %></h4>
+			 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
+			<div class="smallFundBox">
+				<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+				<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
+			</div>
 		<% end %>
 	</div>
 </div>
-<% end %>
