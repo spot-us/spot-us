@@ -1577,8 +1577,9 @@
 }
 
 .loginForms .formContainer.login{
-	float:right;
+	float:left;
 }
+
 
 .loginForms .formContainer.login .formBody{
 	background-color:#fff;
@@ -1618,6 +1619,94 @@
 }
 
 /*end login form*/
+
+/*donation amounts page*/
+
+.donationAmounts{
+	width:65%;
+	float:left;
+	margin-top:20px;
+}
+
+.donationAmounts h2{
+	font-size:24px;
+	font-family:Helvetica, arial, sans-serif;
+	font-weight:bold;
+	color:#000;
+	margin:0px;
+}
+
+.donationAmounts h3{
+	font-size:22px;
+	font-weight:normal;
+	font-family:Georia, times, serif;
+	color:#000;
+}
+
+.donationAmounts h4{
+	font-size:18px;
+	font-weight:bold;
+	font-family:Helvetica, arial, sans-serif;
+	color:#666;
+	text-transform:uppercase;
+	dipslay:block;
+	border-bottom:2px solid #ccc;
+}
+
+.donationAmounts ul{
+	list-style-type:none;
+}
+
+.donationAmounts ul li{
+	margin:10px 0px 5px;
+}
+
+.donationAmounts ul div{
+	position:relative;
+	text-align:right;
+	width:100px;
+	padding:10px;
+	left:90%;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	background-color:#eee;
+	margin-bottom:20px;
+}
+
+.donationAmounts ul li.amount{
+	width:20%;
+	display:block;
+	float:right;
+	clear:both;
+}
+
+.donationAmounts ul li h5 {
+	font-size:18px;
+	font-weight:bold;
+	font-family:Helvetica, arial, sans-serif;
+	color:#24454f;
+	margin:0px;
+	width:inherit;
+	display:inline;
+}
+
+.donationAmounts ul li p{
+	margin:0px;
+	padding:0px;
+}
+
+.donationAmounts ul li img {
+	width:75px;
+	height:75px;
+	margin-right:10px;
+	border:1px solid #ccc;
+	float:left;
+	clear:both;
+}
+
+
+/*end donation amounts*/
+
 
 /*create or edit a pitch sidebar*/
 .createPitchSidebar{

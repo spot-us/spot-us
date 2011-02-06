@@ -561,7 +561,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 #section_popup .row .main_col em {font-size:12px;}
 
 	
-.myspot_donation_amounts  #facebox .body {padding:20px !important;}
+.myspot_donation_amounts  #facebox .body {}
 #donation_processor .total {position:relative;margin-top:5px;}
 #donation_processor .total h3 {font-size:20px;font-family:Verdana;font-weight:bold;}
 #donation_processor .total .paypal {position:absolute;right:42px;top:51px;}
@@ -583,7 +583,7 @@ ul.filter li:hover, .filter ul li a:hover{background-image:url(http://www.lauren
 
 #form_page {padding:20px 40px;}
 
-#myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {padding:20px 20px 50px;width:770px;float:left;}
+#myspot_dashboard, #myspot_profile, #myspot_settings, #donation_amounts {}
 ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #dashboard_content td img, #dashboard_content img.thumbnail {float:left;margin:0 10px 10px 0;}
 #public_profile #content_wrapper {padding:20px;border: 1px solid #aaa;background:#f3f3f3;min-height:300px;}
@@ -604,24 +604,6 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 #purchases_lite h2 {border-bottom:1px solid #aaa;}
 #purchases_lite h3 {margin-bottom:15px;border-bottom:1px solid #aaa;display:block;}
 #purchases_lite ol {margin:8px 80px 30px;}
-
-
-#donation_amounts p {margin-bottom:.5em;}
-#donation_amounts a {color:#398C9F;}
-#donation_amounts h4 a {color:#11363E;}
-#donation_amounts ul {list-style-type:none;margin:0 20px; width:95%;}
-#donation_amounts ul li img {float:left;margin: 0 35px 10px 0;}
-#donation_amounts h2.heading {border-bottom:5px solid #eee;color: #800000; text-align: center;margin-bottom:25px;}
-#donation_amounts h3.heading {border-bottom:5px solid #eee;margin-bottom:20px;padding-bottom:5px;}
-#donation_amounts .donation {margin-bottom:15px;border-bottom: 1px solid #eee;padding-bottom:10px;}
-#donation_amounts .donation_item, #donation_amounts .donation_extra, #donation_amounts .donation_owe {float:left;width:500px;margin-right:30px;}
-#donation_amounts .donation_extra { font-weight:normal; font-size:16px; }
-#donation_amounts .donation_extra h3 { font-weight:normal; font-size:16px; padding:0px; margin:0px;}
-#donation_amounts .donation_extra p { font-size:12px;font-weight:normal; padding:4px 0px 0px 0px; margin:0px;}
-#donation_amounts .donation_owe { font-size:20px; }
-#donation_amounts .donater, #donation_amounts .donater_owe, #donation_amounts .donater_credit  {float:right;}
-#donation_amounts .donater_credit  {float:right;color:red; font-weight:bold;}
-#donation_amounts .donater_owe span { font-size:20px; padding:0px; margin:0px;}
 
 #donation_amounts_lite { height:100%; margin-bottom:15px; padding:5px; }
 #donation_amounts_lite p {margin-bottom:2px;;}

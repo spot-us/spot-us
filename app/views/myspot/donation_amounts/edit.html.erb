@@ -49,37 +49,30 @@
 	<% end %>
 <% end %>
 <%= render :partial => "layouts/common_questions" %>
-<div id="donationAmounts">
+<div id="donationAmounts" class="donationAmounts">
 	<h2> Almost done! One more step:</h2>
 	<h3>You can contribute more by adjusting the amounts below.</h3>
     <% if unpaid_donations.any? %>
-		<h3>Fund Your Donations</h3>
+		<h4>Fund Your Donations</h4>
     <% end %>   
-    <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"clearfix", :id => "donation_amounts" do %>
+    <% form_tag myspot_donations_amounts_path, :method => :put, :class=>"", :id => "donation_amounts" do %>
        <ul>
-         <% unpaid_donations.each do |donation| %>
-            <% content_tag_for :li, donation, :class => 'unpaid clearfix' do %>
-               <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
-               <div>
-                  <h4>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h4><br/>
-                  <% if Group.all.any? %>
-                      <p>
-                        <a href="#group_selection">Donate on behalf of group?</a>
-                        <%= select_tag "donation_amounts[#{donation.id}][group_id]", '<option value=''>select a group</option>' +  options_from_collection_for_select(Group.all, :id, :name), :class => "invisible" %>
-                        <em class="invisible quiet small">optional</em>
-                      </p>
-                  <% end %>
+        <li>
+ 		<% unpaid_donations.each do |donation| %>
+            <% content_tag_for :li, donation, :class => 'unpaid' do %>
+				<div>
+		              $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id, :class => "line_item" %>
+
+		                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
+
+		               </div>             
+  <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
+		<h5>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h5>
                   <p>
-                     <%= truncate_words(donation.pitch.short_description,10) %>
+                     <%= strip_html truncate_words(donation.pitch.short_description,20) %>
                      <%= link_to 'Read More &raquo;', donation.pitch %>
                   </p>
-               </div>
-               <div>
-                   $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id, :class => "line_item" %>
-                  <div>
-                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
-                  </div> 
-               </div>
+		</li>
             <% end %>
          <% end %>
          </ul>
@@ -87,7 +80,7 @@
           <h3>Apply Credits</h3>
           <ul>
               <% unpaid_credits.each do |credit_pitch| %>
-                <% content_tag_for :li, credit_pitch, :class => 'unpaid clearfix' do %>
+                <% content_tag_for :li, credit_pitch, :class => 'unpaid' do %>
                     <%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
                     <div>
                        <h4>PITCH:
@@ -108,15 +101,13 @@
             <% end %>
             </ul>
          <% end %>
-         <h3>Extra</h3>
+         <h4>Extra</h4>
          <ul>
             <li id="support_spotus">
-               <div>
                   <h3>Support Spot.Us</h3>
 				  <p>
 					We are a nonprofit and this money goes to support our overhead such as credit card fees to process your contribution.
                   </p>
-               </div>
                <div>
                   $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;", :disabled=>true %>
 					<%= hidden_field_tag "spotus_donation_amount_hidden", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation_hidden", :style => "text-align:right" %>
@@ -139,7 +130,7 @@
          </ul>
 		<%end%>
 		
-		<h3 class="heading"></h3>
+		<h3></h3>
          <ul>
             <li id="support_spotus">
                <div>
