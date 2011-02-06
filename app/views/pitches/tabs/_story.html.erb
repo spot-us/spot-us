@@ -7,8 +7,8 @@
 			<%= transform_embed_code(@story.video_embed, 520, 320) %>
 		</div>
 	<% else %>
-		<div class="featuredImage">
-			<%= image_tag(@story.featured_image.url(:featured_image)) %>
+		<div class="largerFeaturedImage">
+			<%= image_tag(@story.featured_image.url(:larger_featured_image)) %>
 		</div>
 	<%end%>
 
