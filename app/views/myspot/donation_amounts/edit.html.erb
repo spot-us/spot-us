@@ -59,15 +59,15 @@
        <ul>
         <li>
  		<% unpaid_donations.each do |donation| %>
-            <% content_tag_for :li, donation, :class => 'unpaid' do %>
+            <% content_tag_for :li, donation, :class => 'unpaid' do %>            
+  			<%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
 				<div>
 		              $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id, :class => "line_item" %>
 
 		                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
 
-		               </div>             
-  <%= link_to image_tag(donation.pitch.featured_image.url(:thumb)), donation.pitch %>
-		<h5>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h5>
+		               </div>
+					<h5>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h5>
                   <p>
                      <%= strip_html truncate_words(donation.pitch.short_description,20) %>
                      <%= link_to 'Read More &raquo;', donation.pitch %>
@@ -87,7 +87,7 @@
                            <%= link_to credit_pitch.pitch.headline, credit_pitch.pitch %>
                         </h4>
                         <p>
-                           <%= truncate_words(credit_pitch.pitch.short_description, 10) %>
+                           <%= truncate_words(credit_pitch.pitch.short_description, 30) %>
                            <%= link_to 'Read More &raquo;', credit_pitch.pitch %>
                         </p>
                     </div>
@@ -105,16 +105,13 @@
          <ul>
             <li id="support_spotus">
                   <h3>Support Spot.Us</h3>
-				  <p>
+				<div>
+	                  $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;", :disabled=>true %>
+						<%= hidden_field_tag "spotus_donation_amount_hidden", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation_hidden", :style => "text-align:right" %>
+	               </div>  
+				<p>
 					We are a nonprofit and this money goes to support our overhead such as credit card fees to process your contribution.
                   </p>
-               <div>
-                  $ <%= text_field_tag "spotus_donation_amount", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation", :style => "text-align:right;", :disabled=>true %>
-					<%= hidden_field_tag "spotus_donation_amount_hidden", number_to_currency(spotus_donation.amount, :unit => ''), :size => 5, :id => "spotus_donation_hidden", :style => "text-align:right" %>
-                  <div>
-                     <%#= link_to "Remove", '#', :id => 'remove_spotus_donation' %>
-                  </div>
-               </div>
             </li>
          </ul>
 		<% if current_user.total_credits > 0 %>
@@ -129,16 +126,12 @@
             </li>
          </ul>
 		<%end%>
-		
-		<h3></h3>
-         <ul>
-            <li id="support_spotus">
-               <div>
-                  <h3>Total:</h3>
-               </div>
+		<ul>
+            <li>
                <div>
                   <span id="spotus_total_amount">-</span>
                </div>
+<h3>Total:</h3>
             </li>
          </ul>
       <div>

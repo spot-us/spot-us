@@ -1648,8 +1648,9 @@
 	font-weight:bold;
 	font-family:Helvetica, arial, sans-serif;
 	color:#666;
+	clear:both;
 	text-transform:uppercase;
-	dipslay:block;
+	display:block;
 	border-bottom:2px solid #ccc;
 }
 
@@ -1658,19 +1659,20 @@
 }
 
 .donationAmounts ul li{
-	margin:10px 0px 5px;
+	margin:10px 0px 15px 0px;
+	clear:both;
+	/*min-height:75px;*/
 }
-
 .donationAmounts ul div{
 	position:relative;
 	text-align:right;
-	width:100px;
+	width:80px;
 	padding:10px;
-	left:90%;
+	float:right;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
 	background-color:#eee;
-	margin-bottom:20px;
+	margin:0px 0px 20px 20px;
 }
 
 .donationAmounts ul li.amount{
@@ -1684,10 +1686,15 @@
 	font-size:18px;
 	font-weight:bold;
 	font-family:Helvetica, arial, sans-serif;
-	color:#24454f;
+	color:#666;
 	margin:0px;
 	width:inherit;
 	display:inline;
+}
+
+.donationAmounts ul li h5 a{
+	color:#24454f;
+	text-decoration:none;
 }
 
 .donationAmounts ul li p{
