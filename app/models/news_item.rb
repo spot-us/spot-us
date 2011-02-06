@@ -341,7 +341,7 @@ class NewsItem < ActiveRecord::Base
   def slug?
     return slug unless slug.blank?
     if headline
-      short_headline = headline.length>30 ? headline[0..30].gsub(/\w+$/, '')+"..." : headline
+      short_headline = headline.length>30 ? headline[0..26].gsub(/\w+$/, '')+"..." : headline
     else
       short_headline = ""
     end
