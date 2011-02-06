@@ -5,7 +5,7 @@
 		<div><%=pitch_date(cca.created_at)%> by <%=link_to cca.user, profile_path(cca.user)%></div>
 		<ul class='donateButtons'>
 			<li>
-				<%= link_to "Earn Credits", cca_path(cca), :title => '', :alt => "Earn credits to donate if you're short on cash"  unless current_user && cca.survey_completed?(current_user)%>
+				<%= link_to "Earn Credits", cca_path(cca), :title => '', :alt => "Earn credits to donate if you're short on cash", :class=>"buttonLikeLink"  unless current_user && cca.survey_completed?(current_user)%>
 			</li>
 		</ul>
 	</li>
