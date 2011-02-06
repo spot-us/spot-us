@@ -1,0 +1,1 @@
+run "cd #{latest_release}; rake ts:stop"
