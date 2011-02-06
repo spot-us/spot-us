@@ -858,11 +858,18 @@
 	
 }
 
+.socialSharing{
+	height:20px;
+	padding:10px;
+	background-color:#eee;
+	border:1px solid #ccc;
+	margin-bottom:20px;
+}
+
 .socialSharing ul{
 	width:50%;
 	float:left;
 	position:relative;
-	top:20px;
 }
 
 .socialSharing ul li{
