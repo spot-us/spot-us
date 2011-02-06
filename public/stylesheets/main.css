@@ -1135,11 +1135,16 @@
 
 /*widget*/
 
+.widgetPopup {
+	width:580px;
+}
+
 .widgetContainer{
 	width:300px;
 	-webkit-border-radius:4px;
 	-moz-border-radius:4px;
 	background-color:#24454f;
+	float:left;
 }
 
 .widgetContainer h1{
@@ -1201,6 +1206,25 @@
 .widgetContent ul.donateButtons{
 	position:relative;
 	top:-20px;
+}
+
+.widgetEmbedContainer{
+	width:250px!important;
+	padding:10px;
+	font-family:Georia, times, serif;
+	font-size:18px;
+	float:right;
+	height:inherit;
+}
+
+.widgetEmbedContainer p{
+	width:inherit;
+}
+
+.widgetEmbedContainer textarea{
+	width:200px;
+	height:100px;
+	display:block;
 }
 
 /*end widget*/
