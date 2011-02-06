@@ -15,6 +15,8 @@ class StoriesController < ApplicationController
     @pitch = @story.pitch
     respond_to do |format|
       format.html do
+        redirect_to "#{pitch_path(@pitch)}/story", :status => :moved_permanently 
+        return
       end
       format.xml do
       end
