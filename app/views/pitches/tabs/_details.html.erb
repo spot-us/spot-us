@@ -11,27 +11,27 @@
 	<%end%>
 	
 	<div class="shortDescription">
-		<%= transform_embed_code(@pitch.short_description, 520, 320) %>
+		<%= transform_embed_code(@pitch.short_description.strip_double_spaces, 520, 320) %>
 	</div>
 
 	<% unless @pitch.extended_description.blank? %>
 		<h2>How will it help?</h2>
-		<%= @pitch.extended_description %>
+		<%= @pitch.extended_description.strip_double_spaces %>
 	<% end %>
 	
 	<%if @pitch.skills%>
 		<h2>Qualifications</h2>
-		<%= @pitch.skills %>
+		<%= @pitch.skills.strip_double_spaces %>
 	<%end%>
 	
 	<%if @pitch.delivery_description%>
 		<h2>Deliverables</h2>
-		<%= @pitch.delivery_description %>
+		<%= @pitch.delivery_description.strip_double_spaces %>
 	<%end%>
 	
 	<%if @pitch.disclosure%>	
 		<h2>Disclaimers</h2>
-		<%= @pitch.disclosure %>
+		<%= @pitch.disclosure.strip_double_spaces %>
 	<%end%>
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>
