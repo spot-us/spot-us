@@ -1,1 +1,1 @@
-run "cd #{latest_release}; rake ts:stop"
+run "cd #{current_release}; rake ts:stop"
