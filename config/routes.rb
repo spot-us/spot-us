@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.connect "pitches/:id/blog_posts", :controller => "pitches", :action => "index", :tab=>'posts'
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
+  map.connect "pitches/:id/get_widget", :controller => "pitches", :action => "get_widget"
   map.connect "pitches/:id/:tab.:format", :controller => "pitches", :action => "show", :requirements => {:tab=>/posts|comments|assignments/}
   map.connect "pitches/:id/:tab/:item_id", :controller => "pitches", :action => "show", :item_id=>nil, :requirements => {:tab=>/posts|comments|assignments/}
   

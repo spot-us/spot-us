@@ -1137,6 +1137,8 @@
 
 .widgetPopup {
 	width:580px;
+	clear:both;
+	display:block;
 }
 
 .widgetContainer{
@@ -1181,7 +1183,7 @@
 
 .widgetContent h4{
 	padding:0px;
-	margin:0px;
+	margin:0px 0px 0px 5px;
 }
 
 .widgetContent h4 a{
@@ -1209,9 +1211,9 @@
 }
 
 .widgetEmbedContainer{
-	width:250px!important;
+	width:250px !important;
 	padding:10px;
-	font-family:Georia, times, serif;
+	font-family:Georgia, times, serif;
 	font-size:18px;
 	float:right;
 	height:inherit;

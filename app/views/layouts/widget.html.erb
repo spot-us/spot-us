@@ -1,10 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en">
 	<%= render :partial => 'layouts/head' %>
-	 <body>
-		<%#= fb_connect_javascript_tag %>
-		<%#= init_fb_connect "XFBML" %>
+	<body>
 		<%= yield %>
 		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
-	 </body>
+	</body>
 </html>
