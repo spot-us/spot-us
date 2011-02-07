@@ -50,6 +50,7 @@ class UsersController < ApplicationController
         self.current_user = @user
         create_current_login_cookie
         handle_first_donation_for_non_logged_in_user
+        handle_first_pledge_for_non_logged_in_user
         update_balance_cookie
         flash_and_redirect(:success, 'Welcome to Spot.Us!', return_path)
       else

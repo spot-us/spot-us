@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
 		self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
 
 		if logged_in?
-      		current_user.connect_fb(new_fb_user) if new_fb_user
+      current_user.connect_fb(new_fb_user) if new_fb_user
 			handle_remember_me
 			create_current_login_cookie
 			update_balance_cookie
