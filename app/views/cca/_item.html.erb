@@ -1,33 +1,31 @@
-<div id="survey_form">
-	<%# apply_fragment ['cca_form_1_', @cca, @cache_form, params[:pitch_id]] do %>
-		<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
-			<% if @pitch %>
-				Fill out the survey below. Once complete, your credit will be applied to the pitch:<br/>
-				<strong><%=link_to (h @pitch.headline), pitch_path(@pitch) %></strong><br/>
-			<% else %>
-				Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.
-			<% end %>	
-			<br/>
-			<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
-			<%= hidden_field_tag "id", @cca.id %>
-			<h5>Terms of Service. <span class="deep-red">*</span></h5> 
-			<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
-			<% @cca.cca_questions.each_with_index do |question, index| %>
-				<%= survey_section(question, index) %>
-				<h5><%= question.question %> <%= is_required(question.required) %></h5>
-				<%= "<div class='description'>#{question.description}</div>" if !question.description.blank? %>
-				<%= survey_element(question, current_user, true) %><br/>
-			<% end %>
-			<%= end_survey_sections %>
-			<br/>
-			<hr>
-			<h5>I'd like, or know somebody who would like, to sponsor a survey like this one.</h5>
-			<input name="sponsor_interest" value="yes" type="checkbox" /> Spot.Us will email you with details
-			<% unless params[:pitch_id].blank? %>
-				<input type="hidden" name="pitch_id" value="<%= params[:pitch_id]  %>">
-			<% end %>
-			<br/><br/>
-			<%= get_button("Submit your answers") %>
-		<%# end %>
+<%# apply_fragment ['cca_form_1_', @cca, @cache_form, params[:pitch_id]] do %>
+	<% form_tag(submit_answers_cca_path(@cca), :method => "put", :class=>'auth') do %>
+		<% if @pitch %>
+			Fill out the survey below. Once complete, your credit will be applied to the pitch:<br/>
+			<strong><%=link_to (h @pitch.headline), pitch_path(@pitch) %></strong><br/>
+		<% else %>
+			Fill out the survey below. Once complete, you can use your credits at any point to fund the story of your choice.
+		<% end %>	
+		<br/>
+		<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
+		<%= hidden_field_tag "id", @cca.id %>
+		<h5>Terms of Service. <span class="deep-red">*</span></h5> 
+		<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
+		<% @cca.cca_questions.each_with_index do |question, index| %>
+			<%= survey_section(question, index) %>
+			<h5><%= question.question %> <%= is_required(question.required) %></h5>
+			<%= "<div class='description'>#{question.description}</div>" if !question.description.blank? %>
+			<%= survey_element(question, current_user, true) %><br/>
+		<% end %>
+		<%= end_survey_sections %>
+		<br/>
+		<hr>
+		<h5>I'd like, or know somebody who would like, to sponsor a survey like this one.</h5>
+		<input name="sponsor_interest" value="yes" type="checkbox" /> Spot.Us will email you with details
+		<% unless params[:pitch_id].blank? %>
+			<input type="hidden" name="pitch_id" value="<%= params[:pitch_id]  %>">
+		<% end %>
+		<br/><br/>
+		<%= get_button("Submit your answers") %>
 	<% end %>
-</div>
+<%# end %>

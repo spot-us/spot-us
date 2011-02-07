@@ -17,12 +17,12 @@
 				Congrats! By completing the survey "<%= @cca.title %>", you have earned <strong><%= number_to_currency(@cca.award_amount) %></strong> in credits, and have a total of <strong><%= number_to_currency(current_user.remaining_credits) %></strong>. Feel free to apply now to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.
 			</div>
 			<br/>
-			<div id="story_listing">
+			<ul class="storyGrid">
 				<%=render :partial=>"shared/lists", :locals=>{ 
 					:items => @news_items, 
 					:no_items_message=>"There were no results for your search.  Try different search terms." 
 					}%>
-			</div>
+			</ul>
 			<% else %>
 				You have not completed this survey yet. <br/>
 				<%= link_to "complete survey?", "/cca/#{@cca.id}" %>

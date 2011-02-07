@@ -697,29 +697,47 @@
 }
 	/*button styles only for pitch (fund box) views*/
 
-.fundBox .donateButtons li.creditsButton, .fundBox .donateButtons li.fundButton input{
+.fundBox .donateButtons li.creditsButton, .fundBox .donateButtons li.fundButton input,
+	.fundThis .donateButtons li.creditsButton, .fundThis .donateButtons li.fundButton input{
 	padding:15px;
 }
 
-.fundBox .donateButtons li.fundButton{
+.fundBox .donateButtons li.fundButton, .fundThis .donateButtons li.fundButton{
 	padding:0px;
 }
 
-.fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a {
+.fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a,
+ 	.fundThis .donateButtons li.fundButton form input, .fundThis .donateButtons li.creditsButton a{
 	color:#fff;
 	font-size:16px;
 	line-height:18px;
 }
 
-.fundBox .donateButtons li.fundButton{
+.fundBox .donateButtons li.fundButton, .fundThis .donateButtons li.fundButton{
 	margin-left:5px;
 }
 
-.fundBox .donateButtons li.creditsButton{
+.fundBox .donateButtons li.creditsButton, .fundThis .donateButtons li.creditsButton{
 	margin-right:5px;
 }
 
 /*end donate button styles*/
+
+/* HACK FOR FUND THIS BUTTON */
+
+.fundThis{
+	width:100%;
+	padding-bottom:15px;
+	clear:both;
+}
+
+.fundThis .donateButtons .fundButton{
+	padding:15px;
+	width:100%;
+}
+
+/* END HACK */
+
 
 /* static middle tabs*/
 
