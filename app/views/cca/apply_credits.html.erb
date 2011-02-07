@@ -4,8 +4,7 @@
 
 
 <div class="surveyPage">
-	<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-	<h2 class="headline"><%= @cca.user.full_name %> thanks you!</h2>
+	<h2><%= @cca.user.full_name %> thanks you!</h2>
 	<div>
 		<% if @cca.survey_completed?(current_user) %>
 			<p>
@@ -17,8 +16,10 @@
 				<%=render :partial=>"shared/lists", :locals=>{ :items => @news_items,  :no_items_message=>"There are no unfunded pitches available." }%>
 			</ul>
 		<% else %>
-			<p>You have not completed this survey yet. <br/>
-			<%= link_to "complete survey?", "/cca/#{@cca.id}" %></p>
+			<p>
+				You have not completed this survey yet. <br/>
+				<%= link_to "complete survey?", "/cca/#{@cca.id}" %>
+			</p>
 		<% end %>
 	</div>
 </div>
