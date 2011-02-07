@@ -1478,13 +1478,32 @@
 
 /*cca survey styles*/
 .surveyBody{
-	width:75%;
+	width:66%;
 	float:left;
 }
 
+.surveyBody .formContainer .formBody{
+	width:90%;
+}
+
+.surveyBody .formContainer .formBody h2{
+	margin:0px;
+}
+
 .surveySidebar{
-	width:25%;
+	width:30%;
 	float:right;
+	border-left:1px solid #ccc;
+	padding-left:20px;
+}
+
+.surveySidebar h4{
+	text-transform: uppercase;
+	font-family: Helvetica, arial, sans-serif;
+	font-weight: bold;
+	color: #777;
+	font-size: 13px;
+}
 }
 
 /*end cca survey styles*/
