@@ -26,7 +26,7 @@
 	<% if @cca %>
 		<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
 		<div class="surveyContainer">
-			<div clas="surveySidebar">
+			<div class="surveySidebar">
 				<%= render :partial => "fund_this" if params[:pitch_id]%>
 				<%= render :partial => "sponsor_info" %>
 			</div>
