@@ -12,6 +12,7 @@
 	height:100px;
 	padding-top:10px;
 	border-bottom:1px solid #ccc;
+	margin-bottom:30px;
 }
 
 .lowerWrapper{
@@ -727,7 +728,7 @@
 	list-style-type:none;
 	position:relative;
 	z-index:1000;
-	top:-29px;
+	top:-56px;
 	width:100%;
 	margin: 0px 0 3px 0;
 	clear:both;
@@ -924,10 +925,9 @@
 .summarySidebar{
 	width:44%;
 	float:right;
-	/*erik, i can never get display:inline to work for divs.
-	 so i keep floating things left and right. remind me to ask you about this.*/
 	border-left:1px solid #ccc;
 	min-height:800px;
+	margin-top:0px;
 }
 
 .adminMenu{
@@ -1677,6 +1677,7 @@
 }
 
 .loginForms .formContainer.login .formBody .row .leftCheckbox,
+.formContainer .formBody .row .leftCheckbox input,
 .loginForms .formContainer.register .formBody .row .leftCheckbox input
 {
 	width:20px;
