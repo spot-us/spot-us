@@ -24,7 +24,7 @@
 	<%if defined?(show_embed) && show_embed%>
 		<div class="widgetEmbedContainer">
 			<p>To get this widget, just grab this html code and paste into your template. You can, of course, change the width of the iframe to fit your template.</p>
-			<textarea><iframe width='300' src='http://spot.us/pitches/781-mixed-use-is-already-happening-but-it-s-not-legal/widget' border='1' scrolling='no' noscroll></iframe>
+			<textarea id='embed_code'><%="<iframe width='300' src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='1' scrolling='no' noscroll></iframe>"%>
 			</textarea>
 		</div>
 	<%end%>
