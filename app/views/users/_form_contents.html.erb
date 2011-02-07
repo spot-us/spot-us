@@ -31,9 +31,10 @@
 		<%= f.select :type, [["Community Member", "Citizen"], ["Reporter", "Reporter"], ["News Publisher", "Organization"]] %>
 	</div>
 	<div class="row">
+		<div class="leftCheckbox">
 		<%= f.check_box :terms_of_service, {}, '1', '0' %>
-		<label>Accept the</label>
-		<%= link_to 'Terms of Service', page_path('terms') %>
+		Accept the <%= link_to 'Terms of Service', page_path('terms') %>
+		</div>
 		<div>
 			<%= submit_tag "Register", {:class => 'submitButton'} %>
 		</div>

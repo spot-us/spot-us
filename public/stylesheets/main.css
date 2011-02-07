@@ -859,7 +859,7 @@
 }
 
 .headerTitle {
-	width:50%;
+	width:80%;
 	float:left;
 	color:#000;
 	padding:0px;
@@ -942,10 +942,9 @@
 .summarySidebar{
 	width:44%;
 	float:right;
-	/*erik, i can never get display:inline to work for divs.
-	 so i keep floating things left and right. remind me to ask you about this.*/
 	border-left:1px solid #ccc;
 	min-height:800px;
+	margin-top:0px;
 }
 
 .adminMenu{
@@ -987,7 +986,7 @@
 .fundBox {
 	padding:20px;
 	display:block;
-	height:170px;
+	height:150px;
 }
 
 .smallFundBox {
@@ -1000,7 +999,7 @@
 }
 
 .fundBox ul{
-	padding-top:30px;
+	padding-top:15px;
 }
 
 .fundBox .progressIncomplete, .fundBox .progressComplete, .smallFundBox .progressIncomplete, .smallFundBox .progressComplete {
@@ -1351,10 +1350,10 @@
 }
 
 .updateContainer .dateCircle{
-	-moz-border-radius:40px;
-	-webkit-border-radius:40px;
-	height:40px;
-	width:40px;
+	-moz-border-radius:50px;
+	-webkit-border-radius:50px;
+	height:50px;
+	width:50px;
 	color:#fff;
 	background-color:#24454f;
 	margin-left:-70px;
@@ -1367,7 +1366,7 @@
 
 .updateContainer .dateCircle span{
 	position:relative;
-	top:10px;
+	top:15px;
 }
 
 /*end updates container*/
@@ -1475,6 +1474,47 @@
 
 /*end post comment*/
 
+
+/*cca survey styles*/
+.surveyBody{
+	width:66%;
+	float:left;
+}
+
+.surveyBody .formContainer .formBody{
+	width:90%;
+}
+
+.surveyBody .formContainer .formBody h2{
+	margin:0px;
+}
+
+.surveySidebar{
+	width:30%;
+	float:right;
+	border-left:1px solid #ccc;
+}
+
+.surveySidebar h2{
+	padding:0;
+	margin:0;
+}
+
+
+.surveySidebar h4{
+	text-transform: uppercase;
+	font-family: Helvetica, arial, sans-serif;
+	font-weight: bold;
+	color: #777;
+	font-size: 13px;
+}
+
+.sponsorBox .sectionBox{
+	padding-left:20px;
+}
+
+
+/*end cca survey styles*/
 
 /*new form styles*/
 .formContainer{
@@ -1697,6 +1737,7 @@
 }
 
 .loginForms .formContainer.login .formBody .row .leftCheckbox,
+.formContainer .formBody .row .leftCheckbox input,
 .loginForms .formContainer.register .formBody .row .leftCheckbox input
 {
 	width:20px;
