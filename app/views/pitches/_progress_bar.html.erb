@@ -8,4 +8,7 @@
 		<h5>100% funded</h5>
 	</div>			
 <%end%>
-<%= due_date_in_words(pitch.expiration_date) %>
+	<ul class="progressDataContainer">
+		<li class="dueDate"><%= due_date_in_words(pitch.expiration_date) %></li>
+		<li class="totalAmount">$200 of $4,000 raised</li>
+	</ul>

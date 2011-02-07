@@ -1053,6 +1053,27 @@
 	font-size:18px;
 }
 
+.progressDataContainer{
+	width:100%;
+	padding-top:5px!important;
+}
+
+.progressDataContainer li{
+	display:inline;	
+	list-style-type:none;
+	width:50%;
+}
+
+.progressDataContainer li.dueDate{
+	text-align:left;
+	border-right:1px solid #ccc;
+	padding-right:10px;
+	margin-right:10px;	
+}
+
+.progressDataContainer li.totalAmount{
+	text-align:right;
+}
 
 .donorsBox, .getInvolved{
 	padding:10px 20px 0px 20px;
@@ -1335,6 +1356,27 @@
 }
 
 /*end pitch sub-pages*/
+
+/*assignment menu*/
+
+.assignmentAdmin{
+	
+}
+
+.assignmentAdmin .adminHeader{
+	background-color:#f6e8e8;
+	font-weight:bold;
+	padding:10px;
+}
+
+.assignmentAdmin li span a{
+	background-color:#eee;
+	padding:5px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+
+/*end assignment menu*/
 
 /*updates container*/
 
