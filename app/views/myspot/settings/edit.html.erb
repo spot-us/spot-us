@@ -1,7 +1,6 @@
 <% @title = "Spot.us - Settings" %>
-<%= render :partial => 'layouts/common_questions' %>
+
 <div id="myspot_dashboard">
-	<h3>My Spot</h3>
 	<%= render :partial => "myspot/nav", :locals => {:selected_tab => "settings"} %>
 	<% unless @settings.errors.empty? %>
 		<% content_for :error do %>

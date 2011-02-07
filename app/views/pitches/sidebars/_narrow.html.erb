@@ -10,4 +10,6 @@
 	<%end%>
 	<%= render :partial => "pitches/donors", :locals => { :pitch => @pitch, :number_of_donors => 4 }%>
 	<%= render :partial => "pitches/get_involved"%>
+	<%= render :partial => "pitches/mediabugs" if @story%>
+	
 </div>

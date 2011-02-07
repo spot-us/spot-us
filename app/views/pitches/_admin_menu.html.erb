@@ -1,6 +1,6 @@
 <%if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
 	<div class='adminMenu'>
-		<h3>Author Options</h3>
+		<h3>Pitch Author Options</h3>
 		<%if pitch.approvable_by?(current_user)%>
 			<%if pitch.unapproved?%>
 				<%= link_to "Approve", approve_admin_pitch_path(pitch), :method => :put, :title => "Approve This Pitch"%>

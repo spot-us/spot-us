@@ -2,6 +2,8 @@
 	<h1>Sponsorship<%if @cca%>: <%= @cca.title %><%end%></h1>
 	<%if @cca%>
 		<p>Earn <%= number_to_currency(@cca.award_amount) %> in pitch credits by engaging with this sponsorship!</p>
+	<%else%>
+		<p>Earn funds through engagement - our budget, your decision.</p>
 	<%end%>
 </div>
 <div class="joinContainer">
