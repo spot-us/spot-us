@@ -1,8 +1,8 @@
 <div class="sponsorBox">
-	<h2>Survey Sponsor:</h2>
 	<div class="sectionBox">
+	<h4>Survey Sponsor</h4>
+		<h2><%= @cca.user.full_name %></h2>
 		<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
-		<h3><%= @cca.user.full_name %></h3>
 	</div>
 	<div class="sectionBox">
 	  <h4>Website:</h4>

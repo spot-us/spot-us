@@ -1494,8 +1494,13 @@
 	width:30%;
 	float:right;
 	border-left:1px solid #ccc;
-	padding-left:20px;
 }
+
+.surveySidebar h2{
+	padding:0;
+	margin:0;
+}
+
 
 .surveySidebar h4{
 	text-transform: uppercase;
@@ -1504,7 +1509,11 @@
 	color: #777;
 	font-size: 13px;
 }
+
+.sponsorBox .sectionBox{
+	padding-left:20px;
 }
+
 
 /*end cca survey styles*/
 
