@@ -1,0 +1,8 @@
+<% content_for :head do %>
+	<script type="text/javascript" src="http://mediabugs.org/widget/widget.js"></script>
+<%end%>
+
+<ul class="getInvolved">
+	<h3>MediaBugs: Report An Error</h3>
+	<li><a href="#" onclick="reportMediaBug('<%=h @story.headline%>','Spot.Us','<%=h @story.pitch.user.full_name%>','<%=h report_an_error_date(@story.created_at)%>','<%=h story_path(@story, {:only_path=>false})%>');">Send your report</a></li>
+</ul>

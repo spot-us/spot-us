@@ -1,7 +1,6 @@
 <% @title = "Spot.us - Twitter and Facebook Settings" %>
-<%= render :partial => 'layouts/common_questions' %>
+
 <div id="myspot_dashboard">
-	<h3>My Spot</h3>
 	<%= render :partial => "myspot/nav", :locals => {:selected_tab => "twitter_credentials"} %>
 	<% unless @twitter_credential.errors.empty? %>
 		<% content_for :error do %>
