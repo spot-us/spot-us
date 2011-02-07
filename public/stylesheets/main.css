@@ -1350,10 +1350,10 @@
 }
 
 .updateContainer .dateCircle{
-	-moz-border-radius:40px;
-	-webkit-border-radius:40px;
-	height:40px;
-	width:40px;
+	-moz-border-radius:50px;
+	-webkit-border-radius:50px;
+	height:50px;
+	width:50px;
 	color:#fff;
 	background-color:#24454f;
 	margin-left:-70px;
@@ -1366,7 +1366,7 @@
 
 .updateContainer .dateCircle span{
 	position:relative;
-	top:10px;
+	top:15px;
 }
 
 /*end updates container*/
