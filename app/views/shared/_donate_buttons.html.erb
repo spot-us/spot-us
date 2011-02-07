@@ -1,5 +1,5 @@
 <ul class="donateButtons">
-	<% if @show_cca && !pitch.fully_funded? %>
+	<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
 		<li class='creditsButton'>
 			<% if current_user %>
 				<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
