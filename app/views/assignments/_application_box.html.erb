@@ -1,0 +1,11 @@
+<div class="applicationBox">
+	<%if current_user && @assignment.accepted_contributors.include?(current_user)%>
+		<p>You have been accepted as a contributor to this assignment.</p>
+	<%elsif current_user && @assignment.rejected_contributors.include?(current_user)%>
+		<p>You have been rejected as a contributor to this assignment.</p>
+	<% elsif current_user &&  @assignment.contributors.include?(current_user)%>
+		<p>You have applied to contribute to this assignment.</p>
+	<% else %>
+	  	<p><%= link_to("Apply to contribute", process_application_pitch_assignment_path(@assignment.pitch, @assignment), :class => "linkAsButton", :confirm => "Apply as a contributor? Clicking OK will send a message to the creator of the pitch.")%></p>
+	<%end%>
+</div>

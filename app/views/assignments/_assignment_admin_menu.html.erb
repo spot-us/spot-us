@@ -1,0 +1,54 @@
+<ul class="assignmentAdmin">
+	<li class="adminHeader">Assignment Admin</li>
+    
+	<li>Status: <%= @assignment.status%>
+		<span>
+		    <%if @assignment.status == "open"%>
+				<%= link_to "close assignment", close_assignment_pitch_assignment_path(@assignment.pitch, @assignment), :confirm => "Close assignment?", :class => "linkAsButton"%>
+		    <%elsif @assignment.status == "closed"%>
+				<%= link_to "re-open assignment", open_assignment_pitch_assignment_path(@assignment.pitch, @assignment), :confirm => "Re-open assignment?", :class => "linkAsButton"%>
+			<%end%>
+		<span>
+	</li>
+    
+	<%if @assignment.contributors.any? and @assignment.status == "open"%>
+
+		<li>
+	      	<h5>Contributor Applications</h5>
+	      	<table>
+	        	
+				<tr>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Actions</th>
+				</tr>
+				
+	        	<%@assignment.applications.each do |application|%>
+	         		
+					<tr>
+						<td>
+							<%= application.contributor.full_name%>
+						</td>
+						<td>
+							<%= application.status%>
+						</td>
+						<td>
+							<%if application.status == "pending"%>
+								<%= link_to "accept", "/assignment/#{@assignment.id}/application/accept/#{application.id}", :confirm => "Accept contributor?", :class => "linkAsButton"%>
+								|
+								<%= link_to "reject", "/assignment/#{@assignment.id}/application/reject/#{application.id}", :confirm => "Reject contributor?", :class => "linkAsButton"%>
+							<%elsif application.status == "accepted"%>
+								<%= link_to "reject", "/assignment/#{@assignment.id}/application/reject/#{application.id}", :confirm => "Reject contributor?", :class => "linkAsButton"%>
+							<%elsif application.status == "rejected"%>
+								<%= link_to "accept", "/assignment/#{@assignment.id}/application/accept/#{application.id}", :confirm => "Accept contributor?", :class => "linkAsButton"%>
+							<%end%>
+						</td>
+					</tr>
+				
+				<%end%>
+				
+			</table>
+		</li>
+	<%end%>
+
+</ul>

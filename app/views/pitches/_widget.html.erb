@@ -1,39 +1,31 @@
-
-<%=image_tag("/images/new_design/widget.png", :class => "widget_icon") %>
-<div class="widget_header">
-	<h5 class="get_widget">Get the Spot.Us Widget</h5> Want the embed code to add to your blog or site!? Grab the different widgets below.
-</div>
-<div class="widget_links">
-	<a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="slideWidget('simple_widget');return false;">SIMPLE WIDGET</a> &nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp; <a class="reveal_widget" href="#" rel="nofollow" style="text-decoration:underline;" onclick="slideWidget('spotus_lite_widget');return false;">SPOT.US LITE</a>
-</div>
-<div class="widget_panel" id='simple_widget'>
-	<div style="border:1px solid #888;margin:5px 0px 5px 0px;padding:0px;width:334px;">
-		<iframe width='330' height='280' src='<%=pitch_path(@pitch)%>/widget' border='1' scrolling='no' noscroll></iframe>
+<div class="widgetPopup">
+	<div class="widgetContainer">
+		<h1><a href="http://spot.us" title="Spot.us">Spot.us</a></h1>
+		<div class="widgetContent">
+			<% if @pitch.story && @pitch.story.published? %>
+				<h2>This story has been published!</h2>
+				<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.story.headline), @pitch.story, :target => "_parent" %></h4>
+				 by <%= link_to truncate(h(@pitch.story.user.full_name), :length => 12), profile_path(@pitch.story.user), :target => "_parent" %>
+				<div class="smallFundBox">
+					<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+				</div>
+			<% else %>
+				<h2>Help fund this story!</h2>
+				<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.headline), @pitch, :target => "_parent" %></h4>
+				 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
+				<div class="smallFundBox">
+					<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
+					<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<div class="widget_tip">To get this widget, just grab this html code and paste into your template.
-		<textarea class="widget_code" style='width:320px;height:25px;'><%="<iframe width='330' src='#{pitch_path(@pitch,{:only_path=>false})}/widget' border='1' scrolling='no' noscroll></iframe>"%></textarea>
-		You can of course change the width of the iframe to fit your template.
-	</div>
-</div>
-
-<div class="widget_panel" id='spotus_lite_widget'>
-	<div class="widget_tip_lite">
-		<h3>Spot.Us Lite</h3>
-		<p><em>Spot.Us Lite</em> is widget which allows anyone to register at Spot.Us, login at Spot.Us and even donate to a pitch without having to leave the site hosting the widget. Isn't that cool?'</p>
-		<p>You need to follow a few steps to get <em>Spot.Us Lite</em> working on your site. Just follow these simple steps below to get it up and running in no time.<p>
-		<ol>
-			<li>Download the file <a href='http://www.spot.us/helper.html' title='Grab the helper.html file' target='_blank'>http://www.spot.us/helper.html</a>, and upload it to your root folder on your server.</li>
-			<li>Grab this html code and paste into your template:
-			<textarea class="widget_code" style='width:275px;height:155px;'><%="<script type='text/javascript'> 						
-var spotus_lite_host = 'http://www.domain.com/path'; // Example: If you can access the helper.html file at http://www.domain.com/path/helper.html, then you add http://www.domain.com/path there.
-var spotus_lite_url = '#{pitch_path(@pitch,{:only_path=>false}).gsub('pitches','lite')}';
-</script>
-<script src='http://spot.us/javascripts/spotus_lite_min.js' type='text/javascript'></script>
-<iframe width='300' src='' border='1' onChange='resizeIframe();' onLoad='resizeIframe();' id='spotus_lite' scrolling='no' noscroll></iframe>"
-			%></textarea></li>	
-			<li>You now need to modify the pasted code. You need to change <em>'http://www.domain.com/path'</em> to the root path of your server. Example: If you can access the helper.html file at http://www.domain.com/path/helper.html, then you add http://www.domain.com/path there.</li>					
-		</ol>
-		<p>You can of course change the width of the iframe to fit your template. Note: As Spot.Us Lite is an interactive widget, we recommend that you do not use widths below 300px.</p>
-		<p>If you have any issues with the widget, please contact <a href='mailto:info@spot.us' title='info@spot.us'>info@spot.us</a></p>
-	</div>
+	
+	<%if defined?(show_embed) && show_embed%>
+		<div class="widgetEmbedContainer">
+			<p>To get this widget, just grab this html code and paste into your template. You can, of course, change the width of the iframe to fit your template.</p>
+			<textarea id='embed_code'><%="<iframe width='300' src='#{pitch_path(@pitch, {:only_path=>false})}/widget' border='1' scrolling='no' noscroll></iframe>"%>
+			</textarea>
+		</div>
+	<%end%>
 </div>

@@ -1,0 +1,19 @@
+<% content_for :head do %>
+	<script>
+		jQuery(document).ready(function($){
+			$("#embed_code").click(
+				function(){
+					this.select();
+				}
+			)
+			$("#embed_code").focus(
+				function(){
+					this.select();
+				}
+			)
+		});
+	</script>
+<% end %>
+
+
+<%=render :partial => "widget", :locals => { :show_embed => true}%>

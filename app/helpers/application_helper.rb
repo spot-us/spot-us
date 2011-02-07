@@ -208,12 +208,6 @@ module ApplicationHelper
     submit_tag button_text, options
   end 
   
-  def get_link_button(link_text, href, options={})
-    options[:class] = "submitButton"
-    options[:title] = link_text
-    link_to link_text, href, options
-  end 
-  
   def excerpt?(text, strip_length=50)
     text = strip_html(text)
     text.length>strip_length ? text[0..strip_length].gsub(/\w+$/, '')+"..." : text

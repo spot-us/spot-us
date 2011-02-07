@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
 		@user = User.new
 		store_news_item_for_non_logged_in_user
 		store_comment_for_non_logged_in_user
-		store_location(params[:return_to] || root_path)
+		store_location(session[:return_to] || params[:return_to] || root_path)
 		if request.xhr?
 			render :partial => "header_form"
 		end
@@ -64,7 +64,7 @@ class SessionsController < ApplicationController
 		self.current_user = User.authenticate(params[:email], Base64.decode64(params[:encoded_password]))
 
 		if logged_in?
-      		current_user.connect_fb(new_fb_user) if new_fb_user
+      current_user.connect_fb(new_fb_user) if new_fb_user
 			handle_remember_me
 			create_current_login_cookie
 			update_balance_cookie

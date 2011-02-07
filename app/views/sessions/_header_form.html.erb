@@ -9,20 +9,3 @@
    <% end %>
    <%= render :partial => "users/popup_form" %>
 </div>
-<% javascript_tag do %>
-   jQuery(function(){
-      jQuery(".show_register_form").click(function(){
-         jQuery("#register_form").show();
-         jQuery("#login_form").hide();
-         return false;
-      });
-      jQuery("#show_login_form").click(function(){
-         jQuery("#register_form").hide();
-         jQuery("#login_form").show();
-         return false;
-      });
-      <% if params[:register] %>
-         jQuery(".show_register_form").click();
-      <% end %>
-   });
-<% end %>

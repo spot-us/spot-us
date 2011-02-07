@@ -1,4 +1,3 @@
-<%= render :partial => "pitches/pitch_head" %>
 <% @title = "Spot.us - #{h @assignment.title} - Pitch: #{h @assignment.pitch.headline}" %>
 
 <%=render :partial => "pitches/tabs"%>
@@ -12,5 +11,34 @@
 <%#=render :partial => "admin_menu"%>
 
 <div class="pitchContainer">
+	<div class="updateContainer">
+		<div class="dateCircle">
+			<span><%=post_date(@assignment.created_at)%></span>
+		</div>
+		<li>
+			<h2><%= link_to h(@assignment.title), pitch_assignment_path(@pitch, @assignment) %></h2>
+
+			<%unless @assignment.media_embed.blank?%>
+		    	<div class="videoContainer">
+					<%= transform_embed_code(@assignment.video_embed, 670, 320) %>
+				</div>
+			<%end%>
+			
+			<%=@assignment.body%>
+
+			<span>Posted by <%= link_to @assignment.user.full_name, profile_path(@assignment.user) %> on <%= pitch_date(@assignment.created_at) %></span>
+			
+			<!-- Application stuff for the assignment -->
+			<%= render :partial => "application_box" if current_user && current_user != @assignment.user%>
+
+		    <!-- ADMIN MENU -->
+			<%= render :partial => "assignment_admin_menu" if @assignment.user == current_user || is_admin?%>
+			
+			<%if @assignment.pitch.assignable_by?(current_user)%>
+				<%= link_to "Edit", edit_pitch_assignment_path(@assignment.pitch, @assignment)%>
+			<%end%>
+			
+		</li>
+	</div>
 	<%=render :partial => "pitches/sidebars/narrow"%>
 </div>

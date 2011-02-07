@@ -1,16 +1,15 @@
-<label>Survey Sponsor:</label>
-<div class="section clearfix">
-	<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
-	<h3><%= @cca.user.full_name %></h3>
-	
-</div>
-<div class="section">
-  <label>Website:</label>
-  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
-</div>
-<div class="section">
-  <label>About:</label>
-	<div class="about_sponsor">
-  		<%= @cca.user.about_you %>
+<div class="sponsorBox">
+	<h2>Survey Sponsor:</h2>
+	<div class="sectionBox">
+		<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
+		<h3><%= @cca.user.full_name %></h3>
+	</div>
+	<div class="sectionBox">
+	  <h4>Website:</h4>
+	  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
+	</div>
+	<div class="sectionBox">
+	  <h4>About:</h4>
+		<%= @cca.user.about_you %>
 	</div>
 </div>

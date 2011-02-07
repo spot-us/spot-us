@@ -11,7 +11,7 @@ class Myspot::DonationsController < ApplicationController
   response_for :create do |format|
     if resource_saved?
       update_balance_cookie
-      session[:donation_id] = @donation.id # temporary solution for being able to retrieve donation for share popup
+      session[:donation_id] = @donation.id   # temporary solution for being able to retrieve donation for share popup
       if params[:spotus_lite]
         format.html { redirect_to spotus_lite_myspot_donations_amounts_path }
       else
@@ -35,9 +35,11 @@ class Myspot::DonationsController < ApplicationController
   def can_create?
     if current_user.nil?
       session[:return_to] = edit_myspot_donations_amounts_path
-      session[:news_item_id] = params[:pitch_id]
-      session[:donation_amount] = params[:amount]
-      render :partial => "sessions/header_form" and return false
+      cookies[:news_item_id] = params[:donation][:pitch_id]
+      cookies[:donation_amount] = params[:donation][:amount]
+      redirect_to "/session/new"
+      return false
+      #render :partial => "sessions/header_form" and return false
     end
 
     access_denied unless Donation.createable_by?(current_user)

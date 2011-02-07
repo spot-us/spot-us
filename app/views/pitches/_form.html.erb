@@ -1,12 +1,12 @@
 <% content_for :head do %>
-<script>
-jQuery(document).ready(function($){
-	$("#toggleDivs").click(function(){
-		$('div[id*=toggle_div]').slideToggle(600);
-		return false;
-	});
-});
-</script>
+	<script>
+		jQuery(document).ready(function($){
+			$("#toggleDivs").click(function(){
+				$('div[id*=toggle_div]').slideToggle(600);
+				return false;
+			});
+		});
+	</script>
 <% end %>
 <% form_for(@pitch, :html => { :multipart => true }) do |f| %>
 <div class="formContainer">

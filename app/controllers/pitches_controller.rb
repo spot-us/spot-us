@@ -95,6 +95,11 @@ class PitchesController < ApplicationController
     @pitch = get_pitch
     render :layout => "widget"
   end
+  
+  def get_widget
+    @pitch = get_pitch
+    render :layout => "widget"
+  end
 
   def show_support
     pitch = get_pitch

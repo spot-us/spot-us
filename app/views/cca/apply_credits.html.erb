@@ -2,31 +2,23 @@
 <% end %>
 <% @title = "Spot.us - Apply Credits" %>
 
-
-<div id="news_item">
-	<div id="apply_credits_sponsor_info" class="survey_about" style="display:none;">
-		<%= render :partial => "sponsor_info"%>
-	</div>
-	<div id="news_item_header">
-		<img width="62" height="53" align="left" style="padding-right: 10px;" src="/images/new_design/pitch.png"/>
-		<h2 class="headline"><%= @cca.user.full_name %> thanks you!</h2>
-	</div>
-	<div id="apply_credits_to_pitches">
+<div class="surveyPage">
+	<h2><%= @cca.user.full_name %> thanks you!</h2>
+	<div>
 		<% if @cca.survey_completed?(current_user) %>
-			<div style="padding-right:100px">
-				Congrats! By completing the survey "<%= @cca.title %>", you have earned <strong><%= number_to_currency(@cca.award_amount) %></strong> in credits, and have a total of <strong><%= number_to_currency(current_user.remaining_credits) %></strong>. Feel free to apply now to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.
-			</div>
-			<br/>
-			<div id="story_listing">
-				<%=render :partial=>"shared/lists", :locals=>{ 
-					:items => @news_items, 
-					:no_items_message=>"There were no results for your search.  Try different search terms." 
-					}%>
-			</div>
-			<% else %>
+			<p>
+				Congrats! By completing the survey "<%= @cca.title %>", you have earned <strong><%= number_to_currency(@cca.award_amount) %></strong> in credits, 
+				and have a total of <strong><%= number_to_currency(current_user.remaining_credits) %></strong>. Feel free to apply now 
+				to one of the pitches below, or <%= link_to "browse others", "/stories/unfunded" %>.
+			</p>
+			<ul class="storyGrid">
+				<%=render :partial=>"shared/lists", :locals=>{ :items => @news_items,  :no_items_message=>"There are no unfunded pitches available." }%>
+			</ul>
+		<% else %>
+			<p>
 				You have not completed this survey yet. <br/>
 				<%= link_to "complete survey?", "/cca/#{@cca.id}" %>
-			<% end %>
-		</div>
+			</p>
+		<% end %>
 	</div>
 </div>
