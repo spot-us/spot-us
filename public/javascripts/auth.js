@@ -25,6 +25,7 @@ jQuery(document).ready(function($){
 				$(document).trigger('close.facebox');
 			}
 			if ($.isFunction(callback)){
+				
 				callback(jump_to);
 			}
 			jump_to = undefined;

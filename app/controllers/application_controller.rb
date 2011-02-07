@@ -180,10 +180,10 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_first_donation_for_non_logged_in_user
-    if session[:news_item_id] && session[:donation_amount]
-      self.current_user.donations.create(:pitch_id => session[:news_item_id], :amount => session[:donation_amount])
-      session[:news_item_id] = nil
-      session[:donation_amount] = nil
+    if cookies[:news_item_id] && cookies[:donation_amount]
+      self.current_user.donations.create(:pitch_id => cookies[:news_item_id], :amount => cookies[:donation_amount])
+      cookies[:news_item_id] = nil
+      cookies[:donation_amount] = nil
     end
   end
 

@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
 		@user = User.new
 		store_news_item_for_non_logged_in_user
 		store_comment_for_non_logged_in_user
-		store_location(params[:return_to] || root_path)
+		store_location(session[:return_to] || params[:return_to] || root_path)
 		if request.xhr?
 			render :partial => "header_form"
 		end

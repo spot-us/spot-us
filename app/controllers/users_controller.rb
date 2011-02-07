@@ -43,11 +43,13 @@ class UsersController < ApplicationController
     return_path = root_path
     return_path = params[:return_to] if params[:return_to] && params[:spotus_lite]
     return_path = URI.decode(cookies[:return_to]) if cookies[:return_to]
+    return_path = session[:return_to] if session[:return_to]
     if @user.save
       unless @user.organization?
         @user.activate!
         self.current_user = @user
         create_current_login_cookie
+        handle_first_donation_for_non_logged_in_user
         update_balance_cookie
         flash_and_redirect(:success, 'Welcome to Spot.Us!', return_path)
       else
