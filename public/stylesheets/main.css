@@ -986,7 +986,7 @@
 .fundBox {
 	padding:20px;
 	display:block;
-	height:170px;
+	height:150px;
 }
 
 .smallFundBox {
@@ -999,7 +999,7 @@
 }
 
 .fundBox ul{
-	padding-top:30px;
+	padding-top:15px;
 }
 
 .fundBox .progressIncomplete, .fundBox .progressComplete, .smallFundBox .progressIncomplete, .smallFundBox .progressComplete {
