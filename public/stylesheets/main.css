@@ -1119,6 +1119,7 @@
 
 .getInvolved li{
 	display:block;
+	margin-bottom:20px;
 }
 
 .getInvolved h3, .donorsBox h3{
