@@ -1360,20 +1360,30 @@
 /*assignment menu*/
 
 .assignmentAdmin{
-	
+	background-color:#f6e8e8;
+	padding:10px;
+	border-top:1px dotted #ccc;
 }
 
 .assignmentAdmin .adminHeader{
-	background-color:#f6e8e8;
 	font-weight:bold;
-	padding:10px;
+}
+
+.assignmentAdmin li{
+	display:inline;
+	padding-right:20px!important;
+	text-transform:capitalize;
 }
 
 .assignmentAdmin li span a{
-	background-color:#eee;
+	background-color:#b15b5b;
 	padding:5px;
+	color:#fff;
+	font-weight:bold;
+	text-decoration:none;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
+	margin-left:10px;
 }
 
 /*end assignment menu*/
