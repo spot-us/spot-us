@@ -254,6 +254,8 @@
 .logoContainerUSC a{
 	width:288px;
 	height:105px;
+	top: 10px;
+	position: relative;
 	background-image:url('/images/new/spotuslogoUSC.png');
 }
 
@@ -953,8 +955,16 @@
 	margin-right:10px;
 }
 
+.socialSharing ul li.tweetButton{
+	position:relative;
+	top:-2px;
+}
+
+
 .socialSharing ul li a{
 	color:#24454f;
+	position: relative;
+	top: 2px;
 }
 
 .socialSharing ul li a:hover{
