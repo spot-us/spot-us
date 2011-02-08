@@ -1,12 +1,17 @@
 <div class="headerContainer">
+	<%if @current_network && @current_network.name=="la"%>
+	<div class="logoContainerUSC">
+		<a href="/" title="Spot.us - Community Funded Reporting in Partnership with USC">
+			<span>Spot.us - Community Powered Reporting in Partnership with USC</span>
+		</a>
+	</div><!--end logo container-->
+	<%else%>
 	<div class="logoContainer">
 		<a href="/" title="Spot.us - Community Funded Reporting">
 			<span>Spot.us - Community Powered Reporting</span>
-			<%if @current_network && @current_network.name=="la"%>
-				<span><img src="/images/new_design/usc.png" alt="USC Annenberg Center" /></span>
-			<%end%>
 		</a>
-	</div><!--end logo container-->
+	</div><!--end logo container USC-->
+	<%end%>
 	<ul class="rightHeaderContainer">
 		<li>
 			<div class="searchBox">
