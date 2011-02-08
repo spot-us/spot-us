@@ -27,12 +27,14 @@ module ApplicationHelper
   end
   
   def parse_xml_created_at(xml, posts)
-    unless posts.empty?
-      xml.pubDate posts.first.created_at.to_s(:rfc822) 
-      xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
-    else
-      xml.pubDate Time.now.to_s(:rfc822) 
-      xml.lastBuildDate Time.now.to_s(:rfc822)
+    if posts
+      unless posts.empty?
+        xml.pubDate posts.first.created_at.to_s(:rfc822) 
+        xml.lastBuildDate posts.first.created_at.to_s(:rfc822)
+      else
+        xml.pubDate Time.now.to_s(:rfc822) 
+        xml.lastBuildDate Time.now.to_s(:rfc822)
+      end
     end
   end
   
