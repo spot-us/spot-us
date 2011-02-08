@@ -2,22 +2,4 @@
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}, {:title => "Story Updates - #{@pitch.headline}"}) %>
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
 	<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
-	<script>
-		jQuery(document).ready(function($){
-			jQuery("#show_action_items").click(function(){
-				jQuery.facebox(jQuery("#action_buttons").html());
-			});
-			jQuery(".toggle_video").click(function(){
-				$(".video_container").slideToggle(200);
-				return false;
-			});
-			jQuery(".widget_code").hover(function(){
-				$(this).addClass("hilited_input");
-				}, function(){
-					$(this).removeClass("hilited_input");
-				}).click(function(){
-					$(this).select();
-			});
-		});	
-	</script>
 <% end %>

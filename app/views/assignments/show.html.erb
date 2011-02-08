@@ -20,7 +20,7 @@
 
 			<%unless @assignment.media_embed.blank?%>
 		    	<div class="videoContainer">
-					<%= transform_embed_code(@assignment.video_embed, 670, 320) %>
+					<%= transform_embed_code(@assignment.media_embed, 670, 320) %>
 				</div>
 			<%end%>
 			
