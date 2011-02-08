@@ -955,8 +955,16 @@
 	margin-right:10px;
 }
 
+.socialSharing ul li.tweetButton{
+	position:relative;
+	top:-2px;
+}
+
+
 .socialSharing ul li a{
 	color:#24454f;
+	position: relative;
+	top: 2px;
 }
 
 .socialSharing ul li a:hover{
