@@ -242,7 +242,7 @@
 }
 
 .logoContainerUSC a{
-	width:382px;
+	width:288px;
 	height:105px;
 	background-image:url('/images/new/spotuslogoUSC.png');
 }
@@ -267,7 +267,7 @@
 
 /*Right header styles*/
 .rightHeaderContainer {
-	width:68%;
+	width:65%;
 	float:right;
 	padding-top:25px;
 }
