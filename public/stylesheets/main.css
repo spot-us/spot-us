@@ -217,7 +217,7 @@
 
 /* Logo container */
 
-.logoContainer {
+.logoContainer, .logoContainerUSC{
 	float: left;
 	padding:0px;
 	margin:10px 20px 0px 0px;
@@ -225,17 +225,26 @@
 	height:80px;
 }
 
-.logoContainer a{
+.logoContainer a, .logoContainerUSC a{
 	font-size:30px;
 	text-transform:uppercase;
 	text-decoration:none;
 	display:block;
-	width:282px;
-	height:105px;
-	background-image:url('/images/new/spotuslogo.png');
 	background-repeat:no-repeat;
 	text-indent:-3000px;
 	margin-top:0px;
+}
+
+.logoContainer a{
+	width:282px;
+	height:105px;
+	background-image:url('/images/new/spotuslogo.png');
+}
+
+.logoContainerUSC a{
+	width:382px;
+	height:105px;
+	background-image:url('/images/new/spotuslogoUSC.png');
 }
 
 
