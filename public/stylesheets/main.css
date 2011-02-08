@@ -789,6 +789,10 @@
 	border-bottom: 1px solid #fff;
 }
 
+.tabs li.story{
+	margin-right:15px;
+}
+
 .tabs li:hover, .tabs li.current{
 	background-color:#fff;
 }
