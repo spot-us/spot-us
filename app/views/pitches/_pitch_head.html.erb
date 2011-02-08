@@ -1,6 +1,6 @@
 <% content_for :head do %>
 	<%if @pitch%>
-		<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"posts", :format => 'rss'}, {:title => "Story Updates - #{@pitch.headline}"}) %>
+		<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"updates", :format => 'rss'}, {:title => "Story Updates - #{@pitch.headline}"}) %>
 		<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"comments", :format => 'rss'}, {:title => "Comments - #{@pitch.headline}"}) %>
 		<%= auto_discovery_link_tag(:rss, {:controller => 'pitches', :action => 'show', :id => @pitch.to_param, :tab=>"assignments", :format => 'rss'}, {:title => "Assignments - #{@pitch.headline}"}) %>
 	<%end%>
