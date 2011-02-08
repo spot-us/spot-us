@@ -764,7 +764,6 @@
 .tabs{
 	list-style-type:none;
 	position:relative;
-	z-index:1000;
 	top:-29px;
 	width:100%;
 	margin: 0px 0 3px 0;
