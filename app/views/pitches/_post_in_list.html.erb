@@ -1,4 +1,4 @@
-<%# apply_fragment ['pitch_posts_alt_', @pitch, post] do %>
+<% apply_fragment ['pitch_post_listing_', @pitch, post] do %>
 	<div class="dateCircle">
 		<span><%=post_date(post.created_at)%></span>
 	</div>
@@ -9,4 +9,4 @@
 
 		<span>Posted by <%= link_to post.user.full_name, profile_path(post.user) %> on <%= pitch_date(post.created_at) %></span>
 	</li>
-<%# end %>
+<% end %>
