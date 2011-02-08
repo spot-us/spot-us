@@ -1,6 +1,7 @@
-<% apply_fragment ['pitch_summary_', @pitch] do %>
-	<div class="summaryContent">
-		<div class="descriptionContainer">
+<div class="summaryContent">
+	<div class="descriptionContainer">			
+		<% apply_fragment ['pitch_summary_a_', @pitch] do %>
+		
 			<% unless @pitch.video_embed.blank? %>
 				<div class="videoContainer">
 					<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
@@ -20,17 +21,11 @@
 				</div>
 			<% end %>
 
-			<div class="socialSharing">
-				<ul>
-					<li><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="spotus">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
-					<li><iframe src="http://www.facebook.com/plugins/like.php?href=http://spot.us<%=pitch_path(@pitch)%>&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:21px;" allowTransparency="true"></iframe></li>
-				</ul>
-				<ul>
-					<li><a href="<%=pitch_path(@pitch)%>/get_widget" rel="facebox">Widget</a></li>
-					<li><a href="<%=pitch_path(@pitch)%>/discussion">Comments (0)</a></li>
-				</ul>
-			</div>
-		</div>
+		<%end%>
+		
+		<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+
 	</div>
-<%end%>
+</div>
+
 <%=render :partial => "pitches/sidebars/wide"%>
