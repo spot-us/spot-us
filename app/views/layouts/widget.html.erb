@@ -3,6 +3,6 @@
 	<%= render :partial => 'layouts/head' %>
 	<body>
 		<%= yield %>
-		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
+		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" && params[:action]!="get_widget" %>
 	</body>
 </html>
