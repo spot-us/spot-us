@@ -1,37 +1,39 @@
-<div class="pitchLeftContainer">
+<% apply_fragment ['pitch_details_', @pitch] do %>
+	<div class="pitchLeftContainer">
 	
-	<% unless @pitch.video_embed.blank? %>
-		<div class="videoContainer">
-			<%= transform_embed_code(@pitch.video_embed, 670, 320) %>
-		</div>
-	<% else %>
-		<div class="featuredImage">
-			<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
-		</div>
-	<%end%>
+		<% unless @pitch.video_embed.blank? %>
+			<div class="videoContainer">
+				<%= transform_embed_code(@pitch.video_embed, 670, 320) %>
+			</div>
+		<% else %>
+			<div class="featuredImage">
+				<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
+			</div>
+		<%end%>
 	
-	<div class="shortDescription">
-		<%= @pitch.short_description.strip_double_spaces %>
-	</div>
+		<div class="shortDescription">
+			<%= @pitch.short_description.strip_double_spaces %>
+		</div>
 
-	<% unless @pitch.extended_description.blank? %>
-		<h2>How will it help?</h2>
-		<%= @pitch.extended_description.strip_double_spaces %>
-	<% end %>
+		<% unless @pitch.extended_description.blank? %>
+			<h2>How will it help?</h2>
+			<%= @pitch.extended_description.strip_double_spaces %>
+		<% end %>
 	
-	<%if @pitch.skills%>
-		<h2>Qualifications</h2>
-		<%= @pitch.skills.strip_double_spaces %>
-	<%end%>
+		<%if @pitch.skills%>
+			<h2>Qualifications</h2>
+			<%= @pitch.skills.strip_double_spaces %>
+		<%end%>
 	
-	<%if @pitch.delivery_description%>
-		<h2>Deliverables</h2>
-		<%= @pitch.delivery_description.strip_double_spaces %>
-	<%end%>
+		<%if @pitch.delivery_description%>
+			<h2>Deliverables</h2>
+			<%= @pitch.delivery_description.strip_double_spaces %>
+		<%end%>
 	
-	<%if @pitch.disclosure%>	
-		<h2>Disclaimers</h2>
-		<%= @pitch.disclosure.strip_double_spaces %>
-	<%end%>
-</div>
+		<%if @pitch.disclosure%>	
+			<h2>Disclaimers</h2>
+			<%= @pitch.disclosure.strip_double_spaces %>
+		<%end%>
+	</div>
+<%end%>
 <%=render :partial => "pitches/sidebars/narrow"%>
