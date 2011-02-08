@@ -5,15 +5,17 @@
 		<h2>Individual Donors: <%=number_to_currency @pitch.total_amount_donated%> donated by <%=@pitch.supporters.length%> supporters</h2>
 		<ul>
 			<%@pitch.supporters.each do |supporter|%>
-				<li>
-					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
-					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
-					<span>Joined <%=short_date(supporter.created_at)%></span>
-					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
-					<%=excerpt?(supporter.get_about_you, 40)%>
-					<%=link_to "more &rarr;", profile_path(supporter)%>
+				<% apply_fragment ['pitch_supporter_listing_', @pitch, supporter] do %>
+					<li>
+						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
+						<span>Joined <%=short_date(supporter.created_at)%></span>
+						<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
+						<%=excerpt?(supporter.get_about_you, 40)%>
+						<%=link_to "more &rarr;", profile_path(supporter)%>
 				
-				</li>
+					</li>
+				<%end%>
 			<%end%>
 		</ul>
 	<%end%>
@@ -23,15 +25,17 @@
 		<h2>Organizational Support: <%=number_to_currency @pitch.total_amount_donated%> donated by <%=@pitch.donating_groups.length%> groups</h2>
 		<ul>
 			<%@pitch.donating_groups.each do |supporter|%>
-				<li>
-					<%=image_tag(supporter.image.url(:thumb), {:alt => supporter.full_name})%>
-					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
-					<span>Joined <%=short_date(supporter.created_at)%></span>
-					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
-					<%=excerpt?(supporter.get_about_you, 40)%>
-					<%=link_to "more &rarr;", profile_path(supporter)%>
+				<% apply_fragment ['pitch_supporter_listing_', @pitch, supporter] do %>
+					<li>
+						<%=image_tag(supporter.image.url(:thumb), {:alt => supporter.full_name})%>
+						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
+						<span>Joined <%=short_date(supporter.created_at)%></span>
+						<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
+						<%=excerpt?(supporter.get_about_you, 40)%>
+						<%=link_to "more &rarr;", profile_path(supporter)%>
 
-				</li>
+					</li>
+				<%end%>
 			<%end%>
 		</ul>
 	<%end%>
@@ -44,15 +48,17 @@
 		<h2>Group Supporters: <%=number_to_currency @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%> donated by <%=supporters.length%> groups</h2>
 		<ul>
 			<%supporters.each do |supporter|%>
-				<li>
-					<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
-					<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
-					<span>Joined <%=short_date(supporter.created_at)%></span>
-					<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
-					<%=excerpt?(supporter.get_about_you, 40)%>
-					<%=link_to "more &rarr;", profile_path(supporter)%>
+				<% apply_fragment ['pitch_supporter_listing_', @pitch, supporter] do %>
+					<li>
+						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
+						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
+						<span>Joined <%=short_date(supporter.created_at)%></span>
+						<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
+						<%=excerpt?(supporter.get_about_you, 40)%>
+						<%=link_to "more &rarr;", profile_path(supporter)%>
 
-				</li>
+					</li>
+				<%end%>
 			<%end%>
 		</ul>
 	<%end%>
@@ -64,17 +70,19 @@
 		<ul>
 			<%donations.each do |donation|%>
 				<%cca = donation.cca%>
-				<%if cca && cca.user%>
-					<%supporter = cca.user%>
-					<li>
-						<%=image_tag(supporter.photo.url(:thumb), {:alt => cca.title})%>
-						<h3><%=link_to cca.title, cca_path(cca)%></h3>
-						<span>Joined <%=short_date(supporter.created_at)%></span>
-						<h4>Contributed <%=number_to_currency(donation.cca_total_amount)%></h4>
-						<%=excerpt?(cca.description, 40)%>
-						<%=link_to "more &rarr;", cca_path(cca)%>
+				<% apply_fragment ['pitch_cca_donation_listing_', @pitch, donation] do %>
+					<%if cca && cca.user%>
+						<%supporter = cca.user%>
+						<li>
+							<%=image_tag(supporter.photo.url(:thumb), {:alt => cca.title})%>
+							<h3><%=link_to cca.title, cca_path(cca)%></h3>
+							<span>Joined <%=short_date(supporter.created_at)%></span>
+							<h4>Contributed <%=number_to_currency(donation.cca_total_amount)%></h4>
+							<%=excerpt?(cca.description, 40)%>
+							<%=link_to "more &rarr;", cca_path(cca)%>
 
-					</li>
+						</li>
+					<%end%>
 				<%end%>
 			<%end%>
 		</ul>
