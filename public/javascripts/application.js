@@ -55,16 +55,26 @@ jQuery(document).ready(function($){
 	});
 	
 	/* Hover */
-	jQuery("a[id*=hoverAnchor]").hover(function(){
+	jQuery("a[id*=hoverAnchor],li[id*=hoverAnchor]").hover(function(){
         $(this).addClass("hover");
         containerName = this.id.replace('hoverAnchor', '');
 		pos = $(this).position();
-		$("#hoverContainer"+containerName).css( { "left": (pos.left) + "px", "top": pos.top+14 + "px" } );
+		from_top = 14;
+		containerNameArr = containerName.split('-');
+		if (containerNameArr.length > 1){
+			containerName = containerNameArr[0];
+			from_top = 28;
+		}
+		$("#hoverContainer"+containerName).css( { "left": (pos.left) + "px", "top": pos.top+from_top + "px" } );
 		$("#hoverContainer"+containerName).fadeIn();
     }, function(){
 		containerName = this.id.replace('hoverAnchor', '');
         $(this).removeClass("hover");
-        $("#hoverContainer"+containerName).hide();
+        containerNameArr = containerName.split('-');
+		if (containerNameArr.length > 1){
+			containerName = containerNameArr[0];
+		}
+		$("#hoverContainer"+containerName).hide();
     });
 
 	jQuery("ul[id*=hoverContainer]").hover(function(){
