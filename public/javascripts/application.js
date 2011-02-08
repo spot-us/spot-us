@@ -64,6 +64,11 @@ jQuery(document).ready(function($){
 		if (containerNameArr.length > 1){
 			containerName = containerNameArr[0];
 			from_top = 28;
+			if (containerNameArr.length>2){
+				if(containerNameArr[2]=="large"){
+					from_top = 42;
+				}
+			}
 		}
 		$("#hoverContainer"+containerName).css( { "left": (pos.left) + "px", "top": pos.top+from_top + "px" } );
 		$("#hoverContainer"+containerName).fadeIn();

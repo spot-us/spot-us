@@ -1,7 +1,7 @@
 <%unless pitch.fully_funded?%>
 	<ul class="donateButtons">
 		<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
-			<li class='creditsButton' id="hoverAnchorFreeCredits-<%=pitch.id%>">
+			<li class='creditsButton' id="hoverAnchorFreeCredits-<%=pitch.id%>-<%=@pitch ? "large" : "small"%>">
 				<% if current_user %>
 					<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
 				<% else %>
