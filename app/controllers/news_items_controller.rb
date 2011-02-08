@@ -56,8 +56,13 @@ class NewsItemsController < ApplicationController
     @network = current_network                                                    # get the network
     @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
     @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
-    @items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) if @filter!='updates'
-    @items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>9) if @filter=='updates'
+    @filter = "updates" if @filter=='posts'
+    
+    unless @filter=='updates'
+      @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
+    else
+      @news_items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>9)
+    end
   end
 
   def load_networks
