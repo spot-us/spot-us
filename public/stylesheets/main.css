@@ -704,6 +704,7 @@
 
 .fundBox .donateButtons li.fundButton, .fundThis .donateButtons li.fundButton{
 	padding:0px;
+	width:48%;
 }
 
 .fundBox .donateButtons li.fundButton form input, .fundBox .donateButtons li.creditsButton a,
