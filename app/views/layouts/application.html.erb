@@ -41,6 +41,7 @@
 		<%#= render :partial => 'layouts/splash' %>
 		<%= render :partial => 'layouts/get_satisfaction' if GS_APP && !defined?(@hide_gs)  %>
 		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
+		<%= render :partial => 'shared/hovers' %>
 
 		<% if session[:show_default_answers] %>
 			<script>
@@ -51,11 +52,6 @@
 		<% end %>
 
 		<%= yield :bottom %>
-		
-		<ul class='hoverContainer helper' id='hoverContainerFreeCredits' style="display:none;">
-			<h3>Earn Free Credits</h3>
-			Earn funds to donate. Our sponsorship budget - your decision.
-		</ul>
 
 	</body>
 </html>
