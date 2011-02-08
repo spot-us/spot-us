@@ -8,7 +8,7 @@
 			</li>
 			<% if @pitch.peer_reviewer %>
 				<li>
-					Peer review by <%= link_to @pitch.user.full_name, profile_path(@pitch.user) %>
+					Peer review by <%= link_to @pitch.peer_reviewer.full_name, profile_path(@pitch.peer_reviewer) %>
 				</li>
 			<%end%>
 		</ul>
