@@ -44,7 +44,7 @@
 						<li class="purchase"><%=link_to image_tag("/images/new/cart.gif"), edit_myspot_donations_amounts_path%></a></li>
 						<li class="menuSeparator">&nbsp;</li>
 					<%end%>
-					<li>Welcome back <%=link_to current_user.first_name, profile_path(current_user)%></li>
+					<li>Welcome back <%=link_to current_user.first_name, myspot_profile_path%></li>
 				<%end%>
 			</ul><!--end loginMenu-->
 		</li>

@@ -1,6 +1,6 @@
 <% @title = "Spot.us - Member Profile" %>
 
-<div id="myspot_dashboard">
+<div>
    <%= render :partial => "/myspot/nav", :locals => {:selected_tab => "profile"}%>
    <%= link_to image_tag("edit_your_profile.png", :class=>"float-right"), edit_myspot_profile_path if params[:controller] == "myspot/profiles" %>
    <% if @profile.is_a?(Organization) %>

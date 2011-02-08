@@ -20,7 +20,7 @@
 
 			<%unless @assignment.media_embed.blank?%>
 		    	<div class="videoContainer">
-					<%= transform_embed_code(@assignment.video_embed, 670, 320) %>
+					<%= transform_embed_code(@assignment.media_embed, 670, 320) %>
 				</div>
 			<%end%>
 			
@@ -29,7 +29,7 @@
 			<span>Posted by <%= link_to @assignment.user.full_name, profile_path(@assignment.user) %> on <%= pitch_date(@assignment.created_at) %></span>
 			
 			<!-- Application stuff for the assignment -->
-			<%= render :partial => "application_box" if current_user && current_user != @assignment.user%>
+			<%= render :partial => "application_box" if current_user != @assignment.user%>
 
 		    <!-- ADMIN MENU -->
 			<%= render :partial => "assignment_admin_menu" if @assignment.user == current_user || is_admin?%>

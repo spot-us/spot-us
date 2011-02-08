@@ -13,19 +13,19 @@ class UsersController < ApplicationController
     if @filter=='donated' || @filter.blank?  
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
       @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, max(donations.id) as max_id", 
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc')
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc', :per_page => 9)
     elsif @filter=='donated-most'
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :group=>"donations.user_id").map(&:user_id).join(',')
       @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, count(*) as cnt, max(donations.id) as max_id",
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'cnt desc, max_id desc')
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'cnt desc, max_id desc', :per_page => 9)
     elsif @filter=='organizations'
       user_ids_all = Donation.paid.by_network(current_network).find(:all, :conditions=>"users.type='Organization'", :group=>"donations.user_id", :include=>:user).map(&:user_id).join(',')
       @items = Donation.by_network(current_network).paginate(:page => params[:page], :select=>"donations.*, max(donations.id) as max_id", 
-        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc')
+        :conditions=>"donations.user_id in (#{user_ids_all})", :group=>"donations.user_id", :order=>'max_id desc', :per_page => 9)
     elsif @filter=='reporters'
       user_ids_all = Pitch.by_network(current_network).browsable.find(:all, :group=>"news_items.user_id").map(&:user_id).join(',')
       @items = Pitch.by_network(current_network).browsable.paginate(:page => params[:page], :select=>"news_items.*, max(news_items.id) as max_id", 
-        :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'max_id desc')
+        :conditions=>"news_items.user_id in (#{user_ids_all})", :group=>"news_items.user_id", :order=>'max_id desc', :per_page => 9)
     end
       
     respond_to do |format|

@@ -1,37 +1,43 @@
 <div class="pitchLeftContainer">
-	
-	<% unless @pitch.video_embed.blank? %>
-		<div class="videoContainer">
-			<%= transform_embed_code(@pitch.video_embed, 670, 320) %>
-		</div>
-	<% else %>
-		<div class="featuredImage">
-			<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
-		</div>
-	<%end%>
-	
-	<div class="shortDescription">
-		<%= @pitch.short_description.strip_double_spaces %>
-	</div>
 
-	<% unless @pitch.extended_description.blank? %>
-		<h2>How will it help?</h2>
-		<%= @pitch.extended_description.strip_double_spaces %>
-	<% end %>
+	<% apply_fragment ['pitch_details_c_', @pitch] do %>
 	
-	<%if @pitch.skills%>
-		<h2>Qualifications</h2>
-		<%= @pitch.skills.strip_double_spaces %>
+		<% unless @pitch.video_embed.blank? %>
+			<div class="videoContainer">
+				<%= transform_embed_code(@pitch.video_embed, 670, 320) %>
+			</div>
+		<% else %>
+			<div class="largerFeaturedImage">
+				<%= image_tag(@pitch.featured_image.url(:larger_featured_image)) %>
+			</div>
+		<%end%>
+	
+		<div class="shortDescription">
+			<%= @pitch.short_description.strip_double_spaces %>
+		</div>
+
+		<% unless @pitch.extended_description.blank? %>
+			<h2>How will it help?</h2>
+			<%= @pitch.extended_description.strip_double_spaces %>
+		<% end %>
+	
+		<%unless @pitch.skills.blank?%>
+			<h2>Qualifications</h2>
+			<%= @pitch.skills.strip_double_spaces %>
+		<%end%>
+	
+		<%unless @pitch.delivery_description.blank?%>
+			<h2>Deliverables</h2>
+			<%= @pitch.delivery_description.strip_double_spaces %>
+		<%end%>
+	
+		<%unless @pitch.disclosure.blank?%>	
+			<h2>Disclaimers</h2>
+			<%= @pitch.disclosure.strip_double_spaces %>
+		<%end%>
 	<%end%>
 	
-	<%if @pitch.delivery_description%>
-		<h2>Deliverables</h2>
-		<%= @pitch.delivery_description.strip_double_spaces %>
-	<%end%>
-	
-	<%if @pitch.disclosure%>	
-		<h2>Disclaimers</h2>
-		<%= @pitch.disclosure.strip_double_spaces %>
-	<%end%>
+	<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+		
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>

@@ -1,34 +1,31 @@
 <div class="summaryContent">
-	<div class="descriptionContainer">
-		<% unless @pitch.video_embed.blank? %>
-			<div class="videoContainer">
-				<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+	<div class="descriptionContainer">			
+		<% apply_fragment ['pitch_summary_a_', @pitch] do %>
+		
+			<% unless @pitch.video_embed.blank? %>
+				<div class="videoContainer">
+					<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
+				</div>
+			<% else %>
+				<div class="featuredImage">
+					<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
+				</div>
+			<%end%>
+			<div class="shortDescription">
+				<%= @pitch.excerpt?.strip_double_spaces %>
 			</div>
-		<% else %>
-			<div class="featuredImage">
-				<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
-			</div>
-		<%end%>
-		<div class="shortDescription">
-			<%= @pitch.excerpt?.strip_double_spaces %>
-		</div>
-		<% unless @pitch.extended_description.blank? %>
-			<div class="extendedDescription">
-				<h4>How will it help?</h4>
-				<%= @pitch.extended_description.strip_double_spaces %>
-			</div>
-		<% end %>
+			<% unless @pitch.extended_description.blank? %>
+				<div class="extendedDescription">
+					<h4>How will it help?</h4>
+					<%= @pitch.extended_description.strip_double_spaces %>
+				</div>
+			<% end %>
 
-		<div class="socialSharing">
-			<ul>
-				<li><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="spotus">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
-				<li><iframe src="http://www.facebook.com/plugins/like.php?href=http://spot.us<%=pitch_path(@pitch)%>&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:21px;" allowTransparency="true"></iframe></li>
-			</ul>
-			<ul>
-				<li><a href="<%=pitch_path(@pitch)%>/get_widget" rel="facebox">Widget</a></li>
-				<li><a href="<%=pitch_path(@pitch)%>/discussion">Comments (0)</a></li>
-			</ul>
-		</div>
+		<%end%>
+		
+		<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+
 	</div>
 </div>
+
 <%=render :partial => "pitches/sidebars/wide"%>

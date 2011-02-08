@@ -1,64 +1,62 @@
 <% @title = "Spot.us - Member Profile" %>
 
-<div id="myspot_dashboard">
-   <%= render :partial => "/myspot/nav", :locals => {:selected_tab => "profile"}%>
-   <div id="dashboard_content">
-   <% form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true, :class => "form" } do |f| %>
-      <h4>Edit Your Profile</h4>
-      <%= render :partial => "myspot/profile_nav" %>
-        <% if @profile.is_a?(Organization) || @profile.is_a?(Sponsor) %>
-             <%= render :partial => "news_org_profile", :locals => {:f => f} %>
-        <% else %>
-             <div class="row">
-                <%= f.label :photo %>
-                <%= image_tag @profile.photo.url(:thumb), :class => 'thumbnail' %>
-                <span class="small">Upload a new image.<br/> Photos are 50x50 pixels</span><br/>
-                 <%= f.file_field :photo, :size => 15 %>
-             </div>
-             <div class="row">
-               <%= f.label :first_name %>
-               <%= f.text_field :first_name %>
-             </div>
-             <div class="row">
-               <%= f.label :last_name %>
-               <%= f.text_field :last_name %>
-             </div>
-         <% end %>
-         <div class="row">
-            <%= f.label :website, "Website" %>
-            <%= f.text_field :website %>
-            <em class='small'>use http://</em>
-         </div>
-		<% if APP_CONFIG[:has_networks] %>
-	         <div class="row">
-	            <%= render :partial => 'shared/network', :locals => {:f => f, :instance => @profile} %>
-	         </div>
-		<% end %>
-        <% if @profile.is_a?(Reporter) %>
-          <div class="row">
-            <%= f.label :fact_check_interest, "I am interested in being a Peer-Review Editor" %>
-            <%= f.check_box :fact_check_interest %>
-          </div>
-        <% end %>
-        <div class="row">
-          <label>Topics of Interest</label>
-          <div class="profile_topics clearfix">
-            <%= topic_check_boxes(@profile, "profile") %> 
-          </div>
-        </div>
-        <div class="row clearfix">
-          	<label>About You</label>
-
-          		<%= ckeditor_textarea("profile", "about_you", :toolbar => 'Basic', :width => '520px', :height => '200px') %>
-
+	<%= render :partial => "/myspot/nav", :locals => {:selected_tab => "profile"}%>
+	<h2>Edit Your Profile</h2>
+	<div class="formContainer">
+		<div class="formBody">
+			<% form_for :profile, :url => myspot_profile_path, :html => { :method => :put, :multipart => true, :class => "form" } do |f| %>
+				<%= render :partial => "myspot/profile_nav" %>
+				<% if @profile.is_a?(Organization) || @profile.is_a?(Sponsor) %>
+					<%= render :partial => "news_org_profile", :locals => {:f => f} %>
+				<% else %>
+					<div class="row">
+						<%= f.label :photo %>
+						<%= image_tag @profile.photo.url(:thumb), :class => 'thumbnail' %>
+						<span class="small">Upload a new image.<br/> Photos are 50x50 pixels</span><br/>
+						<%= f.file_field :photo, :size => 15 %>
+					</div>
+					<div class="row">
+						<%= f.label :first_name %>
+						<%= f.text_field :first_name %>
+					</div>
+					<div class="row">
+						<%= f.label :last_name %>
+						<%= f.text_field :last_name %>
+					</div>
+				<% end %>
+				<div class="row">
+					<%= f.label :website, "Website" %>
+					<%= f.text_field :website %>
+					<em class='small'>use http://</em>
+				</div>
+				<% if APP_CONFIG[:has_networks] %>
+				<div class="row">
+					<%= render :partial => 'shared/network', :locals => {:f => f, :instance => @profile} %>
+				</div>
+				<% end %>
+				<% if @profile.is_a?(Reporter) %>
+					<div class="row">
+						<%= f.label :fact_check_interest, "I am interested in being a Peer-Review Editor" %>
+						<%= f.check_box :fact_check_interest %>
+					</div>
+				<% end %>
+				<div class="row">
+					<label>Topics of Interest</label>
+					<div class="sites">
+						<br/><br/>
+						<%= topic_check_boxes(@profile, "profile") %> 
+					</div>
+				</div>
+				<div class="row" style="padding-top:10px">
+					<label>About You</label>
+					<%= ckeditor_textarea("profile", "about_you", :toolbar => 'Basic', :width => '520px', :height => '200px') %>
+				</div>
+				<div class="row">
+					<%= get_button("Save")%>
+					<%= link_to get_button("Cancel"), myspot_profile_path %>
+				</div>
+			<% end %>
 		</div>
-		<div>&nbsp;</div>
-        <div class="row">
-          <label>&nbsp; </label>
-          <%= link_to image_tag('cancel.png', :alt => 'Cancel'), myspot_profile_path %>
-          <input type="image" src="/images/save.png">
-        </div>
-   <% end %>
-   </div>
-</div>
+	</div>
+
 

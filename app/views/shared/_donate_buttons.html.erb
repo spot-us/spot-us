@@ -1,14 +1,16 @@
-<ul class="donateButtons">
-	<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
-		<li class='creditsButton'>
-			<% if current_user %>
-				<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
-			<% else %>
-				<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
-			<% end %>
+<%unless pitch.fully_funded?%>
+	<ul class="donateButtons">
+		<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
+			<li class='creditsButton' id="hoverAnchorFreeCredits-<%=pitch.id%>-<%=@pitch ? "large" : "small"%>">
+				<% if current_user %>
+					<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
+				<% else %>
+					<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :alt => "earn credits to donate if you're short on cash"}) %>
+				<% end %>
+			</li>
+		<% end %>
+		<li class='fundButton'>	
+			<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
 		</li>
-	<% end %>
-	<li class='fundButton'>	
-		<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
-	</li>
-</ul>
+	</ul>
+<%end%>

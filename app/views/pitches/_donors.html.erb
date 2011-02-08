@@ -9,7 +9,9 @@
 			<%nrs = pitch.supporters.length>number_of_donors ? number_of_donors : pitch.supporters.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = pitch.supporters[ind]%>
-				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+				<% apply_fragment ['pitch_supporter_listing_small_', pitch, supporter] do %>
+					<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>
 				<span><%= link_to "and #{pitch.supporters.length-nrs} others...", pitch_path(pitch)+"/donors#individuals"%></span>
@@ -28,7 +30,9 @@
 			<%nrs = pitch.donating_groups.length>number_of_donors ? number_of_donors : pitch.donating_groups.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = pitch.supporters[ind]%>
-				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+				<% apply_fragment ['pitch_supporter_listing_small_', pitch, supporter] do %>
+					<li><%=link_to image_tag(supporter.image.url(:thumb), {:alt => supporter.name}), profile_path(supporter)%></li>
+				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>
 				<span><%= link_to "and #{pitch.donating_groups.length-nrs} others...", pitch_path(pitch)+"/donors#organizations"%></span>
@@ -50,7 +54,9 @@
 			<%nrs = supporters.length>number_of_donors ? number_of_donors : supporters.length%>
 			<%nrs.times do |ind|%>
 				<%supporter = supporters[ind]%>
-				<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+				<% apply_fragment ['pitch_supporter_listing_small_', pitch, supporter] do %>
+					<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name}), profile_path(supporter)%></li>
+				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>
 				<span><%= link_to "and #{supporters.length-nrs} others...", pitch_path(pitch)+"/donors#groups"%></span>
@@ -70,8 +76,10 @@
 			<%nrs = donations.length>number_of_donors ? number_of_donors : donations.length%>
 			<%nrs.times do |ind|%>
 				<%cca = donations[ind].cca%>
-				<%if cca && cca.user%>
-					<li><%=link_to image_tag(cca.user.photo.url(:thumb), {:alt => cca.user.full_name}), cca_path(cca)%></li>
+				<% apply_fragment ['pitch_cca_listing_small_', pitch, cca] do %>
+					<%if cca && cca.user%>
+						<li><%=link_to image_tag(cca.user.photo.url(:thumb), {:alt => cca.user.full_name}), cca_path(cca)%></li>
+					<%end%>
 				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>

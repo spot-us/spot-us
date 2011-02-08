@@ -6,11 +6,8 @@
 	</head>
 
 	<body>
-
-		<!-- START HEADERS -->
-		<%#=render :partial => 'layouts/embed_admin_menu'%>
-		<%#= render :partial => 'layouts/login' %>
-
+		
+		<!-- START HEADER -->
 		<div class='upperWrapper'>
 			<div class='innerWrapper'>
 				<%= render :partial => "layouts/header" %>
@@ -39,8 +36,9 @@
 			<%= render :partial => 'layouts/footer' %>
 		</div>
 
+		<!-- START HELPER METHODS -->
 		<%= render :partial => 'layouts/google_analytics' if RAILS_ENV == "production" %>
-		<%= render :partial => 'layouts/splash' %>
+		<%#= render :partial => 'layouts/splash' %>
 		<%= render :partial => 'layouts/get_satisfaction' if GS_APP && !defined?(@hide_gs)  %>
 		<%= render :partial => 'layouts/social_notifier' if cookies[:social_notifier] and current_user and @notify_object %>
 
@@ -53,6 +51,11 @@
 		<% end %>
 
 		<%= yield :bottom %>
+		
+		<ul class='hoverContainer helper' id='hoverContainerFreeCredits' style="display:none;">
+			<h3>Earn Free Credits</h3>
+			Earn funds to donate. Our sponsorship budget - your decision.
+		</ul>
 
 	</body>
 </html>

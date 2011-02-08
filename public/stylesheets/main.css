@@ -14,6 +14,11 @@
 	border-bottom:1px solid #ccc;
 }
 
+.messageWrapper{
+	width:100%;
+	clear:both;
+}
+
 .lowerWrapper{
 	width:100%;
 	clear:both;
@@ -30,6 +35,11 @@
 	width:100%;
 	background-color:#24454f;
 	clear:both;
+}
+
+.messageContainer{
+	margin:0px auto;
+	display:block;
 }
 
 .contentContainer{
@@ -754,7 +764,6 @@
 .tabs{
 	list-style-type:none;
 	position:relative;
-	z-index:1000;
 	top:-29px;
 	width:100%;
 	margin: 0px 0 3px 0;
@@ -778,6 +787,10 @@
 	border-top:1px solid #ccc;
 	border-right:1px solid #ccc;
 	border-bottom: 1px solid #fff;
+}
+
+.tabs li.story{
+	margin-right:15px;
 }
 
 .tabs li:hover, .tabs li.current{
@@ -1059,7 +1072,7 @@
 .smallFundBox .progressIncomplete h5, .smallFundBox .progressComplete h5{
 	font-size:20px;
 	line-height:32px;
-	margin-top:-42px;
+	margin-top:-43px;
 	font-size:18px;
 }
 
@@ -1285,6 +1298,12 @@
 	width:68%;
 	float:left;
 	margin-right:30px;
+}
+
+.pitchLeftContainer .discussionContainer{
+	width:100%;
+	float:none;
+	margin:none;
 }
 
 .donorsContainer.community{

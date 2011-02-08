@@ -1,6 +1,6 @@
 .row
   =# ckeditor_textarea('comment', 'body', :toolbar => 'Basic', :height => '100px')
-  = f.text_area :body
+  = f.text_area :body, :rows => 5, :style => "width:98%;"
 .row
   = f.hidden_field :commentable_id
   = f.hidden_field :commentable_type
