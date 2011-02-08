@@ -162,7 +162,7 @@ module ApplicationHelper
   end
 
   def pitch_date(dt)
-	  dt.strftime("%d/%m/%y")
+	  dt.strftime("%m/%d/%y")
   end
   
   def post_date(dt)
