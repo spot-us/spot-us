@@ -1,4 +1,4 @@
-<% apply_fragment ['pitch_details_', @pitch] do %>
+<% apply_fragment ['pitch_details_a_', @pitch] do %>
 	<div class="pitchLeftContainer">
 	
 		<% unless @pitch.video_embed.blank? %>
@@ -7,7 +7,7 @@
 			</div>
 		<% else %>
 			<div class="featuredImage">
-				<%= image_tag(@pitch.featured_image.url(:featured_image)) %>
+				<%= image_tag(@pitch.featured_image.url(:larger_featured_image)) %>
 			</div>
 		<%end%>
 	
