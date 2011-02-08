@@ -254,6 +254,8 @@
 .logoContainerUSC a{
 	width:288px;
 	height:105px;
+	top: 10px;
+	position: relative;
 	background-image:url('/images/new/spotuslogoUSC.png');
 }
 
