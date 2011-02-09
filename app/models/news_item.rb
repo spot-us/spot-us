@@ -282,7 +282,8 @@ class NewsItem < ActiveRecord::Base
     #unless Rails.env.development?
     if user.notify_facebook_wall
       description = ""
-      description = strip_html(self.short_description) if self.short_description
+      description = strip_html(self.summary) if self.summary
+      description = strip_html(self.short_description) if self.short_description && description.blank?
       description = strip_html(self.extended_description) if self.extended_description && description.blank?
       description = "#{description[0..200]}..." if description.length>200
       [self.user, User.info_account?].compact.uniq.each do |u|
