@@ -1,0 +1,10 @@
+<% apply_fragment ['user_listing_', user] do %>
+	<li>
+		<%=image_tag(user.photo.url(:thumb), {:alt => user.full_name})%>
+		<h3><%=link_to user.full_name, profile_path(user)%></h3>
+		<span>Joined <%=short_date(user.created_at)%></span>
+		<h4><%if user.all_donations.total_amount>0%>Donated <%=number_to_currency(user.all_donations.total_amount)%> to <%=user.all_donations.nr_of_donations%> stories<%else%>Has not donated yet<%end%></h4>
+		<%=excerpt?(user.get_about_you, 40)%>
+		<%=link_to "more &rarr;", profile_path(user)%>
+	</li>
+<%end%>

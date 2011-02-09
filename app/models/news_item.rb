@@ -109,6 +109,7 @@ class NewsItem < ActiveRecord::Base
     indexes excerpt, :sortable => true
     indexes short_description, :sortable => true
     indexes extended_description, :sortable => true
+    indexes status, :sortable => true
     
     has user_id, created_at, updated_at
   end
