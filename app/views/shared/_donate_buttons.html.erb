@@ -1,5 +1,5 @@
-<%unless pitch.fully_funded?%>
-	<ul class="donateButtons">
+<ul class="donateButtons">
+	<%unless pitch.fully_funded?%>
 		<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
 			<li class='creditsButton' id="hoverAnchorFreeCredits-<%=pitch.id%>-<%=@pitch ? "large" : "small"%>">
 				<% if current_user %>
@@ -12,5 +12,9 @@
 		<li class='fundButton'>	
 			<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
 		</li>
-	</ul>
-<%end%>
+	<%else%>
+		<li class='creditsButton'>
+			<a href="" rel="nofollow">Fully Funded</a>
+		</li>
+	<%end%>
+</ul>
