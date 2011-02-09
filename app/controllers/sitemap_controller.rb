@@ -27,7 +27,7 @@ class SitemapController < ApplicationController
        when 'stories'
          @stories = Story.published.find(:all)
        when 'pitches'
-         @pitches = Pitch.browsable.find(:all)
+         @pitches = Pitch.accepted.find(:all)
      end
 
      render :layout=>false
