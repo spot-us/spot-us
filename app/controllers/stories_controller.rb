@@ -6,7 +6,7 @@ class StoriesController < ApplicationController
   resources_controller_for :stories
 
   def index
-    redirect_to "/stories/published", :status=>301
+    redirect_to "/stories/published", :status => :moved_permanently 
     return
   end
   

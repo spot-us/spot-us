@@ -12,7 +12,7 @@ class PitchesController < ApplicationController
   bounce_bots(:send_bots, :pitch, :blog_url)
 
   def index
-    redirect_to "/stories/unfunded", :status=>301
+    redirect_to "/stories/unfunded", :status => :moved_permanently 
     return
   end
   
@@ -41,7 +41,7 @@ class PitchesController < ApplicationController
     @tab = params[:tab] || ""
     
     if @tab=='posts'
-      redirect_to "#{pitch_path(@pitch)}/updates", :status=>301
+      redirect_to "#{pitch_path(@pitch)}/updates", :status => :moved_permanently 
       return
     end
     
