@@ -39,6 +39,12 @@ class PitchesController < ApplicationController
   def show
     @pitch = get_pitch
     @tab = params[:tab] || ""
+    
+    if @tab=='posts'
+      redirect_to "#{pitch_path(@pitch)}/updates", :status=>301
+      return
+    end
+    
     @story = @pitch.story if @tab=='story'
     respond_to do |format|
       format.html do
