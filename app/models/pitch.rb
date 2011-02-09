@@ -362,6 +362,11 @@ class Pitch < NewsItem
 
   def do_fund_events
     send_fund_notification unless story && story.published?
+    #if the slug is not set for old pitches, force one temporarily...
+    unless slug
+      self.slug = slug?
+      self.save
+    end
     create_associated_story unless story
   end
   
