@@ -18,7 +18,7 @@
 			<li><a href="/stories/unfunded<%= "/#{@topic.seo_name}" unless @topic.blank? %>" title="Recent" <%if @filter=='unfunded'%>class="currentFilter"<%end%>>Recent</a></li>
 			<li class='filterSeparator'>|<li>
 			<li><a href="/stories/almost-funded<%= "/#{@topic.seo_name}" unless @topic.blank? %>" title="Almost Funded" <%if @filter=='almost-funded'%>class="currentFilter"<%end%>>Almost Funded</a></li>
-		</ul
+		</ul>
 	<%end%>
 	<%if @topic || @filter=='published' || @filter=='unfunded' || @filter=='funded' ||  @filter=='almost-funded'%>
 		<ul>
