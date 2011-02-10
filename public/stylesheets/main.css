@@ -981,7 +981,7 @@
 	padding:0px 0px 10px 0px;
 }
 
-.adminMenu a{
+.adminMenu a, .adminMenu span{
 	display:block;
 	color:#fff;
 	font-weight:bold;
@@ -996,10 +996,44 @@
 	text-shadow: #333 0px 0px 1px;
 }
 
-.adminMenu a:hover{
+.adminMenu a:hover, .adminMenu span:hover{
 	background-color:#983939;
 	background-image:none;
 	text-shadow: #000 0px 0px 1px;
+}
+
+.adminMenu .emailList{
+	background-color:#fff;
+	border:1px solid #999;
+	padding:3px;
+	font-size:11px;
+}
+
+.adminMenu .emailList strong{
+	padding-left:3px;
+	font-size:13px;
+}
+
+.adminMenu .emailList a{
+	display:inline;
+	color:#666;
+	font-weight:normal;
+	padding:none;
+	background-color:#fff;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	text-decoration:underline;
+	text-align:none;
+	font-size:11px;
+	margin-bottom:0px;
+	text-shadow: none;
+}
+
+.adminMenu .emailList a:hover{
+	background-color:#fff;
+	background-image:none;
+	text-shadow: none;
+	text-decoration:none;
 }
 
 .fundBox, .smallFundBox{

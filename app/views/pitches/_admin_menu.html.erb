@@ -1,4 +1,4 @@
-<%if pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
+<%if is_admin? || pitch.editable_by?(current_user) || pitch.featureable_by?(current_user) || pitch.postable_by?(current_user) || pitch.approvable_by?(current_user)%>
 	<div class='adminMenu'>
 		<h3>Pitch Author Options</h3>
 		<%if pitch.approvable_by?(current_user)%>
@@ -35,15 +35,21 @@
 			<%= link_to "Accept donations", accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"%>
 			<%= link_to "Delete", pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"%>
 		<%end%>
+		<%if is_admin?%>
+			<%unless pitch.supporters.empty?%>
+				<span id="toggleEmailSupporters">Emails to Public Supporters</span>
+				<p id="listEmailSupporters" class="emailList" style="display:none;">
+					<strong>These are the emails of the public supporters</strong>
+					<%= pitch.supporters.map{ |supporter| link_to(supporter.email, "mailto:#{supporter.email}", :alt => supporter.email) }.join(", ")%>
+				<p>
+			<%end%>
+			<%unless @pitch.subscribers.empty?%>
+				<span id="toggleEmailSubscribers">Emails To Subscribers</span>
+				<p id="listEmailSubscribers" class="emailList" style="display:none;">
+					<%= pitch.subscribers.map{ |subscriber| link_to(subscriber.email, "mailto:#{subscriber.email}", :alt => subscriber.email) }.join(", ")%>
+				</p>
+			<%end%>
+		<%end%>
+		
 	</div>
 <%end%>
-
-	<%if false%>
-	
-	<%if is_admin?%>
-		<h3>Public Support</h3>
-		<%= pitch.supporters.map{ |supporter| link_to(supporter.email, "mailto:#{supporter.email}", :alt => supporter.email) }.join(", ")%>
-		<h3>Subscribers</h3>
-		<%= pitch.subscribers.map{ |subscriber| link_to(subscriber.email, "mailto:#{subscriber.email}", :alt => subscriber.email) }.join(", ")%>
-	<%end%>
-	<%end%>

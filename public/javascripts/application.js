@@ -91,6 +91,11 @@ jQuery(document).ready(function($){
 		$("#hoverAnchor"+containerName).removeClass("hover");
         $(this).fadeOut();
     });
+
+	jQuery("span[id*=toggleEmail]").click(function(){
+		containerName = this.id.replace('toggle', '');
+		$("#list"+containerName).slideToggle(200);
+	});
 	
 });
 
