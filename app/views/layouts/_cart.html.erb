@@ -1,10 +1,10 @@
 <%if current_balance>0 && current_user.total_credits>0 %>
-	<li class="purchase"><%=link_to image_tag("/images/new/cart_with_credits.png"), edit_myspot_donations_amounts_path%></a></li>
+	<li class="purchase" id="hoverAnchorCartWithCredits"><%=link_to image_tag("/images/new/cart_with_credits.png"), edit_myspot_donations_amounts_path%></a></li>
 	<li class="menuSeparator">&nbsp;</li>
 <%elsif current_balance>0%>
-	<li class="purchase"><%=link_to image_tag("/images/new/cart.gif"), edit_myspot_donations_amounts_path%></a></li>
+	<li class="purchase" id="hoverAnchorCart"><%=link_to image_tag("/images/new/cart.gif"), edit_myspot_donations_amounts_path%></a></li>
 	<li class="menuSeparator">&nbsp;</li>
 <%elsif  current_user.total_credits>0%>
-	<li class="purchase"><%=link_to image_tag("/images/new/credits.png"), "/stories/unfunded"%></a></li>
+	<li class="purchase" id="hoverAnchorCredits"><%=link_to image_tag("/images/new/credits.png"), "/stories/unfunded"%></a></li>
 	<li class="menuSeparator">&nbsp;</li>
 <%end%>

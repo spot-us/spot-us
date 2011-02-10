@@ -1805,7 +1805,7 @@
 }
 
 
-.formContainer .formBody .row .submitButton{
+.formContainer .formBody .row .submitButton, .formContainer .formBody .submitButton{
 	padding:10px;
 	-webkit-border-radius:4px;
 	-moz-borer-radius:4px;
