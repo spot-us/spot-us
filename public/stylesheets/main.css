@@ -1563,6 +1563,10 @@
 	float:left;
 }
 
+.descriptionContainer{
+	padding:5px;
+}
+
 .surveyBody .formContainer .formBody{
 	width:90%;
 }
