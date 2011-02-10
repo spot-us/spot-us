@@ -52,7 +52,7 @@ module CcaHelper
       @current_section = question.section
       text << '</fieldset>' if index > 0
       unless question.section.blank?
-        text << '<fieldset><legend>'
+        text << '<fieldset class="surveySection"><legend>'
         text << question.section 
         text << '</legend>'
       end

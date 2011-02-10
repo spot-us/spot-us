@@ -1,5 +1,5 @@
 <ul class="tabs">
-	<li class="<%=(selected_tab=="show" ? "active" : "")%>"><%= link_to "PROFILE", profile_path(@profile), :id => "profile_tab" %></li>
+	<li class="<%=(selected_tab=="show" ? "active" : "")%>"><%= link_to "Profile", profile_path(@profile), :id => "profile_tab" %></li>
 	<li class="<%=(selected_tab=="donations" ? "active" : "")%>"><%= link_to "Donations (#{@profile.all_donations.paid.count})", "/profiles/#{@profile.id}/donations", :id => "dashboard_donations_tab" %></li>
 	<li class="<%=(selected_tab=="pledges" ? "active" : "")%>"><%= link_to "Pledges (#{@profile.pledges.count})", "/profiles/#{@profile.id}/pledges", :id => "dashboard_pledges_tab" %></li>
 	<li class="<%=(selected_tab=="pitches" ? "active" : "")%>"><%= link_to "Pitches (#{@profile.pitches.count})", "/profiles/#{@profile.id}/pitches", :id => "dashboard_pitches_tab" %></li>
