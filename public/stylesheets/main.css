@@ -30,6 +30,12 @@
 	clear:both;
 }
 
+.spaceWrapper{
+	padding-top:10px;
+	padding-bottom:10px;
+	display:block;
+}
+
 .bottomWrapper{
 	margin:0px auto;
 	width:100%;
