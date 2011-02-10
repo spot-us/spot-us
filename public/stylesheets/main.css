@@ -745,22 +745,6 @@
 
 /*end donate button styles*/
 
-/* HACK FOR FUND THIS BUTTON */
-
-.fundThis{
-	width:100%;
-	padding-bottom:15px;
-	clear:both;
-}
-
-.fundThis .donateButtons .fundButton{
-	padding:15px;
-	width:100%;
-}
-
-/* END HACK */
-
-
 /* static middle tabs*/
 
 .tabs{
@@ -1568,6 +1552,11 @@
 
 
 /*cca survey styles*/
+
+.surveyPageContainer{
+	margin-top:10px;
+}
+
 .surveyBody{
 	width:66%;
 	float:left;
@@ -1583,6 +1572,7 @@
 
 .surveySidebar{
 	width:30%;
+	padding-left:10px;
 	float:right;
 	border-left:1px solid #ccc;
 }
@@ -1590,6 +1580,10 @@
 .surveySidebar h2{
 	padding:0;
 	margin:0;
+}
+
+.sectionBox{
+	clear:both;
 }
 
 
@@ -1602,9 +1596,20 @@
 }
 
 .sponsorBox .sectionBox{
-	padding-left:20px;
+	padding-left:10px;
 }
 
+.fundThis{
+	width:100%;
+	padding-bottom:15px;
+	clear:both;
+	display:block;
+}
+
+.fundThis .donateButtons .fundButton{
+	padding:15px;
+	width:100%;
+}
 
 /*end cca survey styles*/
 

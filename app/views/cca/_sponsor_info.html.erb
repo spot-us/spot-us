@@ -1,15 +1,19 @@
 <div class="sponsorBox">
 	<div class="sectionBox">
-	<h4>Survey Sponsor</h4>
+		<h4>Survey Sponsor</h4>
 		<h2><%= @cca.user.full_name %></h2>
 		<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
 	</div>
-	<div class="sectionBox">
-	  <h4>Website:</h4>
-	  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
-	</div>
-	<div class="sectionBox">
-	  <h4>About:</h4>
-		<%= @cca.user.about_you %>
-	</div>
+	<%unless @cca.user.website.blank?%>
+		<div class="sectionBox">
+		  <h4>Website:</h4>
+		  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
+		</div>
+	<%end%>
+	<%unless @cca.user.about_you.blank?%>
+		<div class="sectionBox">
+		  <h4>About:</h4>
+			<%= @cca.user.about_you %>
+		</div>
+	<%end%>
 </div>

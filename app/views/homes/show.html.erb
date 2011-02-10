@@ -1,11 +1,28 @@
 <% @title = "Spot.us - Home" %>
 <ul class="tabs">
 	<li <%if @filter=='featured'%>class="current"<%end%>><a href="/">Featured</a></li>
-	<li <%if @filter=='recent'%>class="current"<%end%>><a href="/recent">Recent</a></li>
+	<li <%if @filter=='community'%>class="current"<%end%>><a href="/community">Community</a></li>
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
-<%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection.", :show_pagination => false} %>
+
+<%unless @filter == "community"%>
+	<%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection.", :show_pagination => false} %>
+<%else%>
+
+	<div class="donorsContainer community">
+
+		<ul>
+			<%@items.each do |donation|%>
+				<% user = donation.user%>
+				<%=render :partial => "users/user", :locals => { :user => user }%>
+			<%end%>
+		</ul>
+
+	</div>
+
+<%end%>
+
 <div class="seeMoreContainer">
 	<%=get_more_link(@filter)%>
 </div>
