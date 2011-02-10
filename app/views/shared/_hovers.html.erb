@@ -3,17 +3,20 @@
 	Earn funds to donate. Our sponsorship budget - your decision.
 </ul>
 
-<ul class='hoverContainer helper' id='hoverContainerCart' style="display:none;">
-	<h3>You have unpaid donations!</h3>
-	Just click the cart and we will take you to your cart.
-</ul>
+<!-- These global hovers will only load when you are logged in...  -->
+<%if current_user%>
+	<ul class='hoverContainer helper' id='hoverContainerCart' style="display:none;">
+		<h3>You have unpaid donations!</h3>
+		Just click the cart and we will take you to your cart.
+	</ul>
 
-<ul class='hoverContainer helper' id='hoverContainerCartWithCredits' style="display:none;">
-	<h3>You have unpaid donations and credits!</h3>
-	Just click the cart and we will take you to your cart so you can use your credits to pay them.
-</ul>
+	<ul class='hoverContainer helper' id='hoverContainerCartWithCredits' style="display:none;">
+		<h3>You have unpaid donations and credits!</h3>
+		Just click the cart and we will take you to your cart so you can use your credits to pay them.
+	</ul>
 
-<ul class='hoverContainer helper' id='hoverContainerCredits' style="display:none;">
-	<h3>You have available credits!</h3>
-	Just click the dollar sign to find a story you can use your credits to fund.
-</ul>
+	<ul class='hoverContainer helper' id='hoverContainerCredits' style="display:none;">
+		<h3>You have available credits!</h3>
+		Just click the dollar sign to find a story you can use your credits to fund.
+	</ul>
+<%end%>
