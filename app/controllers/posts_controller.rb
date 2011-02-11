@@ -2,6 +2,15 @@ class PostsController < ApplicationController
   resources_controller_for :post
   before_filter :login_required, :except => [:show, :index]
   before_filter :select_tab
+  
+  def show
+    @post = find_resource
+    @pitch = @post.pitch
+    if params[:old]
+      redirect_to "#{pitch_post_path(@pitch, @post)}", :status => :moved_permanently 
+      return
+    end
+  end
 
   response_for :create do |format|
     format.html do

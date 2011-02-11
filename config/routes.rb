@@ -46,6 +46,7 @@ ActionController::Routing::Routes.draw do |map|
     pitch.resources :assignments, :except => [:index], :member => {:process_application => :get, :open_assignment => :get, :close_assignment => :get}
     pitch.connect ":tab", :controller => "pitches", :action => "show", :requirements => { :tab => /summary|story|updates|discussion|assignments|donors|details|story/  }
   end
+  map.connect "pitches/:pitch_id/posts/:id", :controller => "posts", :action => "show", :old=>true
   map.connect "pitches/:id/blog_posts", :controller => "pitches", :action => "show", :tab=>'posts'
   map.connect "pitches/:id/widget", :controller => "pitches", :action => "widget"
   map.connect "pitches/:id/get_widget", :controller => "pitches", :action => "get_widget"

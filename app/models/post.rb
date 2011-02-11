@@ -59,6 +59,18 @@ class Post < ActiveRecord::Base
     return true
   end
   
+  def to_s
+    title
+  end
+  
+  def to_param
+    begin 
+      "#{id}-#{to_s.parameterize}"
+    rescue
+      "#{id}"
+    end
+  end
+  
   def short_url(start_url=nil,base_url=nil)
     base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
     base_url += "pitches/"
