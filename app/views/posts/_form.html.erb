@@ -5,7 +5,7 @@
 		</div>
 		<div class="row">
 		    <%= f.label :title %>
-		    <%= f.text_field :title, :value => @post && @post.title ? @post.title : TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => @post && @post.title ? "" : "gray_text", :id => "title" %>
+		    <%= f.text_field :title, :value => @post && @post.title ? @post.title : TEXT[:title], :onclick => "clear_text('title', '#{TEXT[:title]}')", :class => @post && @post.title && @post.title!=TEXT[:title] ? "" : "grayText", :id => "title" %>
 		</div>
 		<div class="row">
 		    <%= f.label :body %>

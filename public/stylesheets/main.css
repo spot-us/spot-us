@@ -2366,3 +2366,7 @@ li.total div{
 .shortDescription{
 	margin-top:10px;
 }
+
+.grayText{
+	color:#999;
+}

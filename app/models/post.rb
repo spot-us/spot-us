@@ -51,6 +51,14 @@ class Post < ActiveRecord::Base
     blog_image_file_name.blank?
   end
   
+  def validate
+    if TEXT[:title]==title
+      errors.add("", "You have to specify a title") 
+      return false
+    end
+    return true
+  end
+  
   def short_url(start_url=nil,base_url=nil)
     base_url  = "http://#{APP_CONFIG[:default_host]}/" unless base_url
     base_url += "pitches/"
