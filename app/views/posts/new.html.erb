@@ -1,13 +1,13 @@
 <div id="spotus_form" class="blog_post">
-   <% unless @post.errors.empty? %>
-     <% content_for :error do %>
-       <%= error_messages_for :post %>
-     <% end %>
-   <% end %>
-   
-  <h2>Make a blog post about pitch '<%= @pitch.headline %>'</h2>
-  <%= render :partial => 'news_items/user', :locals => { :news_item => @pitch } %>
-  <% form_for([@pitch, @post], :html => { :multipart => true }) do |f| %>
-    <%= render :partial => 'form', :locals => {:f => f} %>
-  <% end %>
+	<% unless @post.errors.empty? %>
+		<% content_for :error do %>
+			<%= error_messages_for :post %>
+		<% end %>
+	<% end %>
+
+	<h2>Make a blog post about pitch '<%= @pitch.headline %>'</h2>
+	<%= render :partial => 'news_items/user', :locals => { :news_item => @pitch } %>
+	<% form_for([@pitch, @post], :html => { :multipart => true }) do |f| %>
+		<%= render :partial => 'form', :locals => {:f => f} %>
+	<% end %>
 </div>
