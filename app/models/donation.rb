@@ -113,7 +113,7 @@ class Donation < ActiveRecord::Base
     base_url += "pitches/"
     authorize = UrlShortener::Authorize.new APP_CONFIG[:bitly][:login], APP_CONFIG[:bitly][:api_key]
     client = UrlShortener::Client.new(authorize)
-    shorten = client.shorten("#{base_url}#{pitch.to_param}/posts/#{id}")
+    shorten = client.shorten("#{base_url}#{pitch.to_param}")
     shorten.urls
   end
 
