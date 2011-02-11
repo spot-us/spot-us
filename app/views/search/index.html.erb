@@ -14,7 +14,7 @@
 	<div class="donorsContainer community">
 
 		<ul>
-			<%@items.compact!.each do |user|%>
+			<%@items.each do |user|%>
 				<%=render :partial => @template_name, :locals => { :user => user }%>
 			<%end%>
 		</ul>
