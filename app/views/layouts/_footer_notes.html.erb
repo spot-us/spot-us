@@ -2,7 +2,7 @@
 	<div class="footerNotes">
 		<h3>Almost Funded Stories</h3>
 		<ul>
-			<% Pitch.almost_funded.unfunded.top_four.each do |p| %>
+			<% Pitch.almost_funded.unfunded.desc.top_four.each do |p| %>
 				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
 			<%end%>
 		</ul>
@@ -10,7 +10,7 @@
 	<div class="footerNotes">
 		<h3>Unfunded Stories</h3>
 		<ul>
-			<% Pitch.unfunded.top_four.each do |p| %>
+			<% Pitch.unfunded.desc.top_four.each do |p| %>
 				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
 			<%end%>
 		</ul>

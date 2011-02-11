@@ -128,7 +128,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','')"
   named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft')"
   named_scope :pitch_or_tip, :conditions => 'news_items.type IN("Pitch","Tip")'
-  named_scope :top_four, :limit => 4, :conditions => "news_items.created_at desc"
+  named_scope :top_four, :limit => 4
   named_scope :desc, :order => 'news_items.created_at DESC'
   named_scope :asc, :order => 'news_items.created_at ASC'
   named_scope :fundable_news_item, :conditions => ['news_items.type in (?)', ["Pitch", "Tip"]]
