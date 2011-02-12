@@ -5,7 +5,8 @@
 	<li <%if @tab=='updates'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/updates">Updates (<%=@pitch.posts.length%>)</a></li>
 	<li <%if @tab=='discussion'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/discussion">Discussion (<%=@pitch.comments.length%>)</a></li>
 	<li <%if @tab=='assignments'%>class="current"<%end%>><a href="<%=pitch_path(@pitch)%>/assignments">Assignments (<%=@pitch.assignments.length%>)</a></li>
-	<%if @pitch.story && @pitch.story.published?%>
+	<%if (@pitch.story && @pitch.story.published?) || (@pitch.story && @pitch.story.status=="draft" && @pitch.story.editable_by?(current_user)) 
+			|| (@pitch.story && @pitch.story.status=='fact_check' && @pitch.story.fact_checkable_by?(current_user))%>
 		<li class="story<%if @tab=='story'%> current<%end%>"><a href="<%=pitch_path(@pitch)%>/story">Story</a></li>
 	<%end%>
 	
