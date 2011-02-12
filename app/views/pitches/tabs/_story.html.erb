@@ -6,15 +6,17 @@
 		<div class="videoContainer">
 			<%= transform_embed_code(@story.video_embed, 670, 320) %>
 		</div>
-	<% else %>
+	<% elsif @story.featured_image? %>
 		<div class="largerFeaturedImage">
 			<%= image_tag(@story.featured_image.url(:larger_featured_image)) %>
 		</div>
 	<%end%>
 
-	<div class="shortDescription">
-		<%= @story.extended_description.strip_double_spaces %>
-	</div>
+	<%unless @story.extended_description.blank?%>
+		<div class="shortDescription">
+			<%= @story.extended_description.strip_double_spaces %>
+		</div>
+	<%end%>
 
 	<%unless @story.external_links.blank?%>
 		<h2>External Links</h2>
