@@ -17,7 +17,7 @@
       - else
         .centered= link_to image_tag('feature_this_pitch.png'), feature_pitch_path(pitch), :method => :get, :title => "Feature This Pitch"
     - if pitch.postable_by?(current_user)
-      = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"
+      = link_to image_tag('make_blog_post.gif'), new_pitch_post_path(pitch), :title => "Make Blog Post"˝
     - if pitch.assignable_by?(current_user)
       = link_to image_tag('make_assignment.gif'), new_pitch_assignment_path(pitch), :title => "Make Assignment"
     - if pitch.story
