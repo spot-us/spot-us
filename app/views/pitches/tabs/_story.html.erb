@@ -2,7 +2,7 @@
 <div class="pitchLeftContainer">
 	<h2>Story: <%=h @pitch.story.headline%></h2>
 	
-	<% unless @story.video_embed.blank? %>
+	<% if !@story.video_embed.blank? %>
 		<div class="videoContainer">
 			<%= transform_embed_code(@story.video_embed, 670, 320) %>
 		</div>
