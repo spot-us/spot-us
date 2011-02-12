@@ -38,6 +38,12 @@ class PitchesController < ApplicationController
   
   def show
     @pitch = get_pitch
+    
+    unless @pitch
+      render_404
+      return
+    end
+    
     @tab = params[:tab] || ""
     
     if @tab=='posts'
