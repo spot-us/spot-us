@@ -22,14 +22,14 @@
 			<%if !defined?(post) || !post%>
 				<%= link_to "Write a blog post", new_pitch_post_path(pitch), :title => "Write a blog post" %>
 			<%else%>
-				<%= link_to "Edit story update", edit_pitch_post_path(pitch, post), :title => "Edit Story Update" %>
+				<%= link_to "Edit this blog post", edit_pitch_post_path(pitch, post), :title => "Edit this blog post" %>
 			<%end%>
 		<%end%>
 		<%if pitch.assignable_by?(current_user)%>
 			<%= link_to "Create an assignment", new_pitch_assignment_path(pitch), :title => "Make Assignment"%>
 		<%end%>
 		<%if (current_user == pitch.user && !pitch.story)%>
-			<%= link_to "Create the story", begin_story_pitch_path(pitch), :title => "begin your story draft"%>
+			<%= link_to "Turn in draft story", begin_story_pitch_path(pitch), :title => "begin your story draft"%>
 		<%end%>
 		<%if (!pitch.fully_funded? && current_user == pitch.user)%>
 			<%= link_to "Accept donations", accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"%>
