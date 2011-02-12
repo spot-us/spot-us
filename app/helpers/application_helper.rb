@@ -55,7 +55,7 @@ module ApplicationHelper
   end
 
   def current_balance
-    return 0 if current_user.donations.unpaid.blank?
+    #return 0 if current_user.donations.unpaid.blank? && current_user.credit_pitches.unpaid.blank?
     current_user.current_balance
   end
 

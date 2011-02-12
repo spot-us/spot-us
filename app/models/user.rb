@@ -316,9 +316,8 @@ class User < ActiveRecord::Base
     credit_these_pitches.map(&:amount).sum.to_f
   end
   
-  #depricated
   def allocated_credits
-      self.credit_pitches.unpaid.map(&:amount).sum.to_f
+    self.credit_pitches.unpaid.map(&:amount).sum.to_f
   end
   
   def has_enough_credits?(credit_pitch_amounts)
@@ -485,11 +484,15 @@ class User < ActiveRecord::Base
   
   # TODO: remove after updating all models with amount
   def unpaid_donations_sum_in_cents
-    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+    sum = 0
+    sum = donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount_in_cents).sum
+    sum = credit_pitches.unpaid.empty? ? 0 : credit_pitches.unpaid.map(&:amount_in_cents).sum.to_f
   end
 
   def unpaid_donations_sum
-    donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount).sum
+    sum = 0
+    sum = donations.unpaid.empty? ? 0 : donations.unpaid.map(&:amount).sum
+    sum = credit_pitches.unpaid.empty? ? 0 : credit_pitches.unpaid.map(&:amount).sum.to_f
   end
 
   def unpaid_spotus_donation
