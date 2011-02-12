@@ -47,6 +47,12 @@ class ApplicationController < ActionController::Base
     Citizen
   end
   
+  def display_404
+    @page_not_found = true
+    render :file => "pages/notfound", :use_full_path => true, :layout => true, :status => 404, :page_not_found=>true
+    return
+  end
+  
   def social_notifier
     if current_user
       if cookies[:social_notifier_shown]

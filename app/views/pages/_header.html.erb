@@ -1,6 +1,10 @@
 <div class="headerTitle">
-	<h1 rel="nofollow"><%=params[:id].to_s%></h1>
-	<p>Pioneering community-funded reporting</p>
+	<%unless @page_not_found%>
+		<h1 rel="nofollow"><%=params[:id].to_s%></h1>
+		<p>Pioneering community-funded reporting</p>
+	<%else%>
+		<h1>Sorry, we couldn't find that page!</h1>
+	<%end%>
 </div>
 <div class="joinContainer">
 	<a href="/user/new" title='Register' rel="nofollow">Join &rsaquo;</a>

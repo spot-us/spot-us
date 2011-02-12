@@ -38,9 +38,9 @@ class PitchesController < ApplicationController
   
   def show
     @pitch = get_pitch
-    
-    unless @pitch
-      render_404
+  
+    if @pitch.blank?
+      display_404 
       return
     end
     
