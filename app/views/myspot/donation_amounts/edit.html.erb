@@ -4,42 +4,57 @@
 
 	<% javascript_tag do %>
 
-	jQuery(document).ready(function(){
-		jQuery("form#donation_amounts").submit(function(){
-			if(jQuery("#purchase").css("display") != "none") {
-				jQuery("#loading_status").fadeIn(50);
-				jQuery.post(jQuery(this).attr("action"), jQuery(this).serialize(), function(result){
-					jQuery("#loading_status").hide();
-					jQuery.facebox(result);
+		jQuery(window).bind('beforeunload', function() {
+			if(jQuery('#navigate_away').val()=='true'){
+				return "You haven't completed the donation process. Are you sure you want to leave?";
+		 	}
+		});
+
+		jQuery(document).ready(function(){
+			
+			jQuery('#purchase').click(function(){
+				jQuery('#navigate_away').val('false');
+			});
+			
+			jQuery('#apply_credits').click(function(){
+				jQuery('#navigate_away').val('false');
+			});
+			
+			jQuery("form#donation_amounts").submit(function(){
+				if(jQuery("#purchase").css("display") != "none") {
+					jQuery("#loading_status").fadeIn(50);
+					jQuery.post(jQuery(this).attr("action"), jQuery(this).serialize(), function(result){
+						jQuery("#loading_status").hide();
+						jQuery.facebox(result);
+						return false;
+					}, "script");
 					return false;
-				}, "script");
+				}
+			});
+			jQuery('#remove_spotus_donation').click(function(){
+				jQuery('input#spotus_donation').remove();
+				jQuery('#support_spotus').hide();
+				getTotalAmounts(true);
 				return false;
-			}
-		});
-		jQuery('#remove_spotus_donation').click(function(){
-			jQuery('input#spotus_donation').remove();
-			jQuery('#support_spotus').hide();
-			getTotalAmounts(true);
-			return false;
-		});
+			});
 
-		jQuery('select.invisible').val('');
+			jQuery('select.invisible').val('');
 
-		jQuery('a.show_group_selector').toggle(function(){
-			jQuery(this).next("select").removeClass("invisible").focus().next("em").removeClass("invisible");        
-		},function(){
-			jQuery(this).blur().next("select").val('').addClass("invisible").next("em").addClass("invisible");
-		});
+			jQuery('a.show_group_selector').toggle(function(){
+				jQuery(this).next("select").removeClass("invisible").focus().next("em").removeClass("invisible");        
+			},function(){
+				jQuery(this).blur().next("select").val('').addClass("invisible").next("em").addClass("invisible");
+			});
 		
-		getTotalAmounts(true);
-		
-		jQuery('input.line_item').change(function(){
 			getTotalAmounts(true);
+		
+			jQuery('input.line_item').change(function(){
+				getTotalAmounts(true);
+			});
+			jQuery('input#spotus_donation').change(function(){
+				getTotalAmounts(false);
+			});		
 		});
-		jQuery('input#spotus_donation').change(function(){
-			getTotalAmounts(false);
-		});		
-	});
 	<% end %>
 <% end %>
 
@@ -130,6 +145,7 @@
             </li>
          </ul>
       <div>
+		<%= hidden_field_tag "navigate_away", true, :id => "navigate_away" %>
         <%= image_submit_tag 'apply_credits_checkout.png', :alt => 'Apply Credits', :name =>"submit", :value => "apply_credits", :id=>"apply_credits" %> 
 		<%= image_submit_tag 'purchase.png', :alt => 'Purchase', :name =>"submit", :value => "purchase", :id=>"purchase" %>
       </div>
