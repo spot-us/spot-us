@@ -5,7 +5,9 @@
 	<li <%if @filter=='published'%>class="current"<%end%>><a href="/published">Published</a></li>
 	<li <%if @filter=='updates'%>class="current"<%end%>><a href="/updates">Updates</a></li>
 </ul>
-
+<div class="seeMoreContainer">
+	<%=get_more_link(@filter)%>
+</div>
 <%unless @filter == "community"%>
 	<%= render :partial => "shared/lists", :locals => {:items => @items, :no_items_message => "No stories found for this selection.", :show_pagination => false} %>
 <%else%>
@@ -23,6 +25,3 @@
 
 <%end%>
 
-<div class="seeMoreContainer">
-	<%=get_more_link(@filter)%>
-</div>
