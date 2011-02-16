@@ -10,7 +10,7 @@
 				<%= transform_embed_code(@pitch.media_embed, 670, 320) %>
 			</div>
 		<% else %>
-			<div class="featuredImage">
+			<div class="largerFeaturedImage">
 				<%= image_tag(@pitch.featured_image.url(:larger_featured_image)) %>
 			</div>
 		<%end%>
