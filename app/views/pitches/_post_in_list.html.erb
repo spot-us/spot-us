@@ -5,13 +5,13 @@
 	<li>
 		<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
 
-		<% unless @pitch.media_embed.blank? %>
+		<% unless post.media_embed.blank? %>
 			<div class="videoContainer">
-				<%= transform_embed_code(@pitch.media_embed, 670, 320) %>
+				<%= transform_embed_code(post.media_embed, 670, 320) %>
 			</div>
-		<% else %>
+		<% elsif post.featured_image? %>
 			<div class="largerFeaturedImage">
-				<%= image_tag(@pitch.featured_image.url(:larger_featured_image)) %>
+				<%= image_tag(post.featured_image.url(:larger_featured_image)) %>
 			</div>
 		<%end%>
 		
