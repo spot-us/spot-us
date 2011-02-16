@@ -1,7 +1,9 @@
 <div class="summaryContent">
 	<div class="descriptionContainer">			
-		<% apply_fragment ['pitch_summary_a_', @pitch] do %>
+		<% apply_fragment ['pitch_summary_b_', @pitch] do %>
 		
+			<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+			
 			<% unless @pitch.video_embed.blank? %>
 				<div class="videoContainer">
 					<%= transform_embed_code(@pitch.video_embed, 520, 320) %>
@@ -23,8 +25,6 @@
 
 		<%end%>
 		
-		<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
-
 	</div>
 </div>
 

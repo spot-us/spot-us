@@ -932,6 +932,15 @@
 	margin-bottom:20px;
 }
 
+.descriptionContainer .socialSharing{
+	height:15px;
+	padding:10px;
+	width:500px;
+	background-color:#f9f9f9;
+	border:1px solid #ddd;
+	margin-bottom:10px;
+}
+
 .socialSharing ul{
 	float:left;
 	position:relative;
@@ -945,16 +954,21 @@
 	margin-right:10px;
 }
 
+.descriptionContainer .socialSharing ul li{
+	font-size:12px;
+}
+
 .socialSharing ul li.tweetButton{
 	position:relative;
 	top:-2px;
 }
 
 
+.descriptionContainer .socialSharing ul li a{
+	top: 0px;
+}
+
 .socialSharing ul li a{
-	color:#24454f;
-	position: relative;
-	top: 2px;
 }
 
 .socialSharing ul li a:hover{
