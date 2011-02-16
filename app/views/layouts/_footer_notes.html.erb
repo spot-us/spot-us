@@ -10,7 +10,7 @@
 	<div class="footerNotes">
 		<h3>Unfunded Stories</h3>
 		<ul>
-			<% Pitch.unfunded.desc.top_four.each do |p| %>
+			<% Pitch.unfunded.accepted.desc.top_four.each do |p| %>
 				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
 			<%end%>
 		</ul>
