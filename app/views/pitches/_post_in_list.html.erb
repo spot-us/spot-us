@@ -9,9 +9,9 @@
 			<div class="videoContainer">
 				<%= transform_embed_code(post.media_embed, 670, 320) %>
 			</div>
-		<% elsif post.featured_image? %>
+		<% elsif post.blog_image? %>
 			<div class="largerFeaturedImage">
-				<%= image_tag(post.featured_image.url(:larger_featured_image)) %>
+				<%= image_tag(post.blog_image.url(:larger_featured_image)) %>
 			</div>
 		<%end%>
 		
