@@ -1,5 +1,7 @@
 <%if show_cca?(@show_cca) && (!defined?(only_progress) || !only_progress)%>
-	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT/1.05), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}"} do |f| %>
+	<% html_options = {:id => "new_donation_#{news_item.id}"}%>
+	<% html_options[:target] = "_blank" if @is_widget%>
+	<% form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT/1.05), :url => myspot_donations_path, :html => html_options do |f| %>
 		<%= f.hidden_field :amount, :id => "donation_default_amount" %>
 		<%= f.hidden_field :pitch_id %>
 		<%= submit_tag "Fund This Story", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}" %>

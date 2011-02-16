@@ -1,0 +1,20 @@
+<ul class="donateButtons">
+	<%unless pitch.fully_funded?%>
+		<% if @show_cca && !pitch.fully_funded? && !defined?(@cca) %>
+			<li class='creditsButton'>
+				<% if current_user %>
+					<%= link_to "Free Credits", cca_path(@first_cca) + "/#{pitch.id}", :title => '', :alt => "earn credits to donate if you're short on cash" %>
+				<% else %>
+					<%= facebox_login_link_to("Free Credits", cca_path(@first_cca) + "/#{pitch.id}", {:return_to => cca_path(@first_cca) + "/#{pitch.id}", :target=>"_blank", :alt => "earn credits to donate if you're short on cash"}) %>
+				<% end %>
+			</li>
+		<% end %>
+		<li class='fundButton'>	
+			<%= render :partial => "donations/text_button", :locals => { :news_item => pitch }%>
+		</li>
+	<%else%>
+		<li class='creditsButton'>
+			<a href="" rel="nofollow" onclick="return false;">Fully Funded</a>
+		</li>
+	<%end%>
+</ul>

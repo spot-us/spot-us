@@ -105,11 +105,13 @@ class PitchesController < ApplicationController
 
   def widget
     @pitch = get_pitch
+    @is_widget = true
     render :layout => "widget"
   end
   
   def get_widget
     @pitch = get_pitch
+    @is_widget = true
     render :layout => "widget"
   end
 

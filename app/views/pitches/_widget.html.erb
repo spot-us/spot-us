@@ -15,7 +15,7 @@
 				 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
 				<div class="smallFundBox">
 					<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
-					<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
+					<%= render :partial => "shared/widget_donate_buttons", :locals => { :pitch => @pitch }%>
 				</div>
 			<% end %>
 		</div>
