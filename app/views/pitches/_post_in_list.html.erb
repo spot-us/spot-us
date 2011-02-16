@@ -5,7 +5,7 @@
 	<li>
 		<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
 
-		<% unless post.media_embed.blank? %>
+		<% if !post.media_embed.blank? %>
 			<div class="videoContainer">
 				<%= transform_embed_code(post.media_embed, 670, 320) %>
 			</div>
