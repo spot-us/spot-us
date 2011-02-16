@@ -175,10 +175,10 @@ class Mailer < ActionMailer::Base
   end
   
   def assignment_application_notification(mail)
-    recipients [mail[:assignment].user.email,mail[:contributor].email].join(",")
+    recipients mail[:assignment].user.email
     bcc        '"David Cohn" <david@spot.us>'
     from       MAIL_FROM_INFO
-    subject    "Spot.Us: Assignment assignment application: " + mail[:assignment].pitch.headline
+    subject    "Spot.Us: Assignment assignment application: " + mail[:assignment].pitch.slug?
     body       mail
   end
   

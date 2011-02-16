@@ -2,7 +2,7 @@ Dear <%=@user.first_name%>,
 
 Thanks for applying to join this pitch's reporting team!
 
-<%= @pitch.headline %>
+<%= @pitch.slug? %>
 <%= pitch_url(@pitch) %>
 
 What does this mean? 
