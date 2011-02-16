@@ -2352,7 +2352,7 @@ li.total div{
 
 .seeMoreContainer{
 	width:100%;
-	margin:10px;
+	margin:0px 30px 10px 10px;
 	clear:both;
 	text-align:right;
 	display:block;
@@ -2360,7 +2360,13 @@ li.total div{
 
 .seeMoreContainer a{
 	font-size:14px;
+	margin-right:20px;
 	text-transform:capitalize;
+	text-decoration:none;
+}
+
+.seeMoreContainer a:hover{
+	text-decoration:underline;
 }
 
 .shortDescription{

@@ -1,10 +1,20 @@
-<% apply_fragment ['pitch_post_listing_', @pitch, post] do %>
+<% apply_fragment ['pitch_post_listing_a_', @pitch, post] do %>
 	<div class="dateCircle">
 		<span><%=post_date(post.created_at)%></span>
 	</div>
 	<li>
 		<h2><%= link_to h(post.title), pitch_post_path(@pitch, post) %></h2>
 
+		<% unless @pitch.media_embed.blank? %>
+			<div class="videoContainer">
+				<%= transform_embed_code(@pitch.media_embed, 670, 320) %>
+			</div>
+		<% else %>
+			<div class="featuredImage">
+				<%= image_tag(@pitch.featured_image.url(:larger_featured_image)) %>
+			</div>
+		<%end%>
+		
 		<%=post.body%>
 
 		<span>Posted by <%= link_to post.user.full_name, profile_path(post.user) %> on <%= pitch_date(post.created_at) %></span>
