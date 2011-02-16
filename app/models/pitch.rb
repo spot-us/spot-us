@@ -42,6 +42,8 @@ class Pitch < NewsItem
   # extend ActiveSupport::Memoizable
   aasm_initial_state  :unapproved
 
+  after_create :send_thank_you
+
   aasm_state :unapproved
   aasm_state :active
   aasm_state :accepted
@@ -417,6 +419,10 @@ class Pitch < NewsItem
   def expiration_date_cannot_be_in_the_past 
    errors.add(:expiration_date, "can't be in the past") if  !expiration_date.blank? and expiration_date < Date.today 
   end 
+  
+  def send_thank_you
+    Mailer.deliver_thank_you_for_your_pitch(user, self)
+  end
 
 end
 

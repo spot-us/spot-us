@@ -231,4 +231,11 @@ class Mailer < ActionMailer::Base
     body        :ne => ne, :user => user
   end
   
+  def thank_you_for_your_pitch(user, pitch)
+    recipients  user.email
+    from        MAIL_FROM_INFO
+    subject     "Thanks for creating a pitch on Spot.Us!"
+    body        :pitch => pitch, :user => user
+  end
+  
 end

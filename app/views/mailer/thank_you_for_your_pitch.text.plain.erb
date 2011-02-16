@@ -1,0 +1,16 @@
+Dear <%=@user.full_name%>,
+
+Thanks for creating a pitch on Spot.Us. Please note that the pitch is not live yet. But you can find it and edit it by going to the <%=link_to @pitch.slug?, pitch_path(@pitch, {:only_path=>false})%> (you can find it in your dashboard in your user profile) and clicking "edit pitch." 
+
+The pitch will not go live until it is approved by Spot.Us administration. We will contact you shortly with ideas on fundraising, how to tighten the pitch, etc. 
+
+Once the pitch is up on Spot.Us - we work for you! Our goal is just to give you a solid footing. 
+
+If you want - feel free to get the process started by emailing info@spot.us
+
+Sincerely,
+
+David Cohn
+Spot.Us
+
+<%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>
