@@ -16,5 +16,12 @@
 		<li class='creditsButton'>
 			<a href="" rel="nofollow" onclick="return false;">Fully Funded</a>
 		</li>
+		<%if pitch.story && pitch.story.published?%>
+			<li class='fundButton'>	
+				<form>
+					<input type="submit" value="Published" onclick="return false;" />
+				</form>
+			</li>
+		<%end%>
 	<%end%>
 </ul>
