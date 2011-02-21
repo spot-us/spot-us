@@ -12,5 +12,5 @@
 
 <ul class="progressDataContainer">
 	<li class="dueDate"><%= due_date_in_words(pitch.expiration_date) %></li>
-	<li class="totalAmount"><%=pitch.funding_needed>0 ? number_to_currency(pitch.total_amount_donated) : number_to_currency(pitch.requested_amount)%> of <%=number_to_currency pitch.requested_amount%> raised</li>
+	<li class="totalAmount"><%=pitch.total_amount_donated%> of <%=pitch.funding_needed>0 ? number_to_currency(pitch.requested_amount) : number_to_currency(pitch.total_amount_donated)%> raised</li>
 </ul>
