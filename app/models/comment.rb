@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true
   belongs_to :user
 
-  validates_presence_of :title, :body
+  validates_presence_of :body
   validates_length_of :body, :maximum => 2000
   after_create :send_notification
   after_save :touch_commentable
