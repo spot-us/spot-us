@@ -34,7 +34,7 @@ class Cca < ActiveRecord::Base
   end
   
 	named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
-	named_scope :live, :conditions=>'status=1', :order => 'created_at desc'
+	named_scope :live, :conditions=>'status=1', :order => 'position asc, created_at desc'
 	
 	def banner_name
     banner_file_name.blank?
