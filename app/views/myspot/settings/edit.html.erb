@@ -14,40 +14,6 @@
 				<%= f.label :email, 'Email Address' %>
 				<%= f.text_field :email %>
 			</div>
-			<% if @settings.is_a?(Reporter) || @settings.is_a?(Organization) || @settings.is_a?(Sponsor) %>
-				<div class="row">
-					<%= f.label :phone, 'Phone Number' %>
-					<%= f.text_field :phone %>
-					<br /><span class='small quieter'>Private</span>
-				</div>
-				<div class="row">
-					<%= f.label :address1, 'Address (1)' %>
-					<%=  f.text_field :address1 %>
-					<br /><span class='small quieter'>Private. </span>
-					<br />This is so we can send you a check.
-				</div>
-				<div class="row">
-					<%= f.label :address2, 'Address (2)' %>
-					<%= f.text_field :address2 %>
-				</div>
-				<div class="row">
-					<%= f.label :city %>
-					<%= f.text_field :city %>
-				</div>
-				<div class="row">
-					<%= f.label :state %>
-					<%= f.text_field :state, :size => 2 %>
-				</div>
-				<div class="row">
-					<%= f.label :zip %>
-					<%= f.text_field :zip, :size => 5 %>
-				</div>
-				<div class="row">
-					<%= f.label :country %>
-					<%= f.country_select :country, ['United States'], :include_blank => true %>
-				</div>
-			<% end %>
-			
 			<div class="row">
 				<%= f.label :password, 'New Password' %>
 				<%= f.password_field :password %>
@@ -67,7 +33,13 @@
 				<%= f.label     :notify_comments,  "Notify Me Of New Comments" %>
 				<%= f.check_box :notify_comments, :class => "normalCheckBox" %>
 			</div>
-
+			<% if @settings.is_a?(Reporter) || @settings.is_a?(Organization) || @settings.is_a?(Sponsor) %>
+				<div class="row">
+					<%= f.label :phone, 'Phone Number' %>
+					<%= f.text_field :phone %>
+					<br /><span class='small quieter'>Private</span>
+				</div>
+			<% end %>
 			<div class="row">
 				<%=get_button("Save")%>
 			</div>
