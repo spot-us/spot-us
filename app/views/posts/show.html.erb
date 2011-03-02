@@ -13,8 +13,8 @@
 
 <div class="pitchContainer">
 	<div class="updateContainer">
-		<%= render :partial => 'pitches/post_in_list', :locals => { :post => @post }%>
 		<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_post_path(@pitch, @post, {:only_path=>false}) }%>
+		<%= render :partial => 'pitches/post_in_list', :locals => { :post => @post }%>
 	</div>
 	<%=render :partial => "pitches/sidebars/narrow"%>
 </div>
