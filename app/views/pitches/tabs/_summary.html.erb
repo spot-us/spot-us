@@ -1,6 +1,6 @@
 <div class="summaryContent">
 	<div class="descriptionContainer">			
-		<% apply_fragment ['pitch_summary_b_', @pitch] do %>
+		<% apply_fragment ['pitch_summary_c_', @pitch] do %>
 		
 			<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
 			
@@ -15,6 +15,7 @@
 			<%end%>
 			<div class="shortDescription">
 				<%= @pitch.excerpt?.strip_double_spaces %>
+				<div class='readMore'><%=link_to "read more &rarr;", "#{pitch_path(@pitch)}/details", {:rel=>"nofollow", :title=>"read more"}%></div>
 			</div>
 			<% unless @pitch.extended_description.blank? %>
 				<div class="extendedDescription">

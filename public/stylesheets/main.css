@@ -2390,3 +2390,8 @@ li.total div{
 .grayText{
 	color:#999;
 }
+
+.readMore{
+	text-align:right;
+	padding-right:10px;
+}
