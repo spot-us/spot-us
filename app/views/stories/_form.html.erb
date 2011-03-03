@@ -41,6 +41,14 @@
 		<%= f.file_field :featured_image %><br/>
 		<span class="small quieter"> JPEG, PNG and GIF's less than 5 MB.</span>
 	</div>
+	<%if is_admin?%>
+		<div class="row">
+			<label for="show_repostus">
+				Show Repost.Us
+			</label>
+			<%= f.check_box :show_repostus, {}, '1', '0' %>
+		</div>
+	<%end%>
 	<!-- <div class="row media">
 	<%#= f.label :featured_image_caption, "Add a Featured Image Caption" + "<br/><span class='small quieter'>200 Characters Max</span>" %>
 	<%#= f.text_area :featured_image_caption, :rows => 2 %>

@@ -11,11 +11,11 @@
 	<%= render :partial => "pitches/donors", :locals => { :pitch => @pitch, :number_of_donors => 4 }%>
 	<%= render :partial => "pitches/get_involved"%>
 	<%= render :partial => "pitches/mediabugs" if @story%>
-	<%if @story%>
+	<%if @story && @story.show_repostus?%>
 		<ul class="getInvolved" style='margin-top:-20px;'>
 			<h3>Repost.Us</h3>
 			<li>
-				<a class='rpuRepostUsButton' href='https://secure.repost.us/syndicate/create?url=<permalink to this article>'>
+				<a class='rpuRepostUsButton' href='https://secure.repost.us/syndicate/create?url=<%=URI.encode("#{pitch_path(@pitch, {:only_path=>false})}/story")%>'>
 					<img title='Repost This' alt='Repost This' src='http://1.rp-api.com/buttons/repost.png'/>
 				</a>
 			</li>
