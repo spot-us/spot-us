@@ -115,16 +115,17 @@ class Purchase < ActiveRecord::Base
   end
   
   def associate_credits
-    transaction do 
-      credit_pitch_ids = user.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
-      credit = Credit.create(:user => user, :description => "Applied to Pitches (#{credit_pitch_ids})",
-                      :amount => (0 - user.allocated_credits))
-      user.credit_pitches.unpaid.each do |credit_pitch|
-        credit_pitch.credit_id = credit.id
-        credit_pitch.status = "deducted"
-        credit_pitch.save(false)
-      end
-    end
+    # taking out old accounting...
+    #transaction do 
+    #  credit_pitch_ids = user.credit_pitches.unpaid.map{|credit_pitch| [credit_pitch.pitch.id]}.join(", ")
+    #  credit = Credit.create(:user => user, :description => "Applied to Pitches (#{credit_pitch_ids})",
+    #                  :amount => (0 - user.allocated_credits))
+    #  user.credit_pitches.unpaid.each do |credit_pitch|
+    #    credit_pitch.credit_id = credit.id
+    #    credit_pitch.status = "deducted"
+    #    credit_pitch.save(false)
+    #  end
+    #end
   end
 
   def associate_spotus_donations
