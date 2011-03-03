@@ -83,8 +83,13 @@ class Post < ActiveRecord::Base
   def status_update(show_url=true)
     url_length = show_url ? 22 : 0
     share_type = type.to_s.titleize
-    max_length = PREPEND_STATUS_UPDATE.length + share_type.length + url_length + 15
-    msg  = "#{PREPEND_STATUS_UPDATE}: "
+    if SHOW_PREPEND_FOR_STORY_UPDATES
+      max_length = PREPEND_STATUS_UPDATE.length + url_length + 15
+      msg  = "#{PREPEND_STATUS_UPDATE}: "
+    else
+      max_length = url_length + 15
+      msg  = ""
+    end
     msg += title.length > 140-max_length ? "#{title[0..max_length].gsub(/\w+$/, '')}..." : title
     msg += " - #{short_url}" if show_url
     msg

@@ -39,3 +39,5 @@ FILTERS_CONTRIBUTORS_STRING = FILTERS_CONTRIBUTORS.collect{ |key, value| key}.jo
 TEXT = {}
 TEXT[:headline] = "Write a short, enticing and descriptive headline"
 TEXT[:title] = "Write a short, enticing and descriptive title"
+
+SHOW_PREPEND_FOR_STORY_UPDATES = false
