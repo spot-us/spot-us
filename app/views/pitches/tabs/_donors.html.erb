@@ -25,7 +25,7 @@
 		<h2>Organizational Support: <%=number_to_currency @pitch.total_amount_donated%> donated by <%=@pitch.donating_groups.length%> groups</h2>
 		<ul>
 			<%@pitch.donating_groups.each do |supporter|%>
-				<% apply_fragment ['pitch_groups_listing_', @pitch, supporter] do %>
+				<% apply_fragment ['pitch_groups_listing_a_', @pitch, supporter] do %>
 					<li>
 						<%=image_tag(supporter.image.url(:thumb), {:alt => supporter.name})%>
 						<h3><%=link_to supporter.name, profile_path(supporter)%></h3>
@@ -47,8 +47,8 @@
 		<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
 		<h2>Organization Supporters: <%=number_to_currency @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%> donated by <%=supporters.length%> groups</h2>
 		<ul>
-			<%supporters.each do |supporter|%>
-				<% apply_fragment ['pitch_organization_listing_', @pitch, supporter] do %>
+			<%supporters.uniq.each do |supporter|%>
+				<% apply_fragment ['pitch_organization_listing_a_', @pitch, supporter] do %>
 					<li>
 						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>

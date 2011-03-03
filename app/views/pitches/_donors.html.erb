@@ -44,6 +44,7 @@
 	<%supporters = []%>
 	<%supporters.concat(pitch.supporting_organizations) if pitch.supporting_organizations.any?%>
 	<%supporters.concat(pitch.donations_and_credits.from_organizations.map(&:user)) if pitch.donations_and_credits.from_organizations.any?%>
+	<%supporters.uniq!%>
 	<div class="donorsBox">
 		<h3>Organization Support</h3>
 		<ul class="total">
