@@ -1,23 +1,27 @@
 xml.instruct! :xml, :version=>"1.0" 
 
-if @news_items.first.is_a?(Pitch)
-  xml.pitches{
-    xml.paginationVariables{
-      xml.requestedPage h(@requested_page.to_s)
-      xml.totalPages h(@news_items.total_pages)
+if @news_items && !@news_items.empty?
+  if @news_items.first.is_a?(Pitch)
+    xml.pitches{
+      xml.paginationVariables{
+        xml.requestedPage h(@requested_page.to_s)
+        xml.totalPages h(@news_items.total_pages)
+      }
+      @news_items.each do |news_item|
+        xml << render(:partial => "news_items/pitch", :locals => { :news_item => news_item })
+      end
     }
-    @news_items.each do |news_item|
-      xml << render(:partial => "news_items/pitch", :locals => { :news_item => news_item })
-    end
-  }
-elsif @news_items.first.is_a?(Story)
-  xml.stories{
-    xml.paginationVariables{
-      xml.requestedPage h(@requested_page.to_s)
-      xml.totalPages h(@news_items.total_pages)
+  elsif @news_items.first.is_a?(Story)
+    xml.stories{
+      xml.paginationVariables{
+        xml.requestedPage h(@requested_page.to_s)
+        xml.totalPages h(@news_items.total_pages)
+      }
+      @news_items.each do |news_item|
+        xml << render(:partial => "news_items/story", :locals => { :news_item => news_item })
+      end
     }
-    @news_items.each do |news_item|
-      xml << render(:partial => "news_items/story", :locals => { :news_item => news_item })
-    end
-  }
+  end
+else
+  xml.noResults true
 end

@@ -215,7 +215,7 @@ class NewsItem < ActiveRecord::Base
   end
   
   def self.get_stories(page, topic_id, grouping_id, topic, selected_filter, current_network, limit=nil)
-    having_cache ["news_items_stories", page, topic_id, grouping_id, topic, selected_filter, current_network, limit], {:expires_in => CACHE_TIMEOUT }  do
+    having_cache ["news_items_stories_", page, topic_id, grouping_id, topic, selected_filter, current_network, limit], {:expires_in => CACHE_TIMEOUT }  do
       unless limit
         self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).paginate(:page => page)
       else
