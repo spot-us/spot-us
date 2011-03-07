@@ -21,7 +21,7 @@
 <%end%>
 <%if pitch.donating_groups.any?%>
 	<div class="donorsBox">
-		<h3>Orgaization Support</h3>
+		<h3>Organization Support</h3>
 		<ul class="total">
 			<li><h5><%=number_to_currency pitch.total_amount_donated%></h5></li>
 			<li><span>(<%=pitch.donating_groups.length%> supporters)</span></li>
@@ -31,7 +31,7 @@
 			<%nrs.times do |ind|%>
 				<%supporter = pitch.supporters[ind]%>
 				<% apply_fragment ['pitch_groups_listing_small_', pitch, supporter] do %>
-					<li><%=link_to image_tag(supporter.image.url(:thumb), {:alt => supporter.name}), profile_path(supporter)%></li>
+					<li><%=link_to image_tag(supporter.photo.url(:thumb), {:alt => supporter.name}), profile_path(supporter)%></li>
 				<%end%>
 			<%end%>
 			<%unless nrs<number_of_donors%>

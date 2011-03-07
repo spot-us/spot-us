@@ -27,7 +27,7 @@
 			<%@pitch.donating_groups.each do |supporter|%>
 				<% apply_fragment ['pitch_groups_listing_a_', @pitch, supporter] do %>
 					<li>
-						<%=image_tag(supporter.image.url(:thumb), {:alt => supporter.name})%>
+						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.name})%>
 						<h3><%=link_to supporter.name, profile_path(supporter)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
 						<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
