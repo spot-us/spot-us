@@ -40,7 +40,7 @@ class SpotusDonation < ActiveRecord::Base
   def tithe
     (user.unpaid_donations_sum * SPOTUS_TITHE).round
   end
-
+ 
   def unpaid?
     (purchase.blank? && credit.blank?) || (!credit.blank? && credit.amount.abs<amount) || (!purchase.blank? && purchase.total_amount<amount) || (!credit.blank? && !purchase.blank? && (credit.amount.abs+purchase.total_amount)<amount)
   end
