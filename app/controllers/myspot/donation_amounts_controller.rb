@@ -162,7 +162,7 @@ class Myspot::DonationAmountsController < ApplicationController
       # pay the spotus donation using the credit while the paid amount is larger than the spotus donation amount...
       if paid_amount < spotus_donation_amount
         if first_iteration
-          spotus_donation = SpotusDonation.update(key, { 'amount' => credit.amount, 'credit_id' => credit.id })
+          spotus_donation = SpotusDonation.update(key, { 'amount' => credit.amount, 'credit_id' => credit.id, :user_id => current_user.id })
           first_iteration = false
         else
           spotus_donation = SpotusDonation.create(:user_id => current_user.id, :credit_id => credit.id, :amount => credit.amount)
@@ -189,9 +189,9 @@ class Myspot::DonationAmountsController < ApplicationController
     @unpaid_credits ||= current_user.credit_pitches.unpaid
   end
 
-  def spotus_donation
-    @spotus_donation ||= current_user.current_spotus_donation
-  end
+  #def spotus_donation
+  #  @spotus_donation ||= current_user.current_spotus_donation
+  #end
 
 end
 
