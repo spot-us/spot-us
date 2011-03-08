@@ -1,7 +1,7 @@
 class Myspot::DonationAmountsController < ApplicationController
 
   before_filter :login_required, :except => [:show]
-  helper_method :unpaid_donations, :unpaid_credits, :spotus_donation
+  helper_method :unpaid_donations, :unpaid_credits
   ssl_required :update, :edit
 
   def show
