@@ -57,7 +57,7 @@ class NewsItemsController < ApplicationController
     @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
     @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
     @filter = "updates" if @filter=='posts'
-    @length = params[:length]
+    @full = params[:length]
     
     unless @filter=='updates'
       @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
