@@ -1,3 +1,10 @@
+<%content_for :head do%>
+	<script>
+		var RecaptchaOptions = {
+			theme : 'clean'
+		};
+	</script>
+<%end%>
 <div class="loginForms">
 
 	<div class="formContainer login">
@@ -75,7 +82,13 @@
 					<%= f.check_box :terms_of_service, {}, '1', '0' %>
 					Accept the <%= link_to 'Terms of Service', page_path('terms') %>
 					</div>
-
+				</div>
+				<div class="row">
+					<label>Are you human?
+					</label>
+					<%= recaptcha_tags %>
+				</div>
+				<div class="row">
 					<div>
 						<%= submit_tag "Register", {:class => 'submitButton'} %>
 					</div>

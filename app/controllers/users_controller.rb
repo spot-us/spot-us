@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     return_path = params[:return_to] if params[:return_to] && params[:spotus_lite]
     return_path = URI.decode(cookies[:return_to]) if cookies[:return_to]
     return_path = session[:return_to] if session[:return_to]
-    if @user.save
+    if verify_recaptcha(:model=>@user) && @user.save
       unless @user.organization?
         @user.activate!
         self.current_user = @user
