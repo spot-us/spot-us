@@ -166,7 +166,7 @@ module ApplicationHelper
   end
   
   def post_date(dt)
-	  "#{dt.day}/#{dt.month}/#{dt.year.to_s[2..3]}"
+	  "#{dt.month}/#{dt.day}/#{dt.year.to_s[2..3]}"
   end
   
   def report_an_error_date(dt)
