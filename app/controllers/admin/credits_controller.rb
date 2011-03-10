@@ -3,18 +3,21 @@ class Admin::CreditsController < ApplicationController
   layout "bare"
   
   def index
-    load_users_and_credits
+    load_credits
     @credit = Credit.new
+  end
+  
+  def new
+    load_users
   end
   
   def create
     @credit = Credit.new(params[:credit])
     if @credit.save
-      update_balance_cookie
       redirect_to admin_credits_path
     else
-      load_users_and_credits
-      render :action => 'index'
+      load_users
+      render :action => 'new'
     end
   end
   
@@ -42,8 +45,12 @@ class Admin::CreditsController < ApplicationController
   
   private
   
-    def load_users_and_credits
-      @users = User.find :all, :order => "last_name asc, first_name asc" # this could be huge list ... 
-      @credits = Credit.paginate(:page => params[:page], :per_page => 50, :order => "updated_at desc, created_at desc")
-    end
+  def load_users
+    @users = User.find :all, :order => "last_name asc, first_name asc", :conditions=>'last_name is not null and first_name is not null' # this could be huge list ... 
+  end
+    
+  def load_credits
+    @credits = Credit.paginate(:page => params[:page], :per_page => 50, :order => "updated_at desc, created_at desc")
+  end
+
 end

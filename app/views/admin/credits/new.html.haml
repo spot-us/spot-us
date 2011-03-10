@@ -1,0 +1,12 @@
+= render :partial => "/admin/admin_header"
+
+%h2 Add Credit
+= error_messages_for :credit
+- form_for :credit, @credit, :url => admin_credits_path do |f|
+  = f.select(:user_id, @users.collect {|u| [ u.full_name, u.id ] }, { :include_blank => true })
+  = f.label :description
+  = f.text_field :description
+  = f.label :amount
+  $
+  = f.text_field :amount
+  = image_submit_tag image_path('add.png')
