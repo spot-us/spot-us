@@ -88,6 +88,30 @@ class PitchesController < ApplicationController
     redirect_to pitch_path(pitch)
   end
 
+  def apply_credits
+    pitch = get_pitch
+    credits = current_user.total_available_credits
+    credits.each do |credit|
+      amount = credit.amount * 0.95
+      
+      # slice off the spotus donation
+      spotus_donation_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",
+                      :amount => (credit.amount-amount), :cca_id => credit.cca_id)
+      
+      # update the credit
+      credit.update_attributes(:amount => amount)
+      
+      # create the donation
+      d = Donation.create(:user_id => current_user.id, :pitch_id => pitch.id, :credit_id => credit.id, :amount => amount, :donation_type => "credit")
+      d.pay!
+      
+      # create the spotus donation
+      spotus_donation = SpotusDonation.create(:user_id => current_user.id, :credit_id => spotus_donation_credit.id, :amount => spotus_donation_credit.amount)
+    end
+    set_social_notifier_cookie("donation")
+    redirect_to pitch_path(pitch)
+  end
+
   def unfeature
     pitch = get_pitch
     if pitch.featureable_by?(current_user)

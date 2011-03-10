@@ -55,7 +55,8 @@ class CcaController < ApplicationController
       @cca.award_credit(current_user)
       if credit_to_pitch?
         update_balance_cookie
-        redirect_to edit_myspot_donations_amounts_path
+        #redirect_to edit_myspot_donations_amounts_path
+        redirect_to apply_credits_pitch_path(@pitch)
       else
         session[:show_default_answers] = @cca.id unless @cca.default_cca_answers.empty?
         update_balance_cookie
@@ -88,12 +89,12 @@ class CcaController < ApplicationController
   protected
 
   def valid_pitch?
-	pitch = Pitch.find_by_id(params[:pitch_id])
-	if pitch and !pitch.fully_funded?
-		true
-	else
-		false
-	end
+  	@pitch = Pitch.find_by_id(params[:pitch_id])
+  	if @pitch and !@pitch.fully_funded?
+  		true
+  	else
+  		false
+  	end
   end
   
   def load_cca
