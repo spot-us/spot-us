@@ -78,12 +78,12 @@ class CcaController < ApplicationController
   end
 
   def credit_to_pitch?
-	if params[:pitch_id] and valid_pitch?
-		Donation.create(:pitch_id => params[:pitch_id], :amount => @cca.award_amount/1.05, :donation_type => "credit", :user_id => current_user.id)
-		return true
-	else 
-		return false
-	end
+  	if params[:pitch_id] and valid_pitch?
+  		#Donation.create(:pitch_id => params[:pitch_id], :amount => @cca.award_amount/1.05, :donation_type => "credit", :user_id => current_user.id)
+  		return true
+  	else 
+  		return false
+  	end
   end
   
   protected
