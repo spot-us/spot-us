@@ -10,8 +10,6 @@
 %h2 Search user
 = render :partial => '/admin/users/search_form'
 
-%h2 System Users
-= link_to 'New user', new_admin_user_path
 .box
   %table.users_table 
     %tr
@@ -77,27 +75,3 @@
           .clear
           %hr/
 = will_paginate @users
-
-%h1{:onclick=>"$('#factCheckers').slideToggle();return false;", :style=>"cursor:pointer;"} Peer Review Interest &raquo;
-.box
-  %table{:style=>"display:none;", :id=>'factCheckers'}
-    - for user in User.fact_checkers
-      %tr
-        %td=h user.first_name
-        %td=h user.last_name
-        %td=h user.email
-        %td=h user.phone
-
-
-%h1{:onclick=>"$('#approvedOrganizations').slideToggle();return false;", :style=>"cursor:pointer;"} News Organizations Awaiting Approval &raquo;
-.box
-  %table{:style=>"display:none;", :id=>'approvedOrganizations'}
-    - for user in User.unapproved_news_orgs
-      %tr
-        %td=h user.first_name
-        %td=h user.last_name
-        %td=h user.email
-        %td=h user.phone
-        %td=link_to 'Approve', approve_admin_user_path(user), :method => :put
-
-

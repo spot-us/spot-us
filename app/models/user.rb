@@ -172,6 +172,7 @@ class User < ActiveRecord::Base
     indexes first_name, :sortable => true
     indexes last_name, :sortable => true
     indexes organization_name, :sortable => true
+    indexes email, :sortable => true
     
     has created_at, updated_at
   end

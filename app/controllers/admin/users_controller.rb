@@ -22,11 +22,16 @@ class Admin::UsersController < ApplicationController
     org.activate!
     redirect_to(admin_user_path(org))
   end
+  
+  def search
+    conditions = ""
+    @users = User.search params[:search_term], :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => params[:page], :per_page=>10, :retry_stale => true
+  end
 
   # GET /users
   # GET /users.xml
   def index
-    @users = User.find(:all)
+    @users = User.paginate(:page=>params[:page])
     @fact_checkers = User.find_all_by_fact_check_interest(true)
 
     respond_to do |format|

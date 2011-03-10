@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.search '/search', :controller => 'search', :action => "index"
   map.connect "/search/:search_term/:tab", :controller=>"search", :action => "index", :tab=>nil
-  
+
   map.connect ":filter.:format", :controller => "homes", :action => "show", :requirements => {:filter=>/#{FILTERS_STORIES_STRING}|community/}
   map.start_story 'start_story', :controller => 'homes', :action => "start_story"
   map.categories 'networks/:id/categories', :controller => 'networks', :action => 'categories'
@@ -99,7 +99,7 @@ ActionController::Routing::Routes.draw do |map|
                          :member=>{:spotus_lite=>:get}
 
   map.namespace :admin do |admin|
-    admin.resources :users, :member => {:log_in_as => :get, :promote_to_sponsor => :get, :approve => :put}
+    admin.resources :users, :member => {:log_in_as => :get, :promote_to_sponsor => :get, :approve => :put}, :collection => { :search => :any  }
     admin.resources :credits, :collection => { :unused => :get  }
     admin.resources :pitches, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
     admin.resources :tips
