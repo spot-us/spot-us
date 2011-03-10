@@ -33,6 +33,7 @@
 			});
 			
 			jQuery('#remove_spotus_donation').click(function(){
+				jQuery('#navigate_away').val('false');
 				jQuery('input#spotus_donation').remove();
 				jQuery('#support_spotus').hide();
 				getTotalAmounts(true);
@@ -79,7 +80,7 @@
 				<div>
 		              $ <%= text_field_tag "donation_amounts[#{donation.id}][amount]", number_to_currency(donation.amount, :delimiter => '', :unit => ''), :size => 6, :id => "donation_amounts_#{donation.id}_amount", :style => "text-align:right;", :donation_id => donation.id, :class => "line_item" %>
 
-		                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?" %>
+		                     <%= link_to "Remove", myspot_donation_url(donation), :method => :delete, :confirm => "Are you sure you'd like to remove this donation of #{number_to_currency(donation.amount)}?", :onclick=>"jQuery('#navigate_away').val('false');" %>
 
 		               </div>
 					<h5>PITCH: <%= link_to donation.pitch.headline, donation.pitch %></h5>
@@ -100,7 +101,7 @@
  					<%= link_to image_tag(credit_pitch.pitch.featured_image.url(:thumb)), credit_pitch.pitch %>
                        <div>
                         $ <%= text_field_tag "credit_pitch_amounts[#{credit_pitch.id}][amount]", number_to_currency(credit_pitch.amount, :delimiter => '', :unit => ''), :size => 6, :id => "credit_pitch_amounts_#{credit_pitch.id}_amount", :style => "text-align:right;", :class => "line_item" %>
-                           <%= link_to "Remove", myspot_donation_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?" %>
+                           <%= link_to "Remove", myspot_donation_path(credit_pitch), :method => :delete, :confirm => "Are you sure you'd like to remove this credit of #{number_to_currency(credit_pitch.amount)}?", :onclick=>"jQuery('#navigate_away').val('false');" %>
                     </div>
 							<h5>PITCH:
                            <%= link_to credit_pitch.pitch.headline, credit_pitch.pitch %>
