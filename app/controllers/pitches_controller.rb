@@ -105,6 +105,9 @@ class PitchesController < ApplicationController
       d = Donation.create(:user_id => current_user.id, :pitch_id => pitch.id, :credit_id => credit.id, :amount => amount, :donation_type => "credit")
       d.pay!
       
+      # add the session id
+      session[:donation_id] = d.id
+      
       # create the spotus donation
       spotus_donation = SpotusDonation.create(:user_id => current_user.id, :credit_id => spotus_donation_credit.id, :amount => spotus_donation_credit.amount)
     end
