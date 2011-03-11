@@ -1,9 +1,11 @@
-<% apply_fragment ['pitch_', pitch, current_user, @show_cca, @first_cca] do %>
+<% apply_fragment ['pitch_list_header_', pitch, current_user, @show_cca, @first_cca] do %>
 	<li>
 		<%=link_to image_tag(pitch.featured_image(:small_hero), {:alt => h(pitch.headline)}), pitch_path(pitch), {:rel => "nofollow"}%>
 		<h3><%=link_to pitch.slug?, pitch_path(pitch)%></h3>
 		<div><%=pitch_date(pitch.created_at)%> by <%=link_to pitch.user, profile_path(pitch.user)%></div>
+<%end%>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => pitch }%>
+<% apply_fragment ['pitch_list_footer_', pitch, current_user, @show_cca, @first_cca] do %>
 		<div><%=number_to_currency(pitch.current_funding)%> raised and <%=number_to_currency(pitch.funding_needed)%> to go</div>
 	</li>
 <%end%>
