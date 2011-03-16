@@ -1,18 +1,21 @@
 <div class="sponsorBox">
-	<div class="sectionBox">
-		<h4>Survey Sponsor</h4>
-		<h2><%= @cca.user.full_name %></h2>
-		<%= link_to image_tag(@cca.user.photo(:thumb), :class => "avatar"), profile_path(@cca.user) %> 
+	<div>
+		<h4>Sponsored by</h4>
+		<p><%= @cca.user.full_name %></p>
+	</div>
+	<div>
+	  <h4>Value</h4>
+	  <p><%= number_to_currency(@cca.award_amount) %> - <a href="#">For every survey completed by our community, <%= number_to_currency(@cca.award_amount) %> goes toward a Spot.us story.</a></p>
 	</div>
 	<%unless @cca.user.website.blank?%>
-		<div class="sectionBox">
-		  <h4>Website:</h4>
-		  <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %>
+		<div>
+		  <h4>Website</h4>
+		 <p> <%= link_to @cca.user.website[7..-1], @cca.user.website  if @cca.user.website %></p>
 		</div>
 	<%end%>
 	<%unless @cca.user.about_you.blank?%>
-		<div class="sectionBox">
-		  <h4>About:</h4>
+		<div>
+		  <h4>About the sponsor</h4>
 			<%= @cca.user.about_you %>
 		</div>
 	<%end%>

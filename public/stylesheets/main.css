@@ -890,6 +890,12 @@
 }
 
 
+.headerTitle.cca h1{
+	position:relative;
+	top:25px;
+}
+
+
 /*end pitch header*/
 
 /*pitch page*/
@@ -1626,11 +1632,41 @@
 }
 
 .surveyBody .formContainer .formBody{
-	width:90%;
+	width:100%;
+	background-color:#fff;
+	border:none;
+	padding:0px;
+	font-family:georgia,times,serif;
+	font-size:18px;
+	line-height:24px;
+	color:#000;
+	text-shadow:#fff 0px 0px 1px;
 }
 
 .surveyBody .formContainer .formBody h2{
 	margin:0px;
+}
+
+.surveyBody .formContainer .formBody span{
+	color:red;
+	font-weight:bold;
+}
+
+.surveyBody .formContainer .formBody h5{
+	color:#9d9c9c;
+}
+
+.surveyBody .formContainer .formBody textarea,
+.surveyBody .formContainer .formBody input{
+	border:1px solid #ccc;
+	padding:10px;
+	font-size:14px;
+	margin-top:10px;
+}
+
+.surveyBody .formContainer .formBody textarea {
+	height:100px;
+	width:90%;
 }
 
 .surveySidebar{
@@ -1658,8 +1694,13 @@
 	font-size: 13px;
 }
 
-.sponsorBox .sectionBox{
+.sponsorBox div{
 	padding-left:10px;
+}
+
+.sponsorBox div p{
+	font-family: Helvetica, arial, sans-serif;
+	font-size:16px;
 }
 
 .fundThis{
@@ -1674,12 +1715,66 @@
 	width:100%;
 }
 
+.ccaHowContainer {
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	background-color:#eee3cb;
+	padding:10px;
+	margin-bottom:30px;
+}
+
+.ccaHowContainer h2{
+	color:#0e383e;
+	display:block;
+	margin-bottom:90px;
+}
+
+.ccaHowContainer ul{
+	display:block;
+}
+
+.ccaHowContainer ul li{
+	list-style-type:none;
+	display:inline;
+	width:300px!important;
+	padding-right:20px;
+	font-family:Georgia,times,serif;
+	font-size:16px;
+	color:#000;
+	background-position:top;
+	background-repeat:no-repeat;
+	padding-top:100px;	
+}
+
+.ccaHowContainer ul li.engage{
+	background-image:url('/images/new/ccaEngage.png');
+	height:100px!important;
+}
+
+.ccaHowContainer ul li.accumulate{
+	background-image:url('/images/new/ccaAccumulate.png');
+}
+
+.ccaHowContainer ul li.apply{
+	background-image:url('/images/new/ccaApply.png');
+}
+
+
+.ccaHowContainer ul li span{
+	font-size:30px;
+	width:30px;
+	font-weight:bold;
+	position:relative;
+	top:5px;
+	color:#0e383e;
+	font-family:Helvetica,arial,sans-serif;
+}
+
 /*end cca survey styles*/
 
 /*new form styles*/
 .formContainer{
 	margin-top:10px;
-	width:500px;
 }
 
 .formContainer .formHeading, .comments .formHeading{
