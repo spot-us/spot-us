@@ -889,10 +889,13 @@
 	text-transform:capitalize;
 }
 
+.headerTitle.cca{
+	width:100%;
+}
 
 .headerTitle.cca h1{
 	position:relative;
-	top:25px;
+	top:11px;
 }
 
 
@@ -1667,6 +1670,10 @@
 .surveyBody .formContainer .formBody textarea {
 	height:100px;
 	width:90%;
+}
+
+.surveyBody .formContainer .formBody .submitButton{
+	margin: 20px 0px 0px 445px;
 }
 
 .surveySidebar{
