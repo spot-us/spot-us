@@ -1715,6 +1715,12 @@
 	width:100%;
 }
 
+.sponsorImageContainer img{
+	width:100%;
+	border:1px solid #ccc;
+}
+
+
 .ccaHowContainer {
 	-webkit-border-radius:5px;
 	-moz-border-radius:5px;
@@ -1768,6 +1774,14 @@
 	top:5px;
 	color:#0e383e;
 	font-family:Helvetica,arial,sans-serif;
+}
+
+.ccaHowContainer span.close{
+	text-indent:-3000px;
+	width:28px;
+	height:28px;
+	float:right;
+	background-image:url('/images/new/ccax.png');
 }
 
 /*end cca survey styles*/
