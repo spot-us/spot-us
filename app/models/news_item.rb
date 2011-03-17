@@ -188,7 +188,7 @@ class NewsItem < ActiveRecord::Base
   
   def valid_excerpt
     unless excerpt.blank?
-      excerpt_length = excerpt.gsub(/<\/?[^>]*>/, "").length
+      excerpt_length = excerpt.strip_html.gsub(/\s+/, "").length
       if excerpt_length<250 || excerpt_length>1000
         errors.add("wrong_excerpt_length", "Your summary must be between 250 to 1000 characters") 
         return false
@@ -225,7 +225,7 @@ class NewsItem < ActiveRecord::Base
   end
   
   def peer_reviewer
-    #fact_checker || (parent && parent.fact_checker)
+    # fact_checker || (parent && parent.fact_checker)
     return nil if !["Pitch","Story"].include?(self.class.to_s)
     item = self.class.to_s == "Pitch" ? self : self.pitch
     if item.assignments.any?

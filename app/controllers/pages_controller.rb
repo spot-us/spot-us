@@ -22,7 +22,7 @@ class PagesController < ApplicationController
   def show
     if PAGES.include?(params[:id])
       @hide_gs = true if params[:id] == "support"
-      render :action => params[:id]
+      render :action => params[:id], :layout => (params[:id]!='reporter_agreement')
     else
       raise ActiveRecord::RecordNotFound,
       "No such static page: #{params[:id].inspect}"
