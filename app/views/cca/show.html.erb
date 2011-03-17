@@ -25,7 +25,12 @@
 <% end %>
 
 <div class="surveyPageContainer">
-	<div class="ccaHowContainer">
+	<% if @cca %>
+		<div class="sponsorImageContainer">
+			<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
+		</div>
+	<div class="ccaHowContainer" id="ccaHow">
+		<span class="close"><img src="/images/new/ccax.png" onclick="$('#ccaHow').hide();return false;"></span>
 		<h2>How community-centered sponsorships work</h2>
 		<ul>
 			<li class="engage"><span>1.</span> Engage with this activity from our sponsor.</li>
@@ -33,8 +38,6 @@
 			<li class="apply"><span>3.</span> Apply your free credits to any story.</li>
 		</ul>
 	</div>
-	<% if @cca %>
-		<%= image_tag(@cca.banner.url(:large_banner)) if @cca.banner? %>
 		<div class="surveyContainer">
 			<div class="surveySidebar">
 				<%= render :partial => "fund_this" if params[:pitch_id]%>
