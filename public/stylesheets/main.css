@@ -1670,10 +1670,28 @@
 .surveyBody .formContainer .formBody textarea {
 	height:100px;
 	width:90%;
+	margin-bottom:20px;
 }
 
 .surveyBody .formContainer .formBody .submitButton{
 	margin: 20px 0px 0px 445px;
+}
+
+.surveySection {
+	border:0px;
+}
+
+.surveySection legend{
+	background-color:#eee;
+	width:100%;
+	padding:5px 3px;
+	color:#666;
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
+	font-family:helvetica,arial,sans-serif;
+	font-weight:bold;
+	position:relative;
+	left:-3px;
 }
 
 .surveySidebar{
@@ -1725,6 +1743,9 @@
 .sponsorImageContainer img{
 	width:100%;
 	border:1px solid #ccc;
+	position:relative;
+	top:10px;
+	margin-bottom:30px;
 }
 
 
