@@ -3,7 +3,7 @@
 		<h3 id='hoverAnchorIncentives-large'>Incentives</h3>
 		<%incentives.each do |incentive|%>
 			<li><h4><%= incentive.level?%></h4></li>
-			<li class="description"><%= incentive.description%> <%if is_admin?%>(<%=link_to "Edit", edit_pitch_incentive_path(@pitch, incentive)%>)<%end%></li>
+			<li class="description"><%= incentive.description%> <%if pitch.editable_by?(current_user)%>(<%=link_to "Edit", edit_pitch_incentive_path(pitch, incentive)%>) | (<%=link_to "Delete", pitch_incentive_path(pitch, incentive), :method => :delete, :confirm => "Are you sure you would like to delete this incentive?", :style=>"color:red;"%>)<%end%></li>
 		<%end%>
 	</ul>
 	<% content_for :bottom do %>

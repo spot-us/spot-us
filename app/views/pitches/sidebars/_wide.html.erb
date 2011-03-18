@@ -4,7 +4,7 @@
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
 	</div>
 	<%= render :partial => "admin_menu", :locals => {:pitch=>@pitch} %>
-	<%= render :partial => 'pitches/incentives', :locals => { :incentives => @pitch.incentives.find(:all, :order => "incentive_id asc") } if is_admin?%>
+	<%= render :partial => 'pitches/incentives', :locals => { :incentives => @pitch.incentives.find(:all, :order => "amount asc"), :pitch => @pitch } if @pitch.editable_by?(current_user)%>
 	<%= render :partial => "donors", :locals => { :pitch => @pitch, :number_of_donors => 6 }%>
 	<%= render :partial => "get_involved"%>
 </div>

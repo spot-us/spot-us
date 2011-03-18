@@ -4,8 +4,8 @@
 			<%=yield :error%>
 		</div>
 		<div class="row">
-		    <%= f.label :incentive_id %>
-		    <%= f.select :incentive_id, Incentive::INCENTIVES.collect {|k,c| [number_to_currency(Incentive::INCENTIVES[k]), k] } %>
+		    <%= f.label :amount %>
+		    <%= f.text_field :amount %>
 		</div>
 		<div class="row">
 		    <%= f.label :description %>
