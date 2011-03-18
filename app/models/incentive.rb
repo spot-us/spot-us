@@ -12,7 +12,16 @@ class Incentive < ActiveRecord::Base
   validates_presence_of :incentive_id, :pitch, :description
   
   def level?
-    "donated XXX or more".gsub('XXX',"#{INCENTIVES[incentive_id]}".to_currency)
+    "Donated XXX or more".gsub('XXX',"#{INCENTIVES[incentive_id]}".to_currency)
+  end
+  
+  def validate
+    p = Incentive.find(:first, :conditions => ["incentive_id=?", incentive_id])
+    unless p
+      errors.add('', 'You can only have one incentive per donation level')
+      return false
+    end
+    return true
   end
   
 end
