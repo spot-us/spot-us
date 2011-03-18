@@ -1249,6 +1249,10 @@
 	clear:both;
 }
 
+.incentivesBox h3{
+	cursor:pointer;
+}
+
 .donorsBox h5{
 	font-family:Helvetica, arial, sans-serif;
 	font-size:24px;

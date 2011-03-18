@@ -55,7 +55,7 @@ jQuery(document).ready(function($){
 	});
 	
 	/* Hover */
-	jQuery("a[id*=hoverAnchor],li[id*=hoverAnchor]").hover(function(){
+	jQuery("a[id*=hoverAnchor],li[id*=hoverAnchor],h3[id*=hoverAnchor]").hover(function(){
         $(this).addClass("hover");
         containerName = this.id.replace('hoverAnchor', '');
 		pos = $(this).position();
