@@ -1163,7 +1163,7 @@
 	text-align:right;
 }
 
-.donorsBox, .getInvolved{
+.donorsBox, .getInvolved, .incentivesBox{
 	padding:10px 20px 0px 20px;
 	border-top:1px dotted #eee;
 	margin-bottom:20px;
@@ -1214,11 +1214,11 @@
 	color:#11363e;
 }
 
-.getInvolved{
+.getInvolved, .incentivesBox{
 	clear:both;
 }
 
-.getInvolved li, .donorsBox li{
+.getInvolved li, .incentivesBox li, .donorsBox li{
 	list-style-type:none;
 	font-size:13px; 
 	color:#000;
@@ -1226,12 +1226,21 @@
 	padding:0px 0px 0px 0px;
 }
 
-.getInvolved li{
+.getInvolved li, .incentivesBox li{
+	width:100%;
 	display:block;
 	margin-bottom:20px;
 }
 
-.getInvolved h3, .donorsBox h3{
+.incentivesBox li{
+	margin-bottom:5px;
+}
+
+.incentivesBox li.description{
+	margin-bottom:20px;
+}
+
+.getInvolved h3, .incentivesBox h3, .donorsBox h3{
 	text-transform:uppercase;
 	font-family:Helvetica, arial, sans-serif;
 	font-weight:bold;
@@ -1248,7 +1257,7 @@
 	padding:0;
 }
 
-.getInvolved h4{
+.getInvolved h4, .incentivesBox h4{
 	text-transform:none;
 	font-family:Helvetica, arial, sans-serif;
 	font-weight:bold;

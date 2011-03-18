@@ -120,6 +120,7 @@ class Pitch < NewsItem
       find(:all, :limit => number, :order => 'created_at DESC')
     end
   end
+  has_many :incentives
   has_many :assignments, :order => "created_at desc", :dependent => :delete_all
   has_many :contributor_applications do
     def unapproved

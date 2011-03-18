@@ -36,6 +36,7 @@
 			<%= link_to "Delete", pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"%>
 		<%end%>
 		<%if is_admin?%>
+			<%= link_to "Add An Incentive", new_pitch_incentive_path(pitch), :title => "Add An Incentive"%>
 			<%unless pitch.supporters.empty?%>
 				<span id="toggleEmailSupporters">Emails to Public Supporters</span>
 				<p id="listEmailSupporters" class="emailList" style="display:none;">

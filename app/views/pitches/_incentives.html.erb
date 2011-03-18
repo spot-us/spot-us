@@ -1,0 +1,7 @@
+<ul class="incentivesBox">
+	<h3>Incentives</h3>
+	<%@pitch.incentives.each do |incentive|%>
+		<li><h4><%= incentive.level?%></h4></li>
+		<li class="description"><%= incentive.description%> <%if is_admin?%>(<%=link_to "Edit", edit_pitch_incentive_path(@pitch, incentive)%>)<%end%></li>
+	<%end%>
+</ul>

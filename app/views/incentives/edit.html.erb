@@ -1,0 +1,12 @@
+<div id="spotus_form">
+	<h2>Edit Incentive</h2>
+	<% unless @incentive.errors.empty? %>
+		<% content_for :error do %>
+			<%= error_messages_for :incentive %>
+		<% end %>
+	<% end %>
+
+	<% form_for([@pitch, @incentive], :html => { :multipart => true }) do |f| %>
+		<%= render :partial => 'form', :locals => {:f => f} %>
+	<% end %>
+</div>

@@ -23,4 +23,8 @@ class String
     self.strip_html.truncate_words(length, end_string)
   end
   
+  def to_currency
+    ActionController::Base.helpers.number_to_currency(self)
+  end
+  
 end

@@ -3,7 +3,9 @@
 		<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => @pitch }%>
 	</div>
-	<%=render :partial => "admin_menu", :locals => {:pitch=>@pitch} %>
+	<%= render :partial => "admin_menu", :locals => {:pitch=>@pitch} %>
+	<%= render :partial => 'pitches/incentives' if is_admin?%>
 	<%= render :partial => "donors", :locals => { :pitch => @pitch, :number_of_donors => 6 }%>
 	<%= render :partial => "get_involved"%>
 </div>
+<hr/>

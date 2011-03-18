@@ -1,0 +1,19 @@
+<div class="formContainer">
+	<div class="formBody">
+		<div class="row">
+			<%=yield :error%>
+		</div>
+		<div class="row">
+		    <%= f.label :incentive_id %>
+		    <%= f.select :incentive_id, Incentive::INCENTIVES.collect {|k,c| [number_to_currency(Incentive::INCENTIVES[k]), k] } %>
+		</div>
+		<div class="row">
+		    <%= f.label :description %>
+		    <%= f.text_field :description %>
+		</div>
+		<div class="row submit">
+		    <label> </label>
+		    <%= get_button("Save") %>
+		</div>
+	</div>
+</div>
