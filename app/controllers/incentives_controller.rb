@@ -26,4 +26,10 @@ class IncentivesController < ApplicationController
     end
   end
   
+  response_for :destroy do |format|
+    format.html do
+      redirect_to pitch_path(@pitch)
+    end
+  end
+  
 end
