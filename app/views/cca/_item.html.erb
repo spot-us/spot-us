@@ -15,7 +15,9 @@
 			<%= survey_section(question, index) %>
 			<h5><%= question.question %> <%= is_required(question.required) %></h5>
 			<%= "<div class='descriptionContainer'>#{question.description}</div>" if !question.description.blank? %>
-			<%= survey_element(question, current_user, true) %><br/>
+			<div <%if is_required(question.required) && !question.answer_by_user(current_user, false)%>style="background:#f9f9f9; border:1px solid red;padding:5px;"<%end%>>
+				<%= survey_element(question, current_user, true) %><br/>
+			</div>
 		<% end %>
 		<%= end_survey_sections %>
 		<br/>
