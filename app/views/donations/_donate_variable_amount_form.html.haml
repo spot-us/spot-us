@@ -2,7 +2,7 @@
   - if current_user && current_user.has_donated_to?(news_item)
     = f.hidden_field :amount, :value => number_to_currency(current_user.max_donation_for(news_item), :unit => '')
   - else
-    = f.hidden_field :amount, :value => number_to_currency(news_item.default_donation_amount, :unit => '')
+    = f.hidden_field :amount, :value => number_to_currency((news_item.default_donation_amount<news_item.funding_needed ? news_item.default_donation_amount : news_item.funding_needed), :unit => '')
   = f.hidden_field :pitch_id
   = hidden_field_tag :spotus_lite, spotus_lite
   = submit_tag("Donate", :title => "Donate another amount", :alt => "Donate another amount")
