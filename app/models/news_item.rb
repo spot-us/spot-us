@@ -157,7 +157,7 @@ class NewsItem < ActiveRecord::Base
   
   named_scope :constrain_topic_id, lambda{ |topic_id|
     topic_id = -1 unless topic_id
-    return {} if topic_id<=0
+    return {} if topic_id.to_i<=0
     { :include=>[:topics], :conditions=>["topics.id=?", topic_id] }
   }
   
