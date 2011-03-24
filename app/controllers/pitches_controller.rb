@@ -102,7 +102,7 @@ class PitchesController < ApplicationController
       credit.update_attributes(:amount => amount)
       
       # create the donation
-      d = Donation.create(:user_id => current_user.id, :pitch_id => pitch.id, :credit_id => credit.id, :amount => amount, :donation_type => "credit")
+      d = Donation.create(:user_id => current_user.id, :pitch_id => pitch.id, :credit_id => credit.id, :amount => amount, :donation_type => "credit", :applying_credits => true)
       d.pay!
       
       # add the session id

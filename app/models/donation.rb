@@ -20,6 +20,9 @@ class Donation < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
+  attr_accessor :applying_credits
+  @@applying_credits = false
+
   include AASM
   class << self
     alias invasive_inherited_from_aasm inherited
@@ -190,11 +193,13 @@ class Donation < ActiveRecord::Base
       keep_under_user_limit #self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
     end
     
-    limit_to_existing_donation
-    # limit if amount is greater than the remaining funding sought for pitch
-    if self.amount > pitch.requested_amount - pitch.current_funding
-      self.amount = pitch.requested_amount - pitch.current_funding
-    end 
+    unless applying_credits
+      limit_to_existing_donation
+      # limit if amount is greater than the remaining funding sought for pitch
+      if self.amount > pitch.requested_amount - pitch.current_funding
+        self.amount = pitch.requested_amount - pitch.current_funding
+      end 
+    end
   end
 
   def check_donation
