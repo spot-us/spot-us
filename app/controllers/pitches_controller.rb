@@ -101,7 +101,7 @@ class PitchesController < ApplicationController
       # update the credit
       credit.update_attributes(:amount => amount)
       
-      # create the donation
+      # create the donation and do not run any the limiting to existing donations rules
       d = Donation.create(:user_id => current_user.id, :pitch_id => pitch.id, :credit_id => credit.id, :amount => amount, :donation_type => "credit", :applying_credits => true)
       d.pay!
       
