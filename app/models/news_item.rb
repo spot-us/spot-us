@@ -161,12 +161,10 @@ class NewsItem < ActiveRecord::Base
     { :include=>[:topics], :conditions=>["topics.id=?", topic_id] }
   }
   
-  has_many :groupings_user, :foreign_key => "user_id", :primary_key => "user_id"
-  has_many :groupings, :through => :groupings_user
   named_scope :constrain_grouping_id, lambda{ |grouping_id|
     grouping_id = -1 unless grouping_id
     return {} if grouping_id.to_i<=0
-    return { :include=>[:groupings_user], :conditions=>["groupings_users.grouping_id=?", grouping_id] }
+    return { :joins => 'inner join groupings_users gu on gu.user_id=news_items.user_id', :conditions=>["gu.grouping_id=?", grouping_id] }
   }
   
   cattr_reader :per_page
