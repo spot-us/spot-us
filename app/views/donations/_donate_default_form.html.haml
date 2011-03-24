@@ -1,4 +1,4 @@
-- form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT<news_item.funding_needed ? Donation::DEFAULT_AMOUNT : funding_needed), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f|
+- form_for Donation.new(:pitch => news_item, :amount => Donation::DEFAULT_AMOUNT<news_item.funding_needed ? Donation::DEFAULT_AMOUNT : news_item.funding_needed), :url => myspot_donations_path, :html => {:id => "new_donation_#{news_item.id}", :class => "donate auth"} do |f|
   = f.hidden_field :amount, :id => "donation_default_amount"
   = f.hidden_field :pitch_id
   - unless @show_cca && !defined?(force_fund_this)
