@@ -190,9 +190,10 @@ class Donation < ActiveRecord::Base
     #debugger
     # limit if not an org and the amount is greater than the pitch/user's remaining limit (under 20% of pitch total)
     if !user.organization? 
-      keep_under_user_limit #self.pitch.max_donation_amount(user) - self.pitch.total_amount_allocated_by_user(user)
+      keep_under_user_limit
     end
     
+    # do not run these rules when you are applying the credits...
     unless applying_credits
       limit_to_existing_donation
       # limit if amount is greater than the remaining funding sought for pitch
