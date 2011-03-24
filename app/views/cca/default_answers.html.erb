@@ -2,9 +2,11 @@
 <div id="survey_form">
 	<% @cca.cca_questions.each_with_index do |question, index| %>
 		<%= survey_section(question, index) %>
-		<h5><%= question.question %></h5>
-		<%= "<div class='description'>#{question.description}</div>" if !question.description.blank? %>
-		<%= survey_element(question, current_user, true, true) %><br/>
+		<%if question.answer_by_user(user, false)%>
+			<h5><%= question.question %></h5>
+			<%= "<div class='description'>#{question.description}</div>" if !question.description.blank? %>
+			<%= survey_element(question, current_user, true, true) %><br/>
+		<%end%>
 	<% end %>
 </div>
 <%session[:show_default_answers] = nil%>
