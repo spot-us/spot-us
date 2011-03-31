@@ -1,0 +1,76 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+require 'spreadsheet'
+
+log = Logger.new(STDOUT)
+
+log.info Time.now.to_s + " Warming up to import pictures..."
+
+xls_filename = ARGV.first
+photos_path = ARGV.second
+
+unless xls_filename.blank?
+  book = Spreadsheet.open xls_filename
+  sheet = book.worksheet 0
+  i = 0
+  nr_rows = sheet.row_count.to_i
+  sheet.each do |row|
+    if i > 0
+      log.info "   -- Processing row #{i.to_s} of #{(nr_rows-1).to_s}"
+      
+      # create the arg hash...
+      arg = {}
+      arg[:image_id] = row[0].to_s.gsub('.0', '')
+      arg[:year] = row[1].to_i if row[1]
+      arg[:poy] = row[2].to_i if row[2]
+      arg[:division] = row[3] if row[3] 
+      arg[:category] = row[4] if row[4]
+      arg[:award] = row[5] if row[5]
+      arg[:first_name] = row[6] if row[6]	
+      arg[:last_name] = row[7] if row[7]
+      arg[:organization] = row[8] if row[8]
+      arg[:location] = row[9] if row[9]
+      arg[:title] = row[10] if row[10]
+      arg[:caption] = row[11] if row[11]
+      arg[:gender] = row[12] if row[12]
+      arg[:color] = row[13] if row[13]
+      
+      # handle the old keywords...
+      old_keywords = []
+      [14,15,16,17,18].each do |ind|
+        old_keywords << row[ind].to_s.split(',') unless row[ind].blank?
+      end
+      old_keywords.flatten!
+      arg[:old_keywords] = old_keywords.collect{ |ok| ok.strip }.join(",") unless old_keywords.empty?
+      
+      arg[:assigned_category] = row[19]	
+      arg[:number_of_pictures] = row[20] 	
+      arg[:number_in_series] = row[21]
+      
+      # handle the proof data...
+      proof = []
+      [22,23,24].each do |ind|
+        proof << row[ind].to_s.split(',') unless row[ind].blank?
+      end
+      proof.flatten!
+      arg[:proof] = proof.collect{ |p| p.strip }.join(",") unless proof.empty?
+      
+      # get the photo file and attach it...
+      my_filename = "#{arg[:image_id]}"
+      tempfile = Tempfile.new(my_filename)
+      tempfile.write open(photos_path+"/"+my_filename).read
+      arg[:photo] = tempfile
+      
+      p = Picture.create(arg)
+    end
+    i += 1
+  end
+  log.info Time.now.to_s + " Done and going to sleep..."
+else
+  log.info ""
+  log.info Time.now.to_s + " Oops, you have specify a tab delimited file..."
+end

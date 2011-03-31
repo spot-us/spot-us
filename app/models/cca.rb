@@ -6,22 +6,24 @@ class Cca < ActiveRecord::Base
   has_many :cca_answers, :conditions => 'cca_answers.default_answer=0 OR cca_answers.default_answer is null'
   has_many :default_cca_answers, :class_name=>"CcaAnswer", :conditions => 'cca_answers.default_answer=1', :foreign_key => "cca_id"
   has_many :credits, :foreign_key=>'cca_id'
-
+  has_many :pictures
+  has_many :turk_answers
+  
   attr_accessor :providing_default_answer
   @@providing_default_answer = false
 
   has_attached_file :banner,
-  :styles => { :thumb => '99x8#', 
-    :large_banner => "992x78#", 
-    :small_banner => "496x39#"},
-    :storage => :s3,
-    :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
-    :bucket =>   S3_BUCKET,
-    :path => "cca-banners/" <<
-    ":attachment/:id_partition/" <<
-    ":basename_:style.:extension",
-    :url =>  "cca-banners/:attachment/:id_partition/" <<
-    ":basename_:style.:extension"
+    :styles => { :thumb => '99x8#', 
+      :large_banner => "992x78#", 
+      :small_banner => "496x39#"},
+      :storage => :s3,
+      :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
+      :bucket =>   S3_BUCKET,
+      :path => "cca-banners/" <<
+      ":attachment/:id_partition/" <<
+      ":basename_:style.:extension",
+      :url =>  "cca-banners/:attachment/:id_partition/" <<
+      ":basename_:style.:extension"
 
     unless Rails.env.development?
       validates_attachment_content_type :banner,
@@ -44,6 +46,9 @@ class Cca < ActiveRecord::Base
     ["Pending","Live","Finished"]
   end
 
+  def get_answers_by_user(user_id)
+    turk_answers.find(:all, :conditions => ["user_id=?", user_id])
+  end
 
   def has_begun?(user)
     CcaAnswer.find_by_user_id_and_cca_id(user.id, self.id)
@@ -65,6 +70,7 @@ class Cca < ActiveRecord::Base
 
   def survey_completed?(user)
     # checks if user has completed this survey
+    return true if self.get_answers_by_user(user.id).length>5
     completed_answer = self.cca_answers.find(:first, :conditions => "user_id = #{user.id} and status = 1")
     return false if completed_answer.blank?
     return true

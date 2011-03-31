@@ -1,0 +1,58 @@
+<% content_for :head do %>	
+<% end %>
+
+<% @title = "Spot.us - Community Centered Advertising" %>
+
+<div class="surveyPageContainer">
+		<div class="ccaHowContainer" id="ccaHow">
+			<%if false%>
+				<span class="close"><img src="/images/new/ccax.png" onclick="$('#ccaHow').hide();return false;"></span>
+			<%end%>
+			<h2>How community-centered sponsorships work</h2>
+			<ul>
+				<li class="engage"><span>1.</span> Engage with this activity from our sponsor.</li>
+				<li class="accumulate"><span>2.</span> Accumulate credits to donate.</li>
+				<li class="apply"><span>3.</span> Apply your free credits to any story.</li>
+			</ul>
+		</div>
+		<div class="surveyContainer">
+			<div class="surveySidebar">
+				<%= render :partial => "cca/fund_this" if params[:pitch_id]%>
+				<%= render :partial => "cca/sponsor_info" %>
+			</div>
+
+			<div class="surveyBody">
+				<%= @cca.description.strip_double_spaces %> 
+				<h2>Picture: <%=@picture.title%></h2>
+				<p style="margin-top:-20px;"><%=@picture.caption%></p>
+				<% if @picture.errors.any? %>
+					<div style="border:1px solid red;width:100%;padding:5px 10px">
+						<ul class="formErrorsList" style="list-style-type:none; font-size: 14px; ">
+							<%@picture.errors.each do |error|%>
+								<li><%=error[1]%></li>
+							<%end%>
+						</ul>
+					</div>
+				<% end %>
+				<div class="formContainer">
+					<div class="formBody">
+						<%form_tag("/cca/#{@cca.id}/pictures/#{@picture.id}/tag") do %>
+							<%=image_tag @picture.photo(:large), :width=>643, :height=>500%>
+							<br/><br/>
+							<label>Tags (separate them by comma)</label>
+							<%= text_field_tag :taglist, params[:taglist].to_s, {:style=>"width:620px;"} %>
+							<%= get_button("Apply Your Credits Now", {:name=>"apply_now", :id=>"apply_now"}) if @cca.get_answers_by_user(current_user.id).length>=5%>
+							<%= get_button("Tag") %>
+						<%end%>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<%unless current_user%>
+	<script>
+		jQuery(document).ready(function($){
+			jQuery.facebox({ajax:"/sections/cca"});
+		});
+	</script>
+<%end%>

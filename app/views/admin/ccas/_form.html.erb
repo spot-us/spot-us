@@ -14,6 +14,10 @@
         <%= f.label     :sponsor_id, "Sponsor" %>
         <%= f.select(:sponsor_id, @users.collect {|u| [ u.full_name, u.id ] }, { :include_blank => true }) %>
     </div>
+	<div class="row">
+        <%= f.label     :is_picture_task, "Is the CCA a picture task?" %>
+        <%= f.check_box :is_picture_task %>
+    </div>
     <div class="row">
         <%= f.label     :title, "Title" %>
         <%= f.text_field :title %>

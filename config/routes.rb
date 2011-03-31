@@ -62,8 +62,14 @@ ActionController::Routing::Routes.draw do |map|
   #map.connect "/cca/submit_answers", :controller => "cca", :action => "submit_answers"
   #map.connect "/cca/apply_credits/:id", :controller => "cca", :action => "apply_credits"
   #map.connect "/cca/:id", :controller => "cca", :action => "show"
-  map.resources :cca, :only=>[:show, :index], :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get, :default_answers => :get}
+  map.connect "/cca/:cca_id/pictures/:id", :controller => "pictures", :action => "show"
+  map.connect "/cca/:cca_id/pictures/:id/tag", :controller => "pictures", :action => "tag"
+  map.resources :cca, :member=>{:submit_answers=>:put, :apply_credits=>:get, :results=>:get, :default_answers => :get}
+  # do |cca|
+  #  cca.resources :pictures
+  #end
   map.connect "/cca/:id/:pitch_id", :controller => "cca", :action => "show"
+  
   # facebook acct link
   #map.resources :users, :collection => {:link_user_accounts => :get}
   map.connect "users/link_user_accounts", :controller => "users", :action => "link_user_accounts"

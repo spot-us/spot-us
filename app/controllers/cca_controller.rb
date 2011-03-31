@@ -8,7 +8,18 @@ class CcaController < ApplicationController
   end
   
   def show
-	  @pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
+    if @cca.is_picture_task
+      if current_user
+        redirect_to check_for_cca_turk_for_pictures
+        return 
+      else
+        session[:return_url] = cca_path(@cca)
+        redirect_to new_session_path
+        return
+      end
+    end
+    
+    @pitch = Pitch.find_by_id(params[:pitch_id]) if params[:pitch_id]
   	if current_user
   		latest_answer = CcaAnswer.latest_answer(@cca,current_user)
   		@cache_form = latest_answer ? latest_answer : nil
@@ -72,9 +83,8 @@ class CcaController < ApplicationController
   end 
   
   def apply_credits
-    @cca = find_resource
-    @filter = "almost-funded"
-    @news_items = NewsItem.constrain_type(@filter).send(@filter.gsub('-','_')).order_results(@filter).browsable.by_network(current_network).paginate(:page => params[:page])
+    redirect_to "/stories/almost-funded"
+    return
   end
 
   def credit_to_pitch?

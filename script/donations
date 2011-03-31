@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+log.info Time.now.to_s + " Warming up to process donations..."
+csv = ""
+csv += ['User', 'Donations', '', '', 'Nr of Donations', '', ''].join(",")+"\r\n"
+csv += ['', 'Time', 'Amount', 'Total', 'Paid', 'Credits', 'Sponsors'].join(",")+"\r\n"
+users = User.all
+i = 1
+users.each do |user|
+  log.info("   - Processing user #{i} of #{users.length}")
+  data = []
+  data << "User #{user.id}"
+  data << ''
+  data << ''
+  total_count = user.all_donations.find(:all, :conditions=>"donations.status='paid' or donations.credit_id is not null").length
+  credit_count = user.all_donations.find(:all, :conditions=>"donations.credit_id is not null").length
+  data << total_count
+  data << total_count-credit_count
+  data << credit_count
+  data << user.all_donations.find(:all, :joins=>"inner join credits on credits.id=donations.id", :conditions=>"credits.cca_id is not null and donations.credit_id is not null").length
+  csv += data.join(",")+"\r\n"
+  user.all_donations.find(:all, :conditions=>"donations.status='paid' or donations.credit_id is not null").each do |d|
+    csv += ['', d.created_at, d.amount, '', '', '', ''].join(",")+"\r\n"
+  end
+  i += 1
+end
+
+File.open("/Users/eriks/spotus/donations.csv", 'w') {|f| f.write(csv) }
+
+log.info Time.now.to_s + " Done and going to sleep..."

@@ -264,4 +264,22 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def check_for_cca_turk_for_pictures
+    # get all answers by user...
+    turk_answers = @cca.get_answers_by_user(current_user.id)
+    if turk_answers.length >= 15 
+      credit = Credit.create(:user_id => current_user.id, :description => "Awarded for #{@cca.title} | #{@cca.id}", :amount => 0.50*turk_answers.length, :cca_id => @cca.id)
+      return "/stories/almost-funded"
+    else
+      picture_ids_string = turk_answers.map(&:turkable_id).join(",")
+      picture = Picture.random(@cca.id, picture_ids_string)
+      unless picture.empty?
+        return "/cca/#{@cca.id}/pictures/#{picture.first.id}"
+      else
+        credit = Credit.create(:user_id => current_user.id, :description => "Awarded for #{@cca.title} | #{@cca.id}", :amount => 0.50*turk_answers.length, :cca_id => @cca.id)
+        return "/stories/almost-funded"
+      end
+    end
+  end
+  
 end
