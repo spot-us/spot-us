@@ -15,7 +15,7 @@ class Picture < ActiveRecord::Base
   attr_accessor :taglist
   
   has_attached_file :photo,
-                      :styles => { :thumb => '50x50#', :large => '600x400', :medium => '300x200' },
+                      :styles => { :thumb => '50x50#', :large => '643x500', :medium => '321x250' },
                       :storage => :s3,
                       :s3_credentials => "#{RAILS_ROOT}/config/s3.yml",
                       :bucket =>   S3_BUCKET,
