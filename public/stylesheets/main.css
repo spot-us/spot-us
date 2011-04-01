@@ -1698,6 +1698,21 @@
 	margin: 20px 0px 0px 445px;
 }
 
+.surveyBody .formContainer .formBody .turkSubmitButtons{
+	clear:both;
+	list-style-type: none;
+	margin-top:20px;
+}
+
+.surveyBody .formContainer .formBody .turkSubmitButtons li{
+	float:right;
+	margin-left:10px;
+}
+
+.surveyBody .formContainer .formBody .turkSubmitButtons li .submitButton{
+	margin:0px;
+}
+
 .surveySection {
 	border:0px;
 }
