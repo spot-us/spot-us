@@ -30,7 +30,7 @@
 				</td>
 				  
 				<td><%=cca.position%></td>
-				<td><%=Cca.STATUS_VALUES[cca.status] %></td>
+				<td><%=Cca::STATUS_VALUES[cca.status] %></td>
 				<td>
 			    	<%= link_to 'edit', edit_admin_cca_url(cca)%><br/>
 					<%= link_to 'provide answers', default_answers_admin_cca_url(cca)%><br/>

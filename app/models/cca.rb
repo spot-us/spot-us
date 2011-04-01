@@ -9,11 +9,13 @@ class Cca < ActiveRecord::Base
   has_many :pictures
   has_many :turk_answers
   
+  after_create :assign_pictures, :if=>:is_picture_task
+  
   attr_accessor :providing_default_answer
   @@providing_default_answer = false
 
   has_attached_file :banner,
-    :styles => { :thumb => '99x8#', 
+    :styles => { :thumb => '99x78#', 
       :large_banner => "992x78#", 
       :small_banner => "496x39#"},
       :storage => :s3,
@@ -38,12 +40,12 @@ class Cca < ActiveRecord::Base
   named_scope :cca_home, :conditions=>'status=1', :order => 'RAND()'
   named_scope :live, :conditions=>'status=1', :order => 'position asc, created_at desc'
 
+  STATUS_VALUES = ["Pending", "Live", "Finished"]
+  TOTAL_TURKS_VALUES = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  TURKS_PER_USER = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
   def banner_name
     banner_file_name.blank?
-  end
-
-  def self.STATUS_VALUES
-    ["Pending","Live","Finished"]
   end
 
   def get_answers_by_user(user_id)
@@ -63,7 +65,7 @@ class Cca < ActiveRecord::Base
   end
 
   def check_credit_settings
-    if self.award_amount > self.max_credits_amount
+    if self.award_amount > self.max_credits_amount && !is_picture_task
       errors.add_to_base("Award amount cannot be greater than maximum credit amount")
     end
   end
@@ -78,7 +80,7 @@ class Cca < ActiveRecord::Base
 
   def award_credit(user)
     Credit.create(:user_id => user.id, :amount => self.award_amount, 
-    :description => "Awarded for #{self.title} | #{self.id}", :cca_id=>self.id)
+      :description => "Awarded for #{self.title} | #{self.id}", :cca_id=>self.id)
     self.process_credits_awarded(self.award_amount)
     self.set_completed_status(user)
   end 
@@ -182,6 +184,14 @@ class Cca < ActiveRecord::Base
   def already_submitted?(user)
     answer = CcaAnswer.find_by_user_id_and_cca_id_and_status_and_default_answer(user,self.id,1,false)
     answer ? true : false
+  end
+  
+  def assign_pictures
+    if is_picture_task
+      Picture.find(:all, :conditions => 'cca_id is null', :limit => total_turks).each do |p|
+        p.update_attributes({:cca_id => id})
+      end
+    end
   end
 
 end

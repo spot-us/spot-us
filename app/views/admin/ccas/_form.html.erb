@@ -1,3 +1,14 @@
+<%content_for :head do%>
+	<script>
+		function togglePictureTaskFields(){
+			jQuery("div[id*='normalCca']").slideToggle(600);
+			jQuery("div[id*='turkTask']").slideToggle(600);
+			checkbox = jQuery("#isPictureTask");
+			checkbox.val('1', !checkbox.val('1'));
+		}
+	</script>
+<%end%>
+
 <% if (@cca && !@cca.errors.empty?) %>
 	<div class="formErrors">
 		<h3 class="formErrorHeading">Ooops, something went wrong!</h3>
@@ -16,7 +27,7 @@
     </div>
 	<div class="row">
         <%= f.label     :is_picture_task, "Is the CCA a picture task?" %>
-        <%= f.check_box :is_picture_task %>
+        <%= f.check_box :is_picture_task, :id=>"isPictureTask", :onclick=>"togglePictureTaskFields();" %>
     </div>
     <div class="row">
         <%= f.label     :title, "Title" %>
@@ -32,15 +43,27 @@
     </div>
     <div class="row">
         <%= f.label     :status, "Set Status" %>
-        <%= f.select(:status, Cca.STATUS_VALUES.collect {|s| [s, Cca.STATUS_VALUES.index(s)] }) %><br/>
+        <%= f.select(:status, Cca::STATUS_VALUES.collect {|s| [s, Cca::STATUS_VALUES.index(s)] }) %><br/>
         <em class="small">Note: Surveys will automatically switch to Finished status when awarded credits equal the max amount.</em>
     </div>
-    <div class="row">
-        <%= f.label     :max_credits_amount, "Maxiumum credit amount" %>
+    <div class="row" id='normalCca' <%if @cca.is_picture_task%>style="display:none;"<%end%>>
+        <%= f.label     :max_credits_amount, "Maximum credit amount" %>
         <%= f.text_field :max_credits_amount %>
     </div>
+	<div class="row" id='turkTaskTotal' <%unless @cca.is_picture_task%>style="display:none;"<%end%>>
+        <%= f.label     :total_turks, "Number of total turks" %>
+        <%= f.select(:total_turks, Cca::TOTAL_TURKS_VALUES.collect { |s| [s, s] } ) %>
+    </div>
+	<div class="row" id='turkTaskMaximumPerUser' <%unless @cca.is_picture_task%>style="display:none;"<%end%>>
+        <%= f.label     :minimum_turks_per_user, "Minimum number of turk-tasks per user" %>
+        <%= f.select(:minimum_turks_per_user, Cca::TURKS_PER_USER.collect {|s| [s, s] }) %>
+    </div>
+	<div class="row" id='turkTaskMinimumPerUser' <%unless @cca.is_picture_task%>style="display:none;"<%end%>>
+        <%= f.label     :maximum_turks_per_user, "Maximum number of turk-tasks per user" %>
+        <%= f.select(:maximum_turks_per_user, Cca::TURKS_PER_USER.collect {|s| [s, s] }) %>
+    </div>
     <div class="row">
-        <%= f.label     :award_amount, "Award amount" %>
+        <%= f.label     :award_amount, "Award amount (per cca or per turk)" %>
         <%= f.text_field :award_amount %>
     </div>
 	<div class="row add_media">

@@ -39,7 +39,7 @@ class Admin::CcasController < ApplicationController
   response_for :create do |format|
     format.html do
       if resource_saved?
-        flash[:success] = "You have successfuly created a new cca!"
+        flash[:success] = "You have successfully created a new cca!"
         redirect_to admin_ccas_path
       else
         render :action => 'new'

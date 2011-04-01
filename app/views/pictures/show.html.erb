@@ -41,8 +41,8 @@
 							<br/><br/>
 							<label>Tags (separate them by comma)</label>
 							<%= text_field_tag :taglist, params[:taglist].to_s, {:style=>"width:620px;"} %>
-							<%= get_button("Apply Your Credits Now", {:name=>"apply_now", :id=>"apply_now"}) if @cca.get_answers_by_user(current_user.id).length>=5%>
-							<%= get_button("Tag") %>
+							<%= get_button("Get Credits", {:name=>"apply_now", :id=>"apply_now"}) if @cca.get_answers_by_user(current_user.id).length+1>=@cca.minimum_turks_per_user || @cca.get_answers_by_user(current_user.id).length+1>=@cca.maximum_turks_per_user%>
+							<%= get_button("Give Me More") %>
 						<%end%>
 					</div>
 				</div>
