@@ -1694,6 +1694,10 @@
 	margin-bottom:20px;
 }
 
+.submitButton{
+	cursor:pointer;
+}
+
 .surveyBody .formContainer .formBody .submitButton{
 	margin: 20px 0px 0px 445px;
 }

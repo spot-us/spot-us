@@ -44,10 +44,10 @@
 							<ul class="turkSubmitButtons">
 								
 								<li>
-									<%= get_button("Give Me More Credits") %>
+									<%= get_button("Save & Show Another") %>
 								</li>
 								<li>
-									<%= get_button("Get My Credits Now", {:name=>"apply_now", :id=>"apply_now"}) if @cca.get_answers_by_user(current_user.id).length+1>=@cca.minimum_turks_per_user || @cca.get_answers_by_user(current_user.id).length+1>=@cca.maximum_turks_per_user || true%>
+									<%= get_button("Save & Apply Credits", {:name=>"apply_now", :id=>"apply_now"}) if @cca.get_answers_by_user(current_user.id).length+1>=@cca.minimum_turks_per_user || @cca.get_answers_by_user(current_user.id).length+1>=@cca.maximum_turks_per_user || true%>
 								</li>
 							</ul>
 						<%end%>
