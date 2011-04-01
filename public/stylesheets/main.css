@@ -1698,6 +1698,17 @@
 	cursor:pointer;
 }
 
+.turkStats{
+	list-style-type:none;
+	font-size:14px;
+	clear:both;
+}
+
+.turkStats li{
+	float:right;
+	padding:10px;
+}
+
 .surveyBody .formContainer .formBody .submitButton{
 	margin: 20px 0px 0px 445px;
 }
