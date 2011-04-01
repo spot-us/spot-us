@@ -9,7 +9,8 @@ class Incentive < ActiveRecord::Base
   end
   
   def validate
-    p = Incentive.find(:first, :conditions => ["amount=?", amount])
+    p = nil
+    p = Incentive.find(:first, :conditions => ["amount=? and pitch_id=?", amount, pitch.id]) if pitch
     if p
       errors.add('', 'You can only have one incentive per amount level')
       return false
