@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   
   after_save :touch_pitch
+  before_save :clean_columns
   
   has_attached_file :blog_image,
                       :styles => { :thumb => '50x50#', 
@@ -181,6 +182,10 @@ class Post < ActiveRecord::Base
     
   def touch_pitch
     self.pitch.touch_pitch!
+  end
+  
+  def clean_columns
+  	self.body 		= self.body.sanitize if self.body
   end
 
 end
