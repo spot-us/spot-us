@@ -200,6 +200,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.get_contributor_count(is_admin=false)
+    having_cache ["contributor_count_"], { :expires_in => 86400, :force => is_admin }  do
+      (count / 50.0).floor * 50
+    end
+  end
+
 ################### new facebook oauth 2 ###############
 
 	def link_identity!(uid)

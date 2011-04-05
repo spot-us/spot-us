@@ -155,6 +155,12 @@ class Pitch < NewsItem
     # end.flatten
   end
 
+  def get_incentives(is_admin=false)
+    having_cache ["incentives_", id], { :expires_in => CACHE_TIMEOUT, :force => is_admin }  do
+      incentives.find(:all, :order => "amount asc")
+    end
+  end
+
   def can_be_accepted?
     active?
   end
