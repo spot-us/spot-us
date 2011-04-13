@@ -40,6 +40,12 @@ class Admin::PitchesController < ApplicationController
     flash[:success] = "You have un-approved the pitch '#{current_pitch.headline}'!"
     redirect_to :back
   end
+  
+  def close
+    current_pitch.close!
+    flash[:success] = "You have closed the pitch '#{current_pitch.headline}'!"
+    redirect_to :back
+  end
 
   protected
 

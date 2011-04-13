@@ -48,6 +48,7 @@ class Pitch < NewsItem
   aasm_state :active
   aasm_state :accepted
   aasm_state :funded
+  aasm_state :closed
 
   aasm_event :unapprove do
     transitions :from => :active, :to => :unapproved
@@ -63,6 +64,10 @@ class Pitch < NewsItem
 
   aasm_event :accept do
     transitions :from => [:unapproved, :active], :to => :accepted, :on_transition => :do_fund_events
+  end
+  
+  aasm_event :close do
+    transitions :from => [:unapproved, :active], :to => :closed, :on_transition => :do_close_events
   end
   
   validates_presence_of :requested_amount
@@ -379,7 +384,8 @@ class Pitch < NewsItem
     create_associated_story unless story
   end
   
-
+  def do_close_events
+  end
 
   def create_peer_editor_assignment
     Assignment.create(:pitch_id => self.id, :user_id => self.user.id, :title =>"Apply to be Peer Review Editor", :is_factchecker_assignment => true,

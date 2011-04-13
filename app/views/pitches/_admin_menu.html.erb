@@ -32,8 +32,9 @@
 		<%if (current_user == pitch.user && !pitch.story)%>
 			<%= link_to "Turn in draft story", begin_story_pitch_path(pitch), :title => "begin your story draft"%>
 		<%end%>
-		<%if (!pitch.fully_funded? && current_user == pitch.user)%>
+		<%if (!pitch.fully_funded? && (current_user == pitch.user || is_admin?))%>
 			<%= link_to "Accept donations", accept_myspot_pitch_path(pitch), :method => :put, :confirm => "If you confirm we will stop collecting donations and you'll be contracted to complete the pitch?", :title => "Accept Donations"%>
+			<%= link_to "Close", close_admin_pitch_path(pitch), :confirm => "Do you wish to close this pitch?", :title => "Close Pitch"%>
 			<%= link_to "Delete", pitch_path(pitch), :method => :delete, :confirm => "Do you wish to delete this pitch?", :title => "Delete Pitch"%>
 		<%end%>
 		<%if is_admin?%>
