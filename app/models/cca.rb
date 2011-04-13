@@ -135,7 +135,7 @@ class Cca < ActiveRecord::Base
         question.cca_answers.each do |answer|
           csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(user)
         end
-        if question.question_type=='radio' || question.question_type=='checkbox'
+        if question.question_type=='radio' || question.question_type=='radio_horizontal' || question.question_type=='checkbox'
           csv << ['', '', '']
           csv << [question.question, 'Answer', 'Nr Of Answers']
           answers = question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers')
