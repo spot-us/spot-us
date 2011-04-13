@@ -19,22 +19,15 @@ class Admin::PitchesController < ApplicationController
     @pitches = Pitch.paginate(:page => params[:page], :per_page => 20, :order => "created_at desc", :include => [:donations, 
               :user, :contributor_applications])
   end
+  
+  def unfunded
+    @pitches = Pitch.unfunded.paginate(:page => params[:page], :per_page => 20, :order => "expiration_date asc", :include => [:donations, 
+              :user, :contributor_applications])
+  end
 
   def fact_checker_chooser
     render :partial => 'fact_checker_chooser', :locals => { :pitch => current_pitch, :cancel => true }
   end
-
-  # def approve_blogger
-  #   current_pitch.approve_blogger!(params[:user_id])
-  #   flash[:success] = "Successfully added blogger to '#{current_pitch.headline}'!"
-  #   redirect_to :back
-  # end
-  # 
-  # def unapprove_blogger
-  #   current_pitch.unapprove_blogger!(params[:user_id])
-  #   flash[:success] = "Successfully removed blogger from '#{current_pitch.headline}'!"
-  #   redirect_to :back
-  # end
 
   def approve
     current_pitch.approve!
@@ -48,9 +41,10 @@ class Admin::PitchesController < ApplicationController
     redirect_to :back
   end
 
-
   protected
+
   def current_pitch
     @pitch ||= Pitch.find(params[:id])
   end
+
 end
