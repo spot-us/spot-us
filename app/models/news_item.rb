@@ -54,11 +54,6 @@ class NewsItem < ActiveRecord::Base
     sanitizer.allowed_tags.delete('div')
   end
 
-  # cleanse_columns(:delivery_description, :extended_description, :short_description, :skills) do |sanitizer|
-  #   sanitizer.allowed_tags.add(%w(object param embed a img))
-  #   sanitizer.allowed_attributes.add(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
-  # end
-
   cleanse_columns(:video_embed, :widget_embed) do |sanitizer|
     sanitizer.allowed_tags.replace(%w(object param embed a img))
     sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
@@ -117,16 +112,16 @@ class NewsItem < ActiveRecord::Base
   named_scope :newest, :include => :user, :order => 'news_items.created_at DESC'
   
   named_scope :featured, :conditions => {:feature => true}, :order => "news_items.created_at desc"
-  named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded')"
+  named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded','closed')"
   named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
   named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
   named_scope :published, :conditions => {:status => 'published'}
-  named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft')"
-  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
-  named_scope :recent, :order => 'news_items.created_at DESC', :conditions => "news_items.status NOT IN ('unapproved','draft','')"
+  named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft','closed')"
+  named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved' and news_items.status != 'closed'"
+  named_scope :recent, :order => 'news_items.created_at DESC', :conditions => "news_items.status NOT IN ('unapproved','draft','closed','')"
   
-  named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','')"
-  named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft')"
+  named_scope :accepted, :conditions => "news_items.status NOT IN ('unapproved','draft','closed','')"
+  named_scope :approved, :conditions => "news_items.status NOT IN ('unapproved','draft', 'closed')"
   named_scope :unfunded_with_no_story, :conditions => "news_items.status='active' and news_item_id is null"
   named_scope :pitch_or_tip, :conditions => 'news_items.type IN("Pitch","Tip")'
   named_scope :top_four, :limit => 4

@@ -252,19 +252,6 @@ class Pitch < NewsItem
     user.is_a?(Admin)
   end
 
-  # def approve_blogger!(user_id)
-  #   return if user_id.nil?
-  #   return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
-  #   application.update_attribute(:approved, true)
-  #   # Mailer.deliver_approved_reporting_team_notification(self, application.user)
-  # end
-
-  # def unapprove_blogger!(user_id)
-  #   return if user_id.nil?
-  #   return unless application = contributor_applications.detect{|ca| ca.user_id == user_id.to_i}
-  #   application.update_attribute(:approved, false)
-  # end
-
   def funding_needed
     return 0 unless active? || unapproved?
     requested_amount - total_amount_donated
@@ -336,9 +323,7 @@ class Pitch < NewsItem
     return true if user.organization? && attempted_donation_amount <= requested_amount
     return false if attempted_donation_amount > funding_needed
     user_donations = donations.paid.total_amount_for_user(user) + credit_pitches.paid.total_amount_for_user(user)
-    #user_donations = donations.total_amount_for_user(user) + credit_pitches.total_amount_for_user(user)
     (user_donations + attempted_donation_amount) <= max_donation_amount(user)
-    #user_donations <= max_donation_amount(user)
   end
 
   def dispatch_fact_checker
