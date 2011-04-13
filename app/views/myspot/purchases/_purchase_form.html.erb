@@ -47,6 +47,11 @@
 			You have enough credits to cover this transaction. Please click Purchase to continue.
 		<% else %>
 			<h3>Pay with your Credit Card</h3>
+			<% if @purchase.errors.any? %>
+				<div class="error">
+					<%= error_messages_for :purchase %>
+				</div>
+			<% end %>
 			<div class="">
 				<div class="row">
 					<%= f.label :first_name %>
