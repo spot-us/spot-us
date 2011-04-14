@@ -53,6 +53,7 @@ class Cca < ActiveRecord::Base
   end
 
   def has_begun?(user)
+    return false unless user
     CcaAnswer.find_by_user_id_and_cca_id(user.id, self.id)
   end
 
