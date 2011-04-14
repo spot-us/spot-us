@@ -2593,3 +2593,11 @@ li.total div{
 	width:20px;
 	display:inline;
 }
+
+.flashError{
+	border-top:5px solid red;
+	border-bottom:5px solid red;
+	padding:10px;
+	margin:5px 0; 
+	font-size:18px;
+}

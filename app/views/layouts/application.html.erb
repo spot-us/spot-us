@@ -15,6 +15,18 @@
 		</div>
 		<!-- END HEADER -->
 		
+		<%#if flash[:notice] || flash[:success]%>
+			<div class="flashError">
+				<div class='innerWrapper'>
+					<div>
+						hkjjhkh
+						<%= flash[:notice] if flash[:notice]%>
+						<%= flash[:success] if flash[:success]%>					
+					</div>
+				</div>
+			</div>
+		<%#end%>
+		
 		<!-- Only show middle header if a partial is defined for the particular controller... -->
 		<%if File.exists?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_header.html.erb")%>
 			<div class='middleWrapper'>
