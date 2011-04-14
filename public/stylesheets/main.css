@@ -1678,6 +1678,8 @@
 
 .surveyBody .formContainer .formBody h5{
 	color:#9d9c9c;
+	width:100%;
+	clear:both;
 }
 
 .surveyBody .formContainer .formBody textarea,
@@ -1730,6 +1732,8 @@
 
 .surveySection {
 	border:0px;
+	width:100%;
+	clear:both;
 }
 
 .surveySection legend{
@@ -2586,11 +2590,13 @@ li.total div{
 .radioHorizontal{
 	list-style-type:none;
 	clear:both;
+	width:100%;
 }
 
 .radioHorizontal li{
 	text-align:center;
 	width:20px;
+	float:left;
 	display:inline;
 }
 
