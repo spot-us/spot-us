@@ -1,4 +1,4 @@
-<%unless incentives.empty?%>
+<%if incentives && !incentives.empty?%>
 	<ul class="incentivesBox">
 		<h3 id='hoverAnchorIncentives-large'>Incentives</h3>
 		<%incentives.each do |incentive|%>
