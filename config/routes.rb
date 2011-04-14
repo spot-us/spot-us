@@ -108,7 +108,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :users, :member => {:log_in_as => :get, :promote_to_sponsor => :get, :approve => :put}, :collection => { :search => :any  }
     admin.resources :credits, :collection => { :unused => :get  }
-    admin.resources :pitches, :collection => {:unfunded => :get}, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
+    admin.resources :pitches, :collection => {:unfunded => :get}, :member => { :fact_checker_chooser => :get, :approve => :put, :unapprove => :put, :close => :put} #, :approve_blogger => :put, :unapprove_blogger => :put 
     admin.resources :tips
     admin.resources :comments
     admin.resources :subscribers

@@ -28,12 +28,17 @@ module CcaHelper
 			items = question.question_data.split("\n")
 			items.each do |item|
 				item = item.strip
-				text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
-				answer = question.answer_by_user(user, default_answer)
-				text << 'value="' << item << '"'
-				text << ' checked' if show_answer && answer && answer.answer == item
-				text << '> '
-				text << item
+				text << "<ul class=\"radioHorizontal\">"
+				  text << "<li>"
+            text << item
+            text << "<br/>"
+    				text << '<input type="radio" name="answers[question_' << question.id.to_s << ']"'
+    				answer = question.answer_by_user(user, default_answer)
+    				text << 'value="' << item << '"'
+    				text << ' checked' if show_answer && answer && answer.answer == item
+    				text << '> '
+  				text << "</li"
+				text << "</ul>"
 			end
 		when question.question_type == "checkbox"
 			items = question.question_data.split("\n")

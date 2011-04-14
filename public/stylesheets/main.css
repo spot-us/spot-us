@@ -2583,3 +2583,12 @@ li.total div{
 	text-align:right;
 	padding-right:10px;
 }
+.radioHorizontal{
+	list-style-type:none;
+	clear:both;
+}
+
+.radioHorizontal li{
+	text-align:center;
+	display:inline;
+}
