@@ -2590,5 +2590,6 @@ li.total div{
 
 .radioHorizontal li{
 	text-align:center;
+	width:20px;
 	display:inline;
 }

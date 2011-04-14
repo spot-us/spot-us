@@ -26,9 +26,9 @@ module CcaHelper
 			end
 		when question.question_type == "radio_horizontal"
 			items = question.question_data.split("\n")
+			text << "<ul class=\"radioHorizontal\">"
 			items.each do |item|
 				item = item.strip
-				text << "<ul class=\"radioHorizontal\">"
 				  text << "<li>"
             text << item
             text << "<br/>"
@@ -37,9 +37,9 @@ module CcaHelper
     				text << 'value="' << item << '"'
     				text << ' checked' if show_answer && answer && answer.answer == item
     				text << '> '
-  				text << "</li"
-				text << "</ul>"
+  				text << "</li>"
 			end
+			text << "</ul>"
 		when question.question_type == "checkbox"
 			items = question.question_data.split("\n")
 			items.each do |item|

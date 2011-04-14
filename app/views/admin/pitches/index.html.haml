@@ -48,9 +48,9 @@
           = button_to 'reset funding', reset_funding_pitch_url(pitch), :confirm => 'Are you sure you want to reset the donations for this pitch?'
           = button_to 'delete', admin_pitch_url(pitch), :method => :delete, :confirm => 'Are you sure you want to delete this pitch?', :class => 'delete_button'
 		
-		%td
-		  - if pitch.closed?
-		    %strong= "CLOSED" 
+        %td
+          - if pitch.closed?
+            %strong= "CLOSED" 
 
 
 = will_paginate @pitches
