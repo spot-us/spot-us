@@ -30,6 +30,6 @@
 			<input type="hidden" name="pitch_id" value="<%= params[:pitch_id]  %>">
 		<% end %>
 		<br/><br/>
-		<%= get_button("Submit your answers") %>
+		<%= get_button("Submit your answers", :onlick=>"$(this).attr('disabled', 'disabled');") %>
 	<% end %>
 <%# end %>
