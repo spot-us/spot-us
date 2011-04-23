@@ -58,7 +58,7 @@ class Cca < ActiveRecord::Base
   end
 
   def number_of_answers
-    cca_answers.any? ? cca_answers.count(:select=>"distinct user_id") : 0
+    cca_answers.any? ? cca_answers.count(:select=>"distinct user_id").to_i : 0
   end
 
   def sections
@@ -72,6 +72,7 @@ class Cca < ActiveRecord::Base
   end
 
   def survey_completed?(user)
+    return false unless user
     # checks if user has completed this survey
     return true if self.get_answers_by_user(user.id).length>5
     completed_answer = self.cca_answers.find(:first, :conditions => "user_id = #{user.id} and status = 1")
@@ -139,15 +140,49 @@ class Cca < ActiveRecord::Base
         if question.question_type=='radio' || question.question_type=='radio_horizontal' || question.question_type=='checkbox'
           csv << ['', '', '']
           csv << [question.question, 'Answer', 'Nr Of Answers']
-          answers = question.cca_answers.find(:all, :group=>'answer', :select => 'answer, count(*) as nr_of_answers')
-          not_finished = 0
+          answers = question.cca_answers.find(:all, :group => 'answer', :select => 'answer, count(*) as nr_of_answers')
+          not_finished_arr = {}
+          answers.each do |a|
+            not_finished_arr[a.answer] = 0
+          end
           question.cca_answers.each do |a|
-            not_finished += 1 if self.survey_completed?(a.user)
+            not_finished_arr[a.answer] += 1 unless self.survey_completed?(a.user)
           end
           total_answers_count = 0
           answers.each do |answer|
-            csv << ['', answer.answer, answer.nr_of_answers-not_finished]
-            total_answers_count += (answer.nr_of_answers-not_finished) 
+            csv << ['', answer.answer, answer.nr_of_answers.to_i-not_finished_arr[answer.answer]]
+            total_answers_count += (answer.nr_of_answers.to_i-not_finished_arr[answer.answer]) 
+          end
+          csv << ['', 'Total Answers', total_answers_count]
+        end
+        csv << ['', '', '']
+      end
+    end
+  end
+  
+  def generate_csv_file(file_name="results.csv")
+    FasterCSV.open("/data/spotus/"+file_name,"w") do |csv|
+      csv << ['Question', 'User', 'Answers']
+      cca_questions.each do |question|
+        csv << [question.question, '', '']
+        question.cca_answers.each do |answer|
+          csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(user)
+        end
+        if question.question_type=='radio' || question.question_type=='radio_horizontal' || question.question_type=='checkbox'
+          csv << ['', '', '']
+          csv << [question.question, 'Answer', 'Nr Of Answers']
+          answers = question.cca_answers.find(:all, :group => 'answer', :select => 'answer, count(*) as nr_of_answers')
+          not_finished_arr = {}
+          answers.each do |a|
+            not_finished_arr[a.answer] = 0
+          end
+          question.cca_answers.each do |a|
+            not_finished_arr[a.answer] += 1 unless self.survey_completed?(a.user)
+          end
+          total_answers_count = 0
+          answers.each do |answer|
+            csv << ['', answer.answer, answer.nr_of_answers.to_i-not_finished_arr[answer.answer]]
+            total_answers_count += (answer.nr_of_answers.to_i-not_finished_arr[answer.answer]) 
           end
           csv << ['', 'Total Answers', total_answers_count]
         end
