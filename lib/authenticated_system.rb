@@ -93,7 +93,7 @@ module AuthenticatedSystem
     end
     
     def store_purchase
-      session[:return_to] = "https://#{APP_CONFIG[:default_host]}/purchase"
+      session[:return_to] = "http://#{APP_CONFIG[:default_host]}/purchase"
       cookies[:donation_total_amount] = params[:total_amount]
       cookies[:donation_pitch_id] = params[:pitch_id]
     end

@@ -15,10 +15,11 @@
 		</div>
 		<!-- END HEADER -->
 		
-		<%if flash[:notice] || flash[:success]%>
+		<%if flash[:notice] || flash[:success] || flash[:error]%>
 			<div class="flashError">
 				<div class='innerWrapper'>
 					<div>
+						<%= flash[:error] if flash[:error]%>
 						<%= flash[:notice] if flash[:notice]%>
 						<%= flash[:success] if flash[:success]%>					
 					</div>

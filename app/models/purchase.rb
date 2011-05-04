@@ -68,7 +68,7 @@ class Purchase < ActiveRecord::Base
 
   def total_amount
     return self[:total_amount] unless self[:total_amount].blank?
-    donations_sum - credit_to_apply
+    donations_sum
   end
 
   def self.valid_donations_for_user?(user, donations)
