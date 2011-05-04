@@ -132,6 +132,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/myspot/purchases/paypal_return", :controller => "myspot/purchases", :action => "paypal_return"
   map.connect "/myspot/purchases/paypal_ipn", :controller => "myspot/purchases", :action => "paypal_ipn"
   
+  
+  map.connect "/purchase", :controller => "myspot/purchases", :action => "new"
   map.namespace :myspot do |myspot|
     myspot.resource :profile do |profile|
       profile.resources :jobs

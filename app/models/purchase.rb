@@ -22,7 +22,7 @@ class Purchase < ActiveRecord::Base
   class GatewayError < RuntimeError; end
 
   attr_accessor :credit_card_number, :credit_card_year, :credit_card_month,
-    :credit_card_type, :verification_value
+    :credit_card_type, :verification_value, :donation_amount, :spotus_donation_amount
   attr_reader :credit_card
 
   cattr_accessor :gateway
@@ -41,10 +41,10 @@ class Purchase < ActiveRecord::Base
 
   validate :validate_credit_card, :on => :create, :unless => lambda {|p| p.credit_covers_total? || p.paypal_transaction? }
 
-  belongs_to :user
-  has_many   :donations, :conditions => {:donation_type => "payment"}
-  has_many :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}
-  has_one    :spotus_donation
+  belongs_to  :user
+  has_many    :donations, :conditions => {:donation_type => "payment"}
+  has_many    :credit_pitches, :class_name => "Donation", :conditions => {:donation_type => "credit"}
+  has_one     :spotus_donation
 
   def credit_covers_total?
     self.total_amount == 0

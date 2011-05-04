@@ -135,7 +135,7 @@ class Cca < ActiveRecord::Base
       cca_questions.each do |question|
         csv << [question.question, '', '']
         question.cca_answers.each do |answer|
-          csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(user)
+          csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(answer.user)
         end
         if question.question_type=='radio' || question.question_type=='radio_horizontal' || question.question_type=='checkbox'
           csv << ['', '', '']
@@ -166,7 +166,7 @@ class Cca < ActiveRecord::Base
       cca_questions.each do |question|
         csv << [question.question, '', '']
         question.cca_answers.each do |answer|
-          csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(user)
+          csv << ['',(answer.user ? answer.user.full_name : "deleted user"), answer.answer] if self.survey_completed?(answer.user)
         end
         if question.question_type=='radio' || question.question_type=='radio_horizontal' || question.question_type=='checkbox'
           csv << ['', '', '']

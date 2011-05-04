@@ -1,46 +1,6 @@
 <% @title = "Spot.us - Your Donations" %>
-<div id="purchases<%="_lite" if cookies[:spotus_lite]%>">
-   
-      <% unless @purchase.errors.empty? %>
-        <% content_for :error do %>
-          <%= error_messages_for :purchase %>
-        <% end %>
-      <% end %>
-
-    <h2>Your Donations</h2>
-    <% @donations.each do |donation| %>
-         <div class="donation clearfix">
-           <div class="float-left">
-             PITCH:
-             <strong><%= h donation.pitch.headline %></strong>
-             <% if donation.group %>
-               (<%= donation.group.name %>)
-             <% end %>
-           </div>
-           <div class="float-right">
-             <%= number_to_currency donation.amount %>
-           </div>
-         </div>
-     <% end %>
-     <div class="donation clearfix">
-         <div class="float-left">
-           <strong>Support Spot.Us</strong>
-         </div>
-         <div class="float-right">
-           <%= number_to_currency(@purchase.spotus_donation[:amount] || 0) %>
-         </div>
-     </div>
-     <% if current_user.allocated_credits > 0 %>
-         <div class="donation credit_line">
-              <div class="float-left">
-                CREDIT APPLIED
-              </div>
-              <div class="float-right">
-                <%= number_to_currency(current_user.allocated_credits) %>
-              </div>
-         </div>  
-     <% end %>   
-    <br/>
-    <hr/>
-    <%= render :partial => "/myspot/purchases/purchase_form" %>
+<div id="purchases<%="_lite" if cookies[:spotus_lite]%>" class="donationAmounts">
+	<div class="formContainer">
+		<%= render :partial => "/myspot/purchases/purchase_form" %>
+	</div>
 </div>

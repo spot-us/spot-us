@@ -2,30 +2,45 @@ class Myspot::PurchasesController < ApplicationController
   include ActiveMerchant::Billing::Integrations
 
   before_filter :login_required, :except => [:paypal_ipn]
-  ssl_required :create, :new
+  #ssl_required :create, :new
   before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
 
   def new
-    @donations = current_user.donations.unpaid
-    @purchase = Purchase.new(:user       => current_user,
-                             :donations  => @donations,
-                             :spotus_donation => current_user.current_spotus_donation,
-                             :first_name => current_user.first_name,
-                             :last_name  => current_user.last_name)
+    #@donations = current_user.donations.unpaid
+    #@purchase = Purchase.new(:user       => current_user,
+    #                         :donations  => @donations,
+    #                         :spotus_donation => current_user.current_spotus_donation,
+    #                         :first_name => current_user.first_name,
+    #                         :last_name  => current_user.last_name)
+    @donation_amount = params[:total_amount].to_f
+    @pitch = Pitch.find_by_id(params[:pitch_id].to_i)
     if cookies[:spotus_lite]
-		render :layout=>'lite'
-	else
-		render :partial => "/myspot/purchases/purchase_form", :layout => false
-	end
+  		render :layout=>'lite'
+  	else
+  		#render :partial => "/myspot/purchases/purchase_form"
+  	end
   end
 
   def create
     @purchase                 = Purchase.new(params[:purchase])
     @purchase.user            = current_user
-    @donations                = current_user.donations.unpaid
-    @purchase.donations       = @donations
-    @purchase.spotus_donation = current_user.current_spotus_donation
+    @donations = []
+    
+    donation_amount = params[:purchase][:donation_amount]
+    
+    # create the donation and do not run any the limiting to existing donations rules
+    d = Donation.create(:user_id => current_user.id, :pitch_id => params[:purchase][:pitch_id], :amount => donation_amount, :donation_type => "payment")
+    d.pay!
+    
+    # add the session id
+    session[:donation_id] = d.id
+    
+    # create the spotus donation
+    spotus_donation = SpotusDonation.create(:user_id => current_user.id, :amount => spotus_amount)
+    
+    @purchase.donations       = [d]
+    @purchase.spotus_donation = spotus_donation
     begin
       if @purchase.save
         set_social_notifier_cookie("donation")
@@ -51,20 +66,36 @@ class Myspot::PurchasesController < ApplicationController
 
   def paypal_return
     update_balance_cookie
-    if current_user.donations.unpaid.any?
-      flash[:success] = "Thanks! Your donations will be marked paid when PayPal clears them."
-    else
-      flash[:success] = "Thanks! Your payment has been received."
-    end
+    flash[:notice] = "Thanks! We are processing your donation and it will appear on the site when PayPal has processed it."
     redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : myspot_donations_path
   end
 
   def paypal_ipn
     notify = Paypal::Notification.new(request.raw_post)
 
-    @spotus_donation = SpotusDonation.find_from_paypal(notify.params)
-    @donations = Donation.find_all_from_paypal(notify.params)
-    @user = @donations.first.user
+    #@spotus_donation = SpotusDonation.find_from_paypal(notify.params)
+    #@donations = Donation.find_all_from_paypal(notify.params)
+    
+    paypal_params = notify.params
+    paypal_tmp = paypal_params.select{|k,v| k =~ /item_number_1/}
+    arr = paypal_tmp.split("-")
+    pitch_id = arr[1]
+    user__id = arr[2]
+    
+    donation_amount = paypal_params.select{|k,v| k =~ /amount_1/}
+    spotus_donation_amount = paypal_params.select{|k,v| k =~ /amount_2/}
+    
+    # create the donation and do not run any the limiting to existing donations rules
+    d = Donation.create(:user_id => user_id, :pitch_id => pitch_id, :amount => donation_amount, :donation_type => "payment")
+    d.pay!
+    
+    # add the session id
+    session[:donation_id] = d.id
+    
+    # create the spotus donation
+    spotus_donation = SpotusDonation.create(:user_id => user_id, :amount => spotus_amount)
+    
+    @user = User.find_by_id(user_id)
 
     unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten.compact)
       logger.error("Invalid users for PayPal transaction 28C98632UU123291R")

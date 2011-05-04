@@ -1,111 +1,148 @@
-<div id="donation_processor">
-	<div class="total" style="display:block;">
-		<h3>Your Total:
-			<%= number_to_currency @purchase.total_amount %>
-		</h3>
-		<% unless @purchase.credit_covers_total? %>
-			<em class="paypal_label">or pay with PayPal</em>&nbsp;
-			<div class="paypal">
-				<% if @purchase.credit_covers_partial? %>
-					<div id="paypal_credit_notice">
-						Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
-						<ol>
-							<li> Remove the donations you wanted to purchase with PayPal from your cart</li>
-							<li> Come back and purchase just the items covered by credit</li>
-							<li> Re-donate and select PayPal for the items you wanted use PayPal for</li>
-						</ol>
-					</div>
-				<% else %>
-					<% form_tag PAYPAL_POST_URL do %>
-						<%paypal_return_myspot_purchases_url = "http://spot.us/myspot/purchases/paypal_return"%>
-						<%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
-						<%= hidden_field_tag "cmd", "_cart" %>
-						<%= hidden_field_tag "upload", "1" %>
-						<%= hidden_field_tag "business", PAYPAL_EMAIL %>
-						<% i = 1 %>
-						<% @donations.each do |donation| %>
-							<%= hidden_field_tag "item_number_#{i}", "#{donation.id}" %>
-							<%= hidden_field_tag "item_name_#{i}", "PITCH: #{donation.pitch.headline}" %>
-							<% amount = 0 %>
-							<% amount = donation.amount%>
-							<% amount -= donation.credit.amount if donation.credit%>
-							<%= hidden_field_tag "amount_#{i}", amount %>
-							<% i += 1 %>
-							<%= hidden_field_tag "item_number_#{i}", "#{@purchase.spotus_donation.id}" %>
-							<%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
-							<%= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
-						<% end %>
-						<%= image_submit_tag "/images/new_design/yellow_paypal_buynow.gif", :style => "" %>
-					<% end %>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
+<% content_for :head do %>
 
-	<% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "spotus_form", :class => cookies[:spotus_lite] ? 'purchase_lite' : '"purchase'} do |f| %>
-		<% if @purchase.credit_covers_total? %>
+	<% javascript_tag do %>
+
+		jQuery(document).ready(function(){
+
+			getTotalAmounts(true);
+		
+			jQuery('#paypal_amount').change(function(){
+				alert(jQuery(this).val());
+				jQuery('#spotus_donation_amount_paypal').html('$ '+jQuery(this).val()*0.05);
+				jQuery('#hidden_spotus_donation_amount_paypal').val(jQuery(this).val()*0.05);
+			});
+			
+			jQuery('#card_amount').change(function(){
+				jQuery('#spotus_donation_amount_card').html('$ '+jQuery(this).val()*0.05);
+				jQuery('#hidden_spotus_donation_amount_card').val(jQuery(this).val()*0.05);
+			});
+		
+		});
+	<% end %>
+<% end %>
+
+<% if false && @purchase.credit_covers_partial? %>
+	<div id="paypal_credit_notice">
+		Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
+		<ol>
+			<li> Remove the donations you wanted to purchase with PayPal from your cart</li>
+			<li> Come back and purchase just the items covered by credit</li>
+			<li> Re-donate and select PayPal for the items you wanted use PayPal for</li>
+		</ol>
+	</div>
+<% else %>
+	<%= form_tag(PAYPAL_POST_URL)  %>
+		<div class="formBody">
+			<h2 style="margin-top:0px;border:none">Pay using PayPal</h2>
+			<div class="row">
+				<% paypal_return_myspot_purchases_url = "http://spot.us/myspot/purchases/paypal_return"%>
+				<%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
+				<%= hidden_field_tag "cmd", "_cart" %>
+				<%= hidden_field_tag "upload", "1" %>
+				<%= hidden_field_tag "business", PAYPAL_EMAIL %>
+			</div>
+			<% i = 1 %>
+			<%# @donations.each do |donation| %>
+				<%= hidden_field_tag "item_number_#{i}", "1-#{@pitch.id}-#{current_user.id}" %>
+				<%= hidden_field_tag "item_name_#{i}", "PITCH: #{@pitch.headline}" %>
+				<div class="row">
+					<label for="<%="amount_#{i}"%>">Donation Amount</label>
+					<%= text_field_tag "amount_#{i}", @donation_amount, :id=>"paypal_amount" %>
+				</div>
+				<% i += 1 %>
+				<div class="row">
+					<%= hidden_field_tag "item_number_#{i}", "2-#{@pitch.id}-#{current_user.id}" %>
+					<%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
+					<%#= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
+				</div>
+				<div class="row">
+					<label for="<%="amount_#{i}"%>">Spot.Us Donation Amount</label>
+					<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
+					<%= hidden_field_tag "amount_#{i}", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_paypal" %>
+				</div>
+			<%# end %>
+			<div class="row">
+				<%= get_button("Pay with PayPal") %>
+			</div>
+		</div>
+	</form>
+<% end %>
+
+<% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "", :class => cookies[:spotus_lite] ? 'purchase_lite' : ''} do |f| %>
+	<div class="formBody">
+		<% if false && @purchase.credit_covers_total? %>
 			You have enough credits to cover this transaction. Please click Purchase to continue.
 		<% else %>
-			<h3>Pay with your Credit Card</h3>
-			<% if @purchase.errors.any? %>
+			<h2 style="margin-top:0px;border:none">Pay with your Credit Card</h2>
+			
+			<h3>Donation Details</h3>
+			<div class="row">
+				<label>Donation Amount</label>
+				<%= f.text_field_tag "donation_amount", @donation_amount, :id=>"card_amount" %>
+			</div>
+			<div class="row">
+				<label for="<%="spotus_donation_amount"%>">Spot.Us Donation Amount</label>
+				<span id="spotus_donation_amount_card">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
+				<%= hidden_field_tag "spotus_donation_amount", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_card" %>
+			</div>
+			
+			<h3>Your Card Details</h3>
+			<% if @purchase && @purchase.errors.any? %>
 				<div class="error">
 					<%= error_messages_for :purchase %>
 				</div>
 			<% end %>
-			<div class="">
-				<div class="row">
-					<%= f.label :first_name %>
-					<%= f.text_field :first_name, :class => "big" %>
-				</div>
-				<div class="row">
-					<%=  f.label :last_name %>
-					<%= f.text_field :last_name, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :credit_card_type %>
-					<%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']] %>
-				</div>
-				<div class="row">
-					<%= f.label :credit_card_number %>
-					<%= f.text_field :credit_card_number, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :credit_card_month, 'Expiration Date' %>
-					<%= f.text_field :credit_card_month, :size => 2, :class => "tiny" %>
-					<%= '/' %>
-					<%= f.text_field :credit_card_year, :size => 4, :class => "small" %>
-					(MM/YYYY)
-				</div>
-				<div class="row">
-					<%= f.label :verification_value, 'Security Code' %>
-					<%= f.text_field :verification_value, :size => 4, :class => "tiny" %>
-				</div>
-				<div class="row">
-					<%= f.label :address1, 'Address (1)' %>
-					<%= f.text_field :address1, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :address2, 'Address (2)' %>
-					<%= f.text_field :address2, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :city %>
-					<%= f.text_field :city, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :state %>
-					<%= f.text_field :state, :size => 2, :class => "tiny" %>
-				</div>
-				<div class="row">
-					<%= f.label :zip %>
-					<%= f.text_field :zip, :size => 5, :class => "small" %>
-				</div>
+			<%= hidden_field_tag :pitch_id, @pitch.id %>
+			<div class="row">
+				<%= f.label :first_name %>
+				<%= f.text_field :first_name, :class => "big" %>
+			</div>
+			<div class="row">
+				<%=  f.label :last_name %>
+				<%= f.text_field :last_name, :class => "big" %>
+			</div>
+			<div class="row">
+				<%= f.label :credit_card_type %>
+				<%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']] %>
+			</div>
+			<div class="row">
+				<%= f.label :credit_card_number %>
+				<%= f.text_field :credit_card_number, :class => "big" %>
+			</div>
+			<div class="row">
+				<%= f.label :credit_card_month, 'Expiration Date' %>
+				<%= f.text_field :credit_card_month, :size => 2, :style => "width:auto;" %>
+				<%= '/' %>
+				<%= f.text_field :credit_card_year, :size => 4, :style => "width:auto;" %>
+				(MM/YYYY)
+			</div>
+			<div class="row">
+				<%= f.label :verification_value, 'Security Code' %>
+				<%= f.text_field :verification_value, :size => 4, :class => "tiny" %>
+			</div>
+			<div class="row">
+				<%= f.label :address1, 'Address (1)' %>
+				<%= f.text_field :address1, :class => "big" %>
+			</div>
+			<div class="row">
+				<%= f.label :address2, 'Address (2)' %>
+				<%= f.text_field :address2, :class => "big" %>
+			</div>
+			<div class="row">
+				<%= f.label :city %>
+				<%= f.text_field :city, :class => "big" %>
+			</div>
+			<div class="row">
+				<%= f.label :state %>
+				<%= f.text_field :state, :size => 2, :class => "tiny" %>
+			</div>
+			<div class="row">
+				<%= f.label :zip %>
+				<%= f.text_field :zip, :size => 5, :class => "small" %>
 			</div>
 		<% end %>
-		<div class="float-right">
-			<input type="submit" value="Submit Purchase" alt="Purchase" class="blue_button" />
+		<div class="row">
+			<%= get_button("Purchase") %>
 		</div>
-	<% end %>
-	<div class="clearfix">
 	</div>
-</div>
+<% end %>
