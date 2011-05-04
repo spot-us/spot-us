@@ -92,7 +92,7 @@ class PitchesController < ApplicationController
     pitch = get_pitch
     credits = current_user.total_available_credits
     credits.each do |credit|
-      amount = credit.amount * 0.95
+      amount = credit.amount * (1-SpotusDonation::SPOTUS_TITHE)
       
       # slice off the spotus donation
       spotus_donation_credit = Credit.create(:user_id => credit.user_id, :description => "#{credit.description} (Sliced off from #{credit.id} which had the amount #{credit.amount})",

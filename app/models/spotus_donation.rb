@@ -30,7 +30,7 @@ class SpotusDonation < ActiveRecord::Base
           (credit_id is not null and purchase_id is not null and spotus_donations.amount<=(purchases.total_amount+ABS(credits.amount)))", 
       :joins=>"left join credits on credits.id=credit_id left join purchases on purchases.id=purchase_id"
 
-  SPOTUS_TITHE = 0.05
+  SPOTUS_TITHE = 0.1
 
   def amount
     return self[:amount] unless self[:amount].blank?
