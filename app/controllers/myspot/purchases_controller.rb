@@ -22,8 +22,8 @@ class Myspot::PurchasesController < ApplicationController
     @pitch = Pitch.find_by_id(params[:pitch_id].to_i) if params[:pitch_id]
     @pitch = Pitch.find_by_id(cookies[:donation_pitch_id].to_i) if cookies[:donation_pitch_id] && !@pitch
     
-    #cookies[:donation_pitch_id] = nil
-    #cookies[:donation_total_amount] = nil
+    cookies[:donation_pitch_id] = nil
+    cookies[:donation_total_amount] = nil
     
     if cookies[:spotus_lite]
   		render :layout=>'lite'
