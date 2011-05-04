@@ -2,7 +2,7 @@ class Myspot::PurchasesController < ApplicationController
   include ActiveMerchant::Billing::Integrations
 
   before_filter :login_required, :except => [:paypal_ipn]
-  #ssl_required :create, :new
+  ssl_required :create, :new
   before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
 
@@ -14,20 +14,17 @@ class Myspot::PurchasesController < ApplicationController
     #                         :first_name => current_user.first_name,
     #                         :last_name  => current_user.last_name)
     @donation_amount = 0
-    @donation_amount = params[:total_amount].to_f if params[:total_amount]
-    @donation_amount = params[:amount_1].to_f if params[:amount_1]
-    @donation_amount = params[:donation_amount].to_f if params[:donation_amount]
-    if session[:donation_total_amount]
-      @donation_amount = session[:donation_total_amount].to_f
-      session[:donation_total_amount] = nil
-    end
-    
+    @donation_amount = params[:total_amount].to_f if params[:total_amount] && @donation_amount==0
+    @donation_amount = params[:amount_1].to_f if params[:amount_1] && @donation_amount==0
+    @donation_amount = params[:donation_amount].to_f if params[:donation_amount] && @donation_amount==0
+    @donation_amount = cookies[:donation_total_amount].to_f if cookies[:donation_total_amount] && @donation_amount==0
     
     @pitch = Pitch.find_by_id(params[:pitch_id].to_i) if params[:pitch_id]
-    if session[:donation_pitch_id]
-      @pitch = Pitch.find_by_id(session[:donation_pitch_id].to_i)
-      session[:donation_pitch_id] = nil
-    end
+    @pitch = Pitch.find_by_id(cookies[:donation_pitch_id].to_i) if cookies[:donation_pitch_id] && !@pitch
+    
+    #cookies[:donation_pitch_id] = nil
+    #cookies[:donation_total_amount] = nil
+    
     if cookies[:spotus_lite]
   		render :layout=>'lite'
   	else
@@ -44,7 +41,6 @@ class Myspot::PurchasesController < ApplicationController
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => current_user.id, :pitch_id => params[:purchase][:pitch_id], :amount => donation_amount, :donation_type => "payment")
-    d.pay!
     
     # add the session id
     session[:donation_id] = d.id
@@ -93,15 +89,14 @@ class Myspot::PurchasesController < ApplicationController
     paypal_tmp = paypal_params.select{|k,v| k =~ /item_number_1/}
     arr = paypal_tmp.split("-")
     pitch_id = arr[1]
-    user__id = arr[2]
+    user_id = arr[2]
     
     donation_amount = paypal_params.select{|k,v| k =~ /amount_1/}
     spotus_donation_amount = paypal_params.select{|k,v| k =~ /amount_2/}
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => user_id, :pitch_id => pitch_id, :amount => donation_amount, :donation_type => "payment")
-    d.pay!
-    
+
     # add the session id
     session[:donation_id] = d.id
     
@@ -110,14 +105,14 @@ class Myspot::PurchasesController < ApplicationController
     
     @user = User.find_by_id(user_id)
 
-    unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten.compact)
-      logger.error("Invalid users for PayPal transaction 28C98632UU123291R")
-      render :nothing => true and return
-    end
+    #unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten.compact)
+    #  logger.error("Invalid users for PayPal transaction 28C98632UU123291R")
+    #  render :nothing => true and return
+    #end
 
     purchase = Purchase.new
     purchase.spotus_donation = @spotus_donation
-    purchase.donations = @donations
+    purchase.donations = [d]
     purchase.user = @user
     purchase.paypal_transaction_id = notify.transaction_id
 

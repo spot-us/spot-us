@@ -94,8 +94,8 @@ module AuthenticatedSystem
     
     def store_purchase
       session[:return_to] = "https://#{APP_CONFIG[:default_host]}/purchase"
-      session[:donation_total_amount] = params[:total_amount]
-      session[:donation_pitch_id] = params[:pitch_id]
+      cookies[:donation_total_amount] = params[:total_amount]
+      cookies[:donation_pitch_id] = params[:pitch_id]
     end
 
     # Redirect to the URI stored by the most recent store_location call or
