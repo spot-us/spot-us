@@ -2,7 +2,7 @@ class Myspot::PurchasesController < ApplicationController
   include ActiveMerchant::Billing::Integrations
 
   before_filter :login_required, :except => [:paypal_ipn]
-  ssl_required :create, :new
+  #ssl_required :create, :new
   before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
 
@@ -13,8 +13,21 @@ class Myspot::PurchasesController < ApplicationController
     #                         :spotus_donation => current_user.current_spotus_donation,
     #                         :first_name => current_user.first_name,
     #                         :last_name  => current_user.last_name)
-    @donation_amount = params[:total_amount].to_f
-    @pitch = Pitch.find_by_id(params[:pitch_id].to_i)
+    @donation_amount = 0
+    @donation_amount = params[:total_amount].to_f if params[:total_amount]
+    @donation_amount = params[:amount_1].to_f if params[:amount_1]
+    @donation_amount = params[:donation_amount].to_f if params[:donation_amount]
+    if session[:donation_total_amount]
+      @donation_amount = session[:donation_total_amount].to_f
+      session[:donation_total_amount] = nil
+    end
+    
+    
+    @pitch = Pitch.find_by_id(params[:pitch_id].to_i) if params[:pitch_id]
+    if session[:donation_pitch_id]
+      @pitch = Pitch.find_by_id(session[:donation_pitch_id].to_i)
+      session[:donation_pitch_id] = nil
+    end
     if cookies[:spotus_lite]
   		render :layout=>'lite'
   	else
@@ -25,9 +38,9 @@ class Myspot::PurchasesController < ApplicationController
   def create
     @purchase                 = Purchase.new(params[:purchase])
     @purchase.user            = current_user
-    @donations = []
     
     donation_amount = params[:purchase][:donation_amount]
+    spotus_amount = params[:purchase][:spotus_amount]
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => current_user.id, :pitch_id => params[:purchase][:pitch_id], :amount => donation_amount, :donation_type => "payment")
@@ -45,7 +58,7 @@ class Myspot::PurchasesController < ApplicationController
       if @purchase.save
         set_social_notifier_cookie("donation")
         update_balance_cookie
-        redirect_url = @donations && !@donations.empty? && @donations.first ? pitch_url(@donations.first.pitch) : myspot_donations_path
+        redirect_url = d ? pitch_url(d.pitch) : myspot_donations_path
         redirect_to cookies[:spotus_lite] ? "/lite/#{cookies[:spotus_lite]}" : redirect_url
       else
         unless cookies[:spotus_lite]

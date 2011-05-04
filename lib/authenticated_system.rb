@@ -79,6 +79,7 @@ module AuthenticatedSystem
         format.any do
           flash[:error] = opts[:flash] || 'You must be logged in to access this page.'
           store_location
+          store_purchase
           redirect_to opts[:redirect] || new_session_path
         end
       end
@@ -89,6 +90,12 @@ module AuthenticatedSystem
     # We can return to this location by calling #redirect_back_or_default.
     def store_location(url = nil)
       session[:return_to] = url || request.request_uri
+    end
+    
+    def store_purchase
+      session[:return_to] = "https://#{APP_CONFIG[:default_host]}/purchase"
+      session[:donation_total_amount] = params[:total_amount]
+      session[:donation_pitch_id] = params[:pitch_id]
     end
 
     # Redirect to the URI stored by the most recent store_location call or
