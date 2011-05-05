@@ -4,27 +4,10 @@ class Myspot::PurchasesController < ApplicationController
   before_filter :login_required, :except => [:paypal_ipn]
   ssl_required :create, :new
   before_filter :unpaid_donations_required, :except => [:paypal_ipn, :paypal_return]
+  before_filter :set_donation_amount_and_pitch
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
 
   def new
-    #@donations = current_user.donations.unpaid
-    #@purchase = Purchase.new(:user       => current_user,
-    #                         :donations  => @donations,
-    #                         :spotus_donation => current_user.current_spotus_donation,
-    #                         :first_name => current_user.first_name,
-    #                         :last_name  => current_user.last_name)
-    @donation_amount = 0
-    @donation_amount = params[:total_amount].to_f if params[:total_amount] && @donation_amount==0
-    @donation_amount = params[:amount_1].to_f if params[:amount_1] && @donation_amount==0
-    @donation_amount = params[:donation_amount].to_f if params[:donation_amount] && @donation_amount==0
-    @donation_amount = cookies[:donation_total_amount].to_f if cookies[:donation_total_amount] && @donation_amount==0
-    
-    @pitch = Pitch.find_by_id(params[:pitch_id].to_i) if params[:pitch_id]
-    @pitch = Pitch.find_by_id(cookies[:donation_pitch_id].to_i) if cookies[:donation_pitch_id] && !@pitch
-    
-    cookies[:donation_pitch_id] = nil
-    cookies[:donation_total_amount] = nil
-    
     if cookies[:spotus_lite]
   		render :layout=>'lite'
   	else
@@ -50,6 +33,7 @@ class Myspot::PurchasesController < ApplicationController
     
     @purchase.donations       = [d]
     @purchase.spotus_donation = spotus_donation
+    
     begin
       if @purchase.save
         set_social_notifier_cookie("donation")
@@ -135,6 +119,20 @@ class Myspot::PurchasesController < ApplicationController
 
   def unpaid_donations_required
     # redirect_to myspot_donations_path if current_user.donations.unpaid.empty? && (current_user.unpaid_spotus_donation.nil? || current_user.unpaid_spotus_donation.amount <= 0)
+  end
+
+  def set_donation_amount_and_pitch
+    @donation_amount = 0
+    @donation_amount = params[:total_amount].to_f if params[:total_amount] && @donation_amount==0
+    @donation_amount = params[:amount_1].to_f if params[:amount_1] && @donation_amount==0
+    @donation_amount = params[:donation_amount].to_f if params[:donation_amount] && @donation_amount==0
+    @donation_amount = cookies[:donation_total_amount].to_f if cookies[:donation_total_amount] && @donation_amount==0
+    
+    @pitch = Pitch.find_by_id(params[:pitch_id].to_i) if params[:pitch_id]
+    @pitch = Pitch.find_by_id(cookies[:donation_pitch_id].to_i) if cookies[:donation_pitch_id] && !@pitch
+    
+    cookies[:donation_pitch_id] = nil
+    cookies[:donation_total_amount] = nil
   end
 
 end
