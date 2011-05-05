@@ -2123,12 +2123,35 @@
 
 /*end login form*/
 
+
+/*purchase form*/
+.purchaseForms .formContainer{
+	width:43%;
+}
+
+.purchaseForms .formContainer{
+	float:left;
+	margin:30px;
+}
+
+.purchaseForms .formContainer .formBody .row .leftCheckbox{
+	width:20px;
+	float:left;
+}
+
+.purchaseForms .formContainer h2{
+	margin:0px;
+	padding:5px 0px;
+}
+
+/*end purchase form*/
+
 /*donation amounts page*/
 
 .donationAmounts{
 	width:65%;
 	float:left;
-	margin-top:20px;
+	margin-top:0px;
 }
 
 .donationAmounts h2, li.total h3{

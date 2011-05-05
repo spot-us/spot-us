@@ -1,6 +1,5 @@
 <% @title = "Spot.us - Your Donations" %>
-<div id="purchases<%="_lite" if cookies[:spotus_lite]%>" class="donationAmounts">
-	<div class="formContainer">
-		<%= render :partial => "/myspot/purchases/purchase_form" %>
-	</div>
+<div class="purchaseForms">
+	<h2 style="margin:20px 30px 0px 30px; padding:0px; border-bottom:1px solid #999; width:96%">Fund your donation</h2>
+	<%= render :partial => "/myspot/purchases/purchase_form" %>
 </div>
