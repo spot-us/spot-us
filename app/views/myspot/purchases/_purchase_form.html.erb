@@ -91,7 +91,7 @@
 					<%= error_messages_for :purchase %>
 				</div>
 			<% end %>
-			<%= f.hidden_field :pitch_id, @pitch.id %>
+			<%= hidden_field_tag "pitch_id", @pitch.id %>
 			<div class="row">
 				<%= f.label :first_name %>
 				<%= f.text_field :first_name, :class => "big" %>

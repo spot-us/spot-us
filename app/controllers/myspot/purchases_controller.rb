@@ -40,7 +40,7 @@ class Myspot::PurchasesController < ApplicationController
     spotus_amount = params[:spotus_amount]
     
     # create the donation and do not run any the limiting to existing donations rules
-    d = Donation.create(:user_id => current_user.id, :pitch_id => params[:purchase][:pitch_id], :amount => donation_amount, :donation_type => "payment")
+    d = Donation.create(:user_id => current_user.id, :pitch_id => params[:pitch_id], :amount => donation_amount, :donation_type => "payment")
     
     # add the session id
     session[:donation_id] = d.id
