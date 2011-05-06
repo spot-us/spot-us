@@ -20,56 +20,6 @@
 	<% end %>
 <% end %>
 
-<% if false && @purchase.credit_covers_partial? %>
-	<div id="paypal_credit_notice">
-		Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
-		<ol>
-			<li> Remove the donations you wanted to purchase with PayPal from your cart</li>
-			<li> Come back and purchase just the items covered by credit</li>
-			<li> Re-donate and select PayPal for the items you wanted use PayPal for</li>
-		</ol>
-	</div>
-<% else %>
-	<div class="formContainer">
-		<%= form_tag(PAYPAL_POST_URL)  %>
-		
-			<div class="formBody">
-				<h2 style="margin-top:0px;border:none">Pay using PayPal</h2>
-				<div class="row">
-					<% paypal_return_myspot_purchases_url = "http://spot.us/myspot/purchases/paypal_return"%>
-					<%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
-					<%= hidden_field_tag "cmd", "_cart" %>
-					<%= hidden_field_tag "upload", "1" %>
-					<%= hidden_field_tag "business", PAYPAL_EMAIL %>
-				</div>
-				<% i = 1 %>
-				<%# @donations.each do |donation| %>
-					<%= hidden_field_tag "item_number_#{i}", "1-#{@pitch.id}-#{current_user.id}" %>
-					<%= hidden_field_tag "item_name_#{i}", "PITCH: #{@pitch.headline}" %>
-					<div class="row">
-						<label for="<%="amount_#{i}"%>">Donation Amount</label>
-						<%= text_field_tag "amount_#{i}", @donation_amount, :id=>"paypal_amount" %>
-					</div>
-					<% i += 1 %>
-					<div class="row">
-						<%= hidden_field_tag "item_number_#{i}", "2-#{@pitch.id}-#{current_user.id}" %>
-						<%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
-						<%#= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
-					</div>
-					<div class="row">
-						<label for="<%="amount_#{i}"%>">Spot.Us Donation Amount</label>
-						<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
-						<%= hidden_field_tag "amount_#{i}", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_paypal" %>
-					</div>
-				<%# end %>
-				<div class="row">
-					<%= get_button("Pay with PayPal") %>
-				</div>
-			</div>
-		</form>
-	</div>
-<% end %>
-
 <div class="formContainer">
 	<% form_for :purchase, :url => myspot_purchases_path, :html => {:id => "", :class => cookies[:spotus_lite] ? 'purchase_lite' : ''} do |f| %>
 		<div class="formBody">
@@ -155,3 +105,53 @@
 		</div>
 	<% end %>
 </div>
+
+<% if false && @purchase.credit_covers_partial? %>
+	<div id="paypal_credit_notice">
+		Credits are not supported for PayPal purchases at this time. You can pay with a credit card below to make the purchase now, you can pay the full amount by clicking Buy Now, or you can work around the issue by following these instructions:
+		<ol>
+			<li> Remove the donations you wanted to purchase with PayPal from your cart</li>
+			<li> Come back and purchase just the items covered by credit</li>
+			<li> Re-donate and select PayPal for the items you wanted use PayPal for</li>
+		</ol>
+	</div>
+<% else %>
+	<div class="formContainer">
+		<%= form_tag(PAYPAL_POST_URL)  %>
+		
+			<div class="formBody">
+				<h2 style="margin-top:0px;border:none">Pay using PayPal</h2>
+				<div class="row">
+					<% paypal_return_myspot_purchases_url = "http://spot.us/myspot/purchases/paypal_return"%>
+					<%= hidden_field_tag "return", paypal_return_myspot_purchases_url %>
+					<%= hidden_field_tag "cmd", "_cart" %>
+					<%= hidden_field_tag "upload", "1" %>
+					<%= hidden_field_tag "business", PAYPAL_EMAIL %>
+				</div>
+				<% i = 1 %>
+				<%# @donations.each do |donation| %>
+					<%= hidden_field_tag "item_number_#{i}", "1-#{@pitch.id}-#{current_user.id}" %>
+					<%= hidden_field_tag "item_name_#{i}", "PITCH: #{@pitch.headline}" %>
+					<div class="row">
+						<label for="<%="amount_#{i}"%>">Donation Amount</label>
+						<%= text_field_tag "amount_#{i}", @donation_amount, :id=>"paypal_amount" %>
+					</div>
+					<% i += 1 %>
+					<div class="row">
+						<%= hidden_field_tag "item_number_#{i}", "2-#{@pitch.id}-#{current_user.id}" %>
+						<%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
+						<%#= hidden_field_tag "amount_#{i}", @purchase.spotus_donation[:amount] %>
+					</div>
+					<div class="row">
+						<label for="<%="amount_#{i}"%>">Spot.Us Donation Amount</label>
+						<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
+						<%= hidden_field_tag "amount_#{i}", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_paypal" %>
+					</div>
+				<%# end %>
+				<div class="row">
+					<%= get_button("Pay with PayPal") %>
+				</div>
+			</div>
+		</form>
+	</div>
+<% end %>
