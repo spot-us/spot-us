@@ -41,7 +41,7 @@
 			
 				<h3>Your Card Details</h3>
 				<% if @purchase && @purchase.errors.any? %>
-					<div class="error">
+					<div class="error" style="width:80%;">
 						<%= error_messages_for :purchase %>
 					</div>
 				<% end %>

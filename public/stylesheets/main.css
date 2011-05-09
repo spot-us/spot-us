@@ -1685,9 +1685,9 @@
 .surveyBody .formContainer .formBody textarea,
 .surveyBody .formContainer .formBody input{
 	border:1px solid #ccc;
-	padding:10px;
+	padding:5px;
 	font-size:14px;
-	margin-top:10px;
+	margin-top:5px;
 }
 
 .surveyBody .formContainer .formBody textarea {
@@ -1973,7 +1973,7 @@
 	cursor:arrow;
 	font-weight:bold;
 	text-align: left;
-	margin-bottom:10px!important;
+	margin-bottom:5px !important;
 	width:200px;
 	text-transform:capitalize;
 	font-size:15px;
@@ -2009,7 +2009,7 @@
 	/*margin-left:30px;*/
 	font-size:14px;
 	font-family:georgia;
-	line-height:24px;
+	line-height:18px;
 	padding:5px;
 }
 
@@ -2026,7 +2026,7 @@
 .formContainer .formBody .row .sites input{
 	display:inline;
 	width:20px;
-	padding:20px;
+	padding:10px;
 }
 
 .cke_wrapper.cke_ltr{
