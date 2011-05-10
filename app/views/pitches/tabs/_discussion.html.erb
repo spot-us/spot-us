@@ -9,9 +9,9 @@
 				<ul>
 					<li>
 						<div class="commentMetadata">
-							<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) %>
+							<%= link_to image_tag(comment.user.photo(:thumb), :class => "avatar"), profile_path(comment.user) if comment.user%>
 							<span class="date"><%= medium_date(comment.created_at) %></span>
-							<span><%= link_to comment.user.full_name, profile_path(comment.user) %></span>
+							<span><%= link_to comment.user.full_name, profile_path(comment.user) if comment.user %></span>
 						</div>
 						<p><%= comment.body %></p>
 					</li>
