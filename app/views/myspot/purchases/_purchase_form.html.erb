@@ -4,16 +4,20 @@
 
 		jQuery(document).ready(function(){
 
-			getTotalAmounts(true);
+			//getTotalAmounts(true);
 		
 			jQuery('#paypal_amount').change(function(){
-				jQuery('#spotus_donation_amount_paypal').html('$ '+jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
-				jQuery('#hidden_spotus_donation_amount_paypal').val(jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
+				fraction = parseFloat(<%=SpotusDonation::SPOTUS_TITHE%>)
+				amount = parseFloat(jQuery(this).val())*fraction;
+				jQuery('#spotus_donation_amount_paypal').html('$ '+formatAsMoney(amount));
+				jQuery('#hidden_spotus_donation_amount_paypal').val(formatAsMoney(amount));
 			});
 			
 			jQuery('#card_amount').change(function(){
-				jQuery('#spotus_donation_amount_card').html('$ '+jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
-				jQuery('#hidden_spotus_donation_amount_card').val(jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
+				fraction = parseFloat(<%=SpotusDonation::SPOTUS_TITHE%>)
+				amount = parseFloat(jQuery(this).val())*fraction;
+				jQuery('#spotus_donation_amount_card').html('$ '+formatAsMoney(amount));
+				jQuery('#hidden_spotus_donation_amount_card').val(formatAsMoney(amount));
 			});
 		
 		});
@@ -35,7 +39,7 @@
 				</div>
 				<div class="row">
 					<label for="<%="spotus_donation_amount"%>">Spot.Us Donation Amount</label>
-					<span id="spotus_donation_amount_card">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
+					<span id="spotus_donation_amount_card">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%></span>
 					<%= hidden_field_tag "spotus_donation_amount", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_card" %>
 				</div>
 			
@@ -144,7 +148,7 @@
 					</div>
 					<div class="row">
 						<label for="<%="amount_#{i}"%>">Spot.Us Donation Amount</label>
-						<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%>
+						<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%></span>
 						<%= hidden_field_tag "amount_#{i}", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_paypal" %>
 					</div>
 				<%# end %>
