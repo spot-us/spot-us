@@ -65,18 +65,15 @@ class Myspot::PurchasesController < ApplicationController
 
   def paypal_ipn
     notify = Paypal::Notification.new(request.raw_post)
-
-    #@spotus_donation = SpotusDonation.find_from_paypal(notify.params)
-    #@donations = Donation.find_all_from_paypal(notify.params)
     
     paypal_params = notify.params
-    paypal_tmp = paypal_params.select{|k,v| k =~ /item_number_1/}
+    paypal_tmp = paypal_params.select{|k,v| k =~ /item_number1/}
     arr = paypal_tmp.split("-")
     pitch_id = arr[1]
     user_id = arr[2]
     
-    donation_amount = paypal_params.select{|k,v| k =~ /amount_1/}
-    spotus_donation_amount = paypal_params.select{|k,v| k =~ /amount_2/}
+    donation_amount = paypal_params.select{|k,v| k =~ /mc_gross_1/}
+    spotus_donation_amount = paypal_params.select{|k,v| k =~ /mc_gross_2/}
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => user_id, :pitch_id => pitch_id, :amount => donation_amount, :donation_type => "payment")
@@ -87,17 +84,12 @@ class Myspot::PurchasesController < ApplicationController
     # create the spotus donation
     spotus_donation = SpotusDonation.create(:user_id => user_id, :amount => spotus_donation_amount)
     
-    @user = User.find_by_id(user_id)
-
-    #unless Purchase.valid_donations_for_user?(@user, [@donations, @spotus_donation].flatten.compact)
-    #  logger.error("Invalid users for PayPal transaction 28C98632UU123291R")
-    #  render :nothing => true and return
-    #end
+    user = User.find_by_id(user_id)
 
     purchase = Purchase.new
-    purchase.spotus_donation = @spotus_donation
+    purchase.spotus_donation = spotus_donation
     purchase.donations = [d]
-    purchase.user = @user
+    purchase.user = user
     purchase.paypal_transaction_id = notify.transaction_id
 
     if notify.acknowledge
