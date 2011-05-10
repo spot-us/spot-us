@@ -12,7 +12,6 @@
 			});
 			
 			jQuery('#card_amount').change(function(){
-				alert(jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
 				jQuery('#spotus_donation_amount_card').html('$ '+jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
 				jQuery('#hidden_spotus_donation_amount_card').val(jQuery(this).val()*<%=SpotusDonation::SPOTUS_TITHE%>);
 			});
