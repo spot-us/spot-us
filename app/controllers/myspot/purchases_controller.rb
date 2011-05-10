@@ -20,7 +20,7 @@ class Myspot::PurchasesController < ApplicationController
     @purchase.user            = current_user
     
     donation_amount = params[:donation_amount]
-    spotus_amount = params[:spotus_amount]
+    spotus_amount = params[:spotus_donation_amount]
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => current_user.id, :pitch_id => params[:pitch_id], :amount => donation_amount, :donation_type => "payment")
@@ -85,7 +85,7 @@ class Myspot::PurchasesController < ApplicationController
     session[:donation_id] = d.id
     
     # create the spotus donation
-    spotus_donation = SpotusDonation.create(:user_id => user_id, :amount => spotus_amount)
+    spotus_donation = SpotusDonation.create(:user_id => user_id, :amount => spotus_donation_amount)
     
     @user = User.find_by_id(user_id)
 
