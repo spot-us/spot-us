@@ -106,12 +106,12 @@ module ApplicationHelper
         text << "You have #{number_to_currency(current_user.remaining_credits)} in credits to use. "
         text << link_to("Apply Them &raquo;", edit_myspot_donations_amounts_path)
       end
-      #if (current_user.total_credits<=0 && current_balance > 0)
-      #  text << "You need "
-      #  text << link_to(number_to_currency(current_balance), edit_myspot_donations_amounts_path, :id => "current_balance")
-      #  text << " to fund your donations. "
-      #  text << link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
-      #end
+      if (current_user.total_credits<=0 && current_balance > 0)
+        text << "You need "
+        text << link_to(number_to_currency(current_balance), edit_myspot_donations_amounts_path, :id => "current_balance")
+        text << " to fund your donations. "
+        text << link_to("Purchase &raquo;", edit_myspot_donations_amounts_path)
+      end
     end
   end
 
