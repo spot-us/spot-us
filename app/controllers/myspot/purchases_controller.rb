@@ -105,8 +105,13 @@ class Myspot::PurchasesController < ApplicationController
     if notify.acknowledge
       if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
         purchase.save
-		
       else
+        unless purchase.errors.empty?
+          logger.info('Purchase errors:')
+          purchase.errors.each do |key,e|
+            logger.info("Error: " + e)
+          end
+        end
         logger.error("PayPal acknowledgement was unpaid or the amounts didn't match for the following transaction: #{notify.params['txn_id']}")
       end
     else
