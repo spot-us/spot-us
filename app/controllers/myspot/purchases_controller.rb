@@ -67,22 +67,32 @@ class Myspot::PurchasesController < ApplicationController
     notify = Paypal::Notification.new(request.raw_post)
     
     paypal_params = notify.params
-    paypal_tmp = paypal_params.select{|k,v| k =~ /item_number1/}
+    paypal_tmp = params[:item_number1]  
     arr = paypal_tmp.split("-")
     pitch_id = arr[1]
     user_id = arr[2]
     
-    donation_amount = paypal_params.select{|k,v| k =~ /mc_gross_1/}
-    spotus_donation_amount = paypal_params.select{|k,v| k =~ /mc_gross_2/}
+    donation_amount = params[:mc_gross_1]
+    spotus_donation_amount = params[:mc_gross_2]
     
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => user_id, :pitch_id => pitch_id, :amount => donation_amount, :donation_type => "payment")
-
-    # add the session id
-    session[:donation_id] = d.id
+    unless d.errors.empty?
+      logger.info('Donation errors:')
+      d.errors.each do |key,e|
+        logger.info("Error: " + e)
+      end
+    end
     
     # create the spotus donation
     spotus_donation = SpotusDonation.create(:user_id => user_id, :amount => spotus_donation_amount)
+    
+    unless spotus_donation.errors.empty?
+      logger.info('SpotusDonation errors:')
+      spotus_donation.errors.each do |key,e|
+        logger.info("Error: " + e)
+      end
+    end
     
     user = User.find_by_id(user_id)
 
@@ -95,7 +105,6 @@ class Myspot::PurchasesController < ApplicationController
     if notify.acknowledge
       if notify.complete? and purchase.total_amount == BigDecimal.new(notify.amount.to_s)
         purchase.save
-        set_social_notifier_cookie("donation")
 		
       else
         logger.error("PayPal acknowledgement was unpaid or the amounts didn't match for the following transaction: #{notify.params['txn_id']}")
