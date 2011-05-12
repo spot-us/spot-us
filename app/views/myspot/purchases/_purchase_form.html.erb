@@ -51,31 +51,37 @@
 				<% end %>
 				<%= hidden_field_tag "pitch_id", @pitch.id %>
 				<div class="row">
-					<%= f.label :first_name %>
-					<%= f.text_field :first_name, :class => "big" %>
+					<div class="halfRow">
+						<%= f.label :first_name %>
+						<%= f.text_field :first_name, :size => 16, :style => "width:150px" %>
+					</div>
+					<div class="halfRow">
+						<%=  f.label :last_name %>
+						<%= f.text_field :last_name, :size => 16, :style => "width:150px" %>
+					</div>
 				</div>
 				<div class="row">
-					<%=  f.label :last_name %>
-					<%= f.text_field :last_name, :class => "big" %>
+					<div class="halfRow">
+						<%= f.label :credit_card_type %>
+						<%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']],{}, {:style=>"width:150px;height:31px;"} %>
+					</div>
+					<div class="halfRow">
+						<%= f.label :credit_card_number %>
+						<%= f.text_field :credit_card_number, :size=>16, :style => "width:auto;" %>
+					</div>
 				</div>
 				<div class="row">
-					<%= f.label :credit_card_type %>
-					<%= f.select :credit_card_type, [['Visa', "visa"], ['MasterCard', 'master'], ['Discover', 'discover'], ['American Express','american_express']] %>
-				</div>
-				<div class="row">
-					<%= f.label :credit_card_number %>
-					<%= f.text_field :credit_card_number, :class => "big" %>
-				</div>
-				<div class="row">
-					<%= f.label :credit_card_month, 'Expiration Date' %>
-					<%= f.text_field :credit_card_month, :size => 2, :style => "width:auto;" %>
-					<%= '/' %>
-					<%= f.text_field :credit_card_year, :size => 4, :style => "width:auto;" %>
-					(MM/YYYY)
-				</div>
-				<div class="row">
-					<%= f.label :verification_value, 'Security Code' %>
-					<%= f.text_field :verification_value, :size => 4, :class => "tiny" %>
+					<div class="halfRow">
+						<%= f.label :credit_card_month, 'Expiration Date' %>
+						<%= f.text_field :credit_card_month, :size => 2, :style => "width:auto;" %>
+						<%= '/' %>
+						<%= f.text_field :credit_card_year, :size => 4, :style => "width:auto;" %>
+						(MM/YYYY)
+					</div>
+					<div class="halfRow">
+						<%= f.label :verification_value, 'Security Code' %>
+						<%= f.text_field :verification_value, :size => 4, :style => "width:auto" %>
+					</div>
 				</div>
 				<div class="row">
 					<%= f.label :address1, 'Address (1)' %>
@@ -87,20 +93,22 @@
 				</div>
 				<div class="row">
 					<%= f.label :city %>
-					<%= f.text_field :city, :class => "big" %>
+					<%= f.text_field :city %>
 				</div>
 				<div class="row">
-					<%= f.label :state %>
-					<select name="purchase[state]">
-						<option value="" <%if !@purchase || @purchase.state.blank?%>selected<%end%>>Select a state</option>
-						<%STATES.each do |key,state|%>
-							<option value="<%=key%>" <%if @purchase && @purchase.state && @purchase.state==key%>selected<%end%>><%=state%></option> 
-						<%end%>
-					</select>
-				</div>
-				<div class="row">
-					<%= f.label :zip %>
-					<%= f.text_field :zip, :size => 5, :class => "small" %>
+					<div class="halfRow">
+						<%= f.label :state %>
+						<select name="purchase[state]" style="width:150px;height:31px;">
+							<option value="" <%if !@purchase || @purchase.state.blank?%>selected<%end%> style="width:150px;">Select a state</option>
+							<%STATES.each do |key,state|%>
+								<option value="<%=key%>" <%if @purchase && @purchase.state && @purchase.state==key%>selected<%end%> style="width:150px;"><%=state%></option> 
+							<%end%>
+						</select>
+					</div>
+					<div class="halfRow">
+						<%= f.label :zip %>
+						<%= f.text_field :zip, :size => 5, :style => "width:auto;" %>
+					</div>
 				</div>
 			<% end %>
 			<div class="row">
