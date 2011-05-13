@@ -10,6 +10,7 @@ class Post < ActiveRecord::Base
   
   belongs_to :pitch
   belongs_to :user
+  has_many :clickstreams, :as => :clickstreamable
   
   after_save :touch_pitch
   before_save :clean_columns

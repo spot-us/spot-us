@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
   
+  BOT_FILTER = /(?:Googlebot|Slurp|Apache|msnbot|wget|libwww|nutch|ia_archiver|heretrix|cuil|google|yandex)/i
+  
   include AuthenticatedSystem
   include SslRequirement
 
@@ -19,8 +21,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_default_html_meta_tags
   before_filter :social_notifier
   before_filter :load_classes, :if => Proc.new { Rails.env.development? }
-  
   after_filter  :async_posts
+  after_filter :save_clickstream, :if => :save_clickstream?
 
   map_resource :profile, :singleton => true, :class => "User", :find => :current_user
   
@@ -35,6 +37,54 @@ class ApplicationController < ActionController::Base
   helper_method :fb_session
   def fb_session
     session[:fb_session]
+  end
+  
+  def save_clickstream?
+    params[:controller]!='sitemap' && params[:controller]!='comments' #&& !(params[:controller]=~/(?:admin)/i)
+  end
+  
+  def save_clickstream
+    
+    return if current_user && current_user.admin? 
+    
+    arg = {}
+
+    user_agent = request ? request.user_agent : nil
+    return if user_agent =~ BOT_FILTER
+
+    user_agent = user_agent[0,255] if user_agent && user_agent.size > 256
+
+    arg[:ip] = request.remote_ip if request
+    arg[:url] = request.request_uri if request
+    arg[:session_id] = session.session_id if session && !session.empty?
+    arg[:user_agent] = user_agent
+    arg[:user_id] = session[:user_id]
+    arg[:referer] = request.env["HTTP_REFERER"]
+
+    if @profile
+      arg[:clickstreamable_type] = 'Profile'
+      arg[:clickstreamable_id] = @profile.id
+    elsif @post
+      arg[:clickstreamable_type] = 'Post'
+      arg[:clickstreamable_id] = @post.id
+    elsif @story
+      arg[:clickstreamable_type] = 'Story'
+      arg[:clickstreamable_id] = @story.id
+    elsif @pitch
+      arg[:clickstreamable_type] = 'Pitch'
+      arg[:clickstreamable_id] = @pitch.id
+    elsif params[:controller]=='homes'
+      arg[:clickstreamable_type] = 'Home'
+      arg[:clickstreamable_id] = 0
+    elsif params[:controller]=='session'
+      arg[:clickstreamable_type] = 'Session'
+      arg[:clickstreamable_id] = 0
+    else
+      return 
+    end
+
+    Clickstream.create(arg) if arg && !arg.empty?
+    
   end
   
   def load_classes

@@ -68,6 +68,7 @@ class NewsItem < ActiveRecord::Base
   belongs_to :parent, :class_name => 'NewsItem', :foreign_key => "news_item_id"
   belongs_to :fact_checker, :class_name => 'User'
   has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :clickstreams, :as => :clickstreamable
   
   has_attached_file :featured_image,
                     :styles => { :thumb => '50x50#', 

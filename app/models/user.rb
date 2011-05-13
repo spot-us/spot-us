@@ -72,6 +72,7 @@ class User < ActiveRecord::Base
   has_one :twitter_credential
   has_many :async_posts
   has_and_belongs_to_many :groupings
+  has_many :clickstreams, :as => :clickstreamable
   
   belongs_to :category
 
