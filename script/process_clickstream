@@ -14,7 +14,7 @@ clickstreams = Clickstream.unprocessed.all
 
 clickstreams.each do |c|
   log.info "    Processing #{c.clickstreamable_type.to_s} with id #{c.clickstreamable_id.to_s}..."
-  unless c.clickstreamable_type.to_s =~ /(?:Home:Session)/i
+  unless c.clickstreamable_type.to_s =~ /(?:Home|Session)/i
     object = c.clickstreamable
     if object
       object.viewed = object.viewed ? (object.viewed.to_i + c.cnt.to_i) : c.cnt.to_i
