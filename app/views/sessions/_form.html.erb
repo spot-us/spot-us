@@ -54,24 +54,28 @@
 				</div>
 				<h2>New users register</h2>
 				<div class="row">
-					<%= f.label :first_name, "Your First Name" %>
-					<%= f.text_field :first_name, :class => "text", :tabindex => 1 %>
+					<div class="halfRow">
+						<%= f.label :first_name, "Your First Name" %>
+						<%= f.text_field :first_name, :style=>"width:150px;", :tabindex => 1 %>
+					</div>
+					<div class="halfRow">
+						<%= f.label :last_name, "Your Last Name" %>
+						<%= f.text_field :last_name, :style=>"width:150px;", :tabindex => 2 %>
+					</div>
 				</div>
 				<div class="row">
-					<%= f.label :last_name, "Your Last Name" %>
-					<%= f.text_field :last_name, :class => "text", :tabindex => 2 %>
-				</div>
-				<div class="row">
-					<%= f.label :password %>
-					<%= f.password_field :password, :class => "text", :tabindex => 3 %>
-				</div>
-				<div class="row">
-					<%= f.label :password_confirmation, "Confirm Password" %>
-					<%= f.password_field :password_confirmation, :class => "text", :tabindex => 4 %>
+					<div class="halfRow">
+						<%= f.label :password %>
+						<%= f.password_field :password, :style=>"width:150px;", :tabindex => 3 %>
+					</div>
+					<div class="halfRow">
+						<%= f.label :password_confirmation, "Confirm Password" %>
+						<%= f.password_field :password_confirmation, :style=>"width:150px;", :tabindex => 4 %>
+					</div>
 				</div>
 				<div class="row">
 					<%= f.label :email, "Your E-mail Address" %>
-					<%= f.text_field :email, :class => "text", :tabindex => 5 %>
+					<%= f.text_field :email, :tabindex => 5 %>
 				</div>
 				<div class="row">
 					<%= f.label :type, "I am a" %>
