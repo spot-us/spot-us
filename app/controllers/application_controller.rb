@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
   
   def save_clickstream?
-    params[:controller]!='sitemap' && params[:controller]!='comments' #&& !(params[:controller]=~/(?:admin)/i)
+    params[:controller]!='sitemap' && params[:controller]!='comments' && params[:action]!="logout"#&& !(params[:controller]=~/(?:admin)/i)
   end
   
   def save_clickstream
