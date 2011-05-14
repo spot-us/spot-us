@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     arg[:referer] = request.env["HTTP_REFERER"]
 
     if @profile
-      arg[:clickstreamable_type] = 'Profile'
+      arg[:clickstreamable_type] = 'User'
       arg[:clickstreamable_id] = @profile.id
     elsif @post
       arg[:clickstreamable_type] = 'Post'
