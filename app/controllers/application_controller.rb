@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
   
   def save_clickstream?
-    params[:controller]!='sitemap' && params[:controller]!='comments' && params[:action]!="logout"#&& !(params[:controller]=~/(?:admin)/i)
+    params[:controller]!='sitemap' && params[:controller]!='comments' && params[:action]!="destroy"#&& !(params[:controller]=~/(?:admin)/i)
   end
   
   def save_clickstream
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
     elsif params[:controller]=='homes'
       arg[:clickstreamable_type] = 'Home'
       arg[:clickstreamable_id] = 0
-    elsif params[:controller]=='session'
+    elsif params[:controller]=='sessions'
       arg[:clickstreamable_type] = 'Session'
       arg[:clickstreamable_id] = 0
     else
