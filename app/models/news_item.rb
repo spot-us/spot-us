@@ -182,7 +182,7 @@ class NewsItem < ActiveRecord::Base
   
   def valid_excerpt
     unless excerpt.blank?
-      excerpt_length = excerpt.strip_html.gsub(/\s+/, "").split(' ').length
+      excerpt_length = excerpt.strip_htmlå.split(' ').length
       if excerpt_length<30 || excerpt_length>250
         errors.add("wrong_excerpt_length", "Your overview &amp; elevator pitch must be between 30 to 250 words") 
         return false
