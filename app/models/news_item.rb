@@ -174,17 +174,16 @@ class NewsItem < ActiveRecord::Base
     return (self.short_description ? self.short_description : self.extended_description).to_s.strip_and_shorten
   end
 
-
   def validate
-    return valid_excerpt unless excerpt.blank?
+    return valid_description unless short_description.blank?
     return true
   end
   
-  def valid_excerpt
-    unless excerpt.blank?
-      excerpt_length = excerpt.strip_html.split(' ').length
-      if excerpt_length<30 || excerpt_length>250
-        errors.add("wrong_excerpt_length", "Your overview &amp; elevator pitch must be between 30 to 250 words") 
+  def valid_description
+    unless short_description.blank?
+      description_length = short_description.strip_html.split(' ').length
+      if description_length > 600
+        errors.add("wrong_description_length", "Your pitch description can only be 600 words") 
         return false
       else
         return true
@@ -193,10 +192,6 @@ class NewsItem < ActiveRecord::Base
       return true
     end
   end
-
-	# def network_id
-	# 	APP_CONFIG[:has_networks] ? network_id : 0 #APP_CONFIG[:all_network]
-	# end
 
   # NOTE: You can chain scopes off of with_sort, but you can't chain with_sort off of scopes.
   # Well, you can, but you will lose the previous scopes.

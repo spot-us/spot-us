@@ -26,12 +26,14 @@
 				</span> <a href='#' rel='nofollow' id='hoverAnchorSlug'><img src='/images/new/help.png'></a>" %>
 			<%= f.text_field :slug %>
 		</div>
-		<div class="row">
-			<%= f.label :excerpt, "Overview &amp; Elevator Pitch <span class='required'>
-					*
-				</span> <a href='#' rel='nofollow' id='hoverAnchorSummary'><img src='/images/new/help.png'></a>" %>
-			<%= ckeditor_textarea("pitch", "excerpt", :toolbar => 'Simple', :width => '450px', :height => '75px') %>
-		</div>
+		<%if false%>
+			<div class="row">
+				<%= f.label :excerpt, "Overview &amp; Elevator Pitch <span class='required'>
+						*
+					</span> <a href='#' rel='nofollow' id='hoverAnchorSummary'><img src='/images/new/help.png'></a>" %>
+				<%= ckeditor_textarea("pitch", "excerpt", :toolbar => 'Simple', :width => '450px', :height => '75px') %>
+			</div>
+		<%end%>
 		<div class="row">
 			<%= f.label :short_description, "Long Description <span class='required'>
 					*
@@ -39,9 +41,9 @@
 			<%= ckeditor_textarea("pitch", "short_description", :toolbar => 'Medium', :width => '450px', :height => '125px') %>
 		</div>
 		<% if APP_CONFIG[:has_networks] || (current_user && current_user.admin?)%>
-		<div class="row">
-			<%= render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch} %>
-		</div>
+			<div class="row">
+				<%= render :partial => 'shared/network', :locals => {:f => f, :instance => @pitch} %>
+			</div>
 		<% end %>
 		<div class="row">
 				<%= f.label :topics, "Topics <span class='required'>
