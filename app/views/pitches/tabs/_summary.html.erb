@@ -14,8 +14,7 @@
 				</div>
 			<%end%>
 			<div class="shortDescription">
-				<%= @pitch.excerpt?.strip_double_spaces %>
-				<div class='readMore'><%=link_to "read more &rarr;", "#{pitch_path(@pitch)}/details", {:rel=>"nofollow", :title=>"read more"}%></div>
+				<%= @pitch.short_description %>
 			</div>
 			<% unless @pitch.extended_description.blank? %>
 				<div class="extendedDescription">
