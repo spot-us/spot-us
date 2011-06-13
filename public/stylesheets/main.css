@@ -2289,7 +2289,7 @@ li.total div{
 .sponsorContainer p span{
 	font-size:20px;
 	line-height:32px;
-	font-family:helvetica, arial, sans serif;
+	font-family:helvetica, arial, sans-serif;
 	text-shadow:0px 0px 1px #fff;
 	letter-spacing:-1px;
 }
@@ -2299,7 +2299,7 @@ li.total div{
 	color:white;
 	padding-left:40px;
 	font-size:15px;
-	font-family:helvetica, arial, sans serif;
+	font-family:helvetica, arial;
 	list-style-type: decimal!important;
 }
 
@@ -2307,8 +2307,6 @@ li.total div{
 	padding: 0px;
 	margin:0px;
 	border-bottom:1px solid #ccc;
-	display:block;
-	width:100%;
 }
 
 .sponsorContainer ol li div{
