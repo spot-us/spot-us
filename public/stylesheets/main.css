@@ -2299,15 +2299,24 @@ li.total div{
 	color:white;
 	padding-left:40px;
 	font-size:15px;
-	font-family:courier;
+	font-family:helvetica, arial, sans serif;
 	list-style-type: decimal!important;
-	width:80%;
 }
 
 .sponsorContainer ol li{
 	padding: 0px;
-	margin:0px 0px 1px 0px;
+	margin:0px;
+	border-bottom:1px solid #ccc;
+	display:block;
+	width:100%;
 }
+
+.sponsorContainer ol li div{
+	padding:10px;
+	background-color:#fff;
+	color:#000;
+}
+
 
 .sponsorContainer ol li p{
 	background-color:#eee;
