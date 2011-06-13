@@ -1372,7 +1372,7 @@
 /*end widget*/
 
 /*pitch sub-pages (tabs)*/
-.pitchLeftContainer, .discussionContainer, .updateContainer, .donorsContainer{
+.pitchLeftContainer, .discussionContainer, .updateContainer, .donorsContainer, .sponsorContainer{
 	width:68%;
 	float:left;
 	margin-right:30px;
@@ -2283,6 +2283,31 @@ li.total div{
 	font-size:14px;
 }
 /*end create or edit a pitch sidebar*/
+
+/*sponsor page*/
+
+.sponsorContainer ol{
+	background-color:#025f6d;
+	color:white;
+	padding-left:40px;
+	font-size:15px;
+	font-family:courier;
+	list-style-type: decimal!important;
+	width:80%;
+}
+
+.sponsorContainer ol li{
+	padding: 0px;
+	margin:0px 0px 1px 0px;
+}
+
+.sponsorContainer ol li p{
+	background-color:#eee;
+	display:block;
+	padding:10px;
+}
+
+/*end sponsor page*/
 
 
 /* Footer styles */
