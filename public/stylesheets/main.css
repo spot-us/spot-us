@@ -2286,6 +2286,14 @@ li.total div{
 
 /*sponsor page*/
 
+.sponsorContainer p span{
+	font-size:20px;
+	line-height:32px;
+	font-family:helvetica, arial, sans serif;
+	text-shadow:0px 0px 1px #fff;
+	letter-spacing:-1px;
+}
+
 .sponsorContainer ol{
 	background-color:#025f6d;
 	color:white;

@@ -1,11 +1,27 @@
 <div class="contentContainer">
 	<div class="sponsorContainer">
 		<h2>Overview</h2>
-		<p><span>A Spot.us sponsorship guarantees an extended brand experience for the audience in an uncluttered and controlled environment. Audiences spend approximately three minutes exposed to the brand with no other advertising on the page. They'll engage with the brand on our terms and once the transaction is completed they'll support the reporting project of their choice thanks to you, leaving them with powerful positive association with your brand. <a href="#">Download the sponsorship kit for more</a>.</p>  
+		<p><span>A Spot.us sponsorship guarantees an extended brand experience for the audience in an uncluttered and controlled environment. Audiences spend approximately three minutes exposed to the brand with no other advertising on the page. They'll engage with the brand on our terms and once the transaction is completed they'll support the reporting project of their choice thanks to you, leaving them with powerful positive association with your brand. <a href="#">Download the sponsorship kit for more</a>.</span></p>  
 
+		<script language="javascript"> 
+		function toggle() {
+			var ele = document.getElementById("toggleText");
+			var text = document.getElementById("displayText");
+			if(ele.style.display == "block") {
+		    		ele.style.display = "none";
+				text.innerHTML = "show";
+		  	}
+			else {
+				ele.style.display = "block";
+				text.innerHTML = "hide";
+			}
+		} 
+		</script>
+		
 		<h2>How it works</h2>
 		<ol>
-			<li><p>Sponsor pledges money.</p></li>
+			<li><p>Sponsor pledges money. <a id="displayText" href="javascript:toggle();">(show more)</a></p>
+				<div id="toggleText" style="display: none">Lorem ipsum tofu dolor sit amet chickpea, consectetuer lentil adipiscing elit. Ut odio. Nam tempeh sed est. Nam a risus sweet potato et est iaculis adipiscing. Vestibulum seitan ante aubergine primis mushroom in faucibus orci luctus nut loaf et ultrices posuere beanburger cubilia Curae; Integer ut quorn justo. In tincidunt rice viverra tofurkey nisl. Donec avocado malesuada magna. Curabitur id tomato auctor soybean tellus barley adipiscing pharetra. Fusce spelt vel justo broccoli non orci semper aduki bean feugiat. Cras pumpkin eu leo at oats purus ultrices tristique.</div></li>
 			<li><p>Sponsor and Spot.us create act of engagement.</p></li>
 			<li><p>Community members participate in act of engagement.</p></li>
 			<li><p>Community members earn sponsor's dollars by participating.</p></li>
