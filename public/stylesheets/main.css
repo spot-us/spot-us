@@ -2322,6 +2322,24 @@ li.total div{
 	padding:10px;
 }
 
+.sponsorContainer .formContainer .formBody {
+	border:0px;
+	padding:0px;
+	background-color:#fff;
+}
+
+.sponsorContainer .formContainer .formBody label {
+	display:inline;
+	width:180px!important;
+	text-align:right;
+	float:left;
+	margin-right:10px;
+}
+
+.sponsorContainer .formContainer .formBody .submitButton {
+	margin:20px 0px 0px 355px;
+}
+
 /*end sponsor page*/
 
 
