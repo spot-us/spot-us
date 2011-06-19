@@ -2351,13 +2351,15 @@ li.total div{
 	padding:10px;
 	background-color:#fff;
 	color:#000;
+	margin-left:60px;
+	font-size:16px;
+	line-height:18px;
+	font-family:georgia,times,serif;
 }
-
 
 .sponsorContainer ul li p{
 	background-color:#eee;
 	display:block;
-	width:90%;
 	padding:10px;
 }
 
