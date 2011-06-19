@@ -2350,6 +2350,10 @@ li.total div{
 
 .sponsorContainer ul li p a{
 	float:right;
+	font-family:helvetica,arial,sans serif;
+	color:#025f6d;
+	font-size:13px;
+	text-decoration:none;
 }
 
 .sponsorContainer ul li div{
@@ -2382,8 +2386,20 @@ li.total div{
 	margin-right:10px;
 }
 
+.sponsorContainer .formContainer .formBody .row input, .formContainer .formBody .row textarea, .formContainer .formBody .row select {
+width: 458px;
+border: 1px solid #666;
+-moz-border-radius: 0px;
+-webkit-border-radius: 0px;
+font-size: 14px;
+font-family: georgia;
+line-height: 18px;
+padding: 7px;
+}
+
 .sponsorContainer .formContainer .formBody .submitButton {
-	margin:20px 0px 0px 355px;
+	margin:20px 0px 0px 500px;
+	width:120px;
 }
 
 .sponsorRightContainer {
