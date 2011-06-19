@@ -2295,30 +2295,69 @@ li.total div{
 }
 
 .sponsorContainer ol{
-	background-color:#025f6d;
+	background-color:#fff;
 	color:white;
-	padding-left:40px;
+	padding-left:0px;
 	font-size:15px;
 	font-family:helvetica, arial;
 	list-style-type: decimal!important;
 }
 
-.sponsorContainer ol li{
+.sponsorContainer ul li{
 	padding: 0px;
-	margin:0px;
-	border-bottom:1px solid #ccc;
+	margin-bottom:10px;
+	list-style-type:none;
 }
 
-.sponsorContainer ol li div{
+.sponsorContainer ul li span{
+	color:#fff;
+	width:45px;
+	height:41px;
+	float:left;
+	display:block;
+	margin-right:20px!important;
+	text-indent:-2000px;
+}
+
+.sponsorContainer ul li span.no1 {
+	background-image:url('/public/images/new_design/sponsor1.png');
+}
+
+.sponsorContainer ul li span.no2 {
+	background-image:url('/public/images/new_design/sponsor2.png');
+}
+
+.sponsorContainer ul li span.no3 {
+	background-image:url('/public/images/new_design/sponsor3.png');
+}
+
+.sponsorContainer ul li span.no4 {
+	background-image:url('/public/images/new_design/sponsor4.png');
+}
+
+.sponsorContainer ul li span.no5 {
+	background-image:url('/public/images/new_design/sponsor5.png');
+}
+
+.sponsorContainer ul li span.no6 {
+	background-image:url('/public/images/new_design/sponsor6.png');
+}
+
+.sponsorContainer ul li p a{
+	float:right;
+}
+
+.sponsorContainer ul li div{
 	padding:10px;
 	background-color:#fff;
 	color:#000;
 }
 
 
-.sponsorContainer ol li p{
+.sponsorContainer ul li p{
 	background-color:#eee;
 	display:block;
+	width:90%;
 	padding:10px;
 }
 
@@ -2338,6 +2377,18 @@ li.total div{
 
 .sponsorContainer .formContainer .formBody .submitButton {
 	margin:20px 0px 0px 355px;
+}
+
+.sponsorRightContainer {
+	position:relative;
+	left:30px;
+	width:25%;
+	float:right;
+}
+.sponsorRightContainer ul{
+	list-style-type:none;
+	font-size:14px;
+	line-height:22px;
 }
 
 /*end sponsor page*/
