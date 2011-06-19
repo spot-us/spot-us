@@ -2285,8 +2285,13 @@ li.total div{
 /*end create or edit a pitch sidebar*/
 
 /*sponsor page*/
+.contentContainer .sponsorContainer h2{
+	font-size:18px!important;
+	color:#00353b;
+	margin-bottom:0px;
+}
 
-.sponsorContainer p span{
+.sponsorContainer p span {
 	font-size:20px;
 	line-height:32px;
 	font-family:helvetica, arial, sans-serif;
@@ -2391,6 +2396,10 @@ li.total div{
 	list-style-type:none;
 	font-size:14px;
 	line-height:22px;
+}
+
+.sponsorRightContainer h4{
+	font-size:14px;
 }
 
 /*end sponsor page*/
