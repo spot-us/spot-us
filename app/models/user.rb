@@ -120,6 +120,10 @@ class User < ActiveRecord::Base
     end
   end
   
+  # AK 2011/06/22 - oauth-plugin additions
+  has_many :client_applications
+  has_many :tokens, :class_name=>"OauthToken",:order=>"authorized_at desc",:include=>[:client_application]
+
   named_scope :section?, lambda { |section|
     return {} if section.blank?
     self.send(section)

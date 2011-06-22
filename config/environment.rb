@@ -40,6 +40,8 @@ Rails::Initializer.run do |config|
   config.gem "memcached"
   config.gem "right_aws"
   config.gem "url_shortener"
+  config.gem 'oauth'
+  config.gem 'oauth-plugin', :version => '= 0.3.14'
   
   config.time_zone = 'UTC'
 
