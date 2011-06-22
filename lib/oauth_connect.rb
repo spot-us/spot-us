@@ -4,7 +4,7 @@ module OauthConnect
   end
   
   def twitter_oauth_client
-	TwitterOAuth::Client.new(:consumer_key => TWITTER_CONSUMER_KEY,:consumer_secret => TWITTER_CONSUMER_SECRET)
+	  TwitterOAuth::Client.new(:consumer_key => TWITTER_CONSUMER_KEY,:consumer_secret => TWITTER_CONSUMER_SECRET)
   end
 
 	
