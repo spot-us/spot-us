@@ -38,8 +38,6 @@
 #  current_funding             :decimal(15, 2)
 #
 
-require "url_shortener"
-
 class NewsItem < ActiveRecord::Base
   include HasTopics
   include AASMWithFixes
