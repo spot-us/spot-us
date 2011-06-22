@@ -426,9 +426,12 @@ class User < ActiveRecord::Base
     self.class.encrypt(password, salt)
   end
 
+  def self.random_password
+    ActiveSupport::SecureRandom.base64(8)
+  end
+
   def reset_password!
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a - %w(l o 0 1 i I L)
-    string = (1..6).collect { chars[rand(chars.size)] }.join
+    string = ActiveSupport::SecureRandom.base64(8)
     update_attributes(:password => string, :password_confirmation => string)
     Mailer.deliver_password_reset_notification(self)
   end
