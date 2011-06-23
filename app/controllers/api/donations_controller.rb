@@ -15,8 +15,8 @@ class Api::DonationsController < ApplicationController
     purchase                 = Purchase.new(params[:purchase])
     purchase.user            = current_user
 
-    donation_amount = params[:purchase][:donation_amount]
-    spotus_amount = params[:purchase][:donation_amount] * SpotusDonation::SPOTUS_TITHE
+    donation_amount = params[:donation_amount]
+    spotus_amount = params[:donation_amount] * SpotusDonation::SPOTUS_TITHE
 
     # create the donation and do not run any the limiting to existing donations rules
     d = Donation.create(:user_id => current_user.id, :pitch_id => params[:pitch_id], :amount => donation_amount, :donation_type => "payment")
