@@ -34,6 +34,7 @@ class Api::DonationsController < ApplicationController
       if purchase.save
         arr[:success] = "Congratulations! You have donated to the pitch"
         arr[:id] = d.id
+        arr[:donation] = { :amount => donation_amount, :processing_fee => spotus_amount, :total_amount => donation_amount * (1+SpotusDonation::SPOTUS_TITHE)  }
       else
         arr[:errors] = purchase.errors.full_messages
       end
