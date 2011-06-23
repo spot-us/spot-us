@@ -4,6 +4,7 @@ class Api::DonationsController < ApplicationController
 
   include OAuth::Controllers::ProviderController
 
+  ssl_required :card
   before_filter :login_or_oauth_required
 
   def card
