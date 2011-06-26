@@ -2421,6 +2421,60 @@ padding: 7px;
 /*end sponsor page*/
 
 
+/*sponsor profile pages*/
+.sponsorProfileContainer {
+	width:75%;
+	clear:both;
+	border-right:1px solid #ccc;
+	margin: 0px 20px 30px 0px;
+	float:left;
+}
+
+.sponsorProfileContainer p{
+	font-size:18px;
+	line-height:25px;
+}
+
+.sponsorProfileContainer h3, .sponsorProfileSidebar h4 {
+	color:#000;
+	font-size:18px;
+	margin:10px 0px 0px 0px;
+}
+
+.sponsorProfileContainer .sponsorAboutBox {
+	padding: 0px 20px 20px 20px;
+	background-color:#eee;
+	margin-right:20px;
+}
+
+.sponsorProfileContainer .sponsorAboutBox img {
+	width:150px;
+	height:95px;
+	float:left;
+	border:1px solid #ccc;
+	margin-right:20px;
+}
+
+.sponsorProfileSidebar {
+	width:22%;
+	float:right;
+}
+
+.sponsorProfileSidebar a{
+	color:#fff;
+	background-color:#e06f00;
+	padding:5px;
+	text-decoration:none;
+	font-weight:bold;
+	font-family:helvetica,arial,sans-serif;
+	font-size:15px;
+	margin:10px 0px 0px 0px!important;
+	-webkit-border-radius:3px;
+	-moz-borer-radius:3px;
+}
+
+/*end sponsor profile*/
+
 /* Footer styles */
 
 .footerContainer, .copyrightContainer {
