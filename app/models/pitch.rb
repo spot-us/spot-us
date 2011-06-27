@@ -146,7 +146,7 @@ class Pitch < NewsItem
   named_scope :without_a_story, :conditions => 'news_items.id NOT IN (SELECT news_item_id FROM news_items WHERE news_items.type = "Story" AND news_items.status = "published")'
   #named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
   
-  MAX_PER_USER_DONATION_PERCENTAGE = 0.20
+  MAX_PER_USER_DONATION_PERCENTAGE = 1.00
 
   def self.all_active_reporters
     self.without_a_story.find(:all, :conditions=>"status='active'", :include=>:user, :group=>"user_id").map(&:user)
