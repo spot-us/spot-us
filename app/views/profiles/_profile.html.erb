@@ -52,10 +52,8 @@
 			<p><%=@profile.about_you%></p>
 		</div>
 
-		<h3>About <%=@profile.full_name%> Sponsorship</h3>
-		<p>The U.S. has the highest teen pregnancy rate in the industrialized world — about three in 10 teenagers get pregnant before the age of 20 — and teen pregnancies cost the U.S. billions in tax dollars.
-
-		The Roblee Foundation Sponsorship asked readers how they feel about teen pregnancy’s portrayal in the media. It ran during March and April 2011.</p>
+		<h3>About <%=@profile.full_name%> Last Sponsorship</h3>
+		<%=@profile.ccas.last.description%>
 	</div>
 	<div class="sponsorProfileSidebar">
 		<h4>What is a Spot.us Sponsorship?</h4>
