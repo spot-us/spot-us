@@ -41,7 +41,8 @@
 		</ul>
 
 		<h2>Interested? Fill out the form below or email david@spot.us</h2>
-		<div class="formContainer">	<div class="formBody">
+		<div class="formContainer">	
+			<div class="formBody">
 				<div class="row"><label for="name">Name:</label> <input type="text"></input></div>
 				<div class="row"><label for="org">Organization:</label> <input type="text"></input></div>
 				<div class="row"><label for="email">Email:</label> <input type="text"></input></div>
@@ -56,20 +57,9 @@
 		<a href="#"><img src="/public/images/new/sponsorshipKit.png" /></a>
 		<h4>Community-focused sponsors</h4>
 		<ul>
-			<li>Whitman Institute</li>
-			<li>Roblee Foundation</li>
-			<li>PC Rush</li>
-			<li>AARP</li>
-			<li>Knight Commission</li>
-			<li>Mortgage Revolution</li>
-			<li>SavetheNews.org</li>
-			<li>Clay Shirky</li>
-			<li>Knight Foundation</li>
-			<li>Harnisch Foundation</li>
-			<li>Full Circle Fund</li>
-			<li>The California Endowment</li>
-			<li>Sales Force</li>
-			<li>Kastia Foundation</li>
+			<%Sponsor.all.each do |sponsor|%>
+				<li><%=link_to sponsor.full_name, profile_path(sponsor)%></li>
+			<%end%>
 		</ul>
 	</div>
 </div>

@@ -1,65 +1,68 @@
-<div id="profile_user">
-   <%= render :partial => 'shared/user', :locals => { :user => @profile } %>
-</div>
-<% if @profile.topics.any? %>
-   <div class="profile_section">
-      <strong><%= h @profile.first_name %></strong>
-         has shown interest in 
-       <%= show_topics(@profile) %>
-       <br/>
-   </div>
-<% end %>
-
-<% unless @profile.about_you.blank? %>
-   <div class="profile_section">
-      <h3>About <%= @profile.full_name %></h3>
-      <%= sanitize @profile.about_you %>
-   </div>
-
-<% end %>
-<% if @profile.is_a?(Reporter) && @profile.samples.any? %>
-   <div class="profile_section">
-      <h3>Work Samples</h3>
-     <% for sample in @profile.samples %>
-         <% if !sample.url.blank? %>
-           <%= link_to h(sample.title), sample.url %>
-         <% else %>
-            <%= h sample.title %>
-         <% end %>
-         <%= sanitize(sample.description) %>
-      <% end %>
-   </div>
-<% end %>
-<% if @profile.is_a?(Reporter) && @profile.jobs.any? %>
-   <div class="profile_section">
-     <h3>Work History</h3>
-     <% for job in @profile.jobs %>
-         <% if !job.url.blank? %>
-            <%= link_to h(job.title), job.url %>
-         <% else %>
-            <%= h job.title %>
-         <% end %>
-         <%= sanitize(job.description) %>
-      <% end %>
-   </div>
-<% end %>
-<div class="sponsorProfileContainer">
-	<div class="sponsorAboutBox">
-		<h3>About <!--sponsorName-->Roblee Foundation<!--end sponsor name--></h3>
-		<img src="http://s3.amazonaws.com/spotus-production-storage/news_items/featured_images/000/000/856/spanier_pdna_014_small_hero.jpg?1300153967">
-		<p>Dedicated to promoting change by supporting organizations that address significant social issues, address quality of life, and help individuals fulfill their potential.</p>
+<%unless @profile.sponsor?%>
+	<div id="profile_user">
+	   <%= render :partial => 'shared/user', :locals => { :user => @profile } %>
 	</div>
+	<% if @profile.topics.any? %>
+	   <div class="profile_section">
+	      <strong><%= h @profile.first_name %></strong>
+	         has shown interest in 
+	       	<%= show_topics(@profile) %>
+	       <br/>
+	   </div>
+	<% end %>
 
-	<h3>About <!--sponsorName-->Roblee Foundation<!--end sponsor name--> Sponsorship</h3>
-	<p>The U.S. has the highest teen pregnancy rate in the industrialized world — about three in 10 teenagers get pregnant before the age of 20 — and teen pregnancies cost the U.S. billions in tax dollars.
+	<% unless @profile.about_you.blank? %>
+	   <div class="profile_section">
+	      <h3>About <%= @profile.full_name %></h3>
+	      <%= sanitize @profile.about_you %>
+	   </div>
 
-	The Roblee Foundation Sponsorship asked readers how they feel about teen pregnancy’s portrayal in the media. It ran during March and April 2011.</p>
-</div>
-<div class="sponsorProfileSidebar">
-	<h4>What is a Spot.us Sponsorship?</h4>
-	<p>A Spot.Us sponsorship guarantees an extended brand experience for the audience in an uncluttered and controlled environment. Audiences spend approximately three minutes exposed to the brand with no other advertising on the page. </p>
-	<p><a href="/pages/sponsors">Learn more &rarr;</a></p>
-</div>
+	<% end %>
+	<% if @profile.is_a?(Reporter) && @profile.samples.any? %>
+	   <div class="profile_section">
+	      <h3>Work Samples</h3>
+	     <% for sample in @profile.samples %>
+	         <% if !sample.url.blank? %>
+	           <%= link_to h(sample.title), sample.url %>
+	         <% else %>
+	            <%= h sample.title %>
+	         <% end %>
+	         <%= sanitize(sample.description) %>
+	      <% end %>
+	   </div>
+	<% end %>
+	<% if @profile.is_a?(Reporter) && @profile.jobs.any? %>
+	   <div class="profile_section">
+	     <h3>Work History</h3>
+	     <% for job in @profile.jobs %>
+	         <% if !job.url.blank? %>
+	            <%= link_to h(job.title), job.url %>
+	         <% else %>
+	            <%= h job.title %>
+	         <% end %>
+	         <%= sanitize(job.description) %>
+	      <% end %>
+	   </div>
+	<% end %>
+<%else%>
+	<div class="sponsorProfileContainer">
+		<div class="sponsorAboutBox">
+			<h3>About <%=@profile.full_name%></h3>
+			<%=image_tag @profile.photo.url(:thumb)%>
+			<p><%=@profile.about_you%></p>
+		</div>
+
+		<h3>About <%=@profile.full_name%> Sponsorship</h3>
+		<p>The U.S. has the highest teen pregnancy rate in the industrialized world — about three in 10 teenagers get pregnant before the age of 20 — and teen pregnancies cost the U.S. billions in tax dollars.
+
+		The Roblee Foundation Sponsorship asked readers how they feel about teen pregnancy’s portrayal in the media. It ran during March and April 2011.</p>
+	</div>
+	<div class="sponsorProfileSidebar">
+		<h4>What is a Spot.us Sponsorship?</h4>
+		<p>A Spot.Us sponsorship guarantees an extended brand experience for the audience in an uncluttered and controlled environment. Audiences spend approximately three minutes exposed to the brand with no other advertising on the page. </p>
+		<p><a href="/pages/sponsors">Learn more &rarr;</a></p>
+	</div>
+<%end%>
 
 <% if current_user && current_user.is_a?(Admin) %>
    <div class="profile_section">
