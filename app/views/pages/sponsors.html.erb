@@ -43,18 +43,20 @@
 		<h2>Interested? Fill out the form below or email david@spot.us</h2>
 		<div class="formContainer">	
 			<div class="formBody">
-				<div class="row"><label for="name">Name:</label> <input type="text"></input></div>
-				<div class="row"><label for="org">Organization:</label> <input type="text"></input></div>
-				<div class="row"><label for="email">Email:</label> <input type="text"></input></div>
-				<div class="row"><label for="amount">Sponsorship amount:</label> <input type="text"></input></div>
-				<div class="row"><label for="number"># of users you wish to engage:</label> <input type="text"></input></div>
-				<div class="row"><label for="comments">Comments:</label> <textarea></textarea></div>
-				<%= get_button("Submit") %>
+				<form action="/pages/sponsors" method="post">
+					<div class="row"><label for="name">Name:</label> <%=text_field_tag "sponsor[name]"%></div>
+					<div class="row"><label for="org">Organization:</label> <%=text_field_tag "sponsor[organization]"%></div>
+					<div class="row"><label for="email">Email:</label> <%=text_field_tag "sponsor[email]"%></div>
+					<div class="row"><label for="amount">Sponsorship amount:</label> <%=text_field_tag "sponsor[amount]"%></div>
+					<div class="row"><label for="number"># of users you wish to engage:</label> <%=text_field_tag "sponsor[number]"%></div>
+					<div class="row"><label for="comments">Comments:</label> <%=text_area_tag "sponsor[comments]"%></div>
+					<%= get_button("Submit") %>
+				</form>
 			</div>
 		</div>
 	</div>
 	<div class="sponsorRightContainer">
-		<a href="#"><img src="/public/images/new/sponsorshipKit.png" /></a>
+		<a hreflang="#"><img src="/images/new/sponsorshipKit.png" /></a>
 		<h4>Community-focused sponsors</h4>
 		<ul>
 			<%Sponsor.all.each do |sponsor|%>

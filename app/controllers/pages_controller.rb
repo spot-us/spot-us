@@ -32,6 +32,9 @@ class PagesController < ApplicationController
       "No such static page: #{params[:id].inspect}"
     end
   end
+  
+  def sponsors
+  end
 
   def notfound
   end

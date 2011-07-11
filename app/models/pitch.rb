@@ -307,11 +307,8 @@ class Pitch < NewsItem
   end
 
   def max_donation_amount(user)
-    if user.organization? || (funding_needed < donation_limit_per_user)
-      funding_needed
-    else
-      donation_limit_per_user
-    end
+    # || (funding_needed < donation_limit_per_user)
+    user.organization? ? funding_needed : donation_limit_per_user
   end
 
   def default_donation_amount
@@ -321,7 +318,7 @@ class Pitch < NewsItem
   def user_can_donate_more?(user, attempted_donation_amount)
     return false if attempted_donation_amount.nil?
     return true if user.organization? && attempted_donation_amount <= requested_amount
-    return false if attempted_donation_amount > funding_needed
+    #return false if attempted_donation_amount > funding_needed
     user_donations = donations.paid.total_amount_for_user(user) + credit_pitches.paid.total_amount_for_user(user)
     (user_donations + attempted_donation_amount) <= max_donation_amount(user)
   end

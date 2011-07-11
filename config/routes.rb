@@ -30,7 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/notifications/social_notify', :controller => "notifications", :action => "social_notify"
   
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
-    
+  
+  map.connect "/pages/sponsors", :controller => "pages", :action => "sponsors"
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
