@@ -238,4 +238,11 @@ class Mailer < ActionMailer::Base
     body        :pitch => pitch, :user => user
   end
   
+  def sponsor_signup_email(sponsor)
+    recipients  MAIL_FROM_INFO
+    from        MAIL_FROM_INFO
+    subject     "A new sponsor has signed up!"
+    body        :sponsor => sponsor
+  end
+  
 end

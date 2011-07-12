@@ -54,12 +54,12 @@
 		<div class="formContainer">	
 			<div class="formBody">
 				<form action="/pages/sponsors" method="post">
-					<div class="row"><label for="name">Name:</label> <%=text_field_tag "sponsor[name]"%></div>
-					<div class="row"><label for="org">Organization:</label> <%=text_field_tag "sponsor[organization]"%></div>
-					<div class="row"><label for="email">Email:</label> <%=text_field_tag "sponsor[email]"%></div>
-					<div class="row"><label for="amount">Sponsorship amount:</label> <%=text_field_tag "sponsor[amount]"%></div>
-					<div class="row"><label for="number"># of users you wish to engage:</label> <%=text_field_tag "sponsor[number]"%></div>
-					<div class="row"><label for="comments">Comments:</label> <%=text_area_tag "sponsor[comments]"%></div>
+					<div class="row"><label for="name">Name:</label> <%=text_field_tag "sponsor[name]", params[:sponsor] && params[:sponsor][:name] ? params[:sponsor][:name] : ""%></div>
+					<div class="row"><label for="org">Organization:</label> <%=text_field_tag "sponsor[organization]", params[:sponsor] && params[:sponsor][:organization] ? params[:sponsor][:organization] : ""%></div>
+					<div class="row"><label for="email">Email:</label> <%=text_field_tag "sponsor[email]", params[:sponsor] && params[:sponsor][:email] ? params[:sponsor][:email] : ""%></div>
+					<div class="row"><label for="amount">Sponsorship amount:</label> <%=text_field_tag "sponsor[amount]", params[:sponsor] && params[:sponsor][:amount] ? params[:sponsor][:amount] : ""%></div>
+					<div class="row"><label for="number"># of users you wish to engage:</label> <%=text_field_tag "sponsor[number]", params[:sponsor] && params[:sponsor][:number] ? params[:sponsor][:number] : ""%></div>
+					<div class="row"><label for="comments">Comments:</label> <%=text_area_tag "sponsor[comments]", params[:sponsor] && params[:sponsor][:comments] ? params[:sponsor][:comments] : ""%></div>
 					<div class="row">
 						<label for="captcha">Are you human?</label>
 						<%= recaptcha_tags %>
