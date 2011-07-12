@@ -34,12 +34,14 @@ class PagesController < ApplicationController
   end
   
   def sponsors
+    params[:id] = "Sponsors"
     @errors = nil
     valid_captcha = verify_recaptcha
     if params[:sponsor] && valid_captcha && params[:sponsor][:name] && params[:sponsor][:organization] && 
       params[:sponsor][:email] && params[:sponsor][:amount] && params[:sponsor][:number]
       Mailer.deliver_sponsor_signup_email(params[:sponsor])
       flash[:success] = "Thank you for your interest to become a sponsor! We will be in contact shortly."
+      params[:sponsor] = nil
     elsif params[:sponsor]
       @errors  = "You have to provide all fields"
       @errors += ", and you have to provide the right captcha." 
