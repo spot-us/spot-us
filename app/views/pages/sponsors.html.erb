@@ -1,3 +1,10 @@
+<%content_for :head do%>
+	<script>
+		var RecaptchaOptions = {
+			theme : 'clean'
+		};
+	</script>
+<%end%>
 <div class="contentContainer">
 	<div class="sponsorContainer">
 		<h2>Overview</h2>
@@ -41,6 +48,9 @@
 		</ul>
 
 		<h2>Interested? Fill out the form below or email david@spot.us</h2>
+		<%if @errors%>
+			<div style="padding:0px 0px 10px 0px; font-size:14px;"><%=@errors%></div>
+		<%end%>
 		<div class="formContainer">	
 			<div class="formBody">
 				<form action="/pages/sponsors" method="post">
@@ -50,13 +60,17 @@
 					<div class="row"><label for="amount">Sponsorship amount:</label> <%=text_field_tag "sponsor[amount]"%></div>
 					<div class="row"><label for="number"># of users you wish to engage:</label> <%=text_field_tag "sponsor[number]"%></div>
 					<div class="row"><label for="comments">Comments:</label> <%=text_area_tag "sponsor[comments]"%></div>
+					<div class="row">
+						<label for="captcha">Are you human?</label>
+						<%= recaptcha_tags %>
+					</div>
 					<%= get_button("Submit") %>
 				</form>
 			</div>
 		</div>
 	</div>
 	<div class="sponsorRightContainer">
-		<a hreflang="#"><img src="/images/new/sponsorshipKit.png" /></a>
+		<a href="/SpotUsSponsorshipKit.pdf" target="_blank" rel="nofollow"><img src="/images/new/sponsorshipKit.png" /></a>
 		<h4>Community-focused sponsors</h4>
 		<ul>
 			<%Sponsor.all.each do |sponsor|%>

@@ -34,6 +34,13 @@ class PagesController < ApplicationController
   end
   
   def sponsors
+    @errors = nil
+    valid_captcha = verify_recaptcha
+    if params[:sponsor] && valid_captcha
+    elsif params[:sponsor]
+      @errors  = "You have to provide all fields"
+      @errors += ", and you have to provide the right captcha." 
+    end
   end
 
   def notfound
