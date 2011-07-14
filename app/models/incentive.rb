@@ -3,6 +3,7 @@ class Incentive < ActiveRecord::Base
   belongs_to :pitch
     
   validates_presence_of :amount, :pitch, :description
+  validates_numericality_of :amount
   validate_on_create :check_if_amount_is_uniq
   
   def level?
