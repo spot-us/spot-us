@@ -32,37 +32,37 @@
 	<div id="news_item" class="pitch_container clearfix">
 		<div class="pitch_left">
 			<% apply_fragment ['pitch_header_left', @pitch] do %>
-			<div class="small_header">
-				<div class="share_buttons">
-					<%= render :partial => "/shared/social_buttons" %>
+				<div class="small_header">
+					<div class="share_buttons">
+						<%= render :partial => "/shared/social_buttons" %>
+					</div>
+					<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
 				</div>
-				<%= link_to @pitch.user.full_name, profile_path(@pitch.user) %> &nbsp;|&nbsp; <%= pitch_date(@pitch.created_at) %>
-			</div>
-			<h1><%= h @pitch.headline %></h1>
+				<h1><%= h @pitch.headline %></h1>
 			<%end%>
 			<%= render :partial => "tab_header" %>
 			<br class="clear"/>
 
 			<% unless @item %>
-			<%=render :partial=>'main' %>
+				<%=render :partial=>'main' %>
 			<% else %>
-			<%=render :partial=>'item' %>
+				<%=render :partial=>'item' %>
 			<% end %>
 		</div>
 		<div class="pitch_right">
 			<div class="blue_panel">
 				<div class="pitch_author clearfix">
 					<% apply_fragment ['pitch_author_top_alt_', @pitch, @pitch.user] do %>
-					<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
-					<em>Author</em><br/>
-					<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %><br/>
-					<% end %>
-					<% if @pitch.peer_reviewer %>
-					<% apply_fragment ['pitch_peer_reviewer_top_alt_', @pitch, @pitch.peer_reviewer] do %>
-					<em class="peer_reviewer">Peer review: 
-						<strong><%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer)) %></strong>
-					</em>
-					<% end %>
+						<%= link_to image_tag(@pitch.user.photo(:thumb), :class => "avatar"), profile_path(@pitch.user) %>
+						<em>Author</em><br/>
+						<%= link_to @pitch.user.full_name, profile_path(@pitch.user), :class => "username" %><br/>
+						<% end %>
+						<% if @pitch.peer_reviewer %>
+						<% apply_fragment ['pitch_peer_reviewer_top_alt_', @pitch, @pitch.peer_reviewer] do %>
+						<em class="peer_reviewer">Peer review: 
+							<strong><%= link_to(h(@pitch.peer_reviewer.full_name), profile_path(@pitch.peer_reviewer)) %></strong>
+						</em>
+						<% end %>
 					<% end %>
 				</div>
 			</div>

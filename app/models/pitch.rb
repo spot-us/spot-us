@@ -315,6 +315,10 @@ class Pitch < NewsItem
     [Donation::DEFAULT_AMOUNT, donation_limit_per_user, funding_needed].min
   end
 
+  def donations_closed?
+    (story && story.published?) || accepted?
+  end
+
   def user_can_donate_more?(user, attempted_donation_amount)
     return false if attempted_donation_amount.nil?
     return true if user.organization? && attempted_donation_amount <= requested_amount

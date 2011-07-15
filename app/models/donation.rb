@@ -204,13 +204,13 @@ class Donation < ActiveRecord::Base
   end
 
   def check_donation
-    if pitch.fully_funded?
-      errors.add_to_base("Great news! This pitch is already fully funded therefore it can't be donated to any longer.")
+    if pitch.donations_closed?
+      errors.add_to_base("You cannot donate to the pitch as it is fully funded.")
       return
     end
 
     if donation_type == "credit"
-        check_credit
+      check_credit
     end
     unless pitch.user_can_donate_more?(user, self.amount)
       errors.add_to_base("Thanks for your support but we only allow donations of 20% of requested amount from one user. Please lower your donation amount and try again.")
