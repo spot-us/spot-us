@@ -27,11 +27,9 @@ Make any necessary edits to these if the defaults don't work for you. Spot.Us is
 
 h3. Run basic setup tasks
 
-# comment out line 21 in routes.rb
 # rake db:create:all
 # rake db:migrate
 # rake db:populate
-# uncomment line 21 in routes.rb
 
 h3. Start your local server
 
