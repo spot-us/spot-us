@@ -20,7 +20,10 @@ class PagesController < ApplicationController
   ).freeze
 
   def show
-    if PAGES.include?(params[:id])
+    @page = Page.find_by_slug(params[:id])
+    if @page
+      # render normal page
+    elsif PAGES.include?(params[:id])
       @hide_gs = true if params[:id] == "support"
       if params[:id]!='reporter_agreement'
         render :action => params[:id]

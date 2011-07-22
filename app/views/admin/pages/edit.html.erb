@@ -1,0 +1,50 @@
+<% content_for :head do %>
+	<script>
+		jQuery(document).ready(function($){
+			$("#toggleDivs").click(function(){
+				$('div[id*=toggle_div]').slideToggle(600);
+				return false;
+			});
+		});
+		</script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>Edit Page</h2>
+<div class="flash error">
+	<%= error_messages_for :page %>
+</div>
+
+<% form_for([:admin, @page], :html => { :multipart => true }) do |f| %>
+	<div class="formContainer">
+		<div class="formBody">
+			<div class="row">
+				<%= f.label     :title, "Title" %>
+				<%= f.text_field :title %>
+			</div>
+			<div class="row">
+				<%= f.label :body, "Description" %>
+				<%= ckeditor_textarea("page", "body", :toolbar => 'Medium', :width => '800px', :height => '400px') %>
+			</div>
+			<div class="row add_media">
+				<label>Add Image</label>
+				<%= f.file_field :featured_image %><br/>
+				<span class='required'> JPEG, PNG and GIF's less than 5 MB.</span>
+			</div>
+			<div class="row">
+				<%= f.label :embed_code, "Embed media"%>
+				<%= f.text_area :embed_code %>
+			</div>
+			<div class="row">
+				<label> </label>
+				<% if @page.new_record? %>
+					<%= image_submit_tag image_path('save.png'), :alt => 'Create the help page' %>
+				<% else %>
+					<%= link_to image_tag('cancel.png', :alt => 'Cancel'), root_url %>
+					<%= image_submit_tag image_path('save.png') %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>
+

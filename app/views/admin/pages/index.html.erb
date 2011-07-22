@@ -1,0 +1,33 @@
+<% content_for :head do %>
+  <script>
+    $(function(){
+      $(".admin_tab").removeClass("hilited");
+      $("#pages_tab").addClass("hilited");
+    });
+  </script>
+<% end %>
+<%= render :partial => "/admin/admin_header"%>
+
+<h2>Pages</h2>
+<%= link_to "Create a new page", new_admin_page_path%>
+<div class="box">
+	<table class="admin_pitches">
+		<th>Page</th>
+		<th>Slug</th>
+		<th>Excerpt</th>
+		<th>Has multimedia?</th>
+		<th>Actions</th>
+		<% @pages.each do |page| %>
+			<tr class="quiet">
+				<td><%=page.title%></td>
+				<td><%=page.name%></td>
+				<td><%=h page.short?%></td>
+				<td><%=page.embed_code.blank? ? '-' : 'Yes'%></td>
+				<td>
+			        <%= link_to 'edit', edit_admin_page_url(page)%><br/>
+					<%= link_to 'delete', admin_page_url(page), :method => :delete, :confirm => 'Are you sure you want to delete this page?'%>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+</div>

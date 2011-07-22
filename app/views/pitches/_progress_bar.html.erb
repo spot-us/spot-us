@@ -14,5 +14,5 @@
 	<%if !pitch.story || pitch.story.published?%>
 		<li class="dueDate"><%= due_date_in_words(pitch.expiration_date) %></li>
 	<%end%>
-	<li class="totalAmount"><%=number_to_currency pitch.total_amount_donated%> of <%=pitch.funding_needed>0 ? number_to_currency(pitch.requested_amount) : number_to_currency(pitch.total_amount_donated)%> raised</li>
+	<li class="totalAmount"><%=number_to_currency pitch.total_amount_donated%><%unless pitch.donations_closed?%> of <%=pitch.funding_needed>0 ? number_to_currency(pitch.requested_amount) : number_to_currency(pitch.total_amount_donated)%><%end%> raised</li>
 </ul>
