@@ -16,6 +16,7 @@ class Admin::PagesController < ApplicationController
   
   def edit
     @page = Page.find_by_slug(params[:id])
+    @page = Page.find_by_id(params[:id]) unless @page
   end
   
   def update
