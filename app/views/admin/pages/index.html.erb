@@ -14,14 +14,12 @@
 	<table class="admin_pitches">
 		<th>Page</th>
 		<th>Slug</th>
-		<th>Excerpt</th>
 		<th>Has multimedia?</th>
 		<th>Actions</th>
 		<% @pages.each do |page| %>
 			<tr class="quiet">
 				<td><%=page.title%></td>
 				<td><%=page.slug?%></td>
-				<td><%=h page.short?%></td>
 				<td><%=page.embed_code.blank? ? '-' : 'Yes'%></td>
 				<td>
 			        <%= link_to 'edit', edit_admin_page_url(page)%><br/>
