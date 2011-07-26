@@ -22,13 +22,17 @@ class Page < ActiveRecord::Base
       :content_type => ['image/jpeg', 'image/pjpeg', 'image/gif', 'image/png',
                         'image/x-png', 'image/jpg'],
       :message      => "Oops! Make sure you are uploading an image file.",
-      :allow_nil => true
+      :unless => :featured_image_name
 
-    validates_attachment_size :featured_image, :in => 1..5.megabytes, :allow_nil => true
+    validates_attachment_size :featured_image, :in => 1..5.megabytes, :unless => :featured_image_name
   end
   
   def slug?
     slug.downcase
+  end
+  
+  def featured_image_name
+    featured_image_file_name.blank?
   end
   
   def clean_columns
