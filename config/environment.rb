@@ -1,7 +1,7 @@
 #if RAILS_ENV == "development"
-  RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
+#  RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
 #else
-#  RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
+  RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 #end
 
 require File.join(File.dirname(__FILE__), 'boot')
