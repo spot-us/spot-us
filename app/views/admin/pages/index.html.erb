@@ -20,7 +20,7 @@
 		<% @pages.each do |page| %>
 			<tr class="quiet">
 				<td><%=page.title%></td>
-				<td><%=page.name%></td>
+				<td><%=page.slug?%></td>
 				<td><%=h page.short?%></td>
 				<td><%=page.embed_code.blank? ? '-' : 'Yes'%></td>
 				<td>
