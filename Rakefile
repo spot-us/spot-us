@@ -8,7 +8,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'tasks/rails'
 
-#require 'thinking_sphinx/tasks'
+require 'thinking_sphinx/tasks'
 
 desc "Copy application sample config for dev/test purposes"
 task :copy_sample_config do
