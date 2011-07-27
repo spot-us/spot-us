@@ -4,7 +4,7 @@
 			<%= transform_embed_code(@page.embed_code, 700, 350) %>
 		</div>
 	<% else %>
-		<div class="featuredImage">
+		<div style="clear:both;display:block;">
 			<%= image_tag(@page.featured_image.url(:featured_image)) %>
 		</div>
 	<%end%>
