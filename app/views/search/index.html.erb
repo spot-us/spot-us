@@ -8,7 +8,7 @@
 	<li <%if @tab=='community'%>class="current"<%end%>><a href="/search/<%=@search_term%>/community">Community</a></li>
 </ul>
 <%unless @tab == "community"%>
-	<%= render :partial => "shared/lists", :locals => {:items => @items, :template_name => @template_name, :no_items_message => "Got no search results? Are you searching under the right tab? ie: Try 'updates.'"} %>
+	<%= render :partial => "shared/lists", :locals => {:items => @items, :template_name => @template_name, :no_items_message => "Got no search results? Try using a different tab like 'updates.'"} %>
 <%else%>
 
 	<div class="donorsContainer community">
