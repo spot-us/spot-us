@@ -252,6 +252,11 @@ class Pitch < NewsItem
     user.is_a?(Admin)
   end
 
+  def suggested_funding
+    return funding_needed if funding_need>0
+    DEFAULT_AMOUNT
+  end
+
   def funding_needed
     return 0 unless active? || unapproved?
     requested_amount - total_amount_donated
