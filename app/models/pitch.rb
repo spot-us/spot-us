@@ -254,7 +254,7 @@ class Pitch < NewsItem
 
   def suggested_funding
     return funding_needed if funding_needed>0
-    DEFAULT_AMOUNT
+    Donation::DEFAULT_AMOUNT
   end
 
   def funding_needed
