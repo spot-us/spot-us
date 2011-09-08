@@ -142,7 +142,7 @@ class ApplicationController < ActionController::Base
   end
 	
   def block_ips
-    return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86'].include?(request.remote_ip)
+    return head(:bad_request) if ['174.129.157.195','67.202.11.49','72.44.61.86', '222.186.24.27', '222.186.26.208'].include?(request.remote_ip)
     return head(:bad_request) if ['wiki.spot.us','w3.spot.us'].include?(request.domain)
   end
   
