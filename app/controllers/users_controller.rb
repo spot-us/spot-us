@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include AuthenticatedSystem
+  include ActionView::Helpers::NumberHelper
 
   def new
     @user = User.new
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
     return_path = params[:return_to] if params[:return_to] && params[:spotus_lite]
     return_path = URI.decode(cookies[:return_to]) if cookies[:return_to]
     return_path = session[:return_to] if session[:return_to]
-    if verify_recaptcha(:model=>@user) && @user.save
+    if @user.save
       unless @user.organization?
         @user.activate!
         self.current_user = @user
