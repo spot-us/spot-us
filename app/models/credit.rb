@@ -16,6 +16,7 @@ class Credit < ActiveRecord::Base
   has_one :donation
   belongs_to :cca
   belongs_to :pitch
+  belongs_to :redeem_code_key
   
   named_scope :cca_credits, :conditions => 'cca_id is not null'
   

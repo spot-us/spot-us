@@ -3,7 +3,7 @@ require "digest/sha1"
 class SessionsController < ApplicationController
 
   include OauthConnect
-
+  include ActionView::Helpers::NumberHelper
 
 	def facebook_login
 		redirect_to oauth_client.web_server.authorize_url(
@@ -72,11 +72,19 @@ class SessionsController < ApplicationController
 			handle_first_pledge_for_non_logged_in_user
 
 			if params[:return_to]
+				if award_redeem_credits_if_any
+          redirect_to "/stories/unfunded"
+          return
+        end
 				redirect_to params[:return_to]
 				return 
 			elsif request.xhr?
 				render :nothing => true
 			else
+			  if award_redeem_credits_if_any
+          redirect_to "/stories/unfunded"
+          return
+        end
 				redirect_back_or_default('/')
 			end
 		else
@@ -129,6 +137,6 @@ class SessionsController < ApplicationController
 			session[:pledge_amount] ||= params[:pledge_amount]
 		end
 	end
-
+  
 end
 

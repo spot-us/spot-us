@@ -1,5 +1,7 @@
 class HomesController < ApplicationController
   
+  include ActionView::Helpers::NumberHelper
+  
   def show
     get_items
   end
@@ -12,6 +14,40 @@ class HomesController < ApplicationController
       redirect_to new_pitch_path
     else
       redirect_to new_tip_path
+    end
+  end
+  
+  def check_redeem_code_key
+    
+    rck = RedeemCodeKey.find_by_code(params[:rck])
+    
+    unless rck
+      redirect_to "/"
+      return
+    end
+    
+    cookies[:rck] = rck.id if rck && rck.credits_left?
+    
+    c = nil
+    if @current_user
+      c = Credit.find_by_user_id_and_redeem_code_key_id(@current_user.id, rck.id) 
+      unless c
+        c = Credit.create(:user_id => @current_user, :description => "Awarded from redeem code '#{rck.code}' with the amount #{number_to_currency(rck.amount)}",
+                        :amount => rck.amount, :redeem_code_key_id => rck.id)
+        if c
+          flash[:success] = "Congratulations! You have been awarded CREDIT in free credits to fund a story.".gsub('CREDIT', number_to_currency(rck.amount))
+          cookies[:rck] = nil
+          redirect_to "/stories/unfunded"
+          return
+        end
+      end
+      redirect_to "/"
+      return
+    else
+      flash[:success] = "Congratulations! You have been awarded CREDIT in free credits to fund a story. After you have registered or logged into your account
+        you will be awarded these if you haven't already used the redeem code.".gsub('CREDIT', number_to_currency(rck.amount))
+      redirect_to new_session_path
+      return
     end
   end
   

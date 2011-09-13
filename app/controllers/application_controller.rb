@@ -332,4 +332,24 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def award_redeem_credits_if_any
+    rck = RedeemCodeKey.find_by_id(cookies[:rck])
+    
+    return false unless rck
+    return false unless rck.credits_left?
+      
+    c = nil
+    if session[:user_id]
+      c = Credit.find_by_user_id_and_redeem_code_key_id(session[:user_id], rck.id) 
+      return false if c
+      
+      c = Credit.create(:user_id => session[:user_id], :description => "Awarded from redeem code '#{rck.code}' with the amount #{number_to_currency(rck.amount)}",
+                      :amount => rck.amount, :redeem_code_key_id => rck.id)
+      
+      flash[:notice] = "Congratulations! You now have CREDIT to donate. Below are some stories you can donate to:".gsub('CREDIT', number_to_currency(rck.amount))
+      cookies[:rck] = nil
+      return true
+    end
+  end
+  
 end

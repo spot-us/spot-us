@@ -99,6 +99,7 @@ ActionController::Routing::Routes.draw do |map|
       :reset_password => :put
     }
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.connect '/rc/:rck', :controller => 'homes', :action => 'check_redeem_code_key'
 
   map.resource :session
   map.destroy_session 'logout', :controller => 'sessions', :action => 'destroy'

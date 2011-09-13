@@ -52,8 +52,16 @@ class UsersController < ApplicationController
         handle_first_donation_for_non_logged_in_user
         handle_first_pledge_for_non_logged_in_user
         update_balance_cookie
+        if award_redeem_credits_if_any
+          redirect_to "/stories/unfunded"
+          return
+        end
         flash_and_redirect(:success, 'Welcome to Spot.Us!', return_path)
       else
+        if award_redeem_credits_if_any
+          redirect_to "/stories/unfunded"
+          return
+        end
         flash_and_redirect(:success, "Your account will be reviewed prior to approval. We'll get back to you as soon as possible.", return_path)
       end
     else
