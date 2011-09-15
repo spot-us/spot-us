@@ -18,10 +18,10 @@
 		<%if flash[:notice] || flash[:success] || flash[:error]%>
 			<div class="flashError">
 				<div class='innerWrapper'>
-					<div>
+					<div class="flashMessage">
 						<%= flash[:error] if flash[:error]%>
 						<%= flash[:notice] if flash[:notice]%>
-						<%= flash[:success] if flash[:success]%>					
+						<%= flash[:success] if flash[:success]%>				
 					</div>
 				</div>
 			</div>

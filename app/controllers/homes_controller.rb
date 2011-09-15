@@ -35,7 +35,7 @@ class HomesController < ApplicationController
         c = Credit.create(:user_id => @current_user, :description => "Awarded from redeem code '#{rck.code}' with the amount #{number_to_currency(rck.amount)}",
                         :amount => rck.amount, :redeem_code_key_id => rck.id)
         if c
-          flash[:success] = "Congratulations! You have been awarded CREDIT in free credits to fund a story.".gsub('CREDIT', number_to_currency(rck.amount))
+          flash[:success] = "Congratulations! You have been awarded CREDIT in free credits to fund a story. Below are some stories you can fund:".gsub('CREDIT', number_to_currency(rck.amount))
           cookies[:rck] = nil
           redirect_to "/stories/unfunded"
           return
@@ -44,8 +44,8 @@ class HomesController < ApplicationController
       redirect_to "/"
       return
     else
-      flash[:success] = "Congratulations! You have been awarded CREDIT in free credits to fund a story. After you have registered or logged into your account
-        you will be awarded these if you haven't already used the redeem code.".gsub('CREDIT', number_to_currency(rck.amount))
+      flash[:success] = "Congratulations! You are eligible for CREDIT in free credits to fund a story. After you have registered or logged into your account,
+        these credits will be awarded to your account if you haven't already used the redeem code 'CODE'.".gsub('CREDIT', number_to_currency(rck.amount)).gsub('CODE', rck.code)
       redirect_to new_session_path
       return
     end

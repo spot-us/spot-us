@@ -346,7 +346,7 @@ class ApplicationController < ActionController::Base
       c = Credit.create(:user_id => session[:user_id], :description => "Awarded from redeem code '#{rck.code}' with the amount #{number_to_currency(rck.amount)}",
                       :amount => rck.amount, :redeem_code_key_id => rck.id)
       
-      flash[:notice] = "Congratulations! You now have CREDIT to donate. Below are some stories you can donate to:".gsub('CREDIT', number_to_currency(rck.amount))
+      flash[:notice] = "Congratulations! You now have CREDIT to donate. Below are some stories you can fund:".gsub('CREDIT', number_to_currency(rck.amount))
       cookies[:rck] = nil
       return true
     end
