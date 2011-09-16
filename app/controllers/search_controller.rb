@@ -11,7 +11,7 @@ class SearchController < ApplicationController
     @search_term = params[:search_term] || params[:q] || ""
     @page = params[:page] ? params[:page] : 1
     
-    if params[:format]
+    if params[:format] && params[:format]!="rss"
       @search_term += ".#{params[:format]}" 
       params[:format] = nil
     end
