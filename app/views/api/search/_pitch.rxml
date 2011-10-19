@@ -1,0 +1,139 @@
+xml.pitch {
+  
+  if @ids_only
+    apply_fragment ['pitch_header_api_id_only_', news_item] do
+      xml.id news_item.id
+      xml.permaLink pitch_path(news_item, {:only_path => false})
+      xml.updatedAt news_item.updated_at
+    end
+  else
+    apply_fragment ['pitch_header_api_', news_item] do
+      xml.headline news_item.headline
+      xml.createdAt news_item.created_at
+      xml.updatedAt news_item.updated_at
+      xml.permaLink pitch_path(news_item, {:only_path => false})
+      xml.featuredImage news_item.featured_image.url(:thumb)
+  
+      apply_fragment ['pitch_reporter_api_', news_item.user] do
+        xml.reporter{
+            xml.fullName news_item.user.full_name
+            xml.avatar news_item.user.photo.url(:thumb)
+            xml.permaLink profile_path(news_item.user, {:only_path => false})
+        }
+      end
+
+      apply_fragment ['pitch_peer_reviewer_api_', news_item.peer_reviewer] do
+        xml.editor {
+          xml.fullName news_item.peer_reviewer.full_name
+          xml.avatar news_item.peer_reviewer.photo.url(:thumb)
+          xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+        } if news_item.peer_reviewer
+      end
+  
+      apply_fragment ['pitch_amounts_api_', news_item] do
+        xml.requestedAmount number_to_currency(news_item.requested_amount)
+        xml.currentFunding number_to_currency(news_item.current_funding)
+        xml.fundingNeeded number_to_currency(news_item.funding_needed)
+      end
+  
+      xml.shortDescription h(news_item.excerpt?)
+      
+    end
+  
+    apply_fragment ['pitch_story_api_', news_item.story] do
+      xml.story{
+        xml.headline news_item.story.headline
+        xml.createdAt news_item.story.created_at
+        xml.permaLink pitch_path(news_item.story, {:only_path => false})
+        xml.featuredImage news_item.story.featured_image.url(:thumb)
+        
+        apply_fragment ['pitch_story_reporter_api_', news_item.user] do
+          xml.reporter{
+              xml.fullName news_item.story.user.full_name
+              xml.avatar news_item.story.user.photo.url(:thumb)
+              xml.permaLink profile_path(news_item.story.user, {:only_path => false})
+          }
+        end
+        apply_fragment ['pitch_story_reporter_api_', news_item.peer_reviewer] do
+          xml.editor {
+            xml.fullName news_item.peer_reviewer.full_name
+            xml.avatar news_item.peer_reviewer.photo.url(:thumb)
+            xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+          } if news_item.peer_reviewer
+        end
+        
+        xml.shortDescription h(news_item.story.excerpt?)
+
+      } if news_item.story
+    end
+
+    xml.supporters{
+      xml.organizationSupporters {
+        if news_item.supporting_organizations.any? || news_item.donations_and_credits.from_organizations.any? 
+          news_item.organizational_donors.each do |supporter|
+            apply_fragment ['pitch_organizational_donor_api_', supporter] do
+              xml.organizationalDonor{
+                xml.fullName supporter.full_name
+                xml.permaLink profile_path(supporter, {:only_path => false})
+                xml.avatar supporter.photo.url(:thumb)
+                xml.donationAmount number_to_currency(supporter.amount_donated_to(news_item))
+              }
+            end
+          end
+          news_item.supporting_organizations.each do |supporter|
+            apply_fragment ['pitch_organizational_supporter_api_', supporter] do
+              xml.organizationalSupporter{
+                xml.fullName supporter.full_name
+                xml.permaLink profile_path(supporter, {:only_path => false})
+                xml.avatar supporter.photo.url(:thumb)
+              }
+            end
+          end
+        end
+      }
+      xml.groupSupporters {
+        news_item.donating_groups.each do |group|
+          apply_fragment ['pitch_group_donor_api_', group] do
+            xml.groupDonor {
+              xml.groupName group.name 
+              xml.permaLink group_path(group, { :only_path => false })
+              xml.avatar group.image.url(:thumb)
+              xml.donationAmount number_to_currency(group.donations_for_news_item(news_item))
+            }
+          end
+        end
+      }
+      xml.ccaSupporters {
+        xml.totalAmountDonated number_to_currency(Donation.cca_supporters(news_item.id).map{ |obj| obj.cca_total_amount.to_f }.sum)
+        if !Donation.cca_supporters(news_item.id).all.empty?
+          via_cca_supporters_for(news_item).each do |donation|
+            apply_fragment ['pitch_cca_supporter_api_', donation] do
+              xml.ccaSupporter{
+                xml.ccaTitle donation.cca.title 
+                xml.permaLink cca_path(donation.cca, { :only_path => false })
+                xml.avatar donation.cca.user.photo.url(:thumb)
+                xml.donationAmount number_to_currency(donation.cca_total_amount)
+              }
+            end
+          end
+        end
+      }
+      xml.publicSupporters {
+        xml.totalAmountDonated number_to_currency(news_item.total_amount_donated)
+        if citizen_supporters_for(news_item).any?
+          citizen_supporters_for(news_item).each do |supporter|
+            apply_fragment ['pitch_public_supporter_api_', supporter] do
+              xml.publicSupporter{
+                xml.fullName supporter.full_name
+                xml.permaLink profile_path(supporter, {:only_path => false})
+                xml.avatar supporter.photo.url(:thumb)
+                xml.donationAmount number_to_currency(supporter.amount_donated_to(news_item))
+              }
+            end
+          end
+        end
+      }
+    }
+  end
+
+}

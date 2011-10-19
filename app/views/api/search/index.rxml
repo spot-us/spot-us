@@ -1,0 +1,29 @@
+xml.instruct! :xml, :version=>"1.0" 
+
+xml.query{
+  xml.terms h(@terms.join(", "))
+  xml.require_nr_matched_terms h(@require_nr_matched_terms)
+}
+
+if @items && !@items.empty?
+  xml.paginationVariables{
+    xml.requestedPage h(@requested_page.to_s)
+    xml.totalPages h(@items.total_pages)
+  }
+  
+  if @items.first.is_a?(Pitch)
+    xml.pitches{
+      @items.each do |news_item|
+        xml << render(:partial => "pitch", :locals => { :news_item => news_item })
+      end
+    }
+  elsif @items.first.is_a?(Story)
+    xml.stories{
+      @items.each do |news_item|
+        xml << render(:partial => "story", :locals => { :news_item => news_item })
+      end
+    }
+  end
+else
+  xml.noResults true
+end

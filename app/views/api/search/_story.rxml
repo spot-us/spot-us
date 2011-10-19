@@ -1,0 +1,65 @@
+xml.story {
+  
+  if @ids_only
+    apply_fragment ['story_header_api_id_only_', news_item] do
+      xml.id news_item.id
+      xml.permaLink story_path(news_item, {:only_path => false})
+      xml.updatedAt news_item.updated_at
+    end
+  else
+    apply_fragment ['story_header_api_', news_item] do
+      xml.headline news_item.headline
+      xml.createdAt news_item.created_at
+      xml.permaLink story_path(news_item, {:only_path => false})
+      xml.featuredImage news_item.featured_image.url(:thumb)
+
+      apply_fragment ['story_reporter_api_', news_item.user] do
+        xml.reporter{
+            xml.fullName news_item.user.full_name
+            xml.avatar news_item.user.photo.url(:thumb)
+            xml.permaLink profile_path(news_item.user, {:only_path => false})
+        }
+      end
+
+      apply_fragment ['story_peer_reviewer_api_', news_item.peer_reviewer] do
+        xml.editor {
+          xml.fullName news_item.peer_reviewer.full_name
+          xml.avatar news_item.peer_reviewer.photo.url(:thumb)
+          xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+        } if news_item.peer_reviewer
+      end
+      
+      xml.shortDescription h(news_item.excerpt?)
+      
+    end
+  
+    apply_fragment ['story_pitch_api_new_', news_item.pitch] do
+      xml.pitch{
+        xml.headline news_item.pitch.headline
+        xml.createdAt news_item.pitch.created_at
+        xml.permaLink story_path(news_item.pitch, {:only_path => false})
+        xml.featuredImage news_item.pitch.featured_image.url(:thumb)
+        
+        apply_fragment ['story_reporter_api_', news_item.user] do
+          xml.reporter{
+              xml.fullName news_item.user.full_name
+              xml.avatar news_item.user.photo.url(:thumb)
+              xml.permaLink profile_path(news_item.user, {:only_path => false})
+          }
+        end
+
+        apply_fragment ['story_peer_reviewer_api_', news_item.peer_reviewer] do
+          xml.editor {
+            xml.fullName news_item.peer_reviewer.full_name
+            xml.avatar news_item.peer_reviewer.photo.url(:thumb)
+            xml.permaLink profile_path(news_item.peer_reviewer, {:only_path => false})
+          } if news_item.peer_reviewer
+        end
+
+        xml.shortDescription h(news_item.pitch.excerpt?)
+
+      } if news_item.pitch
+    end
+  end
+
+}
