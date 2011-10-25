@@ -14,7 +14,7 @@ class Api::SearchController < ApplicationController
       items_found = false
       i = 1
       until items_found || i > @require_nr_matched_terms
-        @items, items_found = get_items(page, filter_term, get_search_term(@terms))
+        @items, items_found = get_items(page, filter_term, get_search_term(@terms,i))
         i += 1
       end
     end
@@ -45,7 +45,7 @@ class Api::SearchController < ApplicationController
     return items, !items.empty?
   end
   
-  def get_search_term(terms)
+  def get_search_term(terms,i)
     terms.slice(0, (terms.length-i)+1).join(" ")
   end
 

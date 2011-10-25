@@ -34,6 +34,12 @@ jQuery(document).ready(function($){
 	}, function(){
 		$("#" + $(this).attr("id") + "_status").fadeOut(200);
 	});
+	
+	$("span[id*=closeLink]").click(function(){
+		closeLinkWrapper = this.id.replace('closeLink', '').toLowerCase() + "Container";
+		$("#"+closeLinkWrapper).slideUp();
+		$.cookie('hide_announcement', "yes");
+	});
 
 	$(".tab").click(function(){
 		if ($(this).parent().parent().attr('id')!='tabHeaderPitch'){

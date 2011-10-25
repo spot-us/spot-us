@@ -2732,6 +2732,50 @@ padding: 7px;
 	width:934px;
 	background-color:#fff;
 }
+
+.announcementWrapper{
+	padding:5px;
+	margin:0; 
+	font-size:18px;
+	background-color:#DDDDD4;
+}
+
+.announcementMessage{
+	border:2px solid orange;
+	font-size:11px;
+	line-height:12px;
+	margin: 0px auto;
+	padding:10px;
+	width:938px;
+	background-color:#fff;
+}
+
+.announcementMessage h2{
+	font-size:16px;
+	margin:0;
+	padding:0;
+}
+
+.announcementMessage h2 .closeLink{
+	float:right;
+	font-size:10px;
+	font-weight:normal;
+	padding-right:10px;
+	margin-top:-5px;
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.announcementMessage h2 .closeLink:hover{
+	text-decoration:none;
+}
+
+
+.announcementMessage p{
+	font-size:12px;
+	padding:2px 0;
+}
+
 /* end global styles*/
 
 /* categories */
