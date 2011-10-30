@@ -36,7 +36,7 @@ Rails::Initializer.run do |config|
   config.gem "oauth2", :version => "= 0.4.1"
   config.gem "faraday", :version => "= 0.6.1"
   config.gem "json"
-  #config.gem "twitter_oauth"
+  config.gem "twitter_oauth"
   config.gem "memcached"
   config.gem "aws-s3", :lib => "aws/s3", :version => '>= 0.6.2'
   config.gem "url_shortener"
