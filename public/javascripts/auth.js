@@ -135,7 +135,7 @@ jQuery(document).ready(function($){
 	});
 	
 	$('span[id*=help]').click(function() {
-		jQuery.facebox({ajax:"/sections/"+$(this).attr('id')});
+		jQuery.facebox({ajax:"http://"+window.location.hostname+"/sections/"+$(this).attr('id')});
 		return false;
 	});
 					
