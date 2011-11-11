@@ -133,6 +133,11 @@ jQuery(document).ready(function($){
 		jQuery.facebox({ajax:"/sections/"+$(this).attr('id')});
 		return false;
 	});
+	
+	$('span[id*=help]').click(function() {
+		jQuery.facebox({ajax:"/sections/"+$(this).attr('id')});
+		return false;
+	});
 					
 });
 
