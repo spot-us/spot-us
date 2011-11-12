@@ -8,6 +8,7 @@ class Myspot::PurchasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_return]
 
   def new
+     @section = Section.find_by_name('purchase')
     if cookies[:spotus_lite]
   		render :layout=>'lite'
   	else
