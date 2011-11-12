@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
 	});
 	
 	/* Hover */
-	jQuery("a[id*=hoverAnchor],li[id*=hoverAnchor],h3[id*=hoverAnchor]").hover(function(){
+	jQuery("a[id*=hoverAnchor],li[id*=hoverAnchor],h3[id*=hoverAnchor],span[id*=hoverAnchor]").hover(function(){
         $(this).addClass("hover");
         containerName = this.id.replace('hoverAnchor', '');
 		pos = $(this).position();
@@ -88,7 +88,7 @@ jQuery(document).ready(function($){
 		$("#hoverContainer"+containerName).hide();
     });
 
-	jQuery("ul[id*=hoverContainer]").hover(function(){
+	jQuery("ul[id*=hoverContainer],div[id*=hoverContainer]").hover(function(){
         containerName = this.id.replace('hoverContainer', '');
 		$("#hoverAnchor"+containerName).addClass("hover");
 		$(this).show();
@@ -97,6 +97,11 @@ jQuery(document).ready(function($){
 		$("#hoverAnchor"+containerName).removeClass("hover");
         $(this).fadeOut();
     });
+
+	jQuery("span[id*=toggleEmail]").click(function(){
+		containerName = this.id.replace('toggle', '');
+		$("#list"+containerName).slideToggle(200);
+	});
 
 	jQuery("span[id*=toggleEmail]").click(function(){
 		containerName = this.id.replace('toggle', '');
