@@ -2723,31 +2723,16 @@ padding: 7px;
 	background-color:#DDDDD4;
 }
 
-.flashMessage{
-	border:4px solid red;
-	font-size:22px;
-	line-height:26px;
-	margin: 0px auto;
-	padding:20px;
-	width:934px;
-	background-color:#fff;
-}
-
-.announcementWrapper{
-	padding:5px;
-	margin:0; 
-	font-size:18px;
-	background-color:#DDDDD4;
-}
-
-.announcementMessage{
-	border:2px solid orange;
-	font-size:11px;
-	line-height:12px;
-	margin: 0px auto;
-	padding:10px;
-	width:938px;
-	background-color:#fff;
+.announcementMessage {
+  font-size: 11px;
+  line-height: 12px;
+  margin: 10px -20px;
+  padding: 10px 20px;
+  width: 978px;
+  background-color: #B41100;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  color: white;
 }
 
 .announcementMessage h2{
@@ -2770,10 +2755,22 @@ padding: 7px;
 	text-decoration:none;
 }
 
+.announcementWrapper {
+  padding: 5px;
+  margin: 0;
+  font-size: 18px;
+  border-bottom: 1px solid #CCC;
+}
+
+.announcementMessage a img{
+	float: right; 
+	margin: 5px 0 5px 20px; 
+	border: 0; 
+	margin-top: 13px;
+}
 
 .announcementMessage p{
-	font-size:12px;
-	padding:2px 0;
+	width: 500px;
 }
 
 /* end global styles*/
