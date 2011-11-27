@@ -36,11 +36,11 @@
 			
 				<h3>Donation Details</h3>
 				<div class="row">
-					<label>Donation Amount</label>
+					<label>Spot.Us Contribution Amount</label>
 					<%= f.text_field_tag "donation_amount", @donation_amount, :id=>"card_amount" %>
 				</div>
 				<div class="row">
-					<label for="<%="spotus_donation_amount"%>">Spot.Us Donation Amount</label>
+					<label for="<%="spotus_donation_amount"%>">Admin Overhead</label>
 					<span id="spotus_donation_amount_card">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%></span>
 					<%= hidden_field_tag "spotus_donation_amount", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_card" %>
 				</div>
@@ -152,7 +152,7 @@
 					<%= hidden_field_tag "item_number_#{i}", "1-#{@pitch.id}-#{current_user.id}" %>
 					<%= hidden_field_tag "item_name_#{i}", "PITCH: #{@pitch.headline}" %>
 					<div class="row">
-						<label for="<%="amount_#{i}"%>">Donation Amount</label>
+						<label for="<%="amount_#{i}"%>">Spot.Us Contribution Amount</label>
 						<%= text_field_tag "amount_#{i}", @donation_amount, :id=>"paypal_amount" %>
 					</div>
 					<% i += 1 %>
@@ -161,7 +161,7 @@
 						<%= hidden_field_tag "item_name_#{i}", "Support Spot.Us" %>
 					</div>
 					<div class="row">
-						<label for="<%="amount_#{i}"%>">Spot.Us Donation Amount</label>
+						<label for="<%="amount_#{i}"%>">Admin Overhead</label>
 						<span id="spotus_donation_amount_paypal">$ <%=number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => '')%></span>
 						<%= hidden_field_tag "amount_#{i}", number_to_currency(@donation_amount*SpotusDonation::SPOTUS_TITHE, :unit => ''), :size => 5, :id => "hidden_spotus_donation_amount_paypal" %>
 					</div>
