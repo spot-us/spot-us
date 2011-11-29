@@ -2421,6 +2421,34 @@ padding: 7px;
 /*end sponsor page*/
 
 
+/*staticTextContainer page*/
+.contentContainer .staticTextContainer h2{
+	font-size:18px;
+	color:#00353b;
+	margin-bottom:0px;
+}
+
+.contentContainer .staticTextContainer{
+	margin:20px 0;
+}
+
+.staticTextContainer ul li{
+	padding: 0px;
+	margin-bottom:10px;
+	margin-left:25px;
+	font-size:16px;
+}
+
+.staticTextContainer blockquote{
+	margin:10px;
+	width:auto;
+	display:block;
+	padding:10px;
+}
+
+/*end sponsor page*/
+
+
 /*sponsor profile pages*/
 .sponsorProfileContainer {
 	width:75%;

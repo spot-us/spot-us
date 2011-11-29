@@ -1,9 +1,13 @@
 <div class="headerTitle">
-	<%unless @page_not_found%>
+	<%if params[:id]=="terms"%>
+		<h1>Spot.us Terms of Use</h1>
+	<%elsif params[:id]=="privacy"%>
+		<h1>Spot.us Privacy Policy</h1>
+	<%elsif @page_not_found%>
+		<h1>Sorry, we couldn't find that page!</h1>
+	<%else%>	
 		<h1 rel="nofollow"><%=@page ? @page.title : params[:id].to_s%></h1>
 		<p>Pioneering community-funded reporting</p>
-	<%else%>
-		<h1>Sorry, we couldn't find that page!</h1>
 	<%end%>
 </div>
 <div class="joinContainer">

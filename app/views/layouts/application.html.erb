@@ -27,7 +27,7 @@
 			</div>
 		<%end%>
 
-		<%if Time.now > Time.local(2011,"nov",29,9,0,0)%>
+		<%if Time.now > Time.local(2011,"nov",29,9,0,0) || (current_user && current_user.is_a?(Admin))%>
 			<div class="announcementWrapper" id="announcementContainer" <%if cookies[:hide_announcement]=="yes"%>style="display:none;"<%end%>> 
 				<div class="innerWrapper"> 
 					<div class="announcementMessage"> 
