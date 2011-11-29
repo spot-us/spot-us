@@ -9,7 +9,7 @@
 		<br/>
 		<span class="deep-red small">A * indicates Required Fields</span><br/><br/>
 		<%= hidden_field_tag "id", @cca.id %>
-		<h5>Terms of Service. <span class="deep-red">*</span></h5> 
+		<h5>Terms of Use. <span class="deep-red">*</span></h5> 
 		<input name="tos" value="yes" type="checkbox" /> I understand that my survey responses will be shared <em>but my identity will remain anonymous</em>.<br/><br/>
 		<% @cca.cca_questions.each_with_index do |question, index| %>
 			<%= survey_section(question, index) %>
