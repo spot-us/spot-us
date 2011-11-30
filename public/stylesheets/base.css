@@ -25,6 +25,10 @@ acronym,abbr{
 	cursor:help;
 }
 
+ul, li{
+	font:14px/21px Arial, Helvetica, sans-serif;
+}
+
 blockquote{
     font:14px/21px Arial, Helvetica, sans-serif;
 	padding:12px;
