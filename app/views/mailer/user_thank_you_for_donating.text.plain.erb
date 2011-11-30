@@ -1,6 +1,6 @@
 Dear <%= @donation.user.first_name %>,
 
-Thank you for donating $<%= @donation.amount.to_i%> to <%= @donation.pitch.headline %> 
+Thank you for donating $<%= @donation.amount.to_i%> to Spot.Us which in turn supported <%= @donation.pitch.headline %> 
 at <%= pitch_url(@donation.pitch) %>!
 
 Your contribution is a powerful gesture and will help us fund this 
