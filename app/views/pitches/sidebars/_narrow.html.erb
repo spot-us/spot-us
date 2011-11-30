@@ -11,7 +11,7 @@
 	<%= render :partial => 'pitches/incentives', :locals => { :incentives => @pitch.get_incentives(is_admin?), :pitch => @pitch }%>
 	<%= render :partial => "pitches/donors", :locals => { :pitch => @pitch, :number_of_donors => 4 }%>
 	<%= render :partial => "pitches/get_involved"%>
-	<%= render :partial => "pitches/mediabugs" if @story%>
+	<%= render :partial => "pitches/copyright" if @story%>
 	<%if @story && @story.show_repostus?%>
 		<ul class="getInvolved" style='margin-top:-20px;'>
 			<h3>Repost.Us</h3>
