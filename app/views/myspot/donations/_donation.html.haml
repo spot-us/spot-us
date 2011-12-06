@@ -4,7 +4,7 @@
     PITCH:
     = link_to h(donation.pitch.headline), pitch_url(donation.pitch)
   %td.donated= donation.created_at.to_s(:date)
-  %td.donation= number_to_currency(donation.amount)
+  %td.donation== #{donation.amount} credits
   %td.status
     = render :partial => "shared/table_progress_bar", :locals => {:pitch => donation.pitch}
   %td.actions

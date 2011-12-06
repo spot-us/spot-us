@@ -3,7 +3,7 @@
 		<h3>Almost Funded Stories</h3>
 		<ul>
 			<% Pitch.almost_funded.unfunded.desc.top_four.each do |p| %>
-				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=p.funding_needed%> credits to go</span></li>
 			<%end%>
 		</ul>
 	</div><!--end footernotes-->
@@ -11,12 +11,12 @@
 		<h3>Unfunded Stories</h3>
 		<ul>
 			<% Pitch.unfunded.accepted.desc.top_four.each do |p| %>
-				<li><%=link_to p.headline, pitch_path(p)%> <span><%=number_to_currency(p.funding_needed)%> to go</span></li>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=p.funding_needed%> credits to go</span></li>
 			<%end%>
 		</ul>
 	</div><!--end footernotes-->
 	<div class="footerNotes">
 		<h3>What is Spot.us?</h3>
-		<p>Spot.Us is an open source project to pioneer “community powered reporting.” Through Spot.Us the public can commission and participate with journalists to do reporting on important and perhaps overlooked topics. Contributions are tax deductible and we partner with news organizations to distribute content under appropriate licenses.</p>
+		<p>Spot.Us is an open source project to pioneer "community powered reporting." Through Spot.Us the public can commission and participate with journalists to do reporting on important and perhaps overlooked topics. Contributions are tax deductible and we partner with news organizations to distribute content under appropriate licenses.</p>
 	</div><!--end footernotes-->	
 </div>
