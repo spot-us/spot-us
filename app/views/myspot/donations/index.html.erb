@@ -55,7 +55,7 @@
 							Total Amount Donated To Support Spot.Us
 						</td>
 						<td class="donated">&nbsp;</td>
-						<td class="donation"><%= number_to_currency(current_user.paid_spotus_donations_sum) %></td>
+						<td class="donation"><%= format_credits(current_user.paid_spotus_donations_sum) %> credits</td>
 						<td class="status"> </td>
 						<td class="actions"> </td>
 					</tr>

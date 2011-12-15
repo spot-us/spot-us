@@ -2,7 +2,7 @@
 
 	<a name="individuals"></a>
 	<%if @pitch.supporters.any?%>
-		<h2>Individual Donors: <%= @pitch.total_amount_donated%> credits donated to this story by <%=@pitch.supporters.length%> supporters</h2>
+		<h2>Individual Donors: <%= format_credits(@pitch.total_amount_donated)%> credits donated to this story by <%=@pitch.supporters.length%> supporters</h2>
 		<ul>
 			<%@pitch.supporters.each do |supporter|%>
 				<% apply_fragment ['pitch_supporter_listing_', @pitch, supporter] do %>
@@ -10,7 +10,7 @@
 						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
-						<h4>Donated <%=number_to_currency(supporter.amount_donated_to(@pitch))%></h4>
+						<h4>Donated <%=format_credits(supporter.amount_donated_to(@pitch))%> credits to this story</h4>
 						<%=excerpt?(supporter.get_about_you, 40)%>
 						<%=link_to "more &rarr;", profile_path(supporter)%>
 				
@@ -22,7 +22,7 @@
 
 	<a name="groups"></a>
 	<%if @pitch.donating_groups.any?%>
-		<h2>Group Support: <%= @pitch.total_amount_donated%> credits donated to this story donated by <%=@pitch.donating_groups.length%> groups</h2>
+		<h2>Group Support: <%= format_credits(@pitch.total_amount_donated)%> credits donated to this story donated by <%=@pitch.donating_groups.length%> groups</h2>
 		<ul>
 			<%@pitch.donating_groups.each do |supporter|%>
 				<% apply_fragment ['pitch_groups_listing_a_', @pitch, supporter] do %>
@@ -32,9 +32,9 @@
 						<h3><%=link_to supporter.name, profile_path(supporter)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
 						<%if supporter.respond_to? :donations_for_pitch%>
-							<h4>Donated <%=supporter.donations_for_pitch(@pitch)%> credits donated to this story</h4>
+							<h4>Donated <%=format_credits(supporter.donations_for_pitch(@pitch))%> credits donated to this story</h4>
 						<%else%>
-							<h4>Donated <%=supporter.amount_donated_to(@pitch)%> credits donated to this story</h4>
+							<h4>Donated <%=format_credits(supporter.amount_donated_to(@pitch))%> credits donated to this story</h4>
 						<%end%>
 						<%=excerpt?(supporter.description, 40)%>
 						<%=link_to "more &rarr;", profile_path(supporter)%>
@@ -50,7 +50,7 @@
 		<%supporters = []%>
 		<%supporters.concat(@pitch.supporting_organizations) if @pitch.supporting_organizations.any?%>
 		<%supporters.concat(@pitch.donations_and_credits.from_organizations.map(&:user)) if @pitch.donations_and_credits.from_organizations.any?%>
-		<h2>Organization Supporters: <%= @pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%>  credits donated to this story by <%=supporters.length%> groups</h2>
+		<h2>Organization Supporters: <%= format_credits(@pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum)%>  credits donated to this story by <%=supporters.length%> groups</h2>
 		<ul>
 			<%supporters.uniq.each do |supporter|%>
 				<% apply_fragment ['pitch_organization_listing_a_', @pitch, supporter] do %>
@@ -58,7 +58,7 @@
 						<%=image_tag(supporter.photo.url(:thumb), {:alt => supporter.full_name})%>
 						<h3><%=link_to supporter.full_name, profile_path(supporter)%></h3>
 						<span>Joined <%=short_date(supporter.created_at)%></span>
-						<h4>Donated <%=supporter.amount_donated_to(@pitch)%> credits donated to this story</h4>
+						<h4>Donated <%=format_credits(supporter.amount_donated_to(@pitch))%> credits donated to this story</h4>
 						<%=excerpt?(supporter.get_about_you, 40)%>
 						<%=link_to "more &rarr;", profile_path(supporter)%>
 
@@ -71,7 +71,7 @@
 	<a name="cca"></a>
 	<%unless Donation.cca_supporters(@pitch.id).all.empty?%>
 		<%donations = via_cca_supporters_for(@pitch)%>
-		<h2>Community-Centered Advertising: <%= Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum%> credits donated to this story by <%=donations.length%> groups</h2>
+		<h2>Community-Centered Advertising: <%= format_credits(Donation.cca_supporters(@pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum)%> credits donated to this story by <%=donations.length%> groups</h2>
 		<ul>
 			<%donations.each do |donation|%>
 				<%cca = donation.cca%>
@@ -82,7 +82,7 @@
 							<%=image_tag(supporter.photo.url(:thumb), {:alt => cca.title})%>
 							<h3><%=link_to cca.title, cca_path(cca)%></h3>
 							<span>Joined <%=short_date(supporter.created_at)%></span>
-							<h4>Contributed <%=donation.cca_total_amount%> credits donated to this story</h4>
+							<h4>Contributed <%=format_credits(donation.cca_total_amount)%> credits to this story</h4>
 							<%=excerpt?(cca.description, 40)%>
 							<%=link_to "more &rarr;", cca_path(cca)%>
 

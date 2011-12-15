@@ -214,5 +214,9 @@ module ApplicationHelper
     text = strip_html(text)
     text.length>strip_length ? text[0..strip_length].gsub(/\w+$/, '')+"..." : text
   end
+  
+  def format_credits(credits)
+    number_with_delimiter(number_with_precision(credits, :precision => 2))
+  end
 
 end

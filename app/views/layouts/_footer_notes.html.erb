@@ -3,7 +3,7 @@
 		<h3>Almost Funded Stories</h3>
 		<ul>
 			<% Pitch.almost_funded.unfunded.desc.top_four.each do |p| %>
-				<li><%=link_to p.headline, pitch_path(p)%> <span><%=p.funding_needed%> credits to go</span></li>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=format_credits(p.funding_needed)%> credits to go</span></li>
 			<%end%>
 		</ul>
 	</div><!--end footernotes-->
@@ -11,7 +11,7 @@
 		<h3>Unfunded Stories</h3>
 		<ul>
 			<% Pitch.unfunded.accepted.desc.top_four.each do |p| %>
-				<li><%=link_to p.headline, pitch_path(p)%> <span><%=p.funding_needed%> credits to go</span></li>
+				<li><%=link_to p.headline, pitch_path(p)%> <span><%=format_credits(p.funding_needed)%> credits to go</span></li>
 			<%end%>
 		</ul>
 	</div><!--end footernotes-->

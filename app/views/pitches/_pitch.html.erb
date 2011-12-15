@@ -6,6 +6,6 @@
 <%end%>
 		<%= render :partial => "shared/donate_buttons", :locals => { :pitch => pitch }%>
 <% apply_fragment ['pitch_list_footer_', pitch, current_user, @show_cca, @first_cca] do %>
-		<div><%=pitch.current_funding%> credits raised and <%=pitch.funding_needed%> credits to go</div>
+		<div><%=format_credits(pitch.current_funding)%> raised and <%=format_credits(pitch.funding_needed)%> credits to go</div>
 	</li>
 <%end%>

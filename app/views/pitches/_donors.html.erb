@@ -2,7 +2,7 @@
 	<div class="donorsBox">
 		<h3>Individual Donors</h3>
 		<ul class="total">
-			<li><h5><%= pitch.total_amount_donated%> credits donated to the story</h5></li>
+			<li><h5><%= format_credits(pitch.total_amount_donated)%> credits donated to the story</h5></li>
 			<li><span>(<%=pitch.supporters.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
@@ -23,7 +23,7 @@
 	<div class="donorsBox">
 		<h3>Group Support</h3>
 		<ul class="total">
-			<li><h5><%= pitch.total_amount_donated%> credits donated to the story</h5></li>
+			<li><h5><%= format_credits(pitch.total_amount_donated)%> credits donated to the story</h5></li>
 			<li><span>(<%=pitch.donating_groups.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
@@ -51,7 +51,7 @@
 	<div class="donorsBox">
 		<h3>Organization Support</h3>
 		<ul class="total">
-			<li><h5><%= pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum%> credits donated to the story</h5></li>
+			<li><h5><%= format_credits(pitch.donations_and_credits.from_organizations.map{ |d| d.amount }.sum)%> credits donated to the story</h5></li>
 			<li><span>(<%=supporters.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
@@ -73,7 +73,7 @@
 		<%donations = via_cca_supporters_for(pitch)%>
 		<h3>Community-Centered Advertising</h3>
 		<ul class="total">
-			<li><h5><%= Donation.cca_supporters(pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum%> credits donated to the story</h5></li>
+			<li><h5><%= format_credits(Donation.cca_supporters(pitch.id).map{ |obj| obj.cca_total_amount.to_f }.sum)%> credits donated to the story</h5></li>
 			<li><span>(<%=donations.length%> supporters)</span></li>
 		</ul>
 		<ul class="supporters">
