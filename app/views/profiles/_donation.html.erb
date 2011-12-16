@@ -5,7 +5,7 @@
     <%= link_to h(donation.pitch.headline), pitch_url(donation.pitch) %>
   </td>
   <td class="donated"><%= donation.created_at.to_s(:date) %></td>
-  <td class="donation"><%= number_to_currency(donation.amount) %></td>
+  <td class="donation"><%= format_credits(donation.amount) %> credits</td>
   <td class="status">
     <%= render :partial => "shared/table_progress_bar", :locals => {:pitch => donation.pitch} %>
   </td>

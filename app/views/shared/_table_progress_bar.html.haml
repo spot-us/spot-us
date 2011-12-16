@@ -3,12 +3,12 @@
   - if pitch.fully_funded?
     = static_progress_bar('pitch', 1)
     .clear
-      %strong== #{pitch.current_funding} credits
+      %strong= format_credits(pitch.current_funding)
       of
-      == #{pitch.current_funding} credits raised
+      == #{format_credits(pitch.current_funding)} credits raised
   - else
     = static_progress_bar("pitch", pitch.current_funding_in_percentage)
     .clear
-      %strong== #{pitch.current_funding} credits
+      %strong= format_credits(pitch.current_funding)
       of
-      == #{pitch.requested_amount} credits raised
+      == #{format_credits(pitch.requested_amount)} credits raised
