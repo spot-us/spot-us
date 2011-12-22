@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+log.info Time.now.to_s + " Warming up to process donations..."
+csv = ""
+csv += ['Full Name', 'Email', 'Joined at', 'Maxium paid donation', 'Minimum paid donation', 'Average paid donation',
+    'Total donations', 'Paid donations', 'Credits donations', 'Donations supported by sponsors', 'Donated first', 'Donated last', 'Average time between donations in days'].join(",")+"\r\n"
+users = User.all
+i = 1
+users.each do |user|
+  log.info("   - Processing user #{i} of #{users.length}")
+  has_at_least_one_donation = user.all_donations.size > 0
+  has_more_than_one_donation = user.all_donations.size > 1
+  
+  #if has_at_least_one_donation
+    data = []
+    data << user.full_name
+    data << user.email
+    data << user.created_at
+    
+    data << (has_at_least_one_donation ? user.all_donations.map(&:amount).max : "0")
+    data << (has_more_than_one_donation ? user.all_donations.map(&:amount).min : "-")
+    data << (has_more_than_one_donation ? user.all_donations.map(&:amount).sum / user.all_donations.size : "-")
+  
+    total_count = user.all_donations.find(:all, :conditions=>"donations.status='paid' or donations.credit_id is not null").size
+    credit_count = user.all_donations.find(:all, :conditions=>"donations.credit_id is not null").size
+    data << total_count
+    data << total_count-credit_count
+    data << credit_count
+    data << user.all_donations.find(:all, :joins=>"inner join credits on credits.id=donations.credit_id", :conditions=>"credits.cca_id is not null and donations.credit_id is not null").size
+    data << (has_more_than_one_donation ? user.all_donations.map(&:created_at).min : "-")
+    data << user.all_donations.map(&:created_at).max
+    arr = user.all_donations.map(&:created_at).each_cons(2).collect { |a,b| ((b-a)/1.days).round }
+    data << (has_more_than_one_donation ? arr.sum / arr.size : "-")
+    csv += data.join(",")+"\r\n"
+  #end
+  i += 1
+end
+
+File.open("/Users/eriks/spotus/all_donations.csv", 'w') {|f| f.write(csv) }
+
+log.info Time.now.to_s + " Done and going to sleep..."

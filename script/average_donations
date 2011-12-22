@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+log.info Time.now.to_s + " Warming up to process donations..."
+csv = ""
+csv += ['Full Name', 'Overall', 'Paid', 'Credits', 'CCA credits', 'Overall amount', 'Paid amount', 'Credits amount', 'CCA credits amount', 'Overall Donations', 'Paid Donations', 'Credits Donations', 'CCA credits Donations'].join(",")+"\r\n"
+users = User.all
+i = 1
+users.each do |user|
+  log.info("   - Processing user #{i} of #{users.length}")
+  has_at_least_one_donation = user.all_donations.size > 0
+  has_more_than_one_donation = user.all_donations.size > 1
+
+  if has_at_least_one_donation
+    data = []
+    data << user.id
+
+    total = user.all_donations.find(:all, :conditions=>"donations.status='paid' or donations.credit_id is not null")
+    paid = user.all_donations.find(:all, :conditions=>"donations.credit_id is null")
+    credits = user.all_donations.find(:all, :conditions=>"donations.credit_id is not null")
+    cca_credits = user.all_donations.find(:all, :joins=>"inner join credits on credits.id=donations.credit_id", :conditions=>"credits.cca_id is not null and donations.credit_id is not null")
+
+    data << (total.empty? ? 0 : (total.map(&:amount).sum/total.size))
+    data << (paid.empty? ? 0 : (paid.map(&:amount).sum/paid.size))
+    data << (credits.empty? ? 0 : (credits.map(&:amount).sum/credits.size))
+    data << (cca_credits.empty? ? 0 : (cca_credits.map(&:amount).sum/cca_credits.size))
+    data << (total.empty? ? 0 : total.map(&:amount).sum)
+    data << (paid.empty? ? 0 : paid.map(&:amount).sum)
+    data << (credits.empty? ? 0 : credits.map(&:amount).sum)
+    data << (cca_credits.empty? ? 0 : cca_credits.map(&:amount).sum)
+    data << total.size
+    data << paid.size
+    data << credits.size
+    data << cca_credits.size
+    csv += data.join(",")+"\r\n"
+  end
+  i += 1
+end
+
+File.open("/Users/eriks/spotus/average_donations.csv", 'w') {|f| f.write(csv) }
+
+log.info Time.now.to_s + " Done and going to sleep..."

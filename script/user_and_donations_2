@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+log.info Time.now.to_s + " Warming up to process donations..."
+csv = ""
+csv += ['Full Name', 'Total donations', 'Only paid', 'Only credits', 'Only CCA credits', 'Both credits and paid'].join(",")+"\r\n"
+users = User.all
+i = 1
+users.each do |user|
+  log.info("   - Processing user #{i} of #{users.length}")
+  has_at_least_one_donation = user.all_donations.size > 0
+  has_more_than_one_donation = user.all_donations.size > 1
+
+  if has_at_least_one_donation
+    data = []
+    data << user.full_name
+
+    total_count = user.all_donations.find(:all, :conditions=>"donations.status='paid' or donations.credit_id is not null").size
+    credit_count = user.all_donations.find(:all, :conditions=>"donations.credit_id is not null").size
+    paid_count = total_count - credit_count
+    cca_credit_count = user.all_donations.find(:all, :joins=>"inner join credits on credits.id=donations.credit_id", :conditions=>"credits.cca_id is not null and donations.credit_id is not null").uniq.size
+
+    data << total_count
+    data << ((credit_count==0) ? "1" : "0")
+    data << (((total_count-credit_count)==0) ? "1" : "0")
+    data << ((cca_credit_count==credit_count && (total_count-credit_count)==0) ? "1" : "0")
+    data << (((total_count-credit_count)>0 && credit_count>0) ? "1" : "0")
+    csv += data.join(",")+"\r\n"
+  end
+  i += 1
+end
+
+File.open("/Users/eriks/spotus/all_donations_payment_methods_breakdown.csv", 'w') {|f| f.write(csv) }
+
+log.info Time.now.to_s + " Done and going to sleep..."

@@ -4,9 +4,11 @@ class Api::SearchController < ApplicationController
     
     @filter = params[:filter] ? params[:filter] : "unfunded"
     @page = params[:page] ? params[:page] : 1
-    @ids_only = !params[:pass_ids_back].nil? 
+    @ids_only = !params[:pass_ids_back].nil?
+    @full = !params[:full].nil? 
     @require_nr_matched_terms = params[:nr_matched_terms] || 1
-    @terms = params[:terms]
+    @terms = params[:terms].split(",").collect { |term| term.strip  }
+    
     
     unless @terms 
       @items = nil
@@ -16,6 +18,15 @@ class Api::SearchController < ApplicationController
       until items_found || i > @require_nr_matched_terms
         @items, items_found = get_items(page, filter_term, get_search_term(@terms,i))
         i += 1
+      end
+    end
+    
+    respond_to do |format|
+      format.xml do
+        render :layout => false
+      end
+      format.rss do
+        render :layout => false
       end
     end
 
