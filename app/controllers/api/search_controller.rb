@@ -6,7 +6,7 @@ class Api::SearchController < ApplicationController
     @page = params[:page] ? params[:page] : 1
     @ids_only = !params[:pass_ids_back].nil?
     @full = !params[:full].nil? 
-    @require_nr_matched_terms = params[:nr_matched_terms] || 1
+    @require_nr_matched_terms = params[:nr_matched_terms].to_i || 1
     @terms = params[:terms].split(",").collect { |term| term.strip  }
     
     
@@ -14,9 +14,10 @@ class Api::SearchController < ApplicationController
       @items = nil
     else
       items_found = false
+      starting_length = terms.length
       i = 1
-      until items_found || i > @require_nr_matched_terms
-        @items, items_found = get_items(page, filter_term, get_search_term(@terms,i))
+      until items_found || (starting_length - i + 1)  > @require_nr_matched_terms
+        @items, items_found = get_items(@page, @filter, get_search_term(@terms,i))
         i += 1
       end
     end

@@ -1,9 +1,9 @@
 xml.instruct! :xml, :version => "1.0" 
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "Spot.Us: #{@filter.titleize} stories for these search terms: #{@search_terms.join(', ')}"
+    xml.title "Spot.Us: #{@filter.titleize} stories for these search terms: #{@terms.join(', ')}"
     xml.link request.url
-    xml.description "These are the #{@filter.downcase} stories from Spot.Us for these search terms: #{@search_terms.join(', ')}"
+    xml.description "These are the #{@filter.downcase} stories from Spot.Us for these search terms: #{@terms.join(', ')}"
     xml.language "en-us"
     parse_xml_created_at(xml, @items)
     @items.each do |news_item|

@@ -162,6 +162,8 @@ ActionController::Routing::Routes.draw do |map|
   #notifications urls
   map.connect "notify/:code/:notification", :controller => 'notifications', :action => 'index', :notification=>nil
 
+  map.connect '/api/search.:format', :controller => "api/search", :action => "index"
+
   map.connect '*path', :controller => 'homes', :action => 'show'
 end
 
