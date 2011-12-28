@@ -4,7 +4,7 @@ xml.results{
   xml.query{
     xml.terms h(@terms.join(", "))
     xml.require_nr_matched_terms h(@require_nr_matched_terms)
-    xml.matched_terms h(@matched_terms.join(","))
+    xml.matched_terms h(@matched_terms)
   }
   if @items && !@items.empty?
     xml.paginationVariables{
