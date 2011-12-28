@@ -4,7 +4,6 @@ xml.query{
   xml.terms h(@terms.join(", "))
   xml.require_nr_matched_terms h(@require_nr_matched_terms)
 }
-
 if @items && !@items.empty?
   xml.paginationVariables{
     xml.requestedPage h(@requested_page.to_s)
@@ -25,5 +24,5 @@ if @items && !@items.empty?
     }
   end
 else
-  xml.noResults true
+  xml.noResults "true"
 end

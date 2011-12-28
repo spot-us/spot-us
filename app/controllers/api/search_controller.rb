@@ -39,19 +39,19 @@ class Api::SearchController < ApplicationController
     if filter_term == "unfunded"
       conditions = {:status => "'active'"}
       Pitch.per_page = 10
-      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true, :match_mode => :all
+      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true
     elsif filter_term == "funded"
       conditions = {:status => "'funded'"}
       Pitch.per_page = 10
-      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true, :match_mode => :all
+      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true
     elsif filter_term == "published" 
       conditions = {:status => 'published'}
       Story.per_page = 10
-      items = Story.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true, :match_mode => :all
+      items = Story.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true
     else
       conditions = {:status => "'active'"}
       Pitch.per_page = 10
-      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true, :match_mode => :all
+      items = Pitch.search search_term, :order => :created_at, :sort_mode => :desc, :conditions => conditions, :page => page, :per_page => 10, :retry_stale => true
     end
     
     return items, !items.empty?
