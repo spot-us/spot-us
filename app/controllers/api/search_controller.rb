@@ -16,7 +16,7 @@ class Api::SearchController < ApplicationController
       items_found = false
       starting_length = @terms.length
       i = 1
-      until items_found || (starting_length - i + 1)  <= @require_nr_matched_terms
+      until items_found || (starting_length - i + 1)  < @require_nr_matched_terms
         @items, items_found = get_items(@page, @filter, get_search_term(@terms,i))
         @matched_terms = search_terms(@terms,i) if items_found
         i += 1
