@@ -9,6 +9,8 @@ class Api::PitchesController < ApplicationController
     arr[:headline] = pitch.headline
     arr[:permalink] = pitch.permalink
     arr[:status] = pitch.status
+    arr[:created_at] = pitch.created_at
+    arr[:updated_at] = pitch.updated_at
     arr[:is_funded] = pitch.fully_funded?
     arr[:currency] = "credits"
     
