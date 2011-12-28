@@ -63,7 +63,7 @@ class Api::SearchController < ApplicationController
   end
   
   def get_search_term(terms,i)
-    search_terms.join(" ")
+    search_terms(terms,i).join(" ")
   end
 
 end
