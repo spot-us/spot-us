@@ -56,7 +56,8 @@ class Api::PitchesController < ApplicationController
         s = ActiveSupport::OrderedHash.new
       	s[:full_name] = supporter.full_name
       	s[:profile_url] = supporter.permalink
-      	s[:thumb_url] = supporter.image.url(:thumb)
+      	s[:thumb_url] = supporter.image.url(:thumb) if supporter.respond_to? :image
+      	s[:thumb_url] = supporter.photo.url(:thumb) if supporter.respond_to? :photo
       	supporter_arr << s
       end
       p[:supporters] = supporter_arr
