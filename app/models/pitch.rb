@@ -41,6 +41,9 @@
 class Pitch < NewsItem
   # extend ActiveSupport::Memoizable
   aasm_initial_state  :unapproved
+  
+  include ActionController::UrlWriter
+  default_url_options[:host] = APP_CONFIG[:default_host]
 
   after_create :send_thank_you
 
@@ -147,6 +150,10 @@ class Pitch < NewsItem
   #named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved'"
   
   MAX_PER_USER_DONATION_PERCENTAGE = 1.00
+  
+  def permalink
+    pitch_path(self, {:only_path => false})
+  end
 
   def self.all_active_reporters
     self.without_a_story.find(:all, :conditions=>"status='active'", :include=>:user, :group=>"user_id").map(&:user)

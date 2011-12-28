@@ -50,6 +50,9 @@ class User < ActiveRecord::Base
   TYPES = ["Citizen", "Reporter", "Organization", "Admin", "Sponsor"]
   CREATABLE_TYPES = TYPES - ["Admin"]
 
+  include ActionController::UrlWriter
+  default_url_options[:host] = APP_CONFIG[:default_host]
+
   cattr_accessor :per_page
   @@per_page = 10
   
@@ -205,6 +208,10 @@ class User < ActiveRecord::Base
     having_cache ["contributor_count_"], { :expires_in => 86400, :force => is_admin }  do
       (count / 50.0).floor * 50
     end
+  end
+  
+  def permalink
+    profile_path(self, {:only_path => false})
   end
 
 ################### new facebook oauth 2 ###############
