@@ -7,14 +7,14 @@ class Api::SearchController < ApplicationController
     @ids_only = !params[:pass_ids_back].nil?
     @full = !params[:full].nil? 
     @require_nr_matched_terms = params[:nr_matched_terms].to_i || 1
-    @terms = params[:terms].split(",").collect { |term| term.strip  }
+    @terms = params[:terms].split(",").collect { |term| URI.encode(term.strip, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))  }
     
     
     unless @terms 
       @items = nil
     else
       items_found = false
-      starting_length = terms.length
+      starting_length = @terms.length
       i = 1
       until items_found || (starting_length - i + 1)  <= @require_nr_matched_terms
         @items, items_found = get_items(@page, @filter, get_search_term(@terms,i))
