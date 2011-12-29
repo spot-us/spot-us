@@ -7,15 +7,17 @@ class Api::SearchController < ApplicationController
     @ids_only = !params[:pass_ids_back].nil?
     @full = !params[:full].nil? 
     @require_nr_matched_terms = params[:nr_matched_terms].to_i || 1
-    @terms = params[:terms].split(",").collect { |term| URI.encode(term.strip, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))  }
+    @terms = params[:terms].split(",").collect { |term| URI.decode(term.strip, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))  }
     @matched_terms = []
     
+    # get the results terms
     unless @terms 
       @items = nil
     else
       items_found = false
       starting_length = @terms.length
       i = 1
+      # loop until you find items or the required matched terms is reached
       until items_found || (starting_length - i + 1)  < @require_nr_matched_terms
         @items, items_found = get_items(@page, @filter, get_search_term(@terms,i))
         @matched_terms = search_terms(@terms,i) if items_found
@@ -23,6 +25,7 @@ class Api::SearchController < ApplicationController
       end
     end
     
+    # handle the different formats supported
     respond_to do |format|
       format.xml do
         render :layout => false
@@ -36,6 +39,7 @@ class Api::SearchController < ApplicationController
   
   protected
   
+  # perform the search
   def get_items(page, filter_term, search_term)
     if filter_term == "unfunded"
       conditions = {:status => "'active'"}
@@ -58,10 +62,12 @@ class Api::SearchController < ApplicationController
     return items, !items.empty?
   end
   
+  # get the new array of search terms
   def search_terms(terms,i)
     terms.slice(0, (terms.length-i)+1)
   end
   
+  # form query
   def get_search_term(terms,i)
     search_terms(terms,i).join(" ")
   end
