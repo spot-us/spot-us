@@ -7,7 +7,7 @@ class String
   end
   
   def strip_html
-    self.gsub(/<\/?[^>]*>/, "")
+    self.gsub(/(<[^>]+>|&nbsp;|\r|\n)/, "")
   end
   
   def strip_double_spaces
