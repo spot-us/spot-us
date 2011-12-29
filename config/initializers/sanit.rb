@@ -23,11 +23,11 @@ class String
     self.strip_html.truncate_words(length, end_string)
   end
   
-  def shorten_character_limit(length=45, end_string)
-    self.length>length ? self[0..length].gsub(/\w+$/, '')+end_string : self
+  def shorten_character_limit(length, end_string)
+    self.length>length ? self[0..length].gsub(/\w+$/, '') + end_string : self
   end
   
-  def strip_and_shorten_character_limit(length = 30, end_string = '')
+  def strip_and_shorten_character_limit(length = 45, end_string = '')
     self.strip_html.shorten_character_limit(length, end_string)
   end
   
