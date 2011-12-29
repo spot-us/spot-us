@@ -11,6 +11,7 @@ class Api::PitchesController < ApplicationController
     arr[:status] = pitch.status
     arr[:created_at] = pitch.created_at
     arr[:updated_at] = pitch.updated_at
+    arr[:expiration_date] = pitch.expiration_date
     arr[:is_funded] = pitch.fully_funded?
     arr[:currency] = "credits"
     
