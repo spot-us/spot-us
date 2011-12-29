@@ -1,9 +1,10 @@
 class Api::PitchesController < ApplicationController
   
   def show
+    # get the pitch
     pitch = Pitch.find_by_id(params[:id])
     
-    # pitch
+    # main pitch details
     arr = ActiveSupport::OrderedHash.new
     arr[:id] = pitch.id
     arr[:headline] = pitch.headline
@@ -32,6 +33,7 @@ class Api::PitchesController < ApplicationController
     # donors
     donors = ActiveSupport::OrderedHash.new
     
+    # individuals
     if pitch.supporters.any?
       
       p = ActiveSupport::OrderedHash.new
@@ -49,6 +51,8 @@ class Api::PitchesController < ApplicationController
     	p[:supporters] = supporter_arr
     	donors[:supporters] = p
     end
+    
+    # donating groups
     if pitch.donating_groups.any?
       p = ActiveSupport::OrderedHash.new
       p[:amount_raised] = pitch.total_amount_donated
@@ -66,6 +70,8 @@ class Api::PitchesController < ApplicationController
       p[:supporters] = supporter_arr
       donors[:groups] = p
     end
+    
+    # donating organizations 
     if pitch.supporting_organizations.any? || pitch.donations_and_credits.from_organizations.any?	
     	supporters = []
     	supporters.concat(pitch.supporting_organizations) if pitch.supporting_organizations.any?
@@ -88,6 +94,8 @@ class Api::PitchesController < ApplicationController
     	p[:supporters] = supporter_arr
     	donors[:organizations] = p
     end
+    
+    # cca support
     unless Donation.cca_supporters(pitch.id).all.empty?
     	donations = Donation.cca_supporters(pitch)
       
