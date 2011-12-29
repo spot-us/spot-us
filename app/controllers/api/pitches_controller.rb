@@ -14,7 +14,7 @@ class Api::PitchesController < ApplicationController
     arr[:updated_at] = pitch.updated_at
     arr[:expiration_date] = pitch.expiration_date
     arr[:is_funded] = pitch.fully_funded?
-    arr[:thumb_url] = pitch.featured_image(:small_hero)
+    arr[:thumb_url] = pitch.featured_image(:small_hero) 
     arr[:description] = pitch.short_description.strip_and_shorten_character_limit(45)
     arr[:currency] = "credits"
     
