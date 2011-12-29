@@ -6,7 +6,7 @@ class Api::SearchController < ApplicationController
     @page = params[:page] ? params[:page] : 1
     @ids_only = !params[:pass_ids_back].nil?
     @full = !params[:full].nil? 
-    @require_nr_matched_terms = params[:nr_matched_terms].to_i || 1
+    @require_nr_matched_terms = params[:require_nr_matched_terms].to_i || params[:nr_matched_terms].to_i || 1
     @terms = params[:terms].split(",").collect { |term| URI.decode(term.strip, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))  }
     @matched_terms = []
     
