@@ -28,11 +28,15 @@ class String
   end
   
   def strip_and_shorten_character_limit(length = 45, end_string = '')
-    self.sanitize.strip_html.shorten_character_limit(length, end_string)
+    self.sanitize.simple_format.strip_html.shorten_character_limit(length, end_string)
   end
   
   def to_currency
     ActionController::Base.helpers.number_to_currency(self)
+  end
+  
+  def simple_format(html_options={})
+    ActionController::Base.helpers.simple_format(self, html_options={})
   end
   
 end
