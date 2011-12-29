@@ -28,7 +28,7 @@ class String
   end
   
   def strip_and_shorten_character_limit(length = 45, end_string = '')
-    self.sanitize.simple_format.strip_html.shorten_character_limit(length, end_string)
+    self.sanitize.simple_format.strip_html.shorten_character_limit(length, end_string).strip
   end
   
   def to_currency
