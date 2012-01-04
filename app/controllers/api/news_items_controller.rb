@@ -15,7 +15,9 @@ class Api::NewsItemsController < ApplicationController
   end
 
   def kml
-    get_items(100)
+    get_items(20)
+    @items = []
+    @news_items.each { |news_item| @items << get_news_item_arr(news_item, "coordinates") }
     
     # handle the different formats supported
     respond_to do |format|

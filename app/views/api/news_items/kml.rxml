@@ -1,6 +1,6 @@
 xml.kml("xmlns" => "http:// www.opengis.net/kml/2.2")
 
-@news_items.each do |news_item|
+@items.each do |news_item|
   xml.Placemark 
     xml.name news_item.headline
     xml.description h(news_item.short_description.strip_and_shorten_character_limit(80)+"...<br/><a href='#{news_item.permalink}'>Read more &raquo;</a>")
