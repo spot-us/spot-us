@@ -35,13 +35,21 @@ class Api::NewsItemsController < ApplicationController
       progress[:requested_amount] = news_item.requested_amount
       arr[:progress] = progress
       
-      Entity.create(:entitable_id => news_item.id, :entitable_type => news_item.class.to_s) unless news_item.entity
-      if news_item.entity.request_body.blank?
-        news_item.entity.process?(news_item.headline + " " + news_item.short_description) 
-        sleep 1
+      # create the entity if it does not exist.
+      unless news_item.entity
+        e = Entity.create(:entitable_id => news_item.id, :entitable_type => news_item.class.to_s) 
+        news_item = e.entitable
       end
-      arr[:coordinates] = new_item.entity.coordinates?
-    
+      
+      # if the news item has an entity associated...
+      if news_item.entity
+        unless news_item.entity.request_body.blank?
+          news_item.entity.process?(news_item.headline + " " + news_item.short_description) 
+          sleep 1
+        end
+        arr[:coordinates] = new_item.entity.coordinates?
+      end
+      
       news_items << arr
     end
     
