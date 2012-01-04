@@ -35,8 +35,11 @@ class Api::NewsItemsController < ApplicationController
       progress[:requested_amount] = news_item.requested_amount
       arr[:progress] = progress
       
-      entity = news_item.entity ? news_item.entity : Entity.new
-      arr[:coordinates] = entity.coordinates?(news_item.short_description)
+      unless news_item.entity
+        news_item.entity.create
+        news_item.entity.process?(news_item.headline + " " + news_item.short_description)
+      end
+      arr[:coordinates] = new_item.entity.coordinates?
     
       news_items << arr
     end
