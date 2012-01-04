@@ -166,7 +166,7 @@ ActionController::Routing::Routes.draw do |map|
   
   #map.connect '/api/pitches/:id', :controller => "api/pitches", :action => "show"
   map.connect '/api/pitches/:id.:format', :controller => "api/pitches", :action => "show"
-  map.connect '/api/news_items/geography', :controller => "api/news_tems", :action => "geography"
+  map.connect '/api/news_items/geography', :controller => "api/news_items", :action => "geography"
 
   map.connect '*path', :controller => 'homes', :action => 'show'
 end
