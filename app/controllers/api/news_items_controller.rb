@@ -61,6 +61,7 @@ class Api::NewsItemsController < ApplicationController
     
     arr[:coordinates] = entity.coordinates? if entity_type == "coordinates"
     arr[:entities] = entity.entities? if entity_type == "entities"
+    arr
   end
   
   
