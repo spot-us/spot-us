@@ -34,13 +34,13 @@ class Entity < ActiveRecord::Base
 
   def geographies?
     self.geographies = []
-    self.request_body.geographies.each { |g| self.geographies << {:name => g.name} } if self.request_body
+    self.request_body.geographies.each { |g| self.geographies << {:name => g.name} if g.attributes["longitude"] && g.attributes["latitude"] } if self.request_body
     return self.geographies.uniq.compact
   end
 
   def coordinates?
     self.coordinates = []
-    self.request_body.geographies.each { |g| self.coordinates << {:name => g.name, :longitude => g.attributes["longitude"], :latitude => g.attributes["latitude"]} } if self.request_body
+    self.request_body.geographies.each { |g| self.coordinates << {:name => g.name, :longitude => g.attributes["longitude"], :latitude => g.attributes["latitude"] if g.attributes["longitude"] && g.attributes["latitude"]} } if self.request_body
     return self.coordinates
   end
 
