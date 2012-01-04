@@ -3,12 +3,9 @@ class Api::NewsItemsController < ApplicationController
   def geography
     
     get_items(10)
+    pitches = []
     
     @news_items.each do |news_item|
-      pitches = []
-    
-      # get the pitch
-      Pitch.paginate()
     
       # main pitch details
       arr = ActiveSupport::OrderedHash.new
