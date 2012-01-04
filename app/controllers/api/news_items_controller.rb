@@ -3,45 +3,45 @@ class Api::NewsItemsController < ApplicationController
   def geography
     
     get_items(10)
-    pitches = []
+    news_items = []
     
     @news_items.each do |news_item|
     
-      # main pitch details
+      # main news_item details
       arr = ActiveSupport::OrderedHash.new
-      arr[:id] = pitch.id
-      arr[:headline] = pitch.headline
-      arr[:permalink] = pitch.permalink
-      arr[:status] = pitch.status
-      arr[:created_at] = pitch.created_at
-      arr[:updated_at] = pitch.updated_at
-      arr[:expiration_date] = pitch.expiration_date
-      arr[:is_funded] = pitch.fully_funded?
-      arr[:thumb_url] = pitch.featured_image(:small_hero) 
-      arr[:description] = pitch.short_description.strip_and_shorten_character_limit(80)
+      arr[:id] = news_item.id
+      arr[:headline] = news_item.headline
+      arr[:permalink] = news_item.permalink
+      arr[:status] = news_item.status
+      arr[:created_at] = news_item.created_at
+      arr[:updated_at] = news_item.updated_at
+      arr[:expiration_date] = news_item.expiration_date
+      arr[:is_funded] = news_item.fully_funded?
+      arr[:thumb_url] = news_item.featured_image(:small_hero) 
+      arr[:description] = news_item.short_description.strip_and_shorten_character_limit(80)
       arr[:currency] = "credits"
 
       # author
       author = ActiveSupport::OrderedHash.new
-      author[:full_name] = pitch.user.full_name
-      author[:profile_url] = pitch.user.permalink
+      author[:full_name] = news_item.user.full_name
+      author[:profile_url] = news_item.user.permalink
       arr[:author] = author
 
       # progress
       progress = ActiveSupport::OrderedHash.new
-      progress[:raised_amount] = pitch.current_funding
-      progress[:funding_in_percentage] = pitch.funding_in_percentage
-      progress[:funding_needed] = pitch.funding_needed
-      progress[:requested_amount] = pitch.requested_amount
+      progress[:raised_amount] = news_item.current_funding
+      progress[:funding_in_percentage] = news_item.funding_in_percentage
+      progress[:funding_needed] = news_item.funding_needed
+      progress[:requested_amount] = news_item.requested_amount
       arr[:progress] = progress
       
       arr[:geographies] = Entity.geographies?(p.short_description)
       arr[:coordinates] = Entity.coordinates?(p.short_description)
     
-      pitches << arr
+      news_items << arr
     end
     
-    render :json => pitches
+    render :json => news_items
     
   end
 
