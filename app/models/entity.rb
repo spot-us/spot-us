@@ -21,7 +21,7 @@ class Entity < ActiveRecord::Base
     self.save
   end
 
-  def entities?(text=nil)
+  def entities?
     self.entities = []
     self.request_body.entities.each { |e| self.entities << {:type => e.type, :name => e.attributes["name"]} } if self.request_body
     return self.entities
@@ -32,19 +32,19 @@ class Entity < ActiveRecord::Base
     arr_e.map{ |a| a[:name] unless a[:type]=='URL' }.uniq.compact
   end
 
-  def geographies?(text=nil)
+  def geographies?
     self.geographies = []
     self.request_body.geographies.each { |g| self.geographies << {:name => g.name} } if self.request_body
     return self.geographies.uniq.compact
   end
 
-  def coordinates?(text)
+  def coordinates?
     self.coordinates = []
     self.request_body.geographies.each { |g| self.coordinates << {:name => g.name, :longitude => g.attributes["longitude"], :latitude => g.attributes["latitude"]} } if self.request_body
     return self.coordinates
   end
 
-  def language?(text)
+  def language?
     return "Spanish" unless self.request_body
     return self.request_body.language 
   end
