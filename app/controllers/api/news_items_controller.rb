@@ -36,7 +36,7 @@ class Api::NewsItemsController < ApplicationController
       arr[:progress] = progress
       
       # create the entity if it does not exist.
-      entity = Entity.find(:first, :conditions => ["entitable_id=? and entitable_type='?'", news_item.id, news_item.class.to_s])
+      entity = Entity.find(:first, :conditions => ["entitable_id=? and entitable_type=?", news_item.id, news_item.class.to_s])
       entity = Entity.create(:entitable_id => news_item.id, :entitable_type => news_item.class.to_s) unless entity
       
       # if the news item has an entity associated...
