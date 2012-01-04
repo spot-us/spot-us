@@ -36,7 +36,10 @@ class Api::NewsItemsController < ApplicationController
       arr[:progress] = progress
       
       Entity.create(:entitable_id => news_item.id, :entitable_type => news_item.class.to_s) unless news_item.entity
-      news_item.entity.process?(news_item.headline + " " + news_item.short_description) if news_item.entity.request_body.blank?
+      if news_item.entity.request_body.blank?
+        news_item.entity.process?(news_item.headline + " " + news_item.short_description) 
+        sleep 1
+      end
       arr[:coordinates] = new_item.entity.coordinates?
     
       news_items << arr
