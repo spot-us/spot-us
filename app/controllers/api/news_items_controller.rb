@@ -32,6 +32,10 @@ class Api::NewsItemsController < ApplicationController
     
   end
 
+  def kml
+    get_items(10)
+  end
+
   protected
   
   def get_news_item_arr(news_item)
