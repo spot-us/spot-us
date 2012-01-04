@@ -15,7 +15,14 @@ class Api::NewsItemsController < ApplicationController
   end
 
   def kml
-    get_items(10)
+    get_items(100)
+    
+    # handle the different formats supported
+    respond_to do |format|
+      format.xml do
+        render :layout => false
+      end
+    end
   end
 
   protected
