@@ -40,7 +40,7 @@ class Api::NewsItemsController < ApplicationController
       
       # if the news item has an entity associated...
       if entity
-        unless entity.request_body.blank?
+        if entity.request_body.blank?
           entity.process?(news_item.headline + " " + news_item.short_description) 
           sleep 1
         end
