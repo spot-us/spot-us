@@ -4,7 +4,7 @@ class Api::NewsItemsController < ApplicationController
     
     get_items(10)
     
-    @news_item.each do |news_item|
+    @news_items.each do |news_item|
       pitches = []
     
       # get the pitch
