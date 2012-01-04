@@ -1,35 +1,17 @@
 class Api::NewsItemsController < ApplicationController
 
   def entities
-    
     get_items(10)
     news_items = []
-    
-    @news_items.each do |news_item|
-      arr = get_news_item_arr(news_item)
-      arr[:entities] = entity.entities?
-      
-      news_items << arr
-    end
-    
+    @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "entities") }
     render :json => news_items
-    
   end
 
   def geography
-    
     get_items(10)
     news_items = []
-    
-    @news_items.each do |news_item|
-      arr = get_news_item_arr(news_item)
-      arr[:coordinates] = entity.coordinates?
-      
-      news_items << arr
-    end
-    
+    @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "coordinates") }
     render :json => news_items
-    
   end
 
   def kml
@@ -38,7 +20,7 @@ class Api::NewsItemsController < ApplicationController
 
   protected
   
-  def get_news_item_arr(news_item)
+  def get_news_item_arr(news_item, entity_type="coordinates")
     # main news_item details
     arr = ActiveSupport::OrderedHash.new
     arr[:id] = news_item.id
@@ -76,6 +58,9 @@ class Api::NewsItemsController < ApplicationController
       entity.process?(news_item.headline + " " + news_item.short_description) 
       sleep 1
     end
+    
+    arr[:coordinates] = entity.coordinates? if entity_type == "coordinates"
+    arr[:entities] = entity.entities? if entity_type == "entities"
   end
   
   
