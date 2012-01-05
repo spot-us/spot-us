@@ -5,10 +5,10 @@ xml.Document do
   xml.name "Spot.us Pitches"
   @items.each do |news_item|
     unless news_item[:coordinates].empty?
-      apply_fragment ['kml_news_item_', news_item] do
+      apply_fragment ['kml_news_item_a_', news_item] do
         xml.Placemark do
           xml.name news_item[:headline]
-          xml.description xml.cdata!(h(news_item[:description]+"...<br/><a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
+          xml.description xml.cdata!("<a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
           xml.Point do
              xml.coordinates "#{news_item[:coordinates].last[:latitude]},#{news_item[:coordinates].last[:longitude]},0"
           end
