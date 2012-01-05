@@ -69,6 +69,8 @@ class NewsItem < ActiveRecord::Base
   has_one :entity, :as => :entitable, :dependent => :destroy
   has_many :clickstreams, :as => :clickstreamable
   
+  after_create :detect_entities
+  
   has_attached_file :featured_image,
                     :styles => { :thumb => '50x50#', 
                         :medium => "200x150#", 
@@ -337,6 +339,15 @@ class NewsItem < ActiveRecord::Base
     end
     
     return short_headline
+  end
+  
+  def detect_entities
+    return if self.entity
+    begin
+      e = Entity.create({:entitable_type => "NewsItem", :entitable_id => id}) 
+      e.process?("#{headline} #{short_description}")
+    rescue
+    end
   end
 
 end
