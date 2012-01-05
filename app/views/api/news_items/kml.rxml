@@ -1,22 +1,20 @@
 xml.instruct! :xml, :version=>"1.0" 
 
 xml.kml("xmlns" => "http:// www.opengis.net/kml/2.2") {
-
   xml.Document {
-    xml.name "Spot.us Pitches"
+    xml.name "Spot.us Pitches - #{@filter.capitalize}"
     @items.each do |news_item|
       unless news_item[:coordinates].empty?
-        apply_fragment ['kml_news_item_a_', news_item] do
+        apply_fragment ['kml_news_item_f_', news_item[:id], news_item[:updated_at]] do
           xml.Placemark{ 
-            xml.name news_item[:headline]
-            xml.description xml.cdata!("<a href='#{news_item[:permalink]}'>Read more &raquo;</a>")
+            xml.name h(news_item[:headline])
+            xml.description xml.cdata!(h("#{news_item[:description]}... <a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
             xml.Point{ 
-               xml.coordinates "#{news_item[:coordinates].last[:latitude]},#{news_item[:coordinates].last[:longitude]},0"
+               xml.coordinates "#{news_item[:coordinates].last[:longitude]},#{news_item[:coordinates].last[:latitude]},0"
             }   
           }
         end
       end
     end
   }
-
 }

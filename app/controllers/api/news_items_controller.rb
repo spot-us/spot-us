@@ -1,21 +1,23 @@
 class Api::NewsItemsController < ApplicationController
 
   def entities
-    get_items(10)
+    get_items({:limit => 10})
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "entities") }
     render :json => news_items
   end
 
   def geography
-    get_items(10)
+    get_items({:limit => 10})
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "coordinates") }
     render :json => news_items
   end
 
   def kml
-    get_items(20)
+    per_page = params[:per_page] || 10
+    limit = params[:limit] || 20
+    get_items({:per_page => per_page, :limit => limit})
     @items = []
     @news_items.each { |news_item| @items << get_news_item_arr(news_item, "coordinates") }
     
@@ -74,7 +76,7 @@ class Api::NewsItemsController < ApplicationController
   end
   
   
-  def get_items(limit=nil)
+  def get_items(args={})
     @requested_page = params[:page] || 1                                          # allow pagination
     @topic_id = params[:topic_id] || -1                                           # for simplicity for the API
     @grouping_id = params[:grouping_id] || -1                                     # for simplicity for the API
@@ -84,11 +86,14 @@ class Api::NewsItemsController < ApplicationController
     @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
     @filter = "updates" if @filter=='posts'
     @full = params[:length]
+    limit = arg[:limit]
+    per_page = arg[:per_page] ? arg[:per_page] : 10 
     
     unless @filter=='updates'
+      NewsItem.per_page = per_page
       @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
     else
-      @news_items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page=>9)
+      @news_items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page => per_page)
     end
   end
 
