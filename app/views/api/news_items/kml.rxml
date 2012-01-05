@@ -7,7 +7,7 @@ xml.Document do
     unless news_item[:coordinates].empty?
       xml.Placemark do
         xml.name news_item[:headline]
-        xml.description xml.cdata!((h(news_item[:description]+"...<br/><a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
+        xml.description xml.cdata!(h(news_item[:description]+"...<br/><a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
         xml.Point do
            xml.coordinates "#{news_item[:coordinates].last[:latitude]},#{news_item[:coordinates].last[:longitude]},0"
         end
