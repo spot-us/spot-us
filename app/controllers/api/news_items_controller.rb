@@ -1,22 +1,26 @@
 class Api::NewsItemsController < ApplicationController
 
   def entities
-    get_items({:limit => 10})
+    per_page = params[:per_page] || 10
+    limit = params[:limit]
+    get_items({:per_page => per_page, :limit => limit})
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "entities") }
     render :json => news_items
   end
 
   def geography
-    get_items({:limit => 10})
+    per_page = params[:per_page] || 10
+    limit = params[:limit]
+    get_items({:per_page => per_page, :limit => limit})
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "coordinates") }
     render :json => news_items
   end
 
   def kml
-    per_page = params[:per_page] || 10
-    limit = params[:limit] || 20
+    per_page = params[:per_page] || 20
+    limit = params[:limit]
     get_items({:per_page => per_page, :limit => limit})
     @items = []
     @news_items.each { |news_item| @items << get_news_item_arr(news_item, "coordinates") }
