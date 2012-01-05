@@ -1,27 +1,21 @@
 class Api::NewsItemsController < ApplicationController
 
   def entities
-    per_page = params[:per_page] || 10
-    limit = params[:limit]
-    get_items({:per_page => per_page, :limit => limit})
+    get_items
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "entities") }
     render :json => news_items
   end
 
   def geography
-    per_page = params[:per_page] || 10
-    limit = params[:limit]
-    get_items({:per_page => per_page, :limit => limit})
+    get_items
     news_items = []
     @news_items.each { |news_item| news_items << get_news_item_arr(news_item, "coordinates") }
     render :json => news_items
   end
 
   def kml
-    per_page = params[:per_page] || 20
-    limit = params[:limit]
-    get_items({:per_page => per_page, :limit => limit})
+    get_items
     @items = []
     @news_items.each { |news_item| @items << get_news_item_arr(news_item, "coordinates") }
     
@@ -81,7 +75,7 @@ class Api::NewsItemsController < ApplicationController
   end
   
   
-  def get_items(args={})
+  def get_items
     @requested_page = params[:page] || 1                                          # allow pagination
     @topic_id = params[:topic_id] || -1                                           # for simplicity for the API
     @grouping_id = params[:grouping_id] || -1                                     # for simplicity for the API
@@ -89,8 +83,8 @@ class Api::NewsItemsController < ApplicationController
     @network = current_network                                                    # get the network
     @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
     @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
-    limit = args[:limit]
-    per_page = args[:per_page] ? args[:per_page] : 10 
+    per_page = params[:per_page] || 10
+    limit = params[:limit]
     
     NewsItem.per_page = per_page
     @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
