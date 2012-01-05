@@ -66,7 +66,6 @@ class NewsItem < ActiveRecord::Base
   belongs_to :parent, :class_name => 'NewsItem', :foreign_key => "news_item_id"
   belongs_to :fact_checker, :class_name => 'User'
   has_many :comments, :as => :commentable, :dependent => :destroy
-  has_one :entity, :as => :entitable, :dependent => :destroy
   has_many :clickstreams, :as => :clickstreamable
   
   after_create :detect_entities
@@ -192,6 +191,10 @@ class NewsItem < ActiveRecord::Base
     else
       return true
     end
+  end
+  
+  def entity
+    Entity.find(:first, :conditions => ["entitable_type='NewsItem' and entitable_id=?", id])
   end
 
   # NOTE: You can chain scopes off of with_sort, but you can't chain with_sort off of scopes.
