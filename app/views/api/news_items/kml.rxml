@@ -5,10 +5,10 @@ xml.kml("xmlns" => "http:// www.opengis.net/kml/2.2") {
     xml.name "Spot.us Pitches - #{@filter.capitalize}"
     @items.each do |news_item|
       unless news_item[:coordinates].empty?
-        apply_fragment ['kml_news_item_', news_item[:id], news_item[:updated_at]] do
+        apply_fragment ['kml_news_item_g_', news_item[:id], news_item[:updated_at]] do
           xml.Placemark{ 
             xml.name h(news_item[:headline])
-            xml.description xml.cdata!(h("#{news_item[:description]}... <a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
+            xml.description xml.cdata!(h("#{news_item[:description]} ... <a href='#{news_item[:permalink]}'>Read more &raquo;</a>"))
             xml.Point{ 
                xml.coordinates "#{news_item[:coordinates].last[:longitude]},#{news_item[:coordinates].last[:latitude]},0"
             }   
