@@ -54,6 +54,7 @@ class Api::NewsItemsController < ApplicationController
     author = ActiveSupport::OrderedHash.new
     author[:full_name] = news_item.user.full_name
     author[:profile_url] = news_item.user.permalink
+    author[:thumb_url] = news_item.user.photo.url(:thumb)
     arr[:author] = author
 
     # progress
@@ -88,17 +89,11 @@ class Api::NewsItemsController < ApplicationController
     @network = current_network                                                    # get the network
     @topic = params[:topic] ? Topic.find_by_seo_name(params[:topic]) : nil        # get the topic
     @filter = params[:filter] ? params[:filter] : 'unfunded'                      # get the filter
-    @filter = "updates" if @filter=='posts'
-    @full = params[:length]
-    limit = arg[:limit]
-    per_page = arg[:per_page] ? arg[:per_page] : 10 
+    limit = args[:limit]
+    per_page = args[:per_page] ? args[:per_page] : 10 
     
-    unless @filter=='updates'
-      NewsItem.per_page = per_page
-      @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
-    else
-      @news_items = Post.by_network(@current_network).paginate(:page => params[:page], :order => "posts.id desc", :per_page => per_page)
-    end
+    NewsItem.per_page = per_page
+    @news_items = NewsItem.get_stories(@requested_page, @topic_id, @grouping_id, @topic, @filter, current_network, limit) 
   end
 
 end

@@ -22,6 +22,7 @@ class Api::PitchesController < ApplicationController
     author = ActiveSupport::OrderedHash.new
     author[:full_name] = pitch.user.full_name
     author[:profile_url] = pitch.user.permalink
+    author[:thumb_url] = pitch.user.photo.url(:thumb)
     arr[:author] = author
     
     # progress
