@@ -123,6 +123,78 @@ class Donation < ActiveRecord::Base
   def self.old_donors
     find(:all, :order=>'created_at asc', :limit=>100).map(&:user).uniq.map(&:email).join(",")
   end
+  
+  def self.create_donation_report(params, email_report=true)
+
+    # initialize
+    success = false
+    intervals = ["yearly","monthly","daily"]
+    interval = params[0]
+
+    # make sure the parameters are correct...
+    if (intervals.include?(interval) && params.length == 1) || 
+        (intervals.include?(interval) && params.length == 2 && params[1].split("-").length==3) || 
+          (params.length == 2 && params[0].split("-").length==3 && params[1].split("-").length==3)
+
+      # get the time
+      now = Time.now
+
+      # change this time if date is given as first argument
+      if params.length == 2 && intervals.include?(interval)
+        now_arr = params[1].split("-")
+        now = Time.local(now_arr[0],now_arr[1],now_arr[2],0,0,0)
+      end
+
+      # define the date intervals
+      if intervals.include?(interval)
+        start_date = now - 1.year if interval == 'yearly'
+        start_date = now - 1.month if interval == 'month'
+        start_date = now - 1.day if interval == 'day'
+      elsif params.length == 2
+        now_arr = params[1].split("-")
+        now = Time.local(now_arr[0],now_arr[1],now_arr[2],0,0,0)
+
+        start_date_arr = params[0].split("-")
+        start_date = Time.local(start_date_arr[0],start_date_arr[1],start_date_arr[2],0,0,0)
+        interval = "custom"
+      end
+
+      # define the dates
+      start_date = Time.local(start_date.year,start_date.month,start_date.day,0,0,0)
+      end_date = Time.local(now.year,now.month,now.day,0,0,0)
+
+      # find the donations
+      donations = find(:all, :conditions => ["donations.credit_id is null and created_at>=? and created_at<?", start_date, end_date])
+
+      # create the csv file
+      csv = []
+      csv << "Full Name,Donated At,Amount in $,Donated towards pitch,Adminstrative fee in $,Payment Type (credit card, paypal)"
+      donations.each do |d|
+      	txt = []
+      	if d.purchase
+        	txt << (d.user ? d.user.full_name.gsub(",",";") : "Anonymous")
+        	txt << d.created_at
+        	txt << d.amount.to_s
+        	txt << (d.pitch_id? ? "Donated towards pitch #{d.pitch_id}" : "Administrative fee")
+        	txt << (d.purchase.spotus_donation ? d.purchase.spotus_donation.amount : 0)
+        	txt << (d.purchase.paypal_transaction_id? ? "Paypal" : "Credit Card")
+          csv << txt.join(",")
+        end
+      end
+
+      csv = csv.join("\r\n")
+
+      # save the file
+      File.open(APP_CONFIG[:reporting][:file], 'w') {|f| f.write(csv) }
+  
+      # send the email
+      Mailer.deliver_reporting(start_date, end_date, interval) if email_report
+  
+      # set the success variable 
+      success = true
+    end
+    success
+  end
 
   protected
 
