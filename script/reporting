@@ -30,7 +30,7 @@ unless ARGV.empty?
     	txt << d.created_at
     	txt << d.amount.to_s
     	txt << (d.pitch_id? ? "Donated towards pitch #{d.pitch_id}" : "Administrative fee")
-    	txt << d.purchase.spotus_donation.amount
+    	txt << (d.purchase.spotus_donation ? d.purchase.spotus_donation.amount : 0)
     	txt << (d.purchase.paypal_transaction_id? ? "Paypal" : "Credit Card")
       csv << txt.join(",")
     end
