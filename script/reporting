@@ -8,40 +8,74 @@ require 'logger'
 log = Logger.new(STDOUT)
 
 unless ARGV.empty?
-  log.info Time.now.to_s + " Warming up to create a report of donations..."
-
-  now = Time.now
-
+  
+  intervals = ["yearly","monthly","daily"]
   interval = ARGV[0]
-  start_date = now - 1.year if interval == 'yearly'
-  start_date = now - 1.month if interval == 'month'
-  start_date = now - 1.day if interval == 'day'
 
-  start_date = Time.local(start_date.year,start_date.month,start_date.day,0,0,0)
-  end_date = Time.local(now.year,now.month,now.day,0,0,0)
-  donations = Donation.find(:all, :conditions => ["donations.credit_id is null and created_at>=? and created_at<?", start_date, end_date])
+  # make sure the parameters are correct...
+  if (intervals.include?(interval) && ARGV.length == 1) || 
+      (intervals.include?(interval) && ARGV.length == 2 && ARGV[1].split("-").length==3) || 
+        (ARGV.length == 2 && ARGV[0].split("-").length==3 && ARGV[1].split("-").length==3)
+    log.info Time.now.to_s + " Warming up to create a report of donations..."
 
-  csv = []
-  csv << "Full Name,Donated At,Amount in $,Donated towards pitch,Adminstrative fee in $,Payment Type (credit card, paypal)"
-  donations.each do |d|
-  	txt = []
-  	if d.purchase
-    	txt << (d.user ? d.user.full_name : "Anonymous")
-    	txt << d.created_at
-    	txt << d.amount.to_s
-    	txt << (d.pitch_id? ? "Donated towards pitch #{d.pitch_id}" : "Administrative fee")
-    	txt << (d.purchase.spotus_donation ? d.purchase.spotus_donation.amount : 0)
-    	txt << (d.purchase.paypal_transaction_id? ? "Paypal" : "Credit Card")
-      csv << txt.join(",")
+    # get the time
+    now = Time.now
+
+    # change this time if date is given as first argument
+    if ARGV.length == 2 && intervals.include?(interval)
+      now_arr = ARGV[1].split("-")
+      now = Time.local(now_arr[0],now_arr[1],now_arr[2],0,0,0)
     end
+  
+    # define the date intervals
+    if intervals.include?(interval)
+      start_date = now - 1.year if interval == 'yearly'
+      start_date = now - 1.month if interval == 'month'
+      start_date = now - 1.day if interval == 'day'
+    elsif ARGV.length == 2
+      now_arr = ARGV[1].split("-")
+      now = Time.local(now_arr[0],now_arr[1],now_arr[2],0,0,0)
+    
+      start_date_arr = ARGV[0].split("-")
+      start_date = Time.local(start_date_arr[0],start_date_arr[1],start_date_arr[2],0,0,0)
+      interval = "custom"
+    end
+
+    # define the dates
+    start_date = Time.local(start_date.year,start_date.month,start_date.day,0,0,0)
+    end_date = Time.local(now.year,now.month,now.day,0,0,0)
+  
+    # find the donations
+    donations = Donation.find(:all, :conditions => ["donations.credit_id is null and created_at>=? and created_at<?", start_date, end_date])
+
+    # create the csv file
+    csv = []
+    csv << "Full Name,Donated At,Amount in $,Donated towards pitch,Adminstrative fee in $,Payment Type (credit card, paypal)"
+    donations.each do |d|
+    	txt = []
+    	if d.purchase
+      	txt << (d.user ? d.user.full_name.gsub(",",";") : "Anonymous")
+      	txt << d.created_at
+      	txt << d.amount.to_s
+      	txt << (d.pitch_id? ? "Donated towards pitch #{d.pitch_id}" : "Administrative fee")
+      	txt << (d.purchase.spotus_donation ? d.purchase.spotus_donation.amount : 0)
+      	txt << (d.purchase.paypal_transaction_id? ? "Paypal" : "Credit Card")
+        csv << txt.join(",")
+      end
+    end
+
+    csv = csv.join("\r\n")
+
+    # save the file
+    File.open(APP_CONFIG[:reporting][:file], 'w') {|f| f.write(csv) }
+  
+    # send the email
+    Mailer.deliver_reporting(start_date, end_date, interval)
+
+    log.info Time.now.to_s + " Done and going to sleep..."
+  else
+    log.info "Oops, you have to run the script with unsupoorted characters. Please check the command and try again."
   end
-
-  csv = csv.join("\r\n")
-
-  File.open(APP_CONFIG[:reporting][:file], 'w') {|f| f.write(csv) }
-  Mailer.deliver_reporting(start_date, end_date, interval)
-
-  log.info Time.now.to_s + " Done and going to sleep..."
 else
   log.info "Oops, you need to provide the interval you wish to create a report for."
 end

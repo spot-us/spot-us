@@ -249,7 +249,7 @@ class Mailer < ActionMailer::Base
     recipients  APP_CONFIG[:reporting][:emails]
     from        MAIL_FROM_INFO
     subject     "SPOT.US: #{interval.capitalize} Report for donations between #{start_date.strftime("%m/%d/%y")}-#{end_date.strftime("%m/%d/%y")}"
-    content_type  "multipart/alternative"
+    content_type  "multipart/mixed"
 
     part "text/html" do |p|
       p.body = render_message 'reporting', {:start_date => start_date, :end_date => end_date, :interval => interval}

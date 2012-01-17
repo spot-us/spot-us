@@ -20,8 +20,8 @@ config.action_mailer.raise_delivery_errors = false
 use_gateway = true
 
 if APP_CONFIG[:action_mailer].is_a?(Hash)
-  # config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]
-  # config.action_mailer.smtp_settings   = APP_CONFIG[:action_mailer][:smtp_settings]
+  config.action_mailer.delivery_method = APP_CONFIG[:action_mailer][:delivery_method]
+  config.action_mailer.smtp_settings   = APP_CONFIG[:action_mailer][:smtp_settings]
 end
 
 ActiveMerchant::Billing::Base.mode = :test
