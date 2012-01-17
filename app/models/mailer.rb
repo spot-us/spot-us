@@ -245,4 +245,12 @@ class Mailer < ActionMailer::Base
     body        :sponsor => sponsor
   end
   
+  def reporting(start_date, end_date, interval)
+    recipients  APP_CONFIG[:reporting][:emails]
+    from        MAIL_FROM_INFO
+    subject     "SPOT.US: #{interval.capitalize} Report for donations between #{start_date.strftime("%m/%d/%y")}-#{end_date.strftime("%m/%d/%y")}"
+    body        :start_date => start_date, :end_date => end_date, :interval => interval
+    attachment  :content_type => 'text/plain', :filename => ["donation",interval,"report",start_date.strftime("%m-%d-%y"),end_date.strftime("%m-%d-%y")].join("_")+".csv", :body => File.read(APP_CONFIG[:reporting][:file])
+  end
+  
 end

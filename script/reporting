@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+unless ARGV.empty?
+  log.info Time.now.to_s + " Warming up to create a report of donations..."
+
+  now = Time.now
+
+  interval = ARGV[0]
+  start_date = now - 1.year if interval == 'yearly'
+  start_date = now - 1.month if interval == 'month'
+  start_date = now - 1.day if interval == 'day'
+
+  start_date = Time.local(start_date.year,start_date.month,start_date.day,0,0,0)
+  end_date = Time.local(now.year,now.month,now.day,0,0,0)
+  donations = Donation.find(:all, :conditions => ["donations.credit_id is null and created_at>=? and created_at<?", start_date, end_date])
+
+  csv = []
+  csv << "Full Name,Donated At,Amount in $,Donated towards pitch,Adminstrative fee in $,Payment Type (credit card, paypal)"
+  donations.each do |d|
+  	txt = []
+  	if d.purchase
+    	txt << (d.user ? d.user.full_name : "Anonymous")
+    	txt << d.created_at
+    	txt << d.amount.to_s
+    	txt << (d.pitch_id? ? "Donated towards pitch #{d.pitch_id}" : "Administrative fee")
+    	txt << d.purchase.spotus_donation.amount
+    	txt << (d.purchase.paypal_transaction_id? ? "Paypal" : "Credit Card")
+      csv << txt.join(",")
+    end
+  end
+
+  csv = csv.join("\r\n")
+
+  File.open(APP_CONFIG[:reporting][:file], 'w') {|f| f.write(csv) }
+  Mailer.deliver_reporting(start_date, end_date, interval)
+
+  log.info Time.now.to_s + " Done and going to sleep..."
+else
+  log.info "Oops, you need to provide the interval you wish to create a report for."
+end

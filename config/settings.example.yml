@@ -43,3 +43,6 @@ production:
       :consumer_secret: application_secret
   :get_satisfaction:
       :app_name: app_name
+  :reporting: 
+      :emails: "domma separated list for emails to send donation reports to"
+      :file: "temporary file path, note should NOT be in the public directory as of security but needs to exist and be writable prior to running the reporting script"
