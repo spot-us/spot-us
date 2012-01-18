@@ -3,8 +3,6 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
   
-  BOT_FILTER = /(?:Googlebot|Slurp|Apache|msnbot|wget|libwww|nutch|ia_archiver|heretrix|cuil|google|yandex)/i
-  
   include AuthenticatedSystem
   include SslRequirement
 

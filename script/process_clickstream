@@ -23,8 +23,23 @@ clickstreams.each do |c|
   end
 end
 
-log.info "    Updating the table as processed below id #{last_clickstream.id}..."
+# clean up processed clickstreams ...
+if last_clickstream
+  log.info "    Cleaning the clickstream table from processed entries below id #{last_clickstream.id}..." 
 
-Clickstream.update_all('status=1', "clickstreamable_id is not null and clickstreamable_type is not null and status=0 and id<=#{last_clickstream.id}")
+  Clickstream.update_all('status=1', "clickstreamable_id is not null and clickstreamable_type is not null and status=0 and id<=#{last_clickstream.id}")
 
-log.info Time.now.to_s + " Done processing clickstream and going to sleep..."
+  sql = "INSERT INTO clickstream_archives (SELECT * from clickstreams where status = 1 and id<=#{last_clickstream.id})"
+  ActiveRecord::Base.connection.execute(sql)
+
+  Clickstream.delete_all("status=1 and id<=#{last_clickstream.id}")
+end
+
+# clean up the rest of the table...
+log.info "    Cleaning table from invalid data..."
+sql = "INSERT INTO clickstream_archives (SELECT * from clickstreams where clickstreamable_id is null and clickstreamable_type is null)"
+ActiveRecord::Base.connection.execute(sql)
+
+Clickstream.delete_all("clickstreamable_id is null and clickstreamable_type is null")
+
+log.info Time.now.to_s + " Done and going to sleep..."
