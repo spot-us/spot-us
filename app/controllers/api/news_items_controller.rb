@@ -41,7 +41,8 @@ class Api::NewsItemsController < ApplicationController
     arr[:expiration_date] = news_item.expiration_date
     arr[:is_funded] = news_item.is_a?(Story) ? true : news_item.fully_funded?
     arr[:thumb_url] = news_item.featured_image(:small_hero) 
-    arr[:description] = news_item.short_description.strip_and_shorten_character_limit(80)
+    arr[:description] = news_item.short_description.strip_and_shorten_character_limit(80) if news_item.short_description
+    arr[:description] = news_item.extended_description.strip_and_shorten_character_limit(80) if news_item.extended_description
     arr[:currency] = "credits"
 
     # author
