@@ -5,7 +5,6 @@ require 'net/http'
 require 'rubygems'
 require 'logger'
 
-config = YAML.load(File.read(File.join(File.dirname(__FILE__), '..', 'config', 'mail.yml')))[Rails.env]
 log = Logger.new(STDOUT)
 
 log.info Time.now.to_s + " Warming up processor to extract entities form news_items..."
@@ -17,7 +16,7 @@ begin
   
   nr = 1
   news_items.each do |ni|
-    log.info("      -- Processing News Item #{nr} with id #{ni.id} and title #{ni.title}")
+    log.info("      -- Processing News Item #{nr} with id #{ni.id} and title #{ni.headline}")
     ni.detect_entities
     sleep 1
     nr += 1
