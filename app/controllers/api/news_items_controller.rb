@@ -53,12 +53,14 @@ class Api::NewsItemsController < ApplicationController
     arr[:author] = author
 
     # progress
-    progress = ActiveSupport::OrderedHash.new
-    progress[:raised_amount] = news_item.current_funding
-    progress[:funding_in_percentage] = news_item.funding_in_percentage
-    progress[:funding_needed] = news_item.funding_needed
-    progress[:requested_amount] = news_item.requested_amount
-    arr[:progress] = progress
+    unless news_item.is_a?(Story)
+      progress = ActiveSupport::OrderedHash.new
+      progress[:raised_amount] = news_item.current_funding
+      progress[:funding_in_percentage] = news_item.funding_in_percentage
+      progress[:funding_needed] = news_item.funding_needed
+      progress[:requested_amount] = news_item.requested_amount
+      arr[:progress] = progress
+    end
     
     # create the entity if it does not exist.
     entity = Entity.find(:first, :conditions => ["entitable_id=? and entitable_type=?", news_item.id, news_item.class.to_s])
