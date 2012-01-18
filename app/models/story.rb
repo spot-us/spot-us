@@ -44,6 +44,9 @@ class Story < NewsItem
   #   sanitizer.allowed_attributes.add(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
   # end
 
+  include ActionController::UrlWriter
+  default_url_options[:host] = APP_CONFIG[:default_host]
+
   aasm_initial_state  :draft
   aasm_state :draft
   aasm_state :fact_check
@@ -74,6 +77,11 @@ class Story < NewsItem
   validate_on_update :extended_description
 
   named_scope :latest, :order => "updated_at desc", :limit => 6
+  
+  def permalink
+    story_path(self, {:only_path => false})
+  end
+  
   def supporting_organizations
     pitch.supporting_organizations
   end
