@@ -42,4 +42,8 @@ TEXT[:title] = "Write a short, enticing and descriptive title"
 
 SHOW_PREPEND_FOR_STORY_UPDATES = false
 
-BOT_FILTER = /(?:#{Robot.all.map(&:name).join('|')})/i 
+if ActiveRecord::Base.connection.tables.include?("robots")
+  BOT_FILTER = /(?:#{Robot.all.map(&:name).join('|')})/i 
+else
+  BOT_FILTER = /(?:bot)/i
+end
