@@ -148,8 +148,8 @@ class Donation < ActiveRecord::Base
       # define the date intervals
       if intervals.include?(interval)
         start_date = now - 1.year if interval == 'yearly'
-        start_date = now - 1.month if interval == 'month'
-        start_date = now - 1.day if interval == 'day'
+        start_date = now - 1.month if interval == 'monthly'
+        start_date = now - 1.day if interval == 'daily'
       elsif params.length == 2
         now_arr = params[1].split("-")
         now = Time.local(now_arr[0],now_arr[1],now_arr[2],0,0,0)
