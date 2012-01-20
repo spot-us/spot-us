@@ -188,7 +188,7 @@ class Donation < ActiveRecord::Base
       File.open(APP_CONFIG[:reporting][:file], 'w') {|f| f.write(csv) }
   
       # send the email
-      Mailer.deliver_reporting(start_date, end_date, interval) if email_report
+      Mailer.deliver_reporting(start_date, end_date, interval, !donations.empty?) if email_report
   
       # set the success variable 
       success = true
