@@ -207,10 +207,12 @@ class Pitch < NewsItem
   end
 
   def current_funding_in_percentage
+    return 100 if accepted?
     (current_funding/requested_amount)
   end
   
   def funding_in_percentage
+    return 100 if accepted?
     (current_funding_in_percentage*100).to_i>100 ? 100 : (current_funding_in_percentage*100).to_i
   end
 

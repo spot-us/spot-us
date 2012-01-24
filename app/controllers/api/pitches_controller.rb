@@ -29,8 +29,8 @@ class Api::PitchesController < ApplicationController
     progress = ActiveSupport::OrderedHash.new
     progress[:raised_amount] = pitch.current_funding
     progress[:funding_in_percentage] = pitch.funding_in_percentage
-    progress[:funding_needed] = pitch.funding_needed
-    progress[:requested_amount] = pitch.requested_amount
+    progress[:funding_needed] = pitch.accepted? ? 0 : pitch.funding_needed
+    progress[:requested_amount] = pitch.accepted? ? pitch.current_funding : pitch.requested_amount
     arr[:progress] = progress
     
     # donors
