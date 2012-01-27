@@ -7,6 +7,7 @@ class Api::PitchesController < ApplicationController
     # main pitch details
     arr = ActiveSupport::OrderedHash.new
     arr[:id] = pitch.id
+    arr[:slug] = pitch.slug
     arr[:headline] = pitch.headline
     arr[:permalink] = pitch.permalink
     arr[:status] = pitch.status
