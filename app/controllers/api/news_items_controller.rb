@@ -33,6 +33,7 @@ class Api::NewsItemsController < ApplicationController
     # main news_item details
     arr = ActiveSupport::OrderedHash.new
     arr[:id] = news_item.id
+    arr[:slug] = news_item.slug
     arr[:headline] = news_item.headline
     arr[:permalink] = news_item.permalink
     arr[:status] = news_item.status
