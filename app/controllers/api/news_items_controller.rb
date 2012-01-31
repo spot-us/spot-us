@@ -56,10 +56,10 @@ class Api::NewsItemsController < ApplicationController
     # progress
     unless news_item.is_a?(Story)
       progress = ActiveSupport::OrderedHash.new
-      progress[:raised_amount] = news_item.current_funding
-      progress[:funding_in_percentage] = news_item.funding_in_percentage
-      progress[:funding_needed] = news_item.funding_needed
-      progress[:requested_amount] = news_item.requested_amount
+      progress[:raised_amount] = pitch.funding_needed>0 ? pitch.current_funding : pitch.requested_amount
+      progress[:funding_in_percentage] = pitch.funding_needed>0 ? pitch.funding_in_percentage : 100
+      progress[:funding_needed] = pitch.funding_needed>0 ? pitch.funding_needed : 0
+      progress[:requested_amount] = pitch.funding_needed>0 ? pitch.current_funding : pitch.requested_amount
       arr[:progress] = progress
     end
     
