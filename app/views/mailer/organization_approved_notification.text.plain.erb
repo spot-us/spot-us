@@ -10,8 +10,7 @@ privileges to and as a result we are very careful about who is given a
 
 But now that you are in - we work for you!
 
-If you have any questions - don't hesitate to contact David Cohn:
-David@spot.us
+If you have any questions - don't hesitate to contact <%=get_role(:info)%>
 
 In the meantime - here are some ideas on how to get started.
 
@@ -23,7 +22,7 @@ a reality.
 You can get more ideas at our FAQ: http://spot.us/pages/about#faq_news_organization
 
 Sincerely,
-David Cohn
+<%=get_name(:info)%>
 Spot.Us
 
 <%= render :partial=>"footer", :locals=>{ :email=>@user.email }%>

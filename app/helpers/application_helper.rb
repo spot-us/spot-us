@@ -174,12 +174,19 @@ module ApplicationHelper
   end
   
   def short_date(dt)
-      # tn = Time.now
-      # if dt.day < tn.day or dt.month < tn.month or dt.year < tn.year #diff > 60  * 60 * (24 / 1.02)
-           dt.strftime("%m/%d/%y")
-      # else
-      #    dt.strftime("%l:%M %p").downcase
-      # end
+    dt.strftime("%m/%d/%y")
+  end
+  
+  # getting email field for mailer from role for email accounts
+  def get_email(role)
+    return %("#{APP_CONFIG[:mailer][:accounts][role][:name]}" <#{APP_CONFIG[:mailer][:accounts][role][:email]}>) if role
+    %("#{APP_CONFIG[:mailer][:accounts][:info][:name]}" <#{APP_CONFIG[:mailer][:accounts][:info][:email]}>)
+  end
+  
+  # getting the name from role for email accounts
+  def get_name(role)
+    return APP_CONFIG[:mailer][:accounts][role][:name] if role
+    APP_CONFIG[:mailer][:accounts][:info][:name]
   end
   
   def medium_date(dt)

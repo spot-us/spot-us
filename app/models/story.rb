@@ -203,7 +203,7 @@ class Story < NewsItem
   
   protected
   def fact_checker_recipients
-      recipients = '"David Cohn" <david@spot.us>'
+      recipients = get_email(:admin)
       if self.pitch && self.pitch.fact_checker
           fact_checker = User.find_by_id(self.pitch.fact_checker.id)
           if fact_checker && fact_checker.email

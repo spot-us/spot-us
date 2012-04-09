@@ -17,9 +17,10 @@ contact Spot.Us.
 
 You can read more here: http://spot.us/pages/about#joined_the_team
 
-Spot.Us: <info@spot.us> or David Cohn <david@spot.us>
+<%=get_email(:info)%> or <%=get_email(:admin)%>
 
 Sincerely,
-The Spot.Us Team.
+
+The Spot.Us Team
 
 <%= render :partial=>"footer.html.erb", :locals=>{ :email=>@pitch.user.email }%>

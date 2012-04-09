@@ -27,7 +27,7 @@ return. The Center for Media Change, Inc. is a 501(c)3 public benefit corporatio
 <%end%>
 
 Sincerely,
-David Cohn
+<%=get_name(:info)%>
 Spot.Us
 
 <%= render :partial=>"footer", :locals=>{ :email=>@donation.user.email }%>

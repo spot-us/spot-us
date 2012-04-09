@@ -28,7 +28,7 @@ class TwitterCredential < ActiveRecord::Base
   		obj = update_status(client, status)
   	else
   	      #get the user and email update
-  		obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
+  		obj = Mailer.deliver_notification_email(get_email(:webmaster), "Update of Twitter for #{user.email} with email #{user.email}", "Test Twitter update with this status: #{status}") if user
 	
   	end
   	obj
@@ -48,14 +48,14 @@ class TwitterCredential < ActiveRecord::Base
   #     end
   #   else
   #     #get the user and email update
-  #     obj = Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}","Test Twitter update with this status: #{status}") if user
+  #     obj = Mailer.deliver_notification_email(get_email(:webmaster), "Update of Twitter for #{user.email} with email #{user.email}","Test Twitter update with this status: #{status}") if user
   #   end               
   #   
   #   obj
   # end
   
   def raise_error?(type='ERROR', status='')
-    Mailer.deliver_notification_email(MAIL_WEBMASTER, "Update of Twitter for #{user.email} with email #{user.email}", "Attempted Twitter update with this status: #{status}") if user
+    Mailer.deliver_notification_email(get_email(:webmaster), "Update of Twitter for #{user.email} with email #{user.email}", "Attempted Twitter update with this status: #{status}") if user
     logger.info("#{type}: Update of Twitter for #{user.email} with email #{user.email}") if user
     return false
   end
