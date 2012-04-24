@@ -179,14 +179,15 @@ module ApplicationHelper
   
   # getting email field for mailer from role for email accounts
   def get_email(role)
-    return %("#{APP_CONFIG[:mailer][:accounts][role][:name]}" <#{APP_CONFIG[:mailer][:accounts][role][:email]}>) if role
-    %("#{APP_CONFIG[:mailer][:accounts][:info][:name]}" <#{APP_CONFIG[:mailer][:accounts][:info][:email]}>)
+    return "'#{APP_CONFIG[:action_mailer][:accounts][role][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][role][:email]}>" if role
+    "'#{APP_CONFIG[:action_mailer][:accounts][:info][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][:info][:email]}>"
   end
   
   # getting the name from role for email accounts
   def get_name(role)
-    return APP_CONFIG[:mailer][:accounts][role][:name] if role
-    APP_CONFIG[:mailer][:accounts][:info][:name]
+    puts APP_CONFIG[:action_mailer].inspect
+    return APP_CONFIG[:action_mailer][:accounts][role][:name] if role
+    APP_CONFIG[:action_mailer][:accounts][:info][:name]
   end
   
   def medium_date(dt)

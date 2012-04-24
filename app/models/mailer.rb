@@ -1,6 +1,7 @@
 class Mailer < ActionMailer::Base
   include ActionController::UrlWriter
   helper :application
+  include ApplicationHelper
   default_url_options[:host] = DEFAULT_HOST
 
   def notification_email(to, subject, message)
