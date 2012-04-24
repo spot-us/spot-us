@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
+require 'net/imap'
+require 'net/http'
+require 'rubygems'
+require 'logger'
+
+log = Logger.new(STDOUT)
+
+unless ARGV.empty?
+  user = User.find_by_id(ARGV[0])
+  user = User.find_by_email(ARGV[0]) unless user
+  
+  if user
+    Mailer.deliver_activation_email(user)
+    Mailer.deliver_citizen_signup_notification(user)
+    Mailer.deliver_reporter_signup_notification(user)
+    Mailer.deliver_organization_signup_notification(user)
+    Mailer.deliver_password_reset_notification(user)
+    Mailer.deliver_organization_approved_notification(user)
+    Mailer.deliver_unpaid_donations(user)
+    
+    pitch = Pitch.last
+    Mailer.deliver_approved_reporting_team_notification(pitch, user)
+    Mailer.deliver_applied_reporting_team_notification(pitch, user)
+    Mailer.deliver_thank_you_for_your_pitch(user, pitch)
+    
+    comment = Comment.last
+    Mailer.deliver_comment_notification(comment, user)
+    
+    story = Story.last
+    Mailer.deliver_story_published_notification(story,user.full_name,user.email)
+    
+    #Mailer.deliver_
+    #Mailer.deliver_
+    #Mailer.deliver_
+    #Mailer.deliver_
+  else
+    log.info 'You either provided an email or user id that does not exist.'
+  end
+
+else
+  log.info "Oops, you need to provide a user to send to."
+end
