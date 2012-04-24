@@ -33,7 +33,7 @@ class Mailer < ActionMailer::Base
   end
   
   def sponsor_interest_notification(user)
-    recipients 
+    recipients get_email(:info)
     from       get_email(:info)
     subject    "Spot.Us - Someone has signed up to a Sponsor"
     body :user => user

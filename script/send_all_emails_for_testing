@@ -12,7 +12,6 @@ unless ARGV.empty?
   user = User.find_by_email(ARGV[0]) unless user
   
   if user
-    Mailer.deliver_activation_email(user)
     Mailer.deliver_citizen_signup_notification(user)
     Mailer.deliver_reporter_signup_notification(user)
     Mailer.deliver_organization_signup_notification(user)

@@ -185,7 +185,6 @@ module ApplicationHelper
   
   # getting the name from role for email accounts
   def get_name(role)
-    puts APP_CONFIG[:action_mailer].inspect
     return APP_CONFIG[:action_mailer][:accounts][role][:name] if role
     APP_CONFIG[:action_mailer][:accounts][:info][:name]
   end
