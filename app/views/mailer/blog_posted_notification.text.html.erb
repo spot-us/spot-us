@@ -1,0 +1,22 @@
+<p>Dear <%=@to%>,</p>
+
+<p>A project you've supported on Spot.Us has an update.</p> 
+
+<p>Check out the latest blog post: <%= pitch_post_url(@post.pitch, @post) %></p>
+
+<p>Here is an excerpt:<br/>
+"<%=CGI::unescape(strip_html(@post.body))[0..250].gsub(/\w+$/, '').gsub("\n", '').strip + "..."%>"</p>
+
+<p>You can read more at <%= pitch_post_url(@post.pitch, @post) %></p>
+
+<p>Reporting will continue until we've published the finished piece. Stay tuned for more updates.</p>
+
+<p>You can opt to stop receiving blog post notifications by visiting your settings page http://spot.us/myspot/settings/edit</p>
+
+<p>If you have questions or concerns - please contact: <%=get_name(:info)%></p>
+
+<p>Sincerely,</p>
+
+<p>Spot.Us Team</p>
+
+<%= render :partial=>"footer", :locals=>{ :email=>@email, :subscriber=>@subscriber }%>
