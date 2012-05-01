@@ -5,7 +5,7 @@
 <p>Check out the latest blog post: <%= pitch_post_url(@post.pitch, @post) %></p>
 
 <p>Here is an excerpt:<br/>
-"<%=CGI::unescape(strip_html(@post.body))[0..250].gsub(/\w+$/, '').gsub("\n", '').strip + "..."%>"</p>
+"<%=strip_html(@post.body)[0..250].gsub(/\w+$/, '').gsub("\n", '').strip + "..."%>"</p>
 
 <p>You can read more at <%= pitch_post_url(@post.pitch, @post) %></p>
 
