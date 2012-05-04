@@ -178,9 +178,14 @@ module ApplicationHelper
   end
   
   # getting email field for mailer from role for email accounts
-  def get_email(role)
-    return "'#{APP_CONFIG[:action_mailer][:accounts][role][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][role][:email]}>" if role
-    "'#{APP_CONFIG[:action_mailer][:accounts][:info][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][:info][:email]}>"
+  def get_email(role, only_email=false)
+    if only_email
+      return APP_CONFIG[:action_mailer][:accounts][role][:email] if role
+      return APP_CONFIG[:action_mailer][:accounts][:info][:email]
+    else
+      return "'#{APP_CONFIG[:action_mailer][:accounts][role][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][role][:email]}>" if role
+      return "'#{APP_CONFIG[:action_mailer][:accounts][:info][:name]}' <#{APP_CONFIG[:action_mailer][:accounts][:info][:email]}>"
+    end
   end
   
   # getting the name from role for email accounts

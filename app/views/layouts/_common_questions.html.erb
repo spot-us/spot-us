@@ -2,7 +2,7 @@
   <h3>Common Questions</h3>
   <p>
     Perhaps you have some questions. That's great. We love them. Don't hesitate to contact us
-    <%= mail_to get_email(:info), nil, :encode => "hex" %>
+    <%= mail_to get_email(:info, true), nil, :encode => "hex" %>
     Or check out our FAQ's.
   </p>
   <h3><%= link_to "FAQ", page_path('about') %></h3>
