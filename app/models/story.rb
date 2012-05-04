@@ -155,7 +155,7 @@ class Story < NewsItem
             Mailer.deliver_story_to_editor_notification(self,fact_checker.full_name,fact_checker.email)
         end
     end
-    Mailer.deliver_story_to_editor_notification(self,"David","david@spot.us")
+    Mailer.deliver_story_to_editor_notification(self,"Info Spot.us","info@spot.us")
   end
   
   def notify_reporter

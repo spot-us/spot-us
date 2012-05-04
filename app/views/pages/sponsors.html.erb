@@ -33,7 +33,7 @@
 				<div id="myContent1" style="display: none;">Instead of a one-way communication model the Spot.Us sponsorship lets the sponsor interact directly with community members. We can guarantee sponsors an engaged and extended connection with the Spot.Us community in an uncluttered and controlled environment. The more you pledge - the more interactions we can guarantee. Just contact david@spot.us to find out how.</div>
 			</li>
 			<li><span class="no2">2.</span><p>Sponsor and Spot.us create act of engagement.  <a id="myHeader2" href="javascript:toggle('myContent2','myHeader2');" >(show more)</a></p>
-					<div id="myContent2" style="display: none;">After initial discussion with David@spot.us - Sponsors create a survey, quiz, crowdsourced actions or other act of engagement. The goal is to come up with an action that you want Spot.Us community members to take that will benefit your cause, brand or product. Spot.Us staff will help at every step of the process and show you what the act of engagement would look like on our staging site.</div>
+					<div id="myContent2" style="display: none;">After initial discussion with <%=get_email(:info)%> - Sponsors create a survey, quiz, crowdsourced actions or other act of engagement. The goal is to come up with an action that you want Spot.Us community members to take that will benefit your cause, brand or product. Spot.Us staff will help at every step of the process and show you what the act of engagement would look like on our staging site.</div>
 			 </li>
 			<li><span class="no3">3.</span><p>Community members participate in act of engagement. <a id="myHeader3" href="javascript:toggle('myContent3','myHeader3');" >(show more)</a></p>
 				<div id="myContent3" style="display: none;">Once the sponsorship is live, community members click "free credits" to participate with your act of engagement. Spot.Us community members are in a mindset ready and committed to engage with your brand, product or cause. On average they spend around 3 minutes each engaging with a sponsorship.</div>
@@ -49,7 +49,7 @@
 			</li>
 		</ul>
 
-		<h2>Interested? Fill out the form below or email david@spot.us</h2>
+		<h2>Interested? Fill out the form below or email <%=get_email(:info)%></h2>
 		<%if @errors%>
 			<div style="padding:0px 0px 10px 0px; font-size:14px;"><%=@errors%></div>
 		<%end%>

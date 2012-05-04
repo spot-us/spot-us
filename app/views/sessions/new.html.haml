@@ -11,7 +11,7 @@
           = link_to "Register now", new_user_path
       %p
         If you're experiencing a persistent problem, email
-        = mail_to 'david@spot.us', nil, :encode => "hex"
+        = mail_to get_email(:info), nil, :encode => "hex"
         %br
         Seriously, this guy doesn't sleep and he wants the site to work for you!!!
   #spotusForm
