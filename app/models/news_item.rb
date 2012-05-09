@@ -53,7 +53,7 @@ class NewsItem < ActiveRecord::Base
   end
 
   cleanse_columns(:video_embed, :widget_embed) do |sanitizer|
-    sanitizer.allowed_tags.replace(%w(object param embed a img))
+    sanitizer.allowed_tags.replace(%w(object param embed a img iframe))
     sanitizer.allowed_attributes.replace(%w(width height name src value allowFullScreen type href allowScriptAccess style wmode pluginspage classid codebase data quality))
   end
   before_save :clean_columns
