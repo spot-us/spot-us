@@ -5,6 +5,6 @@
 	<%=form_tag("https://#{APP_CONFIG[:default_host]}/purchase", {:target => @is_widget ? "_blank" : ""}) %>
 		<%= hidden_field_tag :total_amount, news_item.suggested_funding %>
 		<%= hidden_field_tag :pitch_id, news_item.id %>
-		<%= submit_tag "Fund This Project", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}" %>
+		<%= submit_tag "Fund This", :alt => "Donate #{Donation::DEFAULT_AMOUNT}", :title => "Click here to donate $#{Donation::DEFAULT_AMOUNT}" %>
 	</form>
 <%end%>

@@ -10,7 +10,7 @@
 					<%= render :partial => "pitches/progress_bar", :locals => { :pitch => @pitch }%>
 				</div>
 			<% else %>
-				<h2>Help Fund This Project!</h2>
+				<h2>Help Fund This!</h2>
 				<%= link_to image_tag(@pitch.featured_image.url(:medium)), @pitch, :target => "_parent" %> <h4><%= link_to h(@pitch.headline), @pitch, :target => "_parent" %></h4>
 				 by <%= link_to truncate(h(@pitch.user.full_name), :length => 20), profile_path(@pitch.user), :target => "_parent" %>
 				<div class="smallFundBox">
