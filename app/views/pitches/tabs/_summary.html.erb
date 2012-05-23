@@ -2,7 +2,7 @@
 	<div class="descriptionContainer">			
 		<% apply_fragment ['pitch_summary_c_', @pitch] do %>
 		
-			<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+			<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
 			
 			<% unless @pitch.video_embed.blank? %>
 				<div class="videoContainer">

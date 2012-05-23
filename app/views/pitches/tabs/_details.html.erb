@@ -37,7 +37,7 @@
 		<%end%>
 	<%end%>
 	
-	<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :widget_url => "#{pitch_path(@pitch)}/get_widget", :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
+	<%= render :partial => "/shared/social_sharing", :locals => { :content_url => pitch_path(@pitch, {:only_path=>false}), :comments_url => "#{pitch_path(@pitch)}/discussion", :comments_count => @pitch.comments.count }%>
 		
 </div>
 <%=render :partial => "pitches/sidebars/narrow"%>
