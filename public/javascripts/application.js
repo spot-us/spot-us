@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
 	}
 	$('a[rel*=facebox]').facebox();
 	$('form[rel*=facebox]').facebox();
-	$('a[href*=/get_external_url]').facebox();
+	$('a[href*="/get_external_url"]').facebox();
 	$(".primary_button").hover(function(){
 		$("#" + $(this).attr("id") + "_status").fadeIn(100);
 	}, function(){
@@ -100,12 +100,12 @@ jQuery(document).ready(function($){
 
 	jQuery("span[id*=toggleEmail]").click(function(){
 		containerName = this.id.replace('toggle', '');
-		$("#list"+containerName).slideToggle(200);
+		$("#list"+containerName).show();
 	});
 
 	jQuery("span[id*=toggleEmail]").click(function(){
 		containerName = this.id.replace('toggle', '');
-		$("#list"+containerName).slideToggle(200);
+		$("#list"+containerName).show();
 	});
 	
 });
@@ -143,7 +143,6 @@ function socialNotifier(){
 			return false;
 		});
 	}
-	
 }
 
 function email_validate(emails) {
