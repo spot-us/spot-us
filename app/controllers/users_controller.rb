@@ -90,6 +90,15 @@ class UsersController < ApplicationController
       redirect_to new_session_url
     end
   end
+  
+  def ban
+    if current_user && current_user.is_a?(Admin)
+      user = User.find_by_id(params[:id])
+      user.update_attributes({:is_banned => true}) if user
+    end
+    redirect_back_or_default('/')
+  end
+  
 
   def activation_email
   end

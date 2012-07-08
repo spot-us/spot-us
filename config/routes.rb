@@ -97,7 +97,8 @@ ActionController::Routing::Routes.draw do |map|
       :resend_activation => :post,
       :password => :get,
       :reset_password => :put
-    }
+    },
+    :member => { :ban => :put }
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.connect '/rc/:rck', :controller => 'homes', :action => 'check_redeem_code_key'
 

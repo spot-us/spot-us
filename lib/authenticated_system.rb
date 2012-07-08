@@ -5,6 +5,10 @@ module AuthenticatedSystem
     def logged_in?
       !!current_user
     end
+    
+    def banned?
+      current_user && current_user.is_banned?
+    end
 
     # Accesses the current user from the session. 
     # Future calls avoid the database because nil is not equal to false.
