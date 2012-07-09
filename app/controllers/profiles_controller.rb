@@ -1,9 +1,10 @@
 class ProfilesController < ApplicationController
   #resources_controller_for :profiles, :class => User #, :only => [:show]
   #before_filter :redirect_appropriately, :except => [:show]
-  before_filter :get_profile
+  before_filter :get_profile, :unless => :ban
   
   def ban
+    @profile = User.find(params[:id])
     @profile.update_attributes({:is_banned => true}) if current_user && current_user.is_a?(Admin) && @profile
     redirect_to :back
     return
