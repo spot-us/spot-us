@@ -42,7 +42,7 @@
 		<%end%>
 		
 		<!-- Only show middle header if a partial is defined for the particular controller... -->
-		<%if File.exists?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_header.html.erb")%>
+		<%if File.exists?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_header.html.erb") || @page_not_found || @exception_found%>
 			<div class='middleWrapper'>
 				<div class='innerWrapper'>
 					<%if @page_not_found || @exception_found %>
