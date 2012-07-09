@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   #resources_controller_for :profiles, :class => User #, :only => [:show]
   #before_filter :redirect_appropriately, :except => [:show]
-  before_filter :get_profile, :except => :ban
+  before_filter :get_profile, :except => [:ban, :unban]
   
   def ban
     user = User.find(params[:id])
