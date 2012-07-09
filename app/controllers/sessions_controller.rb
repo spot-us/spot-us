@@ -70,6 +70,11 @@ class SessionsController < ApplicationController
 
     if banned?
       flash[:notice] = "Sorry, something seems to be wrong. Try again later."
+      self.current_user.forget_me if logged_in?
+      delete_cookie :auth_token
+      delete_cookie :balance_text
+      delete_cookie :current_user_full_name
+      reset_session
       redirect_back_or_default('/')
       return
     elsif logged_in?
