@@ -34,7 +34,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :news_items, :collection => {:search => :any, :sort_options => :get}
   
   map.connect "/pages/sponsors", :controller => "pages", :action => "sponsors"
-  map.resources :donations, :credit_pitches, :affiliations, :pledges, :profiles, :pages, :groups
+  map.resources :donations, :credit_pitches, :affiliations, :pledges, :pages, :groups
+  map.resources :profiles, :member => { :ban => :put }
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :subscribers
@@ -86,8 +87,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/admin/channels/:id/remove_pitch/:pitch_id", :controller => "admin/channels", :action => "remove_pitch"
   map.connect "/admin", :controller => "admin/city_suggestions", :action => "index"
 
-  map.connect "/profiles/:id/:section", :controller => "profiles", :action => "profile", :requirements => {:section=>/assignments|pledges|donations|pitches|posts|tips|comments/}
-  
   # TODO: remove when done
   map.resources :ui
 
@@ -97,8 +96,7 @@ ActionController::Routing::Routes.draw do |map|
       :resend_activation => :post,
       :password => :get,
       :reset_password => :put
-    },
-    :member => { :ban => :put }
+    }
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.connect '/rc/:rck', :controller => 'homes', :action => 'check_redeem_code_key'
 
@@ -138,6 +136,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/myspot/purchases/paypal_return", :controller => "myspot/purchases", :action => "paypal_return"
   map.connect "/myspot/purchases/paypal_ipn", :controller => "myspot/purchases", :action => "paypal_ipn"
   
+  map.connect "/profiles/:profile_id/ban", :controller => "profiles", :action => "ban"
   
   map.connect "/purchase/:pitch_id", :controller => "myspot/purchases", :action => "new"
   map.namespace :myspot do |myspot|

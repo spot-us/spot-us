@@ -3,6 +3,11 @@ class ProfilesController < ApplicationController
   #before_filter :redirect_appropriately, :except => [:show]
   before_filter :get_profile
   
+  def ban
+    @profile.update_attributes({:is_banned => true}) if current_user && current_user.is_a?(Admin) && @profile
+    redirect_back_or_default('/')
+  end
+  
   private
 
   def redirect_appropriately
