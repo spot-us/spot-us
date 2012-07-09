@@ -36,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/pages/sponsors", :controller => "pages", :action => "sponsors"
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :pages, :groups
   map.connect "/profiles/:id/ban", :controller => "profiles", :action => "ban"
+  map.connect "/profiles/:id/unban", :controller => "profiles", :action => "unban"
   map.resources :profiles
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]

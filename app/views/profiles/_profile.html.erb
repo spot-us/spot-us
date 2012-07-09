@@ -67,7 +67,11 @@
      <h3>Admin</h3>
      <%=link_to 'Show', admin_user_path(@profile)%> | 
      <%=link_to 'Edit', edit_admin_user_path(@profile)%> | 
-     <%=link_to 'Ban', "/profiles/#{@profile.id}/ban"%> | 
+	<%unless @profile.is_banned?%>     
+		<%=link_to 'Ban', "/profiles/#{@profile.id}/ban"%> | 
+	<%else%>
+		<%=link_to 'Unban', "/profiles/#{@profile.id}/unban"%> | 
+	<%end%>
      <%=link_to 'Destroy', admin_user_path(@profile), :confirm => 'Are you sure?', :method => :delete%> | 
      <%=link_to 'Log in as', log_in_as_admin_user_path(@profile)%> 
      <%unless @profile.is_a?(Sponsor)%>
