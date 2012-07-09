@@ -1,4 +1,4 @@
-config.action_controller.consider_all_requests_local = true
+config.action_controller.consider_all_requests_local = false
 config.action_controller.perform_caching = true
 config.action_mailer.raise_delivery_errors = false
 config.action_view.debug_rjs = true
