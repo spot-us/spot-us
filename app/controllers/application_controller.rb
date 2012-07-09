@@ -362,30 +362,30 @@ class ApplicationController < ActionController::Base
   
   def render_not_found(exception = nil)
     log_error(exception) if exception
-    can_create?, if params[:action] == "new" || params[:action] == "create"
-    can_edit?, if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
+    can_create? if params[:action] == "new" || params[:action] == "create"
+    can_edit? if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
     current_network
     block_ips
     clear_spotus_lite
     set_cca
     set_default_html_meta_tags
     social_notifier
-    load_classes, if Rails.env.development?
+    load_classes if Rails.env.development?
     set_fb_session
     render :template => "/errors/404.html.erb", :status => 404
   end
 
   def render_error(exception = nil)
     log_error(exception) if exception
-    can_create?, if params[:action] == "new" || params[:action] == "create"
-    can_edit?, if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
+    can_create? if params[:action] == "new" || params[:action] == "create"
+    can_edit? if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
     current_network
     block_ips
     clear_spotus_lite
     set_cca
     set_default_html_meta_tags
     social_notifier
-    load_classes, if Rails.env.development?
+    load_classes if Rails.env.development?
     set_fb_session
     render :template => "/errors/500.html.erb", :status => 500
   end
