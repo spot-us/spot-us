@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   include HoptoadNotifier::Catcher
   filter_parameter_logging :password, :password_confirmation, :credit_card_number
   helper :all # include all helpers, all the time
+
+  unless ActionController::Base.consider_all_requests_local
+    rescue_from Exception, :with => :render_error
+    rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+    rescue_from ActionController::RoutingError, :with => :render_not_found
+    rescue_from ActionController::UnknownController, :with => :render_not_found
+    rescue_from ActionController::UnknownAction, :with => :render_not_found
+  end
   
   include AuthenticatedSystem
   include SslRequirement
@@ -348,6 +356,38 @@ class ApplicationController < ActionController::Base
       cookies[:rck] = nil
       return true
     end
+  end
+  
+  private
+  
+  def render_not_found(exception = nil)
+    log_error(exception) if exception
+    can_create?, if params[:action] == "new" || params[:action] == "create"
+    can_edit?, if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
+    current_network
+    block_ips
+    clear_spotus_lite
+    set_cca
+    set_default_html_meta_tags
+    social_notifier
+    load_classes, if Rails.env.development?
+    set_fb_session
+    render :template => "/errors/404.html.erb", :status => 404
+  end
+
+  def render_error(exception = nil)
+    log_error(exception) if exception
+    can_create?, if params[:action] == "new" || params[:action] == "create"
+    can_edit?, if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
+    current_network
+    block_ips
+    clear_spotus_lite
+    set_cca
+    set_default_html_meta_tags
+    social_notifier
+    load_classes, if Rails.env.development?
+    set_fb_session
+    render :template => "/errors/500.html.erb", :status => 500
   end
   
 end
