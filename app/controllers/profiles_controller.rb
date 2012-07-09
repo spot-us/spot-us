@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
   
   def unban
     user = User.find(params[:id])
-    user.update_attributes(:is_banned, false) if current_user && current_user.is_a?(Admin) && user
+    user.update_attribute(:is_banned, false) if current_user && current_user.is_a?(Admin) && user
     redirect_to :back
     return
   end
