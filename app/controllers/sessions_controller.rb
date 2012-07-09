@@ -70,6 +70,8 @@ class SessionsController < ApplicationController
 
     if banned?
       flash[:notice] = "Sorry, something seems to be wrong. Try again later."
+      redirect_back_or_default('/')
+      return
     elsif logged_in?
       current_user.connect_fb(new_fb_user) if new_fb_user
       handle_remember_me
