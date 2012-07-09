@@ -45,7 +45,7 @@
 		<%if File.exists?("#{RAILS_ROOT}/app/views/#{params[:controller]}/_header.html.erb")%>
 			<div class='middleWrapper'>
 				<div class='innerWrapper'>
-					<%if @page_not_found%>
+					<%if @page_not_found || @exception_found %>
 						<%= render :partial => "pages/header"%>
 					<%else%>
 						<%= render :partial => "header" %>

@@ -5,6 +5,8 @@
 		<h1>Spot.us Privacy Policy</h1>
 	<%elsif @page_not_found%>
 		<h1>Sorry, we couldn't find that page!</h1>
+	<%elsif @exception_found%>
+		<h1>Oops, something went wrong!</h1>
 	<%else%>	
 		<h1 rel="nofollow"><%=@page ? @page.title : params[:id].to_s%></h1>
 		<p>Pioneering community-funded reporting</p>

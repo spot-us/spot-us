@@ -40,7 +40,7 @@ class PitchesController < ApplicationController
     @pitch = get_pitch
   
     if @pitch.blank?
-      display_404 
+      render_not_found 
       return
     end
     

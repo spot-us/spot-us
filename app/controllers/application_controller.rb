@@ -103,12 +103,6 @@ class ApplicationController < ActionController::Base
     Citizen
   end
   
-  def display_404
-    @page_not_found = true
-    render :file => "pages/notfound", :use_full_path => true, :layout => true, :status => 404, :page_not_found=>true
-    return
-  end
-  
   def social_notifier
     if current_user
       if cookies[:social_notifier_shown]
@@ -361,6 +355,7 @@ class ApplicationController < ActionController::Base
   private
   
   def render_not_found(exception = nil)
+    @page_not_found = true
     log_error(exception) if exception
     can_create? if params[:action] == "new" || params[:action] == "create"
     can_edit? if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
@@ -376,6 +371,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error(exception = nil)
+    @exception_found = true
     log_error(exception) if exception
     can_create? if params[:action] == "new" || params[:action] == "create"
     can_edit? if params[:action] == "edit" || params[:action] == "update" || params[:action] == "destroy"
