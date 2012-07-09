@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   def ban
     @profile.update_attributes({:is_banned => true}) if current_user && current_user.is_a?(Admin) && @profile
     redirect_back_or_default('/')
+    return
   end
   
   private
