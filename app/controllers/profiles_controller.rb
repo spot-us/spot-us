@@ -4,15 +4,15 @@ class ProfilesController < ApplicationController
   before_filter :get_profile, :except => :ban
   
   def ban
-    @profile = User.find(params[:id])
-    @profile.update_attributes({:is_banned => true}) if current_user && current_user.is_a?(Admin) && @profile
+    user = User.find(params[:id])
+    user.update_attribute(:is_banned, true) if current_user && current_user.is_a?(Admin) && user
     redirect_to :back
     return
   end
   
   def unban
-    @profile = User.find(params[:id])
-    @profile.update_attributes({:is_banned => false}) if current_user && current_user.is_a?(Admin) && @profile
+    user = User.find(params[:id])
+    user.update_attributes(:is_banned, false) if current_user && current_user.is_a?(Admin) && user
     redirect_to :back
     return
   end
