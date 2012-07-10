@@ -37,7 +37,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :donations, :credit_pitches, :affiliations, :pledges, :pages, :groups
   map.connect "/profiles/:id/ban", :controller => "profiles", :action => "ban"
   map.connect "/profiles/:id/unban", :controller => "profiles", :action => "unban"
-  map.resources :profiles
+  map.resources :profiles do |profile|
+    profile.connect ":tab", :controller => "pitches", :action => "show", :requirements => { :tab => /"assignments|pledges|donations|pitches|posts|tips|comments/  }
+  end
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
   map.resources :subscribers
@@ -137,8 +139,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect "/myspot/purchases/paypal_return", :controller => "myspot/purchases", :action => "paypal_return"
   map.connect "/myspot/purchases/paypal_ipn", :controller => "myspot/purchases", :action => "paypal_ipn"
-  
-  map.connect "/profiles/:profile_id/ban", :controller => "profiles", :action => "ban"
   
   map.connect "/purchase/:pitch_id", :controller => "myspot/purchases", :action => "new"
   map.namespace :myspot do |myspot|

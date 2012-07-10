@@ -25,10 +25,10 @@ class ProfilesController < ApplicationController
   
   def get_profile
     @profile = User.find(params[:id])
-    if ["assignments","pledges","donations","pitches","posts","tips","comments"].include?(params[:section])
-      @tab = params[:section]
-      if params[:section] != "donations"
-        @items = User.find_by_id(@profile.id).send(params[:section]).paginate(:all, :page => params[:page], :per_page => 20, 
+    if ["assignments","pledges","donations","pitches","posts","tips","comments"].include?(params[:tab])
+      @tab = params[:tab]
+      if params[:tab] != "donations"
+        @items = User.find_by_id(@profile.id).send(params[:tab]).paginate(:all, :page => params[:page], :per_page => 20, 
                  :order => "created_at desc")
       else
         @items = User.find_by_id(@profile.id).all_donations.paid.paginate(:all, :page => params[:page], :per_page => 20, 
