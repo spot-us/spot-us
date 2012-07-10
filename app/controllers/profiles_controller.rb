@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
   end
   
   def get_profile
-    @profile = User.find(params[:id])
+    @profile = User.find(params[:profile_id])
     if ["assignments","pledges","donations","pitches","posts","tips","comments"].include?(params[:tab])
       @tab = params[:tab]
       if params[:tab] != "donations"
