@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/profiles/:id/unban", :controller => "profiles", :action => "unban"
   map.connect "/profiles/:profile_id", :controller => "profiles", :action => "show"
   map.resources :profiles do |profile|
-    profile.connect ":tab", :controller => "profiles", :action => "show", :requirements => { :tab => /"assignments|pledges|donations|pitches|posts|tips|comments/  }
+    profile.connect ":tab", :controller => "profiles", :action => "show", :requirements => { :tab => /assignments|pledges|donations|pitches|posts|tips|comments/  }
   end
   map.resources :stories, :member => {:accept => :put, :reject => :put, :fact_check => :put, :publish => :put}, :has_many => :comments
   map.resources :tips, :has_many => [:affiliations, :comments]
