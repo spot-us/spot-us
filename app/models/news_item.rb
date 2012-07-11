@@ -147,7 +147,7 @@ class NewsItem < ActiveRecord::Base
   }
   
   named_scope :order_results, lambda { |type|
-    return {} if type=='almost-funded'
+    return {} if type=='almost_funded'
     return { :order=>"news_items.created_at desc" }
   }
   
