@@ -147,7 +147,7 @@ class NewsItem < ActiveRecord::Base
   }
   
   named_scope :order_results, lambda { |type|
-    return {} if type=='almost_funded'
+    return { :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value" } if type=='almost-funded'
     return { :order=>"news_items.created_at desc" }
   }
   
