@@ -46,7 +46,7 @@ class Pitch < NewsItem
   default_url_options[:host] = APP_CONFIG[:default_host]
 
   after_create :send_thank_you
-
+  
   aasm_state :unapproved
   aasm_state :active
   aasm_state :accepted

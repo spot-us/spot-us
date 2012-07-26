@@ -224,6 +224,7 @@ class Donation < ActiveRecord::Base
   
   def update_pitch_funding
     pitch.current_funding = pitch.total_amount_donated.to_f       # make sure the proper donation amounts are always used
+    pitch.sort_value = (1.0 - (pitch.current_funding / pitch.requested_amount))
     pitch.save
   end
 
