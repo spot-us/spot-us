@@ -115,7 +115,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :featured, :conditions => {:feature => true}, :order => "news_items.created_at desc"
   named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded','closed')"
   named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
-  named_scope :almost_funded, :select => "news_items.*, case when news_items.status = 'active' then (1.0 - (news_items.current_funding / news_items.requested_amount)) else news_items.created_at end as sort_value", :order => "sort_value ASC"
+  named_scope :almost_funded, :select => "news_items.*, if(news_items.status='active'), 1.0 - (news_items.current_funding / news_items.requested_amount), news_items.created_at) as sort_value", :order => "sort_value ASC"
   named_scope :published, :conditions => {:status => 'published'}
   named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft','closed')"
   named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved' and news_items.status != 'closed'"
@@ -210,7 +210,11 @@ class NewsItem < ActiveRecord::Base
   def self.get_stories(page, topic_id, grouping_id, topic, selected_filter, current_network, limit=nil)
     having_cache ["news_items_stories_", page, topic_id, grouping_id, topic, selected_filter, current_network, limit, @@per_page], {:expires_in => CACHE_TIMEOUT }  do
       unless limit
-        self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).paginate(:page => page)
+        if selected_filter=='almost-funded'
+          self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).paginate(:page => page, :select => "news_items.*, if(news_items.status='active'), 1.0 - (news_items.current_funding / news_items.requested_amount), news_items.created_at) as sort_value")
+        else
+          self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).paginate(:page => page)
+        end
       else
         self.constrain_topic_id(topic_id).constrain_grouping_id(grouping_id).constrain_type(selected_filter).constrain_topic(topic).send(selected_filter.gsub('-','_')).order_results(selected_filter).browsable.by_network(current_network).find(:all,:limit=>limit)
       end
