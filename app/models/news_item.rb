@@ -115,7 +115,7 @@ class NewsItem < ActiveRecord::Base
   named_scope :featured, :conditions => {:feature => true}, :order => "news_items.created_at desc"
   named_scope :unfunded, :conditions => "news_items.status NOT IN('accepted','funded','closed')"
   named_scope :funded, :conditions => "news_items.status IN ('accepted','funded')"
-  named_scope :almost_funded, :order => 'news_items.sort_value ASC', :conditions => "news_item.status='active'" 
+  named_scope :almost_funded, :order => 'news_items.sort_value ASC', :conditions => "news_items.status='active'" 
   named_scope :published, :conditions => {:status => 'published'}
   named_scope :suggested, :conditions => "news_items.type='Tip' AND news_items.status NOT IN ('unapproved','draft','closed')"
   named_scope :browsable, :include => :user, :conditions => "news_items.status != 'unapproved' and news_items.status != 'closed'"
