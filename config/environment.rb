@@ -1,4 +1,4 @@
-RAILS_GEM_VERSION = '2.3.12' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 require 'yaml' 
@@ -36,7 +36,7 @@ Rails::Initializer.run do |config|
   config.gem "oauth2", :version => "= 0.4.1"
   config.gem "faraday", :version => "= 0.6.1"
   config.gem "json"
-  #config.gem "twitter_oauth"
+  config.gem "twitter_oauth"
   config.gem "memcached"
   config.gem "aws-s3", :lib => "aws/s3", :version => '>= 0.6.2'
   config.gem "url_shortener"
