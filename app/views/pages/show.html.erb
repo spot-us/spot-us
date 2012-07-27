@@ -1,9 +1,9 @@
 <div class="contentContainer" style=" width:700px; float:left; padding: 20px 20px 40px 0;">
-	<% unless @page.embed_code.blank? %>
+	<% if !@page.embed_code.blank? %>
 		<div class="videoContainer">
 			<%= transform_embed_code(@page.embed_code, 700, 350) %>
 		</div>
-	<% else %>
+	<% elsif @page.featured_image? %>
 		<div style="clear:both;display:block;">
 			<%= image_tag(@page.featured_image.url(:featured_image)) %>
 		</div>
