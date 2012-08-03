@@ -8,7 +8,6 @@ class NotificationsController < ApplicationController
       return
     end
     notify_pitch_owners if params[:notification]=='pitch_owners'
-    notify_unpaid_donations if params[:notification]=='unpaid_donations'
     send_notification_emails if params[:notification]=='send_notification_emails'
     render :text=>"ok!" 
   end
@@ -25,13 +24,6 @@ class NotificationsController < ApplicationController
     Pitch.unfunded_with_no_story.find(:all, :conditions => "id not in (#{posts.join(',')}) and expiration_date>NOW()").each do |pitch|
       Mailer.deliver_create_blog_post_notification(pitch)
     end
-    return
-  end
-  
-  def notify_unpaid_donations
-    #Donation.unpaid.all({:conditions=>["donations.created_at>?", 3.weeks.ago]}).map(&:user).uniq.each do |user|
-    #Mailer.deliver_unpaid_donations(user) if user
-    #end
     return
   end
   
