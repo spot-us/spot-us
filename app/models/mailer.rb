@@ -61,7 +61,7 @@ class Mailer < ActionMailer::Base
   end
 
   def pitch_created_notification(pitch)
-    recipients get_email(:admin)
+    recipients get_email(:pitch)
     from       get_email(:info)
     subject    "Spot.Us: A pitch needs approval!"
     body       :pitch => pitch
