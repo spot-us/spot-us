@@ -47,7 +47,7 @@ class Mailer < ActionMailer::Base
   end
 
   def news_org_signup_request(user)
-    recipients get_email(:admin)
+    recipients get_email(:pitch)
     from       get_email(:info)
     subject    "Spot.Us: News Org Requesting to Join"
     body        :user => user
