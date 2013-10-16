@@ -2933,3 +2933,9 @@ padding: 7px;
 	padding-bottom:5px;
 	margin-bottom:5px;
 }
+
+.status {
+    min-height: 100px;
+    margin: 4px;
+    padding: 4px;
+}
