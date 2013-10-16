@@ -856,3 +856,10 @@ ul#profile_tabs {border-bottom:solid 1px #aaa;margin:15px 0 0px;height:28px;}
 .socialHelpButtons li ul li a img{
 	height:50px;
 }
+
+.status {
+    min-height: 100px;
+    margin: 4px;
+    padding: 4px;
+}
+
