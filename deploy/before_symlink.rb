@@ -1,1 +1,1 @@
-run "cd #{current_path}; rake ts:stop"
+run "cd #{config.current_path}; rake ts:stop"
