@@ -3,7 +3,12 @@
 
 <% @title = "Spot.us - Fund A Story - CCA" %>
 
+<div class="status">
+Thank you for your interest in Spot.us. We are not accepting new pitches or donations at this time.
+<a href="/pages/status">Learn more.</a>
+</div>
+
 <ul class="storyGrid">
 	<%= render :partial => "shared/lists", 
-		:locals => {:items => @ccas, :template_name => "cca/cca", :no_items_message => "There are no active CCAs. Try again later."} %>
+		:locals => {:items => @ccas, :template_name => "cca/cca", :no_items_message => "There are no active CCAs."} %>
 </ul>
