@@ -1,2 +1,2 @@
-run "cd #{latest_release}; rake ts:index"
-run "cd #{latest_release}; rake ts:start"
+run "cd #{config.latest_release}; rake ts:index"
+run "cd #{config.latest_release}; rake ts:start"
